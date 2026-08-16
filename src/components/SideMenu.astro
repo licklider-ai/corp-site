@@ -27,9 +27,13 @@ const isActive = (href: string) => current === href || current === href.replace(
 </nav>
 
 <style>
+  /* スクロールに追従して常時表示。ヘッダーの高さぶん下げる */
   .side-menu {
     position: sticky;
-    top: 2rem;
+    top: calc(var(--header-h) + 2rem);
+    max-height: calc(100vh - var(--header-h) - 4rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .eyebrow {

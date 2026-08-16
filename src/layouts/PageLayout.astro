@@ -39,7 +39,8 @@ const { title, description, toc } = Astro.props;
     display: grid;
     grid-template-columns: 12rem 11rem minmax(0, 1fr);
     gap: 3rem;
-    align-items: start;
+    /* align-items は既定の stretch のまま。列が本文の高さまで伸びることで、
+       中の sticky なメニューがスクロールに追従できる */
   }
 
   .content {

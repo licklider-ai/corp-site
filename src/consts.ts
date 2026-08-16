@@ -17,10 +17,9 @@ export type NavItem = {
 
 /** ヘッダーのグローバルナビゲーション */
 export const GLOBAL_NAV: NavItem[] = [
-  { label: 'Thesis', href: '/thesis/', ready: true },
-  { label: 'What We Build', href: '/what-we-build/', ready: false },
-  { label: 'Open Specification', href: '/open-specification/', ready: false },
-  { label: 'Company', href: '/company/', ready: false },
+  { label: 'About', href: '/about/', ready: false },
+  { label: 'Products', href: '/products/', ready: false },
+  { label: 'News', href: '/news/', ready: false },
 ];
 
 /** 左サイドメニュー。ドラフトの章立てに対応する。 */

@@ -31,8 +31,32 @@ const isActive = (href: string) => current === href || current === href.replace(
   </div>
 </header>
 
+<script>
+  // 固定ヘッダーの実寸を --header-h に反映する。追従するメニューの開始位置と、
+  // アンカーで飛んだときの見出し位置を、ヘッダーの下に揃えるために使う。
+  const header = document.querySelector<HTMLElement>('.site-header');
+
+  if (header) {
+    const sync = () => {
+      const height = header.offsetHeight;
+
+      // ヘッダーが描画されていないときは 0 になる。CSS 側の既定値を潰さないよう無視する
+      if (height > 0) {
+        document.documentElement.style.setProperty('--header-h', `${height}px`);
+      }
+    };
+
+    sync();
+    new ResizeObserver(sync).observe(header);
+  }
+</script>
+
 <style>
+  /* 固定ヘッダー。高さは --header-h として下位のレイアウトから参照される */
   .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
     border-bottom: 1px solid var(--rule);
     background: var(--paper);
   }

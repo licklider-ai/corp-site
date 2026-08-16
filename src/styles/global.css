@@ -23,6 +23,9 @@
   --measure: 34rem; /* 本文の行長 */
   --gutter: 2.5rem;
   --shell: 76rem; /* ページ全体の最大幅 */
+
+  /* 固定ヘッダーの高さ。実寸は Header.astro が上書きする */
+  --header-h: 4.7rem;
 }
 
 *,
@@ -33,6 +36,8 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* アンカーで飛んだ見出しが固定ヘッダーの下に隠れないようにする */
+  scroll-padding-top: calc(var(--header-h) + 1.5rem);
 }
 
 body {

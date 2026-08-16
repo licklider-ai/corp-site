@@ -2,12 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 // トップページはサイドメニューとページ内メニューを持たない。
-// 本文は仮執筆 v0.1 の要約。英語化時にすべて差し替える。
+// 本文は仮執筆 v0.1 の全文。省略せずドラフトのまま掲載する。英語化時に差し替える。
+// (ドラフト末尾の「執筆メモ」はサイト非掲載の指定のため含めない)
 const layers = [
   {
     n: 'Layer 1',
     title: 'nomue Record（公開仕様）と検証器',
-    body: '研究成果物——図、Legend、Methods、Results、Claim——が、どの入力データ、どの利用者宣言、どの統計規則、どの計算から生成されたかを記録する公開形式。付属するオープンソースの検証器は、Recordの内部整合を、当社のソフトウェアに依存せずに第三者が独立して検証できる。',
+    body: '研究成果物——図、Legend、Methods、Results、Claim——が、どの入力データ、どの利用者宣言、どの統計規則、どの計算から生成されたかを記録する公開形式。付属するオープンソースの検証器（verifier）は、Recordの内部整合を、当社のソフトウェアに依存せずに第三者が独立して検証できる。',
   },
   {
     n: 'Layer 2',
@@ -16,16 +17,10 @@ const layers = [
   },
 ];
 
-const guarantees = [
-  '入力データ、利用者の宣言、採用された統計規則、計算結果、図、文章、Claimが互いに矛盾しないこと',
-  '記録された範囲において再現可能であること',
-];
-
-const nonGuarantees = [
-  '実験が宣言どおりに実施されたこと',
-  '入力データが真正であること',
-  '科学的結論が真であること',
-  '論文が採択されること、査読者が同意すること',
+const researchNotes = [
+  '検証の非対称性——生成は安く、検証は高い',
+  '形式承認はなぜ責任を運べないのか',
+  '再現性は成果物の性質ではなく、生成過程の性質である',
 ];
 
 const publicRecord = [
@@ -54,20 +49,26 @@ const publicRecord = [
 
   <div class="sections">
     <section class="band">
-      <p class="eyebrow">Thesis</p>
+      <p class="eyebrow">1 — Thesis</p>
       <div class="band-body">
-        <p class="lead">
-          成果物の量が人間の検証能力を超えるとき、律速段階は生成ではなく、承認へ移る。
+        <p>
+          AIは、解析、図表、文章、コードといった知的成果物を、人間の生産速度をはるかに超えて生成するようになった。生成が希少だった時代に設計された検証と承認の制度は、この変化に追随していない。成果物の量が人間の検証能力を超えるとき、律速段階は生成ではなく、承認へ移る。
         </p>
         <p>
-          承認が律速になると、承認は形式化する。人間は根拠を検証できないまま署名し、その署名は、問題が生じたときに責任の所在を確定する力を失う。責任は、署名によってではなく、検証可能な根拠への接続によって成立する。
+          承認が律速になると、承認は形式化する。人間は根拠を検証できないまま署名し、その署名は、問題が生じたときに責任の所在を確定する力を失う。責任は、署名によってではなく、検証可能な根拠への接続によって成立する。根拠に接続されない承認は、責任の移転ではなく、責任の消失である。
         </p>
-        <p><a href="/thesis/">全文を読む →</a></p>
+        <p>
+          私たちは、責任を——個人の注意力や倫理に委ねられた徳目としてではなく——設計可能な工学的対象として扱う。ソフトウェア工学が型検査、継続的インテグレーション、監査ログによって「正しさ」を人の注意力から仕組みへ移したように、AIが生成する成果物にも、根拠と成果物の整合を機械的に維持し、第三者が独立に検証できる層が必要である。
+        </p>
+        <p>
+          Lickliderは、この層を科学研究から作り始める。科学は、責任の所在（著者性）と検証可能性（再現性）が制度として最も明確に要求され、かつAIによる生成が最も速く浸透しつつある領域だからである。科学において成立した責任の設計は、規制、監査、意思決定を伴うあらゆる領域の原型となる。
+        </p>
+        <p class="more"><a href="/thesis/">Thesis のページへ →</a></p>
       </div>
     </section>
 
     <section class="band">
-      <p class="eyebrow">What We Build</p>
+      <p class="eyebrow">2 — What We Build</p>
       <div class="band-body">
         <p>Lickliderは、二つの層を作っている。</p>
 
@@ -90,24 +91,21 @@ const publicRecord = [
         <p class="lead">
           信頼は、生成物ではなく記録に宿る。生成は利便のための層であり、記録と検証が本体である。
         </p>
+
+        <p class="more"><span class="placeholder" title="準備中">→ nomue 製品サイトへ</span></p>
       </div>
     </section>
 
     <section class="band">
-      <p class="eyebrow">Guarantee Boundary</p>
+      <p class="eyebrow">3 — Guarantee Boundary</p>
       <div class="band-body">
-        <div class="boundary">
-          <div>
-            <h3>保証すること</h3>
-            <p class="boundary-note">記録された範囲内の整合性。</p>
-            <ul>{guarantees.map((item) => <li>{item}</li>)}</ul>
-          </div>
-          <div>
-            <h3>保証しないこと</h3>
-            <p class="boundary-note">記録の外側にあるもの。</p>
-            <ul>{nonGuarantees.map((item) => <li>{item}</li>)}</ul>
-          </div>
-        </div>
+        <h3 class="band-title">保証すること、保証しないこと</h3>
+        <p>
+          <strong>保証すること。</strong>記録された範囲内の整合性。すなわち、入力データ、利用者の宣言、採用された統計規則、計算結果、図、文章、Claimが互いに矛盾せず、再現可能であること。
+        </p>
+        <p>
+          <strong>保証しないこと。</strong>実験が宣言どおりに実施されたこと。入力データが真正であること。科学的結論が真であること。論文が採択されること。査読者が同意すること。
+        </p>
         <p>
           保証の境界を明示することは、製品仕様であると同時に、私たちの主張そのものを検証可能にするための条件である。境界のない保証は、検証できない約束にすぎない。
         </p>
@@ -115,7 +113,7 @@ const publicRecord = [
     </section>
 
     <section class="band">
-      <p class="eyebrow">Open Specification &amp; Verifier</p>
+      <p class="eyebrow">4 — Open Specification &amp; Verifier</p>
       <div class="band-body">
         <p class="lead">私たちの主張を、信頼する必要はない。検証してほしい。</p>
         <ul class="resources">
@@ -138,41 +136,72 @@ const publicRecord = [
     </section>
 
     <section class="band">
-      <p class="eyebrow">Public Record</p>
+      <p class="eyebrow">5 — Research Notes</p>
       <div class="band-body">
-        <p>
-          責任の設計を語る企業として、当社自身の公開コミットメントをここに記録する。宣言、達成、未達、変更のすべてを残す。
-        </p>
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">日付</th>
-              <th scope="col">宣言</th>
-              <th scope="col">状態</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              publicRecord.map((row) => (
-                <tr>
-                  <td>{row.date}</td>
-                  <td>{row.commitment}</td>
-                  <td>{row.status}</td>
-                </tr>
-              ))
-            }
-            <tr class="placeholder">
-              <td>[以後追記]</td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+        <p>責任の設計に関する短い技術的エッセイ。各稿は日付と版番号を持つ。</p>
+        <ul class="notes">
+          {
+            researchNotes.map((note) => (
+              <li>
+                {note} <span class="placeholder">[準備中]</span>
+              </li>
+            ))
+          }
+        </ul>
       </div>
     </section>
 
     <section class="band">
-      <p class="eyebrow">Company</p>
+      <p class="eyebrow">6 — Why "Licklider"</p>
+      <div class="band-body">
+        <p>
+          J. C. R. Licklider は "Man-Computer Symbiosis"（1960）において、人間が目標を設定し判断を担い、計算機が定型的な作業を担うという分業を、最初に定式化した。
+        </p>
+        <p>
+          それから66年。生成は機械の側へ移り、承認と責任は人間の側に残った。しかし、この分業を成立させるための基盤は、いまだ存在しない。
+        </p>
+        <p>社名は、この分業の最初の設計図への参照である。</p>
+      </div>
+    </section>
+
+    <section class="band">
+      <p class="eyebrow">7 — Public Record</p>
+      <div class="band-body">
+        <p>
+          責任の設計を語る企業として、当社自身の公開コミットメントをここに記録する。宣言、達成、未達、変更のすべてを残す。
+        </p>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">日付</th>
+                <th scope="col">宣言</th>
+                <th scope="col">状態</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                publicRecord.map((row) => (
+                  <tr>
+                    <td>{row.date}</td>
+                    <td>{row.commitment}</td>
+                    <td>{row.status}</td>
+                  </tr>
+                ))
+              }
+              <tr class="placeholder">
+                <td>[以後追記]</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <p class="eyebrow">8 — Company</p>
       <div class="band-body">
         <dl class="company">
           <dt>商号</dt>
@@ -184,6 +213,7 @@ const publicRecord = [
           <dt>連絡</dt>
           <dd><a href="mailto:contact@licklider.ai">contact@licklider.ai</a></dd>
         </dl>
+        <p class="colophon placeholder">[設立年・登記情報など、コロフォン調で最小限に]</p>
       </div>
     </section>
   </div>
@@ -261,9 +291,24 @@ const publicRecord = [
     margin-bottom: 0;
   }
 
+  .band-title {
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+  }
+
   .lead {
     font-size: 1.08rem;
     color: var(--ink);
+  }
+
+  strong {
+    font-weight: 400;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .more {
+    margin-top: 1.75rem;
+    font-size: 0.95rem;
   }
 
   .layers {
@@ -305,48 +350,28 @@ const publicRecord = [
     text-align: center;
   }
 
-  .boundary {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2.5rem;
-    margin: 1.5rem 0 2rem;
-  }
-
-  .boundary h3 {
-    font-size: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--ink);
-  }
-
-  .boundary-note {
-    margin: 0.6rem 0 0.75rem;
-    font-size: 0.88rem;
-    color: var(--ink-3);
-  }
-
-  .boundary ul {
-    margin: 0;
-    padding-left: 1.1em;
-    font-size: 0.92rem;
-    color: var(--ink-2);
-  }
-
-  .resources {
+  .resources,
+  .notes {
     list-style: none;
     margin: 1.5rem 0;
     padding: 0;
     font-size: 0.95rem;
   }
 
-  .resources li {
+  .resources li,
+  .notes li {
     padding: 0.75rem 0;
     border-top: 1px solid var(--rule-faint);
     color: var(--ink-2);
   }
 
   .resources strong {
-    font-weight: 400;
     color: var(--ink);
+    border-bottom: 0;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
   }
 
   .company {
@@ -367,6 +392,11 @@ const publicRecord = [
     margin: 0;
   }
 
+  .colophon {
+    margin: 1.5rem 0 0;
+    font-size: 0.9rem;
+  }
+
   @media (max-width: 800px) {
     .hero-inner {
       padding: 4rem var(--gutter) 3.5rem;
@@ -376,11 +406,6 @@ const publicRecord = [
       grid-template-columns: minmax(0, 1fr);
       gap: 1.25rem;
       padding: 3rem 0;
-    }
-
-    .boundary {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 2rem;
     }
   }
 </style>

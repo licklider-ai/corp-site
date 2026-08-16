@@ -69,9 +69,13 @@ const { items } = Astro.props;
 </script>
 
 <style>
+  /* スクロールに追従して常時表示。ヘッダーの高さぶん下げる */
   .page-menu {
     position: sticky;
-    top: 2rem;
+    top: calc(var(--header-h) + 2rem);
+    max-height: calc(100vh - var(--header-h) - 4rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .eyebrow {
