@@ -30,22 +30,39 @@ const { items } = Astro.props;
     .map((link) => document.getElementById(link.dataset.tocLink ?? ''))
     .filter((el): el is HTMLElement => el !== null);
 
-  if (targets.length > 0 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (targets.length > 0) {
     const setActive = (id: string) => {
       links.forEach((link) => {
         link.toggleAttribute('data-active', link.dataset.tocLink === id);
       });
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((entry) => entry.isIntersecting);
-        if (visible.length > 0) {
-          setActive(visible[0]!.target.id);
+    // 画面上部の帯を基準に、そこを最後に通過した節を現在地とする。
+    // 直前の節がわずかに残っている状態でも、読んでいる節が選ばれる。
+    const update = () => {
+      const band = window.innerHeight * 0.3;
+
+      // 描画されていない節 (display:none) は矩形が 0 になるため除外する
+      const rendered = targets
+        .map((target) => ({ target, rect: target.getBoundingClientRect() }))
+        .filter(({ rect }) => rect.width > 0 || rect.height > 0);
+
+      if (rendered.length === 0) return;
+
+      let current = rendered[0]!.target;
+      for (const { target, rect } of rendered) {
+        if (rect.top <= band) {
+          current = target;
         }
-      },
-      { rootMargin: '0px 0px -70% 0px', threshold: 0 }
-    );
+      }
+      setActive(current.id);
+    };
+
+    // 交差の変化を更新の合図として使う (スクロールごとの計算を避ける)
+    const observer = new IntersectionObserver(update, {
+      rootMargin: '0px 0px -70% 0px',
+      threshold: 0,
+    });
 
     targets.forEach((target) => observer.observe(target));
   }
