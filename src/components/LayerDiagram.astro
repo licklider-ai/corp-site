@@ -1,0 +1,345 @@
+---
+// Layer 1 と Layer 2 の相互作用を示す等角図。
+// 上段 = nomue（生成）、下段 = nomue Record と verifier（記録・検証）。
+// 左列の矢印が下から上（根拠の供給）、右列が上から下（記録）を表す。
+
+// 等角の基準寸法: 上面の菱形は半幅 w・半高 h、側面の厚みが t
+const w = 150;
+const h = 86;
+const t = 40;
+const cx = 230;
+const topY = 110; // 上段の上面の中心
+const bottomY = 330; // 下段の上面の中心
+
+const slab = (cy: number) => ({
+  top: `${cx},${cy - h} ${cx + w},${cy} ${cx},${cy + h} ${cx - w},${cy}`,
+  left: `${cx - w},${cy} ${cx},${cy + h} ${cx},${cy + h + t} ${cx - w},${cy + t}`,
+  right: `${cx},${cy + h} ${cx + w},${cy} ${cx + w},${cy + t} ${cx},${cy + h + t}`,
+});
+
+const upper = slab(topY);
+const lower = slab(bottomY);
+
+// 上面へ図形を投影する行列。平面座標 -100..100 の正方形が上面の菱形に重なる
+// (u,v)=(100,-100) が右の角、(100,100) が手前の角に対応するため除数は 200
+const project = (cy: number) => `matrix(${w / 200} ${h / 200} ${-w / 200} ${h / 200} ${cx} ${cy})`;
+
+// 上段の紋: 生成される成果物。図の枠と、Legend・Methods・Results にあたる行で描く
+const outputSpan = 58;
+const outputFigure = { x: -outputSpan, y: -outputSpan, w: outputSpan * 2, h: 52 };
+const outputLines = [
+  { y: 8, to: outputSpan },
+  { y: 30, to: 30 },
+  { y: 52, to: 44 },
+];
+
+// 下段の紋: 構造化された記録を格子で描く
+const gridSpan = 58;
+const gridAt = [-gridSpan / 3, gridSpan / 3];
+
+const chevronY = [200, 230, 260];
+
+const notes = {
+  left: [
+    {
+      title: '根拠の供給',
+      body: '記録された入力データ、利用者の宣言、統計規則、計算が、生成の根拠になる',
+    },
+    {
+      title: '独立した検証',
+      body: 'verifier が Record の内部整合を、当社のソフトウェアに依存せず検証する',
+    },
+  ],
+  right: [
+    {
+      title: '同一の根拠の上に生成',
+      body: '解析、図、Legend、Methods、Results、Claim を Record の上に生成する',
+    },
+    {
+      title: '無効化と再生成',
+      body: 'データ・宣言・解析の変更が、影響を受ける成果物を無効化する',
+    },
+  ],
+};
+---
+
+<figure class="interaction">
+  <div class="notes notes--left">
+    {
+      notes.left.map((note) => (
+        <div class="note">
+          <p class="note-title">{note.title}</p>
+          <p class="note-body">{note.body}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="stack">
+    <p class="stack-label">Layer 2 — nomue（アプリケーション）</p>
+
+    <svg viewBox="0 0 460 480" role="img" aria-labelledby="layer-diagram-title">
+      <title id="layer-diagram-title">
+        上段の nomue（生成）と下段の nomue Record・verifier（記録と検証）が、上下に往復する等角図
+      </title>
+
+      <!-- 軸 -->
+      <line class="axis" x1={cx} y1="6" x2={cx} y2={topY - h} />
+      <line class="axis" x1={cx} y1={bottomY + h + t} x2={cx} y2="474" />
+
+      <!-- 二つの層をつなぐ垂線 -->
+      <line class="link" x1={cx - w} y1={topY + t} x2={cx - w} y2={bottomY} />
+      <line class="link" x1={cx + w} y1={topY + t} x2={cx + w} y2={bottomY} />
+      <line class="link" x1={cx} y1={topY + h + t} x2={cx} y2={bottomY + h} />
+
+      <!-- 下から上へ: 根拠の供給 -->
+      <g class="flow flow--up">
+        {
+          chevronY.map((y, i) => (
+            <path
+              d={`M144 ${y + 8} L152 ${y} L160 ${y + 8}`}
+              style={`animation-delay: ${(chevronY.length - 1 - i) * 0.22}s`}
+            />
+          ))
+        }
+      </g>
+
+      <!-- 上から下へ: 記録 -->
+      <g class="flow flow--down">
+        {
+          chevronY.map((y, i) => (
+            <path
+              d={`M300 ${y} L308 ${y + 8} L316 ${y}`}
+              style={`animation-delay: ${i * 0.22}s`}
+            />
+          ))
+        }
+      </g>
+
+      <!-- Layer 2 -->
+      <g class="slab">
+        <polygon class="face face--side" points={upper.left} />
+        <polygon class="face face--side" points={upper.right} />
+        <polygon class="face face--top" points={upper.top} />
+        <g class="mark" transform={project(topY)}>
+          <rect
+            x={outputFigure.x}
+            y={outputFigure.y}
+            width={outputFigure.w}
+            height={outputFigure.h}
+            vector-effect="non-scaling-stroke"
+          />
+          {
+            outputLines.map((line) => (
+              <line
+                class="mark-rule"
+                x1={-outputSpan}
+                y1={line.y}
+                x2={line.to}
+                y2={line.y}
+                vector-effect="non-scaling-stroke"
+              />
+            ))
+          }
+        </g>
+      </g>
+
+      <!-- Layer 1 -->
+      <g class="slab">
+        <polygon class="face face--side" points={lower.left} />
+        <polygon class="face face--side" points={lower.right} />
+        <polygon class="face face--top" points={lower.top} />
+        <g class="mark" transform={project(bottomY)}>
+          <rect
+            x={-gridSpan}
+            y={-gridSpan}
+            width={gridSpan * 2}
+            height={gridSpan * 2}
+            vector-effect="non-scaling-stroke"
+          />
+          {
+            gridAt.map((p) => (
+              <line x1={p} y1={-gridSpan} x2={p} y2={gridSpan} vector-effect="non-scaling-stroke" />
+            ))
+          }
+          {
+            gridAt.map((p) => (
+              <line x1={-gridSpan} y1={p} x2={gridSpan} y2={p} vector-effect="non-scaling-stroke" />
+            ))
+          }
+        </g>
+      </g>
+    </svg>
+
+    <p class="stack-label">Layer 1 — nomue Record ＋ verifier</p>
+  </div>
+
+  <div class="notes notes--right">
+    {
+      notes.right.map((note) => (
+        <div class="note">
+          <p class="note-title">{note.title}</p>
+          <p class="note-body">{note.body}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <figcaption class="placeholder">
+    [図: Evidence →（宣言・規則・計算）→ Outputs。下層に Record（記録）と Verifier（第三者検証）を貫通させる層構造図]
+  </figcaption>
+</figure>
+
+<style>
+  .interaction {
+    margin: 3.5rem 0 0;
+    display: grid;
+    /* 中央は明示的に幅を与える。auto だと SVG の既定サイズ (300px) で決まってしまう */
+    grid-template-columns: minmax(0, 1fr) 26rem minmax(0, 1fr);
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .stack-label {
+    margin: 0;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+    text-align: center;
+  }
+
+  /* 面は白で塗り、奥の線を隠す */
+  .face {
+    fill: var(--paper);
+    stroke: var(--ink-2);
+    stroke-width: 1;
+    stroke-linejoin: round;
+  }
+
+  .face--side {
+    fill: var(--wash);
+  }
+
+  .mark line,
+  .mark rect,
+  .mark path {
+    fill: none;
+    stroke: var(--ink-3);
+    stroke-width: 1;
+    stroke-linejoin: round;
+  }
+
+  .mark-rule {
+    stroke: var(--ink-4);
+  }
+
+  .axis {
+    stroke: var(--rule);
+    stroke-width: 1;
+  }
+
+  .link {
+    stroke: var(--ink-4);
+    stroke-width: 1;
+    stroke-dasharray: 2 5;
+  }
+
+  .flow path {
+    fill: none;
+    stroke: var(--ink-2);
+    stroke-width: 1.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: flow-pulse 3.2s ease-in-out infinite;
+  }
+
+  @keyframes flow-pulse {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+    45% {
+      opacity: 1;
+    }
+  }
+
+  .notes {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  .notes--left {
+    text-align: right;
+  }
+
+  .note-title {
+    margin: 0 0 0.4rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+
+  .note-body {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--ink-3);
+  }
+
+  figcaption {
+    grid-column: 1 / -1;
+    margin-top: 2.5rem;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flow path {
+      animation: none;
+      opacity: 0.6;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .interaction {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2.5rem;
+    }
+
+    .stack {
+      max-width: 26rem;
+      margin: 0 auto;
+    }
+
+    .stack {
+      order: -1;
+    }
+
+    .notes--left {
+      text-align: left;
+    }
+
+    .notes {
+      gap: 2rem;
+    }
+
+    figcaption {
+      text-align: left;
+    }
+  }
+</style>

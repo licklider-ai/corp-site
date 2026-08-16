@@ -1,4 +1,5 @@
 ---
+import LayerDiagram from '../components/LayerDiagram.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 // トップページはサイドメニューとページ内メニューを持たない。
@@ -67,7 +68,7 @@ const publicRecord = [
       </div>
     </section>
 
-    <section class="band">
+    <section class="band band--wide">
       <p class="eyebrow">2 — What We Build</p>
       <div class="band-body">
         <p>Lickliderは、二つの層を作っている。</p>
@@ -83,11 +84,11 @@ const publicRecord = [
             ))
           }
         </ol>
+      </div>
 
-        <figure class="diagram placeholder">
-          [図: Evidence →（宣言・規則・計算）→ Outputs。下層に Record（記録）と Verifier（第三者検証）を貫通させる層構造図]
-        </figure>
+      <LayerDiagram />
 
+      <div class="band-body">
         <p class="lead">
           信頼は、生成物ではなく記録に宿る。生成は利便のための層であり、記録と検証が本体である。
         </p>
@@ -287,6 +288,15 @@ const publicRecord = [
     max-width: var(--measure);
   }
 
+  /* 図は左右の段を横断して置く。本文の段は 2 列目に固定する */
+  .band--wide .band-body {
+    grid-column: 2;
+  }
+
+  .band--wide :global(.interaction) {
+    grid-column: 1 / -1;
+  }
+
   .band-body > :last-child {
     margin-bottom: 0;
   }
@@ -338,16 +348,6 @@ const publicRecord = [
   .layers p:last-child {
     margin-bottom: 0;
     color: var(--ink-2);
-  }
-
-  .diagram {
-    margin: 2rem 0;
-    padding: 3rem 1.5rem;
-    border: 1px dashed var(--rule);
-    background: var(--wash);
-    font-size: 0.85rem;
-    line-height: 1.6;
-    text-align: center;
   }
 
   .resources,
@@ -406,6 +406,10 @@ const publicRecord = [
       grid-template-columns: minmax(0, 1fr);
       gap: 1.25rem;
       padding: 3rem 0;
+    }
+
+    .band--wide .band-body {
+      grid-column: 1;
     }
   }
 </style>
