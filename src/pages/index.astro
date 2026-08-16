@@ -1,0 +1,386 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// トップページはサイドメニューとページ内メニューを持たない。
+// 本文は仮執筆 v0.1 の要約。英語化時にすべて差し替える。
+const layers = [
+  {
+    n: 'Layer 1',
+    title: 'nomue Record（公開仕様）と検証器',
+    body: '研究成果物——図、Legend、Methods、Results、Claim——が、どの入力データ、どの利用者宣言、どの統計規則、どの計算から生成されたかを記録する公開形式。付属するオープンソースの検証器は、Recordの内部整合を、当社のソフトウェアに依存せずに第三者が独立して検証できる。',
+  },
+  {
+    n: 'Layer 2',
+    title: 'nomue（アプリケーション）',
+    body: 'Recordを正本として研究成果物を生成・維持する実行環境。研究データと研究意図から、解析、図、Legend、Methods、Results、Claimを同一の根拠の上に生成する。データ・宣言・解析のいずれかが変更されたとき、影響を受ける成果物を無効化し、再生成する。',
+  },
+];
+
+const guarantees = [
+  '入力データ、利用者の宣言、採用された統計規則、計算結果、図、文章、Claimが互いに矛盾しないこと',
+  '記録された範囲において再現可能であること',
+];
+
+const nonGuarantees = [
+  '実験が宣言どおりに実施されたこと',
+  '入力データが真正であること',
+  '科学的結論が真であること',
+  '論文が採択されること、査読者が同意すること',
+];
+
+const publicRecord = [
+  { date: '2026-09', commitment: 'nomue Record v0 Public Draft を公開する', status: '予定' },
+];
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">アジェンダ</p>
+      <h1>AI駆動時代の<br />責任の設計</h1>
+      <div class="lede">
+        <p>
+          生成のコストは、ゼロに近づいている。<br />
+          人間に残る仕事は、承認することと、責任を引き受けることである。
+        </p>
+        <p>Lickliderは、その責任を工学的に成立させるための基盤をつくる。</p>
+      </div>
+      <p class="cta">
+        <a href="/thesis/">Thesisを読む →</a>
+        <span class="placeholder" title="準備中">nomue（製品）→</span>
+      </p>
+    </div>
+  </section>
+
+  <div class="sections">
+    <section class="band">
+      <p class="eyebrow">Thesis</p>
+      <div class="band-body">
+        <p class="lead">
+          成果物の量が人間の検証能力を超えるとき、律速段階は生成ではなく、承認へ移る。
+        </p>
+        <p>
+          承認が律速になると、承認は形式化する。人間は根拠を検証できないまま署名し、その署名は、問題が生じたときに責任の所在を確定する力を失う。責任は、署名によってではなく、検証可能な根拠への接続によって成立する。
+        </p>
+        <p><a href="/thesis/">全文を読む →</a></p>
+      </div>
+    </section>
+
+    <section class="band">
+      <p class="eyebrow">What We Build</p>
+      <div class="band-body">
+        <p>Lickliderは、二つの層を作っている。</p>
+
+        <ol class="layers">
+          {
+            layers.map((layer) => (
+              <li>
+                <p class="layer-n">{layer.n}</p>
+                <h3>{layer.title}</h3>
+                <p>{layer.body}</p>
+              </li>
+            ))
+          }
+        </ol>
+
+        <figure class="diagram placeholder">
+          [図: Evidence →（宣言・規則・計算）→ Outputs。下層に Record（記録）と Verifier（第三者検証）を貫通させる層構造図]
+        </figure>
+
+        <p class="lead">
+          信頼は、生成物ではなく記録に宿る。生成は利便のための層であり、記録と検証が本体である。
+        </p>
+      </div>
+    </section>
+
+    <section class="band">
+      <p class="eyebrow">Guarantee Boundary</p>
+      <div class="band-body">
+        <div class="boundary">
+          <div>
+            <h3>保証すること</h3>
+            <p class="boundary-note">記録された範囲内の整合性。</p>
+            <ul>{guarantees.map((item) => <li>{item}</li>)}</ul>
+          </div>
+          <div>
+            <h3>保証しないこと</h3>
+            <p class="boundary-note">記録の外側にあるもの。</p>
+            <ul>{nonGuarantees.map((item) => <li>{item}</li>)}</ul>
+          </div>
+        </div>
+        <p>
+          保証の境界を明示することは、製品仕様であると同時に、私たちの主張そのものを検証可能にするための条件である。境界のない保証は、検証できない約束にすぎない。
+        </p>
+      </div>
+    </section>
+
+    <section class="band">
+      <p class="eyebrow">Open Specification &amp; Verifier</p>
+      <div class="band-body">
+        <p class="lead">私たちの主張を、信頼する必要はない。検証してほしい。</p>
+        <ul class="resources">
+          <li>
+            <strong>nomue Record v0</strong> — 公開仕様（Public Draft、2026年9月公開予定）
+            <span class="placeholder">[リンク]</span>
+          </li>
+          <li>
+            <strong>nomue verifier</strong> — オープンソースの独立検証器
+            <span class="placeholder">[GitHub]</span>
+          </li>
+          <li>
+            <strong>Changelog</strong> — 仕様のすべての変更履歴 <span class="placeholder">[リンク]</span>
+          </li>
+        </ul>
+        <p>
+          仕様と検証器を公開するのは、透明性の演出のためではない。記録形式が特定の企業の生存に依存しないこと自体が、責任のインフラの要件だからである。
+        </p>
+      </div>
+    </section>
+
+    <section class="band">
+      <p class="eyebrow">Public Record</p>
+      <div class="band-body">
+        <p>
+          責任の設計を語る企業として、当社自身の公開コミットメントをここに記録する。宣言、達成、未達、変更のすべてを残す。
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">日付</th>
+              <th scope="col">宣言</th>
+              <th scope="col">状態</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              publicRecord.map((row) => (
+                <tr>
+                  <td>{row.date}</td>
+                  <td>{row.commitment}</td>
+                  <td>{row.status}</td>
+                </tr>
+              ))
+            }
+            <tr class="placeholder">
+              <td>[以後追記]</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="band">
+      <p class="eyebrow">Company</p>
+      <div class="band-body">
+        <dl class="company">
+          <dt>商号</dt>
+          <dd class="placeholder">[株式会社Licklider ／ Licklider, Inc. — 正式表記要確認]</dd>
+          <dt>所在地</dt>
+          <dd>東京、日本 <span class="placeholder">[要確定]</span></dd>
+          <dt>代表</dt>
+          <dd class="placeholder">[氏名]</dd>
+          <dt>連絡</dt>
+          <dd><a href="mailto:contact@licklider.ai">contact@licklider.ai</a></dd>
+        </dl>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  .hero-inner {
+    max-width: var(--shell);
+    margin: 0 auto;
+    padding: 7rem var(--gutter) 6rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 6vw, 4.25rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 1.25rem 0 2.5rem;
+  }
+
+  .lede {
+    max-width: var(--measure);
+    font-size: 1.12rem;
+    color: var(--ink-1);
+  }
+
+  .cta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+  }
+
+  .cta a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 3px;
+  }
+
+  .cta a:hover {
+    border-bottom-color: var(--ink-3);
+  }
+
+  .sections {
+    max-width: var(--shell);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .band {
+    display: grid;
+    grid-template-columns: 12rem minmax(0, 1fr);
+    gap: 3rem;
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  .band:last-child {
+    border-bottom: 0;
+  }
+
+  .band > .eyebrow {
+    margin: 0.35rem 0 0;
+  }
+
+  .band-body {
+    max-width: var(--measure);
+  }
+
+  .band-body > :last-child {
+    margin-bottom: 0;
+  }
+
+  .lead {
+    font-size: 1.08rem;
+    color: var(--ink);
+  }
+
+  .layers {
+    list-style: none;
+    margin: 2rem 0;
+    padding: 0;
+  }
+
+  .layers li {
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--rule-faint);
+  }
+
+  .layer-n {
+    margin: 0 0 0.35rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .layers h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .layers p:last-child {
+    margin-bottom: 0;
+    color: var(--ink-2);
+  }
+
+  .diagram {
+    margin: 2rem 0;
+    padding: 3rem 1.5rem;
+    border: 1px dashed var(--rule);
+    background: var(--wash);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .boundary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .boundary h3 {
+    font-size: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .boundary-note {
+    margin: 0.6rem 0 0.75rem;
+    font-size: 0.88rem;
+    color: var(--ink-3);
+  }
+
+  .boundary ul {
+    margin: 0;
+    padding-left: 1.1em;
+    font-size: 0.92rem;
+    color: var(--ink-2);
+  }
+
+  .resources {
+    list-style: none;
+    margin: 1.5rem 0;
+    padding: 0;
+    font-size: 0.95rem;
+  }
+
+  .resources li {
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--rule-faint);
+    color: var(--ink-2);
+  }
+
+  .resources strong {
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .company {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    row-gap: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .company dt {
+    color: var(--ink-3);
+    font-size: 0.85rem;
+    padding-top: 0.15rem;
+  }
+
+  .company dd {
+    margin: 0;
+  }
+
+  @media (max-width: 800px) {
+    .hero-inner {
+      padding: 4rem var(--gutter) 3.5rem;
+    }
+
+    .band {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+      padding: 3rem 0;
+    }
+
+    .boundary {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2rem;
+    }
+  }
+</style>

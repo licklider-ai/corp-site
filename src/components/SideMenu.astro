@@ -1,0 +1,82 @@
+---
+import { SIDE_NAV } from '../consts';
+
+const current = Astro.url.pathname;
+const isActive = (href: string) => current === href || current === href.replace(/\/$/, '');
+---
+
+<nav class="side-menu" aria-label="サイドメニュー">
+  <p class="eyebrow">Sections</p>
+  <ul>
+    {
+      SIDE_NAV.map((item) => (
+        <li>
+          {item.ready ? (
+            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          ) : (
+            <span class="placeholder" title="準備中">
+              {item.label}
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .side-menu {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.9rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--rule-faint);
+  }
+
+  li {
+    margin: 0;
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  a,
+  span {
+    display: block;
+    padding: 0.5rem 0;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    text-decoration: none;
+    color: var(--ink-2);
+  }
+
+  a:hover {
+    color: var(--ink);
+  }
+
+  a[aria-current='page'] {
+    color: var(--ink);
+  }
+
+  a[aria-current='page']::before {
+    content: '—';
+    margin-right: 0.4em;
+    color: var(--ink);
+  }
+
+  @media (max-width: 1000px) {
+    .side-menu {
+      position: static;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--rule-faint);
+    }
+  }
+</style>

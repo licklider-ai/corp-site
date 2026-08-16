@@ -1,0 +1,149 @@
+/*
+ * Licklider — グローバルスタイル
+ * 配色は白と黒 (＋黒の濃淡) のみ。フォントは Times New Roman。
+ */
+
+:root {
+  /* 白 */
+  --paper: #ffffff;
+
+  /* 黒の濃淡 */
+  --ink: #000000;
+  --ink-1: #1a1a1a; /* 本文 */
+  --ink-2: #4a4a4a; /* 副次テキスト */
+  --ink-3: #767676; /* 補助・キャプション */
+  --ink-4: #a6a6a6; /* 未実装リンク・記号 */
+  --rule: #d4d4d4; /* 罫線 */
+  --rule-faint: #e9e9e9; /* 淡い罫線 */
+  --wash: #f6f6f6; /* ごく淡い面 */
+
+  --font-serif: 'Times New Roman', Times, 'YuMincho', 'Yu Mincho',
+    'Hiragino Mincho ProN', serif;
+
+  --measure: 34rem; /* 本文の行長 */
+  --gutter: 2.5rem;
+  --shell: 76rem; /* ページ全体の最大幅 */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink-1);
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.75;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--ink);
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 0;
+}
+
+p {
+  margin: 0 0 1.25em;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 120ms linear;
+}
+
+a:hover {
+  color: var(--ink-3);
+}
+
+a:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 3px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule-faint);
+  margin: 3rem 0;
+}
+
+ul,
+ol {
+  margin: 0 0 1.25em;
+  padding-left: 1.2em;
+}
+
+li {
+  margin-bottom: 0.4em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.94rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.6em 1em 0.6em 0;
+  border-bottom: 1px solid var(--rule-faint);
+  vertical-align: top;
+}
+
+th {
+  font-weight: 400;
+  color: var(--ink-3);
+  border-bottom-color: var(--rule);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* 未確定情報のプレースホルダー */
+.placeholder {
+  color: var(--ink-4);
+}
+
+/* セクション番号などの小さなラベル */
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  body {
+    font-size: 16px;
+  }
+
+  :root {
+    --gutter: 1.5rem;
+  }
+}

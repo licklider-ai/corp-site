@@ -1,0 +1,56 @@
+---
+import PageMenu from '../components/PageMenu.astro';
+import SideMenu from '../components/SideMenu.astro';
+import type { TocItem } from '../consts';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** ページ内メニューに並べる見出し */
+  toc: TocItem[];
+}
+
+const { title, description, toc } = Astro.props;
+---
+
+{/* 下層ページ: ヘッダーの下に 左から サイドメニュー / ページ内メニュー / コンテンツ */}
+<BaseLayout title={title} description={description}>
+  <div class="shell">
+    <div class="side">
+      <SideMenu />
+    </div>
+
+    <div class="toc">
+      <PageMenu items={toc} />
+    </div>
+
+    <article class="content">
+      <slot />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .shell {
+    max-width: var(--shell);
+    margin: 0 auto;
+    padding: 3rem var(--gutter) 0;
+    display: grid;
+    grid-template-columns: 12rem 11rem minmax(0, 1fr);
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .content {
+    max-width: var(--measure);
+  }
+
+  @media (max-width: 1000px) {
+    .shell {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2rem;
+      padding-top: 2rem;
+    }
+  }
+</style>

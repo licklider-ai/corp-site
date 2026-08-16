@@ -1,0 +1,123 @@
+---
+import type { TocItem } from '../consts';
+import PageLayout from '../layouts/PageLayout.astro';
+
+// 本文は仮執筆 v0.1。英語化時にすべて差し替える。
+const toc: TocItem[] = [
+  { id: 'asymmetry', label: '生成と検証の非対称性' },
+  { id: 'bottleneck', label: '承認が律速になるとき' },
+  { id: 'engineering', label: '責任を工学的対象として扱う' },
+  { id: 'science-first', label: 'なぜ科学研究から始めるのか' },
+];
+---
+
+<PageLayout
+  title="Thesis"
+  description="生成が希少だった時代に設計された検証と承認の制度は、AIによる生成の速度に追随していない。"
+  toc={toc}
+>
+  <header class="page-head">
+    <p class="eyebrow">Thesis</p>
+    <h1>承認は、根拠に接続されてはじめて責任になる</h1>
+    <p class="standfirst">
+      生成が希少だった時代に設計された検証と承認の制度は、AIによる生成の速度に追随していない。
+    </p>
+  </header>
+
+  <section id="asymmetry" class="section">
+    <h2>生成と検証の非対称性</h2>
+    <p>
+      AIは、解析、図表、文章、コードといった知的成果物を、人間の生産速度をはるかに超えて生成するようになった。生成が希少だった時代に設計された検証と承認の制度は、この変化に追随していない。成果物の量が人間の検証能力を超えるとき、律速段階は生成ではなく、承認へ移る。
+    </p>
+  </section>
+
+  <section id="bottleneck" class="section">
+    <h2>承認が律速になるとき</h2>
+    <p>
+      承認が律速になると、承認は形式化する。人間は根拠を検証できないまま署名し、その署名は、問題が生じたときに責任の所在を確定する力を失う。責任は、署名によってではなく、検証可能な根拠への接続によって成立する。
+    </p>
+    <blockquote>根拠に接続されない承認は、責任の移転ではなく、責任の消失である。</blockquote>
+  </section>
+
+  <section id="engineering" class="section">
+    <h2>責任を工学的対象として扱う</h2>
+    <p>
+      私たちは、責任を——個人の注意力や倫理に委ねられた徳目としてではなく——設計可能な工学的対象として扱う。ソフトウェア工学が型検査、継続的インテグレーション、監査ログによって「正しさ」を人の注意力から仕組みへ移したように、AIが生成する成果物にも、根拠と成果物の整合を機械的に維持し、第三者が独立に検証できる層が必要である。
+    </p>
+  </section>
+
+  <section id="science-first" class="section">
+    <h2>なぜ科学研究から始めるのか</h2>
+    <p>
+      Lickliderは、この層を科学研究から作り始める。科学は、責任の所在（著者性）と検証可能性（再現性）が制度として最も明確に要求され、かつAIによる生成が最も速く浸透しつつある領域だからである。科学において成立した責任の設計は、規制、監査、意思決定を伴うあらゆる領域の原型となる。
+    </p>
+  </section>
+
+  <footer class="page-foot">
+    <p class="version">Thesis v0.1 — 2026-08-16</p>
+    <p class="next">
+      次のセクション: <span class="placeholder" title="準備中">What We Build →</span>
+    </p>
+  </footer>
+</PageLayout>
+
+<style>
+  .page-head {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .page-head .eyebrow {
+    margin: 0;
+  }
+
+  .page-head h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0.9rem 0 1.25rem;
+  }
+
+  .standfirst {
+    margin: 0;
+    font-size: 1.08rem;
+    color: var(--ink-2);
+  }
+
+  .section {
+    padding: 2.75rem 0;
+    border-bottom: 1px solid var(--rule-faint);
+    scroll-margin-top: 2rem;
+  }
+
+  .section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .section p:last-child {
+    margin-bottom: 0;
+  }
+
+  blockquote {
+    margin: 1.75rem 0 0;
+    padding-left: 1.25rem;
+    border-left: 1px solid var(--ink);
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+
+  .page-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding: 2rem 0 0;
+    font-size: 0.85rem;
+    color: var(--ink-3);
+  }
+
+  .page-foot p {
+    margin: 0;
+  }
+</style>

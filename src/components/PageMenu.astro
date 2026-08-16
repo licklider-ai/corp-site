@@ -1,0 +1,102 @@
+---
+import type { TocItem } from '../consts';
+
+interface Props {
+  items: TocItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="page-menu" aria-label="ページ内メニュー">
+  <p class="eyebrow">On this page</p>
+  <ul>
+    {
+      items.map((item) => (
+        <li>
+          <a href={`#${item.id}`} data-toc-link={item.id}>
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  // 現在読んでいる見出しをページ内メニューで示す
+  const links = document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]');
+  const targets = Array.from(links)
+    .map((link) => document.getElementById(link.dataset.tocLink ?? ''))
+    .filter((el): el is HTMLElement => el !== null);
+
+  if (targets.length > 0 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const setActive = (id: string) => {
+      links.forEach((link) => {
+        link.toggleAttribute('data-active', link.dataset.tocLink === id);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting);
+        if (visible.length > 0) {
+          setActive(visible[0]!.target.id);
+        }
+      },
+      { rootMargin: '0px 0px -70% 0px', threshold: 0 }
+    );
+
+    targets.forEach((target) => observer.observe(target));
+  }
+</script>
+
+<style>
+  .page-menu {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.9rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid var(--rule-faint);
+  }
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: block;
+    padding: 0.3rem 0 0.3rem 0.9rem;
+    margin-left: -1px;
+    border-left: 1px solid transparent;
+    font-size: 0.84rem;
+    line-height: 1.45;
+    text-decoration: none;
+    color: var(--ink-3);
+  }
+
+  a:hover {
+    color: var(--ink);
+  }
+
+  a[data-active] {
+    color: var(--ink);
+    border-left-color: var(--ink);
+  }
+
+  @media (max-width: 1000px) {
+    .page-menu {
+      position: static;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--rule-faint);
+    }
+  }
+</style>
