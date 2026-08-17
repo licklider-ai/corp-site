@@ -156,15 +156,16 @@ const markFrame = `scale(0.6) rotate(${ground})`;
 const verifyFrame = `scale(0.72) rotate(${ground})`;
 
 // 虫眼鏡は面に伏せた一つの剛体として扱い、面内で 45 度だけ回す。枠の回転を
-// 差し引くと虫眼鏡だけが地面から起き上がって見えるので、ここでは差し引かない。
-// 持ち手もチェックもこの枠に従うので、地面に対する傾きが一つに定まる
+// 差し引くと虫眼鏡だけが地面から起き上がって見えるので、ここでは差し引かない
 const lensFrame = `translate(${lens.x} ${lens.y}) rotate(45)`;
 
-// チェックはレンズの中心を原点に、両腕を ±45 度の直角に折って描く。虫眼鏡の枠が
-// 面内で 45 度回っているので、投影後の腕はちょうど ±29.83 度――菱形の右下辺
-// (地面) と左下辺そのものの傾き――に乗る。腕を直角にしないと画面の縦横に寄り、
-// 面に伏せず貼りついて見える
-const checkPath = 'M-11 0 L-4 7 L11 -8';
+// チェックは虫眼鏡の持ち物ではなく Record の上の記号なので、虫眼鏡と一緒には
+// 回さず、紋の枠のまま地面に正立させる。腕は一般的なチェックの比率 (短腕 54 度・
+// 長腕 -49 度、長さ 1:1.75) をそのまま使う。投影後は 5 度 / -97 度になり、地面
+// (右下辺 -29.83 度) とも左下辺 (+29.83 度) とも平行にならない。書類と同じ「上」を
+// 向くので、面の上に立った記号として読める
+const checkFrame = `translate(${lens.x} ${lens.y})`;
+const checkPath = 'M-10.4 -1.8 L-3.4 7.9 L10.4 -7.9';
 
 const chevronY = [200, 230, 260];
 
@@ -395,7 +396,7 @@ const notes = {
               vector-effect="non-scaling-stroke"
             />
             <circle cx={lens.x} cy={lens.y} r={lens.inner} vector-effect="non-scaling-stroke" />
-            <g transform={lensFrame}>
+            <g transform={checkFrame}>
               <path class="mark-line" d={checkPath} vector-effect="non-scaling-stroke" />
             </g>
           </g>
