@@ -16,6 +16,8 @@
   --rule: #d4d4d4; /* 罫線 */
   --rule-faint: #e9e9e9; /* 淡い罫線 */
   --wash: #f6f6f6; /* ごく淡い面 */
+  --wash-hi: #fafafa; /* 図: 上を向く面 */
+  --wash-lo: #f0f0f0; /* 図: 側面 */
 
   --font-serif: 'Times New Roman', Times, 'YuMincho', 'Yu Mincho',
     'Hiragino Mincho ProN', serif;

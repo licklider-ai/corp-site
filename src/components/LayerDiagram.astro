@@ -3,6 +3,8 @@
 // 上段 = nomue（生成）、下段 = nomue Record と verifier（記録・検証）。
 // 左列の矢印が下から上（根拠の供給）、右列が上から下（記録）を表す。
 
+type Point = [number, number];
+
 // 等角の基準寸法: 上面の菱形は半幅 w・半高 h、側面の厚みが t
 const w = 150;
 const h = 86;
@@ -10,32 +12,81 @@ const t = 40;
 const cx = 230;
 const topY = 110; // 上段の上面の中心
 const bottomY = 330; // 下段の上面の中心
+const corner = 12; // 角の丸み
 
-const slab = (cy: number) => ({
-  top: `${cx},${cy - h} ${cx + w},${cy} ${cx},${cy + h} ${cx - w},${cy}`,
-  left: `${cx - w},${cy} ${cx},${cy + h} ${cx},${cy + h + t} ${cx - w},${cy + t}`,
-  right: `${cx},${cy + h} ${cx + w},${cy} ${cx + w},${cy + t} ${cx},${cy + h + t}`,
-});
+const fmt = ([x, y]: Point) => `${x.toFixed(1)} ${y.toFixed(1)}`;
 
-const upper = slab(topY);
-const lower = slab(bottomY);
+// 多角形の角を丸めたパスを作る。各頂点の手前で辺を切り、頂点を制御点にした曲線でつなぐ
+const rounded = (points: Point[], radius: number) => {
+  const n = points.length;
+  const segments: string[] = [];
+
+  const toward = (from: Point, to: Point): Point => {
+    const dx = to[0] - from[0];
+    const dy = to[1] - from[1];
+    const length = Math.hypot(dx, dy);
+    const r = Math.min(radius, length / 2);
+    return [from[0] + (dx / length) * r, from[1] + (dy / length) * r];
+  };
+
+  for (let i = 0; i < n; i++) {
+    const previous = points[(i - 1 + n) % n]!;
+    const current = points[i]!;
+    const next = points[(i + 1) % n]!;
+
+    segments.push(`${i === 0 ? 'M' : 'L'}${fmt(toward(current, previous))}`);
+    segments.push(`Q${fmt(current)} ${fmt(toward(current, next))}`);
+  }
+
+  return `${segments.join(' ')} Z`;
+};
+
+// 立体の外形 (六角形) と、上を向く面 (菱形)
+const silhouette = (cy: number): Point[] => [
+  [cx, cy - h],
+  [cx + w, cy],
+  [cx + w, cy + t],
+  [cx, cy + h + t],
+  [cx - w, cy + t],
+  [cx - w, cy],
+];
+
+const topFace = (cy: number): Point[] => [
+  [cx, cy - h],
+  [cx + w, cy],
+  [cx, cy + h],
+  [cx - w, cy],
+];
 
 // 上面へ図形を投影する行列。平面座標 -100..100 の正方形が上面の菱形に重なる
 // (u,v)=(100,-100) が右の角、(100,100) が手前の角に対応するため除数は 200
 const project = (cy: number) => `matrix(${w / 200} ${h / 200} ${-w / 200} ${h / 200} ${cx} ${cy})`;
 
-// 上段の紋: 生成される成果物。図の枠と、Legend・Methods・Results にあたる行で描く
-const outputSpan = 58;
-const outputFigure = { x: -outputSpan, y: -outputSpan, w: outputSpan * 2, h: 52 };
-const outputLines = [
-  { y: 8, to: outputSpan },
-  { y: 30, to: 30 },
-  { y: 52, to: 44 },
-];
+// Layer 2 の紋: 歯車 (アプリケーション)
+const gear = (teeth: number, outer: number, inner: number) => {
+  const step = (Math.PI * 2) / teeth;
+  const tip = step * 0.26; // 歯先の半幅
+  const base = step * 0.42; // 歯元の半幅
+  const at = (radius: number, angle: number) =>
+    fmt([radius * Math.cos(angle), radius * Math.sin(angle)]);
 
-// 下段の紋: 構造化された記録を格子で描く
-const gridSpan = 58;
-const gridAt = [-gridSpan / 3, gridSpan / 3];
+  const segments: string[] = [];
+  for (let i = 0; i < teeth; i++) {
+    const a = i * step;
+    segments.push(`${i === 0 ? 'M' : 'L'}${at(inner, a - base)}`);
+    segments.push(`L${at(outer, a - tip)}`);
+    segments.push(`L${at(outer, a + tip)}`);
+    segments.push(`L${at(inner, a + base)}`);
+  }
+  return `${segments.join(' ')} Z`;
+};
+
+const gearPath = gear(8, 60, 44);
+
+// Layer 1 の紋: 盾と鍵穴 (記録の保全と検証)。
+// 鍵穴は円と軸を一本のパスにして、内側に継ぎ目が出ないようにする
+const shieldPath = 'M0 -64 L46 -42 C46 4 29 40 0 60 C-29 40 -46 4 -46 -42 Z';
+const keyholePath = 'M-6.5 -0.7 A13 13 0 1 1 6.5 -0.7 L11 26 L-11 26 Z';
 
 const chevronY = [200, 230, 260];
 
@@ -93,7 +144,7 @@ const notes = {
       <line class="link" x1={cx} y1={topY + h + t} x2={cx} y2={bottomY + h} />
 
       <!-- 下から上へ: 根拠の供給 -->
-      <g class="flow flow--up">
+      <g class="flow">
         {
           chevronY.map((y, i) => (
             <path
@@ -105,7 +156,7 @@ const notes = {
       </g>
 
       <!-- 上から下へ: 記録 -->
-      <g class="flow flow--down">
+      <g class="flow">
         {
           chevronY.map((y, i) => (
             <path
@@ -118,55 +169,23 @@ const notes = {
 
       <!-- Layer 2 -->
       <g class="slab">
-        <polygon class="face face--side" points={upper.left} />
-        <polygon class="face face--side" points={upper.right} />
-        <polygon class="face face--top" points={upper.top} />
+        <path class="body" d={rounded(silhouette(topY), corner)} />
+        <line class="seam" x1={cx} y1={topY + h + 2} x2={cx} y2={topY + h + t - corner} />
+        <path class="deck" d={rounded(topFace(topY), corner)} />
         <g class="mark" transform={project(topY)}>
-          <rect
-            x={outputFigure.x}
-            y={outputFigure.y}
-            width={outputFigure.w}
-            height={outputFigure.h}
-            vector-effect="non-scaling-stroke"
-          />
-          {
-            outputLines.map((line) => (
-              <line
-                class="mark-rule"
-                x1={-outputSpan}
-                y1={line.y}
-                x2={line.to}
-                y2={line.y}
-                vector-effect="non-scaling-stroke"
-              />
-            ))
-          }
+          <path d={gearPath} vector-effect="non-scaling-stroke" />
+          <circle cx="0" cy="0" r="20" vector-effect="non-scaling-stroke" />
         </g>
       </g>
 
       <!-- Layer 1 -->
       <g class="slab">
-        <polygon class="face face--side" points={lower.left} />
-        <polygon class="face face--side" points={lower.right} />
-        <polygon class="face face--top" points={lower.top} />
+        <path class="body" d={rounded(silhouette(bottomY), corner)} />
+        <line class="seam" x1={cx} y1={bottomY + h + 2} x2={cx} y2={bottomY + h + t - corner} />
+        <path class="deck" d={rounded(topFace(bottomY), corner)} />
         <g class="mark" transform={project(bottomY)}>
-          <rect
-            x={-gridSpan}
-            y={-gridSpan}
-            width={gridSpan * 2}
-            height={gridSpan * 2}
-            vector-effect="non-scaling-stroke"
-          />
-          {
-            gridAt.map((p) => (
-              <line x1={p} y1={-gridSpan} x2={p} y2={gridSpan} vector-effect="non-scaling-stroke" />
-            ))
-          }
-          {
-            gridAt.map((p) => (
-              <line x1={-gridSpan} y1={p} x2={gridSpan} y2={p} vector-effect="non-scaling-stroke" />
-            ))
-          }
+          <path d={shieldPath} vector-effect="non-scaling-stroke" />
+          <path d={keyholePath} vector-effect="non-scaling-stroke" />
         </g>
       </g>
     </svg>
@@ -221,29 +240,30 @@ const notes = {
     text-align: center;
   }
 
-  /* 面は白で塗り、奥の線を隠す */
-  .face {
-    fill: var(--paper);
-    stroke: var(--ink-2);
-    stroke-width: 1;
-    stroke-linejoin: round;
+  /* 外形は黒の枠線と薄いグレーの塗り。奥の線はこの塗りで隠れる */
+  .body {
+    fill: var(--wash-lo);
+    stroke: var(--ink);
+    stroke-width: 1.25;
   }
 
-  .face--side {
-    fill: var(--wash);
+  .deck {
+    fill: var(--wash-hi);
+    stroke: var(--ink);
+    stroke-width: 1.25;
   }
 
-  .mark line,
-  .mark rect,
-  .mark path {
-    fill: none;
-    stroke: var(--ink-3);
-    stroke-width: 1;
-    stroke-linejoin: round;
-  }
-
-  .mark-rule {
+  .seam {
     stroke: var(--ink-4);
+    stroke-width: 1;
+  }
+
+  .mark path,
+  .mark circle {
+    fill: none;
+    stroke: var(--ink-2);
+    stroke-width: 1.15;
+    stroke-linejoin: round;
   }
 
   .axis {
@@ -322,12 +342,9 @@ const notes = {
     }
 
     .stack {
+      order: -1;
       max-width: 26rem;
       margin: 0 auto;
-    }
-
-    .stack {
-      order: -1;
     }
 
     .notes--left {
