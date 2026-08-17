@@ -19,8 +19,13 @@ const layers = [
   },
 ];
 
-const publicRecord = [
-  { date: '2026-09', commitment: 'nomue Record v0 Public Draft を公開する', status: '予定' },
+const news = [
+  {
+    date: '2026年8月16日',
+    title: 'nomue verifierを公開',
+    href: 'https://github.com/licklider-ai/nomue-verifier',
+    label: 'GitHub',
+  },
 ];
 ---
 
@@ -102,35 +107,39 @@ const publicRecord = [
     </section>
 
     <section class="band">
-      <p class="eyebrow">Public Record</p>
+      <p class="eyebrow">News</p>
       <div class="band-body">
-        <p>
-          責任の設計を語る企業として、当社自身の公開コミットメントをここに記録する。宣言、達成、未達、変更のすべてを残す。
-        </p>
         <div class="table-scroll">
           <table>
-            <thead>
-              <tr>
-                <th scope="col">日付</th>
-                <th scope="col">宣言</th>
-                <th scope="col">状態</th>
-              </tr>
-            </thead>
             <tbody>
               {
-                publicRecord.map((row) => (
+                news.map((row) => (
                   <tr>
-                    <td>{row.date}</td>
-                    <td>{row.commitment}</td>
-                    <td>{row.status}</td>
+                    <td class="news-date">{row.date}</td>
+                    <td>
+                      <a href={row.href} target="_blank" rel="noopener noreferrer">
+                        {row.title}
+                        {/* 外部リンクの印: 角丸の枠と右上へ抜ける矢印 */}
+                        <svg
+                          class="ext"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path d="M10.8 4.5 H7 C5.6 4.5 4.5 5.6 4.5 7 V17 C4.5 18.4 5.6 19.5 7 19.5 H17 C18.4 19.5 19.5 18.4 19.5 17 V13.2" />
+                          <path d="M11.5 12.5 L19 5" />
+                          <path d="M14.5 4.75 H19.25 V9.5" />
+                        </svg>
+                      </a>
+                    </td>
+                    <td class="news-label">{row.label}</td>
                   </tr>
                 ))
               }
-              <tr class="placeholder">
-                <td>[以後追記]</td>
-                <td></td>
-                <td></td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -264,6 +273,29 @@ const publicRecord = [
 
   .table-scroll {
     overflow-x: auto;
+  }
+
+  /* News: 見出し行なしの一覧。1 行目にも上罫線を引いて表の枠を保つ */
+  .news-date {
+    white-space: nowrap;
+    color: var(--ink-3);
+  }
+
+  .news-label {
+    color: var(--ink-3);
+    text-align: right;
+  }
+
+  tbody tr:first-child td {
+    border-top: 1px solid var(--rule-faint);
+  }
+
+  /* 外部リンクの印はテキストの末尾に沿わせ、リンク色を継承する */
+  .ext {
+    width: 0.8em;
+    height: 0.8em;
+    margin-left: 0.3em;
+    vertical-align: -0.06em;
   }
 
   @media (max-width: 800px) {

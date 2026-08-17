@@ -27,7 +27,7 @@ export const SIDE_NAV: NavItem[] = [
   { label: 'Thesis', href: '/thesis/', ready: true },
   { label: 'What We Build', href: '/what-we-build/', ready: false },
   { label: 'Why "Licklider"', href: '/why-licklider/', ready: false },
-  { label: 'Public Record', href: '/public-record/', ready: false },
+  { label: 'News', href: '/news/', ready: false },
 ];
 
 /** ページ内メニュー (目次) の項目 */
