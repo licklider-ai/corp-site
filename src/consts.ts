@@ -4,7 +4,8 @@
  */
 
 export const SITE_TITLE = 'Licklider';
-export const SITE_DESCRIPTION = 'AI駆動時代の責任の設計'; // TODO: 英語版で要調整
+export const SITE_DESCRIPTION =
+  'Engineering accountability in the AI era. Licklider builds the infrastructure for responsible approval.';
 export const SITE_VERSION = 'v0.1';
 export const SITE_UPDATED = '2026-08-16';
 

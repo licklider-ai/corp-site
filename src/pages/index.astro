@@ -9,20 +9,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const layers = [
   {
     n: 'Layer 1',
-    title: 'nomue Record（公開仕様）と検証器',
-    body: '研究成果物——図、Legend、Methods、Results、Claim——が、どの入力データ、どの宣言、どの統計規則、どの計算から生成されたかを記録する公開形式。責任ある承認を成立させるのは、検証可能な根拠への接続である。Recordは、承認される成果物とその根拠の接続を機械可読な形で固定し、承認者が何に基づいて承認したのかを、本人以外にも検証可能にする。付属するオープンソースの検証器（verifier）により、第三者は、Recordの内部整合を当社のソフトウェアに依存せず独立して検証できる。その記録と接続の検証が当社への信頼に依存しないこと——それが、責任の基盤としてのこの層の成立条件である。',
+    title: 'nomue Record (open specification) and verifier',
+    body: "An open format that records how each research output — figures, Legend, Methods, Results, Claim — was generated: from which input data, which declarations, which statistical rules, which computations. What makes approval responsible is its connection to verifiable evidence. The Record fixes the connection between an approved output and its evidence in machine-readable form, making what the approver relied on verifiable by others, not just by the approver. The accompanying open-source verifier lets third parties check a Record's internal consistency independently, without depending on our software. Neither the record nor its verification requires trusting us — that is the condition on which this layer can serve as a foundation for accountability.",
   },
   {
     n: 'Layer 2',
-    title: 'nomue（アプリケーション）',
-    body: 'Recordを正本として研究成果物を生成・維持する実行環境。研究データと研究意図から、解析、図、Legend、Methods、Results、Claimを同一の根拠の上に生成する。人間は、成果物とその根拠が接続された状態で承認する。データ・宣言・解析のいずれかが変更されたとき、影響を受ける成果物と承認を無効化し、再生成・再承認を必要とする。',
+    title: 'nomue (application)',
+    body: 'An execution environment that generates and maintains research outputs with the Record as their canonical source. From research data and research intent, it produces analyses, figures, Legend, Methods, Results, and Claim on the same underlying evidence. Humans approve each output with its evidence attached. When data, declarations, or analyses change, the outputs and approvals they affect are invalidated, requiring regeneration and re-approval.',
   },
 ];
 
 const news = [
   {
-    date: '2026年8月16日',
-    title: 'nomue verifierを公開',
+    date: 'August 16, 2026',
+    title: 'nomue verifier released',
     href: 'https://github.com/licklider-ai/nomue-verifier',
     label: 'GitHub',
   },
@@ -32,18 +32,18 @@ const news = [
 <BaseLayout>
   <section class="hero">
     <div class="hero-inner">
-      <p class="eyebrow">アジェンダ</p>
-      <h1>AI駆動時代の<br />責任の設計</h1>
+      <p class="eyebrow">Agenda</p>
+      <h1>Engineering Accountability<br />in the AI Era</h1>
       <div class="lede">
         <p>
-          AIは、生成をスケールさせた。<br />
-          次にスケールさせるべきは、承認である。
+          AI has scaled generation.<br />
+          What must scale next is approval.
         </p>
-        <p>Lickliderは、責任ある承認を工学的に成立させるための基盤をつくる。</p>
+        <p>Licklider builds the engineering foundation for responsible approval.</p>
       </div>
       <p class="cta">
-        <a href="/thesis/">Thesisを読む →</a>
-        <span class="placeholder" title="準備中">nomue（製品）→</span>
+        <a href="/thesis/">Read the Thesis →</a>
+        <span class="placeholder" title="Coming soon">nomue (product) →</span>
       </p>
     </div>
   </section>
@@ -54,21 +54,21 @@ const news = [
         <p class="eyebrow">Thesis</p>
         <div class="band-body">
         <p>
-          AIは、解析、図表、文章、コードといった知的成果物を、人間の生産速度をはるかに超えて生成するようになった。生成が希少だった時代に設計された検証と承認の制度は、この変化に追随していない。成果物の量が人間の検証能力を超えるとき、律速段階は生成ではなく、承認へ移る。
+          AI now generates intellectual work — analyses, figures, prose, code — far beyond the pace at which humans can produce it. The institutions of verification and approval, designed for an era when generation was scarce, have not kept up. When the volume of output exceeds human capacity to verify it, the rate-limiting step shifts from generation to approval.
         </p>
         <p>
-          承認が律速になると、承認は形骸化する。人間は根拠を十分に検証できないまま署名し、その署名は、問題が生じたときに責任を確定する力を失っていく。責任は、署名によってではなく、検証可能な根拠への接続によって成立する。根拠から切り離された承認は、責任の移転ではなく、責任の空洞化を招く。
+          When approval becomes the bottleneck, it turns into a formality. People sign off on work whose basis they cannot fully verify, and those signatures gradually lose their power to establish responsibility when something goes wrong. Accountability comes not from a signature but from a connection to verifiable evidence. Approval severed from that evidence does not transfer responsibility; it hollows it out.
         </p>
         <p>
-          私たちは、責任そのものを自動化しようとしているのではない。責任が実質を持つための条件を、工学的に設計しようとしている。私たちはこれを「責任の設計」と呼ぶ。ソフトウェア工学が型検査、継続的インテグレーション、監査ログによって、正しさの一部を人間の注意力ではなく機械的な検証に委ねてきたように、AIが生成する知的成果物にも、根拠と成果物の整合を機械的に維持し、第三者が独立に検証できる層が必要である。
+          We are not trying to automate responsibility itself. We are trying to engineer the conditions under which responsibility has substance. We call this engineering accountability. Just as software engineering shifted part of the burden of correctness from human attention to mechanical verification — type checking, continuous integration, audit logs — the intellectual work AI generates needs a layer that mechanically maintains the consistency between outputs and their evidence, and that third parties can verify independently.
         </p>
         <p>
-          Lickliderは、この層を科学研究から作り始める。科学では、誰が主張に責任を持つかだけでなく、その主張がどのデータ、解析、判断に基づくのかが問われる。主張と根拠の接続が、成果物そのものの成立条件になっているからである。この環境で成立する仕組みは、やがて規制、監査、医療、金融、そしてAIが関与する意思決定へと拡張できる。
+          Licklider starts building this layer in scientific research. Science asks not only who is responsible for a claim, but which data, analyses, and judgments that claim rests on. The connection between claim and evidence is a condition for the work to count at all. What holds up in that environment can, in time, extend to regulation, auditing, medicine, finance, and any decision-making that involves AI.
         </p>
         <p>
-          AI時代に必要なのは、より多く生成するための層だけではない。生成されたものに、人間が責任を持てるようにするための層である。
+          What the AI era needs is not just layers for generating more. It needs a layer that lets humans take responsibility for what has been generated.
         </p>
-        <p class="more"><a href="/thesis/">Thesis のページへ →</a></p>
+        <p class="more"><a href="/thesis/">Read the full Thesis →</a></p>
         </div>
       </div>
     </section>
@@ -80,10 +80,10 @@ const news = [
 
         <div class="band-body">
           <p class="lead">
-            信頼の根拠は、生成物ではなく、検証可能な記録に置く。生成は利便のための層であり、記録と検証が本体である。
+            We place the basis of trust not in generated outputs but in a verifiable record. Generation is a layer of convenience; the record and its verification are the substance.
           </p>
 
-          <p class="more"><span class="placeholder" title="準備中">→ nomue 製品サイトへ</span></p>
+          <p class="more"><span class="placeholder" title="Coming soon">→ nomue product site</span></p>
         </div>
       </div>
     </section>
@@ -94,12 +94,12 @@ const news = [
         <div class="why">
           <div class="band-body">
             <p>
-              J. C. R. Licklider は "Man-Computer Symbiosis"（1960）において、人間が目標を設定し判断を担い、計算機が定型的な作業を担うという分業を、明確に描いた。
+              In "Man-Computer Symbiosis" (1960), J. C. R. Licklider clearly articulated a division of labor in which humans set goals and exercise judgment while computers carry out the routine work.
             </p>
             <p>
-              それから幾十年の月日を経て生成は機械の側へ移り、承認と責任は人間の側に残った。私たちは、この新しい分業には新しい基盤が必要だと考える。
+              In the decades since, generation has moved to the machine's side, while approval and responsibility have stayed with humans. We believe this new division of labor needs a new foundation.
             </p>
-            <p>社名は、この分業の最初の設計図への参照である。</p>
+            <p>Our name refers to the original blueprint for that division of labor.</p>
           </div>
           <LickliderPortrait />
         </div>

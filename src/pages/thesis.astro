@@ -4,58 +4,58 @@ import PageLayout from '../layouts/PageLayout.astro';
 
 // 本文は仮執筆 v0.1。英語化時にすべて差し替える。
 const toc: TocItem[] = [
-  { id: 'asymmetry', label: '生成と検証の非対称性' },
-  { id: 'bottleneck', label: '承認が律速になるとき' },
-  { id: 'engineering', label: '責任を工学的対象として扱う' },
-  { id: 'science-first', label: 'なぜ科学研究から始めるのか' },
+  { id: 'asymmetry', label: 'The asymmetry of generation and verification' },
+  { id: 'bottleneck', label: 'When approval becomes the bottleneck' },
+  { id: 'engineering', label: 'Treating responsibility as an object of engineering' },
+  { id: 'science-first', label: 'Why start with scientific research' },
 ];
 ---
 
 <PageLayout
   title="Thesis"
-  description="生成が希少だった時代に設計された検証と承認の制度は、AIによる生成の速度に追随していない。"
+  description="The institutions of verification and approval, designed for an era when generation was scarce, have not kept pace with the speed of AI generation."
   toc={toc}
 >
   <header class="page-head">
     <p class="eyebrow">Thesis</p>
-    <h1>承認は、根拠に接続されてはじめて責任になる</h1>
+    <h1>Approval becomes responsibility only when it is connected to evidence</h1>
     <p class="standfirst">
-      生成が希少だった時代に設計された検証と承認の制度は、AIによる生成の速度に追随していない。
+      The institutions of verification and approval, designed for an era when generation was scarce, have not kept pace with the speed of AI generation.
     </p>
   </header>
 
   <section id="asymmetry" class="section">
-    <h2>生成と検証の非対称性</h2>
+    <h2>The asymmetry of generation and verification</h2>
     <p>
-      AIは、解析、図表、文章、コードといった知的成果物を、人間の生産速度をはるかに超えて生成するようになった。生成が希少だった時代に設計された検証と承認の制度は、この変化に追随していない。成果物の量が人間の検証能力を超えるとき、律速段階は生成ではなく、承認へ移る。
+      AI now generates intellectual work — analyses, figures, prose, code — far beyond the pace at which humans can produce it. The institutions of verification and approval, designed for an era when generation was scarce, have not kept up with this change. When the volume of output exceeds human capacity to verify it, the rate-limiting step shifts from generation to approval.
     </p>
   </section>
 
   <section id="bottleneck" class="section">
-    <h2>承認が律速になるとき</h2>
+    <h2>When approval becomes the bottleneck</h2>
     <p>
-      承認が律速になると、承認は形式化する。人間は根拠を検証できないまま署名し、その署名は、問題が生じたときに責任の所在を確定する力を失う。責任は、署名によってではなく、検証可能な根拠への接続によって成立する。根拠に接続されない承認は、責任の移転ではなく、責任の消失である。
+      When approval becomes the bottleneck, it turns into a formality. People sign off without being able to verify the evidence, and their signatures lose the power to establish where responsibility lies when something goes wrong. Accountability comes not from a signature but from a connection to verifiable evidence. Approval that is not connected to evidence is not a transfer of responsibility but a disappearance of it.
     </p>
   </section>
 
   <section id="engineering" class="section">
-    <h2>責任を工学的対象として扱う</h2>
+    <h2>Treating responsibility as an object of engineering</h2>
     <p>
-      私たちは、責任を——個人の注意力や倫理に委ねられた徳目としてではなく——設計可能な工学的対象として扱う。ソフトウェア工学が型検査、継続的インテグレーション、監査ログによって「正しさ」を人の注意力から仕組みへ移したように、AIが生成する成果物にも、根拠と成果物の整合を機械的に維持し、第三者が独立に検証できる層が必要である。
+      We treat responsibility not as a virtue entrusted to individual attention and ethics, but as something that can be engineered. Just as software engineering moved "correctness" from human attention into mechanism — through type checking, continuous integration, and audit logs — the outputs AI generates need a layer that mechanically maintains the consistency between evidence and outputs, and that third parties can verify independently.
     </p>
   </section>
 
   <section id="science-first" class="section">
-    <h2>なぜ科学研究から始めるのか</h2>
+    <h2>Why start with scientific research</h2>
     <p>
-      Lickliderは、この層を科学研究から作り始める。科学は、責任の所在（著者性）と検証可能性（再現性）が制度として最も明確に要求され、かつAIによる生成が最も速く浸透しつつある領域だからである。科学において成立した責任の設計は、規制、監査、意思決定を伴うあらゆる領域の原型となる。
+      Licklider starts building this layer in scientific research, because science is the domain where responsibility (authorship) and verifiability (reproducibility) are demanded most explicitly as institutions, and where AI generation is spreading fastest. Engineering accountability that holds in science becomes the prototype for every domain that involves regulation, auditing, and consequential decisions.
     </p>
   </section>
 
   <footer class="page-foot">
     <p class="version">Thesis v0.1 — 2026-08-16</p>
     <p class="next">
-      次のセクション: <span class="placeholder" title="準備中">What We Build →</span>
+      Next section: <span class="placeholder" title="Coming soon">What We Build →</span>
     </p>
   </footer>
 </PageLayout>

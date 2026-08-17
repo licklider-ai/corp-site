@@ -183,10 +183,10 @@ const upChevronY = [0, 30, 60, 90];
 <div class="interaction">
   <figure class="diagram">
     <p class="visually-hidden">
-      上段の nomue Record・verifier（記録と検証）と下段の nomue（生成）のあいだを、根拠と成果物が往復する等角図
+      Isometric diagram: evidence and outputs cycle between nomue Record and verifier (recording and verification) above, and nomue (generation) below
     </p>
 
-    <!-- Layer 1。行 1 の上端に付き、本文の開始位置と揃う -->
+    <!-- Layer 1. Pinned to the top of row 1, aligned with the start of its text -->
     <svg class="slab-svg slab-svg--1" viewBox="70 22 320 216" aria-hidden="true">
       <g class="slab">
           <path class="body" d={slab.body} />
@@ -275,8 +275,8 @@ const upChevronY = [0, 30, 60, 90];
         </g>
     </svg>
 
-    <!-- Layer 2。行 2 の上端に付く。face の点線は Layer 1 の下端から降りてくる
-         中心線の続きで、菱形の上面を前面から横切って手前の頂点まで届く -->
+    <!-- Layer 2. Pinned to the top of row 2. The face line continues the center
+         line descending from Layer 1, crossing the top face to the front vertex -->
     <div class="slab2" aria-hidden="true">
       <svg class="slab-svg" viewBox="70 22 320 216">
         <g class="slab">
@@ -352,18 +352,18 @@ const upChevronY = [0, 30, 60, 90];
       <span class="link link--face"></span>
     </div>
 
-    <!-- 二つの菱形をつなぐ点線と矢印。点線は行 1 の背後から菱形 2 の角まで
-         降ろし、矢印は菱形 1 の下端と菱形 2 の上端の中間に置く -->
+    <!-- Dotted links and flow arrows between the two slabs. The links drop from
+         behind row 1 to the corners of slab 2; the arrows sit midway between them -->
     <div class="links" aria-hidden="true">
       <span class="link link--left"></span>
       <span class="link link--center"></span>
       <span class="link link--right"></span>
       <svg class="flows" viewBox="70 0 320 76">
-        <!-- 上から下へ: 根拠の供給 (Layer 1 → Layer 2) -->
+        <!-- Downward: supplying evidence (Layer 1 → Layer 2) -->
         <g class="flow flow--down">
           {downChevronY.map((y) => <path d={`M144 ${y + 4} L152 ${y + 12} L160 ${y + 4}`} />)}
         </g>
-        <!-- 下から上へ: Record の上への生成 (Layer 2 → Layer 1) -->
+        <!-- Upward: generating on top of the Record (Layer 2 → Layer 1) -->
         <g class="flow flow--up">
           {upChevronY.map((y) => <path d={`M300 ${y + 12} L308 ${y + 4} L316 ${y + 12}`} />)}
         </g>
@@ -371,7 +371,7 @@ const upChevronY = [0, 30, 60, 90];
     </div>
 
     <figcaption class="placeholder">
-      [図: Evidence →（宣言・規則・計算）→ Outputs。下層に Record（記録）と Verifier（第三者検証）を貫通させる層構造図]
+      [Figure: Evidence → (declarations, rules, computations) → Outputs, with Record (recording) and verifier (third-party verification) running through the layer beneath]
     </figcaption>
   </figure>
 
