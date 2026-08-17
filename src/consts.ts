@@ -26,7 +26,6 @@ export const GLOBAL_NAV: NavItem[] = [
 export const SIDE_NAV: NavItem[] = [
   { label: 'Thesis', href: '/thesis/', ready: true },
   { label: 'What We Build', href: '/what-we-build/', ready: false },
-  { label: 'Guarantee Boundary', href: '/guarantee-boundary/', ready: false },
   { label: 'Open Specification', href: '/open-specification/', ready: false },
   { label: 'Research Notes', href: '/research-notes/', ready: false },
   { label: 'Why "Licklider"', href: '/why-licklider/', ready: false },
