@@ -77,13 +77,13 @@ vercel --prod        # 本番デプロイ
 - [ ] `favicon.svg` / `robots.txt` / `sitemap-index.xml` が配信される
 - [ ] OGP メタタグが出力されている
 
-## 4. 旧デプロイの無効化
+## 4. 旧デプロイの無効化（完了: 2026-08-17）
 
-`licklider-v1` の `site/` ディレクトリ由来のデプロイを止めます。
+`licklider-v1` の `site/` ディレクトリ由来のデプロイは停止済みです。
 
-1. 旧 Vercel プロジェクト（`licklider-v1` + Root `site`）から `licklider.ai` ドメインを削除
-2. 旧プロジェクトの Git 連携を解除するか、プロジェクトを Archive
-3. `licklider-v1` リポジトリの `site/` に README を置き、移行先を明記（別 PR）
+- [x] Vercel プロジェクト `licklidermvp/website` を `corp-site` に付け替え（Root Directory: `./`）
+- [x] `licklider.ai` / `www.licklider.ai` は `corp-site` の `main` から配信
+- [x] `licklider-v1/site/` を退役し、移行先 README を配置（[licklider-ai/licklider-v1#site](https://github.com/licklider-ai/licklider-v1/tree/main/site)）
 
 ## 5. CLI でのローカル確認
 
