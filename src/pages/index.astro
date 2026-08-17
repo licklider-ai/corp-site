@@ -1,5 +1,6 @@
 ---
 import LayerDiagram from '../components/LayerDiagram.astro';
+import LickliderPortrait from '../components/LickliderPortrait.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 // トップページはサイドメニューとページ内メニューを持たない。
@@ -104,16 +105,21 @@ const publicRecord = [
       </div>
     </section>
 
-    <section class="band">
-      <p class="eyebrow">Why "Licklider"</p>
-      <div class="band-body">
-        <p>
-          J. C. R. Licklider は "Man-Computer Symbiosis"（1960）において、人間が目標を設定し判断を担い、計算機が定型的な作業を担うという分業を、最初に定式化した。
-        </p>
-        <p>
-          それから66年。生成は機械の側へ移り、承認と責任は人間の側に残った。しかし、この分業を成立させるための基盤は、いまだ存在しない。
-        </p>
-        <p>社名は、この分業の最初の設計図への参照である。</p>
+    <section class="band band--single">
+      <div class="band-inner band-inner--wide">
+        <p class="eyebrow">Why "Licklider"</p>
+        <div class="why">
+          <div class="band-body">
+            <p>
+              J. C. R. Licklider は "Man-Computer Symbiosis"（1960）において、人間が目標を設定し判断を担い、計算機が定型的な作業を担うという分業を、最初に定式化した。
+            </p>
+            <p>
+              それから66年。生成は機械の側へ移り、承認と責任は人間の側に残った。しかし、この分業を成立させるための基盤は、いまだ存在しない。
+            </p>
+            <p>社名は、この分業の最初の設計図への参照である。</p>
+          </div>
+          <LickliderPortrait />
+        </div>
       </div>
     </section>
 
@@ -264,6 +270,18 @@ const publicRecord = [
     margin-top: 3rem;
   }
 
+  /* Why "Licklider": 左に本文、右に人物画。人物画は本文の高さに合わせて中央へ */
+  .why {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 16rem);
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .why .band-body {
+    margin-top: 0;
+  }
+
   .band-body > :last-child {
     margin-bottom: 0;
   }
@@ -334,5 +352,15 @@ const publicRecord = [
       padding: 3rem 0;
     }
 
+    /* 人物画は本文の下へ回して中央に置く */
+    .why {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2.5rem;
+    }
+
+    .why :global(.portrait) {
+      max-width: 15rem;
+      margin: 0 auto;
+    }
   }
 </style>
