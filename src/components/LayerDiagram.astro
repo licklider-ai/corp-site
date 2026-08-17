@@ -131,13 +131,17 @@ const lens = { x: 20, y: 26, outer: 26, inner: 22, gap: 3 };
 const handle = { x: 24, y: -3.5, w: 30, h: 7, r: 3.5 };
 const collarX = 30;
 
-// 虫眼鏡には決まった向きがないので、投影後に参考画像と同じ「右下 45 度」に
-// 見える角度を選ぶ。チェックも同様に、投影後の形から逆算した座標で置く
-const handleFrame = `translate(${lens.x} ${lens.y}) rotate(15)`;
-const checkPath = 'M14.7 31.3 L25.6 34.3 L17.9 11.9';
+// 虫眼鏡とチェックには決まった向きがないので、投影後の見え方から角度を逆算する。
+// 平面上の 27 度は、投影されると画面上で右下 60 度になる
+const handleFrame = `translate(${lens.x} ${lens.y}) rotate(27)`;
 
-// 歯車と見た目の大きさを揃える
-const verifyScale = 'scale(1.2)';
+// チェックは、画面に正立させると面から浮くので、面の向き (画面上で時計回りに
+// 60 度) との中間である 30 度だけ倒した位置に置く
+const checkPath = 'M7 26 L22.4 37.3 L28 12.9';
+
+// 紋は土台の 60% に収める
+const markScale = 'scale(0.6)';
+const verifyScale = 'scale(0.72)';
 
 const chevronY = [200, 230, 260];
 
@@ -225,8 +229,10 @@ const notes = {
         <path class="divider" d={upper.front} />
         <line class="divider" x1={cx} y1={upper.seam.y1} x2={cx} y2={upper.seam.y2} />
         <g class="mark" transform={project(topY)}>
-          <path d={gearPath} vector-effect="non-scaling-stroke" />
-          <circle cx="0" cy="0" r="20" vector-effect="non-scaling-stroke" />
+          <g transform={markScale}>
+            <path d={gearPath} vector-effect="non-scaling-stroke" />
+            <circle cx="0" cy="0" r="20" vector-effect="non-scaling-stroke" />
+          </g>
         </g>
         <path class="outline" d={upper.body} />
       </g>
@@ -411,7 +417,7 @@ const notes = {
   .mark .mark-knockout rect {
     fill: var(--wash-hi);
     stroke: var(--wash-hi);
-    stroke-width: 6;
+    stroke-width: 4;
   }
 
   /* レンズは面の色で塗り、下を通る持ち手の根元を隠す */
