@@ -4,8 +4,9 @@
 // 下段に Layer 2 (アプリケーション) を置く。左列の矢印が上から下 (根拠の供給)、
 // 右列が下から上 (Record の上への生成) を表す。
 //
-// 図の列は本文の列と高さを共有する。菱形は 2 枚の SVG に分かれていて大きさは
-// 固定、あいだの接続部 (点線・矢印) だけが伸縮して本文の高さに追従する。
+// 図の列は本文の列と同じグリッド行を共有する。各菱形はそれぞれの本文と同じ行の
+// 上端に付くので、菱形の縦位置と本文の開始位置が常に一致する。行間の距離は本文の
+// 高さが決め、菱形をつなぐ点線がその距離に追従して伸縮する。
 
 interface Props {
   layers: { n: string; title: string; body: string }[];
@@ -179,15 +180,14 @@ const chevronY = [0, 30, 60];
 
 <div class="interaction">
   <figure class="diagram">
-    <div
-      class="stack"
-      role="img"
-      aria-label="上段の nomue Record・verifier（記録と検証）と下段の nomue（生成）のあいだを、根拠と成果物が往復する等角図"
-    >
-      <!-- Layer 1。外形の輪郭は最後に引き、内側の線に覆われないようにする -->
-      <svg class="slab-svg" viewBox="70 4 320 234" aria-hidden="true">
-        <line class="axis" x1={cx} y1="6" x2={cx} y2={cy - h} />
-        <g class="slab">
+    <p class="visually-hidden">
+      上段の nomue Record・verifier（記録と検証）と下段の nomue（生成）のあいだを、根拠と成果物が往復する等角図
+    </p>
+
+    <!-- Layer 1。行 1 の上端に付き、本文の開始位置と揃う -->
+    <svg class="slab-svg slab-svg--1" viewBox="70 4 320 234" aria-hidden="true">
+      <line class="axis" x1={cx} y1="6" x2={cx} y2={cy - h} />
+      <g class="slab">
           <path class="body" d={slab.body} />
           <path class="deck" d={slab.deck} />
           <path class="divider" d={slab.front} />
@@ -272,13 +272,37 @@ const chevronY = [0, 30, 60];
           </g>
           <path class="outline" d={slab.body} />
         </g>
+    </svg>
+
+    <!-- Layer 2。行 2 の上端に付く。cover は行 2 が菱形より高いときに、
+         背後を通る点線を角より下で隠す。矢印は菱形の上端に固定で追従する -->
+    <div class="slab2" aria-hidden="true">
+      <span class="cover"></span>
+      <svg class="flows" viewBox="70 0 320 76">
+        <!-- 上から下へ: 根拠の供給 (Layer 1 → Layer 2) -->
+        <g class="flow">
+          {
+            chevronY.map((y, i) => (
+              <path
+                d={`M144 ${y + 4} L152 ${y + 12} L160 ${y + 4}`}
+                style={`animation-delay: ${i * 0.22}s`}
+              />
+            ))
+          }
+        </g>
+        <!-- 下から上へ: Record の上への生成 (Layer 2 → Layer 1) -->
+        <g class="flow">
+          {
+            chevronY.map((y, i) => (
+              <path
+                d={`M300 ${y + 12} L308 ${y + 4} L316 ${y + 12}`}
+                style={`animation-delay: ${(chevronY.length - 1 - i) * 0.22}s`}
+              />
+            ))
+          }
+        </g>
       </svg>
-
-      <!-- 本文の高さに追従して伸縮する接続部 -->
-      <div class="gap" aria-hidden="true"></div>
-
-      <!-- Layer 2 -->
-      <svg class="slab-svg" viewBox="70 22 320 234" aria-hidden="true">
+      <svg class="slab-svg" viewBox="70 22 320 234">
         <line class="axis" x1={cx} y1={cy + h + t} x2={cx} y2={cy + h + t + 18} />
         <g class="slab">
           <path class="body" d={slab.body} />
@@ -350,37 +374,13 @@ const chevronY = [0, 30, 60];
           <path class="outline" d={slab.body} />
         </g>
       </svg>
+    </div>
 
-      <!-- 二つの菱形をつなぐ点線と矢印。菱形の SVG の背後に敷く -->
-      <div class="links" aria-hidden="true">
-        <span class="link link--left"></span>
-        <span class="link link--center"></span>
-        <span class="link link--right"></span>
-        <svg class="flows" viewBox="70 0 320 76">
-          <!-- 上から下へ: 根拠の供給 (Layer 1 → Layer 2) -->
-          <g class="flow">
-            {
-              chevronY.map((y, i) => (
-                <path
-                  d={`M144 ${y + 4} L152 ${y + 12} L160 ${y + 4}`}
-                  style={`animation-delay: ${i * 0.22}s`}
-                />
-              ))
-            }
-          </g>
-          <!-- 下から上へ: Record の上への生成 (Layer 2 → Layer 1) -->
-          <g class="flow">
-            {
-              chevronY.map((y, i) => (
-                <path
-                  d={`M300 ${y + 12} L308 ${y + 4} L316 ${y + 12}`}
-                  style={`animation-delay: ${(chevronY.length - 1 - i) * 0.22}s`}
-                />
-              ))
-            }
-          </g>
-        </svg>
-      </div>
+    <!-- 二つの菱形をつなぐ点線。両列の行 1〜2 の背後に敷く -->
+    <div class="links" aria-hidden="true">
+      <span class="link link--left"></span>
+      <span class="link link--center"></span>
+      <span class="link link--right"></span>
     </div>
 
     <figcaption class="placeholder">
@@ -402,27 +402,17 @@ const chevronY = [0, 30, 60];
 </div>
 
 <style>
-  /* 図の列と本文の列を一つのグリッドで持つ。図の注釈 (figcaption) は行 2 に
-     追い出し、行 1 の高さは本文と図の大きいほうが決める */
+  /* 図の列と本文の列が同じ 2 行を共有する。行 1 = Layer 1 (菱形と本文)、
+     行 2 = Layer 2。各行の高さは菱形と本文の高いほうが決める */
   .interaction {
     display: grid;
     grid-template-columns: minmax(0, 18.5rem) minmax(0, 1fr);
     column-gap: 3rem;
+    row-gap: 2rem;
   }
 
   .diagram {
     display: contents;
-  }
-
-  /* 菱形 2 枚は大きさ固定のまま、あいだの .gap だけが行の高さに合わせて伸縮する。
-     点線や矢印の位置は列幅に対する比 (cqw) で決まるので、高さに依存しない */
-  .stack {
-    grid-column: 1;
-    grid-row: 1;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    container-type: inline-size;
   }
 
   .slab-svg {
@@ -430,20 +420,58 @@ const chevronY = [0, 30, 60];
     width: 100%;
     height: auto;
     overflow: visible;
+  }
+
+  .slab-svg--1 {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
     position: relative;
     z-index: 1;
   }
 
-  .gap {
-    flex: 1 1 auto;
-    /* 本文が図より低いときの、菱形どうしの最小間隔 */
-    min-height: 0.5rem;
+  /* Layer 2 の枠。行 2 いっぱいに伸ばし、菱形はその上端に置く。
+     cqw を子要素で使うためのコンテナでもある */
+  .slab2 {
+    grid-column: 1;
+    grid-row: 2;
+    position: relative;
+    z-index: 1;
+    container-type: inline-size;
   }
 
-  .links {
+  .slab2 .slab-svg {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* 行 2 が菱形より高いとき、菱形の下へ抜ける点線を隠す。
+     27.5cqw = 菱形の左右の角の上端 (viewBox 内 y=110) を列幅比に直した値 */
+  .cover {
     position: absolute;
     inset: 0;
+    z-index: 1;
+    background: linear-gradient(to bottom, transparent 27.5cqw, var(--paper) 27.5cqw);
+  }
+
+  /* 矢印は Layer 2 の菱形の上端を基準に固定で置く */
+  .flows {
+    position: absolute;
+    left: 0;
+    top: -15.625cqw;
+    width: 100%;
+    height: 23.75cqw;
+    z-index: 2;
+    overflow: visible;
+  }
+
+  /* 点線は行 1〜2 の背後を貫き、菱形の塗りと cover が余分を隠す */
+  .links {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    position: relative;
     z-index: 0;
+    container-type: inline-size;
   }
 
   /* 点線は 1px 幅の縦帯を繰り返しグラデーションで塗る。SVG の stroke と違い、
@@ -451,6 +479,7 @@ const chevronY = [0, 30, 60];
   .link {
     position: absolute;
     width: 1px;
+    bottom: 0;
     background: repeating-linear-gradient(
       to bottom,
       var(--ink-4) 0 2px,
@@ -459,59 +488,43 @@ const chevronY = [0, 30, 60];
   }
 
   /* 3.125cqw = 菱形の左右の角の x 位置 (viewBox 内 80/320)。
-     45.625cqw = 角の y 位置、72.5cqw = 手前の頂点の y 位置を列幅比に直した値 */
+     45.625cqw = 上の菱形の角の y 位置、72.5cqw = 手前の頂点の y 位置 */
   .link--left {
     left: calc(3.125cqw - 0.5px);
     top: 45.625cqw;
-    bottom: 45.625cqw;
   }
 
   .link--right {
     right: calc(3.125cqw - 0.5px);
     top: 45.625cqw;
-    bottom: 45.625cqw;
   }
 
   .link--center {
     left: calc(50% - 0.5px);
     top: 72.5cqw;
-    bottom: 72.5cqw;
   }
 
-  .flows {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 100%;
-    height: 23.75cqw;
-    transform: translateY(-50%);
-    overflow: visible;
-  }
-
+  /* 本文は各行の上端から始める。行 1 は菱形の SVG が軸の分だけ上に伸びている
+     ので、その高さ (20/320 × 18.5rem) を詰めて菱形の頂点と開始位置を合わせる */
   .layers {
-    grid-column: 2;
-    grid-row: 1;
+    display: contents;
     list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    align-items: center;
-    row-gap: 2rem;
-  }
-
-  /* 図は上下の菱形が列の両端に付くので、本文も Layer 1 を上端、Layer 2 を
-     下端に揃える。これで図と本文の上下の縁が常に一致する */
-  .layers li:first-child {
-    align-self: start;
-  }
-
-  .layers li:last-child {
-    align-self: end;
   }
 
   .layers li {
+    grid-column: 2;
+    margin: 0;
     max-width: var(--measure);
+    align-self: start;
+  }
+
+  .layers li:first-child {
+    grid-row: 1;
+    padding-top: 1.15rem;
+  }
+
+  .layers li:last-child {
+    grid-row: 2;
   }
 
   .layer-n {
@@ -534,8 +547,8 @@ const chevronY = [0, 30, 60];
 
   figcaption {
     grid-column: 1 / -1;
-    grid-row: 2;
-    margin-top: 2.5rem;
+    grid-row: 3;
+    margin-top: 0.5rem;
     font-size: 0.8rem;
     line-height: 1.6;
     text-align: center;
@@ -629,32 +642,35 @@ const chevronY = [0, 30, 60];
     }
   }
 
-  /* 1 ペインで中央寄せ (幅 56rem ＋ 左右の余白 2.5rem) が入らなくなる幅で縦積みへ */
+  /* 1 ペインで中央寄せ (幅 56rem ＋ 左右の余白 2.5rem) が入らなくなる幅で縦積みへ。
+     図 (菱形 2 枚と点線) を先に、本文を後に置く */
   @media (max-width: 980px) {
     .interaction {
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .stack {
+    .slab-svg--1,
+    .slab2,
+    .links {
       justify-self: center;
       width: min(100%, 23rem);
     }
 
-    /* 縦積みでは本文が高さを決めないので、接続部は固定の間隔にする */
-    .gap {
-      flex: 0 0 auto;
-      min-height: 1.5rem;
+    .layers li:first-child {
+      grid-row: 3;
+      padding-top: 0.5rem;
     }
 
-    .layers {
+    .layers li:last-child {
+      grid-row: 4;
+    }
+
+    .layers li {
       grid-column: 1;
-      grid-row: 2;
-      grid-template-rows: none;
-      margin-top: 2.5rem;
     }
 
     figcaption {
-      grid-row: 3;
+      grid-row: 5;
       text-align: left;
     }
   }
