@@ -12,33 +12,48 @@ const t = 40;
 const cx = 230;
 const topY = 110; // 上段の上面の中心
 const bottomY = 330; // 下段の上面の中心
-const corner = 12; // 角の丸み
+const corner = 4; // 角の丸み。輪郭がわずかに和らぐ程度に留める
 
 const fmt = ([x, y]: Point) => `${x.toFixed(1)} ${y.toFixed(1)}`;
+
+// from から to の向きに radius だけ進んだ点。角を丸めるための切り取り位置
+const toward = (from: Point, to: Point, radius: number): Point => {
+  const dx = to[0] - from[0];
+  const dy = to[1] - from[1];
+  const length = Math.hypot(dx, dy);
+  const r = Math.min(radius, length / 2);
+  return [from[0] + (dx / length) * r, from[1] + (dy / length) * r];
+};
 
 // 多角形の角を丸めたパスを作る。各頂点の手前で辺を切り、頂点を制御点にした曲線でつなぐ
 const rounded = (points: Point[], radius: number) => {
   const n = points.length;
   const segments: string[] = [];
 
-  const toward = (from: Point, to: Point): Point => {
-    const dx = to[0] - from[0];
-    const dy = to[1] - from[1];
-    const length = Math.hypot(dx, dy);
-    const r = Math.min(radius, length / 2);
-    return [from[0] + (dx / length) * r, from[1] + (dy / length) * r];
-  };
-
   for (let i = 0; i < n; i++) {
     const previous = points[(i - 1 + n) % n]!;
     const current = points[i]!;
     const next = points[(i + 1) % n]!;
 
-    segments.push(`${i === 0 ? 'M' : 'L'}${fmt(toward(current, previous))}`);
-    segments.push(`Q${fmt(current)} ${fmt(toward(current, next))}`);
+    segments.push(`${i === 0 ? 'M' : 'L'}${fmt(toward(current, previous, radius))}`);
+    segments.push(`Q${fmt(current)} ${fmt(toward(current, next, radius))}`);
   }
 
   return `${segments.join(' ')} Z`;
+};
+
+// 閉じない折れ線。両端はそのまま、途中の角だけ丸める
+const roundedOpen = (points: Point[], radius: number) => {
+  const segments: string[] = [`M${fmt(points[0]!)}`];
+
+  for (let i = 1; i < points.length - 1; i++) {
+    const current = points[i]!;
+    segments.push(`L${fmt(toward(current, points[i - 1]!, radius))}`);
+    segments.push(`Q${fmt(current)} ${fmt(toward(current, points[i + 1]!, radius))}`);
+  }
+
+  segments.push(`L${fmt(points[points.length - 1]!)}`);
+  return segments.join(' ');
 };
 
 // 立体の外形 (六角形) と、上を向く面 (菱形)
@@ -57,6 +72,23 @@ const topFace = (cy: number): Point[] => [
   [cx, cy + h],
   [cx - w, cy],
 ];
+
+// 上面と側面の境目。外形の一部ではないので、控えめな線で引く
+const deckFront = (cy: number): Point[] => [
+  [cx - w, cy],
+  [cx, cy + h],
+  [cx + w, cy],
+];
+
+const slabPaths = (cy: number) => ({
+  body: rounded(silhouette(cy), corner),
+  deck: rounded(topFace(cy), corner),
+  front: roundedOpen(deckFront(cy), corner),
+  seam: { y1: cy + h, y2: cy + h + t - corner },
+});
+
+const upper = slabPaths(topY);
+const lower = slabPaths(bottomY);
 
 // 上面へ図形を投影する行列。平面座標 -100..100 の正方形が上面の菱形に重なる
 // (u,v)=(100,-100) が右の角、(100,100) が手前の角に対応するため除数は 200
@@ -167,26 +199,30 @@ const notes = {
         }
       </g>
 
-      <!-- Layer 2 -->
+      <!-- Layer 2。外形の輪郭は最後に引き、内側の線に覆われないようにする -->
       <g class="slab">
-        <path class="body" d={rounded(silhouette(topY), corner)} />
-        <line class="seam" x1={cx} y1={topY + h + 2} x2={cx} y2={topY + h + t - corner} />
-        <path class="deck" d={rounded(topFace(topY), corner)} />
+        <path class="body" d={upper.body} />
+        <path class="deck" d={upper.deck} />
+        <path class="divider" d={upper.front} />
+        <line class="divider" x1={cx} y1={upper.seam.y1} x2={cx} y2={upper.seam.y2} />
         <g class="mark" transform={project(topY)}>
           <path d={gearPath} vector-effect="non-scaling-stroke" />
           <circle cx="0" cy="0" r="20" vector-effect="non-scaling-stroke" />
         </g>
+        <path class="outline" d={upper.body} />
       </g>
 
       <!-- Layer 1 -->
       <g class="slab">
-        <path class="body" d={rounded(silhouette(bottomY), corner)} />
-        <line class="seam" x1={cx} y1={bottomY + h + 2} x2={cx} y2={bottomY + h + t - corner} />
-        <path class="deck" d={rounded(topFace(bottomY), corner)} />
+        <path class="body" d={lower.body} />
+        <path class="deck" d={lower.deck} />
+        <path class="divider" d={lower.front} />
+        <line class="divider" x1={cx} y1={lower.seam.y1} x2={cx} y2={lower.seam.y2} />
         <g class="mark" transform={project(bottomY)}>
           <path d={shieldPath} vector-effect="non-scaling-stroke" />
           <path d={keyholePath} vector-effect="non-scaling-stroke" />
         </g>
+        <path class="outline" d={lower.body} />
       </g>
     </svg>
 
@@ -240,29 +276,36 @@ const notes = {
     text-align: center;
   }
 
-  /* 外形は黒の枠線と薄いグレーの塗り。奥の線はこの塗りで隠れる */
+  /* 面は薄いグレーの塗りだけ。奥の線はこの塗りで隠れる */
   .body {
     fill: var(--wash-lo);
-    stroke: var(--ink);
-    stroke-width: 1.25;
   }
 
   .deck {
     fill: var(--wash-hi);
-    stroke: var(--ink);
-    stroke-width: 1.25;
   }
 
-  .seam {
-    stroke: var(--ink-4);
+  /* 外形の輪郭だけをはっきり引く */
+  .outline {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 1.25;
+    stroke-linejoin: round;
+  }
+
+  /* 内側の区切り (上面と側面の境目、手前の稜線) は控えめに */
+  .divider {
+    fill: none;
+    stroke: var(--rule);
     stroke-width: 1;
+    stroke-linejoin: round;
   }
 
   .mark path,
   .mark circle {
     fill: none;
-    stroke: var(--ink-2);
-    stroke-width: 1.15;
+    stroke: var(--ink-4);
+    stroke-width: 1;
     stroke-linejoin: round;
   }
 
