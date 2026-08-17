@@ -26,10 +26,8 @@ export const GLOBAL_NAV: NavItem[] = [
 export const SIDE_NAV: NavItem[] = [
   { label: 'Thesis', href: '/thesis/', ready: true },
   { label: 'What We Build', href: '/what-we-build/', ready: false },
-  { label: 'Research Notes', href: '/research-notes/', ready: false },
   { label: 'Why "Licklider"', href: '/why-licklider/', ready: false },
   { label: 'Public Record', href: '/public-record/', ready: false },
-  { label: 'Company', href: '/company/', ready: false },
 ];
 
 /** ページ内メニュー (目次) の項目 */

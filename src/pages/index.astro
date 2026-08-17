@@ -19,12 +19,6 @@ const layers = [
   },
 ];
 
-const researchNotes = [
-  '検証の非対称性——生成は安く、検証は高い',
-  '形式承認はなぜ責任を運べないのか',
-  '再現性は成果物の性質ではなく、生成過程の性質である',
-];
-
 const publicRecord = [
   { date: '2026-09', commitment: 'nomue Record v0 Public Draft を公開する', status: '予定' },
 ];
@@ -89,22 +83,6 @@ const publicRecord = [
       </div>
     </section>
 
-    <section class="band">
-      <p class="eyebrow">Research Notes</p>
-      <div class="band-body">
-        <p>責任の設計に関する短い技術的エッセイ。各稿は日付と版番号を持つ。</p>
-        <ul class="notes">
-          {
-            researchNotes.map((note) => (
-              <li>
-                {note} <span class="placeholder">[準備中]</span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </section>
-
     <section class="band band--single">
       <div class="band-inner band-inner--wide">
         <p class="eyebrow">Why "Licklider"</p>
@@ -156,23 +134,6 @@ const publicRecord = [
             </tbody>
           </table>
         </div>
-      </div>
-    </section>
-
-    <section class="band">
-      <p class="eyebrow">Company</p>
-      <div class="band-body">
-        <dl class="company">
-          <dt>商号</dt>
-          <dd class="placeholder">[株式会社Licklider ／ Licklider, Inc. — 正式表記要確認]</dd>
-          <dt>所在地</dt>
-          <dd>東京、日本 <span class="placeholder">[要確定]</span></dd>
-          <dt>代表</dt>
-          <dd class="placeholder">[氏名]</dd>
-          <dt>連絡</dt>
-          <dd><a href="mailto:contact@licklider.ai">contact@licklider.ai</a></dd>
-        </dl>
-        <p class="colophon placeholder">[設立年・登記情報など、コロフォン調で最小限に]</p>
       </div>
     </section>
   </div>
@@ -301,44 +262,8 @@ const publicRecord = [
     font-size: 0.95rem;
   }
 
-  .notes {
-    list-style: none;
-    margin: 1.5rem 0;
-    padding: 0;
-    font-size: 0.95rem;
-  }
-
-  .notes li {
-    padding: 0.75rem 0;
-    border-top: 1px solid var(--rule-faint);
-    color: var(--ink-2);
-  }
-
   .table-scroll {
     overflow-x: auto;
-  }
-
-  .company {
-    margin: 0;
-    display: grid;
-    grid-template-columns: 7rem minmax(0, 1fr);
-    row-gap: 0.5rem;
-    font-size: 0.95rem;
-  }
-
-  .company dt {
-    color: var(--ink-3);
-    font-size: 0.85rem;
-    padding-top: 0.15rem;
-  }
-
-  .company dd {
-    margin: 0;
-  }
-
-  .colophon {
-    margin: 1.5rem 0 0;
-    font-size: 0.9rem;
   }
 
   @media (max-width: 800px) {
