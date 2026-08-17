@@ -70,23 +70,7 @@ const publicRecord = [
 
     <section class="band band--wide">
       <p class="eyebrow">2 — What We Build</p>
-      <div class="band-body">
-        <p>Lickliderは、二つの層を作っている。</p>
-
-        <ol class="layers">
-          {
-            layers.map((layer) => (
-              <li>
-                <p class="layer-n">{layer.n}</p>
-                <h3>{layer.title}</h3>
-                <p>{layer.body}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-
-      <LayerDiagram />
+      <LayerDiagram layers={layers} />
 
       <div class="band-body">
         <p class="lead">
@@ -288,13 +272,13 @@ const publicRecord = [
     max-width: var(--measure);
   }
 
-  /* 図は左右の段を横断して置く。本文の段は 2 列目に固定する */
+  /* 図も本文も 2 列目に固定し、見出しの段を空けておく */
   .band--wide .band-body {
     grid-column: 2;
   }
 
   .band--wide :global(.interaction) {
-    grid-column: 1 / -1;
+    grid-column: 2;
   }
 
   .band-body > :last-child {
@@ -319,35 +303,6 @@ const publicRecord = [
   .more {
     margin-top: 1.75rem;
     font-size: 0.95rem;
-  }
-
-  .layers {
-    list-style: none;
-    margin: 2rem 0;
-    padding: 0;
-  }
-
-  .layers li {
-    padding: 1.5rem 0;
-    border-top: 1px solid var(--rule-faint);
-  }
-
-  .layer-n {
-    margin: 0 0 0.35rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-  }
-
-  .layers h3 {
-    font-size: 1.05rem;
-    margin-bottom: 0.6rem;
-  }
-
-  .layers p:last-child {
-    margin-bottom: 0;
-    color: var(--ink-2);
   }
 
   .resources,
@@ -408,7 +363,8 @@ const publicRecord = [
       padding: 3rem 0;
     }
 
-    .band--wide .band-body {
+    .band--wide .band-body,
+    .band--wide :global(.interaction) {
       grid-column: 1;
     }
   }

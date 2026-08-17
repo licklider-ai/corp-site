@@ -1,7 +1,14 @@
 ---
-// Layer 1 と Layer 2 の相互作用を示す等角図。
-// 上段 = nomue（生成）、下段 = nomue Record と verifier（記録・検証）。
-// 左列の矢印が下から上（根拠の供給）、右列が上から下（記録）を表す。
+// What We Build の図。左に二層の等角図、右に対応する本文を置く。
+// 本文の Layer 1 → Layer 2 の順序を正本とし、図も上段に Layer 1 (Record ＋ verifier)、
+// 下段に Layer 2 (アプリケーション) を置く。左列の矢印が上から下 (根拠の供給)、
+// 右列が下から上 (Record の上への生成) を表す。
+
+interface Props {
+  layers: { n: string; title: string; body: string }[];
+}
+
+const { layers } = Astro.props;
 
 type Point = [number, number];
 
@@ -87,8 +94,8 @@ const slabPaths = (cy: number) => ({
   seam: { y1: cy + h, y2: cy + h + t - corner },
 });
 
-const upper = slabPaths(topY);
-const lower = slabPaths(bottomY);
+const upper = slabPaths(topY); // Layer 1: nomue Record ＋ verifier
+const lower = slabPaths(bottomY); // Layer 2: nomue (アプリケーション)
 
 // 上面へ図形を投影する行列。平面座標 -100..100 の正方形が上面の菱形に重なる
 // (u,v)=(100,-100) が右の角、(100,100) が手前の角に対応するため除数は 200
@@ -168,49 +175,13 @@ const checkFrame = `translate(${lens.x} ${lens.y})`;
 const checkPath = 'M-10.4 -1.8 L-3.4 7.9 L10.4 -7.9';
 
 const chevronY = [200, 230, 260];
-
-const notes = {
-  left: [
-    {
-      title: '根拠の供給',
-      body: '記録された入力データ、利用者の宣言、統計規則、計算が、生成の根拠になる',
-    },
-    {
-      title: '独立した検証',
-      body: 'verifier が Record の内部整合を、当社のソフトウェアに依存せず検証する',
-    },
-  ],
-  right: [
-    {
-      title: '同一の根拠の上に生成',
-      body: '解析、図、Legend、Methods、Results、Claim を Record の上に生成する',
-    },
-    {
-      title: '無効化と再生成',
-      body: 'データ・宣言・解析の変更が、影響を受ける成果物を無効化する',
-    },
-  ],
-};
 ---
 
-<figure class="interaction">
-  <div class="notes notes--left">
-    {
-      notes.left.map((note) => (
-        <div class="note">
-          <p class="note-title">{note.title}</p>
-          <p class="note-body">{note.body}</p>
-        </div>
-      ))
-    }
-  </div>
-
-  <div class="stack">
-    <p class="stack-label">Layer 2 — nomue（アプリケーション）</p>
-
-    <svg viewBox="0 0 460 480" role="img" aria-labelledby="layer-diagram-title">
+<div class="interaction">
+  <figure class="diagram">
+    <svg viewBox="70 0 320 480" role="img" aria-labelledby="layer-diagram-title">
       <title id="layer-diagram-title">
-        上段の nomue（生成）と下段の nomue Record・verifier（記録と検証）が、上下に往復する等角図
+        上段の nomue Record・verifier（記録と検証）と下段の nomue（生成）のあいだを、根拠と成果物が往復する等角図
       </title>
 
       <!-- 軸 -->
@@ -222,108 +193,37 @@ const notes = {
       <line class="link" x1={cx + w} y1={topY + t} x2={cx + w} y2={bottomY} />
       <line class="link" x1={cx} y1={topY + h + t} x2={cx} y2={bottomY + h} />
 
-      <!-- 下から上へ: 根拠の供給 -->
+      <!-- 上から下へ: 根拠の供給 (Layer 1 → Layer 2) -->
       <g class="flow">
         {
           chevronY.map((y, i) => (
             <path
-              d={`M144 ${y + 8} L152 ${y} L160 ${y + 8}`}
-              style={`animation-delay: ${(chevronY.length - 1 - i) * 0.22}s`}
-            />
-          ))
-        }
-      </g>
-
-      <!-- 上から下へ: 記録 -->
-      <g class="flow">
-        {
-          chevronY.map((y, i) => (
-            <path
-              d={`M300 ${y} L308 ${y + 8} L316 ${y}`}
+              d={`M144 ${y} L152 ${y + 8} L160 ${y}`}
               style={`animation-delay: ${i * 0.22}s`}
             />
           ))
         }
       </g>
 
-      <!-- Layer 2。外形の輪郭は最後に引き、内側の線に覆われないようにする -->
+      <!-- 下から上へ: Record の上への生成 (Layer 2 → Layer 1) -->
+      <g class="flow">
+        {
+          chevronY.map((y, i) => (
+            <path
+              d={`M300 ${y + 8} L308 ${y} L316 ${y + 8}`}
+              style={`animation-delay: ${(chevronY.length - 1 - i) * 0.22}s`}
+            />
+          ))
+        }
+      </g>
+
+      <!-- Layer 1。外形の輪郭は最後に引き、内側の線に覆われないようにする -->
       <g class="slab">
         <path class="body" d={upper.body} />
         <path class="deck" d={upper.deck} />
         <path class="divider" d={upper.front} />
         <line class="divider" x1={cx} y1={upper.seam.y1} x2={cx} y2={upper.seam.y2} />
         <g class="mark" transform={project(topY)}>
-          <g transform={markFrame}>
-            <rect
-              x={monitor.x}
-              y={monitor.y}
-              width={monitor.w}
-              height={monitor.h}
-              rx={monitor.r}
-              vector-effect="non-scaling-stroke"
-            />
-            <rect
-              x={screen.x}
-              y={screen.y}
-              width={screen.w}
-              height={screen.h}
-              rx={screen.r}
-              vector-effect="non-scaling-stroke"
-            />
-            <line
-              x1={screen.x}
-              y1={titleBarY}
-              x2={screen.x + screen.w}
-              y2={titleBarY}
-              vector-effect="non-scaling-stroke"
-            />
-            {dotsX.map((x) => <circle class="mark-dot" cx={x} cy={dotY} r="1.6" />)}
-
-            {
-              codePaths.map((d) => (
-                <path class="mark-line" d={d} vector-effect="non-scaling-stroke" />
-              ))
-            }
-
-            <g transform={`translate(${screenGear.x} ${screenGear.y})`}>
-              <path d={screenGear.path} vector-effect="non-scaling-stroke" />
-              <circle cx="0" cy="0" r={screenGear.hole} vector-effect="non-scaling-stroke" />
-            </g>
-
-            {
-              buttons.map((button) => (
-                <line
-                  class="mark-line"
-                  x1={button.from}
-                  y1={buttonY}
-                  x2={button.to}
-                  y2={buttonY}
-                  vector-effect="non-scaling-stroke"
-                />
-              ))
-            }
-
-            {neckPaths.map((d) => <path d={d} vector-effect="non-scaling-stroke" />)}
-            <rect
-              x={base.x}
-              y={base.y}
-              width={base.w}
-              height={base.h}
-              rx={base.r}
-              vector-effect="non-scaling-stroke"
-            />
-          </g>
-        </g>
-        <path class="outline" d={upper.body} />
-      </g>
-
-      <!-- Layer 1 -->
-      <g class="slab">
-        <path class="body" d={lower.body} />
-        <path class="deck" d={lower.deck} />
-        <path class="divider" d={lower.front} />
-        <line class="divider" x1={cx} y1={lower.seam.y1} x2={cx} y2={lower.seam.y2} />
-        <g class="mark" transform={project(bottomY)}>
           <g transform={verifyFrame}>
             <rect
               x={doc.x}
@@ -401,57 +301,162 @@ const notes = {
             </g>
           </g>
         </g>
+        <path class="outline" d={upper.body} />
+      </g>
+
+      <!-- Layer 2 -->
+      <g class="slab">
+        <path class="body" d={lower.body} />
+        <path class="deck" d={lower.deck} />
+        <path class="divider" d={lower.front} />
+        <line class="divider" x1={cx} y1={lower.seam.y1} x2={cx} y2={lower.seam.y2} />
+        <g class="mark" transform={project(bottomY)}>
+          <g transform={markFrame}>
+            <rect
+              x={monitor.x}
+              y={monitor.y}
+              width={monitor.w}
+              height={monitor.h}
+              rx={monitor.r}
+              vector-effect="non-scaling-stroke"
+            />
+            <rect
+              x={screen.x}
+              y={screen.y}
+              width={screen.w}
+              height={screen.h}
+              rx={screen.r}
+              vector-effect="non-scaling-stroke"
+            />
+            <line
+              x1={screen.x}
+              y1={titleBarY}
+              x2={screen.x + screen.w}
+              y2={titleBarY}
+              vector-effect="non-scaling-stroke"
+            />
+            {dotsX.map((x) => <circle class="mark-dot" cx={x} cy={dotY} r="1.6" />)}
+
+            {
+              codePaths.map((d) => (
+                <path class="mark-line" d={d} vector-effect="non-scaling-stroke" />
+              ))
+            }
+
+            <g transform={`translate(${screenGear.x} ${screenGear.y})`}>
+              <path d={screenGear.path} vector-effect="non-scaling-stroke" />
+              <circle cx="0" cy="0" r={screenGear.hole} vector-effect="non-scaling-stroke" />
+            </g>
+
+            {
+              buttons.map((button) => (
+                <line
+                  class="mark-line"
+                  x1={button.from}
+                  y1={buttonY}
+                  x2={button.to}
+                  y2={buttonY}
+                  vector-effect="non-scaling-stroke"
+                />
+              ))
+            }
+
+            {neckPaths.map((d) => <path d={d} vector-effect="non-scaling-stroke" />)}
+            <rect
+              x={base.x}
+              y={base.y}
+              width={base.w}
+              height={base.h}
+              rx={base.r}
+              vector-effect="non-scaling-stroke"
+            />
+          </g>
+        </g>
         <path class="outline" d={lower.body} />
       </g>
     </svg>
 
-    <p class="stack-label">Layer 1 — nomue Record ＋ verifier</p>
-  </div>
+    <figcaption class="placeholder">
+      [図: Evidence →（宣言・規則・計算）→ Outputs。下層に Record（記録）と Verifier（第三者検証）を貫通させる層構造図]
+    </figcaption>
+  </figure>
 
-  <div class="notes notes--right">
+  <ol class="layers">
     {
-      notes.right.map((note) => (
-        <div class="note">
-          <p class="note-title">{note.title}</p>
-          <p class="note-body">{note.body}</p>
-        </div>
+      layers.map((layer) => (
+        <li>
+          <p class="layer-n">{layer.n}</p>
+          <h3>{layer.title}</h3>
+          <p>{layer.body}</p>
+        </li>
       ))
     }
-  </div>
-
-  <figcaption class="placeholder">
-    [図: Evidence →（宣言・規則・計算）→ Outputs。下層に Record（記録）と Verifier（第三者検証）を貫通させる層構造図]
-  </figcaption>
-</figure>
+  </ol>
+</div>
 
 <style>
+  /* 図の列と本文の列を一つのグリッドで持つ。図の注釈 (figcaption) は行 2 に
+     追い出し、行 1 の高さを SVG だけで決める */
   .interaction {
-    margin: 3.5rem 0 0;
     display: grid;
-    /* 中央は明示的に幅を与える。auto だと SVG の既定サイズ (300px) で決まってしまう */
-    grid-template-columns: minmax(0, 1fr) 26rem minmax(0, 1fr);
-    align-items: center;
-    gap: 2.5rem;
+    grid-template-columns: minmax(0, 21rem) minmax(0, 1fr);
+    column-gap: 3rem;
   }
 
-  .stack {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+  .diagram {
+    display: contents;
   }
 
   svg {
+    grid-column: 1;
+    grid-row: 1;
     width: 100%;
     height: auto;
     overflow: visible;
   }
 
-  .stack-label {
+  /* 菱形の中心は SVG の高さの約 27% / 73% にある。行 1 を半分ずつに割り、
+     各層の本文をその中央に置くと、それぞれの菱形の横に来る */
+  .layers {
+    grid-column: 2;
+    grid-row: 1;
+    list-style: none;
     margin: 0;
-    font-size: 0.8rem;
-    letter-spacing: 0.04em;
+    padding: 0;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    row-gap: 2rem;
+  }
+
+  .layers li {
+    max-width: var(--measure);
+  }
+
+  .layer-n {
+    margin: 0 0 0.35rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .layers h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .layers p:last-child {
+    margin-bottom: 0;
     color: var(--ink-2);
+  }
+
+  figcaption {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 2.5rem;
+    font-size: 0.8rem;
+    line-height: 1.6;
     text-align: center;
   }
 
@@ -542,38 +547,6 @@ const notes = {
     }
   }
 
-  .notes {
-    display: flex;
-    flex-direction: column;
-    gap: 3.5rem;
-  }
-
-  .notes--left {
-    text-align: right;
-  }
-
-  .note-title {
-    margin: 0 0 0.4rem;
-    font-size: 0.85rem;
-    letter-spacing: 0.04em;
-    color: var(--ink);
-  }
-
-  .note-body {
-    margin: 0;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: var(--ink-3);
-  }
-
-  figcaption {
-    grid-column: 1 / -1;
-    margin-top: 2.5rem;
-    font-size: 0.8rem;
-    line-height: 1.6;
-    text-align: center;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .flow path {
       animation: none;
@@ -581,27 +554,25 @@ const notes = {
     }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     .interaction {
       grid-template-columns: minmax(0, 1fr);
-      gap: 2.5rem;
     }
 
-    .stack {
-      order: -1;
-      max-width: 26rem;
-      margin: 0 auto;
+    svg {
+      max-width: 23rem;
+      justify-self: center;
     }
 
-    .notes--left {
-      text-align: left;
-    }
-
-    .notes {
-      gap: 2rem;
+    .layers {
+      grid-column: 1;
+      grid-row: 2;
+      grid-template-rows: none;
+      margin-top: 2.5rem;
     }
 
     figcaption {
+      grid-row: 3;
       text-align: left;
     }
   }
