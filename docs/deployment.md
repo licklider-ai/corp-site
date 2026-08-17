@@ -43,10 +43,7 @@
 
 ## 2. ドメインとリダイレクト
 
-正規 URL は `https://licklider.ai`（apex）です。
-
-[`vercel.json`](../vercel.json) で `www.licklider.ai` から apex への 301 リダイレクトを定義しています。
-Vercel の **Domains** 設定で両方のドメインをこのプロジェクトに追加してください。
+正規 URL は `https://www.licklider.ai` です（`licklider.ai` は Vercel のドメイン設定で www へリダイレクトされます）。
 
 確認:
 
@@ -58,9 +55,9 @@ curl -sI https://licklider.ai/thesis/ | head -n 1
 
 期待結果:
 
-- `https://licklider.ai/` が 200 を返す（新コーポレートサイト）
-- `https://licklider.ai/thesis/` が 200 を返す
-- `www` は apex へリダイレクトされる
+- `https://www.licklider.ai/` が 200 を返す（新コーポレートサイト）
+- `https://www.licklider.ai/thesis/` が 200 を返す
+- `https://licklider.ai/` は `www` へリダイレクトされる
 
 ## 3. 本番デプロイの確認
 

@@ -4,7 +4,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://licklider.ai',
+  site: 'https://www.licklider.ai',
   output: 'static',
   integrations: [sitemap()],
 });
