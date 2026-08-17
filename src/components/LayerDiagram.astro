@@ -133,33 +133,38 @@ const buttons = [
 const neckPaths = ['M-11 27 L-16 38', 'M10 27 L15.5 38'];
 const base = { x: -33, y: 38, w: 66, h: 11, r: 5 };
 
-// Layer 1 の紋: 書類と虫眼鏡とチェック (記録の検証)。
+// Layer 1 の紋: 勲章とチェック (記録の検証)。
 // 紋は平面座標のまま描くので、辺が土台の稜線と平行になり、面に伏せて見える
-const doc = { x: -50, y: -48, w: 60, h: 96, r: 5 };
-const docHeading = { x: -40, y: -38, w: 38, h: 10, r: 3 };
-const docLineFrom = -40;
-const docLines = [
-  { y: -18, to: 0 },
-  { y: -8, to: -12 },
-  { y: 2, to: -4 },
-  { y: 12, to: -16 },
-];
+const badge = { y: -19, outer: 37, inner: 32, points: 16, face: 25 };
 
-const lens = { x: 20, y: 26, outer: 26, inner: 22, gap: 3 };
-const handle = { x: 24, y: -3.5, w: 30, h: 7, r: 3.5 };
-const collarX = 30;
+// 勲章の縁のぎざぎざ。外周と内周の半径を交互に取る
+const rosette = (points: number, outer: number, inner: number) => {
+  const step = Math.PI / points;
+  const coords: string[] = [];
 
-// 虫眼鏡とチェックには決まった向きがないので、投影後の見え方から角度を逆算する。
-// 平面上の 27 度は、投影されると画面上で右下 60 度になる
-const handleFrame = `translate(${lens.x} ${lens.y}) rotate(27)`;
+  for (let i = 0; i < points * 2; i++) {
+    const radius = i % 2 === 0 ? outer : inner;
+    const angle = i * step - Math.PI / 2;
+    coords.push(fmt([radius * Math.cos(angle), radius * Math.sin(angle)]));
+  }
 
-// チェックは、画面に正立させると面から浮くので、面の向き (画面上で時計回りに
-// 60 度) との中間である 30 度だけ倒した位置に置く
-const checkPath = 'M7 26 L22.4 37.3 L28 12.9';
+  return `M${coords.join(' L')} Z`;
+};
+
+const rosettePath = rosette(badge.points, badge.outer, badge.inner);
+
+// リボンは勲章の下から左右に開く。上端は勲章の塗りで隠れる
+const ribbonLeft = 'M-26.4 9.4 L-42.9 53.4 L-28.6 42.4 L-13.2 55.6 L-7.7 16 Z';
+const ribbonRight = 'M26.4 9.4 L42.9 53.4 L28.6 42.4 L13.2 55.6 L7.7 16 Z';
+
+const checkPath = 'M-13.8 0.9 L-4.4 9.7 L15.4 -11.3';
 
 // 紋は土台の 60% に収める
 const markScale = 'scale(0.6)';
-const verifyScale = 'scale(0.72)';
+
+// 勲章には土台と揃えるべき直線が無い。平面上で -45 度回すと、投影後に画面と
+// 同じ向き (リボンが真下に開く) になり、縦の圧縮だけが面に伏せた感じを残す
+const badgeFrame = `${markScale} rotate(-45)`;
 
 const chevronY = [200, 230, 260];
 
@@ -318,79 +323,16 @@ const notes = {
         <path class="divider" d={lower.front} />
         <line class="divider" x1={cx} y1={lower.seam.y1} x2={cx} y2={lower.seam.y2} />
         <g class="mark" transform={project(bottomY)}>
-          <g transform={verifyScale}>
-            <rect
-              x={doc.x}
-              y={doc.y}
-              width={doc.w}
-              height={doc.h}
-              rx={doc.r}
-              vector-effect="non-scaling-stroke"
-            />
-            <rect
-              x={docHeading.x}
-              y={docHeading.y}
-              width={docHeading.w}
-              height={docHeading.h}
-              rx={docHeading.r}
-              vector-effect="non-scaling-stroke"
-            />
-            {
-              docLines.map((line) => (
-                <line
-                  class="mark-line"
-                  x1={docLineFrom}
-                  y1={line.y}
-                  x2={line.to}
-                  y2={line.y}
-                  vector-effect="non-scaling-stroke"
-                />
-              ))
-            }
+          <g transform={badgeFrame}>
+            {/* リボンを先に引き、塗りのある勲章で上端を隠す */}
+            <path d={ribbonLeft} vector-effect="non-scaling-stroke" />
+            <path d={ribbonRight} vector-effect="non-scaling-stroke" />
 
-            {/* 虫眼鏡の下敷き。書類の線を抜いて、重なりに余白をつくる */}
-            <g class="mark-knockout">
-              <circle cx={lens.x} cy={lens.y} r={lens.outer + lens.gap} />
-              <g transform={handleFrame}>
-                <rect
-                  x={handle.x}
-                  y={handle.y}
-                  width={handle.w}
-                  height={handle.h}
-                  rx={handle.r}
-                  vector-effect="non-scaling-stroke"
-                />
-              </g>
+            <g transform={`translate(0 ${badge.y})`}>
+              <path class="medal" d={rosettePath} vector-effect="non-scaling-stroke" />
+              <circle cx="0" cy="0" r={badge.face} vector-effect="non-scaling-stroke" />
+              <path class="mark-line" d={checkPath} vector-effect="non-scaling-stroke" />
             </g>
-
-            {/* 持ち手は先に引き、塗りのあるレンズで根元を隠す */}
-            <g transform={handleFrame}>
-              <rect
-                x={handle.x}
-                y={handle.y}
-                width={handle.w}
-                height={handle.h}
-                rx={handle.r}
-                vector-effect="non-scaling-stroke"
-              />
-              <line
-                x1={collarX}
-                y1={handle.y}
-                x2={collarX}
-                y2={handle.y + handle.h}
-                vector-effect="non-scaling-stroke"
-              />
-            </g>
-
-            <circle
-              class="lens"
-              cx={lens.x}
-              cy={lens.y}
-              r={lens.outer}
-              vector-effect="non-scaling-stroke"
-            />
-            <circle cx={lens.x} cy={lens.y} r={lens.inner} vector-effect="non-scaling-stroke" />
-            <path class="mark-line" d={checkPath} vector-effect="non-scaling-stroke" />
           </g>
         </g>
         <path class="outline" d={lower.body} />
@@ -491,16 +433,8 @@ const notes = {
     stroke: none;
   }
 
-  /* 背後の線を面の色で抜き、紋の要素どうしに余白をつくる */
-  .mark .mark-knockout circle,
-  .mark .mark-knockout rect {
-    fill: var(--wash-hi);
-    stroke: var(--wash-hi);
-    stroke-width: 4;
-  }
-
-  /* レンズは面の色で塗り、下を通る持ち手の根元を隠す */
-  .mark .lens {
+  /* 勲章は面の色で塗り、下を通るリボンの上端を隠す */
+  .mark .medal {
     fill: var(--wash-hi);
   }
 
