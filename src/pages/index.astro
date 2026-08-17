@@ -89,29 +89,6 @@ const publicRecord = [
     </section>
 
     <section class="band">
-      <p class="eyebrow">Open Specification &amp; Verifier</p>
-      <div class="band-body">
-        <p class="lead">私たちの主張を、信頼する必要はない。検証してほしい。</p>
-        <ul class="resources">
-          <li>
-            <strong>nomue Record v0</strong> — 公開仕様（Public Draft、2026年9月公開予定）
-            <span class="placeholder">[リンク]</span>
-          </li>
-          <li>
-            <strong>nomue verifier</strong> — オープンソースの独立検証器
-            <span class="placeholder">[GitHub]</span>
-          </li>
-          <li>
-            <strong>Changelog</strong> — 仕様のすべての変更履歴 <span class="placeholder">[リンク]</span>
-          </li>
-        </ul>
-        <p>
-          仕様と検証器を公開するのは、透明性の演出のためではない。記録形式が特定の企業の生存に依存しないこと自体が、責任のインフラの要件だからである。
-        </p>
-      </div>
-    </section>
-
-    <section class="band">
       <p class="eyebrow">Research Notes</p>
       <div class="band-body">
         <p>責任の設計に関する短い技術的エッセイ。各稿は日付と版番号を持つ。</p>
@@ -306,7 +283,6 @@ const publicRecord = [
     font-size: 0.95rem;
   }
 
-  .resources,
   .notes {
     list-style: none;
     margin: 1.5rem 0;
@@ -314,16 +290,10 @@ const publicRecord = [
     font-size: 0.95rem;
   }
 
-  .resources li,
   .notes li {
     padding: 0.75rem 0;
     border-top: 1px solid var(--rule-faint);
     color: var(--ink-2);
-  }
-
-  .resources strong {
-    color: var(--ink);
-    border-bottom: 0;
   }
 
   .table-scroll {
