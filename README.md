@@ -89,3 +89,5 @@ pnpm install
 
 `main` への push と PR では [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) が
 `pnpm build` を実行します。
+
+本番デプロイ手順の詳細は [`docs/deployment.md`](./docs/deployment.md) を参照してください。
