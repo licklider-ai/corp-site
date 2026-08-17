@@ -174,8 +174,10 @@ const lensFrame = `translate(${lens.x} ${lens.y}) rotate(45)`;
 const checkFrame = `translate(${lens.x} ${lens.y})`;
 const checkPath = 'M-10.4 -1.8 L-3.4 7.9 L10.4 -7.9';
 
-// 矢印は接続部の中央に固定サイズで置く
-const chevronY = [0, 30, 60];
+// 矢印は菱形 1 と 2 の中間にベルトコンベア状に流す。窓 (高さ 76) の外に 1 つ
+// 余分に置き、1 周期 (間隔 30) ぶん平行移動してループすると継ぎ目が見えない
+const downChevronY = [-30, 0, 30, 60];
+const upChevronY = [0, 30, 60, 90];
 ---
 
 <div class="interaction">
@@ -185,8 +187,7 @@ const chevronY = [0, 30, 60];
     </p>
 
     <!-- Layer 1。行 1 の上端に付き、本文の開始位置と揃う -->
-    <svg class="slab-svg slab-svg--1" viewBox="70 4 320 234" aria-hidden="true">
-      <line class="axis" x1={cx} y1="6" x2={cx} y2={cy - h} />
+    <svg class="slab-svg slab-svg--1" viewBox="70 22 320 216" aria-hidden="true">
       <g class="slab">
           <path class="body" d={slab.body} />
           <path class="deck" d={slab.deck} />
@@ -274,36 +275,10 @@ const chevronY = [0, 30, 60];
         </g>
     </svg>
 
-    <!-- Layer 2。行 2 の上端に付く。cover は行 2 が菱形より高いときに、
-         背後を通る点線を角より下で隠す。矢印は菱形の上端に固定で追従する -->
+    <!-- Layer 2。行 2 の上端に付く。face の点線は Layer 1 の下端から降りてくる
+         中心線の続きで、菱形の上面を前面から横切って手前の頂点まで届く -->
     <div class="slab2" aria-hidden="true">
-      <span class="cover"></span>
-      <svg class="flows" viewBox="70 0 320 76">
-        <!-- 上から下へ: 根拠の供給 (Layer 1 → Layer 2) -->
-        <g class="flow">
-          {
-            chevronY.map((y, i) => (
-              <path
-                d={`M144 ${y + 4} L152 ${y + 12} L160 ${y + 4}`}
-                style={`animation-delay: ${i * 0.22}s`}
-              />
-            ))
-          }
-        </g>
-        <!-- 下から上へ: Record の上への生成 (Layer 2 → Layer 1) -->
-        <g class="flow">
-          {
-            chevronY.map((y, i) => (
-              <path
-                d={`M300 ${y + 12} L308 ${y + 4} L316 ${y + 12}`}
-                style={`animation-delay: ${(chevronY.length - 1 - i) * 0.22}s`}
-              />
-            ))
-          }
-        </g>
-      </svg>
-      <svg class="slab-svg" viewBox="70 22 320 234">
-        <line class="axis" x1={cx} y1={cy + h + t} x2={cx} y2={cy + h + t + 18} />
+      <svg class="slab-svg" viewBox="70 22 320 216">
         <g class="slab">
           <path class="body" d={slab.body} />
           <path class="deck" d={slab.deck} />
@@ -374,13 +349,25 @@ const chevronY = [0, 30, 60];
           <path class="outline" d={slab.body} />
         </g>
       </svg>
+      <span class="link link--face"></span>
     </div>
 
-    <!-- 二つの菱形をつなぐ点線。両列の行 1〜2 の背後に敷く -->
+    <!-- 二つの菱形をつなぐ点線と矢印。点線は行 1 の背後から菱形 2 の角まで
+         降ろし、矢印は菱形 1 の下端と菱形 2 の上端の中間に置く -->
     <div class="links" aria-hidden="true">
       <span class="link link--left"></span>
       <span class="link link--center"></span>
       <span class="link link--right"></span>
+      <svg class="flows" viewBox="70 0 320 76">
+        <!-- 上から下へ: 根拠の供給 (Layer 1 → Layer 2) -->
+        <g class="flow flow--down">
+          {downChevronY.map((y) => <path d={`M144 ${y + 4} L152 ${y + 12} L160 ${y + 4}`} />)}
+        </g>
+        <!-- 下から上へ: Record の上への生成 (Layer 2 → Layer 1) -->
+        <g class="flow flow--up">
+          {upChevronY.map((y) => <path d={`M300 ${y + 12} L308 ${y + 4} L316 ${y + 12}`} />)}
+        </g>
+      </svg>
     </div>
 
     <figcaption class="placeholder">
@@ -445,30 +432,26 @@ const chevronY = [0, 30, 60];
     z-index: 2;
   }
 
-  /* 行 2 が菱形より高いとき、菱形の下へ抜ける点線を隠す。
-     27.5cqw = 菱形の左右の角の上端 (viewBox 内 y=110) を列幅比に直した値 */
-  .cover {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(to bottom, transparent 27.5cqw, var(--paper) 27.5cqw);
-  }
-
-  /* 矢印は Layer 2 の菱形の上端を基準に固定で置く */
+  /* 矢印は菱形 1 の下端 (行 1 の上から 66.875cqw) と菱形 2 の上端
+     (行 1 の下から行間 2rem ＋ 0.625cqw) の中間に置く。行 1 が本文で
+     伸びても、この式が中間点を追いかける */
   .flows {
     position: absolute;
     left: 0;
-    top: -15.625cqw;
+    top: calc(50% + 1rem + 33.75cqw);
     width: 100%;
     height: 23.75cqw;
-    z-index: 2;
-    overflow: visible;
+    transform: translateY(-50%);
+    /* ベルトの出入口は端で溶けるように消す */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
   }
 
-  /* 点線は行 1〜2 の背後を貫き、菱形の塗りと cover が余分を隠す */
+  /* 点線の basis は行 1。下端は負のオフセットで行間を越え、菱形 2 の
+     角・頂点にちょうど届く長さで止める */
   .links {
     grid-column: 1;
-    grid-row: 1 / 3;
+    grid-row: 1;
     position: relative;
     z-index: 0;
     container-type: inline-size;
@@ -479,7 +462,6 @@ const chevronY = [0, 30, 60];
   .link {
     position: absolute;
     width: 1px;
-    bottom: 0;
     background: repeating-linear-gradient(
       to bottom,
       var(--ink-4) 0 2px,
@@ -487,25 +469,38 @@ const chevronY = [0, 30, 60];
     );
   }
 
-  /* 3.125cqw = 菱形の左右の角の x 位置 (viewBox 内 80/320)。
-     45.625cqw = 上の菱形の角の y 位置、72.5cqw = 手前の頂点の y 位置 */
+  /* 3.125cqw = 菱形の左右の角の x 位置 (viewBox 内 80/320)。40cqw = 菱形 1 の
+     角の y 位置、66.875cqw = 手前の頂点の y 位置。下端の 27.5cqw / 0.625cqw は
+     菱形 2 の角・頂点の、行 2 上端からの深さ */
   .link--left {
     left: calc(3.125cqw - 0.5px);
-    top: 45.625cqw;
+    top: 40cqw;
+    bottom: calc(-2rem - 27.5cqw);
   }
 
   .link--right {
     right: calc(3.125cqw - 0.5px);
-    top: 45.625cqw;
+    top: 40cqw;
+    bottom: calc(-2rem - 27.5cqw);
   }
 
   .link--center {
     left: calc(50% - 0.5px);
-    top: 72.5cqw;
+    top: 66.875cqw;
+    bottom: calc(-2rem - 0.625cqw);
   }
 
-  /* 本文は各行の上端から始める。行 1 は菱形の SVG が軸の分だけ上に伸びている
-     ので、その高さ (20/320 × 18.5rem) を詰めて菱形の頂点と開始位置を合わせる */
+  /* 中心線の続き。菱形 2 の上面を前面から横切り、手前の頂点で
+     稜線 (divider) に引き継ぐ */
+  .link--face {
+    left: calc(50% - 0.5px);
+    top: 0.625cqw;
+    height: 53.75cqw;
+    z-index: 3;
+  }
+
+  /* 本文は各行の上端から始める。菱形の頂点も行の上端 (0.625cqw 下) にあるので、
+     本文の開始位置と菱形の縦位置が揃う */
   .layers {
     display: contents;
     list-style: none;
@@ -520,7 +515,6 @@ const chevronY = [0, 30, 60];
 
   .layers li:first-child {
     grid-row: 1;
-    padding-top: 1.15rem;
   }
 
   .layers li:last-child {
@@ -611,34 +605,47 @@ const chevronY = [0, 30, 60];
     fill: var(--wash-hi);
   }
 
-  .axis {
-    stroke: var(--rule);
-    stroke-width: 1;
-  }
-
   .flow path {
     fill: none;
     stroke: var(--ink-2);
     stroke-width: 1.25;
     stroke-linecap: round;
     stroke-linejoin: round;
-    animation: flow-pulse 3.2s ease-in-out infinite;
+    opacity: 0.7;
   }
 
-  @keyframes flow-pulse {
-    0%,
-    100% {
-      opacity: 0.35;
+  /* 1 周期 (矢印の間隔 30) ぶん平行移動してループする。列の余分な 1 つが
+     窓の外から入ってくるので、継ぎ目なくベルトコンベア状に見える */
+  .flow--down {
+    animation: belt-down 2.4s linear infinite;
+  }
+
+  .flow--up {
+    animation: belt-up 2.4s linear infinite;
+  }
+
+  @keyframes belt-down {
+    from {
+      transform: translateY(0);
     }
-    45% {
-      opacity: 1;
+    to {
+      transform: translateY(30px);
+    }
+  }
+
+  @keyframes belt-up {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-30px);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .flow path {
+    .flow--down,
+    .flow--up {
       animation: none;
-      opacity: 0.6;
     }
   }
 
