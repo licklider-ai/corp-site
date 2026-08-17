@@ -66,16 +66,26 @@ pnpm install
 
 ## スクリプト
 
-Astro 本体の導入後に利用できます。
+| コマンド        | 内容                                              |
+| --------------- | ------------------------------------------------- |
+| `pnpm dev`      | 開発サーバーを起動 (http://localhost:4321)        |
+| `pnpm build`    | 型チェック後に `dist/` へ本番ビルド               |
+| `pnpm preview`  | ビルド結果をローカルで確認                        |
+| `pnpm check`    | Astro の型チェックのみ実行                        |
 
-| コマンド        | 内容                                     |
-| --------------- | ---------------------------------------- |
-| `pnpm dev`      | 開発サーバーを起動 (http://localhost:4321) |
-| `pnpm build`    | 本番用に `dist/` へビルド                 |
-| `pnpm preview`  | ビルド結果をローカルで確認                |
-| `pnpm check`    | Astro の型チェック                        |
+## デプロイ
 
-## 次のステップ
+本番サイトは [licklider.ai](https://licklider.ai) 向けに Vercel へデプロイします。
+リポジトリルートの [`vercel.json`](./vercel.json) でビルド設定を管理しています。
 
-Astro 本体と初期ページはまだ導入していません。次のコミットで
-`pnpm create astro@latest` 相当のセットアップを行います。
+| 設定項目           | 値                                |
+| ------------------ | --------------------------------- |
+| Framework          | Astro (static)                    |
+| Install Command    | `pnpm install --frozen-lockfile`  |
+| Build Command      | `pnpm build`                      |
+| Output Directory   | `dist`                            |
+| Production Branch  | `main`                            |
+| Node.js Version    | 22.x (`.nvmrc` 参照)              |
+
+`main` への push と PR では [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) が
+`pnpm build` を実行します。
