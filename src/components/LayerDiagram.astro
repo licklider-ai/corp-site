@@ -115,10 +115,29 @@ const gear = (teeth: number, outer: number, inner: number) => {
 
 const gearPath = gear(8, 60, 44);
 
-// Layer 1 の紋: 盾と鍵穴 (記録の保全と検証)。
-// 鍵穴は円と軸を一本のパスにして、内側に継ぎ目が出ないようにする
-const shieldPath = 'M0 -64 L46 -42 C46 4 29 40 0 60 C-29 40 -46 4 -46 -42 Z';
-const keyholePath = 'M-6.5 -0.7 A13 13 0 1 1 6.5 -0.7 L11 26 L-11 26 Z';
+// Layer 1 の紋: 書類と虫眼鏡とチェック (記録の検証)
+const doc = { x: -58, y: -57, w: 70, h: 101, r: 8 };
+const docHeading = { x: -46, y: -49, w: 44, h: 12, r: 3 };
+const docLines = [
+  { y: -28.5, to: -2 },
+  { y: -16, to: -19 },
+  { y: -4.5, to: -24 },
+  { y: 7, to: -25.5 },
+  { y: 18, to: -22.5 },
+  { y: 29.5, to: -15 },
+];
+
+const lens = { x: 9, y: 3, outer: 29, inner: 19.5 };
+const checkPath = 'M-1.5 5.5 L6 12 L18 0';
+const handle = { x: 29, y: -7, w: 31, h: 14, r: 7 };
+const collarX = 35;
+
+// 紋は平面上で -45 度回すと、投影後に画面と同じ向き (せん断なし・縦に圧縮) で見える。
+// 参考画像のロゴも同じ向きに置かれている
+const upright = 'rotate(-45)';
+
+// この向きでは横に伸び縦に縮むため、歯車と見た目の大きさを揃えるには拡大が要る
+const uprightVerify = 'rotate(-45) scale(1.15)';
 
 const chevronY = [200, 230, 260];
 
@@ -206,8 +225,10 @@ const notes = {
         <path class="divider" d={upper.front} />
         <line class="divider" x1={cx} y1={upper.seam.y1} x2={cx} y2={upper.seam.y2} />
         <g class="mark" transform={project(topY)}>
-          <path d={gearPath} vector-effect="non-scaling-stroke" />
-          <circle cx="0" cy="0" r="20" vector-effect="non-scaling-stroke" />
+          <g transform={upright}>
+            <path d={gearPath} vector-effect="non-scaling-stroke" />
+            <circle cx="0" cy="0" r="20" vector-effect="non-scaling-stroke" />
+          </g>
         </g>
         <path class="outline" d={upper.body} />
       </g>
@@ -219,8 +240,72 @@ const notes = {
         <path class="divider" d={lower.front} />
         <line class="divider" x1={cx} y1={lower.seam.y1} x2={cx} y2={lower.seam.y2} />
         <g class="mark" transform={project(bottomY)}>
-          <path d={shieldPath} vector-effect="non-scaling-stroke" />
-          <path d={keyholePath} vector-effect="non-scaling-stroke" />
+          <g transform={uprightVerify}>
+            <rect
+              x={doc.x}
+              y={doc.y}
+              width={doc.w}
+              height={doc.h}
+              rx={doc.r}
+              vector-effect="non-scaling-stroke"
+            />
+            <rect
+              x={docHeading.x}
+              y={docHeading.y}
+              width={docHeading.w}
+              height={docHeading.h}
+              rx={docHeading.r}
+              vector-effect="non-scaling-stroke"
+            />
+            {
+              docLines.map((line) => (
+                <line
+                  class="mark-line"
+                  x1="-49.5"
+                  y1={line.y}
+                  x2={line.to}
+                  y2={line.y}
+                  vector-effect="non-scaling-stroke"
+                />
+              ))
+            }
+
+            {/* 虫眼鏡の下敷き。書類の線を抜いて、参考画像と同じ余白をつくる */}
+            <g class="mark-knockout">
+              <circle cx={lens.x} cy={lens.y} r={lens.outer} vector-effect="non-scaling-stroke" />
+              <g transform={`translate(${lens.x} ${lens.y}) rotate(45)`}>
+                <rect
+                  x={handle.x}
+                  y={handle.y}
+                  width={handle.w}
+                  height={handle.h}
+                  rx={handle.r}
+                  vector-effect="non-scaling-stroke"
+                />
+              </g>
+            </g>
+
+            <circle cx={lens.x} cy={lens.y} r={lens.outer} vector-effect="non-scaling-stroke" />
+            <circle cx={lens.x} cy={lens.y} r={lens.inner} vector-effect="non-scaling-stroke" />
+            <path class="mark-line" d={checkPath} vector-effect="non-scaling-stroke" />
+            <g transform={`translate(${lens.x} ${lens.y}) rotate(45)`}>
+              <rect
+                x={handle.x}
+                y={handle.y}
+                width={handle.w}
+                height={handle.h}
+                rx={handle.r}
+                vector-effect="non-scaling-stroke"
+              />
+              <line
+                x1={collarX}
+                y1={handle.y}
+                x2={collarX}
+                y2={handle.y + handle.h}
+                vector-effect="non-scaling-stroke"
+              />
+            </g>
+          </g>
         </g>
         <path class="outline" d={lower.body} />
       </g>
@@ -302,11 +387,25 @@ const notes = {
   }
 
   .mark path,
-  .mark circle {
+  .mark circle,
+  .mark rect,
+  .mark line {
     fill: none;
     stroke: var(--ink-4);
     stroke-width: 1;
     stroke-linejoin: round;
+  }
+
+  .mark .mark-line {
+    stroke-linecap: round;
+  }
+
+  /* 背後の線を面の色で抜き、紋の要素どうしに余白をつくる */
+  .mark .mark-knockout circle,
+  .mark .mark-knockout rect {
+    fill: var(--wash-hi);
+    stroke: var(--wash-hi);
+    stroke-width: 5;
   }
 
   .axis {
