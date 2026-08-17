@@ -150,8 +150,8 @@ const handle = { x: 24, y: -3.5, w: 30, h: 7, r: 3.5 };
 const collarX = 30;
 
 // 虫眼鏡とチェックには決まった向きがないので、投影後の見え方から角度を逆算する。
-// 平面上の 27 度は、投影されると画面上で右下 60 度になる
-const handleFrame = `translate(${lens.x} ${lens.y}) rotate(27)`;
+// 平面上の 19 度は、投影されると画面上で右下 50 度になる
+const handleFrame = `translate(${lens.x} ${lens.y}) rotate(19)`;
 
 // チェックは、画面に正立させると面から浮くので、面の向き (画面上で時計回りに
 // 60 度) との中間である 30 度だけ倒した位置に置く
