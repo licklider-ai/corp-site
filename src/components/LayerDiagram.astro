@@ -3,6 +3,9 @@
 // 本文の Layer 1 → Layer 2 の順序を正本とし、図も上段に Layer 1 (Record ＋ verifier)、
 // 下段に Layer 2 (アプリケーション) を置く。左列の矢印が上から下 (根拠の供給)、
 // 右列が下から上 (Record の上への生成) を表す。
+//
+// 図の列は本文の列と高さを共有する。菱形は 2 枚の SVG に分かれていて大きさは
+// 固定、あいだの接続部 (点線・矢印) だけが伸縮して本文の高さに追従する。
 
 interface Props {
   layers: { n: string; title: string; body: string }[];
@@ -17,8 +20,7 @@ const w = 150;
 const h = 86;
 const t = 40;
 const cx = 230;
-const topY = 110; // 上段の上面の中心
-const bottomY = 330; // 下段の上面の中心
+const cy = 110; // 各 SVG 内での上面の中心。上下の菱形で共通
 const corner = 4; // 角の丸み。輪郭がわずかに和らぐ程度に留める
 
 const fmt = ([x, y]: Point) => `${x.toFixed(1)} ${y.toFixed(1)}`;
@@ -64,7 +66,7 @@ const roundedOpen = (points: Point[], radius: number) => {
 };
 
 // 立体の外形 (六角形) と、上を向く面 (菱形)
-const silhouette = (cy: number): Point[] => [
+const silhouette = (): Point[] => [
   [cx, cy - h],
   [cx + w, cy],
   [cx + w, cy + t],
@@ -73,7 +75,7 @@ const silhouette = (cy: number): Point[] => [
   [cx - w, cy],
 ];
 
-const topFace = (cy: number): Point[] => [
+const topFace = (): Point[] => [
   [cx, cy - h],
   [cx + w, cy],
   [cx, cy + h],
@@ -81,25 +83,22 @@ const topFace = (cy: number): Point[] => [
 ];
 
 // 上面と側面の境目。外形の一部ではないので、控えめな線で引く
-const deckFront = (cy: number): Point[] => [
+const deckFront = (): Point[] => [
   [cx - w, cy],
   [cx, cy + h],
   [cx + w, cy],
 ];
 
-const slabPaths = (cy: number) => ({
-  body: rounded(silhouette(cy), corner),
-  deck: rounded(topFace(cy), corner),
-  front: roundedOpen(deckFront(cy), corner),
+const slab = {
+  body: rounded(silhouette(), corner),
+  deck: rounded(topFace(), corner),
+  front: roundedOpen(deckFront(), corner),
   seam: { y1: cy + h, y2: cy + h + t - corner },
-});
-
-const upper = slabPaths(topY); // Layer 1: nomue Record ＋ verifier
-const lower = slabPaths(bottomY); // Layer 2: nomue (アプリケーション)
+};
 
 // 上面へ図形を投影する行列。平面座標 -100..100 の正方形が上面の菱形に重なる
 // (u,v)=(100,-100) が右の角、(100,100) が手前の角に対応するため除数は 200
-const project = (cy: number) => `matrix(${w / 200} ${h / 200} ${-w / 200} ${h / 200} ${cx} ${cy})`;
+const project = `matrix(${w / 200} ${h / 200} ${-w / 200} ${h / 200} ${cx} ${cy})`;
 
 // Layer 2 の紋: 歯車 (アプリケーション)
 const gear = (teeth: number, outer: number, inner: number) => {
@@ -174,89 +173,72 @@ const lensFrame = `translate(${lens.x} ${lens.y}) rotate(45)`;
 const checkFrame = `translate(${lens.x} ${lens.y})`;
 const checkPath = 'M-10.4 -1.8 L-3.4 7.9 L10.4 -7.9';
 
-const chevronY = [200, 230, 260];
+// 矢印は接続部の中央に固定サイズで置く
+const chevronY = [0, 30, 60];
 ---
 
 <div class="interaction">
   <figure class="diagram">
-    <svg viewBox="70 0 320 480" role="img" aria-labelledby="layer-diagram-title">
-      <title id="layer-diagram-title">
-        上段の nomue Record・verifier（記録と検証）と下段の nomue（生成）のあいだを、根拠と成果物が往復する等角図
-      </title>
-
-      <!-- 軸 -->
-      <line class="axis" x1={cx} y1="6" x2={cx} y2={topY - h} />
-      <line class="axis" x1={cx} y1={bottomY + h + t} x2={cx} y2="474" />
-
-      <!-- 二つの層をつなぐ垂線 -->
-      <line class="link" x1={cx - w} y1={topY + t} x2={cx - w} y2={bottomY} />
-      <line class="link" x1={cx + w} y1={topY + t} x2={cx + w} y2={bottomY} />
-      <line class="link" x1={cx} y1={topY + h + t} x2={cx} y2={bottomY + h} />
-
-      <!-- 上から下へ: 根拠の供給 (Layer 1 → Layer 2) -->
-      <g class="flow">
-        {
-          chevronY.map((y, i) => (
-            <path
-              d={`M144 ${y} L152 ${y + 8} L160 ${y}`}
-              style={`animation-delay: ${i * 0.22}s`}
-            />
-          ))
-        }
-      </g>
-
-      <!-- 下から上へ: Record の上への生成 (Layer 2 → Layer 1) -->
-      <g class="flow">
-        {
-          chevronY.map((y, i) => (
-            <path
-              d={`M300 ${y + 8} L308 ${y} L316 ${y + 8}`}
-              style={`animation-delay: ${(chevronY.length - 1 - i) * 0.22}s`}
-            />
-          ))
-        }
-      </g>
-
+    <div
+      class="stack"
+      role="img"
+      aria-label="上段の nomue Record・verifier（記録と検証）と下段の nomue（生成）のあいだを、根拠と成果物が往復する等角図"
+    >
       <!-- Layer 1。外形の輪郭は最後に引き、内側の線に覆われないようにする -->
-      <g class="slab">
-        <path class="body" d={upper.body} />
-        <path class="deck" d={upper.deck} />
-        <path class="divider" d={upper.front} />
-        <line class="divider" x1={cx} y1={upper.seam.y1} x2={cx} y2={upper.seam.y2} />
-        <g class="mark" transform={project(topY)}>
-          <g transform={verifyFrame}>
-            <rect
-              x={doc.x}
-              y={doc.y}
-              width={doc.w}
-              height={doc.h}
-              rx={doc.r}
-              vector-effect="non-scaling-stroke"
-            />
-            <rect
-              x={docHeading.x}
-              y={docHeading.y}
-              width={docHeading.w}
-              height={docHeading.h}
-              rx={docHeading.r}
-              vector-effect="non-scaling-stroke"
-            />
-            {
-              docLines.map((line) => (
-                <line
-                  class="mark-line"
-                  x1={docLineFrom}
-                  y1={line.y}
-                  x2={line.to}
-                  y2={line.y}
-                  vector-effect="non-scaling-stroke"
-                />
-              ))
-            }
+      <svg class="slab-svg" viewBox="70 4 320 234" aria-hidden="true">
+        <line class="axis" x1={cx} y1="6" x2={cx} y2={cy - h} />
+        <g class="slab">
+          <path class="body" d={slab.body} />
+          <path class="deck" d={slab.deck} />
+          <path class="divider" d={slab.front} />
+          <line class="divider" x1={cx} y1={slab.seam.y1} x2={cx} y2={slab.seam.y2} />
+          <g class="mark" transform={project}>
+            <g transform={verifyFrame}>
+              <rect
+                x={doc.x}
+                y={doc.y}
+                width={doc.w}
+                height={doc.h}
+                rx={doc.r}
+                vector-effect="non-scaling-stroke"
+              />
+              <rect
+                x={docHeading.x}
+                y={docHeading.y}
+                width={docHeading.w}
+                height={docHeading.h}
+                rx={docHeading.r}
+                vector-effect="non-scaling-stroke"
+              />
+              {
+                docLines.map((line) => (
+                  <line
+                    class="mark-line"
+                    x1={docLineFrom}
+                    y1={line.y}
+                    x2={line.to}
+                    y2={line.y}
+                    vector-effect="non-scaling-stroke"
+                  />
+                ))
+              }
 
-            {/* 虫眼鏡の下敷き。書類の線を抜いて、重なりに余白をつくる */}
-            <g class="mark-knockout">
-              <circle cx={lens.x} cy={lens.y} r={lens.outer + lens.gap} />
+              {/* 虫眼鏡の下敷き。書類の線を抜いて、重なりに余白をつくる */}
+              <g class="mark-knockout">
+                <circle cx={lens.x} cy={lens.y} r={lens.outer + lens.gap} />
+                <g transform={lensFrame}>
+                  <rect
+                    x={handle.x}
+                    y={handle.y}
+                    width={handle.w}
+                    height={handle.h}
+                    rx={handle.r}
+                    vector-effect="non-scaling-stroke"
+                  />
+                </g>
+              </g>
+
+              {/* 持ち手は先に引き、塗りのあるレンズで根元を隠す */}
               <g transform={lensFrame}>
                 <rect
                   x={handle.x}
@@ -266,115 +248,140 @@ const chevronY = [200, 230, 260];
                   rx={handle.r}
                   vector-effect="non-scaling-stroke"
                 />
+                <line
+                  x1={collarX}
+                  y1={handle.y}
+                  x2={collarX}
+                  y2={handle.y + handle.h}
+                  vector-effect="non-scaling-stroke"
+                />
+              </g>
+
+              <circle
+                class="lens"
+                cx={lens.x}
+                cy={lens.y}
+                r={lens.outer}
+                vector-effect="non-scaling-stroke"
+              />
+              <circle cx={lens.x} cy={lens.y} r={lens.inner} vector-effect="non-scaling-stroke" />
+              <g transform={checkFrame}>
+                <path class="mark-line" d={checkPath} vector-effect="non-scaling-stroke" />
               </g>
             </g>
+          </g>
+          <path class="outline" d={slab.body} />
+        </g>
+      </svg>
 
-            {/* 持ち手は先に引き、塗りのあるレンズで根元を隠す */}
-            <g transform={lensFrame}>
+      <!-- 本文の高さに追従して伸縮する接続部 -->
+      <div class="gap" aria-hidden="true"></div>
+
+      <!-- Layer 2 -->
+      <svg class="slab-svg" viewBox="70 22 320 234" aria-hidden="true">
+        <line class="axis" x1={cx} y1={cy + h + t} x2={cx} y2={cy + h + t + 18} />
+        <g class="slab">
+          <path class="body" d={slab.body} />
+          <path class="deck" d={slab.deck} />
+          <path class="divider" d={slab.front} />
+          <line class="divider" x1={cx} y1={slab.seam.y1} x2={cx} y2={slab.seam.y2} />
+          <g class="mark" transform={project}>
+            <g transform={markFrame}>
               <rect
-                x={handle.x}
-                y={handle.y}
-                width={handle.w}
-                height={handle.h}
-                rx={handle.r}
+                x={monitor.x}
+                y={monitor.y}
+                width={monitor.w}
+                height={monitor.h}
+                rx={monitor.r}
+                vector-effect="non-scaling-stroke"
+              />
+              <rect
+                x={screen.x}
+                y={screen.y}
+                width={screen.w}
+                height={screen.h}
+                rx={screen.r}
                 vector-effect="non-scaling-stroke"
               />
               <line
-                x1={collarX}
-                y1={handle.y}
-                x2={collarX}
-                y2={handle.y + handle.h}
+                x1={screen.x}
+                y1={titleBarY}
+                x2={screen.x + screen.w}
+                y2={titleBarY}
+                vector-effect="non-scaling-stroke"
+              />
+              {dotsX.map((x) => <circle class="mark-dot" cx={x} cy={dotY} r="1.6" />)}
+
+              {
+                codePaths.map((d) => (
+                  <path class="mark-line" d={d} vector-effect="non-scaling-stroke" />
+                ))
+              }
+
+              <g transform={`translate(${screenGear.x} ${screenGear.y})`}>
+                <path d={screenGear.path} vector-effect="non-scaling-stroke" />
+                <circle cx="0" cy="0" r={screenGear.hole} vector-effect="non-scaling-stroke" />
+              </g>
+
+              {
+                buttons.map((button) => (
+                  <line
+                    class="mark-line"
+                    x1={button.from}
+                    y1={buttonY}
+                    x2={button.to}
+                    y2={buttonY}
+                    vector-effect="non-scaling-stroke"
+                  />
+                ))
+              }
+
+              {neckPaths.map((d) => <path d={d} vector-effect="non-scaling-stroke" />)}
+              <rect
+                x={base.x}
+                y={base.y}
+                width={base.w}
+                height={base.h}
+                rx={base.r}
                 vector-effect="non-scaling-stroke"
               />
             </g>
-
-            <circle
-              class="lens"
-              cx={lens.x}
-              cy={lens.y}
-              r={lens.outer}
-              vector-effect="non-scaling-stroke"
-            />
-            <circle cx={lens.x} cy={lens.y} r={lens.inner} vector-effect="non-scaling-stroke" />
-            <g transform={checkFrame}>
-              <path class="mark-line" d={checkPath} vector-effect="non-scaling-stroke" />
-            </g>
           </g>
+          <path class="outline" d={slab.body} />
         </g>
-        <path class="outline" d={upper.body} />
-      </g>
+      </svg>
 
-      <!-- Layer 2 -->
-      <g class="slab">
-        <path class="body" d={lower.body} />
-        <path class="deck" d={lower.deck} />
-        <path class="divider" d={lower.front} />
-        <line class="divider" x1={cx} y1={lower.seam.y1} x2={cx} y2={lower.seam.y2} />
-        <g class="mark" transform={project(bottomY)}>
-          <g transform={markFrame}>
-            <rect
-              x={monitor.x}
-              y={monitor.y}
-              width={monitor.w}
-              height={monitor.h}
-              rx={monitor.r}
-              vector-effect="non-scaling-stroke"
-            />
-            <rect
-              x={screen.x}
-              y={screen.y}
-              width={screen.w}
-              height={screen.h}
-              rx={screen.r}
-              vector-effect="non-scaling-stroke"
-            />
-            <line
-              x1={screen.x}
-              y1={titleBarY}
-              x2={screen.x + screen.w}
-              y2={titleBarY}
-              vector-effect="non-scaling-stroke"
-            />
-            {dotsX.map((x) => <circle class="mark-dot" cx={x} cy={dotY} r="1.6" />)}
-
+      <!-- 二つの菱形をつなぐ点線と矢印。菱形の SVG の背後に敷く -->
+      <div class="links" aria-hidden="true">
+        <span class="link link--left"></span>
+        <span class="link link--center"></span>
+        <span class="link link--right"></span>
+        <svg class="flows" viewBox="70 0 320 76">
+          <!-- 上から下へ: 根拠の供給 (Layer 1 → Layer 2) -->
+          <g class="flow">
             {
-              codePaths.map((d) => (
-                <path class="mark-line" d={d} vector-effect="non-scaling-stroke" />
-              ))
-            }
-
-            <g transform={`translate(${screenGear.x} ${screenGear.y})`}>
-              <path d={screenGear.path} vector-effect="non-scaling-stroke" />
-              <circle cx="0" cy="0" r={screenGear.hole} vector-effect="non-scaling-stroke" />
-            </g>
-
-            {
-              buttons.map((button) => (
-                <line
-                  class="mark-line"
-                  x1={button.from}
-                  y1={buttonY}
-                  x2={button.to}
-                  y2={buttonY}
-                  vector-effect="non-scaling-stroke"
+              chevronY.map((y, i) => (
+                <path
+                  d={`M144 ${y + 4} L152 ${y + 12} L160 ${y + 4}`}
+                  style={`animation-delay: ${i * 0.22}s`}
                 />
               ))
             }
-
-            {neckPaths.map((d) => <path d={d} vector-effect="non-scaling-stroke" />)}
-            <rect
-              x={base.x}
-              y={base.y}
-              width={base.w}
-              height={base.h}
-              rx={base.r}
-              vector-effect="non-scaling-stroke"
-            />
           </g>
-        </g>
-        <path class="outline" d={lower.body} />
-      </g>
-    </svg>
+          <!-- 下から上へ: Record の上への生成 (Layer 2 → Layer 1) -->
+          <g class="flow">
+            {
+              chevronY.map((y, i) => (
+                <path
+                  d={`M300 ${y + 12} L308 ${y + 4} L316 ${y + 12}`}
+                  style={`animation-delay: ${(chevronY.length - 1 - i) * 0.22}s`}
+                />
+              ))
+            }
+          </g>
+        </svg>
+      </div>
+    </div>
 
     <figcaption class="placeholder">
       [図: Evidence →（宣言・規則・計算）→ Outputs。下層に Record（記録）と Verifier（第三者検証）を貫通させる層構造図]
@@ -396,7 +403,7 @@ const chevronY = [200, 230, 260];
 
 <style>
   /* 図の列と本文の列を一つのグリッドで持つ。図の注釈 (figcaption) は行 2 に
-     追い出し、行 1 の高さを SVG だけで決める */
+     追い出し、行 1 の高さは本文と図の大きいほうが決める */
   .interaction {
     display: grid;
     grid-template-columns: minmax(0, 18.5rem) minmax(0, 1fr);
@@ -407,16 +414,80 @@ const chevronY = [200, 230, 260];
     display: contents;
   }
 
-  svg {
+  /* 菱形 2 枚は大きさ固定のまま、あいだの .gap だけが行の高さに合わせて伸縮する。
+     点線や矢印の位置は列幅に対する比 (cqw) で決まるので、高さに依存しない */
+  .stack {
     grid-column: 1;
     grid-row: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    container-type: inline-size;
+  }
+
+  .slab-svg {
+    display: block;
     width: 100%;
     height: auto;
     overflow: visible;
+    position: relative;
+    z-index: 1;
   }
 
-  /* 菱形の中心は SVG の高さの約 27% / 73% にある。行 1 を半分ずつに割り、
-     各層の本文をその中央に置くと、それぞれの菱形の横に来る */
+  .gap {
+    flex: 1 1 auto;
+    /* 本文が図より低いときの、菱形どうしの最小間隔 */
+    min-height: 0.5rem;
+  }
+
+  .links {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* 点線は 1px 幅の縦帯を繰り返しグラデーションで塗る。SVG の stroke と違い、
+     高さが変わっても破線の刻みが伸びない */
+  .link {
+    position: absolute;
+    width: 1px;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--ink-4) 0 2px,
+      transparent 2px 7px
+    );
+  }
+
+  /* 3.125cqw = 菱形の左右の角の x 位置 (viewBox 内 80/320)。
+     45.625cqw = 角の y 位置、72.5cqw = 手前の頂点の y 位置を列幅比に直した値 */
+  .link--left {
+    left: calc(3.125cqw - 0.5px);
+    top: 45.625cqw;
+    bottom: 45.625cqw;
+  }
+
+  .link--right {
+    right: calc(3.125cqw - 0.5px);
+    top: 45.625cqw;
+    bottom: 45.625cqw;
+  }
+
+  .link--center {
+    left: calc(50% - 0.5px);
+    top: 72.5cqw;
+    bottom: 72.5cqw;
+  }
+
+  .flows {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 23.75cqw;
+    transform: translateY(-50%);
+    overflow: visible;
+  }
+
   .layers {
     grid-column: 2;
     grid-row: 1;
@@ -427,6 +498,16 @@ const chevronY = [200, 230, 260];
     grid-template-rows: 1fr 1fr;
     align-items: center;
     row-gap: 2rem;
+  }
+
+  /* 図は上下の菱形が列の両端に付くので、本文も Layer 1 を上端、Layer 2 を
+     下端に揃える。これで図と本文の上下の縁が常に一致する */
+  .layers li:first-child {
+    align-self: start;
+  }
+
+  .layers li:last-child {
+    align-self: end;
   }
 
   .layers li {
@@ -522,12 +603,6 @@ const chevronY = [200, 230, 260];
     stroke-width: 1;
   }
 
-  .link {
-    stroke: var(--ink-4);
-    stroke-width: 1;
-    stroke-dasharray: 2 5;
-  }
-
   .flow path {
     fill: none;
     stroke: var(--ink-2);
@@ -560,9 +635,15 @@ const chevronY = [200, 230, 260];
       grid-template-columns: minmax(0, 1fr);
     }
 
-    svg {
-      max-width: 23rem;
+    .stack {
       justify-self: center;
+      width: min(100%, 23rem);
+    }
+
+    /* 縦積みでは本文が高さを決めないので、接続部は固定の間隔にする */
+    .gap {
+      flex: 0 0 auto;
+      min-height: 1.5rem;
     }
 
     .layers {
