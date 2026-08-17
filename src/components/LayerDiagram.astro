@@ -113,7 +113,25 @@ const gear = (teeth: number, outer: number, inner: number) => {
   return `${segments.join(' ')} Z`;
 };
 
-const gearPath = gear(8, 60, 44);
+// Layer 2 の紋: モニタとブラウザ窓、その中のコードと歯車 (アプリケーション)
+const monitor = { x: -60, y: -49, w: 120, h: 76, r: 4 };
+const screen = { x: -50, y: -39, w: 100, h: 56, r: 2 };
+const titleBarY = -27;
+const dotY = -33;
+const dotsX = [-42.5, -36, -29.5];
+const codePaths = [
+  'M-32 -14 L-41 -3 L-32 9', // <
+  'M-18.5 -15 L-27 10', //      /
+  'M-12.5 -14 L-4 -3 L-12.5 9', // >
+];
+const screenGear = { x: 24, y: -5, path: gear(8, 18, 13), hole: 6.5 };
+const buttonY = 23.5;
+const buttons = [
+  { from: -7.5, to: -1 },
+  { from: 3, to: 9.5 },
+];
+const neckPaths = ['M-11 27 L-16 38', 'M10 27 L15.5 38'];
+const base = { x: -33, y: 38, w: 66, h: 11, r: 5 };
 
 // Layer 1 の紋: 書類と虫眼鏡とチェック (記録の検証)。
 // 紋は平面座標のまま描くので、辺が土台の稜線と平行になり、面に伏せて見える
@@ -230,8 +248,64 @@ const notes = {
         <line class="divider" x1={cx} y1={upper.seam.y1} x2={cx} y2={upper.seam.y2} />
         <g class="mark" transform={project(topY)}>
           <g transform={markScale}>
-            <path d={gearPath} vector-effect="non-scaling-stroke" />
-            <circle cx="0" cy="0" r="20" vector-effect="non-scaling-stroke" />
+            <rect
+              x={monitor.x}
+              y={monitor.y}
+              width={monitor.w}
+              height={monitor.h}
+              rx={monitor.r}
+              vector-effect="non-scaling-stroke"
+            />
+            <rect
+              x={screen.x}
+              y={screen.y}
+              width={screen.w}
+              height={screen.h}
+              rx={screen.r}
+              vector-effect="non-scaling-stroke"
+            />
+            <line
+              x1={screen.x}
+              y1={titleBarY}
+              x2={screen.x + screen.w}
+              y2={titleBarY}
+              vector-effect="non-scaling-stroke"
+            />
+            {dotsX.map((x) => <circle class="mark-dot" cx={x} cy={dotY} r="1.6" />)}
+
+            {
+              codePaths.map((d) => (
+                <path class="mark-line" d={d} vector-effect="non-scaling-stroke" />
+              ))
+            }
+
+            <g transform={`translate(${screenGear.x} ${screenGear.y})`}>
+              <path d={screenGear.path} vector-effect="non-scaling-stroke" />
+              <circle cx="0" cy="0" r={screenGear.hole} vector-effect="non-scaling-stroke" />
+            </g>
+
+            {
+              buttons.map((button) => (
+                <line
+                  class="mark-line"
+                  x1={button.from}
+                  y1={buttonY}
+                  x2={button.to}
+                  y2={buttonY}
+                  vector-effect="non-scaling-stroke"
+                />
+              ))
+            }
+
+            {neckPaths.map((d) => <path d={d} vector-effect="non-scaling-stroke" />)}
+            <rect
+              x={base.x}
+              y={base.y}
+              width={base.w}
+              height={base.h}
+              rx={base.r}
+              vector-effect="non-scaling-stroke"
+            />
           </g>
         </g>
         <path class="outline" d={upper.body} />
@@ -410,6 +484,11 @@ const notes = {
 
   .mark .mark-line {
     stroke-linecap: round;
+  }
+
+  .mark .mark-dot {
+    fill: var(--ink-4);
+    stroke: none;
   }
 
   /* 背後の線を面の色で抜き、紋の要素どうしに余白をつくる */
