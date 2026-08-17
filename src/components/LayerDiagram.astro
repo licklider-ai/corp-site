@@ -155,13 +155,14 @@ const ground = -90;
 const markFrame = `scale(0.6) rotate(${ground})`;
 const verifyFrame = `scale(0.72) rotate(${ground})`;
 
-// 虫眼鏡とチェックには決まった向きがないので、投影後の見え方から逆算する。
-// 紋の枠が ground だけ回っているぶんを差し引く
-const handleFrame = `translate(${lens.x} ${lens.y}) rotate(${19 - ground})`;
+// 虫眼鏡は面に伏せた一つの剛体として扱い、面内で 45 度だけ回す。枠の回転を
+// 差し引くと虫眼鏡だけが地面から起き上がって見えるので、ここでは差し引かない。
+// 持ち手もチェックもこの枠に従うので、地面に対する傾きが一つに定まる
+const lensFrame = `translate(${lens.x} ${lens.y}) rotate(45)`;
 
-// チェックは、画面に正立させると面から浮くので、面の向き (画面上で時計回りに
-// 60 度) との中間である 30 度だけ倒した位置に置く
-const checkPath = 'M20 13 L8.8 28.4 L33.1 34';
+// チェックはレンズの中心を原点に、虫眼鏡の枠のまま正立させて描く。面内で 45 度
+// 回るぶん、投影後は右下 30 度・右上 39 度の折れ線になり、伏せたまま check と読める
+const checkPath = 'M-11 0 L-4 8 L10 -12';
 
 const chevronY = [200, 230, 260];
 
@@ -353,7 +354,7 @@ const notes = {
             {/* 虫眼鏡の下敷き。書類の線を抜いて、重なりに余白をつくる */}
             <g class="mark-knockout">
               <circle cx={lens.x} cy={lens.y} r={lens.outer + lens.gap} />
-              <g transform={handleFrame}>
+              <g transform={lensFrame}>
                 <rect
                   x={handle.x}
                   y={handle.y}
@@ -366,7 +367,7 @@ const notes = {
             </g>
 
             {/* 持ち手は先に引き、塗りのあるレンズで根元を隠す */}
-            <g transform={handleFrame}>
+            <g transform={lensFrame}>
               <rect
                 x={handle.x}
                 y={handle.y}
@@ -392,7 +393,9 @@ const notes = {
               vector-effect="non-scaling-stroke"
             />
             <circle cx={lens.x} cy={lens.y} r={lens.inner} vector-effect="non-scaling-stroke" />
-            <path class="mark-line" d={checkPath} vector-effect="non-scaling-stroke" />
+            <g transform={lensFrame}>
+              <path class="mark-line" d={checkPath} vector-effect="non-scaling-stroke" />
+            </g>
           </g>
         </g>
         <path class="outline" d={lower.body} />
