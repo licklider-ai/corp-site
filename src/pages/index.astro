@@ -49,9 +49,10 @@ const publicRecord = [
   </section>
 
   <div class="sections">
-    <section class="band">
-      <p class="eyebrow">1 — Thesis</p>
-      <div class="band-body">
+    <section class="band band--single">
+      <div class="band-inner">
+        <p class="eyebrow">Thesis</p>
+        <div class="band-body">
         <p>
           AIは、解析、図表、文章、コードといった知的成果物を、人間の生産速度をはるかに超えて生成するようになった。生成が希少だった時代に設計された検証と承認の制度は、この変化に追随していない。成果物の量が人間の検証能力を超えるとき、律速段階は生成ではなく、承認へ移る。
         </p>
@@ -65,24 +66,27 @@ const publicRecord = [
           Lickliderは、この層を科学研究から作り始める。科学は、責任の所在（著者性）と検証可能性（再現性）が制度として最も明確に要求され、かつAIによる生成が最も速く浸透しつつある領域だからである。科学において成立した責任の設計は、規制、監査、意思決定を伴うあらゆる領域の原型となる。
         </p>
         <p class="more"><a href="/thesis/">Thesis のページへ →</a></p>
+        </div>
       </div>
     </section>
 
-    <section class="band band--wide">
-      <p class="eyebrow">2 — What We Build</p>
-      <LayerDiagram layers={layers} />
+    <section class="band band--single">
+      <div class="band-inner band-inner--wide">
+        <p class="eyebrow">What We Build</p>
+        <LayerDiagram layers={layers} />
 
-      <div class="band-body">
-        <p class="lead">
-          信頼は、生成物ではなく記録に宿る。生成は利便のための層であり、記録と検証が本体である。
-        </p>
+        <div class="band-body">
+          <p class="lead">
+            信頼は、生成物ではなく記録に宿る。生成は利便のための層であり、記録と検証が本体である。
+          </p>
 
-        <p class="more"><span class="placeholder" title="準備中">→ nomue 製品サイトへ</span></p>
+          <p class="more"><span class="placeholder" title="準備中">→ nomue 製品サイトへ</span></p>
+        </div>
       </div>
     </section>
 
     <section class="band">
-      <p class="eyebrow">3 — Guarantee Boundary</p>
+      <p class="eyebrow">Guarantee Boundary</p>
       <div class="band-body">
         <h3 class="band-title">保証すること、保証しないこと</h3>
         <p>
@@ -98,7 +102,7 @@ const publicRecord = [
     </section>
 
     <section class="band">
-      <p class="eyebrow">4 — Open Specification &amp; Verifier</p>
+      <p class="eyebrow">Open Specification &amp; Verifier</p>
       <div class="band-body">
         <p class="lead">私たちの主張を、信頼する必要はない。検証してほしい。</p>
         <ul class="resources">
@@ -121,7 +125,7 @@ const publicRecord = [
     </section>
 
     <section class="band">
-      <p class="eyebrow">5 — Research Notes</p>
+      <p class="eyebrow">Research Notes</p>
       <div class="band-body">
         <p>責任の設計に関する短い技術的エッセイ。各稿は日付と版番号を持つ。</p>
         <ul class="notes">
@@ -137,7 +141,7 @@ const publicRecord = [
     </section>
 
     <section class="band">
-      <p class="eyebrow">6 — Why "Licklider"</p>
+      <p class="eyebrow">Why "Licklider"</p>
       <div class="band-body">
         <p>
           J. C. R. Licklider は "Man-Computer Symbiosis"（1960）において、人間が目標を設定し判断を担い、計算機が定型的な作業を担うという分業を、最初に定式化した。
@@ -150,7 +154,7 @@ const publicRecord = [
     </section>
 
     <section class="band">
-      <p class="eyebrow">7 — Public Record</p>
+      <p class="eyebrow">Public Record</p>
       <div class="band-body">
         <p>
           責任の設計を語る企業として、当社自身の公開コミットメントをここに記録する。宣言、達成、未達、変更のすべてを残す。
@@ -186,7 +190,7 @@ const publicRecord = [
     </section>
 
     <section class="band">
-      <p class="eyebrow">8 — Company</p>
+      <p class="eyebrow">Company</p>
       <div class="band-body">
         <dl class="company">
           <dt>商号</dt>
@@ -272,13 +276,28 @@ const publicRecord = [
     max-width: var(--measure);
   }
 
-  /* 図も本文も 2 列目に固定し、見出しの段を空けておく */
-  .band--wide .band-body {
-    grid-column: 2;
+  /* 1 ペインの段。見出しを本文の上に置き、内容ごと中央に寄せる。
+     幅は 2 ペイン時の本文列と同じに保つ */
+  .band--single {
+    display: block;
   }
 
-  .band--wide :global(.interaction) {
-    grid-column: 2;
+  .band-inner {
+    max-width: var(--measure);
+    margin: 0 auto;
+  }
+
+  /* 図の段は、2 ペイン時の 2 列目 (シェル 71rem − 見出し 12rem − 間隔 3rem) と同じ幅 */
+  .band-inner--wide {
+    max-width: 56rem;
+  }
+
+  .band-inner > .eyebrow {
+    margin: 0 0 2.5rem;
+  }
+
+  .band-inner--wide .band-body {
+    margin-top: 3rem;
   }
 
   .band-body > :last-child {
@@ -363,9 +382,5 @@ const publicRecord = [
       padding: 3rem 0;
     }
 
-    .band--wide .band-body,
-    .band--wide :global(.interaction) {
-      grid-column: 1;
-    }
   }
 </style>
