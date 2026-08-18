@@ -18,7 +18,7 @@ export type NavItem = {
 
 /** ヘッダーのグローバルナビゲーション */
 export const GLOBAL_NAV: NavItem[] = [
-  // { label: 'About', href: '/about/', ready: false },
+  { label: 'About', href: '/about/', ready: true },
   { label: 'Products', href: '/#what-we-build', ready: true },
   { label: 'News', href: '/#news', ready: true },
 ];

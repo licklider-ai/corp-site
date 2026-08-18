@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// About ページ。トップページと同じ band の作法 (eyebrow を上に置く 1 ペイン、
+// 本文 34rem 中央寄せ) を踏襲する。チームは Anthropic の /company と同じ粒度で
+// 個人ではなく集合として記述する。会社の未確定情報はプレースホルダーにする
+const company = [
+  { term: 'Company', detail: 'Licklider, Inc.', placeholder: false },
+  { term: 'Headquarters', detail: 'Tokyo, Japan', placeholder: false },
+  { term: 'Founded', detail: '[TBC]', placeholder: true },
+  { term: 'Contact', detail: 'contact@licklider.ai', placeholder: false, mail: true },
+];
+---
+
+<BaseLayout title="About" description="Licklider is an infrastructure company in Tokyo, building the layer that lets humans take responsibility for what AI generates.">
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="eyebrow">About</p>
+      <h1>About Licklider</h1>
+      <p class="standfirst">
+        Licklider is an infrastructure company based in Tokyo. We build the layer that lets
+        humans take responsibility for what AI generates — starting with scientific research.
+      </p>
+    </div>
+  </section>
+
+  <div class="sections">
+    <section class="band band--single">
+      <div class="band-inner">
+        <p class="eyebrow">Mission</p>
+        <div class="band-body">
+          <p>
+            Our mission is to make responsible approval possible at machine scale. AI now
+            produces analyses, figures, prose, and code faster than people can verify them,
+            and the institutions built for an era of scarce generation have not kept up. The
+            work that remains human — approving, and taking responsibility — needs
+            infrastructure of its own.
+          </p>
+          <p>
+            We call this engineering accountability: designing the conditions under which
+            approval stays connected to verifiable evidence, so that responsibility keeps its
+            substance.
+          </p>
+          <p class="more"><a href="/thesis/">Read the Thesis →</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band--single">
+      <div class="band-inner">
+        <p class="eyebrow">What We Build</p>
+        <div class="band-body">
+          <p>
+            nomue is our first product: an execution environment that generates and maintains
+            research outputs on top of the nomue Record — an open specification that binds
+            each approved output to its underlying evidence — with an open-source verifier
+            that lets third parties check a Record's internal consistency without depending
+            on our software.
+          </p>
+          <p class="more">
+            <a href="/#what-we-build">What we build →</a>
+            <a href="https://github.com/licklider-ai/nomue-verifier" target="_blank" rel="noopener noreferrer">nomue verifier →</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band--single">
+      <div class="band-inner">
+        <p class="eyebrow">Team</p>
+        <div class="band-body">
+          <p>
+            Licklider was founded in Tokyo and works with researchers wherever they work. The
+            team brings together people who build software and people who have lived inside
+            the scientific process, and treats the two as one discipline.
+          </p>
+          <p>
+            We try to work the way we ask science to work: claims connected to evidence,
+            boundaries stated plainly, and verification that does not require trusting us.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band--single">
+      <div class="band-inner">
+        <p class="eyebrow">Company</p>
+        <div class="band-body">
+          <dl class="company">
+            {
+              company.map((row) => (
+                <>
+                  <dt>{row.term}</dt>
+                  <dd class={row.placeholder ? 'placeholder' : undefined}>
+                    {row.mail ? <a href={`mailto:${row.detail}`}>{row.detail}</a> : row.detail}
+                  </dd>
+                </>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  /* トップの hero より一段静かに。見出しの伸びやかさだけ引き継ぐ */
+  .page-hero-inner {
+    max-width: var(--shell);
+    margin: 0 auto;
+    padding: 5.5rem var(--gutter) 4.5rem;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(2.2rem, 4.8vw, 3.4rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 1.1rem 0 1.75rem;
+  }
+
+  .standfirst {
+    margin: 0;
+    max-width: var(--measure);
+    font-size: 1.08rem;
+    color: var(--ink-2);
+  }
+
+  .sections {
+    max-width: var(--shell);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .band {
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  .band:last-child {
+    border-bottom: 0;
+  }
+
+  .band-inner {
+    max-width: var(--measure);
+    margin: 0 auto;
+  }
+
+  .band-inner > .eyebrow {
+    margin: 0 0 2.5rem;
+  }
+
+  .band-body > :last-child {
+    margin-bottom: 0;
+  }
+
+  .more {
+    margin-top: 1.75rem;
+    font-size: 0.95rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .company {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    row-gap: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .company dt {
+    color: var(--ink-3);
+    font-size: 0.85rem;
+    padding-top: 0.15rem;
+  }
+
+  .company dd {
+    margin: 0;
+  }
+
+  @media (max-width: 800px) {
+    .page-hero-inner {
+      padding: 3.5rem var(--gutter) 3rem;
+    }
+
+    .band {
+      padding: 3rem 0;
+    }
+  }
+</style>
