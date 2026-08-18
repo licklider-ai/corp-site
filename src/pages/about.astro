@@ -1,14 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// About ページ。トップページと同じ band の作法 (eyebrow を上に置く 1 ペイン、
-// 本文 34rem 中央寄せ) を踏襲する。チームは Anthropic の /company と同じ粒度で
-// 個人ではなく集合として記述する。会社の未確定情報はプレースホルダーにする
+// About ページ。セクションはトップページの 2 ペイン band (左に見出し、右に本文) と
+// 同じ作法。チームは Anthropic の /company と同じ粒度で、個人ではなく集合として
+// 記述する
 const company = [
-  { term: 'Company', detail: 'Licklider, Inc.', placeholder: false },
-  { term: 'Headquarters', detail: 'Tokyo, Japan', placeholder: false },
-  { term: 'Founded', detail: '[TBC]', placeholder: true },
-  { term: 'Contact', detail: 'contact@licklider.ai', placeholder: false, mail: true },
+  { term: 'Company', detail: 'Licklider, Inc.' },
+  { term: 'Headquarters', detail: 'N&E BLD. 7F, 1-12-4 Ginza, Chuo-ku, Tokyo, Japan' },
+  { term: 'Founded', detail: 'July 2024' },
 ];
 ---
 
@@ -25,80 +24,52 @@ const company = [
   </section>
 
   <div class="sections">
-    <section class="band band--single">
-      <div class="band-inner">
-        <p class="eyebrow">Mission</p>
-        <div class="band-body">
-          <p>
-            Our mission is to make responsible approval possible at machine scale. AI now
-            produces analyses, figures, prose, and code faster than people can verify them,
-            and the institutions built for an era of scarce generation have not kept up. The
-            work that remains human — approving, and taking responsibility — needs
-            infrastructure of its own.
-          </p>
-          <p>
-            We call this engineering accountability: designing the conditions under which
-            approval stays connected to verifiable evidence, so that responsibility keeps its
-            substance.
-          </p>
-          <p class="more"><a href="/thesis/">Read the Thesis →</a></p>
-        </div>
+    <section class="band">
+      <p class="eyebrow">Mission</p>
+      <div class="band-body">
+        <p>
+          Our mission is to make responsible approval possible at machine scale. AI now
+          produces analyses, figures, prose, and code faster than people can verify them,
+          and the institutions built for an era of scarce generation have not kept up. The
+          work that remains human — approving, and taking responsibility — needs
+          infrastructure of its own.
+        </p>
+        <p>
+          We call this engineering accountability: designing the conditions under which
+          approval stays connected to verifiable evidence, so that responsibility keeps its
+          substance.
+        </p>
       </div>
     </section>
 
-    <section class="band band--single">
-      <div class="band-inner">
-        <p class="eyebrow">What We Build</p>
-        <div class="band-body">
-          <p>
-            nomue is our first product: an execution environment that generates and maintains
-            research outputs on top of the nomue Record — an open specification that binds
-            each approved output to its underlying evidence — with an open-source verifier
-            that lets third parties check a Record's internal consistency without depending
-            on our software.
-          </p>
-          <p class="more">
-            <a href="/#what-we-build">What we build →</a>
-            <a href="https://github.com/licklider-ai/nomue-verifier" target="_blank" rel="noopener noreferrer">nomue verifier →</a>
-          </p>
-        </div>
+    <section class="band">
+      <p class="eyebrow">Team</p>
+      <div class="band-body">
+        <p>
+          Licklider was founded in Tokyo and works with researchers wherever they work. The
+          team brings together people who build software and people who have lived inside
+          the scientific process, and treats the two as one discipline.
+        </p>
+        <p>
+          We try to work the way we ask science to work: claims connected to evidence,
+          boundaries stated plainly, and verification that does not require trusting us.
+        </p>
       </div>
     </section>
 
-    <section class="band band--single">
-      <div class="band-inner">
-        <p class="eyebrow">Team</p>
-        <div class="band-body">
-          <p>
-            Licklider was founded in Tokyo and works with researchers wherever they work. The
-            team brings together people who build software and people who have lived inside
-            the scientific process, and treats the two as one discipline.
-          </p>
-          <p>
-            We try to work the way we ask science to work: claims connected to evidence,
-            boundaries stated plainly, and verification that does not require trusting us.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="band band--single">
-      <div class="band-inner">
-        <p class="eyebrow">Company</p>
-        <div class="band-body">
-          <dl class="company">
-            {
-              company.map((row) => (
-                <>
-                  <dt>{row.term}</dt>
-                  <dd class={row.placeholder ? 'placeholder' : undefined}>
-                    {row.mail ? <a href={`mailto:${row.detail}`}>{row.detail}</a> : row.detail}
-                  </dd>
-                </>
-              ))
-            }
-          </dl>
-        </div>
+    <section class="band">
+      <p class="eyebrow">Company</p>
+      <div class="band-body">
+        <dl class="company">
+          {
+            company.map((row) => (
+              <>
+                <dt>{row.term}</dt>
+                <dd>{row.detail}</dd>
+              </>
+            ))
+          }
+        </dl>
       </div>
     </section>
   </div>
@@ -136,7 +107,11 @@ const company = [
     padding: 0 var(--gutter);
   }
 
+  /* トップページと同じ 2 ペイン: 左に見出しの段、右に本文 */
   .band {
+    display: grid;
+    grid-template-columns: 12rem minmax(0, 1fr);
+    gap: 3rem;
     padding: 4rem 0;
     border-bottom: 1px solid var(--rule-faint);
   }
@@ -145,25 +120,16 @@ const company = [
     border-bottom: 0;
   }
 
-  .band-inner {
-    max-width: var(--measure);
-    margin: 0 auto;
+  .band > .eyebrow {
+    margin: 0.35rem 0 0;
   }
 
-  .band-inner > .eyebrow {
-    margin: 0 0 2.5rem;
+  .band-body {
+    max-width: var(--measure);
   }
 
   .band-body > :last-child {
     margin-bottom: 0;
-  }
-
-  .more {
-    margin-top: 1.75rem;
-    font-size: 0.95rem;
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
   }
 
   .company {
@@ -190,7 +156,13 @@ const company = [
     }
 
     .band {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
       padding: 3rem 0;
+    }
+
+    .company {
+      grid-template-columns: 7.5rem minmax(0, 1fr);
     }
   }
 </style>
