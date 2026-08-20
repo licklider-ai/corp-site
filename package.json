@@ -12,10 +12,11 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "publication:lint": "node scripts/publication-lint.mjs",
+    "build": "pnpm publication:lint && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "astro check"
+    "check": "pnpm publication:lint && astro check"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
