@@ -1,0 +1,186 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('engineering', ({ data }) => data.status !== 'draft');
+
+  return articles.map((article) => ({
+    params: { id: article.id },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: CollectionEntry<'engineering'>;
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const { data } = article;
+
+const dateFormatter = new Intl.DateTimeFormat('en', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const statusLabel = {
+  published: null,
+  corrected: 'Corrected',
+  superseded: 'Superseded',
+  withdrawn: 'Withdrawn',
+  draft: null,
+}[data.status];
+---
+
+<BaseLayout title={data.title} description={data.description}>
+  <article class="engineering-article">
+    <header class="article-header">
+      <p class="eyebrow">Engineering</p>
+      <h1>{data.title}</h1>
+      <p class="dek">{data.description}</p>
+
+      <div class="article-meta">
+        <span>{data.authors.join(', ')}</span>
+        {data.publishedAt && <time datetime={data.publishedAt.toISOString()}>{dateFormatter.format(data.publishedAt)}</time>}
+        {statusLabel && <span class="status">{statusLabel}</span>}
+      </div>
+    </header>
+
+    {
+      data.status === 'corrected' && data.corrections.length > 0 && (
+        <aside class="notice" aria-label="Corrections">
+          <strong>Correction notice</strong>
+          <ul>
+            {data.corrections.map((correction) => (
+              <li>
+                <time datetime={correction.date.toISOString()}>{dateFormatter.format(correction.date)}</time>
+                {' — '}
+                {correction.url ? <a href={correction.url}>{correction.note}</a> : correction.note}
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )
+    }
+
+    {
+      data.status === 'superseded' && (
+        <aside class="notice" aria-label="Superseded article">
+          <strong>This article has been superseded.</strong>
+          {data.supersededBy && <p>See <a href={`/engineering/${data.supersededBy}/`}>{data.supersededBy}</a>.</p>}
+        </aside>
+      )
+    }
+
+    {
+      data.status === 'withdrawn' && (
+        <aside class="notice" aria-label="Withdrawn article">
+          <strong>This article has been withdrawn.</strong>
+          <p>The page remains available as a record. Do not rely on it as current guidance.</p>
+        </aside>
+      )
+    }
+
+    <div class="article-body">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .engineering-article {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 6rem var(--gutter) 9rem;
+  }
+
+  .article-header {
+    max-width: 50rem;
+    margin-bottom: 4rem;
+  }
+
+  h1 {
+    margin-top: 0.75rem;
+    font-size: clamp(2.7rem, 7vw, 5rem);
+    letter-spacing: -0.035em;
+  }
+
+  .dek {
+    max-width: 42rem;
+    margin-top: 1.5rem;
+    color: var(--ink-2);
+    font-size: 1.15rem;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 0.65rem 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    color: var(--ink-3);
+    font-size: 0.85rem;
+  }
+
+  .status {
+    color: var(--ink);
+  }
+
+  .notice {
+    max-width: 46rem;
+    margin: 0 0 3.5rem;
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--rule);
+    background: var(--wash);
+    font-size: 0.94rem;
+  }
+
+  .notice p,
+  .notice ul {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .article-body {
+    max-width: 42rem;
+  }
+
+  .article-body :global(h2) {
+    margin: 3.5rem 0 1rem;
+    font-size: 2rem;
+  }
+
+  .article-body :global(h3) {
+    margin: 2.5rem 0 0.85rem;
+    font-size: 1.35rem;
+  }
+
+  .article-body :global(pre) {
+    overflow-x: auto;
+    padding: 1rem;
+    background: var(--wash);
+    border: 1px solid var(--rule-faint);
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .article-body :global(code) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.88em;
+  }
+
+  .article-body :global(blockquote) {
+    margin: 2rem 0;
+    padding-left: 1.25rem;
+    border-left: 1px solid var(--ink);
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 700px) {
+    .engineering-article {
+      padding-top: 4rem;
+    }
+  }
+</style>
