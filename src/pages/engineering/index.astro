@@ -1,0 +1,145 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const articles = (await getCollection('engineering', ({ data }) => data.status !== 'draft')).sort(
+  (a, b) => (b.data.publishedAt?.getTime() ?? 0) - (a.data.publishedAt?.getTime() ?? 0),
+);
+
+const dateFormatter = new Intl.DateTimeFormat('en', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  title="Engineering"
+  description="Technical essays and evidence from how Licklider builds, tests, and reasons about nomue."
+>
+  <section class="engineering-index">
+    <header class="intro">
+      <p class="eyebrow">Engineering</p>
+      <h1>Engineering</h1>
+      <p>
+        Technical essays and public evidence from how we build, test, and reason about nomue.
+      </p>
+    </header>
+
+    {
+      articles.length > 0 ? (
+        <ol class="article-list">
+          {articles.map((article) => (
+            <li>
+              <a class="article-link" href={`/engineering/${article.id.replace(/\.md$/, '')}/`}>
+                <span class="article-title">{article.data.title}</span>
+                <span class="article-description">{article.data.description}</span>
+                {article.data.publishedAt && (
+                  <time datetime={article.data.publishedAt.toISOString()}>
+                    {dateFormatter.format(article.data.publishedAt)}
+                  </time>
+                )}
+              </a>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p class="empty">No Engineering essays are published yet.</p>
+      )
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .engineering-index {
+    max-width: var(--shell);
+    margin: 0 auto;
+    padding: 6rem var(--gutter) 8rem;
+  }
+
+  .intro {
+    max-width: 46rem;
+    margin-bottom: 5rem;
+  }
+
+  h1 {
+    margin-top: 0.7rem;
+    font-size: clamp(2.8rem, 8vw, 5.6rem);
+    letter-spacing: -0.035em;
+  }
+
+  .intro > p:last-child {
+    max-width: 38rem;
+    margin-top: 1.5rem;
+    color: var(--ink-2);
+    font-size: 1.15rem;
+  }
+
+  .article-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 52rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .article-list li {
+    margin: 0;
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  .article-link {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.5rem 2rem;
+    padding: 1.7rem 0;
+    text-decoration: none;
+  }
+
+  .article-title {
+    color: var(--ink);
+    font-size: 1.45rem;
+    line-height: 1.35;
+  }
+
+  .article-description {
+    grid-column: 1;
+    color: var(--ink-2);
+  }
+
+  time {
+    grid-column: 2;
+    grid-row: 1;
+    color: var(--ink-3);
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .empty {
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 700px) {
+    .engineering-index {
+      padding-top: 4rem;
+    }
+
+    .article-link {
+      display: block;
+    }
+
+    .article-title,
+    .article-description,
+    time {
+      display: block;
+    }
+
+    .article-description {
+      margin-top: 0.4rem;
+    }
+
+    time {
+      margin-top: 0.75rem;
+    }
+  }
+</style>
