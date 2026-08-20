@@ -27,7 +27,7 @@ const engineeringSchema = z
   .superRefine((entry, ctx) => {
     if (entry.status !== 'draft' && !entry.publishedAt) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: 'custom',
         path: ['publishedAt'],
         message: 'publishedAt is required for non-draft Engineering content.',
       });
@@ -39,7 +39,7 @@ const engineeringSchema = z
       entry.updatedAt.getTime() < entry.publishedAt.getTime()
     ) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: 'custom',
         path: ['updatedAt'],
         message: 'updatedAt must not precede publishedAt.',
       });
@@ -48,14 +48,14 @@ const engineeringSchema = z
     if (entry.kind === 'measurement') {
       if (entry.softwareVersions.length === 0) {
         ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+          code: 'custom',
           path: ['softwareVersions'],
           message: 'measurement articles require at least one softwareVersions entry.',
         });
       }
       if (entry.publicEvidenceRefs.length === 0) {
         ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+          code: 'custom',
           path: ['publicEvidenceRefs'],
           message: 'measurement articles require at least one publicEvidenceRefs entry.',
         });
@@ -65,14 +65,14 @@ const engineeringSchema = z
     if (entry.kind === 'third_party_issue') {
       if (entry.upstreamRefs.length === 0) {
         ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+          code: 'custom',
           path: ['upstreamRefs'],
           message: 'third_party_issue articles require at least one upstreamRefs entry.',
         });
       }
       if (entry.publicEvidenceRefs.length === 0) {
         ctx.addIssue({
-          code: z.ZodIssueCode.custom,
+          code: 'custom',
           path: ['publicEvidenceRefs'],
           message: 'third_party_issue articles require at least one publicEvidenceRefs entry.',
         });
@@ -81,7 +81,7 @@ const engineeringSchema = z
 
     if (entry.status === 'corrected' && entry.corrections.length === 0) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: 'custom',
         path: ['corrections'],
         message: 'corrected articles require at least one correction record.',
       });
@@ -89,7 +89,7 @@ const engineeringSchema = z
 
     if (entry.status === 'superseded' && !entry.supersededBy) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: 'custom',
         path: ['supersededBy'],
         message: 'superseded articles require supersededBy.',
       });
