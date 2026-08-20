@@ -2,6 +2,14 @@
 
 Use this as a starting point, not as a mandatory visual structure. Delete sections that do not help the reader.
 
+## Drafting boundary
+
+`corp-site` is a public repository. A source file committed to a branch or pull request is publicly readable even when Astro excludes `status: draft` from generated routes.
+
+Routine early drafting, evidence reconciliation, and adversarial review therefore happen in the approved private working source. Transfer an article into this repository only after the normal human publication approval.
+
+The `draft` status below is a rendering state, not a confidentiality mechanism. Use it in `corp-site` only when the source itself is safe to expose publicly.
+
 ## Frontmatter — explainer
 
 ```yaml
@@ -14,6 +22,8 @@ authors:
   - Licklider
 ---
 ```
+
+For a normal approved publication candidate, set the authoritative publication state and date during transfer rather than using `draft` as a private staging mechanism.
 
 ## Frontmatter — measurement
 
@@ -49,7 +59,7 @@ publicEvidenceRefs:
 ---
 ```
 
-Before changing `status` from `draft`, apply the current upstream Public Communication policy. A third-party issue article must not infer publication permission from valid frontmatter alone.
+Before source enters this public repository, apply the current upstream Public Communication policy. A valid frontmatter shape never implies that publication is authorized.
 
 ## Suggested article body
 
