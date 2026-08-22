@@ -1,0 +1,97 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'current-status', label: 'Current status' },
+  { id: 'observation', label: 'What we observed' },
+  { id: 'scope', label: 'Scope' },
+  { id: 'public-evidence', label: 'Public evidence' },
+  { id: 'preprint-relation', label: 'Relation to the preprint' },
+];
+---
+
+<PublicationLayout
+  category="Engineering"
+  type="Upstream report"
+  title="An extreme-tail sign error in SciPy’s Student-t quantile"
+  description="A reproducible wrong-sign and wrong-finiteness result in an extreme tail, reported to SciPy and routed upstream to Boost."
+  published="August 23, 2026"
+  status="Open upstream issue — no fix accepted or released"
+  toc={toc}
+>
+  <section id="current-status">
+    <h2>Current status</h2>
+    <div class="notice">
+      <p>
+        Reported to SciPy on August 20, 2026. The issue remains open and is labeled
+        <code>defect</code>, <code>scipy.special</code>, and <code>upstream bug</code>.
+      </p>
+      <p>
+        A SciPy contributor requested an upstream Boost report. No fix has been accepted
+        or released.
+      </p>
+    </div>
+  </section>
+
+  <section id="observation">
+    <h2>What we observed</h2>
+    <p>
+      For very small tail probabilities, <code>scipy.special.stdtrit</code> and
+      <code>scipy.stats.t.ppf</code> can return positive infinity where the corresponding
+      Student-t quantile is a large negative finite number. The report includes a
+      reproducible binary64 input and an independent high-precision calculation for the
+      expected value.
+    </p>
+    <p>
+      For one reported case with three degrees of freedom, the returned value is
+      <code>+inf</code>, while the expected result is approximately
+      <code>-2.31e82</code>. The problem therefore changes both sign and finiteness rather
+      than only the last few digits.
+    </p>
+  </section>
+
+  <section id="scope">
+    <h2>Scope</h2>
+    <p>
+      The observed failures occur at exceptionally small probabilities, with onset that
+      depends on the degrees of freedom. This report does not claim that ordinary
+      Student-t analyses are affected, nor does it estimate how often real research
+      workflows reach the failing region.
+    </p>
+    <p>
+      A SciPy contributor identified the inverse incomplete-beta path in Boost as the
+      likely upstream location and left the repair decision to the Boost maintainers.
+      That upstream investigation is not yet complete.
+    </p>
+  </section>
+
+  <section id="public-evidence">
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/25968" target="_blank" rel="noopener noreferrer">SciPy issue #25968</a>
+        — report, reproducer, labels, and current state
+      </li>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/25968#issuecomment-5374411963" target="_blank" rel="noopener noreferrer">SciPy contributor response</a>
+        — request to report the issue upstream to Boost
+      </li>
+    </ul>
+    <p>
+      We will update this page if Boost confirms the cause, a fix is accepted, or a fixed
+      version is released. Those states will be reported separately rather than collapsed
+      into a single “fixed” claim.
+    </p>
+  </section>
+
+  <section id="preprint-relation">
+    <h2>Relation to the preprint</h2>
+    <p>
+      The issue was found while benchmarking Student-t numerical surfaces for the
+      <a href="/research/correctly-rounded-or-refused/">Correctly Rounded or Refused</a>
+      preprint. This Engineering report records the upstream software disposition. It is
+      not peer review of the paper and does not establish the scientific validity of any
+      analysis.
+    </p>
+  </section>
+</PublicationLayout>

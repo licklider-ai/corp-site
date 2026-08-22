@@ -1,0 +1,10 @@
+---
+import { publicationsFor } from '../../data/publications';
+import PublicationIndexLayout from '../../layouts/PublicationIndexLayout.astro';
+---
+
+<PublicationIndexLayout
+  category="Research"
+  description="Papers, preprints, research notes, and benchmark reports. Each item states its evidence, scope, and review status."
+  items={publicationsFor('Research')}
+/>

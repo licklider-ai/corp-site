@@ -1,0 +1,10 @@
+---
+import { publicationsFor } from '../../data/publications';
+import PublicationIndexLayout from '../../layouts/PublicationIndexLayout.astro';
+---
+
+<PublicationIndexLayout
+  category="Engineering"
+  description="Implementation notes, upstream reports, technical methods, and postmortems from building verifiable research infrastructure."
+  items={publicationsFor('Engineering')}
+/>

@@ -1,0 +1,10 @@
+---
+import { publicationsFor } from '../../data/publications';
+import PublicationIndexLayout from '../../layouts/PublicationIndexLayout.astro';
+---
+
+<PublicationIndexLayout
+  category="News"
+  description="Material product, protocol, company, partnership, and policy updates from Licklider."
+  items={publicationsFor('News')}
+/>

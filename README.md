@@ -91,3 +91,9 @@ pnpm install
 `pnpm build` を実行します。
 
 本番デプロイ手順の詳細は [`docs/deployment.md`](./docs/deployment.md) を参照してください。
+
+## 公開情報の分類
+
+公開記事は **Research / Engineering / News** の3系統に分けます。ホームで混在表示する場合は News ではなく **Latest** とし、各項目に分類を表示します。
+
+配置、成熟度ラベル、必須メタデータの正本は [`docs/publication-architecture.md`](./docs/publication-architecture.md) を参照してください。

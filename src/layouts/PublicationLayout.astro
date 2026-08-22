@@ -1,0 +1,149 @@
+---
+import type { PublicationCategory } from '../data/publications';
+import type { TocItem } from '../consts';
+import PageLayout from './PageLayout.astro';
+
+interface Props {
+  category: PublicationCategory;
+  type: string;
+  title: string;
+  description: string;
+  published: string;
+  updated?: string;
+  status: string;
+  toc: TocItem[];
+}
+
+const { category, type, title, description, published, updated, status, toc } = Astro.props;
+const categoryHref = `/${category.toLowerCase()}/`;
+---
+
+<PageLayout title={title} description={description} toc={toc}>
+  <div class="publication">
+    <header class="page-head">
+      <p class="eyebrow"><a href={categoryHref}>{category}</a> / {type}</p>
+      <h1>{title}</h1>
+      <p class="standfirst">{description}</p>
+
+      <dl class="metadata">
+        <dt>By</dt>
+        <dd>Licklider</dd>
+        <dt>Published</dt>
+        <dd>{published}</dd>
+        {updated && <dt>Updated</dt>}
+        {updated && <dd>{updated}</dd>}
+        <dt>Status</dt>
+        <dd>{status}</dd>
+      </dl>
+    </header>
+
+    <div class="body">
+      <slot />
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .publication {
+    width: 100%;
+    padding-bottom: 1rem;
+  }
+
+  .page-head {
+    padding-bottom: 2.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    margin: 0;
+  }
+
+  .eyebrow a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h1 {
+    margin: 1rem 0 1.35rem;
+    font-size: clamp(2rem, 4.3vw, 3.15rem);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+  }
+
+  .standfirst {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 1.1rem;
+  }
+
+  .metadata {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    margin: 2rem 0 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule-faint);
+    row-gap: 0.35rem;
+    font-size: 0.88rem;
+  }
+
+  .metadata dt {
+    color: var(--ink-3);
+  }
+
+  .metadata dd {
+    margin: 0;
+  }
+
+  .body {
+    padding-top: 0.25rem;
+  }
+
+  .body :global(section) {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  .body :global(section:last-child) {
+    border-bottom: 0;
+  }
+
+  .body :global(h2) {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .body :global(h3) {
+    margin: 1.75rem 0 0.75rem;
+    font-size: 1.05rem;
+  }
+
+  .body :global(.notice) {
+    padding: 1.25rem 1.4rem;
+    background: var(--wash);
+    border-left: 2px solid var(--ink-3);
+  }
+
+  .body :global(.notice > :last-child),
+  .body :global(section > :last-child) {
+    margin-bottom: 0;
+  }
+
+  .body :global(pre) {
+    overflow-x: auto;
+    padding: 1rem 1.15rem;
+    background: var(--wash);
+    font-size: 0.8rem;
+    line-height: 1.55;
+  }
+
+  .body :global(code) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.86em;
+  }
+
+  @media (max-width: 700px) {
+    .metadata {
+      grid-template-columns: 5.5rem minmax(0, 1fr);
+    }
+  }
+</style>

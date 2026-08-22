@@ -2,7 +2,10 @@
 import { SIDE_NAV } from '../consts';
 
 const current = Astro.url.pathname;
-const isActive = (href: string) => current === href || current === href.replace(/\/$/, '');
+const isActive = (href: string) => {
+  const base = href.replace(/\/$/, '');
+  return current === href || current === base || current.startsWith(`${base}/`);
+};
 ---
 
 <nav class="side-menu" aria-label="Site sections">

@@ -1,0 +1,139 @@
+---
+import type { PublicationCategory, PublicationItem } from '../data/publications';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  category: PublicationCategory;
+  description: string;
+  items: PublicationItem[];
+}
+
+const { category, description, items } = Astro.props;
+---
+
+<BaseLayout title={category} description={description}>
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="eyebrow">Publications</p>
+      <h1>{category}</h1>
+      <p class="standfirst">{description}</p>
+    </div>
+  </section>
+
+  <section class="index" aria-labelledby="publication-list">
+    <h2 id="publication-list" class="visually-hidden">{category} publications</h2>
+    <div class="table-scroll">
+      <table>
+        <tbody>
+          {
+            items.map((item) => (
+              <tr>
+                <td class="date">{item.date}</td>
+                <td>
+                  <p class="type">{item.type}</p>
+                  <h3><a href={item.href}>{item.title}</a></h3>
+                  <p class="summary">{item.summary}</p>
+                  <p class="status">{item.status}</p>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  .page-hero-inner,
+  .index {
+    max-width: var(--shell);
+    margin: 0 auto;
+    padding-inline: var(--gutter);
+  }
+
+  .page-hero-inner {
+    padding-top: 5.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 4.8vw, 3.4rem);
+    margin: 1.1rem 0 1.75rem;
+  }
+
+  .standfirst {
+    max-width: var(--measure);
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 1.08rem;
+  }
+
+  .index {
+    padding-top: 4rem;
+    padding-bottom: 1rem;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+  }
+
+  td {
+    padding-block: 1.5rem;
+  }
+
+  tbody tr:first-child td {
+    border-top: 1px solid var(--rule-faint);
+  }
+
+  .date {
+    width: 12rem;
+    white-space: nowrap;
+    color: var(--ink-3);
+  }
+
+  .type,
+  .status {
+    color: var(--ink-3);
+    font-size: 0.82rem;
+  }
+
+  .type {
+    margin: 0 0 0.2rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+  }
+
+  .summary {
+    max-width: var(--measure);
+    margin: 0.35rem 0 0.45rem;
+    color: var(--ink-2);
+  }
+
+  .status {
+    margin: 0;
+  }
+
+  @media (max-width: 700px) {
+    .page-hero-inner {
+      padding-top: 3.5rem;
+      padding-bottom: 3rem;
+    }
+
+    .index {
+      padding-top: 2.5rem;
+    }
+
+    .date {
+      width: 8.5rem;
+    }
+  }
+</style>

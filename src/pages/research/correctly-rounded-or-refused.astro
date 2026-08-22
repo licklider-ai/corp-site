@@ -1,0 +1,75 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'publication-status', label: 'Publication status' },
+  { id: 'paper-scope', label: 'What the paper studies' },
+  { id: 'evidence-limits', label: 'Evidence and limits' },
+  { id: 'protocol-relation', label: 'Relation to nomue Protocol' },
+];
+---
+
+<PublicationLayout
+  category="Research"
+  type="Publication"
+  title="Correctly Rounded or Refused — preprint v0.2"
+  description="A preprint on a certified numerical contract for the paired Student-t test in IEEE binary64."
+  published="August 23, 2026"
+  status="Preprint v0.2 — not peer reviewed"
+  toc={toc}
+>
+  <section id="publication-status">
+    <h2>Publication status</h2>
+    <div class="notice">
+      <p><strong>Preprint v0.2 — not peer reviewed.</strong></p>
+      <p>
+        Submitted for journal consideration in August 2026. No acceptance decision has
+        been made.
+      </p>
+    </div>
+    <p>
+      The public manuscript is version 0.2. Journal selection and editorial status may
+      change; the current preprint and its persistent record remain the public reference.
+    </p>
+  </section>
+
+  <section id="paper-scope">
+    <h2>What the paper studies</h2>
+    <p>
+      Statistical software usually returns p-values and confidence limits as bare
+      binary64 numbers, without a machine-checkable statement about their numerical
+      accuracy. The paper proposes a three-valued result contract for the paired
+      Student-t test: a returned quantity is either proved correctly rounded, supplied
+      with a certified interval, or refused.
+    </p>
+    <p>
+      The stated scope is deliberately narrow: paired, equivalently one-sample,
+      Student-t surfaces in IEEE binary64, with integer degrees of freedom up to 30.
+      The paper benchmarks mainstream implementations against a defended high-precision
+      oracle and evaluates per-call certification using ball arithmetic.
+    </p>
+  </section>
+
+  <section id="evidence-limits">
+    <h2>Evidence and limits</h2>
+    <p>
+      The manuscript, version history, and persistent identifier are available in the
+      <a href="https://zenodo.org/records/22025200" target="_blank" rel="noopener noreferrer">Zenodo record</a>.
+    </p>
+    <p>
+      The reported results have not completed peer review. They do not establish
+      scientific truth, the validity of any study using a Student-t test, or the
+      correctness of statistical methods outside the stated numerical surfaces.
+    </p>
+  </section>
+
+  <section id="protocol-relation">
+    <h2>Relation to nomue Protocol</h2>
+    <p>
+      This paper is an <strong>informative research reference</strong>, not a normative
+      part of nomue Protocol. Its paired-test scope differs from the planned Release 1
+      Welch two-sample target. Any future protocol adoption requires a separate,
+      versioned specification decision and its own conformance evidence.
+    </p>
+  </section>
+</PublicationLayout>
