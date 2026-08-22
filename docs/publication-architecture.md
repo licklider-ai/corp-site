@@ -117,9 +117,14 @@ A submission changes the public status, but it does not by itself create News, p
 
 For *Correctly Rounded or Refused: Toward a Certified Numerical Contract for the Paired Student-t Test in IEEE Binary64*:
 
-> **Preprint v0.2, available on Zenodo. Submitted to ACM Transactions on Mathematical Software (ToMS) in August 2026. Peer review is pending; the manuscript has not been accepted or published.**
+> **Preprint v0.2 — not peer reviewed. Submitted for journal consideration in August 2026. No acceptance decision has been made.**
 
 The canonical public preprint remains [Zenodo record 22025200](https://zenodo.org/records/22025200). v0.1 remains version history and is not announced as a separate current publication.
+
+The public site does not name a submitted journal before acceptance. Exact venue,
+submission date, manuscript identifier, and editorial history remain in the internal
+record. A rejection, withdrawal, or resubmission changes the current status but does
+not create a News item.
 
 ---
 
@@ -170,7 +175,7 @@ The canonical public preprint remains [Zenodo record 22025200](https://zenodo.or
 
 | Item | Primary class | Treatment |
 | --- | --- | --- |
-| Zenodo paper v0.2 and ToMS submission status | Research / `publication` | One current Research entry; v0.1 only in version history |
+| Zenodo paper v0.2 and journal-submission status | Research / `publication` | One current Research entry; v0.1 only in version history; submitted journal unnamed before acceptance |
 | New paper version with no material new result | Research update | Update existing entry; no separate News item |
 | SciPy issue reproduced by Licklider | Engineering / `upstream_report` | State Licklider reproduction separately from upstream confirmation |
 | Upstream maintainer confirms and releases a fix | Engineering update | Update the canonical report; News only if the external consequence is material |

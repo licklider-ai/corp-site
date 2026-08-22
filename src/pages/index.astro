@@ -1,6 +1,7 @@
 ---
 import LayerDiagram from '../components/LayerDiagram.astro';
 import LickliderPortrait from '../components/LickliderPortrait.astro';
+import { PUBLICATIONS } from '../data/publications';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 // トップページはサイドメニューとページ内メニューを持たない。
@@ -19,14 +20,7 @@ const layers = [
   },
 ];
 
-const news = [
-  {
-    date: 'August 16, 2026',
-    title: 'nomue verifier released',
-    href: 'https://github.com/licklider-ai/nomue-verifier',
-    label: 'GitHub',
-  },
-];
+const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKey));
 ---
 
 <BaseLayout>
@@ -108,37 +102,22 @@ const news = [
       </div>
     </section>
 
-    <section id="news" class="band">
-      <p class="eyebrow">News</p>
+    <section id="latest" class="band">
+      <p class="eyebrow">Latest</p>
       <div class="band-body">
         <div class="table-scroll">
           <table>
             <tbody>
               {
-                news.map((row) => (
+                latest.map((row) => (
                   <tr>
-                    <td class="news-date">{row.date}</td>
+                    <td class="latest-date">{row.date}</td>
                     <td>
-                      <a href={row.href} target="_blank" rel="noopener noreferrer">
-                        {row.title}
-                        {/* 外部リンクの印: 角丸の枠と右上へ抜ける矢印 */}
-                        <svg
-                          class="ext"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path d="M10.8 4.5 H7 C5.6 4.5 4.5 5.6 4.5 7 V17 C4.5 18.4 5.6 19.5 7 19.5 H17 C18.4 19.5 19.5 18.4 19.5 17 V13.2" />
-                          <path d="M11.5 12.5 L19 5" />
-                          <path d="M14.5 4.75 H19.25 V9.5" />
-                        </svg>
-                      </a>
+                      <a href={row.href}>{row.title}</a>
                     </td>
-                    <td class="news-label">{row.label}</td>
+                    <td class="latest-category">
+                      <a href={`/${row.category.toLowerCase()}/`}>{row.category}</a>
+                    </td>
                   </tr>
                 ))
               }
@@ -277,27 +256,24 @@ const news = [
     overflow-x: auto;
   }
 
-  /* News: 見出し行なしの一覧。1 行目にも上罫線を引いて表の枠を保つ */
-  .news-date {
+  /* Latest: 3 分類を混在表示するため、各行に分類ラベルを置く */
+  .latest-date {
     white-space: nowrap;
     color: var(--ink-3);
   }
 
-  .news-label {
+  .latest-category {
     color: var(--ink-3);
     text-align: right;
   }
 
-  tbody tr:first-child td {
-    border-top: 1px solid var(--rule-faint);
+  .latest-category a {
+    color: inherit;
+    text-decoration: none;
   }
 
-  /* 外部リンクの印はテキストの末尾に沿わせ、リンク色を継承する */
-  .ext {
-    width: 0.8em;
-    height: 0.8em;
-    margin-left: 0.3em;
-    vertical-align: -0.06em;
+  tbody tr:first-child td {
+    border-top: 1px solid var(--rule-faint);
   }
 
   @media (max-width: 800px) {

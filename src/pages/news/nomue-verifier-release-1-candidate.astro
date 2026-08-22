@@ -1,0 +1,76 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+---
+
+<PublicationLayout
+  category="News"
+  type="Product"
+  title="nomue verifier Release 1 candidate is now public"
+  description="The pre-release local verifier is available for public inspection and scoped fixture-based testing."
+  published="August 16, 2026"
+  updated="August 23, 2026"
+  status="Pre-release — package 0.2.1-rc.0"
+>
+  <section>
+    <h2>What is available</h2>
+    <p>
+      The <a href="https://github.com/licklider-ai/nomue-verifier" target="_blank" rel="noopener noreferrer">nomue verifier repository</a>
+      contains a pre-release candidate package for local, issuer-independent verification
+      of scoped nomue Record properties.
+    </p>
+    <p>
+      The package can check Record structure and semantics, content-digest integrity,
+      declared profile admissibility, and the registered Welch result fields under the
+      exact candidate bundle. Verification runs locally after dependencies are installed;
+      it does not call a Licklider server or execute Record-supplied code.
+    </p>
+  </section>
+
+  <section>
+    <h2>Release status</h2>
+    <div class="notice">
+      <p><strong>This is a pre-release candidate, not Protocol Release 1.</strong></p>
+      <p>
+        Package version <code>0.2.1-rc.0</code> is aligned to the planned Release 1
+        support target. nomue Protocol Release 1 has not been published, and the final
+        candidate source pin has not been fixed.
+      </p>
+    </div>
+    <p>
+      The earlier headline “nomue verifier released” was too broad for this maturity.
+      This page replaces it with the exact public state.
+    </p>
+  </section>
+
+  <section>
+    <h2>Try the two public fixtures</h2>
+    <pre><code>git clone https://github.com/licklider-ai/nomue-verifier.git
+cd nomue-verifier
+npm install
+
+npm exec -- nomue verify records/valid.json --format json
+npm exec -- nomue verify records/invalid-result-mismatch.json --format json</code></pre>
+    <p>
+      The first fixture is expected to complete with all applicable scoped checks passing.
+      The second contains a declared-result mismatch and is expected to return a failed
+      scoped check.
+    </p>
+  </section>
+
+  <section>
+    <h2>What a clean report does not mean</h2>
+    <p>A clean verifier report does not establish:</p>
+    <ul>
+      <li>scientific truth or scientific validity;</li>
+      <li>that input data or researcher declarations are truthful;</li>
+      <li>causal validity or publication acceptance;</li>
+      <li>correctness outside the exact registered candidate bundle; or</li>
+      <li>production attestation.</li>
+    </ul>
+    <p>
+      There is no single overall <code>VERIFIED</code> result. Consumers that need exact
+      outcomes must parse the machine-readable report and retain its stated boundaries.
+    </p>
+  </section>
+
+</PublicationLayout>
