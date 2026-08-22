@@ -14,7 +14,7 @@ interface Props {
 const { title, description, toc } = Astro.props;
 ---
 
-{/* 下層ページ: ヘッダーの下に 左から サイドメニュー / ページ内メニュー / コンテンツ */}
+{/* 下層ページ: ヘッダーの下に 左から サイドメニュー / コンテンツ / ページ内メニュー */}
 <BaseLayout title={title} description={description}>
   <div class="shell">
     <div class="side">
@@ -37,19 +37,33 @@ const { title, description, toc } = Astro.props;
     margin: 0 auto;
     padding: 3rem var(--gutter) 0;
     display: grid;
-    grid-template-columns: 12rem 11rem minmax(0, 1fr);
+    grid-template-columns: 12rem minmax(0, 1fr) 11rem;
+    grid-template-areas: 'side content toc';
     gap: 3rem;
     /* align-items は既定の stretch のまま。列が本文の高さまで伸びることで、
        中の sticky なメニューがスクロールに追従できる */
   }
 
+  .side {
+    grid-area: side;
+  }
+
+  .toc {
+    grid-area: toc;
+  }
+
   .content {
+    grid-area: content;
     max-width: var(--measure);
   }
 
   @media (max-width: 1000px) {
     .shell {
       grid-template-columns: minmax(0, 1fr);
+      grid-template-areas:
+        'side'
+        'toc'
+        'content';
       gap: 2rem;
       padding-top: 2rem;
     }
