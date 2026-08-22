@@ -1,5 +1,12 @@
 ---
 import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'publication-status', label: 'Publication status' },
+  { id: 'paper-scope', label: 'What the paper studies' },
+  { id: 'evidence-limits', label: 'Evidence and limits' },
+  { id: 'protocol-relation', label: 'Relation to nomue Protocol' },
+];
 ---
 
 <PublicationLayout
@@ -9,8 +16,9 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
   description="A preprint on a certified numerical contract for the paired Student-t test in IEEE binary64."
   published="August 23, 2026"
   status="Preprint v0.2 — not peer reviewed"
+  toc={toc}
 >
-  <section>
+  <section id="publication-status">
     <h2>Publication status</h2>
     <div class="notice">
       <p><strong>Preprint v0.2 — not peer reviewed.</strong></p>
@@ -25,7 +33,7 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
     </p>
   </section>
 
-  <section>
+  <section id="paper-scope">
     <h2>What the paper studies</h2>
     <p>
       Statistical software usually returns p-values and confidence limits as bare
@@ -42,7 +50,7 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
     </p>
   </section>
 
-  <section>
+  <section id="evidence-limits">
     <h2>Evidence and limits</h2>
     <p>
       The manuscript, version history, and persistent identifier are available in the
@@ -55,7 +63,7 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
     </p>
   </section>
 
-  <section>
+  <section id="protocol-relation">
     <h2>Relation to nomue Protocol</h2>
     <p>
       This paper is an <strong>informative research reference</strong>, not a normative

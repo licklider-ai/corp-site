@@ -1,5 +1,13 @@
 ---
 import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'current-status', label: 'Current status' },
+  { id: 'observation', label: 'What we observed' },
+  { id: 'scope', label: 'Scope' },
+  { id: 'public-evidence', label: 'Public evidence' },
+  { id: 'preprint-relation', label: 'Relation to the preprint' },
+];
 ---
 
 <PublicationLayout
@@ -9,8 +17,9 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
   description="A reproducible wrong-sign and wrong-finiteness result in an extreme tail, reported to SciPy and routed upstream to Boost."
   published="August 23, 2026"
   status="Open upstream issue — no fix accepted or released"
+  toc={toc}
 >
-  <section>
+  <section id="current-status">
     <h2>Current status</h2>
     <div class="notice">
       <p>
@@ -24,7 +33,7 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
     </div>
   </section>
 
-  <section>
+  <section id="observation">
     <h2>What we observed</h2>
     <p>
       For very small tail probabilities, <code>scipy.special.stdtrit</code> and
@@ -41,7 +50,7 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
     </p>
   </section>
 
-  <section>
+  <section id="scope">
     <h2>Scope</h2>
     <p>
       The observed failures occur at exceptionally small probabilities, with onset that
@@ -56,7 +65,7 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
     </p>
   </section>
 
-  <section>
+  <section id="public-evidence">
     <h2>Public evidence</h2>
     <ul>
       <li>
@@ -75,7 +84,7 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
     </p>
   </section>
 
-  <section>
+  <section id="preprint-relation">
     <h2>Relation to the preprint</h2>
     <p>
       The issue was found while benchmarking Student-t numerical surfaces for the

@@ -1,5 +1,12 @@
 ---
 import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'availability', label: 'What is available' },
+  { id: 'release-status', label: 'Release status' },
+  { id: 'public-fixtures', label: 'Try the public fixtures' },
+  { id: 'non-claims', label: 'What a clean report does not mean' },
+];
 ---
 
 <PublicationLayout
@@ -10,8 +17,9 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
   published="August 16, 2026"
   updated="August 23, 2026"
   status="Pre-release — package 0.2.1-rc.0"
+  toc={toc}
 >
-  <section>
+  <section id="availability">
     <h2>What is available</h2>
     <p>
       The <a href="https://github.com/licklider-ai/nomue-verifier" target="_blank" rel="noopener noreferrer">nomue verifier repository</a>
@@ -26,7 +34,7 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
     </p>
   </section>
 
-  <section>
+  <section id="release-status">
     <h2>Release status</h2>
     <div class="notice">
       <p><strong>This is a pre-release candidate, not Protocol Release 1.</strong></p>
@@ -42,7 +50,7 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
     </p>
   </section>
 
-  <section>
+  <section id="public-fixtures">
     <h2>Try the two public fixtures</h2>
     <pre><code>git clone https://github.com/licklider-ai/nomue-verifier.git
 cd nomue-verifier
@@ -57,7 +65,7 @@ npm exec -- nomue verify records/invalid-result-mismatch.json --format json</cod
     </p>
   </section>
 
-  <section>
+  <section id="non-claims">
     <h2>What a clean report does not mean</h2>
     <p>A clean verifier report does not establish:</p>
     <ul>

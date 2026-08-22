@@ -1,6 +1,7 @@
 ---
 import type { PublicationCategory } from '../data/publications';
-import BaseLayout from './BaseLayout.astro';
+import type { TocItem } from '../consts';
+import PageLayout from './PageLayout.astro';
 
 interface Props {
   category: PublicationCategory;
@@ -10,14 +11,15 @@ interface Props {
   published: string;
   updated?: string;
   status: string;
+  toc: TocItem[];
 }
 
-const { category, type, title, description, published, updated, status } = Astro.props;
+const { category, type, title, description, published, updated, status, toc } = Astro.props;
 const categoryHref = `/${category.toLowerCase()}/`;
 ---
 
-<BaseLayout title={title} description={description}>
-  <article class="publication">
+<PageLayout title={title} description={description} toc={toc}>
+  <div class="publication">
     <header class="page-head">
       <p class="eyebrow"><a href={categoryHref}>{category}</a> / {type}</p>
       <h1>{title}</h1>
@@ -38,14 +40,13 @@ const categoryHref = `/${category.toLowerCase()}/`;
     <div class="body">
       <slot />
     </div>
-  </article>
-</BaseLayout>
+  </div>
+</PageLayout>
 
 <style>
   .publication {
-    max-width: var(--measure);
-    margin: 0 auto;
-    padding: 5rem var(--gutter) 1rem;
+    width: 100%;
+    padding-bottom: 1rem;
   }
 
   .page-head {
@@ -141,10 +142,6 @@ const categoryHref = `/${category.toLowerCase()}/`;
   }
 
   @media (max-width: 700px) {
-    .publication {
-      padding-top: 3.25rem;
-    }
-
     .metadata {
       grid-template-columns: 5.5rem minmax(0, 1fr);
     }
