@@ -26,8 +26,8 @@ export const PUBLICATIONS: PublicationItem[] = [
   {
     category: 'Engineering',
     type: 'Upstream report',
-    date: 'August 22, 2026',
-    sortKey: '2026-08-22',
+    date: 'August 23, 2026',
+    sortKey: '2026-08-23',
     title: 'An extreme-tail sign error in SciPy’s Student-t quantile',
     summary:
       'A reproducible wrong-sign and wrong-finiteness result, reported to SciPy and routed upstream to Boost.',
