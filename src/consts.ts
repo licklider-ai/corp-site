@@ -20,9 +20,7 @@ export type NavItem = {
 export const GLOBAL_NAV: NavItem[] = [
   { label: 'About', href: '/about/', ready: true },
   { label: 'Products', href: '/#what-we-build', ready: true },
-  { label: 'Research', href: '/research/', ready: true },
-  { label: 'Engineering', href: '/engineering/', ready: true },
-  { label: 'News', href: '/news/', ready: true },
+  { label: 'Latest', href: '/latest/', ready: true },
 ];
 
 /** 左サイドメニュー。ドラフトの章立てに対応する。 */
@@ -30,6 +28,7 @@ export const SIDE_NAV: NavItem[] = [
   { label: 'Thesis', href: '/thesis/', ready: true },
   { label: 'What We Build', href: '/what-we-build/', ready: false },
   { label: 'Why "Licklider"', href: '/why-licklider/', ready: false },
+  { label: 'Latest', href: '/latest/', ready: true },
   { label: 'Research', href: '/research/', ready: true },
   { label: 'Engineering', href: '/engineering/', ready: true },
   { label: 'News', href: '/news/', ready: true },

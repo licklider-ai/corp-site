@@ -1,0 +1,14 @@
+---
+import { PUBLICATIONS } from '../../data/publications';
+import PublicationIndexLayout from '../../layouts/PublicationIndexLayout.astro';
+
+const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKey));
+---
+
+<PublicationIndexLayout
+  title="Latest"
+  eyebrow="Research / Engineering / News"
+  description="The latest research, engineering, and company news from Licklider, in one chronological view."
+  items={latest}
+  showCategory
+/>

@@ -1,27 +1,29 @@
 ---
-import type { PublicationCategory, PublicationItem } from '../data/publications';
+import type { PublicationItem } from '../data/publications';
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {
-  category: PublicationCategory;
+  title: string;
   description: string;
   items: PublicationItem[];
+  showCategory?: boolean;
+  eyebrow?: string;
 }
 
-const { category, description, items } = Astro.props;
+const { title, description, items, showCategory = false, eyebrow = 'Publications' } = Astro.props;
 ---
 
-<BaseLayout title={category} description={description}>
+<BaseLayout title={title} description={description}>
   <section class="page-hero">
     <div class="page-hero-inner">
-      <p class="eyebrow">Publications</p>
-      <h1>{category}</h1>
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
       <p class="standfirst">{description}</p>
     </div>
   </section>
 
   <section class="index" aria-labelledby="publication-list">
-    <h2 id="publication-list" class="visually-hidden">{category} publications</h2>
+    <h2 id="publication-list" class="visually-hidden">{title} entries</h2>
     <div class="table-scroll">
       <table>
         <tbody>
@@ -30,7 +32,9 @@ const { category, description, items } = Astro.props;
               <tr>
                 <td class="date">{item.date}</td>
                 <td>
-                  <p class="type">{item.type}</p>
+                  <p class="type">
+                    {showCategory ? `${item.category} / ${item.type}` : item.type}
+                  </p>
                   <h3><a href={item.href}>{item.title}</a></h3>
                   <p class="summary">{item.summary}</p>
                   <p class="status">{item.status}</p>
