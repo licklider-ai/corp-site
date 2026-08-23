@@ -4,7 +4,7 @@
 **Authority:** Canonical for placement, labels, and required metadata on `licklider.ai`  
 **Claim authority:** Subordinate to `licklider-ai/nomue-app/PUBLIC_COMMUNICATIONS.md`  
 **Outreach authority:** Media outreach is governed separately by `licklider-ai/nomue-pr`  
-**Status:** Active — v1.0  
+**Status:** Active — v1.1<br>
 **Last updated:** 2026-08-23
 
 ---
@@ -19,7 +19,9 @@ Licklider publishes through three primary classes:
 | **Engineering** | What did we build, debug, measure, or learn in implementation? | `/engineering/` |
 | **News** | What externally meaningful event happened? | `/news/` |
 
-The home page uses **Latest**, not News, when it mixes these classes. Every row must show its primary class.
+`/latest/` is the chronological view across all three classes. The global header links to
+**Latest**, rather than listing all three classes. The class indexes remain canonical,
+and every item in a mixed list must show its primary class.
 
 An item has exactly **one primary class**. It may be linked from another index, but duplicate canonical articles are not created.
 
@@ -103,7 +105,7 @@ Use the most specific fact that is true. Do not shorten a status in a way that i
 | State | Public label |
 | --- | --- |
 | Public manuscript, no journal submission | **Preprint — not peer reviewed** |
-| Formally submitted; review not started or not confirmed | **Submitted to {journal} — peer review pending; not accepted** |
+| Formally submitted; review not started or not confirmed | **Submitted for journal consideration — not peer reviewed; not accepted** |
 | External peer review has started | **In peer review — not accepted** |
 | Journal has issued an acceptance decision | **Accepted — publication pending** |
 | Version of record is public | **Published — peer reviewed** |
@@ -128,9 +130,116 @@ not create a News item.
 
 ---
 
-## 6. Required metadata
+## 6. Public writing standard
 
-### 6.1 Every item
+This section is the canonical editorial standard for reader-facing titles, summaries,
+index text, status notices, and article bodies. Scientific and technical precision must
+be preserved, but internal vocabulary must not be used as a shortcut for explanation.
+
+The assumed reader is an informed non-specialist who may know neither the project nor its
+internal terminology. A specialist must still be able to recover the exact claim, status,
+scope, and evidence from the same page.
+
+### 6.1 Required information order
+
+Write each item in this order unless a documented reason requires otherwise:
+
+1. **Title:** name the concrete finding, event, or available artifact.
+2. **One-sentence summary:** state what happened or what the reader can learn or do.
+3. **Current status:** expose maturity, review state, or unresolved disposition.
+4. **Plain-language explanation:** explain the result before implementation detail.
+5. **Technical detail and evidence:** provide exact functions, versions, methods, links,
+   and reproducer information needed by the relevant specialist.
+6. **Scope and limits:** state what the evidence does not show in ordinary language.
+7. **Relationship or next step:** include only when it materially prevents
+   misunderstanding, such as a paper's relationship to nomue Protocol.
+
+This follows the useful pattern observed in Anthropic and OpenAI publishing: a short,
+concrete headline and summary establish the subject before the page introduces technical
+detail, evidence, and limitations. Their wording is precedent, not authority for
+Licklider claims.
+
+### 6.2 Sentence and terminology rules
+
+- Put the concrete subject and action in the first sentence. Do not open with taxonomy,
+  governance, or implementation vocabulary.
+- Prefer active verbs and observable outcomes: **returns**, **checks**, **reported**,
+  **remains open**, **is available**.
+- Keep the index summary to one sentence and normally no more than 30 words.
+- Keep one main claim per sentence. Split a sentence when its clauses answer different
+  reader questions.
+- Define an unavoidable technical term at first use with a short explanation or example.
+- On an index or in a standfirst, replace specialist shorthand with the concrete behavior
+  it describes. Technical shorthand may appear later when it helps specialists.
+- State maturity and uncertainty directly. Never let words such as **release**,
+  **verified**, **reviewed**, or **fixed** imply a stronger state than the evidence.
+- Preserve necessary limitations, but express them as concrete non-claims rather than
+  compressed legal, governance, or specification language.
+- Use internal enum names, policy terms, and conformance vocabulary only when the reader
+  needs the exact term. Do not make readers decode the repository's internal model.
+
+Examples:
+
+| Avoid as the first explanation | Prefer |
+| --- | --- |
+| “issuer-independent verification of scoped Record properties” | “anyone can run the verifier on their own computer to check the supported parts of a Record” |
+| “wrong-sign and wrong-finiteness result” | “positive infinity instead of a large negative value” |
+| “informative, not normative, for the Protocol” | “the paper does not define or change the Protocol” |
+| “all applicable scoped checks pass” | “every check supported by this version passes” |
+
+Words such as `normative`, `informative`, `admissibility`, `attestation`, `candidate
+bundle`, `numerical surface`, and `finiteness` are not prohibited. They require a
+reader-facing explanation and normally do not belong in a title, standfirst, or index
+summary.
+
+### 6.3 Category-specific lead
+
+- **Research:** begin with the question or finding and the studied scope. Show peer-review
+  status before discussing journal process, methods, or protocol implications.
+- **Engineering:** begin with the observed behavior and practical impact. Then distinguish
+  Licklider's reproduction, a contributor's response, an upstream maintainer's decision,
+  an accepted fix, and a released fix.
+- **News:** begin with what is publicly available or what materially changed. Give the
+  reader a direct next action and show whether the item is a preview, release candidate,
+  or stable release.
+
+### 6.4 Editorial history and public corrections
+
+Do not publish internal editorial history, discarded headlines, copy-editing changes, or
+an explanation that wording was previously too broad. Those facts do not help the reader
+understand the current subject.
+
+Publish a correction or update history only when a previous public version contained a
+material factual error, changed a consequential claim, or when transparency about the
+change is itself important. A maturity change such as acceptance, withdrawal, confirmed
+cause, accepted fix, or released fix may be recorded as an update. Ordinary wording and
+layout revisions are not public correction events.
+
+### 6.5 Mandatory pre-publication check
+
+An item is not ready to publish until every applicable question below can be answered
+**yes**:
+
+- Can a new reader understand the subject from the title and one-sentence summary alone?
+- Does the first paragraph say what happened, what was found, or what is available?
+- Is every specialist term in the opening explained or moved to the technical section?
+- Is the exact maturity or unresolved status visible without inference?
+- Are observation, third-party response, confirmation, acceptance, and release kept
+  separate?
+- Are the scope and important non-claims stated in ordinary language?
+- Have internal editorial deliberation and non-material revision history been removed?
+- Do the home page, Latest, category index, metadata, and article use consistent wording?
+- Do public evidence links support the claims immediately around them?
+
+When a precise claim cannot be made both accurate and understandable, keep the precise
+claim and add an explanation. Do not remove the precision and do not leave the shorthand
+unexplained.
+
+---
+
+## 7. Required metadata
+
+### 7.1 Every item
 
 - title
 - primary class and article type
@@ -141,9 +250,9 @@ not create a News item.
 - canonical URL
 - public evidence links
 - scope and important limitations
-- correction or update history
+- correction or update history when material under section 6.4
 
-### 6.2 Research additions
+### 7.2 Research additions
 
 - manuscript or report version
 - DOI or persistent identifier when available
@@ -152,7 +261,7 @@ not create a News item.
 - relation to nomue Protocol: `none`, `informative`, `experimental`, or `normative`
 - explicit non-claim when scientific validity is not established
 
-### 6.3 Engineering additions
+### 7.3 Engineering additions
 
 - affected component and exact version or commit
 - reproduction conditions
@@ -161,7 +270,7 @@ not create a News item.
 - upstream issue, pull request, maintainer decision, and released-fix status
 - unresolved uncertainty
 
-### 6.4 News additions
+### 7.4 News additions
 
 - effective event date
 - what is publicly available now
@@ -171,7 +280,7 @@ not create a News item.
 
 ---
 
-## 7. Current routing examples
+## 8. Current routing examples
 
 | Item | Primary class | Treatment |
 | --- | --- | --- |
@@ -186,20 +295,25 @@ not create a News item.
 
 ---
 
-## 8. Home page rule
+## 9. Latest aggregation and navigation rule
 
-The existing home-page section named **News** must not absorb Research or Engineering items.
+Research, Engineering, and News remain distinct canonical classes and retain their own
+indexes and article URLs. **Latest** is an aggregation, not a fourth class.
 
-When the first Research or Engineering item is published, either:
+The required public structure is:
 
-- rename the mixed home-page list to **Latest** and show a class label on every row; or
-- keep separate Research, Engineering, and News blocks.
+- `/latest/` lists all three classes in reverse chronological order;
+- the global header links to **Latest**, rather than repeating all three class links;
+- every mixed row shows its primary class and links to the canonical article;
+- category indexes remain available from item labels and lower-page navigation; and
+- the home-page mixed list is named **Latest** and follows the same classification rule.
 
-The preferred implementation is **Latest + three dedicated indexes**. It gives a small publication program one compact feed without erasing the difference between scholarly status, technical experience, and company events.
+This gives a small publication program one compact entry point without erasing the
+difference between scholarly status, technical experience, and company events.
 
 ---
 
-## 9. Authority boundaries
+## 10. Authority boundaries
 
 - `PUBLIC_COMMUNICATIONS.md` controls what Licklider and nomue may claim.
 - This document controls where an allowed claim is presented and which status metadata must accompany it.
