@@ -13,7 +13,7 @@ const toc = [
   category="Research"
   type="Publication"
   title="Correctly Rounded or Refused — preprint v0.2"
-  description="A preprint on a certified numerical contract for the paired Student-t test in IEEE binary64."
+  description="A preprint on checking the numerical accuracy of paired Student-t test results before software returns them."
   published="August 23, 2026"
   status="Preprint v0.2 — not peer reviewed"
   toc={toc}
@@ -28,25 +28,24 @@ const toc = [
       </p>
     </div>
     <p>
-      The public manuscript is version 0.2. Journal selection and editorial status may
-      change; the current preprint and its persistent record remain the public reference.
+      Version 0.2 on Zenodo is the current public manuscript.
     </p>
   </section>
 
   <section id="paper-scope">
     <h2>What the paper studies</h2>
     <p>
-      Statistical software usually returns p-values and confidence limits as bare
-      binary64 numbers, without a machine-checkable statement about their numerical
-      accuracy. The paper proposes a three-valued result contract for the paired
-      Student-t test: a returned quantity is either proved correctly rounded, supplied
-      with a certified interval, or refused.
+      Most statistical software returns p-values and confidence limits as numbers, but
+      does not say whether the final digits are reliable. This paper tests a stricter rule
+      for the paired Student-t test. Software must either return the nearest binary64
+      number and prove it is correctly rounded, return a narrow interval containing the
+      answer, or refuse to return a result.
     </p>
     <p>
-      The stated scope is deliberately narrow: paired, equivalently one-sample,
-      Student-t surfaces in IEEE binary64, with integer degrees of freedom up to 30.
-      The paper benchmarks mainstream implementations against a defended high-precision
-      oracle and evaluates per-call certification using ball arithmetic.
+      Binary64 is the standard number format used for most scientific computing. The
+      study covers paired and one-sample Student-t tests with integer degrees of freedom
+      up to 30. It compares widely used software with an independent high-precision
+      reference and tests whether each result can be certified.
     </p>
   </section>
 
@@ -57,19 +56,20 @@ const toc = [
       <a href="https://zenodo.org/records/22025200" target="_blank" rel="noopener noreferrer">Zenodo record</a>.
     </p>
     <p>
-      The reported results have not completed peer review. They do not establish
-      scientific truth, the validity of any study using a Student-t test, or the
-      correctness of statistical methods outside the stated numerical surfaces.
+      The reported results have not completed peer review. They do not show that the
+      conclusions of any study using a Student-t test are scientifically valid, or that
+      calculations outside the tests and number ranges studied here are correct.
     </p>
   </section>
 
   <section id="protocol-relation">
     <h2>Relation to nomue Protocol</h2>
     <p>
-      This paper is an <strong>informative research reference</strong>, not a normative
-      part of nomue Protocol. Its paired-test scope differs from the planned Release 1
-      Welch two-sample target. Any future protocol adoption requires a separate,
-      versioned specification decision and its own conformance evidence.
+      This paper does not define or change nomue Protocol. It may inform future work, but
+      its scope differs from the planned Release 1: the paper studies paired and
+      one-sample tests, while Release 1 plans to support the Welch two-sample test. Using
+      these findings in a future protocol version would require its own specification
+      update and verification tests.
     </p>
   </section>
 </PublicationLayout>

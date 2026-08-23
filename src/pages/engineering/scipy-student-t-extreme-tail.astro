@@ -12,11 +12,11 @@ const toc = [
 
 <PublicationLayout
   category="Engineering"
-  type="Upstream report"
+  type="Bug report"
   title="An extreme-tail sign error in SciPy’s Student-t quantile"
-  description="A reproducible wrong-sign and wrong-finiteness result in an extreme tail, reported to SciPy and routed upstream to Boost."
+  description="A SciPy bug can return positive infinity instead of a large negative value for an extreme-tail Student-t quantile."
   published="August 23, 2026"
-  status="Open upstream issue — no fix accepted or released"
+  status="Open SciPy issue — no fix accepted or released"
   toc={toc}
 >
   <section id="current-status">
@@ -37,16 +37,16 @@ const toc = [
     <h2>What we observed</h2>
     <p>
       For very small tail probabilities, <code>scipy.special.stdtrit</code> and
-      <code>scipy.stats.t.ppf</code> can return positive infinity where the corresponding
-      Student-t quantile is a large negative finite number. The report includes a
-      reproducible binary64 input and an independent high-precision calculation for the
-      expected value.
+      <code>scipy.stats.t.ppf</code> can return <code>+inf</code> (positive infinity) even
+      though the correct Student-t quantile is a large, negative, finite number. The
+      report includes an input that reproduces the error and an independent
+      high-precision calculation of the expected value.
     </p>
     <p>
       For one reported case with three degrees of freedom, the returned value is
       <code>+inf</code>, while the expected result is approximately
-      <code>-2.31e82</code>. The problem therefore changes both sign and finiteness rather
-      than only the last few digits.
+      <code>-2.31e82</code>. This is not a small rounding difference: the returned result
+      has the wrong sign and incorrectly reports infinity.
     </p>
   </section>
 
@@ -59,9 +59,9 @@ const toc = [
       workflows reach the failing region.
     </p>
     <p>
-      A SciPy contributor identified the inverse incomplete-beta path in Boost as the
-      likely upstream location and left the repair decision to the Boost maintainers.
-      That upstream investigation is not yet complete.
+      A SciPy contributor pointed to Boost, a math library used by SciPy, as the likely
+      source of the error. More specifically, the suspected code calculates an inverse
+      incomplete-beta function. Boost has not yet confirmed the cause.
     </p>
   </section>
 
@@ -79,19 +79,18 @@ const toc = [
     </ul>
     <p>
       We will update this page if Boost confirms the cause, a fix is accepted, or a fixed
-      version is released. Those states will be reported separately rather than collapsed
-      into a single “fixed” claim.
+      version is released. We will distinguish those steps instead of describing the issue
+      as “fixed” before users can install a corrected version.
     </p>
   </section>
 
   <section id="preprint-relation">
     <h2>Relation to the preprint</h2>
     <p>
-      The issue was found while benchmarking Student-t numerical surfaces for the
+      We found this issue while testing Student-t calculations for the
       <a href="/research/correctly-rounded-or-refused/">Correctly Rounded or Refused</a>
-      preprint. This Engineering report records the upstream software disposition. It is
-      not peer review of the paper and does not establish the scientific validity of any
-      analysis.
+      preprint. This page tracks the software bug and its status. It is not peer review of
+      the paper and does not show that any scientific analysis is valid.
     </p>
   </section>
 </PublicationLayout>
