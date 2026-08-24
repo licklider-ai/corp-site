@@ -16,7 +16,7 @@ const toc = [
   title="An extreme-tail sign error in SciPy’s Student-t quantile"
   description="A SciPy bug can return positive infinity instead of a large negative value for an extreme-tail Student-t quantile."
   published="August 23, 2026"
-  status="Open SciPy issue — no fix accepted or released"
+  status="Open SciPy and Boost issues — no fix accepted or released"
   toc={toc}
 >
   <section id="current-status">
@@ -27,8 +27,9 @@ const toc = [
         <code>defect</code>, <code>scipy.special</code>, and <code>upstream bug</code>.
       </p>
       <p>
-        A SciPy contributor requested an upstream Boost report. No fix has been accepted
-        or released.
+        A SciPy contributor requested an upstream Boost report. We opened Boost.Math
+        issue #1436 on August 24, 2026 and cross-linked it from SciPy. Both issues remain
+        open, and no fix has been accepted or released.
       </p>
     </div>
   </section>
@@ -59,9 +60,9 @@ const toc = [
       workflows reach the failing region.
     </p>
     <p>
-      A SciPy contributor pointed to Boost, a math library used by SciPy, as the likely
-      source of the error. More specifically, the suspected code calculates an inverse
-      incomplete-beta function. Boost has not yet confirmed the cause.
+      A SciPy contributor pointed to Boost, a math library used by SciPy, and said the
+      report looks like another edge case for the incomplete beta inverse. Boost has not
+      yet confirmed the cause.
     </p>
   </section>
 
@@ -75,6 +76,14 @@ const toc = [
       <li>
         <a href="https://github.com/scipy/scipy/issues/25968#issuecomment-5374411963" target="_blank" rel="noopener noreferrer">SciPy contributor response</a>
         — request to report the issue upstream to Boost
+      </li>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/25968#issuecomment-5391429348" target="_blank" rel="noopener noreferrer">SciPy follow-up</a>
+        — cross-link to the upstream Boost.Math report
+      </li>
+      <li>
+        <a href="https://github.com/boostorg/math/issues/1436" target="_blank" rel="noopener noreferrer">Boost.Math issue #1436</a>
+        — upstream report and current state
       </li>
     </ul>
     <p>
