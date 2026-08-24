@@ -13,6 +13,17 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'News',
+    type: 'Product',
+    date: 'August 24, 2026',
+    sortKey: '2026-08-24',
+    title: 'nomue Protocol Release 1 Public Draft is now available',
+    summary:
+      'The first public draft of the nomue Protocol is available with local verification, public fixtures, and signed release artifacts.',
+    href: '/news/nomue-protocol-release-1/',
+    status: 'Public Draft — experimental',
+  },
+  {
     category: 'Research',
     type: 'Publication',
     date: 'August 23, 2026',
@@ -41,9 +52,9 @@ export const PUBLICATIONS: PublicationItem[] = [
     sortKey: '2026-08-16',
     title: 'nomue verifier Release 1 candidate is now public',
     summary:
-      'A pre-release version of the local nomue verifier is available for anyone to inspect and test.',
+      'The experimental local verifier is available for anyone to inspect and test and is now pinned to nomue Protocol Release 1.',
     href: '/news/nomue-verifier-release-1-candidate/',
-    status: 'Pre-release — version 0.2.1-rc.0',
+    status: 'Experimental verifier — 0.2.1-rc.0; pinned to Protocol Release 1',
   },
 ];
 
