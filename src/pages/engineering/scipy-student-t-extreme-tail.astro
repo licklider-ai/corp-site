@@ -16,7 +16,7 @@ const toc = [
   title="An extreme-tail sign error in SciPy’s Student-t quantile"
   description="A SciPy bug can return positive infinity instead of a large negative value for an extreme-tail Student-t quantile."
   published="August 23, 2026"
-  status="Open SciPy and Boost issues — no fix accepted or released"
+  status="Reproduced in Boost.Math — no fix accepted or released"
   toc={toc}
 >
   <section id="current-status">
@@ -28,8 +28,15 @@ const toc = [
       </p>
       <p>
         A SciPy contributor requested an upstream Boost report. We opened Boost.Math
-        issue #1436 on August 24, 2026 and cross-linked it from SciPy. Both issues remain
-        open, and no fix has been accepted or released.
+        issue #1436 on August 24, 2026 and cross-linked it from SciPy.
+      </p>
+      <p>
+        A Boost.Math repository collaborator then reproduced the failure directly in
+        Boost.Math: the reported <code>df=3</code> case succeeds at <code>p=1e-230</code>
+        and fails at <code>p=1e-238</code>. They identified line 537 of
+        <code>t_distribution_inv.hpp</code> as the probable error location. The exact
+        cause and fix have not yet been confirmed, and no fix has been accepted or
+        released.
       </p>
     </div>
   </section>
@@ -60,9 +67,12 @@ const toc = [
       workflows reach the failing region.
     </p>
     <p>
-      A SciPy contributor pointed to Boost, a math library used by SciPy, and said the
-      report looks like another edge case for the incomplete beta inverse. Boost has not
-      yet confirmed the cause.
+      The direct Boost.Math reproduction shows that the failure is present in the
+      Boost.Math Student-t quantile path rather than only in SciPy’s Python-facing layer.
+      The suspected location is the final correction step in
+      <code>t_distribution_inv.hpp</code>, but the repository collaborator described that
+      location as probable. The exact numerical mechanism and the appropriate fix are
+      still under investigation.
     </p>
   </section>
 
@@ -85,11 +95,15 @@ const toc = [
         <a href="https://github.com/boostorg/math/issues/1436" target="_blank" rel="noopener noreferrer">Boost.Math issue #1436</a>
         — upstream report and current state
       </li>
+      <li>
+        <a href="https://github.com/boostorg/math/issues/1436#issuecomment-5393925442" target="_blank" rel="noopener noreferrer">Boost.Math reproduction</a>
+        — direct C++ reproducer and probable source location
+      </li>
     </ul>
     <p>
-      We will update this page if Boost confirms the cause, a fix is accepted, or a fixed
-      version is released. We will distinguish those steps instead of describing the issue
-      as “fixed” before users can install a corrected version.
+      We will update this page if Boost confirms the exact cause, a fix is accepted, or a
+      fixed version is released. We will distinguish those steps instead of describing
+      the issue as “fixed” before users can install a corrected version.
     </p>
   </section>
 
