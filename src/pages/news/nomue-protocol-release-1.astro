@@ -1,0 +1,117 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'availability', label: 'What is available' },
+  { id: 'independent-checking', label: 'What anyone can check' },
+  { id: 'release-scope', label: 'Release 1 scope' },
+  { id: 'signed-release', label: 'Signed release artifacts' },
+  { id: 'limits', label: 'What this release does not establish' },
+];
+---
+
+<PublicationLayout
+  category="News"
+  type="Product"
+  title="nomue Protocol Release 1 Public Draft is now available"
+  description="The first public draft of the nomue Protocol is available with a machine-readable Record specification, local verification, public fixtures, and signed release artifacts."
+  published="August 24, 2026"
+  status="Public Draft — experimental"
+  toc={toc}
+>
+  <section id="availability">
+    <h2>What is available</h2>
+    <p>
+      <a href="https://github.com/licklider-ai/nomue-protocol" target="_blank" rel="noopener noreferrer">nomue Protocol Release 1</a>
+      is now publicly available. It defines public structures and verification rules for
+      nomue Records—machine-readable evidence objects that connect scientific-analysis
+      declarations, analytical decisions, inputs, results, and other finalized evidence
+      so that supported properties can be checked independently.
+    </p>
+    <p>
+      Release 1 includes the public specification, schemas, registries, conformance
+      materials, a bundled reference verifier, and signed release artifacts. The
+      separately packaged <a href="https://github.com/licklider-ai/nomue-verifier" target="_blank" rel="noopener noreferrer">nomue verifier</a>
+      is also pinned to the published Release 1 identities.
+    </p>
+    <p>
+      <a href="https://github.com/licklider-ai/nomue-protocol/releases/tag/release-1" target="_blank" rel="noopener noreferrer">View Release 1 on GitHub</a>
+      or <a href="https://github.com/licklider-ai/nomue-verifier" target="_blank" rel="noopener noreferrer">run the nomue verifier</a>.
+    </p>
+  </section>
+
+  <section id="independent-checking">
+    <h2>What anyone can check</h2>
+    <p>
+      After its dependencies are installed, the verifier runs locally and does not need a
+      Licklider server to verify a Record. For the exact Release 1 support target, it can
+      check Record structure and content integrity, whether the declared research design
+      falls inside the supported profile, whether the Welch calculation is computable,
+      and whether stored Welch results match a fresh calculation under the registered
+      rules.
+    </p>
+    <pre><code>git clone https://github.com/licklider-ai/nomue-verifier.git
+cd nomue-verifier
+npm install
+
+npm exec -- nomue verify records/valid.json --format json
+npm exec -- nomue verify records/invalid-result-mismatch.json --format json</code></pre>
+    <p>
+      The first public fixture is expected to pass every check supported by this version.
+      The second deliberately contains a reported-result mismatch and is expected to fail
+      the relevant check.
+    </p>
+  </section>
+
+  <section id="release-scope">
+    <h2>Release 1 scope</h2>
+    <p>
+      Release 1 is an experimental Public Draft, not a Stable 1.0 compatibility promise.
+      Its sole public Record interpretation support target is
+      <code>urn:nomue:bundle:itgc-guarantee:0.2.1-draft.1</code>.
+    </p>
+    <p>
+      That target covers independent two-group continuous outcomes using the two-sided
+      Welch two-sample t procedure, including the unstandardized arithmetic mean
+      difference, standard error, and two-sided 95% Welch-Satterthwaite confidence
+      interval. Other statistical procedures are outside the Release 1 public support
+      boundary.
+    </p>
+  </section>
+
+  <section id="signed-release">
+    <h2>Signed release artifacts</h2>
+    <p>
+      The <a href="https://github.com/licklider-ai/nomue-protocol/releases/tag/release-1" target="_blank" rel="noopener noreferrer">Release 1 page</a>
+      includes a separately attached signed source archive, release checksums, a Protocol
+      snapshot manifest, detached signatures, and the public release key. These artifacts
+      make the published release evidence independently inspectable.
+    </p>
+    <div class="notice">
+      <p>
+        GitHub’s automatically generated <strong>Source code</strong> archives are not the
+        signed Release 1 source artifact. Signature verification should use the separately
+        attached <code>source-archive.tar.gz</code> and its accompanying release files.
+      </p>
+    </div>
+  </section>
+
+  <section id="limits">
+    <h2>What this release does not establish</h2>
+    <p>A passing verification result does not prove that:</p>
+    <ul>
+      <li>the research project or its scientific conclusions are correct;</li>
+      <li>input data or researcher declarations are true;</li>
+      <li>cause-and-effect claims are justified;</li>
+      <li>a paper will be accepted for publication;</li>
+      <li>complete regulatory compliance has been established; or</li>
+      <li>methods outside the explicitly supported Release 1 procedure are valid.</li>
+    </ul>
+    <p>
+      The verifier reports results for explicit checks and scopes rather than returning a
+      single overall <code>VERIFIED</code> label. This Layer 1 release also does not, by
+      itself, mean that the nomue application has shipped Release 1-backed product
+      support.
+    </p>
+  </section>
+</PublicationLayout>
