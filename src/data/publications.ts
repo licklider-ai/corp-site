@@ -13,6 +13,17 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'Engineering',
+    type: 'Upstream report',
+    date: 'August 26, 2026',
+    sortKey: '2026-08-26',
+    title: 'A SciPy exact Wilcoxon p-value error, fixed upstream',
+    summary:
+      'SciPy’s exact Wilcoxon path could return zero for a positive p-value. SciPy diagnosed the cause and merged a fix the same day it was reported.',
+    href: '/engineering/scipy-wilcoxon-exact-pvalue/',
+    status: 'Fix merged in SciPy — not yet released',
+  },
+  {
     category: 'News',
     type: 'Product',
     date: 'August 24, 2026',
