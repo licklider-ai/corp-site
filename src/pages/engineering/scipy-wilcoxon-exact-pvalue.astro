@@ -1,0 +1,141 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'current-status', label: 'Current status' },
+  { id: 'observation', label: 'What we observed' },
+  { id: 'upstream-fix', label: 'What SciPy changed' },
+  { id: 'validation', label: 'How we checked the fix' },
+  { id: 'related', label: 'Related behavior' },
+  { id: 'scope', label: 'Scope' },
+  { id: 'public-evidence', label: 'Public evidence' },
+];
+---
+
+<PublicationLayout
+  category="Engineering"
+  type="Upstream report"
+  title="A SciPy exact Wilcoxon p-value error, fixed upstream"
+  description="SciPy’s exact Wilcoxon path could return zero for a positive p-value. SciPy diagnosed the cause and merged a fix the same day it was reported."
+  published="August 26, 2026"
+  status="Fix merged in SciPy — not yet released"
+  toc={toc}
+>
+  <section id="current-status">
+    <h2>Current status</h2>
+    <div class="notice">
+      <p>
+        We reported <code>scipy.stats.wilcoxon(method='exact')</code> issue #26026 on
+        August 25, 2026. SciPy diagnosed the cause, opened pull request #26027, and
+        merged the fix later the same day. Issue #26026 is now closed as completed.
+      </p>
+      <p>
+        The fix is merged on SciPy’s <code>main</code> branch. This page does not claim
+        that a released SciPy version contains the correction yet.
+      </p>
+    </div>
+  </section>
+
+  <section id="observation">
+    <h2>What we observed</h2>
+    <p>
+      On inputs with no ties and no zeros, SciPy documents
+      <code>method='exact'</code> as the exact Wilcoxon signed-rank path. During numerical
+      auditing, we found 105 calls for which the returned p-value did not match the
+      correctly rounded value from an exact rational oracle.
+    </p>
+    <p>
+      In the representative case reported upstream, SciPy returned <code>0.0</code> even
+      though the exact two-sided p-value is approximately
+      <code>8.12511917099255e-17</code>. A strictly positive probability was therefore
+      lost completely rather than merely rounded by a few floating-point steps.
+    </p>
+  </section>
+
+  <section id="upstream-fix">
+    <h2>What SciPy changed</h2>
+    <p>
+      SciPy traced the problem to the survival-function calculation for the Wilcoxon null
+      distribution: the implementation was selecting the wrong tail in one branch. Pull
+      request #26027 corrected that tail-choice condition.
+    </p>
+    <p>
+      SciPy also added the representative 100-element input vector from #26026 and its
+      exact reference value as a regression test. The full set of 105 affected cases was
+      not added to SciPy’s test suite; we used that larger public dataset separately to
+      check the patch.
+    </p>
+  </section>
+
+  <section id="validation">
+    <h2>How we checked the fix</h2>
+    <p>
+      Before the pull request was merged, we applied the one-line change to a SciPy 1.17.1
+      installation and reran all 105 oracle cases attached to the issue. The cases that
+      had returned <code>0.0</code> were resolved.
+    </p>
+    <p>
+      After the patch, 75 of 105 cases returned the correctly rounded binary64 value.
+      The remaining 30 were all within 1.25 ulp — roughly 1.25 representable
+      floating-point steps — of the exact reference. The representative reproducer
+      returned <code>8.12511917099255e-17</code>, matching the regression-test reference.
+    </p>
+  </section>
+
+  <section id="related">
+    <h2>Related behavior</h2>
+    <p>
+      We filed a separate issue, #26028, for a different regime: with ties or zeros
+      present, a released SciPy version could return a p-value slightly above 1. A SciPy
+      member reproduced that behavior in versions 1.17.1 and 1.18.1, then confirmed that
+      the same reproducer no longer returns a value above 1 on the current
+      <code>main</code> branch. SciPy closed #26028 as resolved.
+    </p>
+    <p>
+      The #26028 tracker does not explicitly attribute that resolution to #26027, so we
+      treat the two upstream dispositions separately rather than claiming a shared cause.
+    </p>
+  </section>
+
+  <section id="scope">
+    <h2>Scope</h2>
+    <p>
+      Issue #26026 concerns the tie-free, zero-free exact path and the numerical accuracy
+      of its p-values. It does not show that every Wilcoxon calculation in SciPy is
+      affected, and it does not characterize how often ordinary research workflows reach
+      the reported cases.
+    </p>
+    <p>
+      We found these cases during a broader numerical audit of statistical-test
+      implementations. This page is limited to the public SciPy issue, its upstream fix,
+      and our public validation of that fix; it does not present the broader study’s
+      measurement design or unpublished findings.
+    </p>
+  </section>
+
+  <section id="public-evidence">
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/26026" target="_blank" rel="noopener noreferrer">SciPy issue #26026</a>
+        — report, reproducer, exact oracle value, and 105-case dataset
+      </li>
+      <li>
+        <a href="https://github.com/scipy/scipy/pull/26027" target="_blank" rel="noopener noreferrer">SciPy pull request #26027</a>
+        — root-cause description, code change, regression test, review, and merge
+      </li>
+      <li>
+        <a href="https://github.com/scipy/scipy/pull/26027#issuecomment-5406608281" target="_blank" rel="noopener noreferrer">105-case validation of the patch</a>
+        — our check of the proposed fix against the exact rational oracle dataset
+      </li>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/26028" target="_blank" rel="noopener noreferrer">SciPy issue #26028</a>
+        — related ties/zeros p-value report and final closed state
+      </li>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/26028#issuecomment-5415429441" target="_blank" rel="noopener noreferrer">SciPy member follow-up on #26028</a>
+        — reproduction in released versions and confirmation that the case is resolved on main
+      </li>
+    </ul>
+  </section>
+</PublicationLayout>
