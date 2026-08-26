@@ -54,7 +54,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     summary:
       'A SciPy bug can return positive infinity instead of a large negative value for an extreme-tail Student-t quantile.',
     href: '/engineering/scipy-student-t-extreme-tail/',
-    status: 'Reproduced in Boost.Math — no fix accepted or released',
+    status: 'Fix merged in Boost.Math — not yet released',
   },
   {
     category: 'News',
