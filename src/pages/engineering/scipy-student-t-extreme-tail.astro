@@ -16,27 +16,28 @@ const toc = [
   title="An extreme-tail sign error in SciPy’s Student-t quantile"
   description="A SciPy bug can return positive infinity instead of a large negative value for an extreme-tail Student-t quantile."
   published="August 23, 2026"
-  status="Reproduced in Boost.Math — no fix accepted or released"
+  status="Fix merged in Boost.Math — not yet released"
   toc={toc}
 >
   <section id="current-status">
     <h2>Current status</h2>
     <div class="notice">
       <p>
-        Reported to SciPy on August 20, 2026. The issue remains open and is labeled
+        Reported to SciPy on August 20, 2026. The SciPy issue remains open and is labeled
         <code>defect</code>, <code>scipy.special</code>, and <code>upstream bug</code>.
       </p>
       <p>
         A SciPy contributor requested an upstream Boost report. We opened Boost.Math
-        issue #1436 on August 24, 2026 and cross-linked it from SciPy.
+        issue #1436 on August 24, 2026 and cross-linked it from SciPy. A Boost.Math
+        repository collaborator reproduced the failure directly in Boost.Math and then
+        opened pull request #1437 to address it.
       </p>
       <p>
-        A Boost.Math repository collaborator then reproduced the failure directly in
-        Boost.Math: the reported <code>df=3</code> case succeeds at <code>p=1e-230</code>
-        and fails at <code>p=1e-238</code>. They identified line 537 of
-        <code>t_distribution_inv.hpp</code> as the probable error location. The exact
-        cause and fix have not yet been confirmed, and no fix has been accepted or
-        released.
+        Boost.Math has now merged #1437 and closed #1436 as completed. The fix prevents
+        underflow in the Student-t inverse correction calculation where possible and adds
+        regression tests for very small quantile probabilities across several degrees of
+        freedom. The correction is merged on Boost.Math’s <code>develop</code> branch; we
+        have not confirmed it in a released Boost.Math or SciPy version yet.
       </p>
     </div>
   </section>
@@ -67,12 +68,18 @@ const toc = [
       workflows reach the failing region.
     </p>
     <p>
-      The direct Boost.Math reproduction shows that the failure is present in the
+      The direct Boost.Math reproduction showed that the failure was present in the
       Boost.Math Student-t quantile path rather than only in SciPy’s Python-facing layer.
-      The suspected location is the final correction step in
-      <code>t_distribution_inv.hpp</code>, but the repository collaborator described that
-      location as probable. The exact numerical mechanism and the appropriate fix are
-      still under investigation.
+      Boost.Math’s merged fix restructures the derivative calculation used by the final
+      correction step to avoid intermediate underflow where possible, and stops that
+      correction when the derivative itself has underflowed. The pull request also adds
+      regression tests covering extreme probabilities for multiple degrees of freedom.
+    </p>
+    <p>
+      This page distinguishes a merged upstream correction from a released fix. Boost.Math
+      #1437 is merged, but the latest Boost.Math release predates that merge, and the SciPy
+      issue remains open. We will update the status again when an installable release that
+      contains the correction is confirmed.
     </p>
   </section>
 
@@ -93,17 +100,21 @@ const toc = [
       </li>
       <li>
         <a href="https://github.com/boostorg/math/issues/1436" target="_blank" rel="noopener noreferrer">Boost.Math issue #1436</a>
-        — upstream report and current state
+        — upstream report, direct reproduction, and completed close
       </li>
       <li>
         <a href="https://github.com/boostorg/math/issues/1436#issuecomment-5393925442" target="_blank" rel="noopener noreferrer">Boost.Math reproduction</a>
-        — direct C++ reproducer and probable source location
+        — direct C++ reproducer and initial source-location diagnosis
+      </li>
+      <li>
+        <a href="https://github.com/boostorg/math/pull/1437" target="_blank" rel="noopener noreferrer">Boost.Math pull request #1437</a>
+        — underflow fix, regression tests, and merged correction
       </li>
     </ul>
     <p>
-      We will update this page if Boost confirms the exact cause, a fix is accepted, or a
-      fixed version is released. We will distinguish those steps instead of describing
-      the issue as “fixed” before users can install a corrected version.
+      Boost.Math has accepted and merged a correction for the upstream defect. We will
+      continue to distinguish that merged state from release availability and will update
+      this page when the correction is confirmed in a released Boost.Math or SciPy version.
     </p>
   </section>
 
