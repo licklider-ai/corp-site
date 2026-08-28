@@ -1,0 +1,178 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'current-status', label: 'Current status' },
+  { id: 'problem', label: 'Why ordinary reference values are not enough' },
+  { id: 'method', label: 'How the evidence is built' },
+  { id: 'review', label: 'What the review established' },
+  { id: 'scope', label: 'What this does not establish' },
+  { id: 'public-evidence', label: 'Public evidence' },
+];
+---
+
+<PublicationLayout
+  category="Engineering"
+  type="Technical method"
+  title="Certifying paired-t numerical evidence before protocol support"
+  description="We built and independently reviewed a proof pipeline for paired-t p-values and critical values before deciding what nomue Protocol will support."
+  published="August 28, 2026"
+  status="Reviewed candidate evidence — not protocol support"
+  toc={toc}
+>
+  <section id="current-status">
+    <h2>Current status</h2>
+    <div class="notice">
+      <p>
+        The candidate evidence generator was merged into the nomue Protocol repository
+        on August 28, 2026, after an independent adversarial review returned GO with no
+        findings. It is public, reproducible engineering work for the proposed Release 2
+        paired-t capability.
+      </p>
+      <p>
+        It is not a supported protocol feature. Release 2 review remains open, the
+        candidate identifiers are unissued, and the numerical contract is incomplete.
+        No paired-t bundle or Public Check has been registered as supported.
+      </p>
+    </div>
+  </section>
+
+  <section id="problem">
+    <h2>Why ordinary reference values are not enough</h2>
+    <p>
+      A table of numbers from a familiar statistics library can show agreement, but it
+      cannot by itself show that the last binary64 digit is correct. Two libraries can
+      also agree because they share an algorithm or a dependency. That makes a simple
+      majority vote a weak basis for a numerical protocol contract.
+    </p>
+    <p>
+      The paired-t proposal therefore treats reference values as claims that need
+      evidence. For each value, the generator must prove that the mathematical result
+      lies inside the rounding cell of one binary64 number. If that proof cannot be
+      completed, generation fails instead of emitting an uncertified value.
+    </p>
+  </section>
+
+  <section id="method">
+    <h2>How the evidence is built</h2>
+    <p>
+      The generator converts every binary64 input and candidate output to exact rational
+      values. It then uses rigorous ball arithmetic to enclose the relevant Student-t
+      probability. A certificate is accepted only when the entire enclosure fits the
+      target value’s exact rounding cell.
+    </p>
+
+    <h3>P-values</h3>
+    <p>
+      Two-sided Student-t p-values are enclosed through the regularized incomplete-beta
+      representation. Boundary probes cover ordinary positive values, values close to
+      one, and a positive mathematical tail too small to be represented as a positive
+      binary64 number. The last case is recorded as non-representability, not as an exact
+      probability of zero.
+    </p>
+
+    <h3>Fixed 95% critical values</h3>
+    <p>
+      For each proposed critical value, the generator reconstructs the candidate
+      binary64 rounding cell exactly. It proves that the two-sided tail is above 0.05 at
+      one rounding-cell boundary and below 0.05 at the other. Each boundary is the exact
+      midpoint between adjacent binary64 values. This brackets the true quantile inside
+      that one cell and excludes both neighbors.
+    </p>
+
+    <h3>A second numerical route</h3>
+    <p>
+      Degrees of freedom 1 and 2 use rigorous closed forms. Higher degrees of freedom use
+      segmented integration of the Student-t density plus an analytic bound for the
+      remaining tail. These routes differ from the primary incomplete-beta calculation,
+      but they still share the same underlying Arb ball-arithmetic library. We therefore
+      describe them as weakly independent, not as independent-library confirmation.
+    </p>
+
+    <h3>Reproducibility and binding</h3>
+    <p>
+      Certificates bind their generator, inputs, dependency environment, repository
+      commit, and raw output by hash. A table manifest additionally binds the ordered
+      values and certificate content. Regeneration is deterministic, and validators
+      reject missing files, changed hashes, altered rounding cells, unsupported scope
+      claims, and inconsistent secondary evidence.
+    </p>
+  </section>
+
+  <section id="review">
+    <h2>What the review established</h2>
+    <p>
+      The reviewed research seed contains fixed 95% critical values for degrees of
+      freedom 1, 2, 4, 5, 6, 10, 30, 100, and 1000. The gaps are deliberate: this is a
+      collection of researched cells, not a contiguous runtime table or a supported
+      degrees-of-freedom range.
+    </p>
+    <p>
+      The reviewer independently recomputed all nine quantiles at 300-digit precision,
+      reconstructed their binary64 cells without using the generator’s conversion code,
+      and confirmed that every true value lies in the declared cell. The 18 adjacent
+      cells were all excluded. The review also checked three p-value certificates, six
+      boundary probes, low-degree closed forms, segmented integration, analytic tail
+      bounds, provenance, and deterministic regeneration.
+    </p>
+    <p>
+      Twenty-three internally consistent bundle mutations and four neighboring critical
+      value candidates were rejected. The complete repository check passed 312 tests,
+      including the Release 1 invariance, conformance, regression, oracle, and generated
+      artifact checks. The reviewer reported no blocker, should-fix, or nice-to-have
+      finding for this increment.
+    </p>
+  </section>
+
+  <section id="scope">
+    <h2>What this does not establish</h2>
+    <p>
+      This increment establishes that the evidence route can produce tightly bound,
+      reproducible certificates for the reviewed cases. It does not select the final
+      critical-value table, a maximum supported degree of freedom, a supported numerical
+      domain, runtime tail procedures, comparison tolerances, refusal-code spellings, or
+      the content hash of a future protocol table.
+    </p>
+    <p>
+      Those choices remain part of the Release 2 D5 numerical-contract decision. Later
+      protocol steps would also be required before any identifier is issued, Public Check
+      becomes authoritative, bundle is registered, or paired-t support is announced.
+      Public review issue #25 remains the decision record.
+    </p>
+    <p>
+      This engineering note is also separate from the <em>Correctly Rounded or Refused</em>{' '}
+      preprint. The preprint is not peer reviewed; this page reports the implementation,
+      evidence, and independent review of one candidate engineering route.
+    </p>
+  </section>
+
+  <section id="public-evidence">
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/27" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #27</a>{' '}
+        — candidate implementation, review history, final checks, and merge record
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/commit/fd703bc9f6ae9c855571f1a9e59e6c50fc73564f" target="_blank" rel="noopener noreferrer">merged protocol commit <code>fd703bc9</code></a>{' '}
+        — exact repository state described here
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/tree/main/tooling/r2-paired-t-evidence" target="_blank" rel="noopener noreferrer">evidence generator and reproduction instructions</a>{' '}
+        — pinned dependencies, cases, generator, and validation workflow
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/numerical/README.md" target="_blank" rel="noopener noreferrer">candidate numerical-evidence scope</a>{' '}
+        — current evidence claims and deliberately open D5 decisions
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/reviews/d5-table-evidence-increment-adversarial-review-disposition.md" target="_blank" rel="noopener noreferrer">independent review disposition</a>{' '}
+        — identity checks, numerical results, mutation results, and authority boundary
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">Release 2 public review issue #25</a>{' '}
+        — open discussion and decision record for the paired-t vertical slice
+      </li>
+    </ul>
+  </section>
+</PublicationLayout>

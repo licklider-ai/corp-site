@@ -14,6 +14,17 @@ export type PublicationItem = {
 export const PUBLICATIONS: PublicationItem[] = [
   {
     category: 'Engineering',
+    type: 'Technical method',
+    date: 'August 28, 2026',
+    sortKey: '2026-08-28',
+    title: 'Certifying paired-t numerical evidence before protocol support',
+    summary:
+      'We built and independently reviewed a proof pipeline for paired-t p-values and critical values before deciding what nomue Protocol will support.',
+    href: '/engineering/certifying-paired-t-numerical-evidence/',
+    status: 'Reviewed candidate evidence — not protocol support',
+  },
+  {
+    category: 'Engineering',
     type: 'Upstream report',
     date: 'August 26, 2026',
     sortKey: '2026-08-26',
