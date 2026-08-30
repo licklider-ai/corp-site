@@ -1,0 +1,192 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'current-status', label: 'Current status' },
+  { id: 'problem', label: 'Why floating-point boundaries matter' },
+  { id: 'evaluator', label: 'The evaluation candidate' },
+  { id: 'boundary-evidence', label: 'What the boundary evidence found' },
+  { id: 'review', label: 'Independent review and repair' },
+  { id: 'scope', label: 'What remains open' },
+  { id: 'public-evidence', label: 'Public evidence' },
+];
+---
+
+<PublicationLayout
+  category="Engineering"
+  type="Implementation note"
+  title="Testing a paired-t evaluator at floating-point boundaries"
+  description="We built a deterministic Student-t probability evaluator and measured where its binary64 output changes class, without claiming protocol support or a final accuracy bound."
+  published="August 30, 2026"
+  status="Reviewed candidate boundary evidence — not protocol support"
+  toc={toc}
+>
+  <section id="current-status">
+    <h2>Current status</h2>
+    <div class="notice">
+      <p>
+        Two reviewed candidate increments were merged into the nomue Protocol repository
+        on August 30, 2026. The first fixes the operation order of a Student-t probability
+        evaluator. The second measures its output around floating-point class boundaries
+        and records where the implementation and certified mathematical result differ.
+      </p>
+      <p>
+        This is reviewed candidate engineering evidence, not a supported protocol
+        capability. Release 2 review remains open. No paired-t identifier, Public Check,
+        schema, or bundle has been issued or registered as supported.
+      </p>
+    </div>
+  </section>
+
+  <section id="problem">
+    <h2>Why floating-point boundaries matter</h2>
+    <p>
+      A mathematical probability can be positive while being too small to appear as a
+      positive binary64 number. At the other end, a probability sufficiently close to one
+      is represented as exactly 1. Between those cases are normal and subnormal positive
+      values. A small numerical error near any transition can change the class of the
+      reported result, not just its final digits.
+    </p>
+    <p>
+      A finite test set can expose these transitions, but its largest observed error is
+      not automatically a guarantee for every input. We therefore separated two tasks:
+      measuring pointwise error at selected boundaries, and proving a future global error
+      bound. Only the first task is complete in this candidate.
+    </p>
+  </section>
+
+  <section id="evaluator">
+    <h2>The evaluation candidate</h2>
+    <p>
+      The evaluator fixes each binary64 operation and its order. It switches between two
+      positive-series forms at an exact input boundary of <code>|t| = 1</code>. The
+      low-degree paths avoid fragile host-library behavior: the degree-of-freedom 1 path
+      does not call the platform <code>atan</code> function, and the degree-of-freedom 2
+      tail uses a cancellation-resistant closed form.
+    </p>
+    <p>
+      The graph also avoids forming <code>t²</code> in the extreme tail, where that
+      intermediate can overflow even when the final probability remains representable.
+      Its iteration cap, branch decision, integer-power order, and refusal conditions are
+      explicit and reproducible.
+    </p>
+    <p>
+      The reviewed runtime-series evidence contains 19 cases. An independent review route
+      reconstructed the formula and operation graph without using Arb, then compared the
+      TypeScript implementation with an independently written operation mirror over 308
+      selected inputs. The graph and mirror agreed bit for bit. The measured differences
+      from certified mathematical truth remained observations, not a tolerance or
+      correctness guarantee.
+    </p>
+  </section>
+
+  <section id="boundary-evidence">
+    <h2>What the boundary evidence found</h2>
+    <p>
+      The follow-up generator searched for adjacent binary64 test statistics on opposite
+      sides of three probability transitions: rounded one to positive normal, positive
+      normal to positive subnormal, and positive subnormal to zero. It used the degree-of-
+      freedom seed <code>{1, 2, 3, 10, 30, 100, 200}</code>. This is a deliberately
+      selected evidence set, not a continuous supported range.
+    </p>
+    <p>
+      The resulting bundle contains 20 transition cases and 40 endpoints. Across this
+      finite seed, the largest observed graph-to-truth difference was 34 binary64 cells.
+      Ten endpoints placed the graph output and the certified truth in different
+      probability classes. These observations show why a class-boundary rule is needed;
+      they do not establish that 34 is a global maximum.
+    </p>
+    <p>
+      The candidate records the form of a future safety margin. If a later proof
+      establishes a global error bound <code>B</code>, an otherwise eligible normal or
+      rounded-one result would need to be more than <code>B</code> binary64 cells from the
+      nearest class transition. No value of <code>B</code> has been selected, and this
+      rule is not active at runtime.
+    </p>
+  </section>
+
+  <section id="review">
+    <h2>Independent review and repair</h2>
+    <p>
+      The runtime-series increment received a candidate-scoped GO review. Its only
+      nice-to-have finding concerned the validator's error message for malformed JSON;
+      that repair was verified in a close-only review.
+    </p>
+    <p>
+      The first independent review of the boundary-evidence increment returned NO-GO with
+      one blocker and one should-fix finding. The repair strengthened the validator's
+      checks for inverse-beta enclosures, rounding cells, projection classes, precision
+      escalation, dependency identity, and coherent evidence rewrites. A close-only
+      review then confirmed both findings closed and returned GO.
+    </p>
+    <p>
+      This review history matters because the evidence bundle is intended to fail closed.
+      A matching hash is not enough: the validator must also reject a consistently
+      rewritten bundle whose numerical meaning or maturity claim has changed.
+    </p>
+  </section>
+
+  <section id="scope">
+    <h2>What remains open</h2>
+    <p>
+      The work does not prove a global graph-to-truth error bound, activate a runtime
+      projection margin, or choose a comparison tolerance. It does not select a supported
+      degree-of-freedom maximum, statistic range, numerical domain, platform matrix,
+      runtime inverse-beta table, final table hash, or final refusal-code vocabulary.
+    </p>
+    <p>
+      The candidate identifiers remain unissued. No authoritative paired-t Public Check,
+      schema, or bundle exists, and Release 2 D5 is not complete. Public review issue #25
+      remains open until at least September 25, 2026 at 20:52:54 UTC.
+    </p>
+    <p>
+      This note follows our earlier explanation of
+      <a href="/engineering/certifying-paired-t-numerical-evidence/">
+        how paired-t reference values and critical values are certified
+      </a>. That article covers the proof pipeline; this one covers the executable
+      evaluation graph and its behavior at target-format boundaries.
+    </p>
+  </section>
+
+  <section id="public-evidence">
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/33" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #33</a>{' '}
+        — runtime-series implementation, evidence, repair, and merge record
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/commit/eb4285bf6df389177904943c0e2aa480dfd9d948" target="_blank" rel="noopener noreferrer">runtime-series merge commit <code>eb4285bf</code></a>{' '}
+        — first merged candidate increment described here
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/reviews/d5-runtime-series-evidence-candidate-adversarial-review-disposition.md" target="_blank" rel="noopener noreferrer">runtime-series review disposition</a>{' '}
+        — independent checks, observed numerical behavior, repair, and authority boundary
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/34" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #34</a>{' '}
+        — truth-boundary candidate, review findings, repair, and merge record
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/commit/6072dd2be046f25a1857db305ea9d526c867c41a" target="_blank" rel="noopener noreferrer">truth-boundary merge commit <code>6072dd2b</code></a>{' '}
+        — exact merged repository state for the boundary evidence
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/48ec887eb5d602a2058f6bcd773a5127a1989c3c/review-inputs/r2-d5-truth-boundary-evidence/REVIEW-RESULT.md" target="_blank" rel="noopener noreferrer">initial boundary-evidence review</a>{' '}
+        — NO-GO disposition and the two findings that required repair
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/018bd33dd36971615f0cfb487e8e8d734275bcc2/review-inputs/r2-d5-truth-boundary-evidence-close/REVIEW-RESULT.md" target="_blank" rel="noopener noreferrer">boundary-evidence close-only review</a>{' '}
+        — GO after both findings were closed
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/numerical/README.md" target="_blank" rel="noopener noreferrer">candidate numerical scope</a>{' '}
+        — current evidence claims and deliberately open numerical decisions
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">Release 2 public review issue #25</a>{' '}
+        — open discussion and future decision record
+      </li>
+    </ul>
+  </section>
+</PublicationLayout>
