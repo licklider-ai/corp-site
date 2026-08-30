@@ -15,6 +15,18 @@ export const PUBLICATIONS: PublicationItem[] = [
   {
     category: 'Engineering',
     type: 'Implementation note',
+    date: 'August 31, 2026',
+    sortKey: '2026-08-31',
+    title: 'Building paired-t numerical tables and input-specific error checks',
+    summary:
+      'We expanded two paired-t numerical tables to 200 reviewed values each, connected one to the evaluator, and built input-specific error checks without declaring protocol support.',
+    href: '/engineering/building-paired-t-tables-and-error-checks/',
+    status:
+      'Reviewed table evidence and integration; error checks remain candidate — not protocol support',
+  },
+  {
+    category: 'Engineering',
+    type: 'Implementation note',
     date: 'August 30, 2026',
     sortKey: '2026-08-30',
     title: 'Testing a paired-t evaluator at floating-point boundaries',

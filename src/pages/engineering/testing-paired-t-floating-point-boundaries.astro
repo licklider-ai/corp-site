@@ -18,6 +18,7 @@ const toc = [
   title="Testing a paired-t evaluator at floating-point boundaries"
   description="We built a deterministic Student-t probability evaluator and measured where its binary64 output changes class, without claiming protocol support or a final accuracy bound."
   published="August 30, 2026"
+  updated="August 31, 2026"
   status="Reviewed candidate boundary evidence — not protocol support"
   toc={toc}
 >
@@ -140,11 +141,19 @@ const toc = [
       remains open until at least September 25, 2026 at 20:52:54 UTC.
     </p>
     <p>
-      This note follows our earlier explanation of
+      This note follows our earlier explanation of{' '}
       <a href="/engineering/certifying-paired-t-numerical-evidence/">
         how paired-t reference values and critical values are certified
       </a>. That article covers the proof pipeline; this one covers the executable
       evaluation graph and its behavior at target-format boundaries.
+    </p>
+    <p>
+      Subsequent work found a 374-cell pointwise witness outside this finite boundary
+      corpus and built an input-specific error-checking candidate. See{' '}
+      <a href="/engineering/building-paired-t-tables-and-error-checks/">
+        the follow-up engineering note
+      </a>{' '}
+      for the new candidate tables, evaluator integration, and proof direction.
     </p>
   </section>
 

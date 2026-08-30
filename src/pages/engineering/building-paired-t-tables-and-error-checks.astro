@@ -1,0 +1,231 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'current-status', label: 'Current status' },
+  { id: 'why-this-step', label: 'Why this step was needed' },
+  { id: 'tables', label: 'Two reviewed numerical tables' },
+  { id: 'integration', label: 'Connecting a table to the evaluator' },
+  { id: 'error-checks', label: 'Input-specific error checks' },
+  { id: 'review-boundary', label: 'What validation and review establish' },
+  { id: 'scope', label: 'What remains open' },
+  { id: 'public-evidence', label: 'Public evidence' },
+];
+---
+
+<PublicationLayout
+  category="Engineering"
+  type="Implementation note"
+  title="Building paired-t numerical tables and input-specific error checks"
+  description="We expanded two paired-t numerical tables to 200 reviewed values each, connected one to the evaluator, and built input-specific error checks without declaring protocol support."
+  published="August 31, 2026"
+  status="Reviewed table evidence and integration; error checks remain candidate — not protocol support"
+  toc={toc}
+>
+  <section id="current-status">
+    <h2>Current status</h2>
+    <div class="notice">
+      <p>
+        Five paired-t numerical candidate increments were merged into the nomue Protocol
+        repository between August 30 and 31, 2026. They extend two numerical tables to
+        every integer degree of freedom from 1 through 200, connect one table to the
+        deterministic probability evaluator, and add an input-specific error-checking
+        candidate.
+      </p>
+      <p>
+        The table evidence and table-to-evaluator connection have passed independent
+        candidate-scoped reviews. The error-checking construction remains an unselected,
+        non-authoritative candidate. None of this establishes paired-t protocol support,
+        and the 1-through-200 range is evidence coverage rather than a supported range.
+      </p>
+    </div>
+  </section>
+
+  <section id="why-this-step">
+    <h2>Why this step was needed</h2>
+    <p>
+      Our earlier boundary study measured differences between a fixed binary64
+      calculation and certified mathematical results. Its selected corpus observed a
+      largest difference of 34 binary64 cells. We explicitly treated that number as a
+      finite observation, not a guarantee for other inputs.
+    </p>
+    <p>
+      The next work confirmed why that distinction matters. A later case at 197 degrees
+      of freedom and a test statistic of 50.4 produced a certified pointwise difference
+      of 374 cells. The earlier result was not wrong; it answered only what happened in
+      its finite corpus. A supported numerical contract needs a bound derived for the
+      evaluated input, not the largest value found in a search.
+    </p>
+  </section>
+
+  <section id="tables">
+    <h2>Two reviewed numerical tables</h2>
+    <p>
+      The probability evaluator needs a normalization constant, <code>1 / B(df / 2, 1 / 2)</code>,
+      for each degree of freedom. The first new table contains a correctly rounded
+      binary64 candidate for every integer <code>df</code> from 1 through 200. Its
+      independent review reproduced all 200 values through an exact-rational route and
+      a fresh enclosure of pi, in addition to checking the generated certificates,
+      hashes, and failure behavior.
+    </p>
+    <p>
+      The second table contains fixed 95% critical-value candidates over the same
+      evidence range. For each entry, generation proves that the mathematical quantile
+      lies inside one binary64 rounding cell. The independent review reconstructed both
+      cell midpoints for all 200 entries and proved all 400 strict tail inequalities.
+      It also confirmed that the values decrease strictly as degrees of freedom increase.
+    </p>
+    <p>
+      These are two different inputs to later paired-t work: one supports probability
+      evaluation, while the other would support fixed 95% interval construction. Their
+      current hashes bind reviewed evidence. They are not selected final protocol tables
+      or final protocol hashes.
+    </p>
+  </section>
+
+  <section id="integration">
+    <h2>Connecting a table to the evaluator</h2>
+    <p>
+      The normalization table was then connected to the existing deterministic
+      Student-t probability graph. The wrapper accepts an exact integer degree of
+      freedom, looks up the reviewed binary64 cell, and passes that value into the
+      unchanged evaluator. It reports the evidence-local table hash and continues to
+      state that no runtime table has been selected.
+    </p>
+    <p>
+      Independent review compared the table-connected path with the earlier evaluator
+      over 371 cases. This included every integer degree of freedom from 1 through 200,
+      a separate statistic corpus, and invalid inputs. Branches, output bits, iteration
+      counts, caps, and projection results matched with no discrepancy. Promotion
+      attempts and malformed table variants were rejected.
+    </p>
+  </section>
+
+  <section id="error-checks">
+    <h2>Input-specific error checks</h2>
+    <p>
+      The next candidate replays that table-connected graph while tracking two sources
+      of mathematical error: binary64 rounding in the executed operations and the
+      positive series terms omitted when iteration stops. It combines them with exact
+      rational arithmetic and converts the result into a conservative integer distance
+      in binary64 cells. The calculation is specific to the evaluated input; it does not
+      use a maximum observed in a corpus as a universal bound.
+    </p>
+    <p>
+      In the current 20-case evidence set, 16 cases satisfy the candidate predicate.
+      Three refuse because the proof's arithmetic preconditions are not met, and one
+      refuses because there is not enough distance from a probability-class boundary.
+      For the 374-cell case, the derived candidate bound is 2,978 cells. That is a
+      conservative bound for this one input, not a selected tolerance or a global
+      guarantee.
+    </p>
+    <p>
+      The candidate does not change the evaluator's result. Its purpose is to determine
+      whether the result has enough input-specific evidence to proceed or should be
+      refused. The proof model, supported platform condition, and runtime activation
+      remain open decisions.
+    </p>
+  </section>
+
+  <section id="review-boundary">
+    <h2>What validation and review establish</h2>
+    <p>
+      A standalone table validator can establish byte binding, structure, authority
+      posture, cross-degree monotonicity, and exact-rational consistency among recorded
+      claims. It does not run the rigorous numerical methods and cannot establish that
+      an externally supplied cell is mathematically true. That requires deterministic
+      regeneration from the pinned source plus independent numerical review.
+    </p>
+    <p>
+      The fixed-critical-value review made this boundary explicit. Its one
+      nice-to-have finding asked for clearer documentation and a strict monotonicity
+      check. The repair added both, including a coherently rehashed nondecreasing-table
+      mutation. A close-only review confirmed the repair, all 21 bundled mutations were
+      rejected, and the reviewed 200 cells remained unchanged.
+    </p>
+    <p>
+      The inverse-beta table and its evaluator integration each received independent GO
+      dispositions with no findings. Those dispositions approve only the
+      non-authoritative candidate evidence and integration described here. They do not
+      select the runtime procedure or approve protocol support.
+    </p>
+  </section>
+
+  <section id="scope">
+    <h2>What remains open</h2>
+    <p>
+      The work does not select either final table or its final content hash. It does not
+      select a supported degree-of-freedom maximum, input domain, global or
+      input-specific runtime error rule, comparison tolerance, platform matrix, or final
+      refusal-code vocabulary. Confidence-interval endpoint error propagation also
+      remains open.
+    </p>
+    <p>
+      No paired-t identifier, authoritative Public Check, schema, or bundle has been
+      issued or registered as supported. Release 2 D5 is not complete, Release 2 has not
+      been published, and public review issue #25 remains open.
+    </p>
+    <p>
+      This note follows our articles on{' '}
+      <a href="/engineering/certifying-paired-t-numerical-evidence/">
+        certifying the first paired-t numerical evidence
+      </a>{' '}
+      and{' '}
+      <a href="/engineering/testing-paired-t-floating-point-boundaries/">
+        testing the evaluator at floating-point boundaries
+      </a>. The earlier articles describe the proof pipeline and finite boundary
+      measurements; this one describes the contiguous candidate tables, their
+      integration, and the move toward per-input proof.
+    </p>
+  </section>
+
+  <section id="public-evidence">
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/37" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #37</a>{' '}
+        — contiguous inverse-beta table candidate and merge record
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/reviews/d5-runtime-inverse-beta-table-evidence-adversarial-review-disposition.md" target="_blank" rel="noopener noreferrer">inverse-beta table review disposition</a>{' '}
+        — independent reproduction of all 200 cells and the candidate authority boundary
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/41" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #41</a>{' '}
+        and{' '}
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/reviews/d5-runtime-table-integration-adversarial-review-disposition.md" target="_blank" rel="noopener noreferrer">its review disposition</a>{' '}
+        — table-to-evaluator connection, graph-equivalence checks, and merge record
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/46" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #46</a>{' '}
+        — input-specific truth-error and projection-margin candidate
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/numerical/truth-error-support-closure-candidate.json" target="_blank" rel="noopener noreferrer">truth-error candidate checkpoint</a>{' '}
+        — proof model, pointwise witness, evidence counts, and held authority state
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/47" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #47</a>{' '}
+        — contiguous fixed-95 critical-value table candidate
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/48" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #48</a>{' '}
+        and{' '}
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/reviews/d5-critical-value-table-evidence-adversarial-review-disposition.md" target="_blank" rel="noopener noreferrer">the final review disposition</a>{' '}
+        — review record, validator-boundary wording, monotonicity hardening, and close-only review
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/commit/bc2305f20a4e08be8ad5c6eb7789f37285f8137c" target="_blank" rel="noopener noreferrer">merged protocol state <code>bc2305f2</code></a>{' '}
+        — exact repository state at publication
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/numerical/README.md" target="_blank" rel="noopener noreferrer">current numerical-candidate scope</a>{' '}
+        — current claims, validation boundaries, and deliberately open decisions
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">Release 2 public review issue #25</a>{' '}
+        — open discussion and future decision record
+      </li>
+    </ul>
+  </section>
+</PublicationLayout>
