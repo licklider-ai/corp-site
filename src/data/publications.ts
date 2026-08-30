@@ -14,6 +14,17 @@ export type PublicationItem = {
 export const PUBLICATIONS: PublicationItem[] = [
   {
     category: 'Engineering',
+    type: 'Implementation note',
+    date: 'August 30, 2026',
+    sortKey: '2026-08-30',
+    title: 'Testing a paired-t evaluator at floating-point boundaries',
+    summary:
+      'We built and independently reviewed a deterministic paired-t probability evaluator and boundary evidence while leaving accuracy bounds, supported inputs, and protocol registration open.',
+    href: '/engineering/testing-paired-t-floating-point-boundaries/',
+    status: 'Reviewed candidate boundary evidence — not protocol support',
+  },
+  {
+    category: 'Engineering',
     type: 'Technical method',
     date: 'August 28, 2026',
     sortKey: '2026-08-28',
