@@ -1,0 +1,217 @@
+---
+import type { TocItem } from '../consts';
+import PageLayout from '../layouts/PageLayout.astro';
+
+const toc: TocItem[] = [
+  { id: 'what', label: 'What nomue is' },
+  { id: 'separation', label: 'Why separate verification' },
+  { id: 'checks', label: 'What it checks' },
+  { id: 'scope', label: 'Current scope' },
+  { id: 'trust', label: 'Public trust layer' },
+  { id: 'limits', label: 'What it does not claim' },
+];
+---
+
+<PageLayout
+  title="nomue"
+  description="nomue is scientific verification infrastructure for AI research agents, starting with statistics."
+  toc={toc}
+>
+  <header class="page-head">
+    <p class="eyebrow">nomue</p>
+    <h1>Statistical verification that does not depend on the model judging itself</h1>
+    <p class="standfirst">
+      nomue is an agent-callable verification layer for bounded scientific statistics. It separates correctness-critical checks from the research model that orchestrates the work.
+    </p>
+  </header>
+
+  <section id="what" class="section">
+    <h2>What nomue is</h2>
+    <p>
+      Research agents can read papers, write code, call statistical libraries, and explain results. nomue is not another general research agent. It is a specialist layer that a research agent can call when it needs a statistical decision or result checked against an explicit supported contract.
+    </p>
+    <p>
+      The goal is not to make a model sound more confident. The goal is to return a narrow, machine-readable decision whose scope and limits are explicit.
+    </p>
+  </section>
+
+  <section id="separation" class="section">
+    <h2>Why separate verification from the model</h2>
+    <p>
+      A single model can otherwise be responsible for understanding the experimental design, filling in missing meaning, choosing a method, doing the calculation, and deciding whether its own answer is acceptable. nomue separates the verification step from that chain.
+    </p>
+    <div class="sequence" aria-label="Research agent and nomue roles">
+      <div>
+        <p class="sequence-label">Research agent</p>
+        <p>Understand the task, gather context, orchestrate tools, and explain the outcome.</p>
+      </div>
+      <div>
+        <p class="sequence-label">nomue</p>
+        <p>Apply the supported statistical contract, request missing declarations, recompute supported quantities, or refuse.</p>
+      </div>
+      <div>
+        <p class="sequence-label">Researcher</p>
+        <p>Provide scientific facts that cannot be inferred and remain responsible for the research decision.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="checks" class="section">
+    <h2>What it checks</h2>
+    <p>Within a supported capability, nomue can distinguish several different questions that are often collapsed into one:</p>
+    <dl class="checks">
+      <dt>Can this analysis proceed?</dt>
+      <dd>Checks whether the declared design and required scientific information fit the supported scope.</dd>
+
+      <dt>Is clarification required?</dt>
+      <dd>Returns a missing-information boundary rather than silently inventing pairing, replicate meaning, or another controlling fact.</dd>
+
+      <dt>Are the reported numbers consistent?</dt>
+      <dd>Recomputes the quantities covered by the registered numerical contract and compares them under the applicable rule.</dd>
+
+      <dt>Should the request be refused?</dt>
+      <dd>Keeps unsupported, inadmissible, and execution-failure states separate from a successful statistical result.</dd>
+    </dl>
+  </section>
+
+  <section id="scope" class="section">
+    <h2>Current scope</h2>
+    <p>
+      The first public Protocol support target is intentionally small. Release 1 Public Draft covers independent two-group continuous data under a two-sided Welch t-test, with explicit declarations, supported numerical recomputation, and local verification of the covered parts of a Record.
+    </p>
+    <p>
+      A paired-t successor is currently in public RFC review. That work does not expand Release 1 and does not imply support for other statistical methods before a later recorded decision.
+    </p>
+    <p class="links">
+      <a href="https://github.com/licklider-ai/nomue-protocol" target="_blank" rel="noopener noreferrer">nomue Protocol →</a><br />
+      <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">Paired-t public RFC →</a>
+    </p>
+  </section>
+
+  <section id="trust" class="section">
+    <h2>The public trust layer</h2>
+    <p>
+      nomue is designed so that the public meaning of a supported result does not depend on trusting Licklider's service. The nomue Protocol defines the public semantics of Records, and the open-source verifier can check supported properties locally.
+    </p>
+    <p>
+      The product runtime remains a separate layer. It can add agent-facing execution and operational capabilities without making every implementation choice part of the public standard.
+    </p>
+    <p class="links">
+      <a href="https://github.com/licklider-ai/nomue-verifier" target="_blank" rel="noopener noreferrer">nomue verifier →</a>
+    </p>
+  </section>
+
+  <section id="limits" class="section">
+    <h2>What nomue does not claim</h2>
+    <p>A supported verification result is deliberately narrower than a claim that the research is "correct." The current public Protocol does not claim to establish:</p>
+    <ul>
+      <li>the truth of the input data or researcher declarations;</li>
+      <li>the overall correctness of a research project;</li>
+      <li>the truth of a scientific or causal conclusion;</li>
+      <li>validity for arbitrary statistical methods; or</li>
+      <li>publication, regulatory, or clinical acceptance.</li>
+    </ul>
+    <p>
+      The useful property is narrower: every supported check says what it checked, under which versioned scope, and what remains outside that claim.
+    </p>
+  </section>
+
+  <footer class="page-foot">
+    <p>Current public support: Release 1 Public Draft — experimental.</p>
+    <p><a href="/evaluation/">Next: Evaluation →</a></p>
+  </footer>
+</PageLayout>
+
+<style>
+  .page-head {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .page-head .eyebrow {
+    margin: 0;
+  }
+
+  .page-head h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0.9rem 0 1.25rem;
+  }
+
+  .standfirst {
+    margin: 0;
+    font-size: 1.08rem;
+    color: var(--ink-2);
+  }
+
+  .section {
+    padding: 2.75rem 0;
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  .section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .section > :last-child {
+    margin-bottom: 0;
+  }
+
+  .sequence {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .sequence > div {
+    border-left: 1px solid var(--rule);
+    padding-left: 1.25rem;
+  }
+
+  .sequence p:last-child {
+    margin-bottom: 0;
+  }
+
+  .sequence-label {
+    margin-bottom: 0.25rem;
+    color: var(--ink);
+  }
+
+  .checks {
+    margin: 1.75rem 0 0;
+  }
+
+  .checks dt {
+    color: var(--ink);
+    margin-top: 1.25rem;
+  }
+
+  .checks dt:first-child {
+    margin-top: 0;
+  }
+
+  .checks dd {
+    margin: 0.25rem 0 0;
+    color: var(--ink-2);
+  }
+
+  .links {
+    margin-top: 1.75rem;
+  }
+
+  .page-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding: 2rem 0 0;
+    font-size: 0.85rem;
+    color: var(--ink-3);
+  }
+
+  .page-foot p {
+    margin: 0;
+  }
+</style>
