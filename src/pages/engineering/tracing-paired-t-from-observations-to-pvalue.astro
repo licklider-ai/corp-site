@@ -1,0 +1,182 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'current-status', label: 'Current status' },
+  { id: 'why-this-step', label: 'Why this step was needed' },
+  { id: 'execution-chain', label: 'One execution chain from observations to p-value' },
+  { id: 'review', label: 'What the review established' },
+  { id: 'scope', label: 'What this still does not establish' },
+  { id: 'public-evidence', label: 'Public evidence' },
+];
+---
+
+<PublicationLayout
+  category="Engineering"
+  type="Implementation note"
+  title="Tracing a paired-t calculation from observations to p-value"
+  description="We connected the paired-data calculation and Student-t tail into one reviewed execution chain from raw observations to a p-value, while keeping mathematical-truth, support, and runtime decisions open."
+  published="August 31, 2026"
+  status="Reviewed actual-execution composition — not protocol support"
+  toc={toc}
+>
+  <section id="current-status">
+    <h2>Current status</h2>
+    <div class="notice">
+      <p>
+        nomue Protocol now has a reviewed, non-authoritative candidate that traces a
+        paired-t calculation from explicit paired observations through the test
+        statistic and into the two-sided Student-t p-value calculation.
+      </p>
+      <p>
+        The composition candidate was merged after independent adversarial review, and
+        its reviewed state is now recorded in the Release 2 candidate readiness files.
+        This is not paired-t protocol support. The candidate remains unissued, public
+        review is open, and the mathematical-truth, confidence-interval, platform,
+        supported-domain, and runtime decisions remain incomplete.
+      </p>
+    </div>
+  </section>
+
+  <section id="why-this-step">
+    <h2>Why this step was needed</h2>
+    <p>
+      Earlier work had already produced two separately reviewed execution traces. The
+      first starts from paired observations and records the binary64 operations used to
+      calculate the paired differences, mean difference, sample variance, standard
+      error, test statistic, and integer degrees of freedom. The second starts from a
+      test statistic and degrees of freedom and records the Student-t tail calculation
+      that produces a p-value.
+    </p>
+    <p>
+      Reviewing those two traces separately does not prove that they form one chain. A
+      system could calculate a valid test statistic, calculate a valid p-value from a
+      different input, and still have two individually valid traces. The missing step
+      was therefore the connection itself: prove that the exact output of the paired
+      calculation is the exact input to the probability calculation.
+    </p>
+  </section>
+
+  <section id="execution-chain">
+    <h2>One execution chain from observations to p-value</h2>
+    <p>
+      The new composition starts with the same explicit paired observations used by the
+      reviewed G4 calculation. The G4 trace is verified first. The composition then
+      takes the exact 64-bit representation of the resulting test statistic together
+      with the integer degrees of freedom and requires them to match the Student-t tail
+      trace input exactly.
+    </p>
+    <p>
+      This is a bit-level handoff, not an approximate numerical comparison. The
+      composition records the G4 trace digest, the tail trace digest, the source and
+      binary64 bits of the test statistic, the degrees of freedom, the tail input bits,
+      and the returned p-value bits and source. Both nested traces are re-verified before
+      the composition is accepted.
+    </p>
+    <p>
+      The p-value returned by the composed evaluator is read from the verified tail
+      trace rather than calculated again through a separate path. The result is a
+      self-contained execution record for the path:
+    </p>
+    <p>
+      <code>paired observations → G4 trace → exact (t bits, df) → Student-t tail trace → p-value</code>
+    </p>
+  </section>
+
+  <section id="review">
+    <h2>What the review established</h2>
+    <p>
+      The independent review tested the composition with 11 successful cases spanning
+      degrees of freedom 1, 2, 4, 9, 30, 149, and 200, including the exact-zero branch,
+      central cases, and both signs of the series path. For every successful case, the
+      directly evaluated G4 result, the directly evaluated tail result, and the composed
+      result agreed on the decision-bearing trace fields and output bits.
+    </p>
+    <p>
+      The reviewer also replaced the embedded tail trace with a different valid tail
+      trace and replaced the G4 trace with a different valid G4 trace. The surrounding
+      link fields and digests were then recomputed coherently. False connections were
+      still rejected because the verifier reconstructs the relationship from the
+      verified nested traces instead of trusting the declared digest alone.
+    </p>
+    <p>
+      Additional attacks changed all nine composition-link fields, mutated nested G4
+      and tail traces while recomputing their digests, and supplied hostile object
+      shapes to the validators. The reviewer reported 291 checks with zero failures and
+      no blocker, should-fix, or nice-to-have finding. The full repository check also
+      passed 431 tests at the reviewed implementation state.
+    </p>
+    <p>
+      The later readiness synchronization was reviewed separately and confirmed that
+      the only maturity change was recording this actual-execution composition as
+      independently reviewed. The numerical logic, authority surfaces, Release 1, and
+      support state did not change.
+    </p>
+  </section>
+
+  <section id="scope">
+    <h2>What this still does not establish</h2>
+    <p>
+      The composition establishes execution continuity: the paired observations, the
+      G4 arithmetic trace, the exact test-statistic handoff, the Student-t tail trace,
+      and the returned p-value are connected as one verifiable candidate execution. It
+      does not establish that the entire chain is already bounded against the exact
+      mathematical target.
+    </p>
+    <p>
+      In particular, the G4 mathematical-truth error bound is still open. The reviewed
+      truth-error work for the Student-t tail is not automatically a proof for the
+      upstream paired-data arithmetic. Confidence-interval trace composition also
+      remains pending.
+    </p>
+    <p>
+      The work does not select supported pair, node, degree-of-freedom, value, or test-
+      statistic bounds. It does not select a supported platform or execution predicate,
+      supported domain, runtime path, final reason-code vocabulary, Public Check, or
+      bundle. Release 2 D5 is not complete, Release 2 has not been published, and public
+      review issue #25 remains open.
+    </p>
+    <p>
+      This note follows our earlier work on{' '}
+      <a href="/engineering/building-paired-t-tables-and-error-checks/">
+        paired-t numerical tables and input-specific error checks
+      </a>. That work focused on numerical evidence and per-input error reasoning; this
+      increment focuses on connecting the actual data-to-statistic execution to the
+      actual probability execution without losing provenance between them.
+    </p>
+  </section>
+
+  <section id="public-evidence">
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/60" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #60</a>{' '}
+        — G4-to-tail actual-execution composition candidate and merge record
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/review-inputs/r2-d5-g4-tail-trace-composition-candidate/REVIEW-RESULT.md" target="_blank" rel="noopener noreferrer">independent composition review result</a>{' '}
+        — exact handoff checks, valid-trace swap attacks, mutation batteries, and review boundary
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/reviews/d5-g4-tail-trace-composition-adversarial-review-disposition.md" target="_blank" rel="noopener noreferrer">composition review disposition</a>{' '}
+        — bounded meaning of the reviewed candidate state
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/62" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #62</a>{' '}
+        — review-state and readiness synchronization
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/commit/0f7bd198f705614da03200b33a1e50c7df413444" target="_blank" rel="noopener noreferrer">merged readiness state <code>0f7bd198</code></a>{' '}
+        — exact repository state that records the reviewed composition in candidate readiness
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/numerical/evidence-readiness.json" target="_blank" rel="noopener noreferrer">current numerical readiness checkpoint</a>{' '}
+        — composition status and the mathematical-truth, interval, support, and runtime items that remain open
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">Release 2 public review issue #25</a>{' '}
+        — open discussion and future decision record
+      </li>
+    </ul>
+  </section>
+</PublicationLayout>
