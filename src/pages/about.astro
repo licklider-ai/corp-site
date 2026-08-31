@@ -1,9 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// About ページ。セクションはトップページの 2 ペイン band (左に見出し、右に本文) と
-// 同じ作法。チームは Anthropic の /company と同じ粒度で、個人ではなく集合として
-// 記述する
 const company = [
   { term: 'Company', detail: 'Licklider, Inc.' },
   { term: 'Headquarters', detail: 'N&E BLD. 7F, 1-12-4 Ginza, Chuo-ku, Tokyo, Japan' },
@@ -11,33 +8,41 @@ const company = [
 ];
 ---
 
-<BaseLayout title="About" description="Licklider is an infrastructure company in Tokyo, building the layer that lets humans take responsibility for what AI generates.">
+<BaseLayout
+  title="About"
+  description="Licklider builds scientific verification infrastructure for AI research agents, starting with statistics."
+>
   <section class="page-hero">
     <div class="page-hero-inner">
       <p class="eyebrow">About</p>
       <h1>About Licklider</h1>
       <p class="standfirst">
-        Licklider is an infrastructure company based in Tokyo. We build the layer that lets
-        humans take responsibility for what AI generates — starting with scientific research.
+        Licklider is an infrastructure company in Tokyo. We build scientific verification for AI research agents, starting with statistics.
       </p>
     </div>
   </section>
 
   <div class="sections">
     <section class="band">
+      <p class="eyebrow">What We Do</p>
+      <div class="band-body">
+        <p>
+          Our first product, nomue, gives research agents a separate place to check bounded statistical decisions and numerical results rather than relying on the model to judge its own analysis.
+        </p>
+        <p>
+          We combine product engineering with research, public specifications, independent verification, and controlled evaluation. The current public Protocol begins with a deliberately narrow Welch t-test scope and expands only through explicit evidence and review.
+        </p>
+      </div>
+    </section>
+
+    <section class="band">
       <p class="eyebrow">Mission</p>
       <div class="band-body">
         <p>
-          Our mission is to make responsible approval possible at machine scale. AI now
-          produces analyses, figures, prose, and code faster than people can verify them,
-          and the institutions built for an era of scarce generation have not kept up. The
-          work that remains human — approving, and taking responsibility — needs
-          infrastructure of its own.
+          Our broader mission is to make responsible approval possible at machine scale. AI can generate analyses, figures, prose, and code faster than people can verify them. The work that remains human — deciding what to accept and what to take responsibility for — needs infrastructure of its own.
         </p>
         <p>
-          We call this engineering accountability: designing the conditions under which
-          approval stays connected to verifiable evidence, so that responsibility keeps its
-          substance.
+          We call this engineering accountability: designing the conditions under which approval stays connected to evidence that can be checked.
         </p>
       </div>
     </section>
@@ -46,13 +51,7 @@ const company = [
       <p class="eyebrow">Team</p>
       <div class="band-body">
         <p>
-          Licklider was founded in Tokyo and works with researchers wherever they work. The
-          team brings together people who build software and people who have lived inside
-          the scientific process, and treats the two as one discipline.
-        </p>
-        <p>
-          We try to work the way we ask science to work: claims connected to evidence,
-          boundaries stated plainly, and verification that does not require trusting us.
+          Licklider was founded in Tokyo and works with researchers wherever they work. We treat software engineering and scientific verification as one discipline: claims should have explicit scope, important boundaries should be stated plainly, and supported results should be independently checkable where possible.
         </p>
       </div>
     </section>
@@ -80,7 +79,6 @@ const company = [
     border-bottom: 1px solid var(--rule-faint);
   }
 
-  /* トップの hero より一段静かに。見出しの伸びやかさだけ引き継ぐ */
   .page-hero-inner {
     max-width: var(--shell);
     margin: 0 auto;
@@ -107,7 +105,6 @@ const company = [
     padding: 0 var(--gutter);
   }
 
-  /* トップページと同じ 2 ペイン: 左に見出しの段、右に本文 */
   .band {
     display: grid;
     grid-template-columns: 12rem minmax(0, 1fr);
