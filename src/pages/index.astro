@@ -1,85 +1,151 @@
 ---
-import LayerDiagram from '../components/LayerDiagram.astro';
 import LickliderPortrait from '../components/LickliderPortrait.astro';
 import { PUBLICATIONS } from '../data/publications';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// トップページはサイドメニューとページ内メニューを持たない。
-// 本文は仮執筆 v0.1 の全文。省略せずドラフトのまま掲載する。英語化時に差し替える。
-// (ドラフト末尾の「執筆メモ」はサイト非掲載の指定のため含めない)
-const layers = [
-  {
-    n: 'Layer 1',
-    title: 'nomue Record (open specification) and verifier',
-    body: 'An open format that records how each research output — figures, Legend, Methods, Results, Claim — was generated from its input data, declarations, statistical rules, and computations. A Record binds each approved output to its underlying evidence in machine-readable form, making the basis of approval independently verifiable. The accompanying open-source verifier lets third parties check the Record’s internal consistency without depending on our software. Neither the Record nor its verification requires trust in us — a necessary condition for this layer to serve as a foundation for accountability.',
-  },
-  {
-    n: 'Layer 2',
-    title: 'nomue (application)',
-    body: 'An execution environment that generates and maintains research outputs with the Record as their canonical source. From research data and research intent, it produces analyses, figures, Legend, Methods, Results, and Claim on the same underlying evidence. Humans approve each output with its evidence attached. When data, declarations, or analyses change, the outputs and approvals they affect are invalidated, requiring regeneration and re-approval.',
-  },
-];
-
 const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKey));
 ---
 
-<BaseLayout>
+<BaseLayout
+  description="Licklider builds scientific verification infrastructure for AI research agents, starting with statistics."
+>
   <section class="hero">
     <div class="hero-inner">
-      <p class="eyebrow">Agenda</p>
-      <h1>Engineering Accountability<br />at Machine Scale</h1>
+      <p class="eyebrow">nomue</p>
+      <h1>Scientific verification<br />for AI research agents</h1>
       <div class="lede">
         <p>
-          AI has scaled generation.<br />
-          What must scale next is approval.
+          Research agents can reason, write code, and use statistical software. nomue gives them a separate place to check the parts that should not depend on the model's own judgment.
         </p>
-        <p>Licklider builds the engineering foundation for responsible approval.</p>
+        <p>
+          It checks whether a supported statistical analysis can proceed, whether required information is missing, whether reported numbers are consistent with the registered calculation, and when the agent should clarify or refuse.
+        </p>
       </div>
-      <p class="cta">
-        <a href="https://github.com/licklider-ai/nomue-verifier" target="_blank" rel="noopener noreferrer">
-          nomue verifier →
-        </a>
-      </p>
+      <div class="cta">
+        <a href="/nomue/">Explore nomue →</a>
+        <a href="https://github.com/licklider-ai/nomue-protocol" target="_blank" rel="noopener noreferrer">Protocol →</a>
+        <a href="https://github.com/licklider-ai/nomue-verifier" target="_blank" rel="noopener noreferrer">Verifier →</a>
+      </div>
     </div>
   </section>
 
   <div class="sections">
     <section class="band band--single">
       <div class="band-inner">
-        <p class="eyebrow">Thesis</p>
+        <p class="eyebrow">Why</p>
         <div class="band-body">
-        <p>
-          AI now generates intellectual work — analyses, figures, prose, code — far beyond the pace at which humans can produce it. The institutions of verification and approval, designed for an era when generation was scarce, have not kept up. When the volume of output exceeds human capacity to verify it, the rate-limiting step shifts from generation to approval.
-        </p>
-        <p>
-          When approval becomes the bottleneck, it turns into a formality. People sign off on work whose basis they cannot fully verify, and those signatures gradually lose their power to establish responsibility when something goes wrong. Accountability comes not from a signature but from a connection to verifiable evidence. Approval severed from that evidence does not transfer responsibility; it hollows it out.
-        </p>
-        <p>
-          We are not trying to automate responsibility itself. We are trying to engineer the conditions under which responsibility has substance. We call this engineering accountability. Just as software engineering shifted part of the burden of correctness from human attention to mechanical verification — type checking, continuous integration, audit logs — the intellectual work AI generates needs a layer that mechanically maintains the consistency between outputs and their evidence, and that third parties can verify independently.
-        </p>
-        <p>
-          Licklider starts building this layer in scientific research. Science asks not only who is responsible for a claim, but which data, analyses, and judgments that claim rests on. The connection between claim and evidence is a condition for the work to count at all. What holds up in that environment can, in time, extend to regulation, auditing, medicine, finance, and any decision-making that involves AI.
-        </p>
-        <p>
-          What the AI era needs is not just layers for generating more. It needs a layer that lets humans take responsibility for what has been generated.
-        </p>
+          <p class="lead">
+            A model can be useful without being the final authority on whether its own statistical analysis is scientifically supported.
+          </p>
+          <p>
+            In a research workflow, a small mistake can propagate from analysis into figures, results, and claims. nomue separates verification from generation: the research agent can orchestrate the work and explain the result, while a bounded verification capability handles the supported statistical decision and numerical checks.
+          </p>
         </div>
       </div>
     </section>
 
-    <section id="what-we-build" class="band band--single">
+    <section class="band band--single">
+      <div class="band-inner band-inner--wide">
+        <p class="eyebrow">How It Works</p>
+        <div class="flow" aria-label="Research agent to nomue verification flow">
+          <div class="flow-step">
+            <span>1</span>
+            <h2>Research agent</h2>
+            <p>Understands the task, gathers context, and decides that statistical verification is needed.</p>
+          </div>
+          <div class="flow-arrow" aria-hidden="true">→</div>
+          <div class="flow-step">
+            <span>2</span>
+            <h2>nomue</h2>
+            <p>Checks the supported contract and returns execute, clarify, refuse, or a verified numerical result.</p>
+          </div>
+          <div class="flow-arrow" aria-hidden="true">→</div>
+          <div class="flow-step">
+            <span>3</span>
+            <h2>Research workflow</h2>
+            <p>Uses the bounded result without treating the model's self-assessment as the verification step.</p>
+          </div>
+        </div>
+        <p class="more"><a href="/nomue/">→ How nomue works</a></p>
+      </div>
+    </section>
+
+    <section class="band">
+      <p class="eyebrow">Current Scope</p>
+      <div class="band-body">
+        <p>
+          The first public Protocol support target is deliberately narrow: independent two-group continuous data using a two-sided Welch t-test, with explicit declarations, numerical recomputation, and local verification of the supported parts of a Record.
+        </p>
+        <p>
+          A paired-t successor is in public RFC review. Other statistical methods are not implied by the current public support target.
+        </p>
+        <p class="more">
+          <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">→ Paired-t public RFC</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="band band--single">
       <div class="band-inner band-inner--wide">
         <p class="eyebrow">What We Build</p>
-        <LayerDiagram layers={layers} />
+        <div class="layers">
+          <article>
+            <p class="layer-label">Public trust layer</p>
+            <h2>Protocol, Record, verifier</h2>
+            <p>
+              Public semantics define what a supported Record means. The verifier lets anyone check supported properties locally without depending on Licklider's service.
+            </p>
+          </article>
+          <article>
+            <p class="layer-label">Agent runtime</p>
+            <h2>Scientific verification capabilities</h2>
+            <p>
+              Agent-callable capabilities apply bounded scientific rules, numerical checks, clarification requirements, and refusal boundaries. The runtime can evolve without turning every product implementation detail into a public standard.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
 
+    <section class="band">
+      <p class="eyebrow">Evidence</p>
+      <div class="band-body">
+        <p>
+          We treat research as part of product development. Numerical edge cases, implementation disagreements, and methodological questions are investigated before they become verification rules.
+        </p>
+        <p>
+          That work has already produced a public preprint, upstream statistical-software findings, and a growing body of reviewed numerical evidence.
+        </p>
+        <p class="more"><a href="/research/">→ Research</a> · <a href="/engineering/">Engineering →</a></p>
+      </div>
+    </section>
+
+    <section class="band">
+      <p class="eyebrow">Evaluation</p>
+      <div class="band-body">
+        <p class="lead">Does adding nomue actually make a research agent more reliable?</p>
+        <p>
+          We are building a controlled evaluation that compares the same model with the same baseline statistical tools, with and without nomue. The primary comparison isolates the incremental effect of adding nomue.
+        </p>
+        <p>
+          We have not published a comparative performance result yet. The evaluation is designed to make that question measurable rather than assumed.
+        </p>
+        <p class="more"><a href="/evaluation/">→ Evaluation design and status</a></p>
+      </div>
+    </section>
+
+    <section class="band band--single">
+      <div class="band-inner">
+        <p class="eyebrow">Thesis</p>
         <div class="band-body">
-          <p class="lead">
-            We place the basis of trust not in generated outputs but in a verifiable record. Generation is a layer of convenience; the record and its verification are the substance.
+          <h2 class="section-title">Engineering Accountability at Machine Scale</h2>
+          <p>
+            AI has scaled generation. As more intellectual work is produced by machines, approval becomes meaningful only when it remains connected to evidence that can be checked.
           </p>
-
-          <p class="more">
-            <a href="https://github.com/licklider-ai/nomue-verifier" target="_blank" rel="noopener noreferrer">→ nomue verifier</a>
+          <p>
+            We start with scientific statistics because the connection between data, analytical decisions, numerical results, and claims can be made explicit and independently testable.
           </p>
+          <p class="more"><a href="/thesis/">→ Read the thesis</a></p>
         </div>
       </div>
     </section>
@@ -90,12 +156,11 @@ const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKe
         <div class="why">
           <div class="band-body">
             <p>
-              In "Man-Computer Symbiosis" (1960), J. C. R. Licklider clearly articulated a division of labor in which humans set goals and exercise judgment while computers carry out the routine work.
+              In "Man-Computer Symbiosis" (1960), J. C. R. Licklider described a division of labor in which humans set goals and exercise judgment while computers carry out routine work.
             </p>
             <p>
-              In the decades since, generation has moved to the machine's side, while approval and responsibility have stayed with humans. We believe this new division of labor needs a new foundation.
+              As machines take on more of the generation and execution, we are building infrastructure for the part that must remain accountable: the connection between decisions and evidence.
             </p>
-            <p>Our name refers to the original blueprint for that division of labor.</p>
           </div>
           <LickliderPortrait />
         </div>
@@ -104,7 +169,7 @@ const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKe
 
     <section id="latest" class="band">
       <p class="eyebrow">Latest</p>
-      <div class="band-body">
+      <div class="band-body latest-body">
         <div class="table-scroll">
           <table>
             <tbody>
@@ -141,14 +206,15 @@ const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKe
   }
 
   .hero h1 {
+    max-width: 58rem;
     font-size: clamp(2.6rem, 6vw, 4.25rem);
-    line-height: 1.15;
+    line-height: 1.12;
     letter-spacing: -0.01em;
     margin: 1.25rem 0 2.5rem;
   }
 
   .lede {
-    max-width: var(--measure);
+    max-width: 42rem;
     font-size: 1.12rem;
     color: var(--ink-1);
   }
@@ -165,10 +231,6 @@ const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKe
     text-decoration: none;
     border-bottom: 1px solid var(--ink);
     padding-bottom: 3px;
-  }
-
-  .cta a:hover {
-    border-bottom-color: var(--ink-3);
   }
 
   .sections {
@@ -197,8 +259,10 @@ const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKe
     max-width: var(--measure);
   }
 
-  /* 1 ペインの段。見出しを本文の上に置き、内容ごと中央に寄せる。
-     幅は 2 ペイン時の本文列と同じに保つ */
+  .latest-body {
+    max-width: none;
+  }
+
   .band--single {
     display: block;
   }
@@ -208,7 +272,6 @@ const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKe
     margin: 0 auto;
   }
 
-  /* 図の段は、2 ペイン時の 2 列目 (シェル 71rem − 見出し 12rem − 間隔 3rem) と同じ幅 */
   .band-inner--wide {
     max-width: 56rem;
   }
@@ -217,11 +280,66 @@ const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKe
     margin: 0 0 2.5rem;
   }
 
-  .band-inner--wide .band-body {
-    margin-top: 3rem;
+  .lead {
+    font-size: 1.08rem;
+    color: var(--ink);
   }
 
-  /* Why "Licklider": 左に本文、右に人物画。人物画は本文の高さに合わせて中央へ */
+  .section-title {
+    font-size: 1.65rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .flow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .flow-step,
+  .layers article {
+    border: 1px solid var(--rule);
+    padding: 1.5rem;
+  }
+
+  .flow-step span,
+  .layer-label {
+    display: block;
+    margin: 0 0 0.75rem;
+    color: var(--ink-3);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .flow-step h2,
+  .layers h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .flow-step p,
+  .layers p:last-child {
+    margin-bottom: 0;
+  }
+
+  .flow-arrow {
+    align-self: center;
+    color: var(--ink-3);
+  }
+
+  .layers {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .more {
+    margin-top: 1.75rem;
+    font-size: 0.95rem;
+  }
+
   .why {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 16rem);
@@ -233,30 +351,10 @@ const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKe
     margin-top: 0;
   }
 
-  .band-body > :last-child {
-    margin-bottom: 0;
-  }
-
-  .lead {
-    font-size: 1.08rem;
-    color: var(--ink);
-  }
-
-  strong {
-    font-weight: 400;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .more {
-    margin-top: 1.75rem;
-    font-size: 0.95rem;
-  }
-
   .table-scroll {
     overflow-x: auto;
   }
 
-  /* Latest: 3 分類を混在表示するため、各行に分類ラベルを置く */
   .latest-date {
     white-space: nowrap;
     color: var(--ink-3);
@@ -287,9 +385,18 @@ const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKe
       padding: 3rem 0;
     }
 
-    /* 人物画は本文の下へ回して中央に置く */
+    .flow,
+    .layers,
     .why {
       grid-template-columns: minmax(0, 1fr);
+    }
+
+    .flow-arrow {
+      justify-self: center;
+      transform: rotate(90deg);
+    }
+
+    .why {
       gap: 2.5rem;
     }
 
