@@ -1,0 +1,216 @@
+---
+import type { TocItem } from '../consts';
+import PageLayout from '../layouts/PageLayout.astro';
+
+const toc: TocItem[] = [
+  { id: 'question', label: 'The question' },
+  { id: 'design', label: 'Comparison design' },
+  { id: 'score', label: 'What is scored' },
+  { id: 'status', label: 'Current status' },
+  { id: 'limits', label: 'Limits' },
+];
+---
+
+<PageLayout
+  title="Evaluation"
+  description="How Licklider is testing whether adding nomue improves the statistical reliability of AI research agents."
+  toc={toc}
+>
+  <header class="page-head">
+    <p class="eyebrow">Evaluation</p>
+    <h1>Does adding nomue actually improve a research agent?</h1>
+    <p class="standfirst">
+      We are building a controlled evaluation to measure the incremental effect of adding nomue to an otherwise identical statistical tool environment.
+    </p>
+  </header>
+
+  <section id="question" class="section">
+    <h2>The question</h2>
+    <p>
+      A useful architecture is not enough. We want to measure whether a frontier model makes better statistical decisions when nomue is available, rather than assuming that it does.
+    </p>
+    <p>
+      The first study is deliberately limited to the exact Welch scope covered by the founding verification capability. A result in that study would not establish that nomue improves science in general.
+    </p>
+  </section>
+
+  <section id="design" class="section">
+    <h2>Comparison design</h2>
+    <div class="arms">
+      <article>
+        <p class="arm-label">A · Diagnostic</p>
+        <h3>Model only</h3>
+        <p>The model receives the scientific task without statistical tools.</p>
+      </article>
+      <article>
+        <p class="arm-label">B · Control</p>
+        <h3>Model + baseline tools</h3>
+        <p>The same model receives a fixed generic Python/statistics tool surface.</p>
+      </article>
+      <article>
+        <p class="arm-label">C · Treatment</p>
+        <h3>Same environment + nomue</h3>
+        <p>The model receives the same baseline tools as B, with nomue added as the only treatment difference.</p>
+      </article>
+    </div>
+    <p class="primary">
+      <strong>Primary comparison: C − B.</strong> A is useful context, but it is not the primary estimate of nomue's effect because B and C are the arms designed to differ only by the addition of nomue.
+    </p>
+  </section>
+
+  <section id="score" class="section">
+    <h2>What is scored</h2>
+    <p>
+      The evaluated model is not allowed to be the judge of whether its own answer is correct. Expected outcomes are fixed before scored outputs are inspected, using independent numerical evidence, registered contracts, conformance fixtures, or pre-adjudicated scientific cases as appropriate.
+    </p>
+    <p>The evaluation separates several kinds of correctness:</p>
+    <ul>
+      <li>whether the agent chose the right action — execute, clarify, refuse, or report unsupported scope;</li>
+      <li>whether it respected the supported statistical method and declarations;</li>
+      <li>whether numerical outputs satisfy the applicable comparison rule;</li>
+      <li>whether it silently invented scientific facts needed to proceed; and</li>
+      <li>whether it overreached when the correct behavior was clarification or refusal.</li>
+    </ul>
+    <p>
+      Results are intended to be reported by case class rather than collapsed into one headline score that hides where failures occur.
+    </p>
+  </section>
+
+  <section id="status" class="section">
+    <h2>Current status</h2>
+    <p>
+      The comparison design, scoring boundary, baseline tool, model-provider adapter foundation, and exact nomue runtime binding are under active development and review. Development fixtures can exercise the A/B/C pipeline without being treated as model-performance evidence.
+    </p>
+    <p>
+      The next stages are live adapter checks, a frozen scored run plan, a sufficiently broad case set, protected holdout handling, live B/C execution, analysis, and adversarial review of the resulting claim.
+    </p>
+    <div class="status-box">
+      <p class="status-label">Public claim status</p>
+      <p><strong>No comparative nomue performance result has been published.</strong></p>
+      <p>We will not describe nomue as making research agents more accurate or reliable unless the controlled evaluation supports that narrower claim.</p>
+    </div>
+  </section>
+
+  <section id="limits" class="section">
+    <h2>What a positive result would and would not mean</h2>
+    <p>
+      A positive C − B result would support a bounded statement: under the measured Welch tasks, models, versions, prompts, and tool configuration, adding nomue improved the predeclared outcomes.
+    </p>
+    <p>It would not by itself show that:</p>
+    <ul>
+      <li>frontier AI is generally bad at statistics;</li>
+      <li>nomue makes AI-generated science correct in general;</li>
+      <li>the measured effect transfers unchanged to other statistical methods; or</li>
+      <li>a future model version will reproduce the same effect without remeasurement.</li>
+    </ul>
+    <p>
+      The point of the evaluation is to make these boundaries visible and testable.
+    </p>
+  </section>
+
+  <footer class="page-foot">
+    <p>Founding evaluation scope: Welch only.</p>
+    <p><a href="/nomue/">Back to nomue →</a></p>
+  </footer>
+</PageLayout>
+
+<style>
+  .page-head {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .page-head .eyebrow {
+    margin: 0;
+  }
+
+  .page-head h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0.9rem 0 1.25rem;
+  }
+
+  .standfirst {
+    margin: 0;
+    font-size: 1.08rem;
+    color: var(--ink-2);
+  }
+
+  .section {
+    padding: 2.75rem 0;
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  .section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .section > :last-child {
+    margin-bottom: 0;
+  }
+
+  .arms {
+    display: grid;
+    gap: 1rem;
+    margin: 1.75rem 0;
+  }
+
+  .arms article {
+    border: 1px solid var(--rule);
+    padding: 1.25rem;
+  }
+
+  .arms h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .arms p:last-child {
+    margin-bottom: 0;
+  }
+
+  .arm-label,
+  .status-label {
+    margin-bottom: 0.4rem;
+    color: var(--ink-3);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .primary {
+    border-left: 1px solid var(--ink);
+    padding-left: 1.25rem;
+  }
+
+  strong {
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .status-box {
+    margin-top: 2rem;
+    padding: 1.25rem;
+    background: var(--wash);
+  }
+
+  .status-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  .page-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding: 2rem 0 0;
+    font-size: 0.85rem;
+    color: var(--ink-3);
+  }
+
+  .page-foot p {
+    margin: 0;
+  }
+</style>
