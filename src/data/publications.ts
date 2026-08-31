@@ -17,6 +17,17 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Implementation note',
     date: 'August 31, 2026',
     sortKey: '2026-08-31',
+    title: 'Tracing a paired-t calculation from observations to p-value',
+    summary:
+      'We connected the paired-data calculation and Student-t tail into one reviewed execution chain from raw observations to a p-value, while keeping mathematical-truth, support, and runtime decisions open.',
+    href: '/engineering/tracing-paired-t-from-observations-to-pvalue/',
+    status: 'Reviewed actual-execution composition — not protocol support',
+  },
+  {
+    category: 'Engineering',
+    type: 'Implementation note',
+    date: 'August 31, 2026',
+    sortKey: '2026-08-31',
     title: 'Building paired-t numerical tables and input-specific error checks',
     summary:
       'We expanded two paired-t numerical tables to 200 reviewed values each, connected one to the evaluator, and built input-specific error checks without declaring protocol support.',
