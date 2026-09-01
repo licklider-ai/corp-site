@@ -3,6 +3,9 @@ import { PUBLICATIONS } from '../data/publications';
 import {
   EVALUATION_BOUNDARY,
   MARKET_SCOPE,
+  NOMUE_GLOBAL_INSTALL_COMMAND,
+  NOMUE_NPX_COMMAND,
+  NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
   PLATFORM_SCOPE,
   PRODUCT_CAPABILITY,
@@ -25,12 +28,14 @@ const verifierStructuredData = {
   '@id': new URL('/#nomue-verifier', Astro.site).href,
   name: 'nomue verifier',
   applicationCategory: 'ScientificApplication',
-  operatingSystem: 'Cross-platform',
+  operatingSystem: PUBLIC_RELEASE.supportedOperatingSystems.join(', '),
   softwareVersion: PUBLIC_RELEASE.verifierPackage,
   description:
-    'Open-source local and offline verification for supported nomue Release 1 Welch Records.',
+    'npm-published open-source local verification for supported nomue Release 1 Welch Records.',
   url: new URL('/docs/record-verification/', Astro.site).href,
+  downloadUrl: PUBLIC_RELEASE.npmUrl,
   codeRepository: PUBLIC_RELEASE.verifierUrl,
+  softwareRequirements: `Node.js ${PUBLIC_RELEASE.testedNodeVersions.join(' or ')}`,
   license: 'https://www.apache.org/licenses/LICENSE-2.0',
   isAccessibleForFree: true,
   offers: {
@@ -54,9 +59,9 @@ const verifierStructuredData = {
       <h1>The verification layer<br />for AI research agents</h1>
       <div class="lede">
         <p>
-          Today, anyone can run the open-source nomue verifier locally to check a
-          supported Welch Record, recompute covered quantities, and receive a
-          machine-readable verification report.
+          Install the nomue verifier from npm, give it a supported Welch Record, and
+          receive a machine-readable report of the scoped checks. Verification runs
+          locally and does not call a nomue server after installation.
         </p>
         <p>
           Licklider builds middleware for bounded verification calls across AI
@@ -65,12 +70,14 @@ const verifierStructuredData = {
         </p>
       </div>
       <div class="cta">
-        <a class="cta-primary" href="/docs/record-verification/">Run the verifier →</a>
+        <a class="cta-primary" href="/docs/record-verification/">Install and run →</a>
+        <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">npm package ↗</a>
         <a href={PUBLIC_RELEASE.verifierUrl} target="_blank" rel="noopener noreferrer">View source on GitHub ↗</a>
         <a href="/nomue/">How nomue works →</a>
       </div>
       <p class="hero-facts">
-        Open source · local and offline · Apache-2.0 · verifier {PUBLIC_RELEASE.verifierPackage} ·
+        {PUBLIC_RELEASE.npmPackage} · npm <code>{PUBLIC_RELEASE.npmDistTag}</code>: {PUBLIC_RELEASE.verifierPackage} release candidate ·{' '}
+        {PUBLIC_RELEASE.supportedOperatingSystems.join(' / ')} · Node.js {PUBLIC_RELEASE.testedNodeVersions.join(' / ')} ·{' '}
         <a href={PUBLIC_RELEASE.protocolUrl} target="_blank" rel="noopener noreferrer">Protocol on GitHub ↗</a>
       </p>
     </div>
@@ -102,15 +109,25 @@ const verifierStructuredData = {
         <div class="quickstart">
           <div>
             <p class="step">Quick start</p>
-            <h3>Run the published verifier locally</h3>
-            <p>The current package is installed from its public repository.</p>
+            <h3>Install the public npm package</h3>
+            <p>
+              The package path is tested on Linux, macOS, and Windows with Node.js 20
+              and 22. The npm <code>latest</code> tag currently points to a release candidate,
+              not a stable release.
+            </p>
           </div>
-          <pre><code>git clone https://github.com/licklider-ai/nomue-verifier.git
-cd nomue-verifier
-npm install
-npm exec -- nomue verify records/valid.json --format json</code></pre>
+          <pre><code>{NOMUE_GLOBAL_INSTALL_COMMAND}
+{NOMUE_VERIFY_COMMAND}
+
+# Or run without a global install
+{NOMUE_NPX_COMMAND}</code></pre>
         </div>
-        <p class="more"><a href="/docs/record-verification/">→ Full verifier guide</a> · <a href="/docs/examples.json">Machine-readable examples →</a></p>
+        <p class="package-meaning">
+          The npm package gives an agent workflow a repeatable tool boundary: pass a
+          Record to a versioned command, receive scoped JSON, and keep the check separate
+          from the research model that requested it.
+        </p>
+        <p class="more"><a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">→ View on npm</a> · <a href="/docs/record-verification/">Full verifier guide →</a> · <a href="/docs/examples.json">Machine-readable examples →</a></p>
       </div>
     </section>
 
@@ -397,6 +414,7 @@ npm exec -- nomue verify records/valid.json --format json</code></pre>
   .quickstart h3 { margin-bottom: 0.65rem; font-size: 1.08rem; }
   .quickstart pre { margin: 0; overflow-x: auto; font-size: 0.78rem; line-height: 1.65; }
   .quickstart code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .package-meaning { max-width: 48rem; margin: 1.5rem 0 0; color: var(--ink-1); }
   .definition { max-width: 52rem; margin: 0 0 2.5rem; color: var(--ink); font-size: clamp(1.35rem, 2.8vw, 2rem); line-height: 1.45; }
   .capability-grid, .call-grid, .scope-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
   .capability-grid article, .call-grid article, .scope-grid article { padding: 1.5rem; border: 1px solid var(--rule); }

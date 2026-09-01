@@ -22,18 +22,33 @@ export const PUBLIC_RELEASE = {
   procedure: 'two-sided Welch two-sample t procedure',
   verifierPackage: '0.2.1-rc.0',
   verifierMaturity: 'experimental release-candidate package',
+  npmPackage: '@licklider/nomue-verifier',
+  npmDistTag: 'latest',
+  npmAccess: 'public',
+  npmUrl: 'https://www.npmjs.com/package/@licklider/nomue-verifier',
+  supportedOperatingSystems: ['Linux', 'macOS', 'Windows'],
+  testedNodeVersions: ['20', '22'],
   protocolUrl: 'https://github.com/licklider-ai/nomue-protocol',
   verifierUrl: 'https://github.com/licklider-ai/nomue-verifier',
 } as const;
 
 export const PUBLIC_CAPABILITY =
-  `Anyone can run the open-source nomue verifier locally to check a conforming Release 1 Record for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}. It recomputes the covered numerical quantities and returns a machine-readable report of the scoped checks.`;
+  `Anyone can install the public ${PUBLIC_RELEASE.npmPackage} package from npm and run nomue verify locally to check a conforming Release 1 Record for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}. It recomputes the covered numerical quantities and returns a machine-readable report of the scoped checks without calling a nomue server after installation.`;
 
 export const PRODUCT_CAPABILITY =
   'The nomue product capability for Welch verification is implemented: it protects material scientific declarations from silent inference, applies the supported decision path, runs deterministic numerical checks, and returns structured outcomes and next actions for a research agent.';
 
 export const PRODUCT_RELEASE_BOUNDARY =
-  'Public product access is being prepared. The public entry points available today are the Protocol, the local verifier, and their machine-readable documentation; a hosted nomue API or MCP endpoint is not yet open.';
+  'Public access today includes the npm-published Release 1 verifier, the Protocol, and their machine-readable documentation. A hosted nomue API or MCP endpoint is not yet open.';
+
+export const NOMUE_GLOBAL_INSTALL_COMMAND =
+  `npm install --global ${PUBLIC_RELEASE.npmPackage}`;
+
+export const NOMUE_NPX_COMMAND =
+  `npx --yes ${PUBLIC_RELEASE.npmPackage} verify ./record.json --format json`;
+
+export const NOMUE_VERIFY_COMMAND =
+  'nomue verify ./record.json --format json';
 
 export const PAIRED_T_BOUNDARY =
   'Paired-t is the next verification method under active development and open Release 2 RFC review. It will join public support only after that evidence and release process is complete.';

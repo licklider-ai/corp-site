@@ -2,7 +2,10 @@
 import type { TocItem } from '../consts';
 import {
   CORE_NON_CLAIMS,
+  NOMUE_GLOBAL_INSTALL_COMMAND,
+  NOMUE_NPX_COMMAND,
   NOMUE_POSITION,
+  NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
   PAIRED_T_RFC_URL,
   PRODUCT_CAPABILITY,
@@ -36,8 +39,8 @@ const toc: TocItem[] = [
       nomue checks a supported statistical decision, recomputes covered quantities, and
       returns a machine-readable result with its evidence, version, and next action.
     </p>
-    <p class="head-links"><a href="/docs/record-verification/">Run the public verifier →</a> · <a href={PUBLIC_RELEASE.verifierUrl} target="_blank" rel="noopener noreferrer">GitHub source ↗</a> · <a href="/docs/examples/">See examples →</a></p>
-    <p class="release-facts">Open source · local and offline · Apache-2.0 · verifier {PUBLIC_RELEASE.verifierPackage}</p>
+    <p class="head-links"><a href="/docs/record-verification/">Install and run →</a> · <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">npm package ↗</a> · <a href={PUBLIC_RELEASE.verifierUrl} target="_blank" rel="noopener noreferrer">GitHub source ↗</a> · <a href="/docs/examples/">See examples →</a></p>
+    <p class="release-facts">Public npm package · <code>{PUBLIC_RELEASE.npmDistTag}</code>: {PUBLIC_RELEASE.verifierPackage} release candidate · Linux / macOS / Windows · Node.js 20 / 22</p>
   </header>
 
   <section id="available" class="section section--lead">
@@ -58,10 +61,21 @@ const toc: TocItem[] = [
         <p>Produce scoped pass, fail, refusal, or unsupported outcomes in a JSON report.</p>
       </article>
     </div>
-    <pre class="quickstart"><code>git clone https://github.com/licklider-ai/nomue-verifier.git
-cd nomue-verifier
-npm install
-npm exec -- nomue verify records/valid.json --format json</code></pre>
+    <pre class="quickstart"><code>{NOMUE_GLOBAL_INSTALL_COMMAND}
+{NOMUE_VERIFY_COMMAND}
+
+# Or run without a global install
+{NOMUE_NPX_COMMAND}</code></pre>
+    <p>
+      After npm installs the package and its dependencies, Record verification stays on
+      the local machine and does not call a nomue server. The package path is exercised
+      in CI on Linux, macOS, and Windows with Node.js 20 and 22.
+    </p>
+    <p>
+      For an agent workflow, this is a concrete verification-call boundary: provide a
+      versioned Record to a separate command and carry its scoped JSON result back into
+      the workflow without asking the research model to judge its own calculation.
+    </p>
     <p><a href="/docs/record-verification/">Install and run the verifier →</a></p>
   </section>
 
@@ -141,8 +155,8 @@ npm exec -- nomue verify records/valid.json --format json</code></pre>
     <div class="status-list">
       <article>
         <p class="status-label">Use today</p>
-        <h3>Open Protocol and local verifier</h3>
-        <p>{`Run ${PUBLIC_RELEASE.verifierPackage} locally against the ${PUBLIC_RELEASE.protocol} support target for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`}</p>
+        <h3>Public npm package, Protocol, and local verifier</h3>
+        <p>{`Install ${PUBLIC_RELEASE.npmPackage} ${PUBLIC_RELEASE.verifierPackage} from npm and run it locally against the ${PUBLIC_RELEASE.protocol} support target for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`}</p>
         <p><a href="/docs/record-verification/">How to use the public verifier →</a></p>
       </article>
       <article>
@@ -175,6 +189,7 @@ npm exec -- nomue verify records/valid.json --format json</code></pre>
     </p>
     <p class="links">
       <a href={PUBLIC_RELEASE.protocolUrl} target="_blank" rel="noopener noreferrer">nomue Protocol →</a><br />
+      <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">nomue verifier on npm →</a><br />
       <a href={PUBLIC_RELEASE.verifierUrl} target="_blank" rel="noopener noreferrer">nomue verifier →</a>
     </p>
   </section>

@@ -4,10 +4,14 @@ import {
   COMPANY_POSITION,
   EVALUATION_BOUNDARY,
   MARKET_SCOPE,
+  NOMUE_GLOBAL_INSTALL_COMMAND,
+  NOMUE_NPX_COMMAND,
+  NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
   PLATFORM_SCOPE,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
+  PUBLIC_RELEASE,
   UPSTREAM_CONTRIBUTIONS,
 } from '../data/site-facts';
 
@@ -23,7 +27,12 @@ const content = `# Licklider
 
 - ${PUBLIC_CAPABILITY}
 - [Run the public verifier](https://www.licklider.ai/docs/record-verification.md)
-- [nomue verifier source](https://github.com/licklider-ai/nomue-verifier): Apache-2.0, local and offline
+- [${PUBLIC_RELEASE.npmPackage}](${PUBLIC_RELEASE.npmUrl}): public npm package; ${PUBLIC_RELEASE.npmDistTag} points to ${PUBLIC_RELEASE.verifierPackage}, a release candidate rather than a stable release
+- Install globally: \`${NOMUE_GLOBAL_INSTALL_COMMAND}\`
+- Verify a local Record: \`${NOMUE_VERIFY_COMMAND}\`
+- Run without a global install: \`${NOMUE_NPX_COMMAND}\`
+- Package-path CI: Linux, macOS, and Windows with Node.js 20 and 22
+- [nomue verifier source](${PUBLIC_RELEASE.verifierUrl}): Apache-2.0; Record verification remains local and does not call a nomue server after installation
 - [Fetch machine-readable examples](https://www.licklider.ai/docs/examples.json)
 
 ## Product and platform
@@ -53,8 +62,9 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 
 ## Public technical authority
 
-- [nomue Protocol](https://github.com/licklider-ai/nomue-protocol): public Layer 1 specification and Release 1 artifacts
-- [nomue verifier](https://github.com/licklider-ai/nomue-verifier): local verifier for supported Release 1 Records
+- [nomue Protocol](${PUBLIC_RELEASE.protocolUrl}): public Layer 1 specification and Release 1 artifacts
+- [nomue verifier on npm](${PUBLIC_RELEASE.npmUrl}): public release-candidate package for supported Release 1 Records
+- [nomue verifier source](${PUBLIC_RELEASE.verifierUrl}): source and release evidence
 
 ## Public upstream contributions
 

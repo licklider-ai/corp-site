@@ -13,6 +13,17 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'News',
+    type: 'Product',
+    date: 'September 1, 2026',
+    sortKey: '2026-09-01',
+    title: 'nomue verifier Release 1 candidate is available on npm',
+    summary:
+      'The public @licklider/nomue-verifier package provides a direct local command for checking supported nomue Release 1 Records.',
+    href: '/news/nomue-verifier-on-npm/',
+    status: 'Public release candidate — npm latest 0.2.1-rc.0',
+  },
+  {
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 1, 2026',

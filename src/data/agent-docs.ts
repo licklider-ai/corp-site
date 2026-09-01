@@ -2,7 +2,10 @@ import {
   CORE_NON_CLAIMS,
   EVALUATION_BOUNDARY,
   MARKET_SCOPE,
+  NOMUE_GLOBAL_INSTALL_COMMAND,
+  NOMUE_NPX_COMMAND,
   NOMUE_POSITION,
+  NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
   PLATFORM_SCOPE,
   PRODUCT_RELEASE_BOUNDARY,
@@ -59,7 +62,7 @@ export const AGENT_DOCS: AgentDoc[] = [
       'Clarify material scientific facts that are unresolved; do not infer them from data shape or prose.',
       'Stop at unsupported or inadmissible scope; do not silently substitute a nearby method.',
       'Return the scoped result together with evidence, versions, next action, and explicit non-claims.',
-      'The public implementation available today is the Release 1 Protocol and local verifier; product access is being prepared.',
+      'The public implementation available today includes the npm-published Release 1 verifier and Protocol; a hosted API or MCP endpoint is not open.',
     ],
     sections: [
       {
@@ -138,7 +141,7 @@ export const AGENT_DOCS: AgentDoc[] = [
     title: 'Verify a Release 1 nomue Record',
     description:
       'When and how to use the public local verifier for the exact Release 1 Public Draft support target.',
-    status: 'Runnable locally — verifier package 0.2.1-rc.0',
+    status: 'Public npm release candidate — @licklider/nomue-verifier 0.2.1-rc.0',
     updated: 'September 1, 2026',
     llmSummary: [
       `Run the public verifier locally for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
@@ -146,7 +149,9 @@ export const AGENT_DOCS: AgentDoc[] = [
       'Use the local verifier only for an existing conforming nomue Record that declares that exact bundle.',
       'Inspect the JSON report; exit codes are routing signals, not scientific verdicts.',
       'Exit code 0 means all applicable scoped checks passed, not that the research is verified overall.',
-      'The public entry points available today are the Protocol, local verifier, and machine-readable documentation.',
+      `Install ${PUBLIC_RELEASE.npmPackage} from npm globally, or run it through npx without a global install.`,
+      'After installation, Record verification runs locally and does not call a nomue server.',
+      'The npm latest dist-tag currently points to 0.2.1-rc.0, which is a release candidate, not a stable release.',
     ],
     sections: [
       {
@@ -160,7 +165,8 @@ export const AGENT_DOCS: AgentDoc[] = [
         bullets: [
           `Profile: ${PUBLIC_RELEASE.profile}.`,
           `Procedure: ${PUBLIC_RELEASE.procedure}.`,
-          `Verifier package: ${PUBLIC_RELEASE.verifierPackage}, an ${PUBLIC_RELEASE.verifierMaturity}.`,
+          `npm package: ${PUBLIC_RELEASE.npmPackage} ${PUBLIC_RELEASE.verifierPackage}, an ${PUBLIC_RELEASE.verifierMaturity}, published with public access under the ${PUBLIC_RELEASE.npmDistTag} dist-tag.`,
+          `Tested package path: ${PUBLIC_RELEASE.supportedOperatingSystems.join(', ')} with Node.js ${PUBLIC_RELEASE.testedNodeVersions.join(' and ')}.`,
         ],
       },
       {
@@ -168,7 +174,7 @@ export const AGENT_DOCS: AgentDoc[] = [
         title: 'When to use the verifier',
         bullets: [
           'You already have a nomue Record that declares the exact Release 1 interpretation bundle.',
-          'You need local, offline checks of the supported Record properties.',
+          'You need local checks of the supported Record properties after package installation.',
           'You can inspect the machine-readable JSON report rather than relying only on the process exit code.',
           'You accept the Public Draft and release-candidate maturity of the artifacts.',
         ],
@@ -188,17 +194,27 @@ export const AGENT_DOCS: AgentDoc[] = [
         id: 'run',
         title: 'Run the public verifier',
         paragraphs: [
-          'After cloning the public verifier repository and installing its dependencies, run the valid and mismatch fixtures:',
+          'Install the public package globally to make the nomue command available, then verify a local Record:',
         ],
-        code: `git clone https://github.com/licklider-ai/nomue-verifier.git
-cd nomue-verifier
-npm install
+        code: `${NOMUE_GLOBAL_INSTALL_COMMAND}
+${NOMUE_VERIFY_COMMAND}
 
-npm exec -- nomue verify records/valid.json --format json
-npm exec -- nomue verify records/invalid-result-mismatch.json --format json`,
+# Or run without a global install
+${NOMUE_NPX_COMMAND}`,
         example: true,
         note:
-          'The first fixture exits 0. The mismatch fixture exits 2. Scripts must inspect the JSON report to learn the exact scoped outcomes.',
+          'The npm latest dist-tag currently resolves to 0.2.1-rc.0. This is a release candidate, not a stable release. Scripts must inspect the JSON report to learn the exact scoped outcomes.',
+      },
+      {
+        id: 'package-behavior',
+        title: 'Package and runtime behavior',
+        bullets: [
+          'The package is publicly accessible on npm.',
+          'The global nomue command and the npx path are both release-tested.',
+          'Package-path CI runs on Linux, macOS, and Windows with Node.js 20 and 22.',
+          'After npm installs the package dependencies, Record verification does not call a nomue server.',
+          'The verifier does not fetch Record-supplied URIs, load remote schemas, or execute Record-supplied code.',
+        ],
       },
       {
         id: 'exit-codes',
@@ -219,6 +235,7 @@ npm exec -- nomue verify records/invalid-result-mismatch.json --format json`,
         title: 'Common mistakes LLMs make with statistical verification',
         bullets: [
           'Treating exit code 0 as an overall VERIFIED status.',
+          'Treating the npm latest dist-tag as a stable-release claim; the published version is 0.2.1-rc.0.',
           'Assuming that a nearby bundle version or similar statistical method is supported.',
           'Assuming that numerical agreement establishes scientific truth.',
           'Allowing the verifier to fetch a Record-supplied URI or execute Record-supplied code; the public verifier does neither.',
@@ -229,6 +246,7 @@ npm exec -- nomue verify records/invalid-result-mismatch.json --format json`,
         title: 'Public evidence and authority',
         links: [
           { label: 'nomue Protocol', href: PUBLIC_RELEASE.protocolUrl },
+          { label: 'nomue verifier on npm', href: PUBLIC_RELEASE.npmUrl },
           { label: 'nomue verifier', href: PUBLIC_RELEASE.verifierUrl },
           {
             label: 'Verification principles',
@@ -319,7 +337,7 @@ npm exec -- nomue verify records/invalid-result-mismatch.json --format json`,
     status: 'Public examples — executable examples use the Release 1 verifier fixtures',
     updated: 'September 1, 2026',
     llmSummary: [
-      'The valid and mismatch fixture commands are executable only after installing the public verifier repository.',
+      'The valid and mismatch fixture commands use a cloned source checkout; ordinary local Records can be checked with the npm-installed nomue command or through npx.',
       'A valid fixture should produce exit code 0 and scoped JSON results; do not summarize it as overall research verification.',
       'A mismatch should produce exit code 2 and preserve the failed scoped check.',
       'If experimental-unit meaning is unresolved, request clarification instead of inferring independence.',
@@ -390,7 +408,7 @@ npm exec -- nomue verify records/invalid-result-mismatch.json --format json`,
     updated: 'September 1, 2026',
     llmSummary: [
       `Run the public verifier locally for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
-      'The agent-callable Welch product capability is implemented and public product access is being prepared.',
+      'The Release 1 verifier is public on npm; the hosted agent-callable API or MCP endpoint is not open.',
       'Paired t is open Release 2 RFC work, not current Release 1 support.',
       'Verification calls across AI research describe the platform category; each additional capability must be evidenced and released separately.',
       'A supported verification does not establish source-data truth, overall research correctness, causal truth, or publication acceptance.',
@@ -402,7 +420,7 @@ npm exec -- nomue verify records/invalid-result-mismatch.json --format json`,
         title: 'Available now',
         paragraphs: [
           PUBLIC_CAPABILITY,
-          `${PUBLIC_RELEASE.protocol} and verifier ${PUBLIC_RELEASE.verifierPackage} are the current public artifacts.`,
+          `${PUBLIC_RELEASE.protocol} and public npm package ${PUBLIC_RELEASE.npmPackage} ${PUBLIC_RELEASE.verifierPackage} are the current public artifacts.`,
           PRODUCT_RELEASE_BOUNDARY,
         ],
       },

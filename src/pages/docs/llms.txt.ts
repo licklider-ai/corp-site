@@ -3,7 +3,14 @@ import {
   AGENT_DOCS,
   DOCS_INDEX_MARKDOWN,
 } from '../../data/agent-docs';
-import { PRODUCT_RELEASE_BOUNDARY, PUBLIC_CAPABILITY } from '../../data/site-facts';
+import {
+  NOMUE_GLOBAL_INSTALL_COMMAND,
+  NOMUE_NPX_COMMAND,
+  NOMUE_VERIFY_COMMAND,
+  PRODUCT_RELEASE_BOUNDARY,
+  PUBLIC_CAPABILITY,
+  PUBLIC_RELEASE,
+} from '../../data/site-facts';
 
 const content = `# Licklider agent-readable documentation
 
@@ -12,6 +19,12 @@ const content = `# Licklider agent-readable documentation
 ## Available now
 
 - ${PUBLIC_CAPABILITY}
+- npm package: [${PUBLIC_RELEASE.npmPackage}](${PUBLIC_RELEASE.npmUrl})
+- npm ${PUBLIC_RELEASE.npmDistTag}: ${PUBLIC_RELEASE.verifierPackage}, a release candidate rather than a stable release
+- Install: \`${NOMUE_GLOBAL_INSTALL_COMMAND}\`
+- Verify: \`${NOMUE_VERIFY_COMMAND}\`
+- No global install: \`${NOMUE_NPX_COMMAND}\`
+- Tested package path: Linux, macOS, and Windows with Node.js 20 and 22
 - [Run the verifier](https://www.licklider.ai/docs/record-verification.md)
 - [Machine-readable examples](https://www.licklider.ai/docs/examples.json)
 

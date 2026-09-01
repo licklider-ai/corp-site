@@ -1,0 +1,103 @@
+---
+import {
+  NOMUE_GLOBAL_INSTALL_COMMAND,
+  NOMUE_NPX_COMMAND,
+  NOMUE_VERIFY_COMMAND,
+  PUBLIC_RELEASE,
+} from '../../data/site-facts';
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'available', label: 'What is available' },
+  { id: 'run', label: 'Install and run' },
+  { id: 'package-path', label: 'Tested package path' },
+  { id: 'local-boundary', label: 'Local verification boundary' },
+  { id: 'release-status', label: 'Release status and scope' },
+];
+---
+
+<PublicationLayout
+  category="News"
+  type="Product"
+  title="nomue verifier Release 1 candidate is available on npm"
+  description="The public @licklider/nomue-verifier package provides a direct local command for checking supported nomue Release 1 Records."
+  published="September 1, 2026"
+  status="Public release candidate — npm latest 0.2.1-rc.0"
+  toc={toc}
+>
+  <section id="available">
+    <h2>What is available</h2>
+    <p>
+      <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer"><code>{PUBLIC_RELEASE.npmPackage}</code></a>
+      {' '}is publicly available on npm at version <code>{PUBLIC_RELEASE.verifierPackage}</code>.
+      It exposes the <code>nomue</code> command for checking a local Record under the
+      exact nomue Protocol Release 1 support target.
+    </p>
+    <p>
+      The package turns the public verifier from a source checkout into a direct tool
+      path: install the command globally, or invoke the same package through{' '}
+      <code>npx</code> when a global install is not wanted. Source and release evidence
+      remain available in the <a href={PUBLIC_RELEASE.verifierUrl} target="_blank" rel="noopener noreferrer">public GitHub repository</a>.
+    </p>
+  </section>
+
+  <section id="run">
+    <h2>Install and run</h2>
+    <pre><code>{NOMUE_GLOBAL_INSTALL_COMMAND}
+{NOMUE_VERIFY_COMMAND}</code></pre>
+    <p>Or run the package without installing a global command:</p>
+    <pre><code>{NOMUE_NPX_COMMAND}</code></pre>
+    <p>
+      Replace <code>./record.json</code> with the path to a conforming nomue Record and
+      inspect the returned JSON report for the individual scoped outcomes.
+    </p>
+  </section>
+
+  <section id="package-path">
+    <h2>Tested package path</h2>
+    <p>
+      The package path has passed CI on Linux, macOS, and Windows with Node.js 20 and
+      22. Release checks exercise global installation, <code>nomue verify</code>, and the
+      npm-exec-equivalent <code>npx</code> path rather than testing only the repository's
+      internal source layout.
+    </p>
+  </section>
+
+  <section id="local-boundary">
+    <h2>Local verification boundary</h2>
+    <p>
+      npm must first obtain the package and its dependencies. After installation, Record
+      verification runs on the local machine and does not call a nomue server. The
+      verifier also does not fetch Record-supplied URIs, load remote schemas, or execute
+      Record-supplied code.
+    </p>
+    <p>
+      This makes the public package an independently runnable verification surface. It
+      is not an announcement of a hosted nomue API or MCP endpoint.
+    </p>
+  </section>
+
+  <section id="release-status">
+    <h2>Release status and exact scope</h2>
+    <div class="notice">
+      <p>
+        npm's <code>{PUBLIC_RELEASE.npmDistTag}</code> dist-tag currently points to{' '}
+        <code>{PUBLIC_RELEASE.verifierPackage}</code>. The package is a release candidate,
+        not a stable release.
+      </p>
+    </div>
+    <p>
+      The sole Release 1 bundle supported by this package is
+      {' '}<code>{PUBLIC_RELEASE.bundle}</code>. It covers {PUBLIC_RELEASE.profile} under the{' '}
+      {PUBLIC_RELEASE.procedure}. Other procedures and nearby bundle versions are not
+      implied by installation or by the npm dist-tag.
+    </p>
+    <p>
+      A clean report means that the named checks passed under that exact scope. It does
+      not establish that the source data or researcher declarations are true, that the
+      study is scientifically valid overall, or that a scientific conclusion is true.
+      See the <a href={PUBLIC_RELEASE.protocolUrl} target="_blank" rel="noopener noreferrer">nomue Protocol</a>{' '}
+      for the authoritative Record and verification semantics.
+    </p>
+  </section>
+</PublicationLayout>

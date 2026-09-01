@@ -16,6 +16,7 @@ const toc = [
   title="nomue Protocol Release 1 Public Draft is now available"
   description="The first public draft of the nomue Protocol is available with a machine-readable Record specification, local verification, public fixtures, and signed release artifacts."
   published="August 24, 2026"
+  updated="September 1, 2026"
   status="Public Draft — experimental"
   toc={toc}
 >
@@ -50,16 +51,14 @@ const toc = [
       and whether stored Welch results match a fresh calculation under the registered
       rules.
     </p>
-    <pre><code>git clone https://github.com/licklider-ai/nomue-verifier.git
-cd nomue-verifier
-npm install
+    <pre><code>npm install --global @licklider/nomue-verifier
+nomue verify ./record.json --format json
 
-npm exec -- nomue verify records/valid.json --format json
-npm exec -- nomue verify records/invalid-result-mismatch.json --format json</code></pre>
+# Or run without a global install
+npx --yes @licklider/nomue-verifier verify ./record.json --format json</code></pre>
     <p>
-      The first public fixture is expected to pass every check supported by this version.
-      The second deliberately contains a reported-result mismatch and is expected to fail
-      the relevant check.
+      The verifier source repository also carries a valid public fixture and an
+      intentionally mismatched fixture for inspecting both result paths.
     </p>
   </section>
 
