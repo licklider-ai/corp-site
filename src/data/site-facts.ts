@@ -30,6 +30,10 @@ export const PUBLIC_RELEASE = {
   testedNodeVersions: ['20', '22'],
   protocolUrl: 'https://github.com/licklider-ai/nomue-protocol',
   verifierUrl: 'https://github.com/licklider-ai/nomue-verifier',
+  verifierCiUrl:
+    'https://github.com/licklider-ai/nomue-verifier/actions/workflows/ci.yml',
+  verifierLicenseUrl:
+    'https://github.com/licklider-ai/nomue-verifier/blob/main/LICENSE',
 } as const;
 
 export const PUBLIC_CAPABILITY =
@@ -39,7 +43,7 @@ export const PRODUCT_CAPABILITY =
   'The nomue product capability for Welch verification is implemented: it protects material scientific declarations from silent inference, applies the supported decision path, runs deterministic numerical checks, and returns structured outcomes and next actions for a research agent.';
 
 export const PRODUCT_RELEASE_BOUNDARY =
-  'Public access today includes the npm-published Release 1 verifier, the Protocol, and their machine-readable documentation. A hosted nomue API or MCP endpoint is not yet open.';
+  'Use the npm-published Release 1 verifier, the Protocol, and their machine-readable documentation today. Hosted nomue API or MCP access is not open; any public release will be announced in Latest and the RSS feed.';
 
 export const NOMUE_GLOBAL_INSTALL_COMMAND =
   `npm install --global ${PUBLIC_RELEASE.npmPackage}`;
@@ -49,6 +53,9 @@ export const NOMUE_NPX_COMMAND =
 
 export const NOMUE_VERIFY_COMMAND =
   'nomue verify ./record.json --format json';
+
+export const NOMUE_CLI_USAGE =
+  'usage: nomue <verify|canonicalize|digest> <record.json> [--format json|json-compact|human]';
 
 export const PAIRED_T_BOUNDARY =
   'Paired-t is the next verification method under active development and open Release 2 RFC review. It will join public support only after that evidence and release process is complete.';

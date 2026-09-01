@@ -48,6 +48,8 @@ const verifierStructuredData = {
     'Local and offline Record verification',
     'Welch result recomputation',
     'Machine-readable scoped verification reports',
+    'Local Record canonical digest projection',
+    'Local Record content digest recomputation',
   ],
 };
 ---
@@ -106,6 +108,20 @@ const verifierStructuredData = {
             <p>Give the research agent scoped results, versions, and an actionable outcome.</p>
           </article>
         </div>
+        <nav class="package-signals" aria-label="Public verifier package facts">
+          <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">
+            <span>npm</span> {PUBLIC_RELEASE.verifierPackage} RC
+          </a>
+          <a href={PUBLIC_RELEASE.verifierCiUrl} target="_blank" rel="noopener noreferrer">
+            <span>CI</span> 3 OS × 2 Node versions
+          </a>
+          <a href={PUBLIC_RELEASE.verifierLicenseUrl} target="_blank" rel="noopener noreferrer">
+            <span>License</span> Apache-2.0
+          </a>
+          <a href="/docs/cli-reference/">
+            <span>CLI</span> 3 commands
+          </a>
+        </nav>
         <div class="quickstart">
           <div>
             <p class="step">Quick start</p>
@@ -125,9 +141,10 @@ const verifierStructuredData = {
         <p class="package-meaning">
           The npm package gives an agent workflow a repeatable tool boundary: pass a
           Record to a versioned command, receive scoped JSON, and keep the check separate
-          from the research model that requested it.
+          from the research model that requested it. The same CLI also provides
+          <code>canonicalize</code> and <code>digest</code> for local Record processing.
         </p>
-        <p class="more"><a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">→ View on npm</a> · <a href="/docs/record-verification/">Full verifier guide →</a> · <a href="/docs/examples.json">Machine-readable examples →</a></p>
+        <p class="more"><a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">→ View on npm</a> · <a href="/docs/record-verification/">Full verifier guide →</a> · <a href="/docs/cli-reference/">CLI reference →</a> · <a href="/docs/examples.json">Machine-readable examples →</a></p>
       </div>
     </section>
 
@@ -247,6 +264,7 @@ const verifierStructuredData = {
             <h2>Welch verification for agent workflows</h2>
             <p>{PRODUCT_CAPABILITY}</p>
             <p class="availability-note">{PRODUCT_RELEASE_BOUNDARY}</p>
+            <p class="availability-links"><a href="/latest/">Latest →</a> · <a href="/rss.xml">RSS →</a></p>
           </article>
           <article>
             <p class="scope-label">Platform</p>
@@ -410,6 +428,10 @@ const verifierStructuredData = {
   .available-band { padding-top: 4.5rem; }
   .available-title { max-width: 48rem; margin: 0 0 1rem; font-size: clamp(1.8rem, 3.8vw, 2.8rem); line-height: 1.2; letter-spacing: -0.01em; }
   .available-copy { max-width: 48rem; margin-bottom: 2.25rem; color: var(--ink-1); font-size: 1.08rem; }
+  .package-signals { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 1.25rem 0; }
+  .package-signals a { display: inline-flex; gap: 0.45rem; align-items: center; padding: 0.42rem 0.62rem; border: 1px solid var(--rule); color: var(--ink-2); font-size: 0.75rem; text-decoration: none; }
+  .package-signals a:hover { border-color: var(--ink); color: var(--ink); }
+  .package-signals span { color: var(--ink); font-weight: 600; }
   .quickstart { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.5fr); gap: 2rem; align-items: start; margin-top: 1rem; padding: 1.5rem; border: 1px solid var(--rule); background: var(--wash); }
   .quickstart h3 { margin-bottom: 0.65rem; font-size: 1.08rem; }
   .quickstart pre { margin: 0; overflow-x: auto; font-size: 0.78rem; line-height: 1.65; }

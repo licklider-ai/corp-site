@@ -2,6 +2,7 @@ import {
   CORE_NON_CLAIMS,
   EVALUATION_BOUNDARY,
   MARKET_SCOPE,
+  NOMUE_CLI_USAGE,
   NOMUE_GLOBAL_INSTALL_COMMAND,
   NOMUE_NPX_COMMAND,
   NOMUE_POSITION,
@@ -248,6 +249,7 @@ ${NOMUE_NPX_COMMAND}`,
           { label: 'nomue Protocol', href: PUBLIC_RELEASE.protocolUrl },
           { label: 'nomue verifier on npm', href: PUBLIC_RELEASE.npmUrl },
           { label: 'nomue verifier', href: PUBLIC_RELEASE.verifierUrl },
+          { label: 'nomue CLI reference', href: '/docs/cli-reference/' },
           {
             label: 'Verification principles',
             href: 'https://github.com/licklider-ai/nomue-protocol/blob/main/spec/core/verification-principles.md',
@@ -256,6 +258,129 @@ ${NOMUE_NPX_COMMAND}`,
             label: 'Interpretation bundle registry',
             href: 'https://github.com/licklider-ai/nomue-protocol/blob/main/registries/interpretation-bundles.yaml',
           },
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'cli-reference',
+    title: 'nomue CLI reference',
+    description:
+      'The exact public command surface shipped by @licklider/nomue-verifier 0.2.1-rc.0, including current help and version boundaries.',
+    status: 'Public CLI reference — release candidate 0.2.1-rc.0',
+    updated: 'September 1, 2026',
+    llmSummary: [
+      `Install ${PUBLIC_RELEASE.npmPackage} globally or run the package through npx.`,
+      'The current public subcommands are verify, canonicalize, and digest.',
+      'nomue --help and nomue --version are not implemented commands in 0.2.1-rc.0.',
+      'Do not invent help or version output; use this reference and npm package metadata.',
+      'verify always writes machine-readable JSON to stdout; --format controls whether and how a human summary is also written to stderr.',
+      'canonicalize and digest are Record-processing utilities, not broader scientific-verification claims.',
+    ],
+    sections: [
+      {
+        id: 'install',
+        title: 'Install or run without a global command',
+        code: `${NOMUE_GLOBAL_INSTALL_COMMAND}
+
+# Or invoke the package without a global install
+${NOMUE_NPX_COMMAND}`,
+        example: true,
+        note:
+          'The npm latest dist-tag currently points to 0.2.1-rc.0, a release candidate rather than a stable release.',
+      },
+      {
+        id: 'commands',
+        title: 'Available subcommands',
+        table: {
+          headers: ['Command', 'Current behavior'],
+          rows: [
+            [
+              'nomue verify <record.json> [--format json|json-compact|human]',
+              'Verify a local Record. Machine-readable JSON is written to stdout. The format flag controls only whether and how a human summary is also written to stderr.',
+            ],
+            [
+              'nomue canonicalize <record.json>',
+              'Write the Record canonical digest projection to stdout after strict local parsing and limit checks.',
+            ],
+            [
+              'nomue digest <record.json>',
+              'Recompute the Record content digest and write a JSON object containing content_digest to stdout.',
+            ],
+          ],
+        },
+      },
+      {
+        id: 'usage-output',
+        title: 'Usage line available before installation',
+        paragraphs: [
+          'The public package wrapper currently defines the following usage line. This page publishes it so a person or agent can inspect the command shape before installing the package.',
+        ],
+        code: NOMUE_CLI_USAGE,
+        note:
+          'Running nomue without the required command and file path writes this line to stderr and exits with code 5.',
+      },
+      {
+        id: 'help-version',
+        title: 'Help and version behavior in 0.2.1-rc.0',
+        paragraphs: [
+          'The current release candidate does not implement nomue --help, nomue verify --help, or nomue --version as commands. Do not construct a tool call that assumes those flags exist.',
+          'nomue --help and nomue --version produce the usage-error path because a file argument is missing. nomue verify --help treats --help as a file path rather than as a help flag. The package version should be read from npm metadata or package.json.',
+        ],
+      },
+      {
+        id: 'exit-codes',
+        title: 'Process exit codes',
+        table: {
+          headers: ['Code', 'Meaning'],
+          rows: [
+            ['0', 'The command completed; for verify, every applicable scoped check outcome is pass.'],
+            ['2', 'A scoped check failed, or parsing or canonicalization was refused.'],
+            ['3', 'Routing failed or the declared bundle is unsupported; no verification report exists.'],
+            ['4', 'The verifier refused safely because a resource limit was reached.'],
+            ['5', 'Usage, input/output, or internal failure prevented completion.'],
+          ],
+        },
+        note:
+          'Exit codes are routing and process signals. They do not establish whether the research is scientifically correct overall.',
+      },
+      {
+        id: 'when-to-use',
+        title: 'When to use these commands',
+        bullets: [
+          'Use verify for a conforming local Record that declares the exact supported Release 1 bundle.',
+          'Use canonicalize when you need the package-defined canonical digest projection of a local Record.',
+          'Use digest when you need to recompute the local Record content digest.',
+          'Parse stdout as machine-readable output and preserve the exact process exit code.',
+        ],
+      },
+      {
+        id: 'when-not-to-use',
+        title: 'When not to use these commands',
+        bullets: [
+          'Do not use --help or --version as if they were implemented flags in this release candidate.',
+          'Do not treat canonicalize or digest as an overall verification of the Record or research.',
+          'Do not expect the CLI to fetch remote Records, schemas, or Record-supplied URIs.',
+          'Do not silently replace an unsupported method or bundle with a nearby supported one.',
+        ],
+      },
+      {
+        id: 'authority',
+        title: 'Implementation sources',
+        links: [
+          {
+            label: 'Public package README',
+            href: `${PUBLIC_RELEASE.verifierUrl}/blob/main/README.md`,
+          },
+          {
+            label: 'Public nomue command wrapper',
+            href: `${PUBLIC_RELEASE.verifierUrl}/blob/main/bin/nomue.cjs`,
+          },
+          {
+            label: 'Reference verifier CLI implementation',
+            href: `${PUBLIC_RELEASE.verifierUrl}/blob/main/reference/verifier/src/cli.ts`,
+          },
+          { label: 'Record verification guide', href: '/docs/record-verification/' },
         ],
       },
     ],
@@ -575,6 +700,7 @@ ${NOMUE_POSITION}
 
 - ${PUBLIC_CAPABILITY}
 - [Run the verifier](https://www.licklider.ai/docs/record-verification.md)
+- [Inspect the exact CLI](https://www.licklider.ai/docs/cli-reference.md)
 - [Use machine-readable examples](https://www.licklider.ai/docs/examples.json)
 
 ## Product and roadmap

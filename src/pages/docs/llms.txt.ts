@@ -20,6 +20,7 @@ const content = `# Licklider agent-readable documentation
 
 - ${PUBLIC_CAPABILITY}
 - npm package: [${PUBLIC_RELEASE.npmPackage}](${PUBLIC_RELEASE.npmUrl})
+- CLI reference: [exact command surface](https://www.licklider.ai/docs/cli-reference.md), including the absence of help and version commands in 0.2.1-rc.0
 - npm ${PUBLIC_RELEASE.npmDistTag}: ${PUBLIC_RELEASE.verifierPackage}, a release candidate rather than a stable release
 - Install: \`${NOMUE_GLOBAL_INSTALL_COMMAND}\`
 - Verify: \`${NOMUE_VERIFY_COMMAND}\`

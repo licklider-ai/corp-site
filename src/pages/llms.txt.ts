@@ -27,6 +27,7 @@ const content = `# Licklider
 
 - ${PUBLIC_CAPABILITY}
 - [Run the public verifier](https://www.licklider.ai/docs/record-verification.md)
+- [Inspect the exact CLI](https://www.licklider.ai/docs/cli-reference.md): shipped subcommands, arguments, output behavior, and unsupported help/version flags
 - [${PUBLIC_RELEASE.npmPackage}](${PUBLIC_RELEASE.npmUrl}): public npm package; ${PUBLIC_RELEASE.npmDistTag} points to ${PUBLIC_RELEASE.verifierPackage}, a release candidate rather than a stable release
 - Install globally: \`${NOMUE_GLOBAL_INSTALL_COMMAND}\`
 - Verify a local Record: \`${NOMUE_VERIFY_COMMAND}\`

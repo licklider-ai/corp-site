@@ -11,15 +11,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const company = [
   { term: 'Company', detail: 'Licklider, Inc.' },
+  { term: 'Founder and CEO', detail: 'Tasuku Kobayashi' },
   { term: 'Headquarters', detail: 'N&E BLD. 7F, 1-12-4 Ginza, Chuo-ku, Tokyo, Japan' },
   { term: 'Founded', detail: 'July 2024' },
 ];
 const mergedUpstreamFixes = UPSTREAM_CONTRIBUTIONS.filter(
   (item) => item.outcome === 'fix_merged',
 );
+const founderStructuredData = {
+  '@type': 'Person',
+  '@id': new URL('/about/#tasuku-kobayashi', Astro.site).href,
+  name: 'Tasuku Kobayashi',
+  jobTitle: 'Founder and CEO',
+  worksFor: { '@id': new URL('/#organization', Astro.site).href },
+};
 ---
 
-<BaseLayout title="About">
+<BaseLayout title="About" structuredData={founderStructuredData}>
   <section class="page-hero">
     <div class="page-hero-inner">
       <p class="eyebrow">About</p>
@@ -146,6 +154,18 @@ const mergedUpstreamFixes = UPSTREAM_CONTRIBUTIONS.filter(
       </div>
     </section>
 
+    <section id="tasuku-kobayashi" class="band">
+      <p class="eyebrow">Founder</p>
+      <div class="band-body founder-profile">
+        <h2>Tasuku Kobayashi</h2>
+        <p class="founder-role">Founder and CEO</p>
+        <p>
+          Tasuku Kobayashi founded Licklider and leads the company’s product, Protocol,
+          research, and engineering work.
+        </p>
+      </div>
+    </section>
+
     <section class="band">
       <p class="eyebrow">Company</p>
       <div class="band-body">
@@ -183,6 +203,8 @@ const mergedUpstreamFixes = UPSTREAM_CONTRIBUTIONS.filter(
   .evidence-list h2 { margin-bottom: 0.65rem; font-size: 1.02rem; }
   .evidence-status { margin-bottom: 0.5rem; color: var(--ink-3); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
   .why { display: grid; grid-template-columns: minmax(0, var(--measure)) 10rem; gap: 4rem; align-items: start; }
+  .founder-profile h2 { margin-bottom: 0.35rem; font-size: 1.25rem; }
+  .founder-role { margin-bottom: 1rem; color: var(--ink-3); font-size: 0.85rem; }
   .company { display: grid; grid-template-columns: 9rem minmax(0, 1fr); row-gap: 0.5rem; margin: 0; font-size: 0.95rem; }
   .company dt { padding-top: 0.15rem; color: var(--ink-3); font-size: 0.85rem; }
   .company dd { margin: 0; }
