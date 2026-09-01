@@ -1,10 +1,80 @@
 ---
 import { publicationsFor } from '../../data/publications';
+import { PAIRED_T_BOUNDARY } from '../../data/site-facts';
 import PublicationIndexLayout from '../../layouts/PublicationIndexLayout.astro';
+
+const pairedTSeries = [
+  {
+    step: '1 · Proof pipeline',
+    title: 'Certifying paired-t numerical evidence before protocol support',
+    href: '/engineering/certifying-paired-t-numerical-evidence/',
+  },
+  {
+    step: '2 · Floating-point boundaries',
+    title: 'Testing a paired-t evaluator at floating-point boundaries',
+    href: '/engineering/testing-paired-t-floating-point-boundaries/',
+  },
+  {
+    step: '3 · Tables and per-input checks',
+    title: 'Building paired-t numerical tables and input-specific error checks',
+    href: '/engineering/building-paired-t-tables-and-error-checks/',
+  },
+  {
+    step: '4 · Full p-value path',
+    title: 'Tracing a paired-t calculation from observations to p-value',
+    href: '/engineering/tracing-paired-t-from-observations-to-pvalue/',
+  },
+  {
+    step: '5 · Reviewed numerical closure',
+    title: 'Bounding numerical error from paired observations to p-values',
+    href: '/engineering/bounding-paired-t-arithmetic-and-pvalues/',
+  },
+];
 ---
 
 <PublicationIndexLayout
   title="Engineering"
   description="Reproducible numerical checks, implementation work, and upstream contributions to scientific software including SciPy, Boost.Math, and R."
   items={publicationsFor('Engineering')}
-/>
+>
+  <section slot="before-list" class="series" aria-labelledby="paired-t-series">
+    <div class="series-inner">
+      <p class="eyebrow">Engineering series</p>
+      <h2 id="paired-t-series">How the paired-t evidence was built</h2>
+      <p class="series-lead">
+        Five notes follow the work from a proof pipeline to reviewed end-to-end
+        numerical evidence. Read them in order to see what each stage established and
+        how later review narrowed the remaining questions.
+      </p>
+      <ol>
+        {pairedTSeries.map((item) => (
+          <li>
+            <span>{item.step}</span>
+            <a href={item.href}>{item.title}</a>
+          </li>
+        ))}
+      </ol>
+      <p class="series-status">{PAIRED_T_BOUNDARY}</p>
+    </div>
+  </section>
+</PublicationIndexLayout>
+
+<style>
+  .series { border-bottom: 1px solid var(--rule-faint); background: var(--wash); }
+  .series-inner { max-width: var(--shell); margin: 0 auto; padding: 3.5rem var(--gutter); }
+  .series h2 { margin: 0.8rem 0 1rem; font-size: clamp(1.5rem, 3vw, 2rem); }
+  .series-lead, .series-status { max-width: 48rem; }
+  .series ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin: 2rem 0 1.5rem; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
+  .series li { display: flex; flex-direction: column; gap: 0.35rem; padding: 1rem 1.1rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .series li:nth-child(odd) { border-left: 1px solid var(--rule); }
+  .series li:last-child { grid-column: 1 / -1; }
+  .series li span { color: var(--ink-3); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .series-status { margin: 0; color: var(--ink-2); font-size: 0.9rem; }
+
+  @media (max-width: 700px) {
+    .series-inner { padding-block: 2.75rem; }
+    .series ol { grid-template-columns: minmax(0, 1fr); }
+    .series li, .series li:nth-child(odd) { border-left: 1px solid var(--rule); }
+    .series li:last-child { grid-column: auto; }
+  }
+</style>

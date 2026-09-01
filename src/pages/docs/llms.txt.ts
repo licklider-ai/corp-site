@@ -4,12 +4,15 @@ import {
   DOCS_INDEX_MARKDOWN,
 } from '../../data/agent-docs';
 import {
+  METHOD_IDENTITY_FINDING,
   NOMUE_GLOBAL_INSTALL_COMMAND,
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
+  PAIRED_T_BOUNDARY,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
+  PUBLIC_TRUST_EVIDENCE,
 } from '../../data/site-facts';
 
 const content = `# Licklider agent-readable documentation
@@ -28,6 +31,7 @@ const content = `# Licklider agent-readable documentation
 - Tested package path: Linux, macOS, and Windows with Node.js 20 and 22
 - [Run the verifier](https://www.licklider.ai/docs/record-verification.md)
 - [Machine-readable examples](https://www.licklider.ai/docs/examples.json)
+- ${PUBLIC_TRUST_EVIDENCE}
 
 ## Start here
 
@@ -44,6 +48,12 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 ## Product access
 
 - ${PRODUCT_RELEASE_BOUNDARY}
+- ${PAIRED_T_BOUNDARY}
+
+## Research finding that informs call selection
+
+- ${METHOD_IDENTITY_FINDING}
+- This is a source-bounded Research finding. It does not add or change Protocol support.
 `;
 
 export const GET: APIRoute = () =>

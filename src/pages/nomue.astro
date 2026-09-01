@@ -12,6 +12,7 @@ import {
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
+  PUBLIC_TRUST_EVIDENCE,
 } from '../data/site-facts';
 import PageLayout from '../layouts/PageLayout.astro';
 
@@ -50,11 +51,11 @@ const toc: TocItem[] = [
     <div class="capability-list">
       <article>
         <h3>Check the exact bundle</h3>
-        <p>Confirm that the Record uses the registered Release 1 profile, procedure, and version.</p>
+        <p>Confirm that the Record uses the published Release 1 profile, procedure, and version.</p>
       </article>
       <article>
         <h3>Recompute covered quantities</h3>
-        <p>Compare registered numerical results under the published verification rule.</p>
+        <p>Recalculate the covered numbers and compare them using the published rule.</p>
       </article>
       <article>
         <h3>Return structured evidence</h3>
@@ -89,9 +90,8 @@ const toc: TocItem[] = [
     <p>{NOMUE_POSITION}</p>
     <p>{PRODUCT_CAPABILITY}</p>
     <p>
-      The product question is deliberately narrow: given these research conditions and
-      this calculation or result, may the result be relied on for this explicitly
-      bounded meaning?
+      nomue asks a precise question: given these research conditions and this calculation
+      or result, what exactly can be checked, and what does that check establish?
     </p>
     <p>
       The result tells the agent what to do next: execute a supported path, ask for one
@@ -132,20 +132,20 @@ const toc: TocItem[] = [
     <h2>How a verification call works</h2>
     <ol class="call-steps">
       <li>
-        <strong>Identify.</strong> The agent names the exact capability, version, and
-        question rather than asking for generic correctness.
+        <strong>Name the check.</strong> The agent identifies the exact question and
+        version instead of asking whether the whole analysis is “correct.”
       </li>
       <li>
-        <strong>Declare.</strong> Required scientific facts are supplied by an authorized
-        source or remain explicitly unresolved; the model does not fill them in.
+        <strong>Supply the facts.</strong> Required scientific information comes from an
+        authorized source. If it is unknown, it stays unknown instead of being guessed.
       </li>
       <li>
-        <strong>Decide.</strong> nomue determines whether the supported path can proceed,
-        needs clarification, or must stop.
+        <strong>Choose the next action.</strong> nomue decides whether the check can run,
+        needs clarification, falls outside current support, or must stop.
       </li>
       <li>
-        <strong>Check.</strong> A supported numerical answer comes from deterministic
-        execution and the applicable verification contract, not generated prose.
+        <strong>Run the check.</strong> A supported numerical answer comes from a fixed
+        calculation and its published rule, not generated prose.
       </li>
       <li>
         <strong>Return the evidence.</strong> The outcome includes the scoped result,
@@ -188,6 +188,7 @@ const toc: TocItem[] = [
       verification semantics, and the open-source verifier checks the covered
       properties locally and offline.
     </p>
+    <p><strong>{PUBLIC_TRUST_EVIDENCE}</strong></p>
     <p>
       The product layer remains separate. It can manage agent-facing intake,
       clarification, execution, and operational behavior without making every product

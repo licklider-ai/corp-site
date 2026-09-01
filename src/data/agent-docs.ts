@@ -2,6 +2,7 @@ import {
   CORE_NON_CLAIMS,
   EVALUATION_BOUNDARY,
   MARKET_SCOPE,
+  METHOD_IDENTITY_FINDING,
   NOMUE_CLI_USAGE,
   NOMUE_GLOBAL_INSTALL_COMMAND,
   NOMUE_NPX_COMMAND,
@@ -12,6 +13,7 @@ import {
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
+  PUBLIC_TRUST_EVIDENCE,
   VERIFICATION_CALL_DEFINITION,
 } from './site-facts';
 
@@ -702,12 +704,18 @@ ${NOMUE_POSITION}
 - [Run the verifier](https://www.licklider.ai/docs/record-verification.md)
 - [Inspect the exact CLI](https://www.licklider.ai/docs/cli-reference.md)
 - [Use machine-readable examples](https://www.licklider.ai/docs/examples.json)
+- ${PUBLIC_TRUST_EVIDENCE}
 
 ## Product and roadmap
 
 - ${PRODUCT_RELEASE_BOUNDARY}
 - ${PAIRED_T_BOUNDARY}
 - ${EVALUATION_BOUNDARY}
+
+## Research finding for call selection
+
+- ${METHOD_IDENTITY_FINDING}
+- This source-bounded finding does not add or change Protocol support.
 
 ## Documentation
 

@@ -2,10 +2,12 @@
 import type { TocItem } from '../../consts';
 import { AGENT_DOCS } from '../../data/agent-docs';
 import {
+  METHOD_IDENTITY_FINDING,
   PAIRED_T_BOUNDARY,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
+  PUBLIC_TRUST_EVIDENCE,
 } from '../../data/site-facts';
 import PageLayout from '../../layouts/PageLayout.astro';
 
@@ -38,6 +40,7 @@ const toc: TocItem[] = [
     <p class="eyebrow">Available now</p>
     <h2>Verify a supported Release 1 Record locally</h2>
     <p class="start-lead">{PUBLIC_CAPABILITY}</p>
+    <p>{PUBLIC_TRUST_EVIDENCE}</p>
     <div class="start-actions">
       <a href="/docs/record-verification/">Install and run the verifier →</a>
       <a href="/docs/cli-reference/">Read the CLI reference →</a>
@@ -59,7 +62,7 @@ const toc: TocItem[] = [
       <article>
         <p class="eyebrow">Call</p>
         <h3>Teach an agent when to verify</h3>
-        <p>Use the when-to-use rules, stop triggers, decision vocabulary, and machine-readable examples.</p>
+        <p>Use the when-to-use rules, stop triggers, decision vocabulary, and machine-readable examples. {METHOD_IDENTITY_FINDING}</p>
         <p><a href="/docs/verification-call/">Verification-call guide →</a></p>
       </article>
       <article>

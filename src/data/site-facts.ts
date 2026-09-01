@@ -6,13 +6,13 @@
  */
 
 export const COMPANY_POSITION =
-  'Licklider builds middleware for bounded verification calls across AI research, starting with scientific statistics.';
+  'Licklider builds middleware that lets AI research agents send clearly defined checks to a separate verification tool, starting with scientific statistics.';
 
 export const VERIFICATION_CALL_DEFINITION =
-  'A verification call sends one bounded property of an analysis, result, or evidence chain to a separate capability. It returns a machine-readable decision with the check performed, the evidence and version used, the next action, and the limit of the result.';
+  'A verification call asks a separate tool to check one clearly defined property of an analysis, result, or evidence chain. It returns a machine-readable answer that says what was checked, which evidence and version were used, what should happen next, and where the result stops.';
 
 export const NOMUE_POSITION =
-  'nomue is Licklider\'s scientific verification product. It separates correctness-critical statistical decisions and numerical checks from the research model that orchestrates the work.';
+  'nomue is Licklider\'s scientific verification product. It moves important statistical decisions and numerical checks out of the research model and into a separate, inspectable tool.';
 
 export const PUBLIC_RELEASE = {
   protocol: 'nomue Protocol Release 1 Public Draft',
@@ -40,10 +40,10 @@ export const PUBLIC_CAPABILITY =
   `Anyone can install the public ${PUBLIC_RELEASE.npmPackage} package from npm and run nomue verify locally to check a conforming Release 1 Record for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}. It recomputes the covered numerical quantities and returns a machine-readable report of the scoped checks without calling a nomue server after installation.`;
 
 export const PRODUCT_CAPABILITY =
-  'The nomue product capability for Welch verification is implemented: it protects material scientific declarations from silent inference, applies the supported decision path, runs deterministic numerical checks, and returns structured outcomes and next actions for a research agent.';
+  'nomue\'s Welch verification is implemented: it keeps the agent from guessing required scientific facts, follows the supported decision path, runs fixed numerical checks, and returns structured outcomes and next actions.';
 
 export const PRODUCT_RELEASE_BOUNDARY =
-  'Use the npm-published Release 1 verifier, the Protocol, and their machine-readable documentation today. Hosted nomue API or MCP access is not open; any public release will be announced in Latest and the RSS feed.';
+  'Use the npm-published Release 1 verifier, the Protocol, and their machine-readable documentation today. Public agent-callable access is the next product layer; releases will be announced in Latest and the RSS feed. Until then, public access is the local verifier rather than a hosted nomue API or MCP endpoint.';
 
 export const NOMUE_GLOBAL_INSTALL_COMMAND =
   `npm install --global ${PUBLIC_RELEASE.npmPackage}`;
@@ -58,19 +58,28 @@ export const NOMUE_CLI_USAGE =
   'usage: nomue <verify|canonicalize|digest> <record.json> [--format json|json-compact|human]';
 
 export const PAIRED_T_BOUNDARY =
-  'Paired-t is the next verification method under active development and open Release 2 RFC review. It will join public support only after that evidence and release process is complete.';
+  'Public paired-t work has reached independently reviewed candidate evidence across deterministic evaluation, two 200-value numerical tables, the observations-to-p-value path, input-specific error bounds, and a confidence-interval execution trace. Confidence-interval truth and final Release 2 support decisions remain under review, so public support is still Welch only.';
 
 export const PAIRED_T_RFC_URL =
   'https://github.com/licklider-ai/nomue-protocol/issues/25';
 
 export const EVALUATION_BOUNDARY =
-  'A controlled comparison is being built to measure the incremental effect of adding nomue to research agents. Comparative performance results will be published after the scored evaluation and adversarial review are complete.';
+  'The A/B/C comparison design, scoring boundary, baseline tools, provider adapters, and exact nomue runtime binding are being built and reviewed. Results will be published after the scored evaluation and adversarial review are complete.';
 
 export const PLATFORM_SCOPE =
-  'Licklider is building the verification-call layer for AI research. Statistics is the first bounded implementation; the platform can expand to other research checks as each capability is evidenced, versioned, and released.';
+  'Licklider is building shared infrastructure for verification calls across AI research. Statistics is the first working area; more research checks can be added as each one gains evidence, a versioned definition, and a public release.';
 
 export const MARKET_SCOPE =
-  'Licklider\'s market scope is the verification calls that arise across AI research, not a single research-workflow SaaS category. That infrastructure category is broader than the capabilities supported today.';
+  'Licklider\'s market is the full set of verification calls that arise across AI research, rather than one research-workflow SaaS category. The long-term infrastructure opportunity is broader than the capabilities available today.';
+
+export const METHOD_IDENTITY_FINDING =
+  'A statistical method name is not a verification contract. A useful guarantee also depends on the comparison family, error criterion, assumptions, sidedness, balance conditions, and exact procedure variant.';
+
+export const PUBLIC_TRUST_EVIDENCE =
+  'Release 1 publishes source code together with public fixtures, a signed source archive, checksums, a snapshot manifest, detached signatures, and the public release key.';
+
+export const VERIFICATION_WORKING_METHOD =
+  'We separate two questions that are often collapsed: whether the recorded computation ran exactly as stated, and how close its result is to the mathematical target. We review those questions separately. If the evidence cannot establish the required boundary, we improve the evidence, narrow the claim, or keep that result out of public support.';
 
 export const CORE_NON_CLAIMS = [
   'the truth of input data or researcher declarations',

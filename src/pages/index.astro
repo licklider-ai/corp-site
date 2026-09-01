@@ -1,8 +1,10 @@
 ---
 import { PUBLICATIONS } from '../data/publications';
 import {
+  COMPANY_POSITION,
   EVALUATION_BOUNDARY,
   MARKET_SCOPE,
+  METHOD_IDENTITY_FINDING,
   NOMUE_GLOBAL_INSTALL_COMMAND,
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
@@ -12,6 +14,7 @@ import {
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
+  PUBLIC_TRUST_EVIDENCE,
   UPSTREAM_CONTRIBUTIONS,
   VERIFICATION_CALL_DEFINITION,
 } from '../data/site-facts';
@@ -65,11 +68,7 @@ const verifierStructuredData = {
           receive a machine-readable report of the scoped checks. Verification runs
           locally and does not call a nomue server after installation.
         </p>
-        <p>
-          Licklider builds middleware for bounded verification calls across AI
-          research—so research agents can send correctness-critical work to a separate,
-          inspectable capability.
-        </p>
+        <p>{COMPANY_POSITION}</p>
       </div>
       <div class="cta">
         <a class="cta-primary" href="/docs/record-verification/">Install and run →</a>
@@ -93,14 +92,14 @@ const verifierStructuredData = {
         <p class="available-copy">{PUBLIC_CAPABILITY}</p>
         <div class="capability-grid">
           <article>
-            <p class="step">1 · Check the contract</p>
-            <h3>Confirm the exact supported procedure</h3>
-            <p>Match the Record to the registered Release 1 bundle and Welch scope.</p>
+            <p class="step">1 · Check the scope</p>
+            <h3>Confirm the exact procedure</h3>
+            <p>Make sure the Record matches the published Release 1 bundle and Welch scope.</p>
           </article>
           <article>
             <p class="step">2 · Recompute</p>
             <h3>Check the covered numbers</h3>
-            <p>Recompute registered quantities and compare them under the versioned rule.</p>
+            <p>Recalculate the listed quantities and compare them using the published rule.</p>
           </article>
           <article>
             <p class="step">3 · Return evidence</p>
@@ -128,8 +127,8 @@ const verifierStructuredData = {
             <h3>Install the public npm package</h3>
             <p>
               The package path is tested on Linux, macOS, and Windows with Node.js 20
-              and 22. The npm <code>latest</code> tag currently points to a release candidate,
-              not a stable release.
+              and 22. The npm <code>latest</code> tag currently points to the
+              <code>{PUBLIC_RELEASE.verifierPackage}</code> release candidate.
             </p>
           </div>
           <pre><code>{NOMUE_GLOBAL_INSTALL_COMMAND}
@@ -139,9 +138,9 @@ const verifierStructuredData = {
 {NOMUE_NPX_COMMAND}</code></pre>
         </div>
         <p class="package-meaning">
-          The npm package gives an agent workflow a repeatable tool boundary: pass a
-          Record to a versioned command, receive scoped JSON, and keep the check separate
-          from the research model that requested it. The same CLI also provides
+          The npm package gives an agent workflow a repeatable check: pass a Record to a
+          versioned command, receive scoped JSON, and keep the result separate from the
+          research model that requested it. The same CLI also provides
           <code>canonicalize</code> and <code>digest</code> for local Record processing.
         </p>
         <p class="more"><a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">→ View on npm</a> · <a href="/docs/record-verification/">Full verifier guide →</a> · <a href="/docs/cli-reference/">CLI reference →</a> · <a href="/docs/examples.json">Machine-readable examples →</a></p>
@@ -205,8 +204,8 @@ const verifierStructuredData = {
         <p>
           A research agent can already call a literature search, a code runner, or a
           statistical library. But a calculation completing is not the same as knowing
-          whether the design is supported, whether a required scientific fact is
-          missing, whether a reported number agrees with a registered calculation, or
+          whether the design is covered, whether a required scientific fact is missing,
+          whether a reported number agrees with a published calculation, or
           whether the system should stop.
         </p>
         <p>
@@ -220,21 +219,26 @@ const verifierStructuredData = {
       <div class="band-inner band-inner--wide">
         <p class="eyebrow">Verification Call</p>
         <p class="definition">{VERIFICATION_CALL_DEFINITION}</p>
+        <aside class="research-finding">
+          <p class="step">What our source review found</p>
+          <p><strong>{METHOD_IDENTITY_FINDING}</strong></p>
+          <p><a href="/research/why-statistical-method-names-are-not-enough/">Read the independently checked Research note →</a></p>
+        </aside>
         <div class="call-grid">
           <article>
             <p class="step">1 · Request</p>
             <h2>Send one bounded check</h2>
             <p>
-              The call identifies the capability, version, evidence, and scientific
-              declarations needed for the check.
+              The request names the check, version, evidence, and scientific facts
+              needed to answer it.
             </p>
           </article>
           <article>
             <p class="step">2 · Decision</p>
             <h2>Get an actionable decision</h2>
             <p>
-              The capability can proceed, ask for missing meaning, report unsupported
-              scope, refuse safely, or preserve a failed check.
+              The tool can proceed, ask for missing information, report that the request
+              is outside its scope, stop safely, or preserve a failed check.
             </p>
           </article>
           <article>
@@ -242,7 +246,7 @@ const verifierStructuredData = {
             <h2>Preserve a checkable record</h2>
             <p>
               The result travels with what passed or failed, the evidence and versions
-              used, the next action, and the exact boundary of the check.
+              used, the next action, and exactly how far the check reaches.
             </p>
           </article>
         </div>
@@ -333,13 +337,14 @@ const verifierStructuredData = {
             <p class="layer-label">Product layer</p>
             <h2>Agent-callable verification capabilities</h2>
             <p>
-              nomue handles product-side intake, clarification, supported-scope
-              decisions, deterministic execution, failure handling, and machine-readable
-              next actions without turning private implementation choices into public
-              Protocol requirements.
+              nomue gathers the required facts, asks for clarification when needed,
+              decides whether a request is supported, runs the fixed calculation, and
+              returns a machine-readable next action. Product implementation details stay
+              separate from the public Protocol.
             </p>
           </article>
         </div>
+        <p class="trust-evidence"><strong>Published release evidence:</strong> {PUBLIC_TRUST_EVIDENCE}</p>
         <p class="more"><a href="/nomue/">→ How nomue works</a></p>
       </div>
     </section>
@@ -438,6 +443,8 @@ const verifierStructuredData = {
   .quickstart code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
   .package-meaning { max-width: 48rem; margin: 1.5rem 0 0; color: var(--ink-1); }
   .definition { max-width: 52rem; margin: 0 0 2.5rem; color: var(--ink); font-size: clamp(1.35rem, 2.8vw, 2rem); line-height: 1.45; }
+  .research-finding { max-width: 52rem; margin: 0 0 2rem; padding: 1.25rem 1.4rem; border-left: 2px solid var(--ink); background: var(--wash); }
+  .research-finding p:last-child { margin-bottom: 0; }
   .capability-grid, .call-grid, .scope-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
   .capability-grid article, .call-grid article, .scope-grid article { padding: 1.5rem; border: 1px solid var(--rule); }
   .capability-grid h3, .call-grid h2, .scope-grid h2, .layers h2 { margin-bottom: 0.75rem; font-size: 1.08rem; }
@@ -446,6 +453,7 @@ const verifierStructuredData = {
   .availability-note { padding-top: 0.75rem; border-top: 1px solid var(--rule-faint); color: var(--ink-3); font-size: 0.85rem; }
   .roadmap-note { max-width: 50rem; margin: 1.5rem 0 0; font-size: 0.9rem; color: var(--ink-2); }
   .scope-note { max-width: 47rem; margin: 2rem 0 0; padding-left: 1.25rem; border-left: 1px solid var(--ink); }
+  .trust-evidence { max-width: 48rem; margin: 1.5rem 0 0; color: var(--ink-2); }
   .section-title { margin-bottom: 1rem; font-size: 1.3rem; }
   .reader-grid, .layers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
   .reader-grid article, .layers article { padding: 1.5rem; border: 1px solid var(--rule); }

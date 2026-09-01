@@ -3,9 +3,11 @@ import LickliderPortrait from '../components/LickliderPortrait.astro';
 import {
   COMPANY_POSITION,
   MARKET_SCOPE,
+  METHOD_IDENTITY_FINDING,
   PLATFORM_SCOPE,
   PUBLIC_CAPABILITY,
   UPSTREAM_CONTRIBUTIONS,
+  VERIFICATION_WORKING_METHOD,
 } from '../data/site-facts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -75,14 +77,13 @@ const founderStructuredData = {
       <div class="band-body">
         <p>
           Research agents can generate analyses, code, figures, and scientific prose.
-          Licklider works on the separate moment when the workflow needs to determine
-          whether a bounded part of that work has an adequate, checkable basis.
+          Licklider works on the separate moment when a workflow needs to check one
+          clearly defined part of that work against evidence.
         </p>
         <p>
           Our first product, nomue, begins with statistical verification. It gives a
-          research agent a specialist capability for supported decisions, deterministic
-          calculations, clarification requirements, refusal boundaries, and scoped
-          verification results.
+          research agent a specialist tool for supported decisions, fixed calculations,
+          requests for missing information, safe stopping, and machine-readable results.
         </p>
       </div>
     </section>
@@ -93,10 +94,9 @@ const founderStructuredData = {
         <p>{PLATFORM_SCOPE}</p>
         <p>{MARKET_SCOPE}</p>
         <p>
-          The intended position is middleware between research agents and the evidence
-          they rely on. A common verification layer can serve different agent interfaces
-          and research workflows without requiring Licklider to own the general-purpose
-          interface used by every researcher.
+          Licklider sits between research agents and the evidence they rely on. The same
+          verification layer can serve different agents and research workflows without
+          replacing the general-purpose interface each researcher chooses.
         </p>
         <p>
           We expand the platform one evidenced capability at a time, so each new method
@@ -114,6 +114,7 @@ const founderStructuredData = {
           unsupported scope, refusal, failed checks, and properties that were not
           asserted.
         </p>
+        <p><strong>{METHOD_IDENTITY_FINDING}</strong></p>
         <p>
           The purpose is practical: help a research agent avoid silent assumptions and
           help a researcher see the exact basis and limit of an AI-assisted result. We
@@ -133,6 +134,7 @@ const founderStructuredData = {
             disagreements, build independent checks, define exact claim boundaries, and
             keep our diagnosis separate from an upstream maintainer's confirmation.
           </p>
+          <p>{VERIFICATION_WORKING_METHOD}</p>
           <p>
             When that work finds a defect in scientific software, we report it back to
             the project. The contribution matters even when the finding never becomes a

@@ -1,5 +1,6 @@
 ---
 import type { TocItem } from '../consts';
+import { METHOD_IDENTITY_FINDING } from '../data/site-facts';
 import PageLayout from '../layouts/PageLayout.astro';
 
 const toc: TocItem[] = [
@@ -70,6 +71,10 @@ const toc: TocItem[] = [
       This interface can be shared across research agents without requiring one company
       to own the researcher's general-purpose AI interface.
     </p>
+    <p>
+      {METHOD_IDENTITY_FINDING} This is why the interface must carry the exact question
+      and conditions, rather than only a familiar method label.
+    </p>
   </section>
 
   <section id="science-first" class="section">
@@ -102,7 +107,7 @@ const toc: TocItem[] = [
   </section>
 
   <footer class="page-foot">
-    <p class="version">Thesis v0.3 — 2026-09-01</p>
+    <p class="version">Thesis v0.4 — 2026-09-01</p>
     <p class="next"><a href="/docs/verification-call/">Next: verification calls →</a></p>
   </footer>
 </PageLayout>

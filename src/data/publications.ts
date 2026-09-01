@@ -22,7 +22,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'Primary-source review showed why procedure names alone cannot identify statistical guarantees, assumptions, comparison families, or later variants.',
     href: '/research/why-statistical-method-names-are-not-enough/',
     status:
-      'Source-bounded research finding — independently checked, not peer reviewed; FND-1 gate open',
+      'Independently checked research note — three source questions closed; wider source review continues; not peer reviewed',
   },
   {
     category: 'News',
@@ -45,7 +45,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'We closed reviewed error ledgers for paired arithmetic and Student-t p-values, then selected 200 critical values for candidate confidence-interval work.',
     href: '/engineering/bounding-paired-t-arithmetic-and-pvalues/',
     status:
-      'Reviewed candidate numerical closure — not a ratified contract or protocol support',
+      'Independently reviewed evidence — arithmetic and p-value error work closed; interval work continues',
   },
   {
     category: 'Engineering',
@@ -68,7 +68,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'We connected paired observations to a p-value in one reviewed trace; later work closed its two numerical error ledgers and added a reviewed interval trace.',
     href: '/engineering/tracing-paired-t-from-observations-to-pvalue/',
     status:
-      'Reviewed p-value and interval execution traces; interval truth remains open — not protocol support',
+      'Independently reviewed p-value and confidence-interval execution traces; interval proof continues',
   },
   {
     category: 'Engineering',
@@ -80,7 +80,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'We built two reviewed 200-value tables and input-specific error checks; later decisions selected the p-value bound and one table for candidate interval work.',
     href: '/engineering/building-paired-t-tables-and-error-checks/',
     status:
-      'Reviewed M1/M2 numerical closure and candidate interval-table selection — not protocol support',
+      'Two independently reviewed 200-value tables and input-specific error checks — candidate Release 2 work',
   },
   {
     category: 'Engineering',
@@ -91,7 +91,8 @@ export const PUBLICATIONS: PublicationItem[] = [
     summary:
       'We built and independently reviewed a deterministic paired-t probability evaluator and boundary evidence while leaving accuracy bounds, supported inputs, and protocol registration open.',
     href: '/engineering/testing-paired-t-floating-point-boundaries/',
-    status: 'Reviewed candidate boundary evidence — not protocol support',
+    status:
+      'Independently reviewed deterministic evaluator and floating-point boundary evidence — candidate Release 2 work',
   },
   {
     category: 'Engineering',
@@ -102,7 +103,8 @@ export const PUBLICATIONS: PublicationItem[] = [
     summary:
       'We built and independently reviewed a proof pipeline for paired-t p-values and critical values before deciding what nomue Protocol will support.',
     href: '/engineering/certifying-paired-t-numerical-evidence/',
-    status: 'Reviewed candidate evidence — not protocol support',
+    status:
+      'Independently reviewed proof pipeline for paired-t p-values and critical values — candidate Release 2 work',
   },
   {
     category: 'Engineering',
@@ -113,7 +115,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     summary:
       'SciPy’s exact Wilcoxon path could return zero for a positive p-value. SciPy diagnosed the cause and merged a fix the same day it was reported.',
     href: '/engineering/scipy-wilcoxon-exact-pvalue/',
-    status: 'Fix merged in SciPy — not yet released',
+    status: 'Fix merged in SciPy — awaiting a SciPy release',
   },
   {
     category: 'News',
@@ -146,7 +148,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     summary:
       'A SciPy bug can return positive infinity instead of a large negative value for an extreme-tail Student-t quantile.',
     href: '/engineering/scipy-student-t-extreme-tail/',
-    status: 'Fix merged in Boost.Math — not yet released',
+    status: 'Fix merged in Boost.Math — awaiting a Boost release',
   },
   {
     category: 'News',

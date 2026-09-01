@@ -4,6 +4,7 @@ import {
   COMPANY_POSITION,
   EVALUATION_BOUNDARY,
   MARKET_SCOPE,
+  METHOD_IDENTITY_FINDING,
   NOMUE_GLOBAL_INSTALL_COMMAND,
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
@@ -12,6 +13,7 @@ import {
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
+  PUBLIC_TRUST_EVIDENCE,
   UPSTREAM_CONTRIBUTIONS,
 } from '../data/site-facts';
 
@@ -35,6 +37,7 @@ const content = `# Licklider
 - Package-path CI: Linux, macOS, and Windows with Node.js 20 and 22
 - [nomue verifier source](${PUBLIC_RELEASE.verifierUrl}): Apache-2.0; Record verification remains local and does not call a nomue server after installation
 - [Fetch machine-readable examples](https://www.licklider.ai/docs/examples.json)
+- ${PUBLIC_TRUST_EVIDENCE}
 
 ## Product and platform
 
@@ -46,6 +49,7 @@ const content = `# Licklider
 
 ## Interpretation boundary
 
+- Source-bounded Research finding: ${METHOD_IDENTITY_FINDING}
 - A clean verification report is a set of scoped results, not an overall claim that the research is correct.
 
 ## Agent-readable documentation
