@@ -7,21 +7,29 @@ import {
   PAIRED_T_BOUNDARY,
   PLATFORM_SCOPE,
   PRODUCT_RELEASE_BOUNDARY,
-  PUBLIC_RELEASE,
+  PUBLIC_CAPABILITY,
 } from '../data/site-facts';
 
 const content = `# Licklider
 
 > ${COMPANY_POSITION}
 
-Important boundaries:
+## Available now
 
-- Current public Protocol support is ${PUBLIC_RELEASE.protocol}, limited to ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.
+- ${PUBLIC_CAPABILITY}
+- [Run the public verifier](https://www.licklider.ai/docs/record-verification.md)
+- [Fetch machine-readable examples](https://www.licklider.ai/docs/examples.json)
+
+## Product and platform
+
 - ${PRODUCT_RELEASE_BOUNDARY}
 - ${PAIRED_T_BOUNDARY}
 - ${EVALUATION_BOUNDARY}
 - ${PLATFORM_SCOPE}
 - ${MARKET_SCOPE}
+
+## Interpretation boundary
+
 - A clean verification report is a set of scoped results, not an overall claim that the research is correct.
 
 ## Agent-readable documentation
@@ -40,7 +48,7 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 ## Public technical authority
 
 - [nomue Protocol](https://github.com/licklider-ai/nomue-protocol): public Layer 1 specification and Release 1 artifacts
-- [nomue verifier](https://github.com/licklider-ai/nomue-verifier): experimental local verifier package
+- [nomue verifier](https://github.com/licklider-ai/nomue-verifier): local verifier for supported Release 1 Records
 
 ## Evidence and updates
 

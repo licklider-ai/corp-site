@@ -3,12 +3,17 @@ import {
   AGENT_DOCS,
   DOCS_INDEX_MARKDOWN,
 } from '../../data/agent-docs';
+import { PRODUCT_RELEASE_BOUNDARY, PUBLIC_CAPABILITY } from '../../data/site-facts';
 
 const content = `# Licklider agent-readable documentation
 
-> Public documentation for deciding when a bounded verification call applies, using current public nomue artifacts, and interpreting their limits.
+> Run the public verifier, decide when a bounded verification call applies, and interpret its returned evidence.
 
-Important: read the status and current limits on each page before acting. The existence of a page does not imply a public API or MCP endpoint.
+## Available now
+
+- ${PUBLIC_CAPABILITY}
+- [Run the verifier](https://www.licklider.ai/docs/record-verification.md)
+- [Machine-readable examples](https://www.licklider.ai/docs/examples.json)
 
 ## Start here
 
@@ -21,6 +26,10 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 ## Machine-readable examples
 
 - [Examples JSON](https://www.licklider.ai/docs/examples.json): normalized executable verifier examples and call-selection boundaries
+
+## Product access
+
+- ${PRODUCT_RELEASE_BOUNDARY}
 `;
 
 export const GET: APIRoute = () =>

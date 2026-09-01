@@ -5,9 +5,10 @@ import {
   MARKET_SCOPE,
   PAIRED_T_BOUNDARY,
   PLATFORM_SCOPE,
+  PRODUCT_CAPABILITY,
   PRODUCT_RELEASE_BOUNDARY,
+  PUBLIC_CAPABILITY,
   PUBLIC_EVIDENCE,
-  PUBLIC_RELEASE,
   VERIFICATION_CALL_DEFINITION,
 } from '../data/site-facts';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -24,24 +25,51 @@ const latest = [...PUBLICATIONS]
       <h1>The verification layer<br />for AI research agents</h1>
       <div class="lede">
         <p>
-          AI agents can search, reason, write code, and generate scientific work. They
-          also need a separate way to check the parts that should not depend on the
-          generating model judging itself.
+          Today, anyone can run the open-source nomue verifier locally to check a
+          supported Welch Record, recompute covered quantities, and receive a
+          machine-readable verification report.
         </p>
         <p>
           Licklider builds middleware for bounded verification calls across AI
-          research, starting with scientific statistics.
+          research—so research agents can send correctness-critical work to a separate,
+          inspectable capability.
         </p>
       </div>
       <div class="cta">
-        <a href="/docs/verification-call/">What is a verification call? →</a>
-        <a href="/nomue/">Explore nomue →</a>
-        <a href="/docs/">Docs for agents →</a>
+        <a class="cta-primary" href="/docs/record-verification/">Run the verifier →</a>
+        <a href="/docs/examples/">See examples →</a>
+        <a href="/nomue/">How nomue works →</a>
       </div>
     </div>
   </section>
 
   <div class="sections">
+    <section class="band band--single available-band">
+      <div class="band-inner band-inner--wide">
+        <p class="eyebrow">Available Now</p>
+        <h2 class="available-title">Verify a supported Welch Record locally</h2>
+        <p class="available-copy">{PUBLIC_CAPABILITY}</p>
+        <div class="capability-grid">
+          <article>
+            <p class="step">1 · Check the contract</p>
+            <h3>Confirm the exact supported procedure</h3>
+            <p>Match the Record to the registered Release 1 bundle and Welch scope.</p>
+          </article>
+          <article>
+            <p class="step">2 · Recompute</p>
+            <h3>Check the covered numbers</h3>
+            <p>Recompute registered quantities and compare them under the versioned rule.</p>
+          </article>
+          <article>
+            <p class="step">3 · Return evidence</p>
+            <h3>Produce a machine-readable report</h3>
+            <p>Give the research agent scoped results, versions, and an actionable outcome.</p>
+          </article>
+        </div>
+        <p class="more"><a href="/docs/record-verification/">→ Install and run locally</a> · <a href="/docs/examples.json">Machine-readable examples →</a></p>
+      </div>
+    </section>
+
     <section class="band">
       <p class="eyebrow">The Missing Call</p>
       <div class="band-body">
@@ -54,9 +82,8 @@ const latest = [...PUBLICATIONS]
           whether the system should stop.
         </p>
         <p>
-          Licklider is not building another general research agent. We are building the
-          specialist layer those agents can use when a bounded part of the work needs
-          separate verification.
+          Licklider builds the specialist layer that general research agents can call
+          when a bounded part of the work needs separate verification.
         </p>
       </div>
     </section>
@@ -68,7 +95,7 @@ const latest = [...PUBLICATIONS]
         <div class="call-grid">
           <article>
             <p class="step">1 · Request</p>
-            <h2>Name the exact property</h2>
+            <h2>Send one bounded check</h2>
             <p>
               The call identifies the capability, version, evidence, and scientific
               declarations needed for the check.
@@ -76,18 +103,18 @@ const latest = [...PUBLICATIONS]
           </article>
           <article>
             <p class="step">2 · Decision</p>
-            <h2>Execute, clarify, or stop</h2>
+            <h2>Get an actionable decision</h2>
             <p>
               The capability can proceed, ask for missing meaning, report unsupported
               scope, refuse safely, or preserve a failed check.
             </p>
           </article>
           <article>
-            <p class="step">3 · Boundary</p>
-            <h2>Return the non-claim too</h2>
+            <p class="step">3 · Evidence</p>
+            <h2>Preserve a checkable record</h2>
             <p>
-              The result travels with what was checked, the evidence and versions used,
-              and what remains unestablished.
+              The result travels with what passed or failed, the evidence and versions
+              used, the next action, and the exact boundary of the check.
             </p>
           </article>
         </div>
@@ -99,25 +126,24 @@ const latest = [...PUBLICATIONS]
         <p class="eyebrow">Platform Scope</p>
         <div class="scope-grid">
           <article>
-            <p class="scope-label">Public today</p>
-            <h2>One exact Welch verification slice</h2>
-            <p>{`${PUBLIC_RELEASE.protocol} and the experimental local verifier cover ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`}</p>
-            <p class="scope-status">Public and experimental</p>
+            <p class="scope-label">Available now</p>
+            <h2>Local verification for Welch Records</h2>
+            <p>{PUBLIC_CAPABILITY}</p>
+            <p><a href="/docs/record-verification/">Run the verifier →</a></p>
           </article>
           <article>
-            <p class="scope-label">In development</p>
-            <h2>Agent-callable product capability</h2>
-            <p>{PRODUCT_RELEASE_BOUNDARY}</p>
-            <p>{PAIRED_T_BOUNDARY}</p>
-            <p class="scope-status">Not current public support</p>
+            <p class="scope-label">Built in product</p>
+            <h2>Welch verification for agent workflows</h2>
+            <p>{PRODUCT_CAPABILITY}</p>
+            <p class="availability-note">{PRODUCT_RELEASE_BOUNDARY}</p>
           </article>
           <article>
-            <p class="scope-label">Long-term category</p>
+            <p class="scope-label">Platform</p>
             <h2>Verification calls across AI research</h2>
             <p>{PLATFORM_SCOPE}</p>
-            <p class="scope-status">Direction, not a shipped-capability claim</p>
           </article>
         </div>
+        <p class="roadmap-note"><strong>Next capability:</strong> {PAIRED_T_BOUNDARY}</p>
         <p class="scope-note">
           {MARKET_SCOPE}
         </p>
@@ -284,6 +310,7 @@ const latest = [...PUBLICATIONS]
   .lede { max-width: 45rem; font-size: 1.15rem; color: var(--ink-1); }
   .cta { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 3rem; font-size: 0.95rem; }
   .cta a { padding-bottom: 3px; border-bottom: 1px solid var(--ink); text-decoration: none; }
+  .cta .cta-primary { padding: 0.65rem 0.9rem; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); }
   .sections { max-width: var(--shell); margin: 0 auto; padding: 0 var(--gutter); }
   .band { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 3rem; padding: 4rem 0; border-bottom: 1px solid var(--rule-faint); }
   .band:last-child { border-bottom: 0; }
@@ -297,12 +324,17 @@ const latest = [...PUBLICATIONS]
   .band-body--wide { max-width: 46rem; }
   .band-body > :last-child, article > :last-child { margin-bottom: 0; }
   .lead { color: var(--ink); font-size: 1.15rem; }
+  .available-band { padding-top: 4.5rem; }
+  .available-title { max-width: 48rem; margin: 0 0 1rem; font-size: clamp(1.8rem, 3.8vw, 2.8rem); line-height: 1.2; letter-spacing: -0.01em; }
+  .available-copy { max-width: 48rem; margin-bottom: 2.25rem; color: var(--ink-1); font-size: 1.08rem; }
   .definition { max-width: 52rem; margin: 0 0 2.5rem; color: var(--ink); font-size: clamp(1.35rem, 2.8vw, 2rem); line-height: 1.45; }
-  .call-grid, .scope-grid, .evidence-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-  .call-grid article, .scope-grid article, .evidence-grid article { padding: 1.5rem; border: 1px solid var(--rule); }
-  .call-grid h2, .scope-grid h2, .evidence-grid h2, .layers h2 { margin-bottom: 0.75rem; font-size: 1.08rem; }
+  .capability-grid, .call-grid, .scope-grid, .evidence-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .capability-grid article, .call-grid article, .scope-grid article, .evidence-grid article { padding: 1.5rem; border: 1px solid var(--rule); }
+  .capability-grid h3, .call-grid h2, .scope-grid h2, .evidence-grid h2, .layers h2 { margin-bottom: 0.75rem; font-size: 1.08rem; }
   .step, .scope-label, .layer-label, .evidence-status { margin-bottom: 0.55rem; color: var(--ink-3); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
-  .scope-status { padding-top: 0.75rem; border-top: 1px solid var(--rule-faint); color: var(--ink-3); font-size: 0.82rem; }
+  .scope-grid article:first-child { background: var(--wash); }
+  .availability-note { padding-top: 0.75rem; border-top: 1px solid var(--rule-faint); color: var(--ink-3); font-size: 0.85rem; }
+  .roadmap-note { max-width: 50rem; margin: 1.5rem 0 0; font-size: 0.9rem; color: var(--ink-2); }
   .scope-note { max-width: 47rem; margin: 2rem 0 0; padding-left: 1.25rem; border-left: 1px solid var(--ink); }
   .section-title { margin-bottom: 1rem; font-size: 1.3rem; }
   .reader-grid, .layers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
@@ -320,7 +352,7 @@ const latest = [...PUBLICATIONS]
   @media (max-width: 900px) {
     .hero-inner { padding: 4.5rem var(--gutter) 4rem; }
     .band, .band-inner { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
-    .call-grid, .scope-grid, .evidence-grid { grid-template-columns: minmax(0, 1fr); }
+    .capability-grid, .call-grid, .scope-grid, .evidence-grid { grid-template-columns: minmax(0, 1fr); }
     .latest-date { width: 8rem; }
   }
 

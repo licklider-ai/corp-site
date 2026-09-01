@@ -5,19 +5,22 @@ import {
   NOMUE_POSITION,
   PAIRED_T_BOUNDARY,
   PAIRED_T_RFC_URL,
+  PRODUCT_CAPABILITY,
   PRODUCT_RELEASE_BOUNDARY,
+  PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
 } from '../data/site-facts';
 import PageLayout from '../layouts/PageLayout.astro';
 
 const toc: TocItem[] = [
+  { id: 'available', label: 'What you can use now' },
   { id: 'what', label: 'What nomue is' },
   { id: 'roles', label: 'Division of roles' },
   { id: 'call', label: 'How a call works' },
-  { id: 'availability', label: 'Current availability' },
+  { id: 'availability', label: 'Product and roadmap' },
   { id: 'trust', label: 'Public trust layer' },
   { id: 'agent-readable', label: 'Agent-readable docs' },
-  { id: 'limits', label: 'What it does not claim' },
+  { id: 'limits', label: 'What a result means' },
 ];
 ---
 
@@ -28,26 +31,48 @@ const toc: TocItem[] = [
 >
   <header class="page-head">
     <p class="eyebrow">nomue</p>
-    <h1>Scientific verification without asking the research model to judge itself</h1>
+    <h1>Give research agents a separate statistical verification call</h1>
     <p class="standfirst">
-      nomue is designed as a specialist capability that research agents can call for
-      bounded statistical decisions and numerical checks. It is not another general
-      research agent.
+      nomue checks a supported statistical decision, recomputes covered quantities, and
+      returns a machine-readable result with its evidence, version, and next action.
     </p>
+    <p class="head-links"><a href="/docs/record-verification/">Run the public verifier →</a> · <a href="/docs/examples/">See examples →</a></p>
   </header>
+
+  <section id="available" class="section section--lead">
+    <p class="eyebrow">Available now</p>
+    <h2>Verify a Release 1 Welch Record locally</h2>
+    <p class="capability-lead">{PUBLIC_CAPABILITY}</p>
+    <div class="capability-list">
+      <article>
+        <h3>Check the exact bundle</h3>
+        <p>Confirm that the Record uses the registered Release 1 profile, procedure, and version.</p>
+      </article>
+      <article>
+        <h3>Recompute covered quantities</h3>
+        <p>Compare registered numerical results under the published verification rule.</p>
+      </article>
+      <article>
+        <h3>Return structured evidence</h3>
+        <p>Produce scoped pass, fail, refusal, or unsupported outcomes in a JSON report.</p>
+      </article>
+    </div>
+    <p><a href="/docs/record-verification/">Install and run the verifier →</a></p>
+  </section>
 
   <section id="what" class="section">
     <h2>What nomue is</h2>
     <p>{NOMUE_POSITION}</p>
+    <p>{PRODUCT_CAPABILITY}</p>
     <p>
       The product question is deliberately narrow: given these research conditions and
       this calculation or result, may the result be relied on for this explicitly
       bounded meaning?
     </p>
     <p>
-      The answer may be a supported execution or scoped verification result. It may also
-      be a request for clarification, unsupported scope, inadmissibility, safe refusal,
-      a failed check, or an operational failure. Those outcomes are kept separate.
+      The result tells the agent what to do next: execute a supported path, ask for one
+      missing scientific fact, route an unsupported request elsewhere, preserve a failed
+      check, or stop safely.
     </p>
   </section>
 
@@ -99,30 +124,31 @@ const toc: TocItem[] = [
         execution and the applicable verification contract, not generated prose.
       </li>
       <li>
-        <strong>Return the boundary.</strong> The outcome includes evidence, versions,
-        next actions, and what remains not asserted.
+        <strong>Return the evidence.</strong> The outcome includes the scoped result,
+        evidence, versions, next action, and the exact boundary of the check.
       </li>
     </ol>
     <p><a href="/docs/verification-call/">Read the verification-call guide →</a></p>
   </section>
 
   <section id="availability" class="section">
-    <h2>Current availability and support</h2>
+    <h2>Product and roadmap</h2>
     <div class="status-list">
       <article>
-        <p class="status-label">Public today</p>
-        <h3>Protocol Release 1 and local verifier</h3>
-        <p>{`${PUBLIC_RELEASE.protocol} is public and experimental. Its sole public Record interpretation support target covers ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}. The separate verifier package remains ${PUBLIC_RELEASE.verifierMaturity}.`}</p>
+        <p class="status-label">Use today</p>
+        <h3>Open Protocol and local verifier</h3>
+        <p>{`Run ${PUBLIC_RELEASE.verifierPackage} locally against the ${PUBLIC_RELEASE.protocol} support target for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`}</p>
         <p><a href="/docs/record-verification/">How to use the public verifier →</a></p>
       </article>
       <article>
-        <p class="status-label">Product</p>
-        <h3>Agent-callable Welch capability</h3>
+        <p class="status-label">Product capability</p>
+        <h3>Welch verification for research agents</h3>
+        <p>{PRODUCT_CAPABILITY}</p>
         <p>{PRODUCT_RELEASE_BOUNDARY}</p>
       </article>
       <article>
-        <p class="status-label">Successor</p>
-        <h3>Paired-t Release 2 RFC</h3>
+        <p class="status-label">Next method</p>
+        <h3>Paired-t verification</h3>
         <p>{PAIRED_T_BOUNDARY}</p>
         <p><a href={PAIRED_T_RFC_URL} target="_blank" rel="noopener noreferrer">Public RFC →</a></p>
       </article>
@@ -132,10 +158,10 @@ const toc: TocItem[] = [
   <section id="trust" class="section">
     <h2>The public trust layer</h2>
     <p>
-      The public meaning of a supported Record does not depend on trusting Licklider's
-      product service. The nomue Protocol defines public Record and scoped verification
-      semantics. The open-source verifier checks the covered properties locally and
-      offline.
+      Anyone can inspect the public meaning of a supported Record without relying on
+      Licklider's product service. The nomue Protocol defines public Record and scoped
+      verification semantics, and the open-source verifier checks the covered
+      properties locally and offline.
     </p>
     <p>
       The product layer remains separate. It can manage agent-facing intake,
@@ -157,31 +183,33 @@ const toc: TocItem[] = [
       expose the same underlying boundary to agents and researchers.
     </p>
     <p>
-      This documentation helps an agent select and interpret a capability. It does not
-      replace the runtime schema, the exact product contract, or the public Protocol.
+      This documentation helps an agent select a capability, supply the right facts, and
+      interpret the returned outcome. The versioned runtime schema and public Protocol
+      remain the exact execution and verification contracts.
     </p>
     <p><a href="/docs/">Agent-readable documentation →</a></p>
   </section>
 
   <section id="limits" class="section">
-    <h2>What nomue does not claim</h2>
+    <h2>What a successful nomue result means</h2>
     <p>
-      A supported verification result is deliberately narrower than a claim that the
-      research is correct. It does not establish:
+      A successful result means that the named checks passed under the stated capability,
+      procedure, evidence, and version. It gives the research agent and researcher a
+      checkable basis for that bounded decision.
     </p>
+    <p>The following questions remain with the researcher or another capability:</p>
     <ul>
       {CORE_NON_CLAIMS.map((claim) => <li>{claim};</li>)}
     </ul>
     <p>
-      The useful property is narrower: each supported check identifies what it checked,
-      under which scope and version, and what remains outside the claim. There is no
-      single overall VERIFIED result in the public Protocol.
+      Keeping these questions separate makes the positive result useful: each passing
+      check says exactly what can be relied on and why.
     </p>
   </section>
 
   <footer class="page-foot">
-    <p>Current public support: Release 1 Public Draft — experimental.</p>
-    <p><a href="/docs/">Next: Docs →</a></p>
+    <p>Available now: local verification of supported Release 1 Welch Records.</p>
+    <p><a href="/docs/record-verification/">Run the verifier →</a></p>
   </footer>
 </PageLayout>
 
@@ -190,9 +218,15 @@ const toc: TocItem[] = [
   .page-head .eyebrow { margin: 0; }
   .page-head h1 { margin: 0.9rem 0 1.25rem; font-size: clamp(1.9rem, 3.6vw, 2.6rem); line-height: 1.25; letter-spacing: -0.01em; }
   .standfirst { margin: 0; font-size: 1.08rem; color: var(--ink-2); }
+  .head-links { margin: 1.75rem 0 0; font-size: 0.92rem; }
   .section { padding: 2.75rem 0; border-bottom: 1px solid var(--rule-faint); }
   .section h2 { margin-bottom: 1rem; font-size: 1.25rem; }
   .section > :last-child, article > :last-child { margin-bottom: 0; }
+  .section--lead h2 { max-width: 38rem; font-size: clamp(1.55rem, 3vw, 2.1rem); line-height: 1.25; }
+  .capability-lead { max-width: 46rem; color: var(--ink-1); font-size: 1.08rem; }
+  .capability-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 1.75rem 0; }
+  .capability-list article { padding: 1.2rem 1.25rem; border: 1px solid var(--rule); }
+  .capability-list h3 { margin-bottom: 0.65rem; font-size: 1rem; }
   .sequence, .status-list { display: grid; gap: 1rem; margin-top: 1.75rem; }
   .sequence > div { padding-left: 1.25rem; border-left: 1px solid var(--rule); }
   .sequence-label, .status-label { margin-bottom: 0.35rem; color: var(--ink-3); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
@@ -203,4 +237,8 @@ const toc: TocItem[] = [
   .links { margin-top: 1.75rem; }
   .page-foot { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; padding: 2rem 0 0; font-size: 0.85rem; color: var(--ink-3); }
   .page-foot p { margin: 0; }
+
+  @media (max-width: 760px) {
+    .capability-list { grid-template-columns: minmax(0, 1fr); }
+  }
 </style>

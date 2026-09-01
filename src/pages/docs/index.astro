@@ -4,13 +4,14 @@ import { AGENT_DOCS } from '../../data/agent-docs';
 import {
   PAIRED_T_BOUNDARY,
   PRODUCT_RELEASE_BOUNDARY,
+  PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
 } from '../../data/site-facts';
 import PageLayout from '../../layouts/PageLayout.astro';
 
 const toc: TocItem[] = [
-  { id: 'start', label: 'Start here' },
-  { id: 'current', label: 'Current public artifacts' },
+  { id: 'start', label: 'Use nomue now' },
+  { id: 'current', label: 'Choose a path' },
   { id: 'documentation', label: 'Documentation' },
   { id: 'for-agents', label: 'For agents' },
   { id: 'authority', label: 'Authority boundary' },
@@ -28,41 +29,47 @@ const toc: TocItem[] = [
     <p class="eyebrow">Docs</p>
     <h1>Documentation for agents and the people who review their work</h1>
     <p class="standfirst">
-      These pages explain when a bounded verification call applies, what information
-      must not be inferred, how to use current public nomue artifacts, and what their
-      results do not establish.
+      Run the public verifier, teach an agent when to call it, and interpret the returned
+      evidence using the same versioned documentation.
     </p>
   </header>
 
   <section id="start" class="section">
-    <h2>Start here</h2>
-    <p>
-      A research agent and a researcher should work from the same underlying boundary:
-      the exact capability, required declarations, possible outcomes, evidence, and
-      non-claims. The human page and machine-readable version present that boundary to
-      different readers without creating different meanings.
-    </p>
-    <p class="primary-link"><a href="/docs/verification-call/">→ What a verification call is</a></p>
+    <p class="eyebrow">Available now</p>
+    <h2>Verify a supported Release 1 Record locally</h2>
+    <p class="start-lead">{PUBLIC_CAPABILITY}</p>
+    <div class="start-actions">
+      <a href="/docs/record-verification/">Install and run the verifier →</a>
+      <a href="/docs/examples/">Work through examples →</a>
+      <a href="/docs/examples.json">Fetch examples as JSON →</a>
+    </div>
   </section>
 
   <section id="current" class="section">
-    <h2>Current public artifacts</h2>
+    <h2>Choose the path you need</h2>
     <div class="status-grid">
       <article>
-        <p class="eyebrow">Public today</p>
-        <h3>{PUBLIC_RELEASE.protocol}</h3>
-        <p>{`The exact public support target covers ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}. The Protocol and verifier remain experimental.`}</p>
+        <p class="eyebrow">Run</p>
+        <h3>Verify a nomue Record</h3>
+        <p>{`Use verifier ${PUBLIC_RELEASE.verifierPackage} for the ${PUBLIC_RELEASE.profile} profile under the ${PUBLIC_RELEASE.procedure}.`}</p>
+        <p><a href="/docs/record-verification/">Verifier guide →</a></p>
       </article>
       <article>
-        <p class="eyebrow">Product availability</p>
-        <h3>No public API or MCP endpoint yet</h3>
-        <p>{PRODUCT_RELEASE_BOUNDARY}</p>
+        <p class="eyebrow">Call</p>
+        <h3>Teach an agent when to verify</h3>
+        <p>Use the when-to-use rules, stop triggers, decision vocabulary, and machine-readable examples.</p>
+        <p><a href="/docs/verification-call/">Verification-call guide →</a></p>
       </article>
       <article>
-        <p class="eyebrow">Successor work</p>
-        <h3>Paired t is under public RFC review</h3>
-        <p>{PAIRED_T_BOUNDARY}</p>
+        <p class="eyebrow">Interpret</p>
+        <h3>Understand the returned result</h3>
+        <p>Keep pass, fail, clarification, refusal, unsupported scope, and operational failure distinct.</p>
+        <p><a href="/docs/decision-vocabulary/">Decision vocabulary →</a></p>
       </article>
+    </div>
+    <div class="availability-note">
+      <p><strong>Product access:</strong> {PRODUCT_RELEASE_BOUNDARY}</p>
+      <p><strong>Next method:</strong> {PAIRED_T_BOUNDARY}</p>
     </div>
   </section>
 
@@ -150,9 +157,11 @@ const toc: TocItem[] = [
     margin-bottom: 0;
   }
 
-  .primary-link {
-    margin-top: 1.75rem;
-  }
+  .start-lead { max-width: 46rem; color: var(--ink-1); font-size: 1.08rem; }
+
+  .start-actions { display: flex; flex-wrap: wrap; gap: 0.8rem 1.5rem; margin-top: 1.75rem; }
+
+  .start-actions a:first-child { padding: 0.6rem 0.8rem; background: var(--ink); color: var(--paper); text-decoration: none; }
 
   .status-grid,
   .doc-list {
@@ -176,4 +185,8 @@ const toc: TocItem[] = [
     color: var(--ink-3);
     font-size: 0.82rem;
   }
+
+  .availability-note { max-width: 46rem; margin-top: 1.5rem; padding: 1rem 1.2rem; background: var(--wash); color: var(--ink-2); font-size: 0.88rem; }
+
+  .availability-note p:last-child { margin-bottom: 0; }
 </style>

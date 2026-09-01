@@ -4,6 +4,7 @@ import {
   COMPANY_POSITION,
   MARKET_SCOPE,
   PLATFORM_SCOPE,
+  PUBLIC_CAPABILITY,
   PUBLIC_EVIDENCE,
 } from '../data/site-facts';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -25,6 +26,15 @@ const company = [
   </section>
 
   <div class="sections">
+    <section class="band">
+      <p class="eyebrow">Available Today</p>
+      <div class="band-body">
+        <p class="lead">A public Protocol and a local verifier that anyone can inspect and run.</p>
+        <p>{PUBLIC_CAPABILITY}</p>
+        <p><a href="/docs/record-verification/">Run the verifier →</a> · <a href="/nomue/">How nomue works →</a></p>
+      </div>
+    </section>
+
     <section class="band">
       <p class="eyebrow">What We Do</p>
       <div class="band-body">
@@ -54,9 +64,8 @@ const company = [
           interface used by every researcher.
         </p>
         <p>
-          Current public support remains deliberately narrow. We separate the long-term
-          category, work under development, and capabilities that are publicly supported
-          today.
+          We expand the platform one evidenced capability at a time, so each new method
+          has an explicit contract and an independently checkable basis.
         </p>
       </div>
     </section>
@@ -71,9 +80,10 @@ const company = [
           asserted.
         </p>
         <p>
-          This language is not a claim of ownership over how researchers speak. Its
-          purpose is practical: help a research agent avoid silent assumptions and help a
-          researcher see the exact basis and limit of an AI-assisted result.
+          The purpose is practical: help a research agent avoid silent assumptions and
+          help a researcher see the exact basis and limit of an AI-assisted result. We
+          publish it as shared working language, not as a claim of ownership over how
+          researchers speak.
         </p>
         <p><a href="/docs/decision-vocabulary/">Decision vocabulary →</a></p>
       </div>
@@ -85,7 +95,7 @@ const company = [
         <div class="work-copy">
           <p>
             Precision is part of the product. We investigate very small numerical
-            disagreements, build independent checks, state important non-claims, and
+            disagreements, build independent checks, define exact claim boundaries, and
             keep our diagnosis separate from an upstream maintainer's confirmation.
           </p>
           <p>
@@ -156,6 +166,7 @@ const company = [
   .band > .eyebrow { margin: 0.35rem 0 0; }
   .band-body { max-width: var(--measure); }
   .band-body > :last-child, article > :last-child { margin-bottom: 0; }
+  .lead { color: var(--ink); font-size: 1.15rem; }
   .work-body { max-width: 52rem; }
   .work-copy { max-width: var(--measure); }
   .evidence-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }

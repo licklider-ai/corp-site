@@ -6,6 +6,7 @@ import {
   PAIRED_T_BOUNDARY,
   PLATFORM_SCOPE,
   PRODUCT_RELEASE_BOUNDARY,
+  PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
   VERIFICATION_CALL_DEFINITION,
 } from './site-facts';
@@ -50,7 +51,7 @@ export const AGENT_DOCS: AgentDoc[] = [
     title: 'What a verification call is',
     description:
       'A shared model for asking a separate capability to check one bounded part of AI-assisted research.',
-    status: 'Conceptual interface — not a public nomue API',
+    status: 'Conceptual guide for selecting a verification capability',
     updated: 'September 1, 2026',
     llmSummary: [
       'A verification call asks a separate capability to check one bounded property.',
@@ -58,7 +59,7 @@ export const AGENT_DOCS: AgentDoc[] = [
       'Clarify material scientific facts that are unresolved; do not infer them from data shape or prose.',
       'Stop at unsupported or inadmissible scope; do not silently substitute a nearby method.',
       'Return the scoped result together with evidence, versions, next action, and explicit non-claims.',
-      'This page defines a conceptual interface, not a currently public nomue API or MCP endpoint.',
+      'The public implementation available today is the Release 1 Protocol and local verifier; product access is being prepared.',
     ],
     sections: [
       {
@@ -66,7 +67,7 @@ export const AGENT_DOCS: AgentDoc[] = [
         title: 'Definition',
         paragraphs: [VERIFICATION_CALL_DEFINITION],
         note:
-          'The phrase names a class of interaction. It does not claim that every form of research verification is currently implemented by nomue.',
+          'The phrase names a reusable class of interaction. The current public implementation begins with Release 1 Welch Record verification.',
       },
       {
         id: 'when-to-use',
@@ -137,22 +138,23 @@ export const AGENT_DOCS: AgentDoc[] = [
     title: 'Verify a Release 1 nomue Record',
     description:
       'When and how to use the public local verifier for the exact Release 1 Public Draft support target.',
-    status: 'Public and experimental — verifier package 0.2.1-rc.0',
+    status: 'Runnable locally — verifier package 0.2.1-rc.0',
     updated: 'September 1, 2026',
     llmSummary: [
-      `Current public support is limited to ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
+      `Run the public verifier locally for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
       `The exact Release 1 bundle is ${PUBLIC_RELEASE.bundle}.`,
       'Use the local verifier only for an existing conforming nomue Record that declares that exact bundle.',
       'Inspect the JSON report; exit codes are routing signals, not scientific verdicts.',
       'Exit code 0 means all applicable scoped checks passed, not that the research is verified overall.',
-      'There is no public hosted nomue API or MCP endpoint on this site today.',
+      'The public entry points available today are the Protocol, local verifier, and machine-readable documentation.',
     ],
     sections: [
       {
         id: 'current-support',
-        title: 'Current public support',
+        title: 'What the verifier checks now',
         paragraphs: [
-          `${PUBLIC_RELEASE.protocol} is ${PUBLIC_RELEASE.protocolMaturity}. Its sole public Record interpretation support target is the exact bundle below.`,
+          PUBLIC_CAPABILITY,
+          `${PUBLIC_RELEASE.protocol} is ${PUBLIC_RELEASE.protocolMaturity}. Its exact Record interpretation bundle is shown below.`,
         ],
         code: PUBLIC_RELEASE.bundle,
         bullets: [
@@ -381,31 +383,32 @@ npm exec -- nomue verify records/invalid-result-mismatch.json --format json`,
   },
   {
     slug: 'limits',
-    title: 'Current limits and non-claims',
+    title: 'Current capability and boundaries',
     description:
-      'The difference between current public support, product development, long-term platform scope, and claims that Licklider does not make.',
-    status: 'Current public boundary — September 1, 2026',
+      'What can be used now, what comes next, how the platform expands, and how to interpret a successful result.',
+    status: 'Current public capability map — September 1, 2026',
     updated: 'September 1, 2026',
     llmSummary: [
-      `Public support is experimental and limited to ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
-      'The agent-callable product capability is not yet a public API or MCP endpoint.',
+      `Run the public verifier locally for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
+      'The agent-callable Welch product capability is implemented and public product access is being prepared.',
       'Paired t is open Release 2 RFC work, not current Release 1 support.',
-      'Verification calls across AI research describe the long-term product category, not shipped support outside statistics.',
+      'Verification calls across AI research describe the platform category; each additional capability must be evidenced and released separately.',
       'A supported verification does not establish source-data truth, overall research correctness, causal truth, or publication acceptance.',
-      'No comparative result showing that nomue improves a research agent has been published.',
+      'A controlled comparison is being built before a performance result is published.',
     ],
     sections: [
       {
         id: 'current',
-        title: 'Current public support',
+        title: 'Available now',
         paragraphs: [
-          `${PUBLIC_RELEASE.protocol} and the ${PUBLIC_RELEASE.verifierPackage} verifier package are public and experimental. The exact public support target is limited to ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
+          PUBLIC_CAPABILITY,
+          `${PUBLIC_RELEASE.protocol} and verifier ${PUBLIC_RELEASE.verifierPackage} are the current public artifacts.`,
           PRODUCT_RELEASE_BOUNDARY,
         ],
       },
       {
         id: 'development',
-        title: 'Under development is not supported',
+        title: 'Next method: paired-t',
         paragraphs: [PAIRED_T_BOUNDARY],
         bullets: [
           'An RFC is a review record, not a support declaration.',
@@ -415,20 +418,20 @@ npm exec -- nomue verify records/invalid-result-mismatch.json --format json`,
       },
       {
         id: 'platform',
-        title: 'Platform scope is a direction, not a support claim',
+        title: 'How the platform expands',
         paragraphs: [PLATFORM_SCOPE, MARKET_SCOPE],
       },
       {
         id: 'non-claims',
-        title: 'What a supported verification does not establish',
+        title: 'What a successful verification means',
         paragraphs: [
-          'A supported result is deliberately narrower than a claim that the research is correct. It does not establish:',
+          'A successful result means that the named checks passed under the stated procedure, evidence, and version. The following questions remain outside that bounded result:',
         ],
         bullets: CORE_NON_CLAIMS.map((claim) => `${claim};`),
       },
       {
         id: 'evaluation',
-        title: 'No comparative performance claim',
+        title: 'Evaluation program',
         paragraphs: [EVALUATION_BOUNDARY],
         links: [{ label: 'Evaluation design and status', href: '/evaluation/' }],
       },
@@ -546,11 +549,17 @@ export function renderDocMarkdown(doc: AgentDoc): string {
 
 export const DOCS_INDEX_MARKDOWN = `# Licklider agent-readable documentation
 
-> Public documentation for understanding when a bounded verification call applies, how to use current public nomue artifacts, and what their results do not establish.
+> Run the public verifier, decide when a verification call applies, and interpret the returned evidence from one versioned documentation set.
 
 ${NOMUE_POSITION}
 
-Important boundaries:
+## Available now
+
+- ${PUBLIC_CAPABILITY}
+- [Run the verifier](https://www.licklider.ai/docs/record-verification.md)
+- [Use machine-readable examples](https://www.licklider.ai/docs/examples.json)
+
+## Product and roadmap
 
 - ${PRODUCT_RELEASE_BOUNDARY}
 - ${PAIRED_T_BOUNDARY}
