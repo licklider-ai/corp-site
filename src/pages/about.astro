@@ -18,11 +18,35 @@ const company = [
 const mergedUpstreamFixes = UPSTREAM_CONTRIBUTIONS.filter(
   (item) => item.outcome === 'fix_merged',
 );
+const founderSelectedWork = [
+  {
+    category: 'Research',
+    title: 'Correctly Rounded or Refused — preprint v0.2',
+    status: 'Sole-author preprint · not peer reviewed',
+    href: '/research/correctly-rounded-or-refused/',
+    evidenceHref: 'https://zenodo.org/records/22025200',
+    evidenceLabel: 'Zenodo record 22025200',
+  },
+  ...UPSTREAM_CONTRIBUTIONS.map((item) => ({
+    category: item.project,
+    title: item.title,
+    status:
+      item.outcome === 'fix_merged'
+        ? 'Reported by Tasuku Kobayashi · fix merged upstream'
+        : 'Reported by Tasuku Kobayashi · open and unconfirmed',
+    href: item.href,
+    evidenceHref: item.evidenceHref,
+    evidenceLabel: item.evidenceLabel,
+  })),
+];
 const founderStructuredData = {
   '@type': 'Person',
   '@id': new URL('/about/#tasuku-kobayashi', Astro.site).href,
   name: 'Tasuku Kobayashi',
   jobTitle: 'Founder and CEO',
+  description:
+    'Founder and CEO of Licklider, serial entrepreneur, researcher, and contributor of numerical defect reports to scientific open-source software.',
+  alumniOf: { '@type': 'Organization', name: 'Recruit' },
   worksFor: { '@id': new URL('/#organization', Astro.site).href },
 };
 ---
@@ -154,15 +178,46 @@ const founderStructuredData = {
       </div>
     </section>
 
-    <section id="tasuku-kobayashi" class="band">
+    <section id="tasuku-kobayashi" class="band band--wide">
       <p class="eyebrow">Founder</p>
-      <div class="band-body founder-profile">
+      <div class="founder-profile">
         <h2>Tasuku Kobayashi</h2>
         <p class="founder-role">Founder and CEO</p>
-        <p>
-          Tasuku Kobayashi founded Licklider and leads the company’s product, Protocol,
-          research, and engineering work.
-        </p>
+        <div class="founder-copy">
+          <p>
+            Tasuku Kobayashi is the founder and CEO of Licklider and a serial
+            entrepreneur. Earlier in his career, he worked at Recruit. Before founding
+            Licklider, he built two companies: a venture-backed AI and HR company, which
+            he exited through a share sale to a Tokyo Stock Exchange–listed company, and
+            an animal-health company, which he exited through a share sale to a trading
+            group operating across Asia.
+          </p>
+          <p>
+            At Licklider, he leads product, Protocol, research, and engineering work on
+            verification infrastructure for AI-assisted research. He is the sole author
+            of the preprint <em>Correctly Rounded or Refused</em> and has reported
+            independently reproduced numerical defects to SciPy, Boost.Math, and R.
+            Those reports have resulted in merged fixes in SciPy and Boost.Math; the R
+            report remains open and unconfirmed.
+          </p>
+        </div>
+
+        <h3>Selected work</h3>
+        <div class="founder-work">
+          {
+            founderSelectedWork.map((item) => (
+              <article>
+                <p class="evidence-status">{item.category} · {item.status}</p>
+                <h4><a href={item.href}>{item.title}</a></h4>
+                <p>
+                  <a href={item.evidenceHref} target="_blank" rel="noopener noreferrer">
+                    {item.evidenceLabel} ↗
+                  </a>
+                </p>
+              </article>
+            ))
+          }
+        </div>
       </div>
     </section>
 
@@ -205,6 +260,11 @@ const founderStructuredData = {
   .why { display: grid; grid-template-columns: minmax(0, var(--measure)) 10rem; gap: 4rem; align-items: start; }
   .founder-profile h2 { margin-bottom: 0.35rem; font-size: 1.25rem; }
   .founder-role { margin-bottom: 1rem; color: var(--ink-3); font-size: 0.85rem; }
+  .founder-copy { max-width: var(--measure); }
+  .founder-profile h3 { margin: 2.5rem 0 1rem; font-size: 1rem; }
+  .founder-work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .founder-work article { padding: 1.25rem; border: 1px solid var(--rule); }
+  .founder-work h4 { margin: 0 0 0.65rem; font-size: 1rem; line-height: 1.35; }
   .company { display: grid; grid-template-columns: 9rem minmax(0, 1fr); row-gap: 0.5rem; margin: 0; font-size: 0.95rem; }
   .company dt { padding-top: 0.15rem; color: var(--ink-3); font-size: 0.85rem; }
   .company dd { margin: 0; }
@@ -217,6 +277,6 @@ const founderStructuredData = {
   }
 
   @media (max-width: 620px) {
-    .evidence-list { grid-template-columns: minmax(0, 1fr); }
+    .evidence-list, .founder-work { grid-template-columns: minmax(0, 1fr); }
   }
 </style>
