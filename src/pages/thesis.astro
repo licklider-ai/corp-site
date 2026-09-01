@@ -6,6 +6,7 @@ const toc: TocItem[] = [
   { id: 'asymmetry', label: 'Generation and verification' },
   { id: 'bottleneck', label: 'Approval as the bottleneck' },
   { id: 'engineering', label: 'Engineering accountability' },
+  { id: 'interface', label: 'A verification interface' },
   { id: 'science-first', label: 'Why science first' },
   { id: 'statistics-first', label: 'Why statistics first' },
 ];
@@ -54,6 +55,23 @@ const toc: TocItem[] = [
     </p>
   </section>
 
+  <section id="interface" class="section">
+    <h2>Verification needs an interface of its own</h2>
+    <p>
+      AI systems already have interfaces for generation: search, code execution,
+      statistical software, and document production. The verification step is often
+      left inside the same model conversation, where the system that generated the work
+      is also asked to decide whether its answer is acceptable.
+    </p>
+    <p>
+      A verification call creates a separate boundary. It names the property to check,
+      the capability and version used, the scientific facts that may not be inferred,
+      the evidence behind the result, and the questions that remain outside the claim.
+      This interface can be shared across research agents without requiring one company
+      to own the researcher's general-purpose AI interface.
+    </p>
+  </section>
+
   <section id="science-first" class="section">
     <h2>Why start with scientific research</h2>
     <p>
@@ -75,11 +93,16 @@ const toc: TocItem[] = [
     <p>
       This is the first concrete implementation of the broader thesis: generation can remain flexible, while the evidence needed for a bounded approval is made explicit and independently checkable.
     </p>
+    <p>
+      Statistics is the first bounded implementation. The longer-term category is the
+      set of verification calls that arise across AI-assisted research; that direction
+      does not imply that other domains are supported today.
+    </p>
   </section>
 
   <footer class="page-foot">
-    <p class="version">Thesis v0.2 — 2026-08-31</p>
-    <p class="next"><a href="/nomue/">Next: nomue →</a></p>
+    <p class="version">Thesis v0.3 — 2026-09-01</p>
+    <p class="next"><a href="/docs/verification-call/">Next: verification calls →</a></p>
   </footer>
 </PageLayout>
 

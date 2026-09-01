@@ -4,8 +4,8 @@
 **Authority:** Canonical for placement, labels, and required metadata on `licklider.ai`  
 **Claim authority:** Subordinate to `licklider-ai/nomue-app/PUBLIC_COMMUNICATIONS.md`  
 **Outreach authority:** Media outreach is governed separately by `licklider-ai/nomue-pr`  
-**Status:** Active — v1.1<br>
-**Last updated:** 2026-08-23
+**Status:** Active — v1.2<br>
+**Last updated:** 2026-09-01
 
 ---
 
@@ -26,6 +26,11 @@ and every item in a mixed list must show its primary class.
 An item has exactly **one primary class**. It may be linked from another index, but duplicate canonical articles are not created.
 
 These classes describe the nature of the public item. They do **not** determine whether media outreach is appropriate.
+
+Product and technical documentation under `/docs/` is not a fourth publication class.
+Documentation placement, human/agent variants, and machine-readable discovery are
+governed by [`agent-readable-documentation.md`](agent-readable-documentation.md).
+Ordinary documentation changes do not create Latest entries.
 
 ---
 

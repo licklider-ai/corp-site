@@ -4,8 +4,8 @@
 
 export const SITE_TITLE = 'Licklider';
 export const SITE_DESCRIPTION =
-  'Licklider builds scientific verification infrastructure for AI research agents, starting with statistics.';
-export const SITE_VERSION = 'v0.2';
+  'Licklider builds middleware for bounded verification calls across AI research, starting with scientific statistics.';
+export const SITE_VERSION = 'v0.3';
 export const SITE_UPDATED = '2026-09-01';
 
 export type NavItem = {
@@ -18,6 +18,7 @@ export type NavItem = {
 /** Global navigation */
 export const GLOBAL_NAV: NavItem[] = [
   { label: 'nomue', href: '/nomue/', ready: true },
+  { label: 'Docs', href: '/docs/', ready: true },
   { label: 'Research', href: '/research/', ready: true },
   { label: 'Latest', href: '/latest/', ready: true },
   { label: 'About', href: '/about/', ready: true },
@@ -26,6 +27,7 @@ export const GLOBAL_NAV: NavItem[] = [
 /** Left navigation used on long-form pages. */
 export const SIDE_NAV: NavItem[] = [
   { label: 'nomue', href: '/nomue/', ready: true },
+  { label: 'Docs', href: '/docs/', ready: true },
   { label: 'Evaluation', href: '/evaluation/', ready: true },
   { label: 'Thesis', href: '/thesis/', ready: true },
   { label: 'Latest', href: '/latest/', ready: true },

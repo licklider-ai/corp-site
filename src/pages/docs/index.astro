@@ -1,0 +1,182 @@
+---
+import type { TocItem } from '../../consts';
+import { AGENT_DOCS } from '../../data/agent-docs';
+import {
+  PAIRED_T_BOUNDARY,
+  PRODUCT_RELEASE_BOUNDARY,
+  PUBLIC_RELEASE,
+} from '../../data/site-facts';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const toc: TocItem[] = [
+  { id: 'start', label: 'Start here' },
+  { id: 'current', label: 'Current public artifacts' },
+  { id: 'documentation', label: 'Documentation' },
+  { id: 'for-agents', label: 'For agents' },
+  { id: 'authority', label: 'Authority boundary' },
+];
+---
+
+<PageLayout
+  title="Docs"
+  description="Agent-readable documentation for bounded verification calls and current public nomue artifacts."
+  toc={toc}
+  markdownHref="/docs/index.md"
+  llmsHref="/docs/llms.txt"
+>
+  <header class="page-head">
+    <p class="eyebrow">Docs</p>
+    <h1>Documentation for agents and the people who review their work</h1>
+    <p class="standfirst">
+      These pages explain when a bounded verification call applies, what information
+      must not be inferred, how to use current public nomue artifacts, and what their
+      results do not establish.
+    </p>
+  </header>
+
+  <section id="start" class="section">
+    <h2>Start here</h2>
+    <p>
+      A research agent and a researcher should work from the same underlying boundary:
+      the exact capability, required declarations, possible outcomes, evidence, and
+      non-claims. The human page and machine-readable version present that boundary to
+      different readers without creating different meanings.
+    </p>
+    <p class="primary-link"><a href="/docs/verification-call/">→ What a verification call is</a></p>
+  </section>
+
+  <section id="current" class="section">
+    <h2>Current public artifacts</h2>
+    <div class="status-grid">
+      <article>
+        <p class="eyebrow">Public today</p>
+        <h3>{PUBLIC_RELEASE.protocol}</h3>
+        <p>
+          The exact public support target covers {PUBLIC_RELEASE.profile} under the
+          {PUBLIC_RELEASE.procedure}. The Protocol and verifier remain experimental.
+        </p>
+      </article>
+      <article>
+        <p class="eyebrow">Product availability</p>
+        <h3>No public API or MCP endpoint yet</h3>
+        <p>{PRODUCT_RELEASE_BOUNDARY}</p>
+      </article>
+      <article>
+        <p class="eyebrow">Successor work</p>
+        <h3>Paired t is under public RFC review</h3>
+        <p>{PAIRED_T_BOUNDARY}</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="documentation" class="section">
+    <h2>Documentation</h2>
+    <div class="doc-list">
+      {
+        AGENT_DOCS.map((doc) => (
+          <article>
+            <h3><a href={`/docs/${doc.slug}/`}>{doc.title}</a></h3>
+            <p>{doc.description}</p>
+            <p class="doc-status">{doc.status}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="for-agents" class="section">
+    <h2>For agents</h2>
+    <p>
+      Every documentation page has a clean Markdown version. The indexes stay short so
+      an agent can discover the relevant page and fetch only the detail it needs.
+      Normalized examples are also available as JSON.
+    </p>
+    <ul>
+      <li><a href="/llms.txt">Site llms.txt</a></li>
+      <li><a href="/docs/llms.txt">Documentation llms.txt</a></li>
+      <li><a href="/docs/index.md">Documentation index in Markdown</a></li>
+      <li><a href="/docs/examples.json">Machine-readable examples</a></li>
+    </ul>
+  </section>
+
+  <section id="authority" class="section">
+    <h2>Authority boundary</h2>
+    <p>
+      These pages do not replace the public nomue Protocol or the released verifier
+      artifacts. Protocol semantics, exact interpretation bundles, checks, and
+      verification-report behavior remain authoritative in the Protocol repository.
+      Product-call guidance explains the Layer 2 interface without redefining Layer 1.
+    </p>
+    <p>
+      If a website explanation conflicts with the pinned Protocol or current product
+      contract, treat the conflict as a documentation defect rather than resolving it
+      by interpretation.
+    </p>
+  </section>
+</PageLayout>
+
+<style>
+  .page-head {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .page-head .eyebrow {
+    margin: 0;
+  }
+
+  .page-head h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0.9rem 0 1.25rem;
+  }
+
+  .standfirst {
+    margin: 0;
+    font-size: 1.08rem;
+    color: var(--ink-2);
+  }
+
+  .section {
+    padding: 2.75rem 0;
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  .section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .section > :last-child,
+  article > :last-child {
+    margin-bottom: 0;
+  }
+
+  .primary-link {
+    margin-top: 1.75rem;
+  }
+
+  .status-grid,
+  .doc-list {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .status-grid article,
+  .doc-list article {
+    padding: 1.2rem 1.25rem;
+    border: 1px solid var(--rule);
+  }
+
+  article h3 {
+    margin: 0.45rem 0 0.65rem;
+    font-size: 1.02rem;
+  }
+
+  .doc-status {
+    color: var(--ink-3);
+    font-size: 0.82rem;
+  }
+</style>

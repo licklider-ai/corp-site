@@ -9,13 +9,20 @@ interface Props {
   description?: string;
   /** ページ内メニューに並べる見出し */
   toc: TocItem[];
+  markdownHref?: string;
+  llmsHref?: string;
 }
 
-const { title, description, toc } = Astro.props;
+const { title, description, toc, markdownHref, llmsHref } = Astro.props;
 ---
 
 {/* 下層ページ: ヘッダーの下に 左から サイドメニュー / コンテンツ / ページ内メニュー */}
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  markdownHref={markdownHref}
+  llmsHref={llmsHref}
+>
   <div class="shell">
     <div class="side">
       <SideMenu />

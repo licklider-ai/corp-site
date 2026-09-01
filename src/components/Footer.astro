@@ -4,6 +4,11 @@
 <footer class="site-footer">
   <div class="inner">
     <p class="copyright">© 2026 Licklider, Inc.</p>
+    <nav aria-label="Machine-readable resources">
+      <a href="/docs/">Docs</a>
+      <a href="/llms.txt">llms.txt</a>
+      <a href="/docs/llms.txt">Docs for agents</a>
+    </nav>
   </div>
 </footer>
 
@@ -25,6 +30,17 @@
   .copyright {
     margin: 0;
     font-size: 0.82rem;
+    color: var(--ink-3);
+  }
+
+  nav {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-size: 0.78rem;
     color: var(--ink-3);
   }
 </style>

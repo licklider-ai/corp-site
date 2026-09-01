@@ -1,0 +1,127 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { AGENT_DOCS, type AgentDoc } from '../../data/agent-docs';
+import DocLayout from '../../layouts/DocLayout.astro';
+
+export const getStaticPaths = (() =>
+  AGENT_DOCS.map((doc) => ({
+    params: { slug: doc.slug },
+    props: { doc },
+  }))) satisfies GetStaticPaths;
+
+interface Props {
+  doc: AgentDoc;
+}
+
+const { doc } = Astro.props;
+const toc = [
+  ...doc.sections.map((section) => ({
+    id: section.id,
+    label: section.title,
+  })),
+  { id: 'llm-summary', label: 'Flat summary for LLMs' },
+];
+---
+
+<DocLayout
+  title={doc.title}
+  description={doc.description}
+  status={doc.status}
+  updated={doc.updated}
+  slug={doc.slug}
+  toc={toc}
+>
+  {
+    doc.sections.map((section) => (
+      <section
+        id={section.id}
+        data-llm-section={section.id}
+        data-llm-example={section.example ? section.id : undefined}
+      >
+        <h2>{section.title}</h2>
+
+        {section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+
+        {section.ordered && (
+          <ol>
+            {section.ordered.map((item) => <li>{item}</li>)}
+          </ol>
+        )}
+
+        {section.bullets && (
+          <ul>
+            {section.bullets.map((item) => <li>{item}</li>)}
+          </ul>
+        )}
+
+        {section.code && (
+          <pre data-llm-code-example><code>{section.code}</code></pre>
+        )}
+
+        {section.table && (
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  {section.table.headers.map((header) => <th>{header}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {section.table.rows.map((row) => (
+                  <tr>
+                    {row.map((cell) => <td>{cell}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {section.note && (
+          <div class="notice">
+            <p>{section.note}</p>
+          </div>
+        )}
+
+        {section.links && (
+          <ul class="resource-links">
+            {section.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                >
+                  {link.label}
+                </a>
+                {link.note && ` — ${link.note}`}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+    ))
+  }
+
+  <section id="llm-summary" data-llm-summary>
+    <h2>Flat summary for LLMs</h2>
+    <p>
+      This llms.txt-style summary is intentionally repetitive. Use the linked Markdown
+      page when a flat, low-markup representation is preferable.
+    </p>
+    <ul>
+      {doc.llmSummary.map((item) => <li>{item}</li>)}
+    </ul>
+    <p><a href={`/docs/${doc.slug}.md`}>Markdown version of this page →</a></p>
+  </section>
+</DocLayout>
+
+<style>
+  .resource-links {
+    margin-top: 1.5rem;
+  }
+
+  table {
+    min-width: 38rem;
+  }
+</style>

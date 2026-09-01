@@ -1,87 +1,162 @@
 ---
-import LickliderPortrait from '../components/LickliderPortrait.astro';
 import { PUBLICATIONS } from '../data/publications';
+import {
+  EVALUATION_BOUNDARY,
+  PAIRED_T_BOUNDARY,
+  PLATFORM_SCOPE,
+  PRODUCT_RELEASE_BOUNDARY,
+  PUBLIC_EVIDENCE,
+  PUBLIC_RELEASE,
+  VERIFICATION_CALL_DEFINITION,
+} from '../data/site-facts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKey));
+const latest = [...PUBLICATIONS]
+  .sort((a, b) => b.sortKey.localeCompare(a.sortKey))
+  .slice(0, 8);
 ---
 
-<BaseLayout
-  description="Licklider builds scientific verification infrastructure for AI research agents, starting with statistics."
->
+<BaseLayout>
   <section class="hero">
     <div class="hero-inner">
-      <p class="eyebrow">nomue</p>
-      <h1>Scientific verification<br />for AI research agents</h1>
+      <p class="eyebrow">Licklider</p>
+      <h1>The verification layer<br />for AI research agents</h1>
       <div class="lede">
         <p>
-          Research agents can reason, write code, and use statistical software. nomue gives them a separate place to check the parts that should not depend on the model's own judgment.
+          AI agents can search, reason, write code, and generate scientific work. They
+          also need a separate way to check the parts that should not depend on the
+          generating model judging itself.
         </p>
         <p>
-          It checks whether a supported statistical analysis can proceed, whether required information is missing, whether reported numbers are consistent with the registered calculation, and when the agent should clarify or refuse.
+          Licklider builds middleware for bounded verification calls across AI
+          research, starting with scientific statistics.
         </p>
       </div>
       <div class="cta">
+        <a href="/docs/verification-call/">What is a verification call? →</a>
         <a href="/nomue/">Explore nomue →</a>
-        <a href="https://github.com/licklider-ai/nomue-protocol" target="_blank" rel="noopener noreferrer">Protocol →</a>
-        <a href="https://github.com/licklider-ai/nomue-verifier" target="_blank" rel="noopener noreferrer">Verifier →</a>
+        <a href="/docs/">Docs for agents →</a>
       </div>
     </div>
   </section>
 
   <div class="sections">
+    <section class="band">
+      <p class="eyebrow">The Missing Call</p>
+      <div class="band-body">
+        <p class="lead">Generation has interfaces. Verification needs one too.</p>
+        <p>
+          A research agent can already call a literature search, a code runner, or a
+          statistical library. But a calculation completing is not the same as knowing
+          whether the design is supported, whether a required scientific fact is
+          missing, whether a reported number agrees with a registered calculation, or
+          whether the system should stop.
+        </p>
+        <p>
+          Licklider is not building another general research agent. We are building the
+          specialist layer those agents can use when a bounded part of the work needs
+          separate verification.
+        </p>
+      </div>
+    </section>
+
     <section class="band band--single">
-      <div class="band-inner">
-        <p class="eyebrow">Why</p>
-        <div class="band-body">
-          <p class="lead">
-            A model can be useful without being the final authority on whether its own statistical analysis is scientifically supported.
-          </p>
-          <p>
-            In a research workflow, a small mistake can propagate from analysis into figures, results, and claims. nomue separates verification from generation: the research agent can orchestrate the work and explain the result, while a bounded verification capability handles the supported statistical decision and numerical checks.
-          </p>
+      <div class="band-inner band-inner--wide">
+        <p class="eyebrow">Verification Call</p>
+        <p class="definition">{VERIFICATION_CALL_DEFINITION}</p>
+        <div class="call-grid">
+          <article>
+            <p class="step">1 · Request</p>
+            <h2>Name the exact property</h2>
+            <p>
+              The call identifies the capability, version, evidence, and scientific
+              declarations needed for the check.
+            </p>
+          </article>
+          <article>
+            <p class="step">2 · Decision</p>
+            <h2>Execute, clarify, or stop</h2>
+            <p>
+              The capability can proceed, ask for missing meaning, report unsupported
+              scope, refuse safely, or preserve a failed check.
+            </p>
+          </article>
+          <article>
+            <p class="step">3 · Boundary</p>
+            <h2>Return the non-claim too</h2>
+            <p>
+              The result travels with what was checked, the evidence and versions used,
+              and what remains unestablished.
+            </p>
+          </article>
         </div>
       </div>
     </section>
 
     <section class="band band--single">
       <div class="band-inner band-inner--wide">
-        <p class="eyebrow">How It Works</p>
-        <div class="flow" aria-label="Research agent to nomue verification flow">
-          <div class="flow-step">
-            <span>1</span>
-            <h2>Research agent</h2>
-            <p>Understands the task, gathers context, and decides that statistical verification is needed.</p>
-          </div>
-          <div class="flow-arrow" aria-hidden="true">→</div>
-          <div class="flow-step">
-            <span>2</span>
-            <h2>nomue</h2>
-            <p>Checks the supported contract and returns execute, clarify, refuse, or a verified numerical result.</p>
-          </div>
-          <div class="flow-arrow" aria-hidden="true">→</div>
-          <div class="flow-step">
-            <span>3</span>
-            <h2>Research workflow</h2>
-            <p>Uses the bounded result without treating the model's self-assessment as the verification step.</p>
-          </div>
+        <p class="eyebrow">Platform Scope</p>
+        <div class="scope-grid">
+          <article>
+            <p class="scope-label">Public today</p>
+            <h2>One exact Welch verification slice</h2>
+            <p>
+              {PUBLIC_RELEASE.protocol} and the experimental local verifier cover
+              {PUBLIC_RELEASE.profile} under the {PUBLIC_RELEASE.procedure}.
+            </p>
+            <p class="scope-status">Public and experimental</p>
+          </article>
+          <article>
+            <p class="scope-label">In development</p>
+            <h2>Agent-callable product capability</h2>
+            <p>{PRODUCT_RELEASE_BOUNDARY}</p>
+            <p>{PAIRED_T_BOUNDARY}</p>
+            <p class="scope-status">Not current public support</p>
+          </article>
+          <article>
+            <p class="scope-label">Long-term category</p>
+            <h2>Verification calls across AI research</h2>
+            <p>{PLATFORM_SCOPE}</p>
+            <p class="scope-status">Direction, not a shipped-capability claim</p>
+          </article>
         </div>
-        <p class="more"><a href="/nomue/">→ How nomue works</a></p>
+        <p class="scope-note">
+          The business is designed as shared infrastructure between research agents and
+          the evidence they rely on, not as a single all-purpose research workflow.
+        </p>
       </div>
     </section>
 
-    <section class="band">
-      <p class="eyebrow">Current Scope</p>
-      <div class="band-body">
-        <p>
-          The first public Protocol support target is deliberately narrow: independent two-group continuous data using a two-sided Welch t-test, with explicit declarations, numerical recomputation, and local verification of the supported parts of a Record.
-        </p>
-        <p>
-          A paired-t successor is in public RFC review. Other statistical methods are not implied by the current public support target.
-        </p>
-        <p class="more">
-          <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">→ Paired-t public RFC</a>
-        </p>
+    <section class="band band--single">
+      <div class="band-inner">
+        <p class="eyebrow">Agent-readable by Design</p>
+        <div class="band-body band-body--wide">
+          <h2 class="section-title">One underlying contract, two readers</h2>
+          <p class="lead">
+            Research agents and researchers should be able to inspect the same scope,
+            required declarations, possible outcomes, and limits.
+          </p>
+          <p>
+            Licklider publishes small discovery indexes, clean Markdown pages, explicit
+            when-to-use and when-not-to-use guidance, and machine-readable examples. The
+            purpose is not to make a model sound confident. It is to reduce wrong calls,
+            prevent silent inference, and make the basis of a result easier for a
+            researcher to review.
+          </p>
+          <div class="reader-grid">
+            <article>
+              <h3>For the research agent</h3>
+              <p>Discover the right capability, provide the right facts, and stop at the stated boundary.</p>
+            </article>
+            <article>
+              <h3>For the researcher</h3>
+              <p>See what the agent asked, what was checked, and what still requires human judgment.</p>
+            </article>
+          </div>
+          <p class="more">
+            <a href="/docs/">→ Read the docs</a> · <a href="/llms.txt">llms.txt →</a>
+          </p>
+        </div>
       </div>
     </section>
 
@@ -93,77 +168,85 @@ const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKe
             <p class="layer-label">Public trust layer</p>
             <h2>Protocol, Record, verifier</h2>
             <p>
-              Public semantics define what a supported Record means. The verifier lets anyone check supported properties locally without depending on Licklider's service.
+              The public Protocol defines how supported evidence and scoped verification
+              results are represented. A local verifier lets third parties check covered
+              properties without depending on Licklider's service.
             </p>
           </article>
           <article>
-            <p class="layer-label">Agent runtime</p>
-            <h2>Scientific verification capabilities</h2>
+            <p class="layer-label">Product layer</p>
+            <h2>Agent-callable verification capabilities</h2>
             <p>
-              Agent-callable capabilities apply bounded scientific rules, numerical checks, clarification requirements, and refusal boundaries. The runtime can evolve without turning every product implementation detail into a public standard.
+              nomue handles product-side intake, clarification, supported-scope
+              decisions, deterministic execution, failure handling, and machine-readable
+              next actions without turning private implementation choices into public
+              Protocol requirements.
             </p>
           </article>
         </div>
+        <p class="more"><a href="/nomue/">→ How nomue works</a></p>
       </div>
     </section>
 
-    <section class="band">
-      <p class="eyebrow">Evidence</p>
-      <div class="band-body">
-        <p>
-          We treat research as part of product development. Numerical edge cases, implementation disagreements, and methodological questions are investigated before they become verification rules.
-        </p>
-        <p>
-          That work has already produced a public preprint, upstream statistical-software findings, and a growing body of reviewed numerical evidence.
-        </p>
-        <p class="more"><a href="/research/">→ Research</a> · <a href="/engineering/">Engineering →</a></p>
+    <section class="band band--single">
+      <div class="band-inner band-inner--wide">
+        <p class="eyebrow">Evidence Before Expansion</p>
+        <div class="evidence-intro">
+          <p class="lead">
+            Verification infrastructure is credible only if small numerical differences
+            and uncertain boundaries are treated as substantive engineering work.
+          </p>
+          <p>
+            We investigate edge cases, check results against independent calculations,
+            report defects upstream, and keep our diagnosis separate from a maintainer's
+            confirmation. The work is useful to the wider scientific software ecosystem,
+            whether or not it becomes a nomue capability.
+          </p>
+        </div>
+        <div class="evidence-grid">
+          {
+            PUBLIC_EVIDENCE.map((item) => (
+              <article>
+                <p class="evidence-status">{item.status}</p>
+                <h2><a href={item.href}>{item.title}</a></h2>
+                <p>{item.summary}</p>
+              </article>
+            ))
+          }
+        </div>
+        <p class="more"><a href="/engineering/">→ Engineering</a> · <a href="/research/">Research →</a></p>
       </div>
     </section>
 
     <section class="band">
       <p class="eyebrow">Evaluation</p>
       <div class="band-body">
-        <p class="lead">Does adding nomue actually make a research agent more reliable?</p>
+        <p class="lead">Does adding nomue actually improve a research agent?</p>
         <p>
-          We are building a controlled evaluation that compares the same model with the same baseline statistical tools, with and without nomue. The primary comparison isolates the incremental effect of adding nomue.
+          We are building a controlled comparison of the same model and baseline tools,
+          with and without nomue. The model is not allowed to judge whether its own
+          answer is correct, and clarification, refusal, and unsupported scope are
+          scored separately from numerical answers.
         </p>
-        <p>
-          We have not published a comparative performance result yet. The evaluation is designed to make that question measurable rather than assumed.
-        </p>
+        <p>{EVALUATION_BOUNDARY}</p>
         <p class="more"><a href="/evaluation/">→ Evaluation design and status</a></p>
       </div>
     </section>
 
-    <section class="band band--single">
-      <div class="band-inner">
-        <p class="eyebrow">Thesis</p>
-        <div class="band-body">
-          <h2 class="section-title">Engineering Accountability at Machine Scale</h2>
-          <p>
-            AI has scaled generation. As more intellectual work is produced by machines, approval becomes meaningful only when it remains connected to evidence that can be checked.
-          </p>
-          <p>
-            We start with scientific statistics because the connection between data, analytical decisions, numerical results, and claims can be made explicit and independently testable.
-          </p>
-          <p class="more"><a href="/thesis/">→ Read the thesis</a></p>
-        </div>
-      </div>
-    </section>
-
-    <section class="band band--single">
-      <div class="band-inner band-inner--wide">
-        <p class="eyebrow">Why "Licklider"</p>
-        <div class="why">
-          <div class="band-body">
-            <p>
-              In "Man-Computer Symbiosis" (1960), J. C. R. Licklider described a division of labor in which humans set goals and exercise judgment while computers carry out routine work.
-            </p>
-            <p>
-              As machines take on more of the generation and execution, we are building infrastructure for the part that must remain accountable: the connection between decisions and evidence.
-            </p>
-          </div>
-          <LickliderPortrait />
-        </div>
+    <section class="band">
+      <p class="eyebrow">Thesis</p>
+      <div class="band-body">
+        <h2 class="section-title">Approval needs a checkable basis</h2>
+        <p>
+          AI has scaled generation. As more intellectual work is produced by machines,
+          approval remains meaningful only when it stays connected to evidence that can
+          be checked.
+        </p>
+        <p>
+          We are not trying to automate responsibility. We are building the verification
+          infrastructure that lets researchers exercise judgment with a clearer basis.
+        </p>
+        <p class="more"><a href="/thesis/">→ Read the thesis</a></p>
       </div>
     </section>
 
@@ -177,9 +260,7 @@ const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKe
                 latest.map((row) => (
                   <tr>
                     <td class="latest-date">{row.date}</td>
-                    <td>
-                      <a href={row.href}>{row.title}</a>
-                    </td>
+                    <td><a href={row.href}>{row.title}</a></td>
                     <td class="latest-category">
                       <a href={`/${row.category.toLowerCase()}/`}>{row.category}</a>
                     </td>
@@ -189,220 +270,61 @@ const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKe
             </tbody>
           </table>
         </div>
+        <p class="more"><a href="/latest/">→ All updates</a></p>
       </div>
     </section>
   </div>
 </BaseLayout>
 
 <style>
-  .hero {
-    border-bottom: 1px solid var(--rule-faint);
+  .hero { border-bottom: 1px solid var(--rule-faint); }
+  .hero-inner { max-width: var(--shell); margin: 0 auto; padding: 7rem var(--gutter) 6rem; }
+  .hero h1 { max-width: 61rem; margin: 1.25rem 0 2.5rem; font-size: clamp(2.7rem, 6vw, 4.45rem); line-height: 1.1; letter-spacing: -0.015em; }
+  .lede { max-width: 45rem; font-size: 1.15rem; color: var(--ink-1); }
+  .cta { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 3rem; font-size: 0.95rem; }
+  .cta a { padding-bottom: 3px; border-bottom: 1px solid var(--ink); text-decoration: none; }
+  .sections { max-width: var(--shell); margin: 0 auto; padding: 0 var(--gutter); }
+  .band { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 3rem; padding: 4rem 0; border-bottom: 1px solid var(--rule-faint); }
+  .band:last-child { border-bottom: 0; }
+  .band > .eyebrow { margin: 0.35rem 0 0; }
+  .band--single { display: block; }
+  .band-inner { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 3rem; }
+  .band-inner > .eyebrow { margin: 0.35rem 0 0; }
+  .band-inner--wide { display: block; }
+  .band-inner--wide > .eyebrow { margin-bottom: 2rem; }
+  .band-body { max-width: var(--measure); }
+  .band-body--wide { max-width: 46rem; }
+  .band-body > :last-child, article > :last-child { margin-bottom: 0; }
+  .lead { color: var(--ink); font-size: 1.15rem; }
+  .definition { max-width: 52rem; margin: 0 0 2.5rem; color: var(--ink); font-size: clamp(1.35rem, 2.8vw, 2rem); line-height: 1.45; }
+  .call-grid, .scope-grid, .evidence-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .call-grid article, .scope-grid article, .evidence-grid article { padding: 1.5rem; border: 1px solid var(--rule); }
+  .call-grid h2, .scope-grid h2, .evidence-grid h2, .layers h2 { margin-bottom: 0.75rem; font-size: 1.08rem; }
+  .step, .scope-label, .layer-label, .evidence-status { margin-bottom: 0.55rem; color: var(--ink-3); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .scope-status { padding-top: 0.75rem; border-top: 1px solid var(--rule-faint); color: var(--ink-3); font-size: 0.82rem; }
+  .scope-note { max-width: 47rem; margin: 2rem 0 0; padding-left: 1.25rem; border-left: 1px solid var(--ink); }
+  .section-title { margin-bottom: 1rem; font-size: 1.3rem; }
+  .reader-grid, .layers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .reader-grid article, .layers article { padding: 1.5rem; border: 1px solid var(--rule); }
+  .reader-grid h3 { margin-bottom: 0.65rem; font-size: 1rem; }
+  .evidence-intro { max-width: 45rem; margin-bottom: 2rem; }
+  .evidence-grid h2 a { text-decoration: none; }
+  .more { margin: 2rem 0 0; font-size: 0.92rem; }
+  .table-scroll { overflow-x: auto; }
+  .latest-body { max-width: none; }
+  .latest-date { width: 10rem; white-space: nowrap; color: var(--ink-3); }
+  .latest-category { width: 7rem; white-space: nowrap; text-align: right; }
+  .latest-category a { color: var(--ink-3); text-decoration: none; }
+
+  @media (max-width: 900px) {
+    .hero-inner { padding: 4.5rem var(--gutter) 4rem; }
+    .band, .band-inner { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+    .call-grid, .scope-grid, .evidence-grid { grid-template-columns: minmax(0, 1fr); }
+    .latest-date { width: 8rem; }
   }
 
-  .hero-inner {
-    max-width: var(--shell);
-    margin: 0 auto;
-    padding: 7rem var(--gutter) 6rem;
-  }
-
-  .hero h1 {
-    max-width: 58rem;
-    font-size: clamp(2.6rem, 6vw, 4.25rem);
-    line-height: 1.12;
-    letter-spacing: -0.01em;
-    margin: 1.25rem 0 2.5rem;
-  }
-
-  .lede {
-    max-width: 42rem;
-    font-size: 1.12rem;
-    color: var(--ink-1);
-  }
-
-  .cta {
-    margin-top: 3rem;
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    font-size: 0.95rem;
-  }
-
-  .cta a {
-    text-decoration: none;
-    border-bottom: 1px solid var(--ink);
-    padding-bottom: 3px;
-  }
-
-  .sections {
-    max-width: var(--shell);
-    margin: 0 auto;
-    padding: 0 var(--gutter);
-  }
-
-  .band {
-    display: grid;
-    grid-template-columns: 12rem minmax(0, 1fr);
-    gap: 3rem;
-    padding: 4rem 0;
-    border-bottom: 1px solid var(--rule-faint);
-  }
-
-  .band:last-child {
-    border-bottom: 0;
-  }
-
-  .band > .eyebrow {
-    margin: 0.35rem 0 0;
-  }
-
-  .band-body {
-    max-width: var(--measure);
-  }
-
-  .latest-body {
-    max-width: none;
-  }
-
-  .band--single {
-    display: block;
-  }
-
-  .band-inner {
-    max-width: var(--measure);
-    margin: 0 auto;
-  }
-
-  .band-inner--wide {
-    max-width: 56rem;
-  }
-
-  .band-inner > .eyebrow {
-    margin: 0 0 2.5rem;
-  }
-
-  .lead {
-    font-size: 1.08rem;
-    color: var(--ink);
-  }
-
-  .section-title {
-    font-size: 1.65rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .flow {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
-    align-items: stretch;
-    gap: 1rem;
-  }
-
-  .flow-step,
-  .layers article {
-    border: 1px solid var(--rule);
-    padding: 1.5rem;
-  }
-
-  .flow-step span,
-  .layer-label {
-    display: block;
-    margin: 0 0 0.75rem;
-    color: var(--ink-3);
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .flow-step h2,
-  .layers h2 {
-    font-size: 1.2rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .flow-step p,
-  .layers p:last-child {
-    margin-bottom: 0;
-  }
-
-  .flow-arrow {
-    align-self: center;
-    color: var(--ink-3);
-  }
-
-  .layers {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
-  }
-
-  .more {
-    margin-top: 1.75rem;
-    font-size: 0.95rem;
-  }
-
-  .why {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 16rem);
-    gap: 3.5rem;
-    align-items: center;
-  }
-
-  .why .band-body {
-    margin-top: 0;
-  }
-
-  .table-scroll {
-    overflow-x: auto;
-  }
-
-  .latest-date {
-    white-space: nowrap;
-    color: var(--ink-3);
-  }
-
-  .latest-category {
-    color: var(--ink-3);
-    text-align: right;
-  }
-
-  .latest-category a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  tbody tr:first-child td {
-    border-top: 1px solid var(--rule-faint);
-  }
-
-  @media (max-width: 800px) {
-    .hero-inner {
-      padding: 4rem var(--gutter) 3.5rem;
-    }
-
-    .band {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 1.25rem;
-      padding: 3rem 0;
-    }
-
-    .flow,
-    .layers,
-    .why {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .flow-arrow {
-      justify-self: center;
-      transform: rotate(90deg);
-    }
-
-    .why {
-      gap: 2.5rem;
-    }
-
-    .why :global(.portrait) {
-      max-width: 15rem;
-      margin: 0 auto;
-    }
+  @media (max-width: 620px) {
+    .reader-grid, .layers { grid-template-columns: minmax(0, 1fr); }
+    .latest-category { display: none; }
   }
 </style>

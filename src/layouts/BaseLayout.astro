@@ -7,11 +7,21 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  markdownHref?: string;
+  llmsHref?: string;
 }
 
-const { title, description = SITE_DESCRIPTION } = Astro.props;
+const {
+  title,
+  description = SITE_DESCRIPTION,
+  markdownHref,
+  llmsHref = '/llms.txt',
+} = Astro.props;
 const pageTitle = title ? `${title} — ${SITE_TITLE}` : SITE_TITLE;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const markdownUrl = markdownHref ? new URL(markdownHref, Astro.site) : undefined;
+const llmsUrl = new URL(llmsHref, Astro.site);
+const socialImageUrl = new URL('/og.png', Astro.site);
 ---
 
 <!doctype html>
@@ -22,15 +32,22 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="describedby" href={llmsUrl} />
+    {markdownUrl && <link rel="alternate" type="text/markdown" href={markdownUrl} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE_TITLE} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Licklider — The verification layer for AI research agents" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
   </head>
 
   <body>

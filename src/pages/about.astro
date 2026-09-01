@@ -1,4 +1,10 @@
 ---
+import LickliderPortrait from '../components/LickliderPortrait.astro';
+import {
+  COMPANY_POSITION,
+  PLATFORM_SCOPE,
+  PUBLIC_EVIDENCE,
+} from '../data/site-facts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const company = [
@@ -8,17 +14,12 @@ const company = [
 ];
 ---
 
-<BaseLayout
-  title="About"
-  description="Licklider builds scientific verification infrastructure for AI research agents, starting with statistics."
->
+<BaseLayout title="About">
   <section class="page-hero">
     <div class="page-hero-inner">
       <p class="eyebrow">About</p>
-      <h1>About Licklider</h1>
-      <p class="standfirst">
-        Licklider is an infrastructure company in Tokyo. We build scientific verification for AI research agents, starting with statistics.
-      </p>
+      <h1>Infrastructure for the verification side of AI research</h1>
+      <p class="standfirst">{COMPANY_POSITION}</p>
     </div>
   </section>
 
@@ -27,32 +28,100 @@ const company = [
       <p class="eyebrow">What We Do</p>
       <div class="band-body">
         <p>
-          Our first product, nomue, gives research agents a separate place to check bounded statistical decisions and numerical results rather than relying on the model to judge its own analysis.
+          Research agents can generate analyses, code, figures, and scientific prose.
+          Licklider works on the separate moment when the workflow needs to determine
+          whether a bounded part of that work has an adequate, checkable basis.
         </p>
         <p>
-          We combine product engineering with research, public specifications, independent verification, and controlled evaluation. The current public Protocol begins with a deliberately narrow Welch t-test scope and expands only through explicit evidence and review.
+          Our first product, nomue, begins with statistical verification. It gives a
+          research agent a specialist capability for supported decisions, deterministic
+          calculations, clarification requirements, refusal boundaries, and scoped
+          verification results.
         </p>
       </div>
     </section>
 
     <section class="band">
-      <p class="eyebrow">Mission</p>
+      <p class="eyebrow">Platform</p>
       <div class="band-body">
+        <p>{PLATFORM_SCOPE}</p>
         <p>
-          Our broader mission is to make responsible approval possible at machine scale. AI can generate analyses, figures, prose, and code faster than people can verify them. The work that remains human — deciding what to accept and what to take responsibility for — needs infrastructure of its own.
+          The intended position is middleware between research agents and the evidence
+          they rely on. A common verification layer can serve different agent interfaces
+          and research workflows without requiring Licklider to own the general-purpose
+          interface used by every researcher.
         </p>
         <p>
-          We call this engineering accountability: designing the conditions under which approval stays connected to evidence that can be checked.
+          Current public support remains deliberately narrow. We separate the long-term
+          category, work under development, and capabilities that are publicly supported
+          today.
         </p>
       </div>
     </section>
 
     <section class="band">
-      <p class="eyebrow">Team</p>
+      <p class="eyebrow">Shared Language</p>
       <div class="band-body">
         <p>
-          Licklider was founded in Tokyo and works with researchers wherever they work. We treat software engineering and scientific verification as one discipline: claims should have explicit scope, important boundaries should be stated plainly, and supported results should be independently checkable where possible.
+          Verification is useful only when people and machines can tell what a result
+          means. We publish clear distinctions between execution, clarification,
+          unsupported scope, refusal, failed checks, and properties that were not
+          asserted.
         </p>
+        <p>
+          This language is not a claim of ownership over how researchers speak. Its
+          purpose is practical: help a research agent avoid silent assumptions and help a
+          researcher see the exact basis and limit of an AI-assisted result.
+        </p>
+        <p><a href="/docs/decision-vocabulary/">Decision vocabulary →</a></p>
+      </div>
+    </section>
+
+    <section class="band band--wide">
+      <p class="eyebrow">How We Work</p>
+      <div class="work-body">
+        <div class="work-copy">
+          <p>
+            Precision is part of the product. We investigate very small numerical
+            disagreements, build independent checks, state important non-claims, and
+            keep our diagnosis separate from an upstream maintainer's confirmation.
+          </p>
+          <p>
+            When that work finds a defect in scientific software, we report it back to
+            the project. The contribution matters even when the finding never becomes a
+            nomue capability.
+          </p>
+        </div>
+        <div class="evidence-list">
+          {
+            PUBLIC_EVIDENCE.slice(0, 2).map((item) => (
+              <article>
+                <p class="evidence-status">{item.status}</p>
+                <h2><a href={item.href}>{item.title}</a></h2>
+                <p>{item.summary}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="band band--wide">
+      <p class="eyebrow">Why “Licklider”</p>
+      <div class="why">
+        <div class="band-body">
+          <p>
+            In “Man-Computer Symbiosis” (1960), J. C. R. Licklider described a division
+            of labor in which humans set goals and exercise judgment while computers
+            carry out routine work.
+          </p>
+          <p>
+            As machines take on more generation and execution, researchers become more
+            important, not less. Their judgment needs clearer evidence and better
+            boundaries. Our name refers to that original vision of complementary roles.
+          </p>
+        </div>
+        <LickliderPortrait />
       </div>
     </section>
 
@@ -75,91 +144,35 @@ const company = [
 </BaseLayout>
 
 <style>
-  .page-hero {
-    border-bottom: 1px solid var(--rule-faint);
-  }
-
-  .page-hero-inner {
-    max-width: var(--shell);
-    margin: 0 auto;
-    padding: 5.5rem var(--gutter) 4.5rem;
-  }
-
-  .page-hero h1 {
-    font-size: clamp(2.2rem, 4.8vw, 3.4rem);
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    margin: 1.1rem 0 1.75rem;
-  }
-
-  .standfirst {
-    margin: 0;
-    max-width: var(--measure);
-    font-size: 1.08rem;
-    color: var(--ink-2);
-  }
-
-  .sections {
-    max-width: var(--shell);
-    margin: 0 auto;
-    padding: 0 var(--gutter);
-  }
-
-  .band {
-    display: grid;
-    grid-template-columns: 12rem minmax(0, 1fr);
-    gap: 3rem;
-    padding: 4rem 0;
-    border-bottom: 1px solid var(--rule-faint);
-  }
-
-  .band:last-child {
-    border-bottom: 0;
-  }
-
-  .band > .eyebrow {
-    margin: 0.35rem 0 0;
-  }
-
-  .band-body {
-    max-width: var(--measure);
-  }
-
-  .band-body > :last-child {
-    margin-bottom: 0;
-  }
-
-  .company {
-    margin: 0;
-    display: grid;
-    grid-template-columns: 9rem minmax(0, 1fr);
-    row-gap: 0.5rem;
-    font-size: 0.95rem;
-  }
-
-  .company dt {
-    color: var(--ink-3);
-    font-size: 0.85rem;
-    padding-top: 0.15rem;
-  }
-
-  .company dd {
-    margin: 0;
-  }
+  .page-hero { border-bottom: 1px solid var(--rule-faint); }
+  .page-hero-inner { max-width: var(--shell); margin: 0 auto; padding: 5.5rem var(--gutter) 4.5rem; }
+  .page-hero h1 { margin: 1.1rem 0 1.75rem; font-size: clamp(2.2rem, 4.8vw, 3.4rem); line-height: 1.2; letter-spacing: -0.01em; }
+  .standfirst { max-width: var(--measure); margin: 0; font-size: 1.08rem; color: var(--ink-2); }
+  .sections { max-width: var(--shell); margin: 0 auto; padding: 0 var(--gutter); }
+  .band { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 3rem; padding: 4rem 0; border-bottom: 1px solid var(--rule-faint); }
+  .band:last-child { border-bottom: 0; }
+  .band > .eyebrow { margin: 0.35rem 0 0; }
+  .band-body { max-width: var(--measure); }
+  .band-body > :last-child, article > :last-child { margin-bottom: 0; }
+  .work-body { max-width: 52rem; }
+  .work-copy { max-width: var(--measure); }
+  .evidence-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .evidence-list article { padding: 1.25rem; border: 1px solid var(--rule); }
+  .evidence-list h2 { margin-bottom: 0.65rem; font-size: 1.02rem; }
+  .evidence-status { margin-bottom: 0.5rem; color: var(--ink-3); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .why { display: grid; grid-template-columns: minmax(0, var(--measure)) 10rem; gap: 4rem; align-items: start; }
+  .company { display: grid; grid-template-columns: 9rem minmax(0, 1fr); row-gap: 0.5rem; margin: 0; font-size: 0.95rem; }
+  .company dt { padding-top: 0.15rem; color: var(--ink-3); font-size: 0.85rem; }
+  .company dd { margin: 0; }
 
   @media (max-width: 800px) {
-    .page-hero-inner {
-      padding: 3.5rem var(--gutter) 3rem;
-    }
+    .page-hero-inner { padding: 3.5rem var(--gutter) 3rem; }
+    .band { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; padding: 3rem 0; }
+    .why { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+    .company { grid-template-columns: 7.5rem minmax(0, 1fr); }
+  }
 
-    .band {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 1.25rem;
-      padding: 3rem 0;
-    }
-
-    .company {
-      grid-template-columns: 7.5rem minmax(0, 1fr);
-    }
+  @media (max-width: 620px) {
+    .evidence-list { grid-template-columns: minmax(0, 1fr); }
   }
 </style>

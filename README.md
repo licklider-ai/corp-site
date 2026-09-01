@@ -97,3 +97,11 @@ pnpm install
 公開記事は **Research / Engineering / News** の3系統に分けます。`/latest/` とホームの **Latest** は3系統を時系列でまとめ、ヘッダーはLatestを共通入口とします。各項目には分類を表示します。
 
 配置、成熟度ラベル、公開文の書き方、公開前チェック、必須メタデータの正本は [`docs/publication-architecture.md`](./docs/publication-architecture.md) を参照してください。
+
+## Agent-readable documentation
+
+`/docs/` は Research / Engineering / News とは別の技術文書面です。人間向けHTML、
+LLM向けMarkdown、`llms.txt`、機械可読exampleは、同じ公開境界から生成します。
+
+配置、正本境界、必須セクション、machine-readable surface、公開前チェックは
+[`docs/agent-readable-documentation.md`](./docs/agent-readable-documentation.md) を参照してください。

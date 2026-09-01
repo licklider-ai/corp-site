@@ -1,5 +1,6 @@
 ---
 import type { TocItem } from '../consts';
+import { EVALUATION_BOUNDARY } from '../data/site-facts';
 import PageLayout from '../layouts/PageLayout.astro';
 
 const toc: TocItem[] = [
@@ -68,8 +69,9 @@ const toc: TocItem[] = [
       <li>whether the agent chose the right action — execute, clarify, refuse, or report unsupported scope;</li>
       <li>whether it respected the supported statistical method and declarations;</li>
       <li>whether numerical outputs satisfy the applicable comparison rule;</li>
-      <li>whether it silently invented scientific facts needed to proceed; and</li>
-      <li>whether it overreached when the correct behavior was clarification or refusal.</li>
+      <li>whether it silently invented scientific facts needed to proceed;</li>
+      <li>whether it overreached when the correct behavior was clarification or refusal; and</li>
+      <li>whether it called and interpreted the verification capability at the correct boundary.</li>
     </ul>
     <p>
       Results are intended to be reported by case class rather than collapsed into one headline score that hides where failures occur.
@@ -86,7 +88,7 @@ const toc: TocItem[] = [
     </p>
     <div class="status-box">
       <p class="status-label">Public claim status</p>
-      <p><strong>No comparative nomue performance result has been published.</strong></p>
+      <p><strong>{EVALUATION_BOUNDARY}</strong></p>
       <p>We will not describe nomue as making research agents more accurate or reliable unless the controlled evaluation supports that narrower claim.</p>
     </div>
   </section>
