@@ -6,7 +6,7 @@ export const SITE_TITLE = 'Licklider';
 export const SITE_DESCRIPTION =
   'Licklider builds scientific verification infrastructure for AI research agents, starting with statistics.';
 export const SITE_VERSION = 'v0.2';
-export const SITE_UPDATED = '2026-08-31';
+export const SITE_UPDATED = '2026-09-01';
 
 export type NavItem = {
   label: string;

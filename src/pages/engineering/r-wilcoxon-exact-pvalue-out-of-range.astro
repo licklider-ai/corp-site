@@ -1,0 +1,192 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'current-status', label: 'Current status' },
+  { id: 'observation', label: 'What we observed' },
+  { id: 'verification', label: 'How we checked it' },
+  { id: 'diagnostic', label: 'Numerical diagnostic' },
+  { id: 'clamping', label: 'Why clamping is insufficient' },
+  { id: 'scope', label: 'Scope' },
+  { id: 'verification-relation', label: 'Relation to verification' },
+  { id: 'public-evidence', label: 'Public evidence' },
+];
+---
+
+<PublicationLayout
+  category="Engineering"
+  type="Upstream report"
+  title="R’s exact Wilcoxon test can return p-values outside the valid range"
+  description="R’s exact Wilcoxon test returned negative p-values and a value above 1 on a zero-difference input; we reported it with three independent exact-arithmetic checks."
+  published="September 1, 2026"
+  status="Reported to R — PR#19144 open and unconfirmed"
+  toc={toc}
+>
+  <section id="current-status">
+    <h2>Current status</h2>
+    <div class="notice">
+      <p>
+        We filed R Bugzilla PR#19144 on August 28, 2026. The report is open and
+        remains <code>UNCONFIRMED</code> in the <code>Accuracy</code> component.
+      </p>
+      <p>
+        R Core has not publicly confirmed the cause or accepted a repair. No upstream
+        fix had been recorded when this page was published.
+      </p>
+    </div>
+  </section>
+
+  <section id="observation">
+    <h2>What we observed</h2>
+    <p>
+      A deterministic input of 100 integers, including exactly one zero difference,
+      caused the one-sample exact path of <code>wilcox.test()</code> to return finite
+      p-values outside the valid interval from 0 to 1. The calls completed without a
+      warning and reported the method as <code>Wilcoxon signed rank exact test</code>.
+    </p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Alternative</th>
+            <th>R result</th>
+            <th>Exact reference in binary64</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>two.sided</code></td>
+            <td><code>-7.5495165674510645e-15</code></td>
+            <td><code>2.5853625172819263e-18</code></td>
+          </tr>
+          <tr>
+            <td><code>greater</code></td>
+            <td><code>-3.7747582837255322e-15</code></td>
+            <td><code>1.2926812586409632e-18</code></td>
+          </tr>
+          <tr>
+            <td><code>less</code></td>
+            <td><code>1.0000000000000038</code></td>
+            <td><code>1.0</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      A p-value is a probability. A negative p-value or a value greater than 1 is
+      outside its mathematical range. For the upper-tail call, the exact p-value is
+      small but strictly positive; it is not zero.
+    </p>
+  </section>
+
+  <section id="verification">
+    <h2>How we checked it</h2>
+    <p>
+      We reproduced the same displayed values in R 4.6.0, R 4.6.1, and an official
+      R-devel build from SVN trunk revision <code>r90451</code>. The R-devel build ran
+      under <code>Rscript --vanilla</code> on <code>x86_64-pc-linux-gnu</code>.
+      Repeated calls were bitwise identical.
+    </p>
+    <p>
+      Three separately implemented exact-arithmetic lineages agreed on the conditional,
+      zero-preserving signed-rank distribution. R and the exact computations also agreed
+      on the signed-rank statistic, <code>4755</code>. The disagreement was in the
+      probability calculation, not the observed statistic.
+    </p>
+  </section>
+
+  <section id="diagnostic">
+    <h2>Reporter-side numerical diagnostic</h2>
+    <p>
+      For this input, the floating-point mass function constructed by
+      <code>.dsignrank()</code> summed to <code>1.0000000000000038</code>. The cumulative
+      probability used by <code>.psignrank()</code> had the same value. Taking its
+      complement therefore produced the negative upper-tail result, and doubling that
+      complement produced the negative two-sided result.
+    </p>
+    <p>
+      This is a reporter-side numerical diagnostic, not an R Core root-cause attribution.
+      R Core has not publicly confirmed the cause or selected a repair.
+    </p>
+  </section>
+
+  <section id="clamping">
+    <h2>Why clamping is insufficient</h2>
+    <p>
+      Restricting the final output to the interval from 0 to 1 would hide the invalid
+      negative value, but it would turn the upper-tail result into zero. The exact
+      upper-tail probability is approximately <code>1.2927e-18</code>, so that guard
+      would still return the wrong numerical answer.
+    </p>
+    <p>
+      Summing the floating upper tail directly kept the result inside the valid range,
+      but it remained 26 representable floating-point steps from the correctly rounded
+      exact value. We therefore did not present a final clamp or direct-tail summation as
+      a complete repair, and we did not assume a preferred upstream numerical strategy.
+    </p>
+  </section>
+
+  <section id="scope">
+    <h2>Scope</h2>
+    <p>
+      The report concerns the one-sample exact Wilcoxon signed-rank path with a zero
+      difference in the tested R 4.6.x and R-devel versions. It does not show that every
+      <code>wilcox.test()</code> calculation is affected, and it does not estimate how
+      often ordinary research workflows reach this numerical regime.
+    </p>
+    <p>
+      R 4.4.3 returned in-range values for the same calls through older behavior that
+      removed the zero and used an asymptotic path. That comparison uses a different
+      calculation path and is not evidence that the new exact result is correct after a
+      simple fallback.
+    </p>
+    <p>
+      The upstream report remains unconfirmed. This page does not claim an R Core cause,
+      an accepted fix, or availability of a correction in any released R version.
+    </p>
+  </section>
+
+  <section id="verification-relation">
+    <h2>Relation to verification</h2>
+    <p>
+      This case illustrates why a range check and an accuracy check are different. A
+      guard can make a number look valid while discarding a strictly positive tail. A
+      bounded verification result therefore needs to say both which property was checked
+      and what remains unestablished.
+    </p>
+    <p>
+      The report does not establish that nomue Protocol currently supports Wilcoxon
+      verification, and it is not comparative evidence that nomue improves research-agent
+      performance.
+    </p>
+  </section>
+
+  <section id="public-evidence">
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href="https://bugs.r-project.org/show_bug.cgi?id=19144" target="_blank" rel="noopener noreferrer">R Bugzilla PR#19144</a>
+        — current upstream status
+      </li>
+      <li>
+        <a href="https://bugs.r-project.org/rest/bug/19144/comment" target="_blank" rel="noopener noreferrer">Public report and reproducer</a>
+        — tested versions, deterministic input, exact references, and reporter-side diagnostic
+      </li>
+      <li>
+        <a href="https://svn.r-project.org/R/trunk/src/library/stats/R/wilcox.test.R" target="_blank" rel="noopener noreferrer">R-devel Wilcoxon source</a>
+        — official current source for the relevant R-level implementation
+      </li>
+    </ul>
+  </section>
+</PublicationLayout>
+
+<style>
+  .table-scroll {
+    margin: 1.75rem 0;
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 40rem;
+  }
+</style>

@@ -14,6 +14,17 @@ export type PublicationItem = {
 export const PUBLICATIONS: PublicationItem[] = [
   {
     category: 'Engineering',
+    type: 'Upstream report',
+    date: 'September 1, 2026',
+    sortKey: '2026-09-01',
+    title: 'R’s exact Wilcoxon test can return p-values outside the valid range',
+    summary:
+      'R’s exact Wilcoxon test returned negative p-values and a value above 1 on a zero-difference input; we reported it with three independent exact-arithmetic checks.',
+    href: '/engineering/r-wilcoxon-exact-pvalue-out-of-range/',
+    status: 'Reported to R — PR#19144 open and unconfirmed',
+  },
+  {
+    category: 'Engineering',
     type: 'Implementation note',
     date: 'August 31, 2026',
     sortKey: '2026-08-31',
