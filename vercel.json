@@ -3,5 +3,13 @@
   "framework": "astro",
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "licklider.ai" }],
+      "destination": "https://www.licklider.ai/:path*",
+      "permanent": true
+    }
+  ]
 }

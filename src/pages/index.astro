@@ -1,20 +1,24 @@
 ---
 import { PUBLICATIONS } from '../data/publications';
 import {
-  COMPANY_POSITION,
   EVALUATION_BOUNDARY,
+  LEARNING_LOOP_POSITION,
   MARKET_SCOPE,
+  MCP_RELEASE,
+  MCP_PUBLIC_SOURCE,
   METHOD_IDENTITY_FINDING,
   NOMUE_GLOBAL_INSTALL_COMMAND,
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
   PLATFORM_SCOPE,
+  PLANNED_METHOD_FAMILIES,
   PRODUCT_CAPABILITY,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
   PUBLIC_TRUST_EVIDENCE,
+  ROADMAP_POSITION,
   UPSTREAM_CONTRIBUTIONS,
   VERIFICATION_CALL_DEFINITION,
 } from '../data/site-facts';
@@ -55,26 +59,38 @@ const verifierStructuredData = {
     'Local Record content digest recomputation',
   ],
 };
+const homeStructuredData = {
+  '@type': 'WebPage',
+  '@id': new URL('/#webpage', Astro.site).href,
+  name: 'Licklider — Scientific verification infrastructure for AI agents',
+  description:
+    'Licklider builds scientific verification infrastructure for AI research agents, starting with public, independently checkable Welch Record verification.',
+  url: new URL('/', Astro.site).href,
+  dateModified: '2026-09-01',
+  isPartOf: { '@id': new URL('/#website', Astro.site).href },
+  about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
+};
 ---
 
-<BaseLayout structuredData={verifierStructuredData}>
+<BaseLayout structuredData={[homeStructuredData, verifierStructuredData]}>
   <section class="hero">
     <div class="hero-inner">
       <p class="eyebrow">Licklider</p>
       <h1>The verification layer<br />for AI research agents</h1>
       <div class="lede">
         <p>
-          Install the nomue verifier from npm, give it a supported Welch Record, and
-          receive a machine-readable report of the scoped checks. Verification runs
-          locally and does not call a nomue server after installation.
+          AI research agents need a separate, inspectable system for decisions they
+          should not grade themselves. nomue gives them versioned verification calls
+          with machine-readable evidence and next actions.
         </p>
-        <p>{COMPANY_POSITION}</p>
+        <p>{ROADMAP_POSITION}</p>
       </div>
       <div class="cta">
         <a class="cta-primary" href="/docs/record-verification/">Install and run →</a>
         <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">npm package ↗</a>
         <a href={PUBLIC_RELEASE.verifierUrl} target="_blank" rel="noopener noreferrer">View source on GitHub ↗</a>
         <a href="/nomue/">How nomue works →</a>
+        <a href="/roadmap/">Product roadmap →</a>
       </div>
       <p class="hero-facts">
         {PUBLIC_RELEASE.npmPackage} · npm <code>{PUBLIC_RELEASE.npmDistTag}</code>: {PUBLIC_RELEASE.verifierPackage} release candidate ·{' '}
@@ -152,11 +168,16 @@ const verifierStructuredData = {
         <p class="eyebrow">Upstream Contributions</p>
         <div class="upstream-head">
           <div>
-            <h2 class="upstream-title">Small numerical errors deserve public, checkable evidence.</h2>
+            <h2 class="upstream-title">Public proof that we can build verification infrastructure.</h2>
             <p class="lead">
-              We test statistical software against independent references, report
-              reproducible defects upstream, and let maintainers decide the cause and
-              repair. This work strengthens tools researchers already depend on.
+              The same work required to build reliable verification—independent
+              references, hostile edge cases, reproducible failures, and exact claim
+              boundaries—has already found defects in software used across science.
+            </p>
+            <p>
+              Three public reports and two merged fixes show the engineering depth
+              behind the platform. They are evidence of what Licklider can build, not
+              the boundary of the business.
             </p>
           </div>
           <dl class="contribution-counts" aria-label="Public upstream contribution totals as of September 1, 2026">
@@ -255,35 +276,47 @@ const verifierStructuredData = {
 
     <section class="band band--single">
       <div class="band-inner band-inner--wide">
-        <p class="eyebrow">Platform Scope</p>
+        <p class="eyebrow">Product Roadmap</p>
+        <h2 class="roadmap-title">One verification call is the entry point, not the destination.</h2>
+        <p class="roadmap-lead">{PLATFORM_SCOPE}</p>
         <div class="scope-grid">
           <article>
             <p class="scope-label">Available now</p>
-            <h2>Local verification for Welch Records</h2>
+            <h3>Public Welch trust layer</h3>
             <p>{PUBLIC_CAPABILITY}</p>
             <p><a href="/docs/record-verification/">Run the verifier →</a></p>
           </article>
           <article>
-            <p class="scope-label">Built in product</p>
-            <h2>Welch verification for agent workflows</h2>
-            <p>{PRODUCT_CAPABILITY}</p>
-            <p class="availability-note">{PRODUCT_RELEASE_BOUNDARY}</p>
-            <p class="availability-links"><a href="/latest/">Latest →</a> · <a href="/rss.xml">RSS →</a></p>
+            <p class="scope-label">Public source candidate</p>
+            <h3>Local MCP adapter</h3>
+            <p>{MCP_PUBLIC_SOURCE}</p>
+            <p><a href={MCP_RELEASE.repositoryUrl} target="_blank" rel="noopener noreferrer">View MCP source ↗</a></p>
           </article>
           <article>
-            <p class="scope-label">Platform</p>
-            <h2>Verification calls across AI research</h2>
-            <p>{PLATFORM_SCOPE}</p>
+            <p class="scope-label">Next product release</p>
+            <h3>Agent-callable Welch</h3>
+            <p>{PRODUCT_CAPABILITY}</p>
+            <p>{PRODUCT_RELEASE_BOUNDARY}</p>
+          </article>
+          <article>
+            <p class="scope-label">Planned platform</p>
+            <h3>Persistent agent infrastructure</h3>
+            <p>Independently verifiable Records, agent-native Project state, resumability, and a generalized capability kernel.</p>
+          </article>
+          <article>
+            <p class="scope-label">Planned methods</p>
+            <h3>Ten capability families</h3>
+            <p>{PLANNED_METHOD_FAMILIES.slice(0, 5).join(', ')}, and five further families covering rank-based, categorical, linear-model, survival, and count outcomes.</p>
+          </article>
+          <article>
+            <p class="scope-label">Compounding system</p>
+            <h3>Governed learning from real use</h3>
+            <p>{LEARNING_LOOP_POSITION}</p>
           </article>
         </div>
-        <p class="roadmap-note"><strong>Next capability:</strong> {PAIRED_T_BOUNDARY}</p>
-        <p class="scope-note">
-          {MARKET_SCOPE}
-        </p>
-        <p class="scope-note">
-          The business is designed as shared infrastructure between research agents and
-          the evidence they rely on, not as a single all-purpose research workflow.
-        </p>
+        <p class="roadmap-note"><strong>Next Protocol capability:</strong> {PAIRED_T_BOUNDARY}</p>
+        <p class="scope-note">{MARKET_SCOPE}</p>
+        <p class="more"><a href="/roadmap/">→ See the full product and capability roadmap</a></p>
       </div>
     </section>
 
@@ -447,9 +480,11 @@ const verifierStructuredData = {
   .research-finding p:last-child { margin-bottom: 0; }
   .capability-grid, .call-grid, .scope-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
   .capability-grid article, .call-grid article, .scope-grid article { padding: 1.5rem; border: 1px solid var(--rule); }
-  .capability-grid h3, .call-grid h2, .scope-grid h2, .layers h2 { margin-bottom: 0.75rem; font-size: 1.08rem; }
+  .capability-grid h3, .call-grid h2, .scope-grid h3, .layers h2 { margin-bottom: 0.75rem; font-size: 1.08rem; }
   .step, .scope-label, .layer-label, .evidence-status { margin-bottom: 0.55rem; color: var(--ink-3); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
   .scope-grid article:first-child { background: var(--wash); }
+  .roadmap-title { max-width: 52rem; margin: 0 0 1rem; font-size: clamp(1.8rem, 3.8vw, 2.8rem); line-height: 1.2; letter-spacing: -0.01em; }
+  .roadmap-lead { max-width: 50rem; margin: 0 0 2rem; color: var(--ink-1); font-size: 1.08rem; }
   .availability-note { padding-top: 0.75rem; border-top: 1px solid var(--rule-faint); color: var(--ink-3); font-size: 0.85rem; }
   .roadmap-note { max-width: 50rem; margin: 1.5rem 0 0; font-size: 0.9rem; color: var(--ink-2); }
   .scope-note { max-width: 47rem; margin: 2rem 0 0; padding-left: 1.25rem; border-left: 1px solid var(--ink); }

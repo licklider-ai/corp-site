@@ -3,6 +3,8 @@ import type { TocItem } from '../../consts';
 import { AGENT_DOCS } from '../../data/agent-docs';
 import {
   METHOD_IDENTITY_FINDING,
+  MCP_RELEASE,
+  MCP_RELEASE_BOUNDARY,
   PAIRED_T_BOUNDARY,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
@@ -58,6 +60,12 @@ const toc: TocItem[] = [
         <h3>Verify a nomue Record</h3>
         <p>{`Install ${PUBLIC_RELEASE.npmPackage} ${PUBLIC_RELEASE.verifierPackage} from npm for the ${PUBLIC_RELEASE.profile} profile under the ${PUBLIC_RELEASE.procedure}.`}</p>
         <p><a href="/docs/record-verification/">Verifier guide →</a></p>
+      </article>
+      <article>
+        <p class="eyebrow">Inspect</p>
+        <h3>Review the public MCP source candidate</h3>
+        <p>{MCP_RELEASE_BOUNDARY}</p>
+        <p><a href={MCP_RELEASE.repositoryUrl} target="_blank" rel="noopener noreferrer">MCP source ↗</a> · <a href="/roadmap/">Roadmap →</a></p>
       </article>
       <article>
         <p class="eyebrow">Call</p>

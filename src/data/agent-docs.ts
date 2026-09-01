@@ -2,6 +2,8 @@ import {
   CORE_NON_CLAIMS,
   EVALUATION_BOUNDARY,
   MARKET_SCOPE,
+  MCP_RELEASE,
+  MCP_RELEASE_BOUNDARY,
   METHOD_IDENTITY_FINDING,
   NOMUE_CLI_USAGE,
   NOMUE_GLOBAL_INSTALL_COMMAND,
@@ -9,11 +11,13 @@ import {
   NOMUE_POSITION,
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
+  PLANNED_METHOD_FAMILIES,
   PLATFORM_SCOPE,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
   PUBLIC_TRUST_EVIDENCE,
+  ROADMAP_POSITION,
   VERIFICATION_CALL_DEFINITION,
 } from './site-facts';
 
@@ -65,7 +69,7 @@ export const AGENT_DOCS: AgentDoc[] = [
       'Clarify material scientific facts that are unresolved; do not infer them from data shape or prose.',
       'Stop at unsupported or inadmissible scope; do not silently substitute a nearby method.',
       'Return the scoped result together with evidence, versions, next action, and explicit non-claims.',
-      'The public implementation available today includes the npm-published Release 1 verifier and Protocol; a hosted API or MCP endpoint is not open.',
+      'The public implementation available today includes the npm-published Release 1 verifier and Protocol. A local MCP source candidate is public; its npm publication and clean-client checks are still pending.',
     ],
     sections: [
       {
@@ -535,7 +539,7 @@ ${NOMUE_NPX_COMMAND}`,
     updated: 'September 1, 2026',
     llmSummary: [
       `Run the public verifier locally for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
-      'The Release 1 verifier is public on npm; the hosted agent-callable API or MCP endpoint is not open.',
+      'The Release 1 verifier is public on npm. A local MCP source candidate is public, while one-line MCP installation and hosted product access are not yet open.',
       'Paired t is open Release 2 RFC work, not current Release 1 support.',
       'Verification calls across AI research describe the platform category; each additional capability must be evidenced and released separately.',
       'A supported verification does not establish source-data truth, overall research correctness, causal truth, or publication acceptance.',
@@ -552,6 +556,21 @@ ${NOMUE_NPX_COMMAND}`,
         ],
       },
       {
+        id: 'mcp-candidate',
+        title: 'Public MCP source candidate',
+        paragraphs: [MCP_RELEASE_BOUNDARY],
+        bullets: [
+          `Candidate: ${MCP_RELEASE.package} ${MCP_RELEASE.version}.`,
+          `Transport: ${MCP_RELEASE.transport}.`,
+          `Tool: ${MCP_RELEASE.tool}.`,
+          `Passing package-path CI: ${MCP_RELEASE.testedOperatingSystems.join(', ')} with Node.js ${MCP_RELEASE.testedNodeVersions.join(' and ')}.`,
+        ],
+        links: [
+          { label: 'Public MCP source', href: MCP_RELEASE.repositoryUrl },
+          { label: 'Passing CI run', href: MCP_RELEASE.ciUrl },
+        ],
+      },
+      {
         id: 'development',
         title: 'Next method: paired-t',
         paragraphs: [PAIRED_T_BOUNDARY],
@@ -564,7 +583,9 @@ ${NOMUE_NPX_COMMAND}`,
       {
         id: 'platform',
         title: 'How the platform expands',
-        paragraphs: [PLATFORM_SCOPE, MARKET_SCOPE],
+        paragraphs: [ROADMAP_POSITION, PLATFORM_SCOPE, MARKET_SCOPE],
+        bullets: PLANNED_METHOD_FAMILIES.map((family) => `${family};`),
+        links: [{ label: 'Full product roadmap', href: '/roadmap/' }],
       },
       {
         id: 'non-claims',
@@ -709,8 +730,12 @@ ${NOMUE_POSITION}
 ## Product and roadmap
 
 - ${PRODUCT_RELEASE_BOUNDARY}
+- ${MCP_RELEASE_BOUNDARY}
 - ${PAIRED_T_BOUNDARY}
 - ${EVALUATION_BOUNDARY}
+- ${ROADMAP_POSITION}
+- Planned method families: ${PLANNED_METHOD_FAMILIES.join('; ')}.
+- [Full product roadmap](https://www.licklider.ai/roadmap/)
 
 ## Research finding for call selection
 
