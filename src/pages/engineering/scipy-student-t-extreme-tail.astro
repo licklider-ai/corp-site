@@ -23,7 +23,7 @@ const toc = [
     <h2>Current status</h2>
     <div class="notice">
       <p>
-        Reported to SciPy on August 20, 2026. The SciPy issue remains open and is labeled
+        Reported to SciPy on August 20, 2026. The SciPy issue remains open and is labeled{' '}
         <code>defect</code>, <code>scipy.special</code>, and <code>upstream bug</code>.
       </p>
       <p>
@@ -45,15 +45,15 @@ const toc = [
   <section id="observation">
     <h2>What we observed</h2>
     <p>
-      For very small tail probabilities, <code>scipy.special.stdtrit</code> and
+      For very small tail probabilities, <code>scipy.special.stdtrit</code> and{' '}
       <code>scipy.stats.t.ppf</code> can return <code>+inf</code> (positive infinity) even
       though the correct Student-t quantile is a large, negative, finite number. The
       report includes an input that reproduces the error and an independent
       high-precision calculation of the expected value.
     </p>
     <p>
-      For one reported case with three degrees of freedom, the returned value is
-      <code>+inf</code>, while the expected result is approximately
+      For one reported case with three degrees of freedom, the returned value is{' '}
+      <code>+inf</code>, while the expected result is approximately{' '}
       <code>-2.31e82</code>. This is not a small rounding difference: the returned result
       has the wrong sign and incorrectly reports infinity.
     </p>

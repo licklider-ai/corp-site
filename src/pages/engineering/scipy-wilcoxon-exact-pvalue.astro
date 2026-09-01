@@ -39,14 +39,14 @@ const toc = [
   <section id="observation">
     <h2>What we observed</h2>
     <p>
-      On inputs with no ties and no zeros, SciPy documents
+      On inputs with no ties and no zeros, SciPy documents{' '}
       <code>method='exact'</code> as the exact Wilcoxon signed-rank path. During numerical
       auditing, we found 105 calls for which the returned p-value did not match the
       correctly rounded value from an exact rational oracle.
     </p>
     <p>
       In the representative case reported upstream, SciPy returned <code>0.0</code> even
-      though the exact two-sided p-value is approximately
+      though the exact two-sided p-value is approximately{' '}
       <code>8.12511917099255e-17</code>. A strictly positive probability was therefore
       lost completely rather than merely rounded by a few floating-point steps.
     </p>
@@ -88,7 +88,7 @@ const toc = [
       We filed a separate issue, #26028, for a different regime: with ties or zeros
       present, a released SciPy version could return a p-value slightly above 1. A SciPy
       member reproduced that behavior in versions 1.17.1 and 1.18.1, then confirmed that
-      the same reproducer no longer returns a value above 1 on the current
+      the same reproducer no longer returns a value above 1 on the current{' '}
       <code>main</code> branch. SciPy closed #26028 as resolved.
     </p>
     <p>
