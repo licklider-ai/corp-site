@@ -11,9 +11,23 @@ interface Props {
   toc: TocItem[];
   markdownHref?: string;
   llmsHref?: string;
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description, toc, markdownHref, llmsHref } = Astro.props;
+const {
+  title,
+  description,
+  toc,
+  markdownHref,
+  llmsHref,
+  ogType,
+  publishedTime,
+  modifiedTime,
+  structuredData,
+} = Astro.props;
 ---
 
 {/* 下層ページ: ヘッダーの下に 左から サイドメニュー / コンテンツ / ページ内メニュー */}
@@ -22,6 +36,10 @@ const { title, description, toc, markdownHref, llmsHref } = Astro.props;
   description={description}
   markdownHref={markdownHref}
   llmsHref={llmsHref}
+  ogType={ogType}
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
+  structuredData={structuredData}
 >
   <div class="shell">
     <div class="side">

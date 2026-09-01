@@ -5,7 +5,7 @@ import {
   MARKET_SCOPE,
   PLATFORM_SCOPE,
   PUBLIC_CAPABILITY,
-  PUBLIC_EVIDENCE,
+  UPSTREAM_CONTRIBUTIONS,
 } from '../data/site-facts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -14,6 +14,9 @@ const company = [
   { term: 'Headquarters', detail: 'N&E BLD. 7F, 1-12-4 Ginza, Chuo-ku, Tokyo, Japan' },
   { term: 'Founded', detail: 'July 2024' },
 ];
+const mergedUpstreamFixes = UPSTREAM_CONTRIBUTIONS.filter(
+  (item) => item.outcome === 'fix_merged',
+);
 ---
 
 <BaseLayout title="About">
@@ -103,14 +106,20 @@ const company = [
             the project. The contribution matters even when the finding never becomes a
             nomue capability.
           </p>
+          <p>
+            Our current public record contains {UPSTREAM_CONTRIBUTIONS.length} upstream
+            defect reports and {mergedUpstreamFixes.length} merged fixes. Each result
+            links to the external issue, review, or commit.
+          </p>
         </div>
         <div class="evidence-list">
           {
-            PUBLIC_EVIDENCE.slice(0, 2).map((item) => (
+            mergedUpstreamFixes.map((item) => (
               <article>
-                <p class="evidence-status">{item.status}</p>
+                <p class="evidence-status">{item.project} · {item.status}</p>
                 <h2><a href={item.href}>{item.title}</a></h2>
                 <p>{item.summary}</p>
+                <p><a href={item.evidenceHref} target="_blank" rel="noopener noreferrer">{item.evidenceLabel} ↗</a></p>
               </article>
             ))
           }

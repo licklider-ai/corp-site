@@ -8,7 +8,8 @@ import {
   PRODUCT_CAPABILITY,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
-  PUBLIC_EVIDENCE,
+  PUBLIC_RELEASE,
+  UPSTREAM_CONTRIBUTIONS,
   VERIFICATION_CALL_DEFINITION,
 } from '../data/site-facts';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -16,9 +17,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const latest = [...PUBLICATIONS]
   .sort((a, b) => b.sortKey.localeCompare(a.sortKey))
   .slice(0, 8);
+const upstreamFixCount = UPSTREAM_CONTRIBUTIONS.filter(
+  (item) => item.outcome === 'fix_merged',
+).length;
+const verifierStructuredData = {
+  '@type': 'SoftwareApplication',
+  '@id': new URL('/#nomue-verifier', Astro.site).href,
+  name: 'nomue verifier',
+  applicationCategory: 'ScientificApplication',
+  operatingSystem: 'Cross-platform',
+  softwareVersion: PUBLIC_RELEASE.verifierPackage,
+  description:
+    'Open-source local and offline verification for supported nomue Release 1 Welch Records.',
+  url: new URL('/docs/record-verification/', Astro.site).href,
+  codeRepository: PUBLIC_RELEASE.verifierUrl,
+  license: 'https://www.apache.org/licenses/LICENSE-2.0',
+  isAccessibleForFree: true,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  provider: { '@id': new URL('/#organization', Astro.site).href },
+  featureList: [
+    'Local and offline Record verification',
+    'Welch result recomputation',
+    'Machine-readable scoped verification reports',
+  ],
+};
 ---
 
-<BaseLayout>
+<BaseLayout structuredData={verifierStructuredData}>
   <section class="hero">
     <div class="hero-inner">
       <p class="eyebrow">Licklider</p>
@@ -37,9 +66,13 @@ const latest = [...PUBLICATIONS]
       </div>
       <div class="cta">
         <a class="cta-primary" href="/docs/record-verification/">Run the verifier →</a>
-        <a href="/docs/examples/">See examples →</a>
+        <a href={PUBLIC_RELEASE.verifierUrl} target="_blank" rel="noopener noreferrer">View source on GitHub ↗</a>
         <a href="/nomue/">How nomue works →</a>
       </div>
+      <p class="hero-facts">
+        Open source · local and offline · Apache-2.0 · verifier {PUBLIC_RELEASE.verifierPackage} ·
+        <a href={PUBLIC_RELEASE.protocolUrl} target="_blank" rel="noopener noreferrer">Protocol on GitHub ↗</a>
+      </p>
     </div>
   </section>
 
@@ -66,7 +99,68 @@ const latest = [...PUBLICATIONS]
             <p>Give the research agent scoped results, versions, and an actionable outcome.</p>
           </article>
         </div>
-        <p class="more"><a href="/docs/record-verification/">→ Install and run locally</a> · <a href="/docs/examples.json">Machine-readable examples →</a></p>
+        <div class="quickstart">
+          <div>
+            <p class="step">Quick start</p>
+            <h3>Run the published verifier locally</h3>
+            <p>The current package is installed from its public repository.</p>
+          </div>
+          <pre><code>git clone https://github.com/licklider-ai/nomue-verifier.git
+cd nomue-verifier
+npm install
+npm exec -- nomue verify records/valid.json --format json</code></pre>
+        </div>
+        <p class="more"><a href="/docs/record-verification/">→ Full verifier guide</a> · <a href="/docs/examples.json">Machine-readable examples →</a></p>
+      </div>
+    </section>
+
+    <section class="band band--single upstream-band">
+      <div class="band-inner band-inner--wide">
+        <p class="eyebrow">Upstream Contributions</p>
+        <div class="upstream-head">
+          <div>
+            <h2 class="upstream-title">Small numerical errors deserve public, checkable evidence.</h2>
+            <p class="lead">
+              We test statistical software against independent references, report
+              reproducible defects upstream, and let maintainers decide the cause and
+              repair. This work strengthens tools researchers already depend on.
+            </p>
+          </div>
+          <dl class="contribution-counts" aria-label="Public upstream contribution totals as of September 1, 2026">
+            <div>
+              <dt>{UPSTREAM_CONTRIBUTIONS.length}</dt>
+              <dd>public defect reports</dd>
+            </div>
+            <div>
+              <dt>{upstreamFixCount}</dt>
+              <dd>fixes merged upstream</dd>
+            </div>
+          </dl>
+        </div>
+        <p class="count-date">Cumulative public record as of September 1, 2026.</p>
+        <div class="upstream-grid">
+          {
+            UPSTREAM_CONTRIBUTIONS.map((item) => (
+              <article>
+                <p class="evidence-status">{item.project} · {item.status}</p>
+                <h3><a href={item.href}>{item.title}</a></h3>
+                <p>{item.summary}</p>
+                <div class="numeric-comparison" aria-label={item.comparisonLabel}>
+                  <span>{item.observed}</span>
+                  <span aria-hidden="true">→</span>
+                  <span>{item.reference}</span>
+                </div>
+                <p class="comparison-label">{item.comparisonLabel}</p>
+                <p class="evidence-links">
+                  <a href={item.href}>Full report →</a><br />
+                  <a href={item.evidenceHref} target="_blank" rel="noopener noreferrer">{item.evidenceLabel} ↗</a>
+                </p>
+                <p class="contribution-credit">{item.credit}</p>
+              </article>
+            ))
+          }
+        </div>
+        <p class="more"><a href="/engineering/">→ All engineering work</a></p>
       </div>
     </section>
 
@@ -215,36 +309,6 @@ const latest = [...PUBLICATIONS]
       </div>
     </section>
 
-    <section class="band band--single">
-      <div class="band-inner band-inner--wide">
-        <p class="eyebrow">Evidence Before Expansion</p>
-        <div class="evidence-intro">
-          <p class="lead">
-            Verification infrastructure is credible only if small numerical differences
-            and uncertain boundaries are treated as substantive engineering work.
-          </p>
-          <p>
-            We investigate edge cases, check results against independent calculations,
-            report defects upstream, and keep our diagnosis separate from a maintainer's
-            confirmation. The work is useful to the wider scientific software ecosystem,
-            whether or not it becomes a nomue capability.
-          </p>
-        </div>
-        <div class="evidence-grid">
-          {
-            PUBLIC_EVIDENCE.map((item) => (
-              <article>
-                <p class="evidence-status">{item.status}</p>
-                <h2><a href={item.href}>{item.title}</a></h2>
-                <p>{item.summary}</p>
-              </article>
-            ))
-          }
-        </div>
-        <p class="more"><a href="/engineering/">→ Engineering</a> · <a href="/research/">Research →</a></p>
-      </div>
-    </section>
-
     <section class="band">
       <p class="eyebrow">Evaluation</p>
       <div class="band-body">
@@ -297,7 +361,7 @@ const latest = [...PUBLICATIONS]
             </tbody>
           </table>
         </div>
-        <p class="more"><a href="/latest/">→ All updates</a></p>
+        <p class="more"><a href="/latest/">→ All updates</a> · <a href="/rss.xml">RSS →</a> · <a href="/feed.json">JSON Feed →</a></p>
       </div>
     </section>
   </div>
@@ -311,6 +375,8 @@ const latest = [...PUBLICATIONS]
   .cta { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 3rem; font-size: 0.95rem; }
   .cta a { padding-bottom: 3px; border-bottom: 1px solid var(--ink); text-decoration: none; }
   .cta .cta-primary { padding: 0.65rem 0.9rem; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); }
+  .hero-facts { margin: 1.35rem 0 0; color: var(--ink-3); font-size: 0.8rem; }
+  .hero-facts a { color: inherit; }
   .sections { max-width: var(--shell); margin: 0 auto; padding: 0 var(--gutter); }
   .band { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 3rem; padding: 4rem 0; border-bottom: 1px solid var(--rule-faint); }
   .band:last-child { border-bottom: 0; }
@@ -327,10 +393,14 @@ const latest = [...PUBLICATIONS]
   .available-band { padding-top: 4.5rem; }
   .available-title { max-width: 48rem; margin: 0 0 1rem; font-size: clamp(1.8rem, 3.8vw, 2.8rem); line-height: 1.2; letter-spacing: -0.01em; }
   .available-copy { max-width: 48rem; margin-bottom: 2.25rem; color: var(--ink-1); font-size: 1.08rem; }
+  .quickstart { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.5fr); gap: 2rem; align-items: start; margin-top: 1rem; padding: 1.5rem; border: 1px solid var(--rule); background: var(--wash); }
+  .quickstart h3 { margin-bottom: 0.65rem; font-size: 1.08rem; }
+  .quickstart pre { margin: 0; overflow-x: auto; font-size: 0.78rem; line-height: 1.65; }
+  .quickstart code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
   .definition { max-width: 52rem; margin: 0 0 2.5rem; color: var(--ink); font-size: clamp(1.35rem, 2.8vw, 2rem); line-height: 1.45; }
-  .capability-grid, .call-grid, .scope-grid, .evidence-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-  .capability-grid article, .call-grid article, .scope-grid article, .evidence-grid article { padding: 1.5rem; border: 1px solid var(--rule); }
-  .capability-grid h3, .call-grid h2, .scope-grid h2, .evidence-grid h2, .layers h2 { margin-bottom: 0.75rem; font-size: 1.08rem; }
+  .capability-grid, .call-grid, .scope-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .capability-grid article, .call-grid article, .scope-grid article { padding: 1.5rem; border: 1px solid var(--rule); }
+  .capability-grid h3, .call-grid h2, .scope-grid h2, .layers h2 { margin-bottom: 0.75rem; font-size: 1.08rem; }
   .step, .scope-label, .layer-label, .evidence-status { margin-bottom: 0.55rem; color: var(--ink-3); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
   .scope-grid article:first-child { background: var(--wash); }
   .availability-note { padding-top: 0.75rem; border-top: 1px solid var(--rule-faint); color: var(--ink-3); font-size: 0.85rem; }
@@ -340,8 +410,25 @@ const latest = [...PUBLICATIONS]
   .reader-grid, .layers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
   .reader-grid article, .layers article { padding: 1.5rem; border: 1px solid var(--rule); }
   .reader-grid h3 { margin-bottom: 0.65rem; font-size: 1rem; }
-  .evidence-intro { max-width: 45rem; margin-bottom: 2rem; }
-  .evidence-grid h2 a { text-decoration: none; }
+  .upstream-band { padding-top: 5rem; }
+  .upstream-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3rem; align-items: end; }
+  .upstream-head > div:first-child { max-width: 46rem; }
+  .upstream-title { max-width: 44rem; margin: 0 0 1rem; font-size: clamp(1.8rem, 3.8vw, 2.8rem); line-height: 1.2; letter-spacing: -0.01em; }
+  .contribution-counts { display: flex; gap: 1rem; margin: 0; }
+  .contribution-counts > div { min-width: 9.5rem; padding: 1.1rem 1.2rem; border: 1px solid var(--ink); }
+  .contribution-counts dt { font-size: 2.2rem; line-height: 1; }
+  .contribution-counts dd { margin: 0.55rem 0 0; color: var(--ink-2); font-size: 0.78rem; }
+  .count-date { margin: 1.25rem 0 2rem; color: var(--ink-3); font-size: 0.78rem; }
+  .upstream-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .upstream-grid article { display: flex; flex-direction: column; padding: 1.5rem; border: 1px solid var(--rule); }
+  .upstream-grid h3 { margin-bottom: 0.75rem; font-size: 1.08rem; }
+  .upstream-grid h3 a { text-decoration: none; }
+  .numeric-comparison { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 0.55rem; align-items: center; margin-top: auto; padding: 1rem 0 0.35rem; border-top: 1px solid var(--rule-faint); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.82rem; }
+  .numeric-comparison span:last-child { text-align: right; }
+  .comparison-label, .contribution-credit { color: var(--ink-3); font-size: 0.75rem; }
+  .comparison-label { margin: 0 0 1rem; }
+  .evidence-links { font-size: 0.84rem; }
+  .contribution-credit { margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--rule-faint); }
   .more { margin: 2rem 0 0; font-size: 0.92rem; }
   .table-scroll { overflow-x: auto; }
   .latest-body { max-width: none; }
@@ -352,12 +439,16 @@ const latest = [...PUBLICATIONS]
   @media (max-width: 900px) {
     .hero-inner { padding: 4.5rem var(--gutter) 4rem; }
     .band, .band-inner { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
-    .capability-grid, .call-grid, .scope-grid, .evidence-grid { grid-template-columns: minmax(0, 1fr); }
+    .capability-grid, .call-grid, .scope-grid, .upstream-grid { grid-template-columns: minmax(0, 1fr); }
+    .quickstart, .upstream-head { grid-template-columns: minmax(0, 1fr); }
+    .contribution-counts { justify-content: flex-start; }
     .latest-date { width: 8rem; }
   }
 
   @media (max-width: 620px) {
     .reader-grid, .layers { grid-template-columns: minmax(0, 1fr); }
+    .contribution-counts { flex-direction: column; }
+    .contribution-counts > div { min-width: 0; }
     .latest-category { display: none; }
   }
 </style>

@@ -4,7 +4,7 @@
 **Authority:** Canonical for placement, labels, and required metadata on `licklider.ai`  
 **Claim authority:** Subordinate to `licklider-ai/nomue-app/PUBLIC_COMMUNICATIONS.md`  
 **Outreach authority:** Media outreach is governed separately by `licklider-ai/nomue-pr`  
-**Status:** Active — v1.2<br>
+**Status:** Active — v1.3<br>
 **Last updated:** 2026-09-01
 
 ---
@@ -22,6 +22,10 @@ Licklider publishes through three primary classes:
 `/latest/` is the chronological view across all three classes. The global header links to
 **Latest**, rather than listing all three classes. The class indexes remain canonical,
 and every item in a mixed list must show its primary class.
+
+`/rss.xml` (RSS 2.0) and `/feed.json` (JSON Feed 1.1) are subscription views of the same
+publication registry. They must be generated from `PUBLICATIONS`, linked through HTML
+feed-discovery metadata, and must not maintain a separate list or stronger wording.
 
 An item has exactly **one primary class**. It may be linked from another index, but duplicate canonical articles are not created.
 
@@ -234,6 +238,7 @@ An item is not ready to publish until every applicable question below can be ans
 - Are the scope and important non-claims stated in ordinary language?
 - Have internal editorial deliberation and non-material revision history been removed?
 - Do the home page, Latest, category index, metadata, and article use consistent wording?
+- Does the item appear once, with the same title, summary, date, and URL in RSS and JSON Feed?
 - Do public evidence links support the claims immediately around them?
 
 When a precise claim cannot be made both accurate and understandable, keep the precise

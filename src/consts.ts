@@ -3,8 +3,10 @@
  */
 
 export const SITE_TITLE = 'Licklider';
+export const SITE_META_TITLE =
+  'Licklider — Verification middleware for AI research agents';
 export const SITE_DESCRIPTION =
-  'Licklider builds middleware for bounded verification calls across AI research, starting with scientific statistics.';
+  'Licklider builds verification middleware for AI research agents. Run the open-source nomue verifier locally to check supported Welch statistical Records.';
 export const SITE_VERSION = 'v0.3';
 export const SITE_UPDATED = '2026-09-01';
 

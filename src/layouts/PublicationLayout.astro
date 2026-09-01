@@ -16,9 +16,34 @@ interface Props {
 
 const { category, type, title, description, published, updated, status, toc } = Astro.props;
 const categoryHref = `/${category.toLowerCase()}/`;
+const publishedTime = new Date(`${published} 00:00:00 UTC`).toISOString();
+const modifiedTime = updated
+  ? new Date(`${updated} 00:00:00 UTC`).toISOString()
+  : publishedTime;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const structuredData = {
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: publishedTime,
+  dateModified: modifiedTime,
+  articleSection: category,
+  url: canonicalUrl,
+  mainEntityOfPage: canonicalUrl,
+  author: { '@id': new URL('/#organization', Astro.site).href },
+  publisher: { '@id': new URL('/#organization', Astro.site).href },
+};
 ---
 
-<PageLayout title={title} description={description} toc={toc}>
+<PageLayout
+  title={title}
+  description={description}
+  toc={toc}
+  ogType="article"
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
+  structuredData={structuredData}
+>
   <div class="publication">
     <header class="page-head">
       <p class="eyebrow"><a href={categoryHref}>{category}</a> / {type}</p>

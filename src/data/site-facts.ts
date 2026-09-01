@@ -58,26 +58,52 @@ export const CORE_NON_CLAIMS = [
   'publication, regulatory, or clinical acceptance',
 ] as const;
 
-export const PUBLIC_EVIDENCE = [
+export const UPSTREAM_CONTRIBUTIONS = [
   {
+    project: 'SciPy',
     title: 'SciPy exact Wilcoxon p-value error',
     summary:
-      'We reported an exact-tail error that could return zero for a positive p-value. SciPy diagnosed the issue and merged a fix; it was not yet released when the report was last updated.',
+      'We reported an exact-tail error that returned zero for a positive p-value. SciPy diagnosed the tail-choice error and merged a regression-tested correction.',
     href: '/engineering/scipy-wilcoxon-exact-pvalue/',
-    status: 'Upstream fix merged',
+    status: 'Fix merged upstream',
+    outcome: 'fix_merged',
+    comparisonLabel: 'Before patch → after patch',
+    observed: '0.0',
+    reference: '8.12511917099255e-17',
+    evidenceHref:
+      'https://github.com/scipy/scipy/commit/6dbd21acb0ab2ad22a06b6351f83a47743d8b0b5',
+    evidenceLabel: 'SciPy commit 6dbd21a',
+    credit: 'Authored by mdhaber · merged by j-bowhay',
   },
   {
+    project: 'Boost.Math / SciPy',
+    title: 'Student-t extreme-tail sign error',
+    summary:
+      'We reported a SciPy Student-t quantile returning positive infinity instead of a finite negative value. Boost.Math reproduced it and merged a correction with regression tests.',
+    href: '/engineering/scipy-student-t-extreme-tail/',
+    status: 'Fix merged upstream',
+    outcome: 'fix_merged',
+    comparisonLabel: 'Returned → expected',
+    observed: '+∞',
+    reference: 'finite negative quantile',
+    evidenceHref:
+      'https://github.com/boostorg/math/commit/d9fc176b77c2bba99279d1a5cb340a1cf97602f5',
+    evidenceLabel: 'Boost.Math commit d9fc176',
+    credit: 'Authored and merged by jzmaddock',
+  },
+  {
+    project: 'R',
     title: 'R exact Wilcoxon out-of-range p-values',
     summary:
       'We reported negative p-values and a value above 1 with independent exact-arithmetic checks. R Bugzilla PR#19144 remains open and unconfirmed.',
     href: '/engineering/r-wilcoxon-exact-pvalue-out-of-range/',
-    status: 'Exact-arithmetic report filed',
-  },
-  {
-    title: 'Correctly Rounded or Refused',
-    summary:
-      'Our public preprint examines how a statistical system can check numerical accuracy before returning paired-t results.',
-    href: '/research/correctly-rounded-or-refused/',
-    status: 'Public preprint v0.2',
+    status: 'Report open upstream',
+    outcome: 'report_open',
+    comparisonLabel: 'R result → exact reference',
+    observed: '-7.55e-15',
+    reference: '2.59e-18',
+    evidenceHref: 'https://bugs.r-project.org/show_bug.cgi?id=19144',
+    evidenceLabel: 'R Bugzilla PR#19144',
+    credit: 'Open and unconfirmed by R Core',
   },
 ] as const;

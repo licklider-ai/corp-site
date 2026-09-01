@@ -98,6 +98,13 @@ pnpm install
 
 配置、成熟度ラベル、公開文の書き方、公開前チェック、必須メタデータの正本は [`docs/publication-architecture.md`](./docs/publication-architecture.md) を参照してください。
 
+公開更新はHTML一覧に加えて、次の購読用Feedから同じ `PUBLICATIONS` データを配信します。
+
+- `/rss.xml` — RSS 2.0
+- `/feed.json` — JSON Feed 1.1
+
+各HTMLページの `<head>` とサイトフッターから両Feedを発見できます。
+
 ## Agent-readable documentation
 
 `/docs/` は Research / Engineering / News とは別の技術文書面です。人間向けHTML、

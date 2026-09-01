@@ -11,4 +11,8 @@ const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKe
   description="Research papers, engineering notes, and company news from Licklider, newest first."
   items={latest}
   showCategory
+  links={[
+    { label: 'Subscribe via RSS →', href: '/rss.xml' },
+    { label: 'JSON Feed →', href: '/feed.json' },
+  ]}
 />

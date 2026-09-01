@@ -8,9 +8,17 @@ interface Props {
   items: PublicationItem[];
   showCategory?: boolean;
   eyebrow?: string;
+  links?: Array<{ label: string; href: string }>;
 }
 
-const { title, description, items, showCategory = false, eyebrow = 'Publications' } = Astro.props;
+const {
+  title,
+  description,
+  items,
+  showCategory = false,
+  eyebrow = 'Publications',
+  links = [],
+} = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -19,6 +27,18 @@ const { title, description, items, showCategory = false, eyebrow = 'Publications
       <p class="eyebrow">{eyebrow}</p>
       <h1>{title}</h1>
       <p class="standfirst">{description}</p>
+      {
+        links.length > 0 && (
+          <p class="hero-links">
+            {links.map((link, index) => (
+              <>
+                {index > 0 && ' · '}
+                <a href={link.href}>{link.label}</a>
+              </>
+            ))}
+          </p>
+        )
+      }
     </div>
   </section>
 
@@ -75,6 +95,11 @@ const { title, description, items, showCategory = false, eyebrow = 'Publications
     margin: 0;
     color: var(--ink-2);
     font-size: 1.08rem;
+  }
+
+  .hero-links {
+    margin: 1.5rem 0 0;
+    font-size: 0.9rem;
   }
 
   .index {
