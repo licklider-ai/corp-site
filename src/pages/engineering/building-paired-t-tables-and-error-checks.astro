@@ -17,9 +17,10 @@ const toc = [
   category="Engineering"
   type="Implementation note"
   title="Building paired-t numerical tables and input-specific error checks"
-  description="We expanded two paired-t numerical tables to 200 reviewed values each, connected one to the evaluator, and built input-specific error checks without declaring protocol support."
+  description="We built two reviewed 200-value tables and input-specific error checks; later decisions selected the p-value bound and one table for candidate interval work."
   published="August 31, 2026"
-  status="Reviewed table evidence and integration; error checks remain candidate — not protocol support"
+  updated="September 1, 2026"
+  status="Reviewed M1/M2 numerical closure and candidate interval-table selection — not protocol support"
   toc={toc}
 >
   <section id="current-status">
@@ -34,9 +35,11 @@ const toc = [
       </p>
       <p>
         The table evidence and table-to-evaluator connection have passed independent
-        candidate-scoped reviews. The error-checking construction remains an unselected,
-        non-authoritative candidate. None of this establishes paired-t protocol support,
-        and the 1-through-200 range is evidence coverage rather than a supported range.
+        candidate-scoped reviews. Subsequent decisions closed the paired arithmetic and
+        Student-t tail numerical requirements, selected the input-specific tail error
+        rule, and selected the exact fixed-95% table bytes for candidate interval work.
+        None of this establishes paired-t protocol support, and the 1-through-200 range
+        remains evidence coverage rather than a supported range.
       </p>
     </div>
   </section>
@@ -77,9 +80,10 @@ const toc = [
     </p>
     <p>
       These are two different inputs to later paired-t work: one supports probability
-      evaluation, while the other would support fixed 95% interval construction. Their
-      current hashes bind reviewed evidence. They are not selected final protocol tables
-      or final protocol hashes.
+      evaluation, while the other supports fixed 95% candidate interval construction.
+      M3-B later selected the exact fixed-95% table bytes for non-authoritative candidate
+      interval work. Neither table is a final Protocol table, and no supported range or
+      final Protocol content hash has been selected.
     </p>
   </section>
 
@@ -122,8 +126,9 @@ const toc = [
     <p>
       The candidate does not change the evaluator's result. Its purpose is to determine
       whether the result has enough input-specific evidence to proceed or should be
-      refused. The proof model, supported platform condition, and runtime activation
-      remain open decisions.
+      refused. M2 later selected this bound form and class-boundary rule for the candidate
+      Student-t tail numerical closure. The supported platform condition, supported
+      domain, and runtime activation remain open decisions.
     </p>
   </section>
 
@@ -154,11 +159,12 @@ const toc = [
   <section id="scope">
     <h2>What remains open</h2>
     <p>
-      The work does not select either final table or its final content hash. It does not
-      select a supported degree-of-freedom maximum, input domain, global or
-      input-specific runtime error rule, comparison tolerance, platform matrix, or final
-      refusal-code vocabulary. Confidence-interval endpoint error propagation also
-      remains open.
+      The work does not select a final Protocol table or final Protocol content hash. The
+      fixed-95% table is selected only for candidate interval work, and the M2
+      input-specific error form is not an activated runtime contract. A supported
+      degree-of-freedom maximum, input domain, comparison rule, platform and execution
+      predicate, and final refusal-code vocabulary remain open. Confidence-interval
+      endpoint error propagation also remains open.
     </p>
     <p>
       No paired-t identifier, authoritative Public Check, schema, or bundle has been
@@ -176,6 +182,14 @@ const toc = [
       </a>. The earlier articles describe the proof pipeline and finite boundary
       measurements; this one describes the contiguous candidate tables, their
       integration, and the move toward per-input proof.
+    </p>
+    <p>
+      The later{' '}
+      <a href="/engineering/bounding-paired-t-arithmetic-and-pvalues/">
+        numerical-closure engineering note
+      </a>{' '}
+      records the M1 and M2 closure decisions, the M3-B table selection, and the limits
+      that remain after those maturity changes.
     </p>
   </section>
 

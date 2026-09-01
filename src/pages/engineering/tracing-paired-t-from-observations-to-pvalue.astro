@@ -15,9 +15,10 @@ const toc = [
   category="Engineering"
   type="Implementation note"
   title="Tracing a paired-t calculation from observations to p-value"
-  description="We connected the paired-data calculation and Student-t tail into one reviewed execution chain from raw observations to a p-value, while keeping mathematical-truth, support, and runtime decisions open."
+  description="We connected paired observations to a p-value in one reviewed execution trace; later work closed its two numerical error ledgers and added a reviewed interval trace."
   published="August 31, 2026"
-  status="Reviewed actual-execution composition — not protocol support"
+  updated="September 1, 2026"
+  status="Reviewed p-value and interval execution traces; interval truth remains open — not protocol support"
   toc={toc}
 >
   <section id="current-status">
@@ -32,8 +33,14 @@ const toc = [
         The composition candidate was merged after independent adversarial review, and
         its reviewed state is now recorded in the Release 2 candidate readiness files.
         This is not paired-t protocol support. The candidate remains unissued, public
-        review is open, and the mathematical-truth, confidence-interval, platform,
-        supported-domain, and runtime decisions remain incomplete.
+        review is open, and the platform, supported-domain, and runtime decisions remain
+        incomplete.
+      </p>
+      <p>
+        Subsequent reviewed work closed the separate mathematical-truth requirements for
+        the paired arithmetic and Student-t p-value path. It also added a reviewed
+        fixed-95% confidence-interval execution trace. The interval endpoint truth
+        requirement remains open, so M3 and Release 2 D5 are not complete.
       </p>
     </div>
   </section>
@@ -124,10 +131,19 @@ const toc = [
       mathematical target.
     </p>
     <p>
-      In particular, the G4 mathematical-truth error bound is still open. The reviewed
-      truth-error work for the Student-t tail is not automatically a proof for the
-      upstream paired-data arithmetic. Confidence-interval trace composition also
-      remains pending.
+      The G4 paired-arithmetic truth requirement and the Student-t tail numerical
+      requirement have since completed independent review. See{' '}
+      <a href="/engineering/bounding-paired-t-arithmetic-and-pvalues/">
+        the numerical-closure engineering note
+      </a>{' '}
+      for those later decisions and the exact critical-value table selected for
+      candidate interval work.
+    </p>
+    <p>
+      M3-C has also connected that selected table to the paired-data trace and recorded
+      the three binary64 operations used to produce the confidence-interval endpoints.
+      This establishes which candidate calculation ran. It does not yet establish the
+      endpoints' complete mathematical-truth bound; that remains the separate M3-D task.
     </p>
     <p>
       The work does not select supported pair, node, degree-of-freedom, value, or test-
@@ -172,6 +188,14 @@ const toc = [
       <li>
         <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/numerical/evidence-readiness.json" target="_blank" rel="noopener noreferrer">current numerical readiness checkpoint</a>{' '}
         — composition status and the mathematical-truth, interval, support, and runtime items that remain open
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/100" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #100</a>{' '}
+        — reviewed M3-C confidence-interval actual-execution trace
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/review-inputs/r2-d5-ci-execution-trace-candidate/REVIEW-RESULT.md" target="_blank" rel="noopener noreferrer">M3-C independent-review result</a>{' '}
+        — GO for the exact interval execution trace while endpoint truth remains open
       </li>
       <li>
         <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">Release 2 public review issue #25</a>{' '}

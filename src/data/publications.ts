@@ -25,6 +25,18 @@ export const PUBLICATIONS: PublicationItem[] = [
   },
   {
     category: 'Engineering',
+    type: 'Implementation note',
+    date: 'September 1, 2026',
+    sortKey: '2026-09-01',
+    title: 'Bounding numerical error from paired observations to p-values',
+    summary:
+      'We closed reviewed error ledgers for paired arithmetic and Student-t p-values, then selected 200 critical values for candidate confidence-interval work.',
+    href: '/engineering/bounding-paired-t-arithmetic-and-pvalues/',
+    status:
+      'Reviewed candidate numerical closure — not a ratified contract or protocol support',
+  },
+  {
+    category: 'Engineering',
     type: 'Upstream report',
     date: 'September 1, 2026',
     sortKey: '2026-09-01',
@@ -41,9 +53,10 @@ export const PUBLICATIONS: PublicationItem[] = [
     sortKey: '2026-08-31',
     title: 'Tracing a paired-t calculation from observations to p-value',
     summary:
-      'We connected the paired-data calculation and Student-t tail into one reviewed execution chain from raw observations to a p-value, while keeping mathematical-truth, support, and runtime decisions open.',
+      'We connected paired observations to a p-value in one reviewed trace; later work closed its two numerical error ledgers and added a reviewed interval trace.',
     href: '/engineering/tracing-paired-t-from-observations-to-pvalue/',
-    status: 'Reviewed actual-execution composition — not protocol support',
+    status:
+      'Reviewed p-value and interval execution traces; interval truth remains open — not protocol support',
   },
   {
     category: 'Engineering',
@@ -52,10 +65,10 @@ export const PUBLICATIONS: PublicationItem[] = [
     sortKey: '2026-08-31',
     title: 'Building paired-t numerical tables and input-specific error checks',
     summary:
-      'We expanded two paired-t numerical tables to 200 reviewed values each, connected one to the evaluator, and built input-specific error checks without declaring protocol support.',
+      'We built two reviewed 200-value tables and input-specific error checks; later decisions selected the p-value bound and one table for candidate interval work.',
     href: '/engineering/building-paired-t-tables-and-error-checks/',
     status:
-      'Reviewed table evidence and integration; error checks remain candidate — not protocol support',
+      'Reviewed M1/M2 numerical closure and candidate interval-table selection — not protocol support',
   },
   {
     category: 'Engineering',

@@ -4,7 +4,7 @@
 **Authority:** Canonical for placement, labels, and required metadata on `licklider.ai`  
 **Claim authority:** Subordinate to `licklider-ai/nomue-app/PUBLIC_COMMUNICATIONS.md`  
 **Outreach authority:** Media outreach is governed separately by `licklider-ai/nomue-pr`  
-**Status:** Active — v1.3<br>
+**Status:** Active — v1.4<br>
 **Last updated:** 2026-09-01
 
 ---
@@ -67,6 +67,30 @@ Classify by the article's primary contribution.
    → **News**
 
 When one event supports more than one useful article, the articles must have different jobs. Example: a protocol release can have one News announcement about availability and one Engineering article about design and verification. Neither may copy the other as a second canonical announcement.
+
+### 3.1 New article or update
+
+Decide from the public state change, not from pull-request count or elapsed time.
+
+Create a new article when the work has its own durable reader-facing conclusion and
+materially changes at least one of these states:
+
+- public availability or the way a reader can use an artifact;
+- closure of a major evidence, safety, or engineering requirement;
+- selection, ratification, support, or release maturity;
+- an externally reviewed disposition or a distinct reproducible finding; or
+- the scope of what can truthfully be claimed or used.
+
+Update the existing canonical article when the change supplies instructions, evidence,
+clarification, repair, or incremental implementation within the same reader-facing
+conclusion. Several pull requests may form one article when they answer the same reader
+question and share one maturity boundary. Conversely, publication proximity is not a
+reason to hide a distinct state change inside an older article.
+
+A useful test is whether the proposed item can state, in one durable sentence, what is
+true now that was not true before. If it cannot, prefer an update or no publication. If
+it can, confirm that the sentence describes a public outcome rather than internal work
+volume before creating a Latest entry.
 
 ---
 
