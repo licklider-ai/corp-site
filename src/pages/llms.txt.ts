@@ -61,6 +61,13 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 - [Evaluation](https://www.licklider.ai/evaluation/): comparison design and current claim boundary
 - [Thesis](https://www.licklider.ai/thesis/): why AI-generated work needs a separate verification layer
 
+## Founder
+
+- [Tasuku Kobayashi](https://www.licklider.ai/about/#tasuku-kobayashi) is Licklider's founder and CEO. He leads product, Protocol, research, and engineering work.
+- He previously worked at Recruit and founded two companies before Licklider, exiting both through share sales.
+- He is the sole author of [Correctly Rounded or Refused — preprint v0.2](https://zenodo.org/records/22025200), which has not been peer reviewed.
+- The SciPy, Boost.Math, and R numerical defect reports listed below were filed under his name. Two have resulted in merged upstream fixes; the R report remains open and unconfirmed.
+
 ## Public technical authority
 
 - [nomue Protocol](${PUBLIC_RELEASE.protocolUrl}): public Layer 1 specification and Release 1 artifacts
