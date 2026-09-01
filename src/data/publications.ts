@@ -13,6 +13,18 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'Research',
+    type: 'Research note',
+    date: 'September 1, 2026',
+    sortKey: '2026-09-01',
+    title: 'Why a statistical method name is not enough',
+    summary:
+      'Primary-source review showed why procedure names alone cannot identify statistical guarantees, assumptions, comparison families, or later variants.',
+    href: '/research/why-statistical-method-names-are-not-enough/',
+    status:
+      'Source-bounded research finding — independently checked, not peer reviewed; FND-1 gate open',
+  },
+  {
     category: 'News',
     type: 'Product',
     date: 'September 1, 2026',

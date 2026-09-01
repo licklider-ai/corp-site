@@ -1,0 +1,213 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'current-status', label: 'Current status' },
+  { id: 'finding', label: 'The finding' },
+  { id: 'primary-sources', label: 'What the sources establish' },
+  { id: 'all-pairs', label: 'Separating later all-pairs sources' },
+  { id: 'limits', label: 'Limits' },
+  { id: 'protocol-relation', label: 'Relation to nomue Protocol' },
+  { id: 'public-evidence', label: 'Public evidence' },
+];
+---
+
+<PublicationLayout
+  category="Research"
+  type="Research note"
+  title="Why a statistical method name is not enough"
+  description="Primary-source review showed why procedure names alone cannot identify statistical guarantees, assumptions, comparison families, or later variants."
+  published="September 1, 2026"
+  status="Source-bounded research finding — independently checked, not peer reviewed; FND-1 gate open"
+  toc={toc}
+>
+  <section id="current-status">
+    <h2>Current status</h2>
+    <div class="notice">
+      <p>
+        <strong>
+          This is a source-bounded research note, not a peer-reviewed paper and not a
+          Protocol decision.
+        </strong>
+      </p>
+      <p>
+        The completed findings passed independent close review. The wider FND-1
+        research gate remains open, and no statistical procedure has been selected for
+        nomue Protocol.
+      </p>
+    </div>
+  </section>
+
+  <section id="finding">
+    <h2>The finding</h2>
+    <p>
+      A familiar procedure name is not enough to identify what a statistical result
+      guarantees. The meaning also depends on which claims belong to the comparison
+      family, which error quantity is controlled, the theorem's assumptions, sidedness,
+      balance conditions, and the exact procedure variant.
+    </p>
+    <p>
+      This matters because closely associated names can refer to different questions.
+      Controlling the probability of any false rejection in a family is not the same as
+      controlling the expected proportion of false discoveries. Comparing every group
+      with one control is not the same as comparing every pair. A later extension also
+      cannot inherit the evidence for an earlier procedure merely by sharing its name.
+    </p>
+  </section>
+
+  <section id="primary-sources">
+    <h2>What the primary sources establish</h2>
+    <p>
+      The investigation inspected the primary texts for Holm's sequentially rejective
+      procedure, the original Benjamini–Hochberg false-discovery-rate procedure,
+      Dunnett's many-to-one construction, and Tukey's 1949 procedure. The review kept
+      their claims separate rather than treating the four names as interchangeable
+      labels for “multiple comparisons.”
+    </p>
+    <ul>
+      <li>
+        Holm's main 1979 result gives strong family-wise error control using valid
+        marginal test levels and the union bound. A separate product-form construction
+        in the same paper uses an independence assumption.
+      </li>
+      <li>
+        The 1995 Benjamini–Hochberg theorem is an independence result about false
+        discovery rate. Later results for other dependence structures are not supplied
+        by that paper.
+      </li>
+      <li>
+        Dunnett's 1955 construction addresses many-to-one comparisons. Its numerical
+        tables have recorded limits involving balance, sidedness, variance assumptions,
+        and approximation.
+      </li>
+      <li>
+        Tukey's 1949 paper describes a three-stage gap, straggler, and upper-tail F
+        procedure. It does not establish the later Studentized-range all-pairs procedure
+        or its unequal-size extension.
+      </li>
+    </ul>
+  </section>
+
+  <section id="all-pairs">
+    <h2>Separating later all-pairs sources</h2>
+    <p>
+      A follow-up investigation examined later sources commonly associated with
+      all-pairs comparisons. It found that their evidential roles must also remain
+      separate.
+    </p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Source-bounded role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hayter (1984)</td>
+            <td>
+              Later-primary formal support for the balanced Studentized-range
+              construction and a conservativeness result for Tukey–Kramer under the
+              recorded conditions
+            </td>
+          </tr>
+          <tr>
+            <td>Kramer (1956)</td>
+            <td>
+              A proposal and illustration for unequal replication, not the later general
+              proof
+            </td>
+          </tr>
+          <tr>
+            <td>Spjøtvoll and Stoline (1973)</td>
+            <td>A distinct extended T-method, not another name for Tukey–Kramer</td>
+          </tr>
+          <tr>
+            <td>Dunnett (1980)</td>
+            <td>Simulation and comparison evidence, not the general proof</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      The authenticated text of Tukey's 1953 manuscript or its 1994 archival printing
+      was not inspected. Exact historical attribution to that manuscript therefore
+      remains open even though the later mathematical and source-role questions above
+      have been narrowed and closed.
+    </p>
+  </section>
+
+  <section id="limits">
+    <h2>Limits</h2>
+    <p>
+      Independent close reviews checked the frozen reports, their source-claim
+      boundaries, and the repository evidence. Some inspected source PDFs could not be
+      redistributed in the public repository and were unavailable to the close-review
+      environments. The review records preserve that access limitation instead of
+      reconstructing or broadening the source claims.
+    </p>
+    <p>
+      This note does not compare the operating performance of the procedures, recommend
+      a default, verify a software implementation, or show that one error criterion is
+      universally preferable. Results remain limited to the cited editions, theorem
+      conditions, and source roles recorded in the investigation.
+    </p>
+  </section>
+
+  <section id="protocol-relation">
+    <h2>Relation to nomue Protocol</h2>
+    <p>
+      The finding is research input for future identity and interpretation design. It
+      does not add a Record field, vocabulary term, method identifier, schema, public
+      check, supported procedure, or implementation behavior.
+    </p>
+    <p>
+      Three of eight recorded FND-1 holds are closed in narrowed form. Five holds remain
+      open, alongside the historical-attribution residual described above. The complete
+      FND-1 research gate is therefore still open, and adopting any result would require
+      a separate Protocol proposal and review.
+    </p>
+  </section>
+
+  <section id="public-evidence">
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/evidence/research/foundation-identity/fnd-1/2026-08-30-multiplicity-primary-text-closure-result.md" target="_blank" rel="noopener noreferrer">Multiplicity primary-text result</a>
+        — inspected claims, page locations, and evidence boundaries
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/evidence/research/foundation-identity/fnd-1/2026-08-30-multiplicity-close-review-result.md" target="_blank" rel="noopener noreferrer">Multiplicity close review</a>
+        — independent review result and recorded access limits
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/evidence/research/foundation-identity/fnd-1/2026-08-31-multiplicity-steward-disposition.md" target="_blank" rel="noopener noreferrer">Multiplicity steward disposition</a>
+        — accepted findings, remaining holds, and explicit non-decisions
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/evidence/research/foundation-identity/fnd-1/2026-09-01-all-pairs-successor-source-supplied-completion-result.md" target="_blank" rel="noopener noreferrer">All-pairs source completion</a>
+        — later-source inspection and claim ledger
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/evidence/research/foundation-identity/fnd-1/2026-09-01-all-pairs-successor-source-reconciliation-close-review-result.md" target="_blank" rel="noopener noreferrer">All-pairs close review</a>
+        — independent reconciliation review
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/evidence/research/foundation-identity/fnd-1/2026-09-01-all-pairs-successor-source-steward-disposition.md" target="_blank" rel="noopener noreferrer">All-pairs steward disposition</a>
+        — closed source roles and the remaining historical-attribution question
+      </li>
+    </ul>
+  </section>
+</PublicationLayout>
+
+<style>
+  .table-scroll {
+    margin: 1.75rem 0;
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 42rem;
+  }
+</style>
