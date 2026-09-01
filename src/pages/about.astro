@@ -2,6 +2,7 @@
 import LickliderPortrait from '../components/LickliderPortrait.astro';
 import {
   COMPANY_POSITION,
+  MARKET_SCOPE,
   PLATFORM_SCOPE,
   PUBLIC_EVIDENCE,
 } from '../data/site-facts';
@@ -45,6 +46,7 @@ const company = [
       <p class="eyebrow">Platform</p>
       <div class="band-body">
         <p>{PLATFORM_SCOPE}</p>
+        <p>{MARKET_SCOPE}</p>
         <p>
           The intended position is middleware between research agents and the evidence
           they rely on. A common verification layer can serve different agent interfaces

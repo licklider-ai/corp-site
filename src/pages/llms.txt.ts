@@ -3,6 +3,7 @@ import { AGENT_DOCS } from '../data/agent-docs';
 import {
   COMPANY_POSITION,
   EVALUATION_BOUNDARY,
+  MARKET_SCOPE,
   PAIRED_T_BOUNDARY,
   PLATFORM_SCOPE,
   PRODUCT_RELEASE_BOUNDARY,
@@ -20,6 +21,7 @@ Important boundaries:
 - ${PAIRED_T_BOUNDARY}
 - ${EVALUATION_BOUNDARY}
 - ${PLATFORM_SCOPE}
+- ${MARKET_SCOPE}
 - A clean verification report is a set of scoped results, not an overall claim that the research is correct.
 
 ## Agent-readable documentation

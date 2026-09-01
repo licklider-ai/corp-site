@@ -2,6 +2,7 @@
 import { PUBLICATIONS } from '../data/publications';
 import {
   EVALUATION_BOUNDARY,
+  MARKET_SCOPE,
   PAIRED_T_BOUNDARY,
   PLATFORM_SCOPE,
   PRODUCT_RELEASE_BOUNDARY,
@@ -117,6 +118,9 @@ const latest = [...PUBLICATIONS]
             <p class="scope-status">Direction, not a shipped-capability claim</p>
           </article>
         </div>
+        <p class="scope-note">
+          {MARKET_SCOPE}
+        </p>
         <p class="scope-note">
           The business is designed as shared infrastructure between research agents and
           the evidence they rely on, not as a single all-purpose research workflow.

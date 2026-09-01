@@ -41,6 +41,9 @@ export const EVALUATION_BOUNDARY =
 export const PLATFORM_SCOPE =
   'The long-term product category is verification calls across AI research. Statistics is the first bounded implementation, not the claimed limit of the infrastructure and not evidence that other verification domains are supported today.';
 
+export const MARKET_SCOPE =
+  'Licklider\'s market scope is the verification calls that arise across AI research, not a single research-workflow SaaS category. That infrastructure category is broader than the capabilities supported today.';
+
 export const CORE_NON_CLAIMS = [
   'the truth of input data or researcher declarations',
   'the overall correctness of a research project',

@@ -1,6 +1,7 @@
 import {
   CORE_NON_CLAIMS,
   EVALUATION_BOUNDARY,
+  MARKET_SCOPE,
   NOMUE_POSITION,
   PAIRED_T_BOUNDARY,
   PLATFORM_SCOPE,
@@ -415,7 +416,7 @@ npm exec -- nomue verify records/invalid-result-mismatch.json --format json`,
       {
         id: 'platform',
         title: 'Platform scope is a direction, not a support claim',
-        paragraphs: [PLATFORM_SCOPE],
+        paragraphs: [PLATFORM_SCOPE, MARKET_SCOPE],
       },
       {
         id: 'non-claims',
