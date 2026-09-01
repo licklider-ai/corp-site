@@ -1,0 +1,199 @@
+---
+import type { TocItem } from '../consts';
+import {
+  EVALUATION_BOUNDARY,
+  EXPANSION_MODEL,
+  LEARNING_LOOP_POSITION,
+  MCP_RELEASE,
+  MCP_RELEASE_BOUNDARY,
+  PAIRED_T_BOUNDARY,
+  PAIRED_T_RFC_URL,
+  PLANNED_METHOD_FAMILIES,
+  PLATFORM_EVOLUTION,
+  PRODUCT_RELEASE_BOUNDARY,
+  PUBLIC_CAPABILITY,
+  PUBLIC_RELEASE,
+  ROADMAP_POSITION,
+} from '../data/site-facts';
+import PageLayout from '../layouts/PageLayout.astro';
+
+const toc: TocItem[] = [
+  { id: 'now', label: 'Available now' },
+  { id: 'candidate', label: 'MCP candidate' },
+  { id: 'next', label: 'Next releases' },
+  { id: 'platform', label: 'Platform evolution' },
+  { id: 'methods', label: 'Method expansion' },
+  { id: 'compounding', label: 'Learning system' },
+];
+
+const roadmapStructuredData = {
+  '@type': 'WebPage',
+  '@id': new URL('/roadmap/#webpage', Astro.site).href,
+  name: 'Licklider product roadmap',
+  description:
+    'Current, next, and planned expansion of nomue from Welch verification into agent-native scientific verification infrastructure.',
+  url: new URL('/roadmap/', Astro.site).href,
+  dateModified: '2026-09-01',
+  isPartOf: { '@id': new URL('/#website', Astro.site).href },
+  about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
+};
+---
+
+<PageLayout
+  title="Roadmap"
+  description="How nomue expands from Welch verification into agent-native scientific verification infrastructure."
+  toc={toc}
+  structuredData={roadmapStructuredData}
+>
+  <header class="page-head">
+    <p class="eyebrow">Roadmap</p>
+    <h1>From one proved verification call to shared research infrastructure</h1>
+    <p class="standfirst">{ROADMAP_POSITION}</p>
+    <p class="roadmap-rule">
+      The stages below separate public artifacts, source candidates, next release work,
+      and adopted plans. They describe sequence and scope rather than promised dates.
+    </p>
+  </header>
+
+  <section id="now" class="section section--lead">
+    <p class="stage-label">Available now</p>
+    <h2>A public trust layer for Welch verification</h2>
+    <p>{PUBLIC_CAPABILITY}</p>
+    <div class="fact-grid">
+      <article>
+        <h3>{PUBLIC_RELEASE.protocol}</h3>
+        <p>Public Record, bundle, check, and result meaning for the first supported scope.</p>
+        <p><a href={PUBLIC_RELEASE.protocolUrl} target="_blank" rel="noopener noreferrer">Protocol source ↗</a></p>
+      </article>
+      <article>
+        <h3>{PUBLIC_RELEASE.npmPackage}</h3>
+        <p>Open-source local verification, published on npm and exercised across three operating systems and two Node.js versions.</p>
+        <p><a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">npm package ↗</a></p>
+      </article>
+      <article>
+        <h3>Machine-readable evidence</h3>
+        <p>Scoped results, versions, reasons, and boundaries can travel with an agent workflow instead of becoming uncheckable prose.</p>
+        <p><a href="/docs/record-verification/">Run the verifier →</a></p>
+      </article>
+    </div>
+  </section>
+
+  <section id="candidate" class="section">
+    <p class="stage-label">Public source candidate</p>
+    <h2>A local MCP path is built and publicly inspectable</h2>
+    <p>{MCP_RELEASE_BOUNDARY}</p>
+    <div class="signal-row" aria-label="MCP candidate facts">
+      <span>{MCP_RELEASE.version}</span>
+      <span>{MCP_RELEASE.transport}</span>
+      <span>one versioned tool</span>
+      <span>3 OS × 2 Node versions</span>
+    </div>
+    <p>
+      <a href={MCP_RELEASE.repositoryUrl} target="_blank" rel="noopener noreferrer">View MCP source ↗</a>
+      {' · '}
+      <a href={MCP_RELEASE.ciUrl} target="_blank" rel="noopener noreferrer">Passing CI run ↗</a>
+    </p>
+  </section>
+
+  <section id="next" class="section">
+    <p class="stage-label">Next release work</p>
+    <h2>Bring verification into the agent workflow, then widen the evidence</h2>
+    <div class="status-list">
+      <article>
+        <h3>Agent-callable Welch capability</h3>
+        <p>{PRODUCT_RELEASE_BOUNDARY}</p>
+      </article>
+      <article>
+        <h3>Paired-t / Protocol Release 2</h3>
+        <p>{PAIRED_T_BOUNDARY}</p>
+        <p><a href={PAIRED_T_RFC_URL} target="_blank" rel="noopener noreferrer">Public RFC ↗</a></p>
+      </article>
+      <article>
+        <h3>Controlled agent evaluation</h3>
+        <p>{EVALUATION_BOUNDARY}</p>
+        <p><a href="/evaluation/">Evaluation design →</a></p>
+      </article>
+    </div>
+  </section>
+
+  <section id="platform" class="section">
+    <p class="stage-label">Planned platform evolution</p>
+    <h2>Make each verification call portable, persistent, and reusable</h2>
+    <div class="evolution-list">
+      {PLATFORM_EVOLUTION.map((step, index) => (
+        <article>
+          <p class="step-number">{String(index + 1).padStart(2, '0')}</p>
+          <div>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="methods" class="section">
+    <p class="stage-label">Planned scientific expansion</p>
+    <h2>Ten method families are already part of the adopted capability architecture</h2>
+    <p>
+      The product plan extends beyond independent two-group Welch into the following
+      research structures. Each family still earns its own scope, evidence, and release.
+    </p>
+    <ul class="method-grid">
+      {PLANNED_METHOD_FAMILIES.map((family) => <li>{family}</li>)}
+    </ul>
+    <aside class="expansion-model">
+      <h3>How expansion moves faster without weakening evidence</h3>
+      <p>{EXPANSION_MODEL}</p>
+    </aside>
+  </section>
+
+  <section id="compounding" class="section">
+    <p class="stage-label">Longer-term compounding system</p>
+    <h2>Real boundary cases become governed improvements</h2>
+    <p>{LEARNING_LOOP_POSITION}</p>
+    <p>
+      This is the platform loop: agents use versioned capabilities, results preserve
+      evidence, failures reveal where the boundary needs work, and reviewed improvements
+      return through new versions.
+    </p>
+  </section>
+
+  <footer class="page-foot">
+    <p>Current public scope: Release 1 Welch Record verification.</p>
+    <p><a href="/docs/record-verification/">Run it now →</a></p>
+  </footer>
+</PageLayout>
+
+<style>
+  .page-head { padding-bottom: 2.5rem; border-bottom: 1px solid var(--rule); }
+  .page-head .eyebrow { margin: 0; }
+  .page-head h1 { margin: 0.9rem 0 1.25rem; font-size: clamp(1.9rem, 3.6vw, 2.7rem); line-height: 1.2; letter-spacing: -0.01em; }
+  .standfirst { margin: 0; font-size: 1.12rem; color: var(--ink-1); }
+  .roadmap-rule { margin: 1.25rem 0 0; color: var(--ink-3); font-size: 0.86rem; }
+  .section { padding: 2.75rem 0; border-bottom: 1px solid var(--rule-faint); }
+  .section h2 { max-width: 42rem; margin-bottom: 1rem; font-size: clamp(1.35rem, 2.5vw, 1.8rem); line-height: 1.25; }
+  .section > :last-child, article > :last-child { margin-bottom: 0; }
+  .stage-label, .step-number { margin-bottom: 0.6rem; color: var(--ink-3); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .fact-grid, .status-list { display: grid; gap: 1rem; margin-top: 1.75rem; }
+  .fact-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .fact-grid article, .status-list article { padding: 1.25rem; border: 1px solid var(--rule); }
+  .fact-grid h3, .status-list h3, .evolution-list h3, .expansion-model h3 { margin-bottom: 0.65rem; font-size: 1.02rem; }
+  .signal-row { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 1.5rem 0; }
+  .signal-row span { padding: 0.4rem 0.6rem; border: 1px solid var(--rule); color: var(--ink-2); font-size: 0.75rem; }
+  .evolution-list { margin-top: 1.5rem; border-top: 1px solid var(--rule); }
+  .evolution-list article { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--rule-faint); }
+  .evolution-list article:last-child { border-bottom: 0; }
+  .method-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin: 1.5rem 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
+  .method-grid li { margin: 0; padding: 0.8rem 0; border-bottom: 1px solid var(--rule-faint); }
+  .method-grid li:nth-child(odd) { padding-right: 1rem; }
+  .method-grid li:nth-child(even) { padding-left: 1rem; border-left: 1px solid var(--rule-faint); }
+  .expansion-model { margin-top: 1.75rem; padding: 1.25rem; border-left: 2px solid var(--ink); background: var(--wash); }
+  .page-foot { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; padding: 2rem 0 0; font-size: 0.85rem; color: var(--ink-3); }
+  .page-foot p { margin: 0; }
+
+  @media (max-width: 760px) {
+    .fact-grid, .method-grid { grid-template-columns: minmax(0, 1fr); }
+    .method-grid li:nth-child(odd), .method-grid li:nth-child(even) { padding-inline: 0; border-left: 0; }
+  }
+</style>

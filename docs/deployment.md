@@ -72,12 +72,32 @@ vercel --prod        # 本番デプロイ
 
 デプロイ後に以下を確認:
 
-- [ ] トップページの Hero 見出しが "Engineering Accountability at Machine Scale"
+- [ ] トップページの Hero 見出しが "The verification layer for AI research agents"
+- [ ] `/roadmap/` が表示され、Available / candidate / next / planned が区別される
 - [ ] `/thesis/` が表示される
 - [ ] `favicon.svg` / `robots.txt` / `sitemap-index.xml` が配信される
 - [ ] OGP メタタグが出力されている
+- [ ] canonical URL が `https://www.licklider.ai/...` を指す
+- [ ] `licklider.ai/...` が同じパスの `www.licklider.ai/...` へ恒久リダイレクトされる
 
-## 4. 旧デプロイの無効化（完了: 2026-08-17）
+## 4. 検索インデックス更新
+
+大幅なトップページ変更後は、古いタイトル・説明・本文断片が検索結果に残って
+いないか確認する。リポジトリ側で次を成立させたうえで、Google Search Console
+の URL 検査から再クロールを依頼する。
+
+1. `https://www.licklider.ai/` の `<title>`、description、canonical、JSON-LD が
+   現在の会社説明と一致する。
+2. `https://www.licklider.ai/sitemap-index.xml` が最新のページを含む。
+3. `https://licklider.ai/` と下層パスが `www` の同一パスへ恒久リダイレクトされる。
+4. 公開HTMLに旧見出しまたは `Placeholder testimonial` が存在しない。
+5. Search Console の URL 検査でトップページと `/roadmap/` のインデックス登録を
+   依頼し、サイトマップを再送信する。
+
+検索結果の反映は即時ではない。再クロール依頼の完了と、実際の検索スニペットの
+更新は別の状態として記録する。
+
+## 5. 旧デプロイの無効化（完了: 2026-08-17）
 
 `licklider-v1` の `site/` ディレクトリ由来のデプロイは停止済みです。
 
@@ -85,7 +105,7 @@ vercel --prod        # 本番デプロイ
 - [x] `licklider.ai` / `www.licklider.ai` は `corp-site` の `main` から配信
 - [x] `licklider-v1/site/` を退役し、移行先 README を配置（[licklider-ai/licklider-v1#site](https://github.com/licklider-ai/licklider-v1/tree/main/site)）
 
-## 5. CLI でのローカル確認
+## 6. CLI でのローカル確認
 
 ```bash
 fnm use --install-if-missing   # Node 22.22.2

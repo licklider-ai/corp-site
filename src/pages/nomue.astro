@@ -2,17 +2,23 @@
 import type { TocItem } from '../consts';
 import {
   CORE_NON_CLAIMS,
+  EXPANSION_MODEL,
+  MCP_RELEASE,
+  MCP_RELEASE_BOUNDARY,
   NOMUE_GLOBAL_INSTALL_COMMAND,
   NOMUE_NPX_COMMAND,
   NOMUE_POSITION,
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
   PAIRED_T_RFC_URL,
+  PLANNED_METHOD_FAMILIES,
+  PLATFORM_EVOLUTION,
   PRODUCT_CAPABILITY,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
   PUBLIC_TRUST_EVIDENCE,
+  ROADMAP_POSITION,
 } from '../data/site-facts';
 import PageLayout from '../layouts/PageLayout.astro';
 
@@ -37,8 +43,9 @@ const toc: TocItem[] = [
     <p class="eyebrow">nomue</p>
     <h1>Give research agents a separate statistical verification call</h1>
     <p class="standfirst">
-      nomue checks a supported statistical decision, recomputes covered quantities, and
-      returns a machine-readable result with its evidence, version, and next action.
+      nomue gives research agents a separate place to check supported scientific and
+      numerical decisions. Welch is the first working vertical slice of a much larger
+      capability architecture.
     </p>
     <p class="head-links"><a href="/docs/record-verification/">Install and run →</a> · <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">npm package ↗</a> · <a href={PUBLIC_RELEASE.verifierUrl} target="_blank" rel="noopener noreferrer">GitHub source ↗</a> · <a href="/docs/examples/">See examples →</a></p>
     <p class="release-facts">Public npm package · <code>{PUBLIC_RELEASE.npmDistTag}</code>: {PUBLIC_RELEASE.verifierPackage} release candidate · Linux / macOS / Windows · Node.js 20 / 22</p>
@@ -157,6 +164,7 @@ const toc: TocItem[] = [
 
   <section id="availability" class="section">
     <h2>Product and roadmap</h2>
+    <p class="roadmap-lead">{ROADMAP_POSITION}</p>
     <div class="status-list">
       <article>
         <p class="status-label">Use today</p>
@@ -165,19 +173,41 @@ const toc: TocItem[] = [
         <p><a href="/docs/record-verification/">How to use the public verifier →</a></p>
       </article>
       <article>
-        <p class="status-label">Product capability</p>
-        <h3>Welch verification for research agents</h3>
-        <p>{PRODUCT_CAPABILITY}</p>
-        <p>{PRODUCT_RELEASE_BOUNDARY}</p>
-        <p><a href="/latest/">Follow Latest →</a> · <a href="/rss.xml">RSS →</a></p>
+        <p class="status-label">Public source candidate</p>
+        <h3>Local MCP adapter</h3>
+        <p>{MCP_RELEASE_BOUNDARY}</p>
+        <p><a href={MCP_RELEASE.repositoryUrl} target="_blank" rel="noopener noreferrer">MCP source ↗</a> · <a href={MCP_RELEASE.ciUrl} target="_blank" rel="noopener noreferrer">CI evidence ↗</a></p>
       </article>
       <article>
-        <p class="status-label">Next method</p>
-        <h3>Paired-t verification</h3>
-        <p>{PAIRED_T_BOUNDARY}</p>
-        <p><a href={PAIRED_T_RFC_URL} target="_blank" rel="noopener noreferrer">Public RFC →</a></p>
+        <p class="status-label">Next product release</p>
+        <h3>Welch verification inside agent workflows</h3>
+        <p>{PRODUCT_CAPABILITY}</p>
+        <p>{PRODUCT_RELEASE_BOUNDARY}</p>
       </article>
     </div>
+    <div class="platform-roadmap">
+      <h3>Planned platform evolution</h3>
+      <div class="platform-grid">
+        {PLATFORM_EVOLUTION.map((step) => (
+          <article>
+            <h4>{step.title}</h4>
+            <p>{step.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+    <div class="method-roadmap">
+      <h3>Planned scientific capability families</h3>
+      <p>{PLANNED_METHOD_FAMILIES.join(' · ')}</p>
+      <p>{EXPANSION_MODEL}</p>
+    </div>
+    <aside class="next-method">
+      <p class="status-label">Next Protocol capability</p>
+      <h3>Paired-t verification</h3>
+      <p>{PAIRED_T_BOUNDARY}</p>
+      <p><a href={PAIRED_T_RFC_URL} target="_blank" rel="noopener noreferrer">Public RFC ↗</a></p>
+    </aside>
+    <p><a href="/roadmap/">See the full roadmap →</a> · <a href="/latest/">Follow Latest →</a> · <a href="/rss.xml">RSS →</a></p>
   </section>
 
   <section id="trust" class="section">
@@ -264,11 +294,18 @@ const toc: TocItem[] = [
   strong { color: var(--ink); font-weight: 400; }
   .status-list article { padding: 1.25rem; border: 1px solid var(--rule); }
   .status-list h3 { margin-bottom: 0.65rem; font-size: 1.05rem; }
+  .roadmap-lead { max-width: 46rem; color: var(--ink-1); font-size: 1.08rem; }
+  .platform-roadmap, .method-roadmap, .next-method { margin-top: 2rem; }
+  .platform-roadmap > h3, .method-roadmap > h3, .next-method h3 { margin-bottom: 0.85rem; font-size: 1.08rem; }
+  .platform-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .platform-grid article { padding: 1.1rem; border: 1px solid var(--rule); }
+  .platform-grid h4 { margin-bottom: 0.55rem; font-size: 0.96rem; }
+  .method-roadmap, .next-method { padding: 1.25rem; border-left: 2px solid var(--ink); background: var(--wash); }
   .links { margin-top: 1.75rem; }
   .page-foot { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; padding: 2rem 0 0; font-size: 0.85rem; color: var(--ink-3); }
   .page-foot p { margin: 0; }
 
   @media (max-width: 760px) {
-    .capability-list { grid-template-columns: minmax(0, 1fr); }
+    .capability-list, .platform-grid { grid-template-columns: minmax(0, 1fr); }
   }
 </style>

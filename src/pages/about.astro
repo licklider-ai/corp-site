@@ -6,6 +6,7 @@ import {
   METHOD_IDENTITY_FINDING,
   PLATFORM_SCOPE,
   PUBLIC_CAPABILITY,
+  ROADMAP_POSITION,
   UPSTREAM_CONTRIBUTIONS,
   VERIFICATION_WORKING_METHOD,
 } from '../data/site-facts';
@@ -91,6 +92,7 @@ const founderStructuredData = {
     <section class="band">
       <p class="eyebrow">Platform</p>
       <div class="band-body">
+        <p class="lead">{ROADMAP_POSITION}</p>
         <p>{PLATFORM_SCOPE}</p>
         <p>{MARKET_SCOPE}</p>
         <p>
@@ -102,6 +104,7 @@ const founderStructuredData = {
           We expand the platform one evidenced capability at a time, so each new method
           has an explicit contract and an independently checkable basis.
         </p>
+        <p><a href="/roadmap/">Product and capability roadmap →</a></p>
       </div>
     </section>
 
@@ -143,7 +146,9 @@ const founderStructuredData = {
           <p>
             Our current public record contains {UPSTREAM_CONTRIBUTIONS.length} upstream
             defect reports and {mergedUpstreamFixes.length} merged fixes. Each result
-            links to the external issue, review, or commit.
+            links to the external issue, review, or commit. This is public evidence of
+            the verification engineering behind the platform, rather than the limit of
+            what Licklider intends to build.
           </p>
         </div>
         <div class="evidence-list">

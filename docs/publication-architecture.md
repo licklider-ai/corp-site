@@ -4,7 +4,7 @@
 **Authority:** Canonical for placement, labels, and required metadata on `licklider.ai`  
 **Claim authority:** Subordinate to `licklider-ai/nomue-app/PUBLIC_COMMUNICATIONS.md`  
 **Outreach authority:** Media outreach is governed separately by `licklider-ai/nomue-pr`  
-**Status:** Active — v1.4<br>
+**Status:** Active — v1.5<br>
 **Last updated:** 2026-09-01
 
 ---
@@ -166,16 +166,59 @@ not create a News item.
 ## 6. Public writing standard
 
 This section is the canonical editorial standard for reader-facing titles, summaries,
-index text, status notices, and article bodies. Scientific and technical precision must
-be preserved, but internal vocabulary must not be used as a shortcut for explanation.
+index text, product pages, roadmap pages, status notices, and article bodies.
+
+Licklider's baseline stance is **evidence-bound ambition**: state the strongest useful
+interpretation that current evidence supports, then make its scope recoverable. Accuracy
+is not a reason to make the company, product, or result appear smaller than the evidence
+shows. Ambition is not permission to turn a plan into a shipped capability.
 
 The assumed reader is an informed non-specialist who may know neither the project nor its
 internal terminology. A specialist must still be able to recover the exact claim, status,
 scope, and evidence from the same page.
 
-### 6.1 Required information order
+### 6.1 Foundation: lead with the positive case
 
-Write each item in this order unless a documented reason requires otherwise:
+Every durable page must first answer the positive reader question appropriate to its job:
+
+- **Company / home:** what large problem Licklider is solving and why its approach can
+  become important;
+- **Product:** what the reader or agent can do, what becomes possible next, and why the
+  architecture can expand;
+- **Research / Engineering:** what was learned, changed, or proved and why that matters;
+- **News:** what became publicly available or materially changed; and
+- **Roadmap:** how the first working slice expands into a larger product and platform.
+
+Do not make a reader assemble the positive case from caveats. Do not begin a company or
+product page with a catalogue of absences. Do not describe a first vertical slice as
+though it were the intended ceiling when an adopted roadmap establishes a broader
+architecture.
+
+Required limitations remain part of the page, but their job is to make the positive claim
+dependable. They must not become the page's dominant narrative unless the page exists
+specifically to document limits, safety, or a correction.
+
+### 6.2 Default narrative architecture
+
+For company, product, and roadmap pages, use this order by default:
+
+1. **Vision:** name the important category, user, and outcome.
+2. **Working proof:** show what exists now and the best public evidence that the team can
+   execute the thesis.
+3. **Expansion:** show the adopted path from the current slice to the larger platform,
+   separating current, candidate, next-release, and planned work.
+4. **Current scope:** state the exact present support boundary once, clearly.
+5. **Detailed boundaries:** route readers who need every non-claim to the relevant
+   product or technical documentation.
+
+This order is summarized as:
+
+```text
+Vision → Proof → Expansion → Current scope → Detailed boundaries
+```
+
+For a specific Research, Engineering, or News item, use this event-level order unless a
+documented reason requires otherwise:
 
 1. **Title:** name the concrete finding, event, or available artifact.
 2. **One-sentence summary:** state what happened or what the reader can learn or do.
@@ -187,12 +230,69 @@ Write each item in this order unless a documented reason requires otherwise:
 7. **Relationship or next step:** include only when it materially prevents
    misunderstanding, such as a paper's relationship to nomue Protocol.
 
-This follows the useful pattern observed in Anthropic and OpenAI publishing: a short,
-concrete headline and summary establish the subject before the page introduces technical
-detail, evidence, and limitations. Their wording is precedent, not authority for
-Licklider claims.
+The first screen or opening paragraph should normally contain category, value, and proof
+or a path to proof. Maturity language belongs beside the artifact or result it qualifies;
+it does not need to interrupt every statement of the broader company thesis.
 
-### 6.2 Sentence and terminology rules
+### 6.3 Limitation placement and density
+
+- State one material qualifier near a claim when omitting it would change the claim's
+  meaning: for example, `release candidate`, `planned`, or `not peer reviewed`.
+- Consolidate general non-claims into one current-scope or interpretation section. Link
+  to detailed Docs rather than repeating the same list after every positive statement.
+- On the home page, use one compact current-scope statement. Do not alternate a positive
+  claim with a limitation paragraph throughout the page.
+- On a product page, explain the value and expansion path before the complete
+  interpretation boundary.
+- On a limits or reference page, completeness takes priority and the full boundary may
+  be the main content.
+- A limitation must describe the boundary of a real positive capability whenever
+  possible. Prefer “This result establishes X; Y remains a separate question” to a bare
+  list of everything the system does not establish.
+- Never duplicate caveats merely to appear prudent. Repetition is required only when a
+  claim would otherwise become materially misleading in that local context.
+
+### 6.4 Roadmap and future scale
+
+An adopted product plan is a legitimate public fact about company direction. Present it
+confidently, using status labels that prevent it from being mistaken for current support.
+
+Use these distinctions:
+
+| Status | Meaning in public copy |
+| --- | --- |
+| **Available now** | A reader can use or inspect the named public artifact now |
+| **Public source candidate** | Candidate implementation and evidence are public, but the stated distribution or client gate is still open |
+| **Next release work** | The next approved product or Protocol outcome; not current support |
+| **Planned platform** | An adopted architectural step with no implied ship date |
+| **Planned capability family** | An adopted scientific family that still requires its own method, evidence, activation, and release decisions |
+
+Do not replace a substantive adopted roadmap with “more checks someday.” Name the
+platform steps and scientific families that are actually planned. Do not invent dates,
+collapse planned work into availability, or imply that every listed capability will ship
+at once.
+
+When the first implementation is narrow, explain its role in the larger system. The
+preferred structure is “X is the first working vertical slice of Y,” followed by the
+evidence that X is real and the adopted steps that make Y credible.
+
+### 6.5 Translate technical proof into company meaning
+
+Technical achievements must be connected to the company thesis when that relationship is
+real. An upstream defect report, independent oracle, public verifier, or cross-platform
+test is not merely an isolated engineering detail: it can be evidence of Licklider's
+ability to build verification infrastructure.
+
+State both layers:
+
+1. the exact technical outcome and external evidence; and
+2. what capability of the company or platform that outcome demonstrates.
+
+Do not inflate the technical result into product traction or scientific superiority. Do
+not leave a strong proof point framed so narrowly that readers mistake it for the whole
+business.
+
+### 6.6 Sentence and terminology rules
 
 - Put the concrete subject and action in the first sentence. Do not open with taxonomy,
   governance, or implementation vocabulary.
@@ -208,6 +308,10 @@ Licklider claims.
   **verified**, **reviewed**, or **fixed** imply a stronger state than the evidence.
 - Preserve necessary limitations, but express them as concrete non-claims rather than
   compressed legal, governance, or specification language.
+- Prefer positive capability language before boundary language: **can**, **checks**,
+  **produces**, **enables**, **expands**, **demonstrates**.
+- Avoid consecutive paragraphs led by `not`, `does not`, `cannot`, `only`, `until`, or
+  `remains`. Rewrite them around the supported capability and consolidate the boundary.
 - Use internal enum names, policy terms, and conformance vocabulary only when the reader
   needs the exact term. Do not make readers decode the repository's internal model.
 
@@ -225,7 +329,7 @@ bundle`, `numerical surface`, and `finiteness` are not prohibited. They require 
 reader-facing explanation and normally do not belong in a title, standfirst, or index
 summary.
 
-### 6.3 Category-specific lead
+### 6.7 Category-specific lead
 
 - **Research:** begin with the question or finding and the studied scope. Show peer-review
   status before discussing journal process, methods, or protocol implications.
@@ -236,7 +340,7 @@ summary.
   reader a direct next action and show whether the item is a preview, release candidate,
   or stable release.
 
-### 6.4 Editorial history and public corrections
+### 6.8 Editorial history and public corrections
 
 Do not publish internal editorial history, discarded headlines, copy-editing changes, or
 an explanation that wording was previously too broad. Those facts do not help the reader
@@ -248,18 +352,26 @@ change is itself important. A maturity change such as acceptance, withdrawal, co
 cause, accepted fix, or released fix may be recorded as an update. Ordinary wording and
 layout revisions are not public correction events.
 
-### 6.5 Mandatory pre-publication check
+### 6.9 Mandatory pre-publication check
 
 An item is not ready to publish until every applicable question below can be answered
 **yes**:
 
 - Can a new reader understand the subject from the title and one-sentence summary alone?
+- Does the opening state why the subject matters before it lists general limitations?
 - Does the first paragraph say what happened, what was found, or what is available?
 - Is every specialist term in the opening explained or moved to the technical section?
 - Is the exact maturity or unresolved status visible without inference?
 - Are observation, third-party response, confirmation, acceptance, and release kept
   separate?
 - Are the scope and important non-claims stated in ordinary language?
+- Are repeated limitations consolidated, with detailed non-claims routed to Docs?
+- If the current capability is a first vertical slice, does the page accurately show the
+  adopted expansion path rather than implying that the slice is the company boundary?
+- Are planned items visibly separated from available and candidate items without making
+  the plan disappear into vague language?
+- Does each major technical proof point explain what it demonstrates about the product or
+  company, without converting it into an unsupported traction or superiority claim?
 - Have internal editorial deliberation and non-material revision history been removed?
 - Do the home page, Latest, category index, metadata, and article use consistent wording?
 - Does the item appear once, with the same title, summary, date, and URL in RSS and JSON Feed?
@@ -284,7 +396,7 @@ unexplained.
 - canonical URL
 - public evidence links
 - scope and important limitations
-- correction or update history when material under section 6.4
+- correction or update history when material under section 6.8
 
 ### 7.2 Research additions
 

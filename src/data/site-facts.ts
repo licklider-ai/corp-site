@@ -6,13 +6,13 @@
  */
 
 export const COMPANY_POSITION =
-  'Licklider builds middleware that lets AI research agents send clearly defined checks to a separate verification tool, starting with scientific statistics.';
+  'Licklider builds scientific verification infrastructure that AI research agents can call when a result needs an independent, versioned check. Statistics is the first working domain.';
 
 export const VERIFICATION_CALL_DEFINITION =
   'A verification call asks a separate tool to check one clearly defined property of an analysis, result, or evidence chain. It returns a machine-readable answer that says what was checked, which evidence and version were used, what should happen next, and where the result stops.';
 
 export const NOMUE_POSITION =
-  'nomue is Licklider\'s scientific verification product. It moves important statistical decisions and numerical checks out of the research model and into a separate, inspectable tool.';
+  'nomue is Licklider\'s agent-callable scientific verification product. It moves important scientific decisions and numerical checks out of the research model and into a separate, inspectable capability.';
 
 export const PUBLIC_RELEASE = {
   protocol: 'nomue Protocol Release 1 Public Draft',
@@ -43,7 +43,25 @@ export const PRODUCT_CAPABILITY =
   'nomue\'s Welch verification is implemented: it keeps the agent from guessing required scientific facts, follows the supported decision path, runs fixed numerical checks, and returns structured outcomes and next actions.';
 
 export const PRODUCT_RELEASE_BOUNDARY =
-  'Use the npm-published Release 1 verifier, the Protocol, and their machine-readable documentation today. Public agent-callable access is the next product layer; releases will be announced in Latest and the RSS feed. Until then, public access is the local verifier rather than a hosted nomue API or MCP endpoint.';
+  'Use the npm-published Release 1 verifier, the Protocol, and their machine-readable documentation today. The next product release adds the agent-facing runtime: a thin interface that gathers the required research conditions, routes clarification or refusal, runs the registered Welch path, and returns structured evidence and next actions.';
+
+export const MCP_RELEASE = {
+  package: '@licklider/nomue-mcp',
+  version: '0.1.0-rc.0',
+  maturity: 'public source candidate',
+  transport: 'local stdio',
+  tool: 'verify_nomue_welch_record',
+  repositoryUrl: 'https://github.com/licklider-ai/nomue-mcp',
+  ciUrl: 'https://github.com/licklider-ai/nomue-mcp/actions/runs/33509445925',
+  testedOperatingSystems: ['Linux', 'macOS', 'Windows'],
+  testedNodeVersions: ['20', '22'],
+} as const;
+
+export const MCP_PUBLIC_SOURCE =
+  `The ${MCP_RELEASE.package} ${MCP_RELEASE.version} source candidate is public. It exposes one ${MCP_RELEASE.transport} tool for local Release 1 Welch Record verification, delegates to the exact published verifier, and has passing package-path CI across Linux, macOS, and Windows.`;
+
+export const MCP_RELEASE_BOUNDARY =
+  `${MCP_PUBLIC_SOURCE} npm publication and clean-client checks are the remaining steps before one-line MCP installation is presented as publicly available.`;
 
 export const NOMUE_GLOBAL_INSTALL_COMMAND =
   `npm install --global ${PUBLIC_RELEASE.npmPackage}`;
@@ -58,7 +76,7 @@ export const NOMUE_CLI_USAGE =
   'usage: nomue <verify|canonicalize|digest> <record.json> [--format json|json-compact|human]';
 
 export const PAIRED_T_BOUNDARY =
-  'Public paired-t work has reached independently reviewed candidate evidence across deterministic evaluation, two 200-value numerical tables, the observations-to-p-value path, input-specific error bounds, and a confidence-interval execution trace. Confidence-interval truth and final Release 2 support decisions remain under review, so public support is still Welch only.';
+  'Paired-t is the next Protocol capability. Public work has already produced independently reviewed candidate evidence across deterministic evaluation, two 200-value numerical tables, the observations-to-p-value path, input-specific error bounds, and a confidence-interval execution trace. The remaining review and Release 2 decision will determine when it becomes public support.';
 
 export const PAIRED_T_RFC_URL =
   'https://github.com/licklider-ai/nomue-protocol/issues/25';
@@ -67,10 +85,55 @@ export const EVALUATION_BOUNDARY =
   'The A/B/C comparison design, scoring boundary, baseline tools, provider adapters, and exact nomue runtime binding are being built and reviewed. Results will be published after the scored evaluation and adversarial review are complete.';
 
 export const PLATFORM_SCOPE =
-  'Licklider is building shared infrastructure for verification calls across AI research. Statistics is the first working area; more research checks can be added as each one gains evidence, a versioned definition, and a public release.';
+  'Licklider is building shared infrastructure for verification calls across AI research. Welch is the first working vertical slice of a broader architecture for portable evidence, persistent agent-native project state, resumability, and expanding scientific capabilities.';
 
 export const MARKET_SCOPE =
   'Licklider\'s market is the full set of verification calls that arise across AI research, rather than one research-workflow SaaS category. The long-term infrastructure opportunity is broader than the capabilities available today.';
+
+export const ROADMAP_POSITION =
+  'Welch is the first working, publicly checkable vertical slice, not the product boundary. The adopted product sequence expands both the platform beneath each call and the scientific methods available through it.';
+
+export const PLATFORM_EVOLUTION = [
+  {
+    title: 'Independently verifiable Records',
+    description:
+      'Carry exact capability, engine, Protocol, and result evidence into a Record that another party can check without trusting the product runtime.',
+  },
+  {
+    title: 'Agent-native Project state',
+    description:
+      'Let an authorized agent return to the same research task without rebuilding canonical context from chat history.',
+  },
+  {
+    title: 'Persistent resumability',
+    description:
+      'Reconnect and continue long-running research work while keeping project truth separate from conversational memory.',
+  },
+  {
+    title: 'Generalized capability kernel',
+    description:
+      'Stabilize the common contract, result, refusal, evidence, and version surfaces after materially different methods prove what is shared.',
+  },
+] as const;
+
+export const PLANNED_METHOD_FAMILIES = [
+  'Independent multi-group',
+  'Paired two-group',
+  'Repeated measures',
+  'Factorial and interaction',
+  'Nonlinear and dose response',
+  'Nonparametric rank-based',
+  'Categorical outcomes',
+  'Correlation and linear models',
+  'Survival time-to-event',
+  'Count outcomes',
+] as const;
+
+export const EXPANSION_MODEL =
+  'Method expansion does not require every app capability to wait for a Protocol release. A method family can first ship with app-level deterministic verification after its own contract, independent-oracle, cross-implementation, property, adversarial, and activation reviews close. It can later gain Protocol-backed independent verification through an exact released bundle.';
+
+export const LEARNING_LOOP_POSITION =
+  'As real use grows, the planned governed learning loop turns privacy-minimized failures and boundary cases into reviewed evidence, regression cases, and improved future capability versions without treating model self-judgment as scientific ground truth.';
 
 export const METHOD_IDENTITY_FINDING =
   'A statistical method name is not a verification contract. A useful guarantee also depends on the comparison family, error criterion, assumptions, sidedness, balance conditions, and exact procedure variant.';

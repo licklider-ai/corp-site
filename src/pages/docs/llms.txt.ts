@@ -5,14 +5,18 @@ import {
 } from '../../data/agent-docs';
 import {
   METHOD_IDENTITY_FINDING,
+  MCP_RELEASE,
+  MCP_RELEASE_BOUNDARY,
   NOMUE_GLOBAL_INSTALL_COMMAND,
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
+  PLANNED_METHOD_FAMILIES,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
   PUBLIC_TRUST_EVIDENCE,
+  ROADMAP_POSITION,
 } from '../../data/site-facts';
 
 const content = `# Licklider agent-readable documentation
@@ -48,7 +52,12 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 ## Product access
 
 - ${PRODUCT_RELEASE_BOUNDARY}
+- ${MCP_RELEASE_BOUNDARY}
+- [Public MCP source](${MCP_RELEASE.repositoryUrl}) and [passing CI](${MCP_RELEASE.ciUrl})
 - ${PAIRED_T_BOUNDARY}
+- ${ROADMAP_POSITION}
+- Planned scientific capability families: ${PLANNED_METHOD_FAMILIES.join('; ')}.
+- [Full roadmap](https://www.licklider.ai/roadmap/)
 
 ## Research finding that informs call selection
 

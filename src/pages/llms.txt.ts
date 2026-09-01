@@ -4,16 +4,20 @@ import {
   COMPANY_POSITION,
   EVALUATION_BOUNDARY,
   MARKET_SCOPE,
+  MCP_RELEASE,
+  MCP_RELEASE_BOUNDARY,
   METHOD_IDENTITY_FINDING,
   NOMUE_GLOBAL_INSTALL_COMMAND,
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
+  PLANNED_METHOD_FAMILIES,
   PLATFORM_SCOPE,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
   PUBLIC_TRUST_EVIDENCE,
+  ROADMAP_POSITION,
   UPSTREAM_CONTRIBUTIONS,
 } from '../data/site-facts';
 
@@ -42,10 +46,15 @@ const content = `# Licklider
 ## Product and platform
 
 - ${PRODUCT_RELEASE_BOUNDARY}
+- ${MCP_RELEASE_BOUNDARY}
+- [Public MCP source](${MCP_RELEASE.repositoryUrl}) and [passing cross-platform CI](${MCP_RELEASE.ciUrl})
 - ${PAIRED_T_BOUNDARY}
 - ${EVALUATION_BOUNDARY}
 - ${PLATFORM_SCOPE}
 - ${MARKET_SCOPE}
+- ${ROADMAP_POSITION}
+- Planned scientific capability families: ${PLANNED_METHOD_FAMILIES.join('; ')}.
+- [Full product roadmap](https://www.licklider.ai/roadmap/)
 
 ## Interpretation boundary
 
@@ -62,6 +71,7 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 
 - [Licklider](https://www.licklider.ai/): company and platform overview
 - [nomue](https://www.licklider.ai/nomue/): scientific verification product, scope, availability, and limits
+- [Roadmap](https://www.licklider.ai/roadmap/): current artifacts, next releases, platform evolution, and planned scientific capability families
 - [Evaluation](https://www.licklider.ai/evaluation/): comparison design and current claim boundary
 - [Thesis](https://www.licklider.ai/thesis/): why AI-generated work needs a separate verification layer
 

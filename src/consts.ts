@@ -4,10 +4,10 @@
 
 export const SITE_TITLE = 'Licklider';
 export const SITE_META_TITLE =
-  'Licklider — Verification middleware for AI research agents';
+  'Licklider — Scientific verification infrastructure for AI agents';
 export const SITE_DESCRIPTION =
-  'Licklider builds verification middleware for AI research agents. Install the open-source nomue verifier from npm to check supported Welch statistical Records locally.';
-export const SITE_VERSION = 'v0.3';
+  'Licklider builds scientific verification infrastructure for AI research agents, starting with public, independently checkable Welch Record verification.';
+export const SITE_VERSION = 'v0.4';
 export const SITE_UPDATED = '2026-09-01';
 
 export type NavItem = {
@@ -20,6 +20,7 @@ export type NavItem = {
 /** Global navigation */
 export const GLOBAL_NAV: NavItem[] = [
   { label: 'nomue', href: '/nomue/', ready: true },
+  { label: 'Roadmap', href: '/roadmap/', ready: true },
   { label: 'Docs', href: '/docs/', ready: true },
   { label: 'Research', href: '/research/', ready: true },
   { label: 'Latest', href: '/latest/', ready: true },
@@ -29,6 +30,7 @@ export const GLOBAL_NAV: NavItem[] = [
 /** Left navigation used on long-form pages. */
 export const SIDE_NAV: NavItem[] = [
   { label: 'nomue', href: '/nomue/', ready: true },
+  { label: 'Roadmap', href: '/roadmap/', ready: true },
   { label: 'Docs', href: '/docs/', ready: true },
   { label: 'Evaluation', href: '/evaluation/', ready: true },
   { label: 'Thesis', href: '/thesis/', ready: true },
