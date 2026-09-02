@@ -8,6 +8,10 @@ import {
   MCP_RELEASE_BOUNDARY,
   METHOD_IDENTITY_FINDING,
   NOMUE_GLOBAL_INSTALL_COMMAND,
+  NOMUE_MCP_CLIENT_CONFIG,
+  NOMUE_MCP_NPX_COMMAND,
+  NOMUE_MCP_WHEN_NOT_TO_USE,
+  NOMUE_MCP_WHEN_TO_USE,
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
@@ -40,6 +44,13 @@ const content = `# Licklider
 - Run without a global install: \`${NOMUE_NPX_COMMAND}\`
 - Package-path CI: Linux, macOS, and Windows with Node.js 20 and 22
 - [nomue verifier source](${PUBLIC_RELEASE.verifierUrl}): Apache-2.0; Record verification remains local and does not call a nomue server after installation
+- [${MCP_RELEASE.package}@${MCP_RELEASE.version}](${MCP_RELEASE.npmUrl}): public local stdio MCP release candidate, exact-version pinned
+- MCP client configuration: \`${NOMUE_MCP_CLIENT_CONFIG}\`
+- Direct start: \`${NOMUE_MCP_NPX_COMMAND}\`
+- Tool: \`${MCP_RELEASE.tool}\`. ${NOMUE_MCP_WHEN_TO_USE}
+- ${NOMUE_MCP_WHEN_NOT_TO_USE}
+- [Official MCP Registry entry](${MCP_RELEASE.registryUrl}): \`${MCP_RELEASE.registryName}\`
+- [MCP installation and result contract](https://www.licklider.ai/docs/mcp-verification.md)
 - [Fetch machine-readable examples](https://www.licklider.ai/docs/examples.json)
 - ${PUBLIC_TRUST_EVIDENCE}
 
@@ -47,7 +58,7 @@ const content = `# Licklider
 
 - ${PRODUCT_RELEASE_BOUNDARY}
 - ${MCP_RELEASE_BOUNDARY}
-- [Public MCP source](${MCP_RELEASE.repositoryUrl}) and [passing cross-platform CI](${MCP_RELEASE.ciUrl})
+- [Public MCP source](${MCP_RELEASE.repositoryUrl}), [npm package](${MCP_RELEASE.npmUrl}), [official registry metadata](${MCP_RELEASE.registryUrl}), and [passing cross-platform CI](${MCP_RELEASE.ciUrl})
 - ${PAIRED_T_BOUNDARY}
 - ${EVALUATION_BOUNDARY}
 - ${PLATFORM_SCOPE}
@@ -87,6 +98,8 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 - [nomue Protocol](${PUBLIC_RELEASE.protocolUrl}): public Layer 1 specification and Release 1 artifacts
 - [nomue verifier on npm](${PUBLIC_RELEASE.npmUrl}): public release-candidate package for supported Release 1 Records
 - [nomue verifier source](${PUBLIC_RELEASE.verifierUrl}): source and release evidence
+- [nomue MCP on npm](${MCP_RELEASE.npmUrl}): public local stdio release candidate
+- [nomue MCP in the official registry](${MCP_RELEASE.registryUrl}): exact registry metadata for ${MCP_RELEASE.registryName}
 
 ## Public upstream contributions
 

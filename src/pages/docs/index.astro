@@ -33,8 +33,8 @@ const toc: TocItem[] = [
     <p class="eyebrow">Docs</p>
     <h1>Documentation for agents and the people who review their work</h1>
     <p class="standfirst">
-      Run the public verifier, teach an agent when to call it, and interpret the returned
-      evidence using the same versioned documentation.
+      Run the public verifier directly or through local MCP, teach an agent when to call
+      it, and interpret the returned evidence using the same versioned documentation.
     </p>
   </header>
 
@@ -45,6 +45,7 @@ const toc: TocItem[] = [
     <p>{PUBLIC_TRUST_EVIDENCE}</p>
     <div class="start-actions">
       <a href="/docs/record-verification/">Install and run the verifier →</a>
+      <a href="/docs/mcp-verification/">Add nomue to an MCP client →</a>
       <a href="/docs/cli-reference/">Read the CLI reference →</a>
       <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">View the npm package ↗</a>
       <a href="/docs/examples/">Work through examples →</a>
@@ -62,10 +63,10 @@ const toc: TocItem[] = [
         <p><a href="/docs/record-verification/">Verifier guide →</a></p>
       </article>
       <article>
-        <p class="eyebrow">Inspect</p>
-        <h3>Review the public MCP source candidate</h3>
+        <p class="eyebrow">Connect</p>
+        <h3>Run the local MCP release candidate</h3>
         <p>{MCP_RELEASE_BOUNDARY}</p>
-        <p><a href={MCP_RELEASE.repositoryUrl} target="_blank" rel="noopener noreferrer">MCP source ↗</a> · <a href="/roadmap/">Roadmap →</a></p>
+        <p><a href="/docs/mcp-verification/">MCP guide →</a> · <a href={MCP_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">npm ↗</a> · <a href={MCP_RELEASE.registryUrl} target="_blank" rel="noopener noreferrer">Official Registry ↗</a></p>
       </article>
       <article>
         <p class="eyebrow">Call</p>

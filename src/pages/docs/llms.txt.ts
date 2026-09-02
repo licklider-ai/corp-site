@@ -8,6 +8,10 @@ import {
   MCP_RELEASE,
   MCP_RELEASE_BOUNDARY,
   NOMUE_GLOBAL_INSTALL_COMMAND,
+  NOMUE_MCP_CLIENT_CONFIG,
+  NOMUE_MCP_NPX_COMMAND,
+  NOMUE_MCP_WHEN_NOT_TO_USE,
+  NOMUE_MCP_WHEN_TO_USE,
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
@@ -21,7 +25,7 @@ import {
 
 const content = `# Licklider agent-readable documentation
 
-> Run the public verifier, decide when a bounded verification call applies, and interpret its returned evidence.
+> Run the public verifier directly or through local MCP, decide when a bounded verification call applies, and interpret its returned evidence.
 
 ## Available now
 
@@ -36,6 +40,13 @@ const content = `# Licklider agent-readable documentation
 - [Run the verifier](https://www.licklider.ai/docs/record-verification.md)
 - [Machine-readable examples](https://www.licklider.ai/docs/examples.json)
 - ${PUBLIC_TRUST_EVIDENCE}
+- MCP package: [${MCP_RELEASE.package}@${MCP_RELEASE.version}](${MCP_RELEASE.npmUrl})
+- MCP client configuration: \`${NOMUE_MCP_CLIENT_CONFIG}\`
+- MCP start command: \`${NOMUE_MCP_NPX_COMMAND}\`
+- MCP tool: \`${MCP_RELEASE.tool}\`. ${NOMUE_MCP_WHEN_TO_USE}
+- ${NOMUE_MCP_WHEN_NOT_TO_USE}
+- [MCP installation and exact result contract](https://www.licklider.ai/docs/mcp-verification.md)
+- [Official MCP Registry entry](${MCP_RELEASE.registryUrl}): \`${MCP_RELEASE.registryName}\`
 
 ## Start here
 
@@ -53,7 +64,7 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 
 - ${PRODUCT_RELEASE_BOUNDARY}
 - ${MCP_RELEASE_BOUNDARY}
-- [Public MCP source](${MCP_RELEASE.repositoryUrl}) and [passing CI](${MCP_RELEASE.ciUrl})
+- [Public MCP source](${MCP_RELEASE.repositoryUrl}), [npm package](${MCP_RELEASE.npmUrl}), [official registry metadata](${MCP_RELEASE.registryUrl}), and [passing CI](${MCP_RELEASE.ciUrl})
 - ${PAIRED_T_BOUNDARY}
 - ${ROADMAP_POSITION}
 - Planned scientific capability families: ${PLANNED_METHOD_FAMILIES.join('; ')}.

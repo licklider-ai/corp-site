@@ -1,5 +1,6 @@
 ---
 import {
+  MCP_RELEASE,
   NOMUE_GLOBAL_INSTALL_COMMAND,
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
@@ -73,7 +74,9 @@ const toc = [
     </p>
     <p>
       This makes the public package an independently runnable verification surface. It
-      is not an announcement of a hosted nomue API or MCP endpoint.
+      is not an announcement of a hosted nomue API or remote HTTP MCP endpoint. A
+      separate local stdio adapter is now available as{' '}
+      <a href={MCP_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer"><code>{MCP_RELEASE.package}@{MCP_RELEASE.version}</code></a>.
     </p>
   </section>
 

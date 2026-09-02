@@ -47,8 +47,8 @@ const toc: TocItem[] = [
       numerical decisions. Welch is the first working vertical slice of a much larger
       capability architecture.
     </p>
-    <p class="head-links"><a href="/docs/record-verification/">Install and run →</a> · <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">npm package ↗</a> · <a href={PUBLIC_RELEASE.verifierUrl} target="_blank" rel="noopener noreferrer">GitHub source ↗</a> · <a href="/docs/examples/">See examples →</a></p>
-    <p class="release-facts">Public npm package · <code>{PUBLIC_RELEASE.npmDistTag}</code>: {PUBLIC_RELEASE.verifierPackage} release candidate · Linux / macOS / Windows · Node.js 20 / 22</p>
+    <p class="head-links"><a href="/docs/record-verification/">Install and run →</a> · <a href="/docs/mcp-verification/">Add the MCP server →</a> · <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">verifier on npm ↗</a> · <a href={MCP_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">MCP on npm ↗</a> · <a href="/docs/examples/">See examples →</a></p>
+    <p class="release-facts">Public release candidates · verifier {PUBLIC_RELEASE.verifierPackage} · MCP {MCP_RELEASE.version} / stdio · Linux / macOS / Windows · Node.js 20 / 22</p>
   </header>
 
   <section id="available" class="section section--lead">
@@ -83,6 +83,11 @@ const toc: TocItem[] = [
       For an agent workflow, this is a concrete verification-call boundary: provide a
       versioned Record to a separate command and carry its scoped JSON result back into
       the workflow without asking the research model to judge its own calculation.
+    </p>
+    <p>
+      The same bounded verification is available to MCP clients through the exact
+      <code>{MCP_RELEASE.package}@{MCP_RELEASE.version}</code> local stdio server. It
+      exposes only <code>{MCP_RELEASE.tool}</code> and does not add a broader verdict.
     </p>
     <p>
       The same CLI provides <code>canonicalize</code> and <code>digest</code> utilities for
@@ -173,10 +178,10 @@ const toc: TocItem[] = [
         <p><a href="/docs/record-verification/">How to use the public verifier →</a></p>
       </article>
       <article>
-        <p class="status-label">Public source candidate</p>
-        <h3>Local MCP adapter</h3>
+        <p class="status-label">Use today — release candidate</p>
+        <h3>Local MCP server</h3>
         <p>{MCP_RELEASE_BOUNDARY}</p>
-        <p><a href={MCP_RELEASE.repositoryUrl} target="_blank" rel="noopener noreferrer">MCP source ↗</a> · <a href={MCP_RELEASE.ciUrl} target="_blank" rel="noopener noreferrer">CI evidence ↗</a></p>
+        <p><a href="/docs/mcp-verification/">Installation and tool boundary →</a> · <a href={MCP_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">npm ↗</a> · <a href={MCP_RELEASE.registryUrl} target="_blank" rel="noopener noreferrer">Official Registry ↗</a> · <a href={MCP_RELEASE.repositoryUrl} target="_blank" rel="noopener noreferrer">Source ↗</a></p>
       </article>
       <article>
         <p class="status-label">Next product release</p>

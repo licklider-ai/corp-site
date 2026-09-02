@@ -1,0 +1,124 @@
+---
+import {
+  MCP_RELEASE,
+  NOMUE_MCP_CLIENT_CONFIG,
+  NOMUE_MCP_NPX_COMMAND,
+  NOMUE_MCP_REPLAY_COMMAND,
+  NOMUE_MCP_WHEN_NOT_TO_USE,
+  NOMUE_MCP_WHEN_TO_USE,
+} from '../../data/site-facts';
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'available', label: 'What is available' },
+  { id: 'configure', label: 'Add it to a client' },
+  { id: 'tool', label: 'Tool boundary' },
+  { id: 'replay', label: 'Independent replay' },
+  { id: 'local-boundary', label: 'Local boundary' },
+  { id: 'release-status', label: 'Release status' },
+];
+---
+
+<PublicationLayout
+  category="News"
+  type="Product"
+  title="nomue local MCP release candidate is available on npm"
+  description="The public @licklider/nomue-mcp package lets MCP clients call the exact Release 1 Welch Record verifier over local stdio."
+  published="September 2, 2026"
+  status="Public local MCP release candidate — npm rc 0.1.0-rc.0; official MCP Registry"
+  toc={toc}
+>
+  <section id="available">
+    <h2>What is available</h2>
+    <p>
+      <a href={MCP_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer"><code>{MCP_RELEASE.package}@{MCP_RELEASE.version}</code></a>
+      {' '}is publicly available on npm and registered as{' '}
+      <a href={MCP_RELEASE.registryUrl} target="_blank" rel="noopener noreferrer"><code>{MCP_RELEASE.registryName}</code></a>
+      {' '}in the official MCP Registry. It is a local stdio server with one tool,
+      <code>{MCP_RELEASE.tool}</code>.
+    </p>
+    <p>
+      The server is a thin adapter around the exact{' '}
+      <code>{MCP_RELEASE.verifierPackage}@{MCP_RELEASE.verifierVersion}</code> npm
+      package. It does not reimplement statistical or Protocol semantics and does not
+      add a blanket verification verdict.
+    </p>
+  </section>
+
+  <section id="configure">
+    <h2>Add it to an MCP client</h2>
+    <pre><code>{NOMUE_MCP_CLIENT_CONFIG}</code></pre>
+    <p>Or start the same exact package directly:</p>
+    <pre><code>{NOMUE_MCP_NPX_COMMAND}</code></pre>
+    <p>
+      The first <code>npx</code> launch may download npm dependencies. No account, API
+      key, environment variable, or Licklider-hosted URL is required. Client
+      configurations pin the exact release-candidate version rather than relying on a
+      mutable npm tag.
+    </p>
+  </section>
+
+  <section id="tool">
+    <h2>One bounded Welch Record tool</h2>
+    <p>{NOMUE_MCP_WHEN_TO_USE}</p>
+    <p>{NOMUE_MCP_WHEN_NOT_TO_USE}</p>
+    <pre><code>{`{"record_json":"{...complete nomue Record JSON text...}"}`}</code></pre>
+    <p>
+      <code>record_json</code> contains the complete Record as JSON text, not a parsed
+      object. Preserving the original text keeps strict parsing, duplicate-member
+      rejection, digest checks, and resource limits inside the verifier.
+    </p>
+    <p>
+      The first MCP text block preserves the verifier stdout from that invocation.
+      Structured content carries the same parsed verifier artifact, while metadata
+      preserves the verifier exit code and input/output digests. Transport success does
+      not mean that every scoped check passed, and passing scoped checks do not establish
+      overall scientific validity.
+    </p>
+  </section>
+
+  <section id="replay">
+    <h2>Replay independently with the npm verifier</h2>
+    <p>Save the same Record JSON text as <code>record.json</code>, then run:</p>
+    <pre><code>{NOMUE_MCP_REPLAY_COMMAND}</code></pre>
+    <p>
+      Every substantive artifact field is independently reproducible. Separate verifier
+      invocations intentionally create different top-level <code>generated_at</code>
+      timestamps, so cross-invocation byte identity is not claimed. Byte preservation is
+      exact within the MCP invocation.
+    </p>
+  </section>
+
+  <section id="local-boundary">
+    <h2>Local-only Phase 1 boundary</h2>
+    <p>
+      After npm installs the package and its dependencies, verification runs locally and
+      does not call a Licklider service. Release CI tests the stdio package path on
+      Linux, macOS, and Windows with Node.js 20 and 22. It does not expose HTTP,
+      authentication, logging, rate limiting, an SLA, or a management interface.
+    </p>
+  </section>
+
+  <section id="release-status">
+    <h2>Release status and exact scope</h2>
+    <div class="notice">
+      <p>
+        This is version <code>{MCP_RELEASE.version}</code>, published through the npm{' '}
+        <code>{MCP_RELEASE.npmDistTag}</code> channel. npm also created
+        <code>latest</code> on this first package publication; that registry behavior is
+        not a stable-release claim. The exact version remains pinned in every client
+        example.
+      </p>
+    </div>
+    <p>
+      The release candidate does not expand the Protocol support target. It verifies
+      existing nomue Release 1 Welch Records only. Paired-t, Wilcoxon, Mann–Whitney,
+      raw-data calculation, method selection, source-data truth, causality, and overall
+      scientific correctness remain outside this tool's result.
+    </p>
+    <p>
+      See the <a href="/docs/mcp-verification/">MCP installation and result contract</a>{' '}
+      for the complete machine-readable boundary and replay instructions.
+    </p>
+  </section>
+</PublicationLayout>

@@ -66,7 +66,7 @@ const homeStructuredData = {
   description:
     'Licklider builds scientific verification infrastructure for AI research agents, starting with public, independently checkable Welch Record verification.',
   url: new URL('/', Astro.site).href,
-  dateModified: '2026-09-01',
+  dateModified: '2026-09-02',
   isPartOf: { '@id': new URL('/#website', Astro.site).href },
   about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
 };
@@ -287,10 +287,10 @@ const homeStructuredData = {
             <p><a href="/docs/record-verification/">Run the verifier →</a></p>
           </article>
           <article>
-            <p class="scope-label">Public source candidate</p>
-            <h3>Local MCP adapter</h3>
+            <p class="scope-label">Available now — release candidate</p>
+            <h3>Local MCP server</h3>
             <p>{MCP_PUBLIC_SOURCE}</p>
-            <p><a href={MCP_RELEASE.repositoryUrl} target="_blank" rel="noopener noreferrer">View MCP source ↗</a></p>
+            <p><a href="/docs/mcp-verification/">Install and use →</a> · <a href={MCP_RELEASE.registryUrl} target="_blank" rel="noopener noreferrer">Official Registry ↗</a> · <a href={MCP_RELEASE.repositoryUrl} target="_blank" rel="noopener noreferrer">Source ↗</a></p>
           </article>
           <article>
             <p class="scope-label">Next product release</p>

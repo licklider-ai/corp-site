@@ -7,6 +7,12 @@ import {
   METHOD_IDENTITY_FINDING,
   NOMUE_CLI_USAGE,
   NOMUE_GLOBAL_INSTALL_COMMAND,
+  NOMUE_MCP_CLIENT_CONFIG,
+  NOMUE_MCP_NPX_COMMAND,
+  NOMUE_MCP_REPLAY_COMMAND,
+  NOMUE_MCP_WHEN_NOT_TO_USE,
+  NOMUE_MCP_WHEN_TO_USE,
+  NOMUE_MCP_WINDOWS_CONFIG,
   NOMUE_NPX_COMMAND,
   NOMUE_POSITION,
   NOMUE_VERIFY_COMMAND,
@@ -62,14 +68,14 @@ export const AGENT_DOCS: AgentDoc[] = [
     description:
       'A shared model for asking a separate capability to check one bounded part of AI-assisted research.',
     status: 'Conceptual guide for selecting a verification capability',
-    updated: 'September 1, 2026',
+    updated: 'September 2, 2026',
     llmSummary: [
       'A verification call asks a separate capability to check one bounded property.',
       'Use it when the generating model should not be the sole judge of its own output.',
       'Clarify material scientific facts that are unresolved; do not infer them from data shape or prose.',
       'Stop at unsupported or inadmissible scope; do not silently substitute a nearby method.',
       'Return the scoped result together with evidence, versions, next action, and explicit non-claims.',
-      'The public implementation available today includes the npm-published Release 1 verifier and Protocol. A local MCP source candidate is public; its npm publication and clean-client checks are still pending.',
+      'The public implementation available today includes the npm-published Release 1 verifier, the Protocol, and an npm-published local stdio MCP server registered in the official MCP Registry.',
     ],
     sections: [
       {
@@ -149,7 +155,7 @@ export const AGENT_DOCS: AgentDoc[] = [
     description:
       'When and how to use the public local verifier for the exact Release 1 Public Draft support target.',
     status: 'Public npm release candidate — @licklider/nomue-verifier 0.2.1-rc.0',
-    updated: 'September 1, 2026',
+    updated: 'September 2, 2026',
     llmSummary: [
       `Run the public verifier locally for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
       `The exact Release 1 bundle is ${PUBLIC_RELEASE.bundle}.`,
@@ -194,7 +200,7 @@ export const AGENT_DOCS: AgentDoc[] = [
           'The requested method is paired t, Wilcoxon, Mann–Whitney, or another method outside the exact Release 1 bundle.',
           'You need the verifier to determine whether the source data or researcher declarations are true.',
           'You need production attestation, manuscript acceptance, or an overall scientific verdict.',
-          'You need a public hosted nomue API or MCP endpoint; none is offered on this site today.',
+          'You need a hosted nomue API or remote HTTP MCP endpoint; the public MCP release candidate is local stdio only.',
         ],
       },
       {
@@ -264,6 +270,140 @@ ${NOMUE_NPX_COMMAND}`,
             label: 'Interpretation bundle registry',
             href: 'https://github.com/licklider-ai/nomue-protocol/blob/main/registries/interpretation-bundles.yaml',
           },
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'mcp-verification',
+    title: 'Use nomue Welch verification over MCP',
+    description:
+      'Install the public local stdio server, decide when its one Welch Record tool applies, and replay the result with the independent verifier.',
+    status: 'Public local MCP release candidate — @licklider/nomue-mcp 0.1.0-rc.0',
+    updated: 'September 2, 2026',
+    llmSummary: [
+      `Start the exact release candidate with ${NOMUE_MCP_NPX_COMMAND}.`,
+      `The sole tool is ${MCP_RELEASE.tool}; its input field record_json contains complete Record JSON text, not a parsed object.`,
+      NOMUE_MCP_WHEN_TO_USE,
+      NOMUE_MCP_WHEN_NOT_TO_USE,
+      `The adapter delegates verification semantics to the exact ${MCP_RELEASE.verifierPackage}@${MCP_RELEASE.verifierVersion} package.`,
+      'The first MCP text block preserves the pinned verifier stdout from the same invocation, while structuredContent carries the same parsed artifact without a new verdict.',
+      'Read scoped results, check versions, reason codes, guarantee_boundary, and next actions; never emit a blanket VERIFIED claim.',
+      'This release candidate is local stdio only. It has no account, API key, hosted HTTP endpoint, or runtime call to a Licklider service.',
+    ],
+    sections: [
+      {
+        id: 'current-support',
+        title: 'Current public MCP surface',
+        paragraphs: [MCP_RELEASE_BOUNDARY],
+        bullets: [
+          `Package: ${MCP_RELEASE.package}@${MCP_RELEASE.version}, published under the ${MCP_RELEASE.npmDistTag} dist-tag.`,
+          `Official MCP Registry name: ${MCP_RELEASE.registryName}.`,
+          `Transport: local ${MCP_RELEASE.transport}; no remote URL or environment variables.`,
+          `Tool: ${MCP_RELEASE.tool}.`,
+          `Verifier dependency: exact ${MCP_RELEASE.verifierPackage}@${MCP_RELEASE.verifierVersion}.`,
+          `Tested package path: ${MCP_RELEASE.testedOperatingSystems.join(', ')} with Node.js ${MCP_RELEASE.testedNodeVersions.join(' and ')}.`,
+          'npm also created the latest dist-tag on the package\'s first publication. That registry behavior is not a stable-release claim; client configurations pin 0.1.0-rc.0 exactly.',
+        ],
+      },
+      {
+        id: 'configure',
+        title: 'Add the server to an MCP client',
+        paragraphs: [
+          'Use the exact prerelease version in the client configuration so later npm tag changes cannot silently change the installed server.',
+        ],
+        code: NOMUE_MCP_CLIENT_CONFIG,
+        example: true,
+        note:
+          'The first npx launch may download the package and its dependencies. No account, API key, URL, or environment variable is required. After installation, verification itself is local.',
+      },
+      {
+        id: 'windows',
+        title: 'Windows command-shim fallback',
+        paragraphs: [
+          'Use this equivalent configuration only when the MCP client does not resolve the npm command shim directly:',
+        ],
+        code: NOMUE_MCP_WINDOWS_CONFIG,
+        example: true,
+      },
+      {
+        id: 'when-to-use',
+        title: 'When to use the MCP tool',
+        paragraphs: [NOMUE_MCP_WHEN_TO_USE],
+        bullets: [
+          'You already have the complete Record as JSON text.',
+          'The Record declares the exact public Release 1 interpretation bundle.',
+          'You need the same scoped report and refusal semantics as the independently runnable npm verifier.',
+          'You will preserve the exact exit code and inspect the machine-readable artifact rather than infer a verdict from transport success.',
+        ],
+      },
+      {
+        id: 'when-not-to-use',
+        title: 'When not to use the MCP tool',
+        paragraphs: [NOMUE_MCP_WHEN_NOT_TO_USE],
+        bullets: [
+          'Do not pass only sample arrays, a spreadsheet, or prose and expect the tool to create a Record.',
+          'Do not silently substitute Welch for paired or rank-based procedures.',
+          'Do not treat a transport-successful tool call as evidence that every scoped check passed.',
+          'Do not treat every passing scoped check as overall scientific validity.',
+        ],
+      },
+      {
+        id: 'input',
+        title: 'Pass complete Record JSON text',
+        code: '{"record_json":"{...complete nomue Record JSON text...}"}',
+        example: true,
+        note:
+          'record_json is JSON text, not a parsed object. Preserve the original text so strict parsing, duplicate-member rejection, digest checks, and resource limits remain inside the verifier.',
+      },
+      {
+        id: 'result',
+        title: 'Result and non-claim contract',
+        bullets: [
+          'The first MCP text content block is the exact stdout emitted by the pinned verifier in that same invocation, including its final newline.',
+          'structuredContent contains the same parsed verifier artifact; the adapter does not add a success verdict.',
+          'MCP metadata carries the verifier exit code, exact input and stdout SHA-256 digests, verifier package identity, and the verifier-generated generated_at field.',
+          'Codes 2 through 5 remain normal machine-readable verifier artifacts; only an adapter failure is an MCP tool error.',
+          'There is no blanket VERIFIED field. Read every scoped result, its version and reason codes, next actions, and guarantee_boundary.',
+        ],
+      },
+      {
+        id: 'exit-codes',
+        title: 'Preserved verifier exit codes',
+        table: {
+          headers: ['Code', 'Meaning'],
+          rows: [
+            ['0', 'A report exists and every applicable scoped check outcome is pass.'],
+            ['2', 'A scoped check failed, or parsing or canonicalization was refused.'],
+            ['3', 'Routing failed or the declared bundle is unsupported; no report exists.'],
+            ['4', 'The verifier refused safely because a resource limit was reached.'],
+            ['5', 'Internal verifier refusal.'],
+          ],
+        },
+        note:
+          'Exit codes are routing and process signals, not overall scientific verdicts.',
+      },
+      {
+        id: 'replay',
+        title: 'Replay independently with the verifier',
+        paragraphs: [
+          'Save the same record_json text as record.json and run the exact verifier dependency:',
+        ],
+        code: NOMUE_MCP_REPLAY_COMMAND,
+        example: true,
+        note:
+          'The substantive artifact is reproducible field-for-field. Each separate verifier invocation intentionally creates a new top-level generated_at timestamp, so two independent invocations are not honestly byte-identical; byte preservation is exact within the MCP invocation.',
+      },
+      {
+        id: 'authority',
+        title: 'Package, registry, and source authority',
+        links: [
+          { label: 'nomue MCP on npm', href: MCP_RELEASE.npmUrl },
+          { label: 'Official MCP Registry entry', href: MCP_RELEASE.registryUrl },
+          { label: 'Public nomue MCP source', href: MCP_RELEASE.repositoryUrl },
+          { label: 'Cross-platform release CI', href: MCP_RELEASE.ciUrl },
+          { label: 'Official Registry publication evidence', href: MCP_RELEASE.registryCiUrl },
+          { label: 'Independent verifier guide', href: '/docs/record-verification/' },
         ],
       },
     ],
@@ -466,11 +606,12 @@ ${NOMUE_NPX_COMMAND}`,
     description:
       'Runnable verifier examples and selection examples showing execute, clarify, unsupported, and bounded interpretation behavior.',
     status: 'Public examples — executable examples use the Release 1 verifier fixtures',
-    updated: 'September 1, 2026',
+    updated: 'September 2, 2026',
     llmSummary: [
-      'The valid and mismatch fixture commands use a cloned source checkout; ordinary local Records can be checked with the npm-installed nomue command or through npx.',
+      'The valid and mismatch fixture commands use a cloned source checkout; ordinary local Records can be checked with the npm-installed nomue command, through npx, or with the public local MCP release candidate.',
       'A valid fixture should produce exit code 0 and scoped JSON results; do not summarize it as overall research verification.',
       'A mismatch should produce exit code 2 and preserve the failed scoped check.',
+      `For MCP, start ${MCP_RELEASE.package}@${MCP_RELEASE.version} and call ${MCP_RELEASE.tool} with the complete Record in record_json.`,
       'If experimental-unit meaning is unresolved, request clarification instead of inferring independence.',
       'Paired-t verification is outside Release 1; report unsupported scope and do not substitute Welch.',
     ],
@@ -505,8 +646,19 @@ ${NOMUE_NPX_COMMAND}`,
           'Expected routing result: exit 2 and a JSON report containing the failed scoped check. The mismatch is not an overall scientific conclusion.',
       },
       {
+        id: 'mcp-valid-record',
+        title: 'Example 3: verify the same Record through local MCP',
+        paragraphs: [
+          `Configure ${MCP_RELEASE.package}@${MCP_RELEASE.version}, then call ${MCP_RELEASE.tool} with the complete Record JSON text in record_json.`,
+        ],
+        code: NOMUE_MCP_CLIENT_CONFIG,
+        example: true,
+        note:
+          'Expected routing result: a verifier artifact with its exit code preserved in MCP metadata. Transport success is not a blanket verification result.',
+      },
+      {
         id: 'missing-declaration',
-        title: 'Example 3: ask rather than infer',
+        title: 'Example 4: ask rather than infer',
         paragraphs: [
           'A research agent receives two columns of measurements, but it cannot establish whether the observations are independent biological units or repeated technical measurements.',
         ],
@@ -519,7 +671,7 @@ ${NOMUE_NPX_COMMAND}`,
       },
       {
         id: 'unsupported-method',
-        title: 'Example 4: do not substitute a nearby method',
+        title: 'Example 5: do not substitute a nearby method',
         paragraphs: [
           'A request asks for paired-t verification. Paired t is outside the public Release 1 support target.',
         ],
@@ -535,11 +687,11 @@ ${NOMUE_NPX_COMMAND}`,
     title: 'Current capability and boundaries',
     description:
       'What can be used now, what comes next, how the platform expands, and how to interpret a successful result.',
-    status: 'Current public capability map — September 1, 2026',
-    updated: 'September 1, 2026',
+    status: 'Current public capability map — September 2, 2026',
+    updated: 'September 2, 2026',
     llmSummary: [
       `Run the public verifier locally for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
-      'The Release 1 verifier is public on npm. A local MCP source candidate is public, while one-line MCP installation and hosted product access are not yet open.',
+      'The Release 1 verifier and local stdio MCP server are public on npm. The MCP release candidate is also registered in the official MCP Registry; hosted product access is not open.',
       'Paired t is open Release 2 RFC work, not current Release 1 support.',
       'Verification calls across AI research describe the platform category; each additional capability must be evidenced and released separately.',
       'A supported verification does not establish source-data truth, overall research correctness, causal truth, or publication acceptance.',
@@ -556,16 +708,21 @@ ${NOMUE_NPX_COMMAND}`,
         ],
       },
       {
-        id: 'mcp-candidate',
-        title: 'Public MCP source candidate',
+        id: 'mcp-release-candidate',
+        title: 'Public local MCP release candidate',
         paragraphs: [MCP_RELEASE_BOUNDARY],
         bullets: [
-          `Candidate: ${MCP_RELEASE.package} ${MCP_RELEASE.version}.`,
+          `Package: ${MCP_RELEASE.package}@${MCP_RELEASE.version}.`,
+          `Start command: ${NOMUE_MCP_NPX_COMMAND}.`,
           `Transport: ${MCP_RELEASE.transport}.`,
           `Tool: ${MCP_RELEASE.tool}.`,
+          `Official MCP Registry name: ${MCP_RELEASE.registryName}.`,
           `Passing package-path CI: ${MCP_RELEASE.testedOperatingSystems.join(', ')} with Node.js ${MCP_RELEASE.testedNodeVersions.join(' and ')}.`,
         ],
         links: [
+          { label: 'Install and use nomue MCP', href: '/docs/mcp-verification/' },
+          { label: 'nomue MCP on npm', href: MCP_RELEASE.npmUrl },
+          { label: 'Official MCP Registry entry', href: MCP_RELEASE.registryUrl },
           { label: 'Public MCP source', href: MCP_RELEASE.repositoryUrl },
           { label: 'Passing CI run', href: MCP_RELEASE.ciUrl },
         ],
@@ -638,6 +795,22 @@ export const AGENT_EXAMPLES = [
     interpretation:
       'Preserve the failed scoped check. Do not rewrite it as a broad scientific conclusion.',
     source: PUBLIC_RELEASE.verifierUrl,
+  },
+  {
+    id: 'release1-valid-record-over-mcp',
+    kind: 'executable_mcp_tool',
+    current_availability: 'public_release_candidate',
+    capability: 'nomue Release 1 Record verification over local MCP',
+    capability_version: MCP_RELEASE.version,
+    server_configuration: NOMUE_MCP_CLIENT_CONFIG,
+    tool: MCP_RELEASE.tool,
+    input: {
+      record_json: '{...complete nomue Record JSON text...}',
+    },
+    expected_routing_result: 'verifier_artifact_with_preserved_exit_code',
+    interpretation:
+      'Inspect the scoped verifier artifact. MCP transport success is not an overall scientific verdict.',
+    source: MCP_RELEASE.repositoryUrl,
   },
   {
     id: 'missing-experimental-unit-declaration',
@@ -715,7 +888,7 @@ export function renderDocMarkdown(doc: AgentDoc): string {
 
 export const DOCS_INDEX_MARKDOWN = `# Licklider agent-readable documentation
 
-> Run the public verifier, decide when a verification call applies, and interpret the returned evidence from one versioned documentation set.
+> Run the public verifier directly or through local MCP, decide when a verification call applies, and interpret the returned evidence from one versioned documentation set.
 
 ${NOMUE_POSITION}
 
@@ -723,6 +896,7 @@ ${NOMUE_POSITION}
 
 - ${PUBLIC_CAPABILITY}
 - [Run the verifier](https://www.licklider.ai/docs/record-verification.md)
+- [Use nomue from an MCP client](https://www.licklider.ai/docs/mcp-verification.md): exact local stdio package, configuration, tool-selection boundary, result contract, and independent replay
 - [Inspect the exact CLI](https://www.licklider.ai/docs/cli-reference.md)
 - [Use machine-readable examples](https://www.licklider.ai/docs/examples.json)
 - ${PUBLIC_TRUST_EVIDENCE}

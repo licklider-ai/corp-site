@@ -43,25 +43,52 @@ export const PRODUCT_CAPABILITY =
   'nomue\'s Welch verification is implemented: it keeps the agent from guessing required scientific facts, follows the supported decision path, runs fixed numerical checks, and returns structured outcomes and next actions.';
 
 export const PRODUCT_RELEASE_BOUNDARY =
-  'Use the npm-published Release 1 verifier, the Protocol, and their machine-readable documentation today. The next product release adds the agent-facing runtime: a thin interface that gathers the required research conditions, routes clarification or refusal, runs the registered Welch path, and returns structured evidence and next actions.';
+  'Use the npm-published Release 1 verifier, the local stdio MCP server, the Protocol, and their machine-readable documentation today. The next managed product release adds agent-facing intake and orchestration: it gathers required research conditions, routes clarification or refusal, runs the registered Welch path, and returns structured evidence and next actions.';
 
 export const MCP_RELEASE = {
   package: '@licklider/nomue-mcp',
   version: '0.1.0-rc.0',
-  maturity: 'public source candidate',
-  transport: 'local stdio',
+  maturity: 'public npm release candidate',
+  npmDistTag: 'rc',
+  npmUrl: 'https://www.npmjs.com/package/@licklider/nomue-mcp/v/0.1.0-rc.0',
+  transport: 'stdio',
   tool: 'verify_nomue_welch_record',
+  registryName: 'io.github.licklider-ai/nomue-mcp',
+  registryUrl:
+    'https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.licklider-ai%2Fnomue-mcp',
+  verifierPackage: '@licklider/nomue-verifier',
+  verifierVersion: '0.2.1-rc.0',
   repositoryUrl: 'https://github.com/licklider-ai/nomue-mcp',
-  ciUrl: 'https://github.com/licklider-ai/nomue-mcp/actions/runs/33509445925',
+  ciUrl: 'https://github.com/licklider-ai/nomue-mcp/actions/runs/33575925536',
+  registryCiUrl:
+    'https://github.com/licklider-ai/nomue-mcp/actions/runs/33577994163',
   testedOperatingSystems: ['Linux', 'macOS', 'Windows'],
   testedNodeVersions: ['20', '22'],
 } as const;
 
 export const MCP_PUBLIC_SOURCE =
-  `The ${MCP_RELEASE.package} ${MCP_RELEASE.version} source candidate is public. It exposes one ${MCP_RELEASE.transport} tool for local Release 1 Welch Record verification, delegates to the exact published verifier, and has passing package-path CI across Linux, macOS, and Windows.`;
+  `The exact ${MCP_RELEASE.package}@${MCP_RELEASE.version} release candidate is public on npm and in the official MCP Registry. It exposes one local ${MCP_RELEASE.transport} tool for Release 1 Welch Record verification, delegates to ${MCP_RELEASE.verifierPackage}@${MCP_RELEASE.verifierVersion}, and has passing package-path CI across Linux, macOS, and Windows.`;
 
 export const MCP_RELEASE_BOUNDARY =
-  `${MCP_PUBLIC_SOURCE} npm publication and clean-client checks are the remaining steps before one-line MCP installation is presented as publicly available.`;
+  `${MCP_PUBLIC_SOURCE} It requires no account, API key, environment variable, or Licklider-hosted service. The first npx launch may download npm dependencies; after installation, verification runs locally. This release candidate supports stdio only: it is not a hosted HTTP endpoint and does not add paired-t, Wilcoxon, Mann–Whitney, method selection, raw-sample calculation, or an overall scientific verdict.`;
+
+export const NOMUE_MCP_NPX_COMMAND =
+  `npx --yes ${MCP_RELEASE.package}@${MCP_RELEASE.version}`;
+
+export const NOMUE_MCP_CLIENT_CONFIG =
+  `{"mcpServers":{"nomue":{"command":"npx","args":["--yes","${MCP_RELEASE.package}@${MCP_RELEASE.version}"]}}}`;
+
+export const NOMUE_MCP_WINDOWS_CONFIG =
+  `{"mcpServers":{"nomue":{"command":"cmd.exe","args":["/d","/s","/c","npx --yes ${MCP_RELEASE.package}@${MCP_RELEASE.version}"]}}}`;
+
+export const NOMUE_MCP_REPLAY_COMMAND =
+  `npx --yes ${MCP_RELEASE.verifierPackage}@${MCP_RELEASE.verifierVersion} verify ./record.json --format json-compact`;
+
+export const NOMUE_MCP_WHEN_TO_USE =
+  `Use when a Record declares ${PUBLIC_RELEASE.bundle}, represents independent two-group continuous outcomes using the two-sided Welch two-sample t procedure, and needs scoped structural, digest, admissibility, computability, or recomputation checks.`;
+
+export const NOMUE_MCP_WHEN_NOT_TO_USE =
+  'Do not use to calculate a Welch test from raw samples, select a method, judge scientific truth or causality, verify paired-t, Wilcoxon, Mann–Whitney, or interpret an unsupported bundle.';
 
 export const NOMUE_GLOBAL_INSTALL_COMMAND =
   `npm install --global ${PUBLIC_RELEASE.npmPackage}`;

@@ -173,21 +173,23 @@ An agent-facing documentation change is not ready until every applicable answer 
   separate?
 - Is a passing scoped result prevented from becoming an overall scientific verdict?
 - Does each executable example point to a current public artifact?
-- Is every conceptual example identified as non-executable when no public endpoint exists?
+- Is every conceptual example identified as non-executable when no matching public surface exists?
 - Do the HTML, Markdown, `llms.txt`, and JSON surfaces agree?
 - Do public evidence links support the claims around them?
 - Does the site build produce every advertised machine-readable URL?
 
-## 11. Initial public documentation boundary
+## 11. Current public documentation boundary
 
-The September 2026 initial surface includes:
+The September 2026 public surface includes:
 
 - the verification-call concept;
 - use of the public Release 1 local verifier;
 - explanatory decision vocabulary;
+- installation, selection, result, and independent-replay guidance for the public local
+  stdio MCP release candidate;
 - executable verifier examples and product-selection examples; and
 - current limits and non-claims.
 
-It does not publish an API, MCP endpoint, or installable Agent Skill. Those surfaces are
-added only after their exact public product identity, version, availability, and
-authority are established.
+It does not publish a hosted API, remote HTTP MCP endpoint, or installable Agent Skill.
+Those surfaces are added only after their exact public product identity, version,
+availability, and authority are established.

@@ -3,9 +3,9 @@ import { AGENT_EXAMPLES } from '../../data/agent-docs';
 
 const payload = {
   schema_version: 'licklider.agent-examples.v1',
-  published: '2026-09-01',
+  published: '2026-09-02',
   authority_note:
-    'Executable examples are derived from the public verifier fixtures. Selection-boundary examples explain product behavior and are not public API requests.',
+    'Executable examples use the public verifier or local stdio MCP release candidate. Selection-boundary examples explain product behavior and are not hosted API requests.',
   examples: AGENT_EXAMPLES,
 };
 

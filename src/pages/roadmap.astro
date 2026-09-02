@@ -19,7 +19,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 
 const toc: TocItem[] = [
   { id: 'now', label: 'Available now' },
-  { id: 'candidate', label: 'MCP candidate' },
+  { id: 'candidate', label: 'Local MCP release' },
   { id: 'next', label: 'Next releases' },
   { id: 'platform', label: 'Platform evolution' },
   { id: 'methods', label: 'Method expansion' },
@@ -33,7 +33,7 @@ const roadmapStructuredData = {
   description:
     'Current, next, and planned expansion of nomue from Welch verification into agent-native scientific verification infrastructure.',
   url: new URL('/roadmap/', Astro.site).href,
-  dateModified: '2026-09-01',
+  dateModified: '2026-09-02',
   isPartOf: { '@id': new URL('/#website', Astro.site).href },
   about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
 };
@@ -50,7 +50,7 @@ const roadmapStructuredData = {
     <h1>From one proved verification call to shared research infrastructure</h1>
     <p class="standfirst">{ROADMAP_POSITION}</p>
     <p class="roadmap-rule">
-      The stages below separate public artifacts, source candidates, next release work,
+      The stages below separate public artifacts, release candidates, next release work,
       and adopted plans. They describe sequence and scope rather than promised dates.
     </p>
   </header>
@@ -79,17 +79,21 @@ const roadmapStructuredData = {
   </section>
 
   <section id="candidate" class="section">
-    <p class="stage-label">Public source candidate</p>
-    <h2>A local MCP path is built and publicly inspectable</h2>
+    <p class="stage-label">Available now — release candidate</p>
+    <h2>Agents can call the local Welch verifier over MCP</h2>
     <p>{MCP_RELEASE_BOUNDARY}</p>
-    <div class="signal-row" aria-label="MCP candidate facts">
+    <div class="signal-row" aria-label="MCP release candidate facts">
       <span>{MCP_RELEASE.version}</span>
       <span>{MCP_RELEASE.transport}</span>
       <span>one versioned tool</span>
       <span>3 OS × 2 Node versions</span>
     </div>
     <p>
-      <a href={MCP_RELEASE.repositoryUrl} target="_blank" rel="noopener noreferrer">View MCP source ↗</a>
+      <a href="/docs/mcp-verification/">Install and use →</a>
+      {' · '}
+      <a href={MCP_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">npm ↗</a>
+      {' · '}
+      <a href={MCP_RELEASE.registryUrl} target="_blank" rel="noopener noreferrer">Official Registry ↗</a>
       {' · '}
       <a href={MCP_RELEASE.ciUrl} target="_blank" rel="noopener noreferrer">Passing CI run ↗</a>
     </p>
@@ -97,10 +101,10 @@ const roadmapStructuredData = {
 
   <section id="next" class="section">
     <p class="stage-label">Next release work</p>
-    <h2>Bring verification into the agent workflow, then widen the evidence</h2>
+    <h2>Add managed orchestration, then widen the evidence</h2>
     <div class="status-list">
       <article>
-        <h3>Agent-callable Welch capability</h3>
+        <h3>Managed agent-facing Welch workflow</h3>
         <p>{PRODUCT_RELEASE_BOUNDARY}</p>
       </article>
       <article>
