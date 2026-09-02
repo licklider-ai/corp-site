@@ -8,6 +8,7 @@ const toc = [
   { id: 'critical-values', label: 'Selecting critical values' },
   { id: 'controlled-execution', label: 'One controlled execution candidate' },
   { id: 'evidence', label: 'What the review tested' },
+  { id: 'review-readiness', label: 'Final review readiness' },
   { id: 'scope', label: 'What remains open' },
   { id: 'public-evidence', label: 'Public evidence' },
 ];
@@ -17,27 +18,33 @@ const toc = [
   category="Engineering"
   type="Implementation note"
   title="From numerical bounds to a controlled paired-t execution candidate"
-  description="We closed a candidate paired-t numerical contract and selected one tightly controlled Node, V8, and Linux execution environment, with independent review and no claim of Protocol support."
+  description="We assembled and independently reviewed the final decision package for the paired-t candidate while leaving Protocol ratification, issuance, and support open."
   published="September 1, 2026"
   updated="September 2, 2026"
-  status="Independently reviewed candidate numerical and execution closure — not ratified Protocol support"
+  status="Independently reviewed final Release 2 candidate review-readiness — not ratified, issued, or supported"
   toc={toc}
 >
   <section id="current-status">
     <h2>Current status</h2>
     <div class="notice">
       <p>
-        The proposed paired-t capability now has an independently reviewed candidate
-        numerical contract, one executable full-trace predicate, and one tightly
-        controlled execution candidate. Together they connect paired observations to a
-        p-value and fixed-95% confidence interval, then test whether that exact
-        calculation can be reproduced under one pinned runtime build.
+        The proposed paired-t capability now has independently reviewed candidate
+        decisions for its numerical contract, full execution trace, controlled runtime,
+        and final reason-code inventory. The four groups have been assembled into one
+        final R2-D5 review-readiness package, and its exact-head independent review
+        returned GO with no findings.
       </p>
       <p>
-        This is a candidate engineering closure, not a ratified Protocol capability.
-        The selected environment is one exact Node, V8, Linux, and executable-hash
-        tuple. It is not evidence of broad cross-platform support, and no paired-t
-        identifier, Public Check, schema, or bundle has been issued.
+        This means the complete candidate can be considered by the Steward after the
+        public review window. It is not a ratified Protocol capability. No paired-t
+        identifier, Public Check, schema, or bundle has been issued, and the one selected
+        Node, V8, Linux, and executable-hash tuple is not broad cross-platform support.
+      </p>
+      <p>
+        A separate exact-head review also found the proposed Requirement namespaces,
+        identifiers, schemas, fixtures, dispatch rules, and public surfaces internally
+        consistent as decision-preparation material. Those structural candidates remain
+        unissued and have not yet been adopted.
       </p>
     </div>
   </section>
@@ -56,6 +63,13 @@ const toc = [
       not useful as a reproducibility claim until its runtime, executable, permissions,
       and evaluated code are also identified. The selected candidate makes that boundary
       explicit and rejects execution outside it.
+    </p>
+    <p>
+      The latest step closes the remaining candidate decision inventory and checks the
+      bindings across all four groups. Instead of asking readers or the Steward to
+      assemble separate review records, the repository now provides one pinned package
+      that states the proposed decisions, evidence, review results, and remaining
+      authority boundary together.
     </p>
   </section>
 
@@ -142,21 +156,45 @@ const toc = [
       mutations attempted to alter the environment, evidence, candidate matrix,
       maturity state, and authority boundary. All were rejected deterministically.
     </p>
+    <p>
+      Group 4 then closed the candidate inventory that explains how failed structural,
+      relationship, numerical, and execution checks would be reported. Its selection and
+      closure both received independent GO dispositions with no findings. The names are
+      still candidates: they have not become issued Public Check or refusal-code
+      identities.
+    </p>
+  </section>
+
+  <section id="review-readiness">
+    <h2>Final review readiness</h2>
+    <p>
+      The final R2-D5 package binds the preserved Groups 1 through 4 closures to the
+      selected numerical, boundary, resource, execution, and reporting evidence. Its
+      independent exact-head review returned GO with no BLOCKER, SHOULD-FIX, or
+      NICE-TO-HAVE finding.
+    </p>
+    <p>
+      Review readiness is a concrete engineering milestone, but it is not ratification.
+      It means the candidate decisions and their evidence can now be evaluated as one
+      coherent unit when the public review window permits a Steward decision. It does not
+      make the candidate authoritative or available to users as paired-t support.
+    </p>
   </section>
 
   <section id="scope">
     <h2>What remains open</h2>
     <p>
-      The next bounded decision is the final reason-code inventory. The authoritative
-      execution allowlist and supported-execution conditions are also still unissued.
-      So are the supported input domain, runtime activation, final Public Check and
-      bundle registration, and permanent paired-t identifiers.
+      The remaining step is the formal Steward disposition after the public review
+      window reaches its earliest decision time. Until then, the reviewed package does
+      not create an authoritative supported domain, execution allowlist, runtime
+      activation rule, final reason-code set, Public Check, bundle, or permanent
+      paired-t identifier.
     </p>
     <p>
-      The numerical contract is not formally frozen. Release 2 D5 is not complete,
-      Release 2 has not been published, and public review issue #25 remains open. The
-      current result is independently reviewed candidate numerical and execution
-      closure—not user-facing paired-t support.
+      The numerical contract is not formally frozen. Release 2 D2 through D5 are not
+      adopted, Release 2 has not been published, and public review issue #25 remains
+      open. The current result is final candidate review readiness—not user-facing
+      paired-t support.
     </p>
   </section>
 
@@ -186,6 +224,30 @@ const toc = [
       <li>
         <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/review-inputs/r2-d5-group-3-supported-execution-closure/REVIEW-RESULT.md" target="_blank" rel="noopener noreferrer">Group 3 closure review</a>{' '}
         — GO with no findings after 216 adversarial mutations
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/154" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #154</a>{' '}
+        — Group 4 candidate reason-code inventory closure
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/155" target="_blank" rel="noopener noreferrer">Group 4 closure review record</a>{' '}
+        — preserved independent GO with no findings
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/156" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #156</a>{' '}
+        — final R2-D5 review-readiness package
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/157" target="_blank" rel="noopener noreferrer">Final R2-D5 readiness review record</a>{' '}
+        — preserved exact-head GO with no findings
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/158" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #158</a>{' '}
+        — D2-D4 structural candidate review protocol
+      </li>
+      <li>
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/159" target="_blank" rel="noopener noreferrer">D2-D4 structural review record</a>{' '}
+        — GO for later decision preparation, with one nice-to-have hardening note
       </li>
       <li>
         <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">Release 2 public review issue #25</a>{' '}
