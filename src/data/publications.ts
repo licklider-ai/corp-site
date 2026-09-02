@@ -52,12 +52,12 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Implementation note',
     date: 'September 1, 2026',
     sortKey: '2026-09-01',
-    title: 'Bounding numerical error from paired observations to p-values',
+    title: 'From numerical bounds to a controlled paired-t execution candidate',
     summary:
-      'We closed reviewed error ledgers for paired arithmetic and Student-t p-values, then selected 200 critical values for candidate confidence-interval work.',
+      'We closed a candidate paired-t numerical contract and selected one controlled Node, V8, and Linux execution environment, with independent review and no claim of Protocol support.',
     href: '/engineering/bounding-paired-t-arithmetic-and-pvalues/',
     status:
-      'Independently reviewed evidence — arithmetic and p-value error work closed; interval work continues',
+      'Independently reviewed candidate numerical and execution closure — not ratified Protocol support',
   },
   {
     category: 'Engineering',

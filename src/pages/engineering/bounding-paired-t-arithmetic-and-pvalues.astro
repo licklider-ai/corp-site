@@ -4,10 +4,10 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
 const toc = [
   { id: 'current-status', label: 'Current status' },
   { id: 'why-this-is-a-milestone', label: 'Why this is a milestone' },
-  { id: 'paired-arithmetic', label: 'Bounding the paired calculation' },
-  { id: 'p-values', label: 'Bounding the p-value calculation' },
-  { id: 'critical-values', label: 'Selecting critical values for interval work' },
-  { id: 'next-step', label: 'What happened next' },
+  { id: 'numerical-contract', label: 'Closing the numerical path' },
+  { id: 'critical-values', label: 'Selecting critical values' },
+  { id: 'controlled-execution', label: 'One controlled execution candidate' },
+  { id: 'evidence', label: 'What the review tested' },
   { id: 'scope', label: 'What remains open' },
   { id: 'public-evidence', label: 'Public evidence' },
 ];
@@ -16,26 +16,28 @@ const toc = [
 <PublicationLayout
   category="Engineering"
   type="Implementation note"
-  title="Bounding numerical error from paired observations to p-values"
-  description="We closed reviewed error ledgers for paired arithmetic and Student-t p-values, then selected 200 critical values for candidate confidence-interval work."
+  title="From numerical bounds to a controlled paired-t execution candidate"
+  description="We closed a candidate paired-t numerical contract and selected one tightly controlled Node, V8, and Linux execution environment, with independent review and no claim of Protocol support."
   published="September 1, 2026"
-  status="Reviewed candidate numerical closure — not a ratified contract or protocol support"
+  updated="September 2, 2026"
+  status="Independently reviewed candidate numerical and execution closure — not ratified Protocol support"
   toc={toc}
 >
   <section id="current-status">
     <h2>Current status</h2>
     <div class="notice">
       <p>
-        Two major numerical evidence requirements for the proposed paired-t capability
-        are now independently review-closed. The first bounds the paired-data arithmetic
-        from observations through the test statistic. The second bounds the Student-t
-        calculation from that statistic to the p-value.
+        The proposed paired-t capability now has an independently reviewed candidate
+        numerical contract, one executable full-trace predicate, and one tightly
+        controlled execution candidate. Together they connect paired observations to a
+        p-value and fixed-95% confidence interval, then test whether that exact
+        calculation can be reproduced under one pinned runtime build.
       </p>
       <p>
-        We also selected the exact bytes of 200 reviewed fixed-95% critical values for
-        subsequent candidate confidence-interval work. This remains non-authoritative
-        engineering work. It is not a ratified numerical contract, a supported
-        degrees-of-freedom range, or paired-t protocol support.
+        This is a candidate engineering closure, not a ratified Protocol capability.
+        The selected environment is one exact Node, V8, Linux, and executable-hash
+        tuple. It is not evidence of broad cross-platform support, and no paired-t
+        identifier, Public Check, schema, or bundle has been issued.
       </p>
     </div>
   </section>
@@ -43,103 +45,118 @@ const toc = [
   <section id="why-this-is-a-milestone">
     <h2>Why this is a milestone</h2>
     <p>
-      Earlier increments showed that individual tables, boundary cases, execution
-      traces, and proof methods worked. This step changes the maturity of the work: two
-      complete parts of the proposed numerical contract now have reviewed error rules,
-      reviewed execution links, and explicit refusal boundaries.
+      Earlier increments established the numerical pieces separately: the arithmetic
+      from paired observations to a test statistic, the Student-t tail calculation, the
+      fixed critical-value table, and confidence-interval endpoint arithmetic. The new
+      closure composes those pieces into one candidate contract and verifies the entire
+      returned trace rather than trusting disconnected outputs.
     </p>
     <p>
-      We call these parts ledgers because they answer different questions. Reproducing
-      the same binary64 operations shows which calculation ran. Bounding the distance
-      from the exact mathematical result shows how much numerical error that calculation
-      can have. One cannot substitute for the other.
-    </p>
-  </section>
-
-  <section id="paired-arithmetic">
-    <h2>Bounding the paired calculation</h2>
-    <p>
-      The paired-data path starts with explicit pairs and calculates their differences,
-      mean difference, sample variance, standard error, test statistic, and integer
-      degrees of freedom. Its operation order is fixed, and every binary64 primitive in
-      the reviewed trace can be re-executed exactly.
-    </p>
-    <p>
-      The mathematical-truth work then places the exact target for each reported quantity
-      inside an exact-rational interval and measures the actual trace value against that
-      interval. An independent adversarial review reconstructed the arithmetic through a
-      separate exact route and completed 568 checks without a failure. This closed the M1
-      error requirement for the paired arithmetic candidate.
+      The execution work answers a different question. A numerically reviewed graph is
+      not useful as a reproducibility claim until its runtime, executable, permissions,
+      and evaluated code are also identified. The selected candidate makes that boundary
+      explicit and rejects execution outside it.
     </p>
   </section>
 
-  <section id="p-values">
-    <h2>Bounding the p-value calculation</h2>
+  <section id="numerical-contract">
+    <h2>Closing the numerical path</h2>
     <p>
-      The Student-t path uses positive series forms and a reviewed table of normalization
-      constants. Instead of treating the largest error found in a test corpus as a
-      universal tolerance, it derives a conservative error bound for the input being
-      evaluated. That bound combines binary64 rounding in the executed graph with the
-      positive terms left after the series stops.
+      The paired-data path fixes the operation order for differences, mean difference,
+      sample variance, standard error, test statistic, and integer degrees of freedom.
+      Its mathematical-truth ledger places exact targets inside rational intervals and
+      measures the actual binary64 trace against them. Independent review reconstructed
+      that arithmetic through a separate exact route and completed 568 checks without a
+      failure.
     </p>
     <p>
-      The selected rule also checks the distance to the nearest probability-class
-      boundary. If the derived error could change whether a result is normal, subnormal,
-      rounded to one, or rounded to zero, an eventual runtime path using this candidate
-      rule would have to refuse rather than silently present the class as established.
-      Independent review accepted this input-specific rule and closed the M2 Student-t
-      tail requirement. No global error constant was selected or required for that
-      closure.
+      The Student-t path uses positive series forms and a reviewed normalization table.
+      For each evaluated input, it combines the rounding error of the executed graph
+      with a bound on the unevaluated positive series terms. It also measures the result
+      against the nearest probability-class boundary. If the bound cannot establish the
+      class, the candidate rule refuses instead of silently treating the class as known.
+    </p>
+    <p>
+      Confidence-interval work then binds the selected critical value, the margin
+      calculation, both endpoint operations, and their exact-rational truth envelopes to
+      the same verified paired-data trace. The Group 2 closure now checks these
+      components, their table hashes, numerical outputs, resource accounting, and nested
+      trace digests as one full-trace envelope. Its independent review returned GO with
+      no findings.
     </p>
   </section>
 
   <section id="critical-values">
-    <h2>Selecting critical values for interval work</h2>
+    <h2>Selecting critical values</h2>
     <p>
-      A separate reviewed table contains fixed-95% Student-t critical values for every
-      integer degree of freedom from 1 through 200. Each mathematical quantile was
-      certified inside one exact binary64 rounding cell, and independent review checked
-      all 200 cells and their ordering.
+      The candidate uses fixed-95% Student-t critical values for every integer degree of
+      freedom from 1 through 200. Each mathematical quantile was certified inside one
+      exact binary64 rounding cell, and independent review checked all 200 cells and
+      their ordering.
     </p>
     <p>
-      M3-B selected those exact table bytes for non-authoritative candidate
-      confidence-interval work. The ordered-cell content hash is{' '}
+      The selected ordered-cell content hash is{' '}
       <code>sha256:24ccc86d7a49b9e1ef1e3fc9b038a5b8d338b8b5ca4a02492d8900d7e7dea3c0</code>.
-      Selection prevents later candidate work from quietly changing a critical value.
-      It does not make 1 through 200 a supported range or turn this into a final Protocol
-      table.
+      Pinning those bytes prevents later candidate work from quietly changing a critical
+      value. It does not make degrees of freedom 1 through 200 a supported Protocol
+      range or turn the table into an authoritative artifact.
     </p>
   </section>
 
-  <section id="next-step">
-    <h2>What happened next</h2>
+  <section id="controlled-execution">
+    <h2>One controlled execution candidate</h2>
     <p>
-      The subsequent M3-C increment connected the selected critical-value table to the
-      reviewed paired-data trace. It records the critical-value lookup and the three
-      binary64 operations used to calculate the margin and two confidence-interval
-      endpoints. Its independent review returned GO with no findings.
+      Group 3 selected exactly one candidate environment: Node <code>24.19.0</code>, V8{' '}
+      <code>13.6.233.17-node.51</code>, Linux x64, and the Node executable whose SHA-256 is{' '}
+      <code>bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12</code>.
+      A different Node patch, V8 build, operating system, architecture, or executable
+      hash is outside this candidate selection.
     </p>
     <p>
-      That review closes execution identity for the interval calculation, not the
-      interval's mathematical-truth bound. M3-D must still propagate the reviewed mean
-      and standard-error intervals, critical-value quantization, and endpoint arithmetic
-      into one truth envelope.
+      The controlled runner pins the compiled candidate files, freezes built-in objects,
+      disables native add-ons and dynamically compiled strings, grants read access only
+      to the declared code and executable, and denies process spawning, workers, WASI,
+      the inspector, and filesystem writes. It checks these conditions before and after
+      one full-trace evaluation and verifies the returned numerical envelope again.
+    </p>
+    <p>
+      Cold and post-warm-up runs produced byte-identical projections for six cases. The
+      preserved evidence also contains the compiled-file digest manifest and 145 matched
+      optimization-trace lines. Independent review accepted the one-entry candidate and
+      the later Group 3 closure with no findings.
+    </p>
+  </section>
+
+  <section id="evidence">
+    <h2>What the review tested</h2>
+    <p>
+      The Group 2 review independently re-executed the candidate numerical graph and
+      checked its exact-rational truth envelopes, p-value projection rules, fixed-95%
+      interval endpoints, table bindings, resource envelope, and full-trace composition.
+      It found no BLOCKER, SHOULD-FIX, or NICE-TO-HAVE issue.
+    </p>
+    <p>
+      The Group 3 review checked the exact runtime and executable identity, controlled
+      process restrictions, cold and warm evidence, compiled-file digests, and the link
+      back to the reviewed Group 2 trace. A reviewer-owned set of 216 adversarial
+      mutations attempted to alter the environment, evidence, candidate matrix,
+      maturity state, and authority boundary. All were rejected deterministically.
     </p>
   </section>
 
   <section id="scope">
     <h2>What remains open</h2>
     <p>
-      The confidence-interval endpoint truth requirement and M3 remain open. The work
-      also does not select a supported degree-of-freedom maximum, pair or resource
-      limits, a supported platform and execution environment, the final supported
-      domain, runtime activation, or final public refusal-code spellings.
+      The next bounded decision is the final reason-code inventory. The authoritative
+      execution allowlist and supported-execution conditions are also still unissued.
+      So are the supported input domain, runtime activation, final Public Check and
+      bundle registration, and permanent paired-t identifiers.
     </p>
     <p>
-      No permanent paired-t identifier, authoritative Public Check, schema, or supported
-      bundle has been issued. Release 2 D5 is not complete, Release 2 has not been
-      published, and public review issue #25 remains open. The current result is reviewed
-      candidate numerical closure, not a user-facing paired-t capability.
+      The numerical contract is not formally frozen. Release 2 D5 is not complete,
+      Release 2 has not been published, and public review issue #25 remains open. The
+      current result is independently reviewed candidate numerical and execution
+      closure—not user-facing paired-t support.
     </p>
   </section>
 
@@ -147,32 +164,28 @@ const toc = [
     <h2>Public evidence</h2>
     <ul>
       <li>
-        <a href="https://github.com/licklider-ai/nomue-protocol/pull/69" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #69</a>{' '}
-        — M1 G4 mathematical-truth closure and merge record
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/138" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #138</a>{' '}
+        — Group 2 candidate numerical-contract and full-trace closure
       </li>
       <li>
-        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/reviews/d5-g4-truth-error-adversarial-review-disposition.md" target="_blank" rel="noopener noreferrer">M1 independent-review disposition</a>{' '}
-        — exact-arithmetic review and bounded meaning of closure
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/review-inputs/r2-d5-group-2-runtime-numerical-contract-closure/REVIEW-RESULT.md" target="_blank" rel="noopener noreferrer">Group 2 independent-review result</a>{' '}
+        — GO with no findings
       </li>
       <li>
-        <a href="https://github.com/licklider-ai/nomue-protocol/pull/89" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #89</a>{' '}
-        — M2 Student-t tail numerical closure and merge record
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/143" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #143</a>{' '}
+        — selection of the one-entry controlled-execution candidate
       </li>
       <li>
-        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/governance/drafts/release-2-candidate/numerical/tail-numerical-selection-candidate.json" target="_blank" rel="noopener noreferrer">M2 numerical-selection checkpoint</a>{' '}
-        — selected error form, projection rule, and held support decisions
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/review-inputs/r2-d5-group-3-supported-execution-selection/REVIEW-RESULT.md" target="_blank" rel="noopener noreferrer">Group 3 selection review</a>{' '}
+        — independent review of the runtime tuple and controlled evidence
       </li>
       <li>
-        <a href="https://github.com/licklider-ai/nomue-protocol/pull/97" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #97</a>{' '}
-        — M3-B selection of the reviewed 200-cell table for candidate interval work
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/148" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #148</a>{' '}
+        — Group 3 candidate supported-execution closure
       </li>
       <li>
-        <a href="https://github.com/licklider-ai/nomue-protocol/pull/100" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #100</a>{' '}
-        — subsequent M3-C confidence-interval actual-execution trace
-      </li>
-      <li>
-        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/review-inputs/r2-d5-ci-execution-trace-candidate/REVIEW-RESULT.md" target="_blank" rel="noopener noreferrer">M3-C independent-review result</a>{' '}
-        — GO for execution identity while endpoint truth remains open
+        <a href="https://github.com/licklider-ai/nomue-protocol/blob/main/review-inputs/r2-d5-group-3-supported-execution-closure/REVIEW-RESULT.md" target="_blank" rel="noopener noreferrer">Group 3 closure review</a>{' '}
+        — GO with no findings after 216 adversarial mutations
       </li>
       <li>
         <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">Release 2 public review issue #25</a>{' '}
