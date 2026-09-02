@@ -54,10 +54,10 @@ export const PUBLICATIONS: PublicationItem[] = [
     sortKey: '2026-09-01',
     title: 'From numerical bounds to a controlled paired-t execution candidate',
     summary:
-      'We closed a candidate paired-t numerical contract and selected one controlled Node, V8, and Linux execution environment, with independent review and no claim of Protocol support.',
+      'We assembled and independently reviewed the final decision package for the paired-t candidate while leaving Protocol ratification, issuance, and support open.',
     href: '/engineering/bounding-paired-t-arithmetic-and-pvalues/',
     status:
-      'Independently reviewed candidate numerical and execution closure — not ratified Protocol support',
+      'Independently reviewed final Release 2 candidate review-readiness — not ratified, issued, or supported',
   },
   {
     category: 'Engineering',
