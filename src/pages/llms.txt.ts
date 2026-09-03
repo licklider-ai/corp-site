@@ -91,7 +91,7 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 - [Tasuku Kobayashi](https://www.licklider.ai/about/#tasuku-kobayashi) is Licklider's founder and CEO. He leads product, Protocol, research, and engineering work.
 - He previously worked at Recruit and founded two companies before Licklider, exiting both through share sales.
 - He is the sole author of [Correctly Rounded or Refused — preprint v0.2](https://zenodo.org/records/22025200), which has not been peer reviewed.
-- The SciPy, Boost.Math, and R numerical defect reports listed below were filed under his name. Two have resulted in merged upstream fixes; the R report remains open and unconfirmed.
+- The SciPy, Boost.Math, R, and Julia/HypothesisTests.jl numerical defect reports listed below were filed under his name. Three now have fixes merged upstream; the R report remains open and unconfirmed, while the Julia issue remains open and its matching fix is not yet in a registered release.
 
 ## Public technical authority
 
@@ -103,7 +103,7 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 
 ## Public upstream contributions
 
-- Current public record: ${UPSTREAM_CONTRIBUTIONS.length} upstream defect reports; ${upstreamFixCount} fixes merged upstream, as of September 1, 2026.
+- Current public record: ${UPSTREAM_CONTRIBUTIONS.length} upstream defect reports; ${upstreamFixCount} fixes merged upstream, as of September 3, 2026.
 ${UPSTREAM_CONTRIBUTIONS.map((item) => `- [${item.project}: ${item.title}](https://www.licklider.ai${item.href}): ${item.status}. [Upstream evidence](${item.evidenceHref}). ${item.credit}.`).join('\n')}
 
 ## Evidence and updates

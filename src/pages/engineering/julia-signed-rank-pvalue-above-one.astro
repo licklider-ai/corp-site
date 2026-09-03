@@ -1,0 +1,175 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'current-status', label: 'Current status' },
+  { id: 'observation', label: 'What we observed' },
+  { id: 'upstream-change', label: 'What changed upstream' },
+  { id: 'verification', label: 'How we checked it' },
+  { id: 'scope', label: 'Scope' },
+  { id: 'verification-relation', label: 'Relation to verification' },
+  { id: 'public-evidence', label: 'Public evidence' },
+];
+---
+
+<PublicationLayout
+  category="Engineering"
+  type="Upstream report"
+  title="A Julia signed-rank p-value above 1, fixed on master"
+  description="HypothesisTests.jl returned 1.25 for an exact two-sided signed-rank p-value. A matching correction is merged on master, though no registered release contains it yet."
+  published="September 3, 2026"
+  status="Matching fix merged in HypothesisTests.jl — issue open; awaiting a registered release"
+  toc={toc}
+>
+  <section id="current-status">
+    <h2>Current status</h2>
+    <div class="notice">
+      <p>
+        We reported HypothesisTests.jl issue #373 on August 25, 2026 after reproducing
+        an exact two-sided signed-rank p-value above 1. Pull request #377 was opened by
+        <code>yoninazarathy</code> on September 2 and merged into <code>master</code> by
+        <code>andreasnoack</code> later that day.
+      </p>
+      <p>
+        The matching correction is present on <code>master</code>. Issue #373 remains
+        open, and the latest registered package version is still <code>0.11.8</code>,
+        which predates the merge. The public tracker does not state that #373 caused
+        #377, so this page does not make that attribution.
+      </p>
+    </div>
+  </section>
+
+  <section id="observation">
+    <h2>What we observed</h2>
+    <p>
+      In HypothesisTests.jl <code>0.11.8</code> on Julia <code>1.12.7</code>, the
+      untied exact path returned <code>1.25</code> for this call:
+    </p>
+    <pre><code>pvalue(ExactSignedRankTest([1.0, 2.0, -3.0]))</code></pre>
+    <p>
+      A p-value is a probability, so it must remain between 0 and 1. For this
+      three-observation example, exhaustive enumeration of the eight possible sign
+      assignments gives two one-sided probabilities of <code>5/8</code>. The standard
+      doubled-tail value is therefore <code>min(1, 2 × 5/8) = 1</code>.
+    </p>
+  </section>
+
+  <section id="upstream-change">
+    <h2>What changed upstream</h2>
+    <p>
+      Pull request #377 changed the no-ties exact two-sided branch so the selected
+      tail is doubled and capped at <code>1.0</code>. The merged regression test pins
+      the example above to exactly <code>1</code>.
+    </p>
+    <p>
+      The pull request also sweeps every untied sign pattern through sample size
+      <code>n = 12</code> and asserts that no two-sided result exceeds 1. Its author
+      reported that 220 of 8,190 swept patterns exceeded 1 before the patch.
+    </p>
+  </section>
+
+  <section id="verification">
+    <h2>How we checked it</h2>
+    <p>
+      We ran the same fixture in clean Julia <code>1.12.7</code> environments against
+      two pinned package states. Registered HypothesisTests.jl <code>0.11.8</code>
+      returned <code>1.25</code>; merge commit <code>f758eea</code> returned
+      <code>1.0</code>. Both checks used assertions on the displayed result rather than
+      relying only on source inspection.
+    </p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Package state</th>
+            <th>Observed p-value</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Registered version <code>0.11.8</code></td>
+            <td><code>1.25</code></td>
+            <td>Released behavior reproduced</td>
+          </tr>
+          <tr>
+            <td>Merge commit <code>f758eea</code></td>
+            <td><code>1.0</code></td>
+            <td>Matching fix reproduced</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="scope">
+    <h2>Scope</h2>
+    <p>
+      This report concerns the untied, no-zero, exact two-sided signed-rank path in the
+      tested HypothesisTests.jl versions. It does not show that every signed-rank call
+      is affected, and it does not estimate how often ordinary research workflows
+      reach a statistic at the null-distribution center.
+    </p>
+    <p>
+      A correction on <code>master</code> is not the same as a released correction.
+      Users of the registered <code>0.11.8</code> package should not infer that the
+      fix is already included. The page also separates our report from the independently
+      authored patch because the upstream record does not establish a causal link.
+    </p>
+  </section>
+
+  <section id="verification-relation">
+    <h2>Relation to verification</h2>
+    <p>
+      The case shows the value of checking simple mathematical invariants alongside
+      high-precision reference values. A range assertion identified an invalid result;
+      exhaustive enumeration explained the expected answer; and a pinned cross-version
+      run separated released behavior from the current upstream fix.
+    </p>
+    <p>
+      This is evidence of Licklider's verification engineering method. It does not mean
+      that nomue Protocol currently supports Julia or signed-rank verification.
+    </p>
+  </section>
+
+  <section id="public-evidence">
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/JuliaStats/HypothesisTests.jl/issues/373" target="_blank" rel="noopener noreferrer">HypothesisTests.jl issue #373</a>
+        — report, reproducer, exact enumeration, source diagnosis, and environment
+      </li>
+      <li>
+        <a href="https://github.com/JuliaStats/HypothesisTests.jl/issues/373#issuecomment-5523789035" target="_blank" rel="noopener noreferrer">Reporter follow-up on #373</a>
+        — current master and release-status snapshot
+      </li>
+      <li>
+        <a href="https://github.com/JuliaStats/HypothesisTests.jl/pull/377" target="_blank" rel="noopener noreferrer">HypothesisTests.jl pull request #377</a>
+        — patch rationale, regression tests, review, and merge
+      </li>
+      <li>
+        <a href="https://github.com/JuliaStats/HypothesisTests.jl/commit/f758eead30e9389dcf7da9872782dede6a4f095f" target="_blank" rel="noopener noreferrer">Merge commit f758eea</a>
+        — correction merged into <code>master</code>
+      </li>
+      <li>
+        <a href="https://github.com/JuliaStats/HypothesisTests.jl/releases/tag/v0.11.8" target="_blank" rel="noopener noreferrer">HypothesisTests.jl v0.11.8 release</a>
+        — latest release at publication time, predating the correction
+      </li>
+      <li>
+        <a href="https://github.com/JuliaRegistries/General/blob/master/H/HypothesisTests/Versions.toml" target="_blank" rel="noopener noreferrer">Julia General version registry</a>
+        — registered HypothesisTests.jl versions at publication time
+      </li>
+    </ul>
+  </section>
+</PublicationLayout>
+
+<style>
+  .table-scroll {
+    margin: 1.75rem 0;
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 40rem;
+  }
+</style>

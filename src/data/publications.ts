@@ -13,6 +13,18 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'Engineering',
+    type: 'Upstream report',
+    date: 'September 3, 2026',
+    sortKey: '2026-09-03',
+    title: 'A Julia signed-rank p-value above 1, fixed on master',
+    summary:
+      'HypothesisTests.jl returned 1.25 for an exact two-sided signed-rank p-value. A matching correction is merged on master, though no registered release contains it yet.',
+    href: '/engineering/julia-signed-rank-pvalue-above-one/',
+    status:
+      'Matching fix merged in HypothesisTests.jl — issue open; awaiting a registered release',
+  },
+  {
     category: 'News',
     type: 'Product',
     date: 'September 2, 2026',
