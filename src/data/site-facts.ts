@@ -181,6 +181,23 @@ export const CORE_NON_CLAIMS = [
 
 export const UPSTREAM_CONTRIBUTIONS = [
   {
+    project: 'Julia / HypothesisTests.jl',
+    title: 'Exact signed-rank p-value above 1',
+    summary:
+      'We reported a two-sided signed-rank p-value of 1.25. A separately authored patch now returns 1.0 on master; no registered release contains it yet.',
+    href: '/engineering/julia-signed-rank-pvalue-above-one/',
+    status: 'Matching fix merged on master; issue open; release pending',
+    outcome: 'fix_merged',
+    comparisonLabel: 'Registered 0.11.8 → merge commit',
+    observed: '1.25',
+    reference: '1.0',
+    evidenceHref:
+      'https://github.com/JuliaStats/HypothesisTests.jl/commit/f758eead30e9389dcf7da9872782dede6a4f095f',
+    evidenceLabel: 'HypothesisTests.jl commit f758eea',
+    credit:
+      'Fix authored by yoninazarathy · merged by andreasnoack · no upstream causal attribution',
+  },
+  {
     project: 'SciPy',
     title: 'SciPy exact Wilcoxon p-value error',
     summary:
