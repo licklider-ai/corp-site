@@ -33,7 +33,7 @@ const roadmapStructuredData = {
   description:
     'Current, next, and planned expansion of nomue from Welch verification into agent-native scientific verification infrastructure.',
   url: new URL('/roadmap/', Astro.site).href,
-  dateModified: '2026-09-02',
+  dateModified: '2026-09-04',
   isPartOf: { '@id': new URL('/#website', Astro.site).href },
   about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
 };
@@ -80,12 +80,12 @@ const roadmapStructuredData = {
 
   <section id="candidate" class="section">
     <p class="stage-label">Available now — release candidate</p>
-    <h2>Agents can call the local Welch verifier over MCP</h2>
+    <h2>Agents can call nomue Record Verifier over MCP</h2>
     <p>{MCP_RELEASE_BOUNDARY}</p>
     <div class="signal-row" aria-label="MCP release candidate facts">
       <span>{MCP_RELEASE.version}</span>
       <span>{MCP_RELEASE.transport}</span>
-      <span>one versioned tool</span>
+      <span>{MCP_RELEASE.tool}</span>
       <span>3 OS × 2 Node versions</span>
     </div>
     <p>
