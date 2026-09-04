@@ -46,28 +46,31 @@ export const PRODUCT_RELEASE_BOUNDARY =
   'Use the npm-published Release 1 verifier, the local stdio MCP server, the Protocol, and their machine-readable documentation today. The next managed product release adds agent-facing intake and orchestration: it gathers required research conditions, routes clarification or refusal, runs the registered Welch path, and returns structured evidence and next actions.';
 
 export const MCP_RELEASE = {
+  displayName: 'nomue Record Verifier',
+  configName: 'nomue-verify',
   package: '@licklider/nomue-mcp',
-  version: '0.1.0-rc.0',
+  version: '0.2.0-rc.1',
   maturity: 'public npm release candidate',
   npmDistTag: 'rc',
-  npmUrl: 'https://www.npmjs.com/package/@licklider/nomue-mcp/v/0.1.0-rc.0',
+  npmLatestVersion: '0.1.0-rc.0',
+  npmUrl: 'https://www.npmjs.com/package/@licklider/nomue-mcp/v/0.2.0-rc.1',
   transport: 'stdio',
-  tool: 'verify_nomue_welch_record',
+  tool: 'verify_nomue_record',
   registryName: 'io.github.licklider-ai/nomue-mcp',
   registryUrl:
     'https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.licklider-ai%2Fnomue-mcp',
   verifierPackage: '@licklider/nomue-verifier',
   verifierVersion: '0.2.1-rc.0',
   repositoryUrl: 'https://github.com/licklider-ai/nomue-mcp',
-  ciUrl: 'https://github.com/licklider-ai/nomue-mcp/actions/runs/33575925536',
+  ciUrl: 'https://github.com/licklider-ai/nomue-mcp/actions/runs/33838485528',
   registryCiUrl:
-    'https://github.com/licklider-ai/nomue-mcp/actions/runs/33577994163',
+    'https://github.com/licklider-ai/nomue-mcp/actions/runs/33838485897',
   testedOperatingSystems: ['Linux', 'macOS', 'Windows'],
   testedNodeVersions: ['20', '22'],
 } as const;
 
 export const MCP_PUBLIC_SOURCE =
-  `The exact ${MCP_RELEASE.package}@${MCP_RELEASE.version} release candidate is public on npm and in the official MCP Registry. It exposes one local ${MCP_RELEASE.transport} tool for Release 1 Welch Record verification, delegates to ${MCP_RELEASE.verifierPackage}@${MCP_RELEASE.verifierVersion}, and has passing package-path CI across Linux, macOS, and Windows.`;
+  `The exact ${MCP_RELEASE.package}@${MCP_RELEASE.version} release candidate is public on npm and in the official MCP Registry as ${MCP_RELEASE.displayName}. It exposes the method-neutral ${MCP_RELEASE.tool} tool over local ${MCP_RELEASE.transport}; the current supported scientific scope remains Release 1 Welch Record verification. It delegates to ${MCP_RELEASE.verifierPackage}@${MCP_RELEASE.verifierVersion} and has passing package-path CI across Linux, macOS, and Windows.`;
 
 export const MCP_RELEASE_BOUNDARY =
   `${MCP_PUBLIC_SOURCE} It requires no account, API key, environment variable, or Licklider-hosted service. The first npx launch may download npm dependencies; after installation, verification runs locally. This release candidate supports stdio only: it is not a hosted HTTP endpoint and does not add paired-t, Wilcoxon, Mann–Whitney, method selection, raw-sample calculation, or an overall scientific verdict.`;
@@ -75,11 +78,14 @@ export const MCP_RELEASE_BOUNDARY =
 export const NOMUE_MCP_NPX_COMMAND =
   `npx --yes ${MCP_RELEASE.package}@${MCP_RELEASE.version}`;
 
+export const NOMUE_MCP_CLAUDE_COMMAND =
+  `claude mcp add ${MCP_RELEASE.configName} -- ${NOMUE_MCP_NPX_COMMAND}`;
+
 export const NOMUE_MCP_CLIENT_CONFIG =
-  `{"mcpServers":{"nomue":{"command":"npx","args":["--yes","${MCP_RELEASE.package}@${MCP_RELEASE.version}"]}}}`;
+  `{"mcpServers":{"${MCP_RELEASE.configName}":{"command":"npx","args":["--yes","${MCP_RELEASE.package}@${MCP_RELEASE.version}"]}}}`;
 
 export const NOMUE_MCP_WINDOWS_CONFIG =
-  `{"mcpServers":{"nomue":{"command":"cmd.exe","args":["/d","/s","/c","npx --yes ${MCP_RELEASE.package}@${MCP_RELEASE.version}"]}}}`;
+  `{"mcpServers":{"${MCP_RELEASE.configName}":{"command":"cmd.exe","args":["/d","/s","/c","npx --yes ${MCP_RELEASE.package}@${MCP_RELEASE.version}"]}}}`;
 
 export const NOMUE_MCP_REPLAY_COMMAND =
   `npx --yes ${MCP_RELEASE.verifierPackage}@${MCP_RELEASE.verifierVersion} verify ./record.json --format json-compact`;

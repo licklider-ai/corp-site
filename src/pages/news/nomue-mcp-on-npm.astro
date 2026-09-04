@@ -1,6 +1,7 @@
 ---
 import {
   MCP_RELEASE,
+  NOMUE_MCP_CLAUDE_COMMAND,
   NOMUE_MCP_CLIENT_CONFIG,
   NOMUE_MCP_NPX_COMMAND,
   NOMUE_MCP_REPLAY_COMMAND,
@@ -22,10 +23,11 @@ const toc = [
 <PublicationLayout
   category="News"
   type="Product"
-  title="nomue local MCP release candidate is available on npm"
-  description="The public @licklider/nomue-mcp package lets MCP clients call the exact Release 1 Welch Record verifier over local stdio."
+  title="nomue Record Verifier MCP release candidate is available"
+  description="The public @licklider/nomue-mcp package exposes a method-neutral Record verification tool over local stdio; the current release supports the Release 1 Welch bundle."
   published="September 2, 2026"
-  status="Public local MCP release candidate — npm rc 0.1.0-rc.0; official MCP Registry"
+  updated="September 4, 2026"
+  status="Public local MCP release candidate — npm rc 0.2.0-rc.1; official MCP Registry"
   toc={toc}
 >
   <section id="available">
@@ -34,8 +36,9 @@ const toc = [
       <a href={MCP_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer"><code>{MCP_RELEASE.package}@{MCP_RELEASE.version}</code></a>
       {' '}is publicly available on npm and registered as{' '}
       <a href={MCP_RELEASE.registryUrl} target="_blank" rel="noopener noreferrer"><code>{MCP_RELEASE.registryName}</code></a>
-      {' '}in the official MCP Registry. It is a local stdio server with one tool,
-      <code>{MCP_RELEASE.tool}</code>.
+      {' '}in the official MCP Registry under the display name{' '}
+      <strong>{MCP_RELEASE.displayName}</strong>. It is a local stdio server with the
+      method-neutral tool <code>{MCP_RELEASE.tool}</code>.
     </p>
     <p>
       The server is a thin adapter around the exact{' '}
@@ -47,6 +50,9 @@ const toc = [
 
   <section id="configure">
     <h2>Add it to an MCP client</h2>
+    <p>Claude Code can add the exact release candidate with one command:</p>
+    <pre><code>{NOMUE_MCP_CLAUDE_COMMAND}</code></pre>
+    <p>Other clients can use the same version-pinned server configuration:</p>
     <pre><code>{NOMUE_MCP_CLIENT_CONFIG}</code></pre>
     <p>Or start the same exact package directly:</p>
     <pre><code>{NOMUE_MCP_NPX_COMMAND}</code></pre>
@@ -59,7 +65,7 @@ const toc = [
   </section>
 
   <section id="tool">
-    <h2>One bounded Welch Record tool</h2>
+    <h2>One bounded Record verification tool</h2>
     <p>{NOMUE_MCP_WHEN_TO_USE}</p>
     <p>{NOMUE_MCP_WHEN_NOT_TO_USE}</p>
     <pre><code>{`{"record_json":"{...complete nomue Record JSON text...}"}`}</code></pre>
@@ -104,9 +110,9 @@ const toc = [
     <div class="notice">
       <p>
         This is version <code>{MCP_RELEASE.version}</code>, published through the npm{' '}
-        <code>{MCP_RELEASE.npmDistTag}</code> channel. npm also created
-        <code>latest</code> on this first package publication; that registry behavior is
-        not a stable-release claim. The exact version remains pinned in every client
+        <code>{MCP_RELEASE.npmDistTag}</code> channel. The mutable <code>latest</code>{' '}
+        tag currently remains on <code>{MCP_RELEASE.npmLatestVersion}</code>; neither tag
+        is a stable-release claim. The exact version remains pinned in every client
         example.
       </p>
     </div>
