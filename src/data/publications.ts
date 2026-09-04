@@ -13,6 +13,18 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'Engineering',
+    type: 'Technical method',
+    date: 'September 4, 2026',
+    sortKey: '2026-09-04',
+    title: 'Cataloguing every multi-group procedure before proposing any of them',
+    summary:
+      'We catalogued 49 multi-group comparison procedures, gave each an explicit disposition, and found only seven backed by primary text we had actually read.',
+    href: '/engineering/cataloguing-multi-group-procedures/',
+    status:
+      'Independently reviewed research input — scope narrowed on incomplete sources; no Release 3 RFC is open',
+  },
+  {
     category: 'Research',
     type: 'Research note',
     date: 'September 4, 2026',
