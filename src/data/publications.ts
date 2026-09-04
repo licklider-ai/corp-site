@@ -29,12 +29,12 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Product',
     date: 'September 2, 2026',
     sortKey: '2026-09-02',
-    title: 'nomue local MCP release candidate is available on npm',
+    title: 'nomue Record Verifier MCP release candidate is available',
     summary:
-      'The public @licklider/nomue-mcp package lets MCP clients call the exact Release 1 Welch Record verifier over local stdio.',
+      'The public @licklider/nomue-mcp package exposes a method-neutral Record verification tool over local stdio; the current release supports the Release 1 Welch bundle.',
     href: '/news/nomue-mcp-on-npm/',
     status:
-      'Public local MCP release candidate — npm rc 0.1.0-rc.0; official MCP Registry',
+      'Public local MCP release candidate — npm rc 0.2.0-rc.1; official MCP Registry',
   },
   {
     category: 'Research',
