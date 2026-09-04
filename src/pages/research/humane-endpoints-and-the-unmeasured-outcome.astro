@@ -1,0 +1,378 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'current-status', label: 'Current status' },
+  { id: 'finding', label: 'The finding' },
+  { id: 'defined', label: 'What the guidance defines' },
+  { id: 'absent', label: 'What it leaves open' },
+  { id: 'terminology', label: 'A terminology split' },
+  { id: 'why-it-matters', label: 'Why this matters' },
+  { id: 'limits', label: 'Limits' },
+  { id: 'protocol-relation', label: 'Relation to nomue Protocol' },
+  { id: 'public-evidence', label: 'Public evidence' },
+];
+
+const EVIDENCE_BASE =
+  'https://github.com/licklider-ai/nomue-protocol/blob/main/evidence/research/foundation-identity/fnd-1';
+---
+
+<PublicationLayout
+  category="Research"
+  type="Research note"
+  title="What three welfare guidance documents define, and what they leave to statistics"
+  description="Three animal-welfare guidance documents define exactly when a study must end and what is recorded, but none says whether the measurement it prevented still exists."
+  published="September 4, 2026"
+  status="Source-bounded research finding — two independent close reviews, not peer reviewed; FND-1 gate open"
+  toc={toc}
+>
+  <section id="current-status">
+    <h2>Current status</h2>
+    <div class="notice">
+      <p>
+        <strong>
+          This is a source-bounded research note, not a peer-reviewed paper and not a
+          Protocol decision.
+        </strong>
+      </p>
+      <p>
+        Two independent close reviews inspected the frozen report against the same three
+        source documents. Both accepted its direction. They disagreed on four points of
+        documentation, and each disagreement was settled against the sources rather than
+        by counting reviewers. The wider FND-1 research gate remains open, and no
+        animal-welfare or missing-data convention has been selected for nomue Protocol.
+      </p>
+    </div>
+  </section>
+
+  <section id="finding">
+    <h2>The finding</h2>
+    <p>
+      An animal study can be required to stop before its planned measurements are taken.
+      Three widely used welfare guidance documents say precisely when that must happen,
+      what triggers it, what action follows, and what has to be recorded. None of them
+      says what becomes of the measurement that was never taken.
+    </p>
+    <p>
+      That silence is not a defect to repair here. It marks where one body of guidance
+      ends and statistical reasoning begins. The practical risk is that an analysis reads
+      a recorded welfare decision as though it had already answered the data question,
+      and so adopts an assumption that no source supplies.
+    </p>
+  </section>
+
+  <section id="defined">
+    <h2>What the guidance defines</h2>
+    <p>
+      The investigation read the complete text of three documents, each recorded by file
+      digest, byte size, and page map before reading. All three describe the end of a
+      study as a structure with separable parts: a rule fixed in advance, an event with a
+      time, and a graded action.
+    </p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Document</th>
+            <th>What it defines directly</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p><strong>OECD</strong></p>
+              <p>
+                Guidance Document on the Recognition, Assessment, and Use of Clinical
+                Signs as Humane Endpoints for Experimental Animals Used in Safety
+                Evaluation. Environment Directorate, ENV/JM/MONO(2000)7, Series on
+                Testing and Assessment No. 19.
+              </p>
+            </td>
+            <td>
+              <ul>
+                <li>
+                  A humane endpoint as the earliest indicator of severe pain, distress,
+                  suffering, or impending death (paragraph 9, p. 10).
+                </li>
+                <li>
+                  Three graded responses: humane killing, termination of exposure that
+                  may be temporary, or dose reduction (paragraph 10, p. 10; paragraph 62,
+                  p. 22).
+                </li>
+                <li>
+                  Impending death defined against the observation schedule: a moribund
+                  state, or death expected before the next planned observation
+                  (paragraph 12, pp. 10&ndash;11).
+                </li>
+                <li>
+                  Endpoints fixed at planning time in the protocol and standard
+                  procedures, observation frequency increased once abnormal signs appear,
+                  and the timing of signs documented (paragraph 11, p. 10; paragraph 41,
+                  p. 17).
+                </li>
+                <li>
+                  The welfare decision bounded by the scientific objective: pain is
+                  treated when treatment does not interfere with the study, and a
+                  decision to kill weighs the potential loss of valuable data
+                  (paragraph 46, pp. 18&ndash;19; paragraph 42, p. 18).
+                </li>
+                <li>
+                  Separate record classes for an animal found dead and an animal humanely
+                  killed (Table 1 note 2, p. 26).
+                </li>
+                <li>
+                  Humanely killed animals counted as dosage-dependent deaths
+                  (paragraph 54, p. 21) &mdash; a counting rule, not a statement about an
+                  unmeasured value.
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>CCAC</strong></p>
+              <p>
+                CCAC guidelines: Identification of scientific endpoints, humane
+                intervention points, and cumulative endpoints. Canadian Council on Animal
+                Care, March 2022.
+              </p>
+            </td>
+            <td>
+              <ul>
+                <li>
+                  Scientific endpoints, at which the approved live animal use is complete,
+                  kept structurally separate from intervention points, where the required
+                  action is not necessarily euthanasia (glossary, pp. 38&ndash;39;
+                  introduction, p. 4).
+                </li>
+                <li>
+                  A graded ladder of interventions: environmental change, supportive care,
+                  antibiotics, pain relief, temporary or permanent removal, then
+                  euthanasia (p. 4).
+                </li>
+                <li>
+                  Anticipated intervention points distinguished from unexpected negative
+                  outcomes such as unrelated illness or a life-support systems failure
+                  (pp. 4&ndash;5).
+                </li>
+                <li>
+                  Pilot studies directed at determining welfare-appropriate endpoints
+                  rather than at generating usable scientific data (guideline 2, p. 2).
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p><strong>Workman et al.</strong></p>
+              <p>
+                Guidelines for the welfare and use of animals in cancer research. British
+                Journal of Cancer (2010) 102(11), 1555&ndash;1577.
+              </p>
+            </td>
+            <td>
+              <ul>
+                <li>
+                  Humane endpoints developed alongside the requirements for a valid
+                  scientific outcome, with earlier endpoints able to increase precision
+                  (p. 1569).
+                </li>
+                <li>
+                  Intentional use of death as an endpoint treated as unacceptable
+                  (p. 1570).
+                </li>
+                <li>
+                  Quantified, domain-specific triggers: for example 20% weight loss at any
+                  time, or 15% maintained for 72 hours against pre-treatment or
+                  age-matched vehicle controls, and ulceration persisting beyond 48 hours
+                  (Box 5, p. 1571).
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Across all three, the trigger rule, the event and its time, and the action taken
+      are separately recorded facts. Where the documents agree, the agreement was treated
+      as independent evidence converging on the same scope, never as a vote.
+    </p>
+  </section>
+
+  <section id="absent">
+    <h2>What it leaves open</h2>
+    <p>
+      None of the three defines whether a scheduled measurement that euthanasia or death
+      prevented still conceptually exists, and none defines a statistical mechanism for
+      how such values go missing.
+    </p>
+    <p>
+      Word-boundary searches over the complete text of all three documents returned no
+      occurrence of MCAR, MAR, or MNAR. The one occurrence of the word censor is in the
+      CCAC text (p. 27), where the guidance reports a cited suggestion that truncated
+      longevity studies can be analyzed with proportional-hazards models on censored
+      data. That is a design option attributed to other literature; it defines neither
+      existence nor a mechanism. The one occurrence of the word missing in the OECD text
+      is in a dental-observation list in an annex (p. 38).
+    </p>
+    <p>
+      The vocabulary of clinical estimands is absent as well. The terms estimand, ICH, E9,
+      treatment policy, hypothetical, composite, while-on-treatment, and principal
+      stratum returned no hits in any of the three documents. The word intercurrent occurs
+      twice, both in an OECD annex, in the ordinary veterinary sense of a concurrent
+      infection rather than the clinical-trial sense.
+    </p>
+    <p>
+      How that absence was established is recorded rather than asserted. It rests on
+      complete text extraction, a full reading of every definitional, procedural,
+      endpoint, monitoring, and record section, inspection of page images where the text
+      layer was degraded, and targeted word-boundary searches. It does not rest on a
+      verified line-by-line reading of every sentence. The absence is therefore graded one
+      step below the direct verification used for the definitions above, and the report
+      says so.
+    </p>
+    <p>
+      What the documents do define next to that gap shows the boundary is real rather
+      than accidental. The event and its time are recorded facts distinct from the
+      observation stream. An animal found dead and an animal humanely killed produce
+      differently sourced final records. An observation lost to a life-support systems
+      failure is classed as an unexpected negative outcome rather than an anticipated
+      intervention point.
+    </p>
+  </section>
+
+  <section id="terminology">
+    <h2>A terminology split</h2>
+    <p>
+      The three documents do not share one word for the same idea. The 2022 CCAC
+      guidelines deliberately replace humane endpoint with humane intervention point,
+      because the required action is not necessarily the end of anything. The OECD and
+      Workman documents use humane endpoint throughout.
+    </p>
+    <p>
+      The investigation preserved that split instead of smoothing it. Any later
+      vocabulary decision has to face the disagreement as the sources state it.
+    </p>
+  </section>
+
+  <section id="why-it-matters">
+    <h2>Why this matters</h2>
+    <p>
+      The narrow technical result is that the endpoint, its time, and the action taken are
+      directly evidenced as separable declared facts across three separately issued
+      documents, from at least two institutionally independent issuing bodies, while the
+      existence status of an unmeasured outcome is carried entirely by statistical
+      sources.
+    </p>
+    <p>
+      The wider point concerns how a verification system should treat such a record. A
+      statement that an animal reached a humane endpoint is a well-defined and
+      well-recorded fact. It is not a statement about whether the measurement that did not
+      happen exists, and treating it as one adopts an assumption that no inspected source
+      provides. This is the kind of fact a Record has to carry explicitly rather than
+      leave an analysis to infer. The finding is research input for that design question.
+      It changes no current capability.
+    </p>
+  </section>
+
+  <section id="limits">
+    <h2>Limits</h2>
+    <p>
+      The conclusions hold for three artifacts at recorded digests, in the specified
+      editions and page maps. They do not extend to other renditions or to guidance that
+      was not inspected.
+    </p>
+    <p>
+      The originally commissioned 1998 CCAC text could not be obtained, and the 2022 CCAC
+      guidelines were inspected in its place. That substitution rests on the same issuing
+      body and the same stated role, not on a formal notice of supersession. A claim that
+      one document supersedes the other would need an official CCAC record.
+    </p>
+    <p>
+      Two further leads, Morton (2000) and Toth (2000), were not inspected, and no
+      conclusion here rests on them. Network routes to the publishers and repositories
+      were blocked in the investigating environment, so the three documents were supplied
+      directly, and their digests, byte sizes, and page maps were recorded before any
+      content was read.
+    </p>
+    <p>
+      This note does not recommend an endpoint, a threshold, a euthanasia rule, or an
+      analysis method. It does not rank the three documents, and it establishes no
+      missing-data assumption for any study.
+    </p>
+  </section>
+
+  <section id="protocol-relation">
+    <h2>Relation to nomue Protocol</h2>
+    <p>
+      The finding is research input for future identity and interpretation design. It adds
+      no Record field, vocabulary term, method identifier, schema, public check, supported
+      procedure, or implementation behavior, and it selects no animal-welfare or
+      missing-data convention.
+    </p>
+    <p>
+      Four of eight recorded FND-1 holds are closed in narrowed form. Four holds remain
+      open, so the complete FND-1 research gate is still open, and adopting any result
+      here would require a separate Protocol proposal and review.
+    </p>
+  </section>
+
+  <section id="public-evidence">
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href={`${EVIDENCE_BASE}/2026-09-02-nonclinical-estimand-animal-endpoint-source-commission.md`} target="_blank" rel="noopener noreferrer">Source commission</a>{' '}
+        &mdash; the bounded question, required sources, and closure conditions set before the work
+      </li>
+      <li>
+        <a href={`${EVIDENCE_BASE}/2026-09-02-nonclinical-estimand-animal-endpoint-source-result.md`} target="_blank" rel="noopener noreferrer">Primary-source result</a>{' '}
+        &mdash; claim ledger with page anchors, the absence method record, and eight falsification cases
+      </li>
+      <li>
+        <a href={`${EVIDENCE_BASE}/2026-09-02-nonclinical-estimand-animal-endpoint-close-review-result.md`} target="_blank" rel="noopener noreferrer">First close review</a>{' '}
+        &mdash; independent inspection of the frozen report against the same documents
+      </li>
+      <li>
+        <a href={`${EVIDENCE_BASE}/2026-09-03-nonclinical-estimand-animal-endpoint-supplemental-close-review-result.md`} target="_blank" rel="noopener noreferrer">Second close review</a>{' '}
+        &mdash; a separate independent inspection reporting four documentation corrections
+      </li>
+      <li>
+        <a href={`${EVIDENCE_BASE}/2026-09-03-nonclinical-estimand-residual-review-variance-adjudication.md`} target="_blank" rel="noopener noreferrer">Review variance adjudication</a>{' '}
+        &mdash; each disputed point settled against the sources, with the corrections carried forward
+      </li>
+      <li>
+        <a href={`${EVIDENCE_BASE}/2026-09-03-nonclinical-estimand-residual-steward-disposition.md`} target="_blank" rel="noopener noreferrer">Steward disposition</a>{' '}
+        &mdash; the accepted narrowing, the preserved terminology split, and the explicit non-decisions
+      </li>
+    </ul>
+  </section>
+</PublicationLayout>
+
+<style>
+  .table-scroll {
+    margin: 1.75rem 0;
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 46rem;
+  }
+
+  td ul {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  td li + li {
+    margin-top: 0.5rem;
+  }
+
+  td p {
+    margin: 0;
+  }
+
+  td p + p {
+    margin-top: 0.4rem;
+  }
+</style>

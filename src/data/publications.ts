@@ -13,6 +13,19 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'Research',
+    type: 'Research note',
+    date: 'September 4, 2026',
+    sortKey: '2026-09-04',
+    title:
+      'What three welfare guidance documents define, and what they leave to statistics',
+    summary:
+      'Three animal-welfare guidance documents define exactly when a study must end and what is recorded, but none says whether the measurement it prevented still exists.',
+    href: '/research/humane-endpoints-and-the-unmeasured-outcome/',
+    status:
+      'Source-bounded research finding — two independent close reviews; not peer reviewed; FND-1 gate open',
+  },
+  {
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 3, 2026',
