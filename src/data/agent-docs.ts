@@ -280,7 +280,7 @@ ${NOMUE_NPX_COMMAND}`,
     title: 'Use nomue Record verification over MCP',
     description:
       'Install the public local stdio server, decide when its method-neutral Record tool applies, and replay the current Release 1 Welch result with the independent verifier.',
-    status: 'Public local MCP release candidate — @licklider/nomue-mcp 0.2.0-rc.1',
+    status: 'Public local MCP release candidate — @licklider/nomue-verifier-mcp 0.2.0-rc.0',
     updated: 'September 4, 2026',
     llmSummary: [
       `Start the exact release candidate with ${NOMUE_MCP_NPX_COMMAND}.`,
@@ -306,7 +306,7 @@ ${NOMUE_NPX_COMMAND}`,
           `Method-neutral tool: ${MCP_RELEASE.tool}; current support remains the Release 1 Welch bundle.`,
           `Verifier dependency: exact ${MCP_RELEASE.verifierPackage}@${MCP_RELEASE.verifierVersion}.`,
           `Tested package path: ${MCP_RELEASE.testedOperatingSystems.join(', ')} with Node.js ${MCP_RELEASE.testedNodeVersions.join(' and ')}.`,
-          `The mutable npm latest tag currently remains on ${MCP_RELEASE.npmLatestVersion}; neither latest nor rc is a stable-release claim. Client configurations pin ${MCP_RELEASE.version} exactly.`,
+          `The mutable npm ${MCP_RELEASE.npmDistTag} tag is not a stable-release claim. Client configurations pin ${MCP_RELEASE.version} exactly.`,
         ],
       },
       {

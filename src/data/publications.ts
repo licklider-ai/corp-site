@@ -38,19 +38,6 @@ export const PUBLICATIONS: PublicationItem[] = [
       'Independently reviewed research input — scope narrowed on incomplete sources; no Release 3 RFC is open',
   },
   {
-    category: 'Research',
-    type: 'Research note',
-    date: 'September 4, 2026',
-    sortKey: '2026-09-04',
-    title:
-      'What three welfare guidance documents define, and what they leave to statistics',
-    summary:
-      'Three animal-welfare guidance documents define exactly when a study must end and what is recorded, but none says whether the measurement it prevented still exists.',
-    href: '/research/humane-endpoints-and-the-unmeasured-outcome/',
-    status:
-      'Source-bounded research finding — two independent close reviews; not peer reviewed; FND-1 gate open',
-  },
-  {
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 3, 2026',
@@ -69,10 +56,10 @@ export const PUBLICATIONS: PublicationItem[] = [
     sortKey: '2026-09-02',
     title: 'nomue Record Verifier MCP release candidate is available',
     summary:
-      'The public @licklider/nomue-mcp package exposes a method-neutral Record verification tool over local stdio; the current release supports the Release 1 Welch bundle.',
+      'The public @licklider/nomue-verifier-mcp package exposes a method-neutral Record verification tool over local stdio; the current release supports the Release 1 Welch bundle.',
     href: '/news/nomue-mcp-on-npm/',
     status:
-      'Public local MCP release candidate — npm rc 0.2.0-rc.1; official MCP Registry',
+      'Public local MCP release candidate — npm rc 0.2.0-rc.0; official MCP Registry',
   },
   {
     category: 'Research',
