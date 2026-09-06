@@ -3,12 +3,8 @@
 ---
 
 <script>
-  const arrow = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17 17 7M7 7h10v10"/></svg>';
   document.querySelectorAll<HTMLAnchorElement>('a[href^="https://"]').forEach((link) => {
     if (new URL(link.href).hostname === location.hostname) return;
-    link.classList.add('external-link');
-    // Preserve arrows already present in the source copy.
-    if (!link.textContent?.includes('↗')) link.insertAdjacentHTML('beforeend', arrow);
     if (link.target === '_blank') {
       link.setAttribute('aria-label', `${link.textContent?.trim()} (opens in a new tab)`);
     }
