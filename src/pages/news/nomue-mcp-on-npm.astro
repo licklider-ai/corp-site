@@ -24,10 +24,10 @@ const toc = [
   category="News"
   type="Product"
   title="nomue Record Verifier MCP release candidate is available"
-  description="The public @licklider/nomue-mcp package exposes a method-neutral Record verification tool over local stdio; the current release supports the Release 1 Welch bundle."
+  description="The public @licklider/nomue-verifier-mcp package exposes a method-neutral Record verification tool over local stdio; the current release supports the Release 1 Welch bundle."
   published="September 2, 2026"
   updated="September 4, 2026"
-  status="Public local MCP release candidate — npm rc 0.2.0-rc.1; official MCP Registry"
+  status="Public local MCP release candidate — npm rc 0.2.0-rc.0; official MCP Registry"
   toc={toc}
 >
   <section id="available">
@@ -110,10 +110,9 @@ const toc = [
     <div class="notice">
       <p>
         This is version <code>{MCP_RELEASE.version}</code>, published through the npm{' '}
-        <code>{MCP_RELEASE.npmDistTag}</code> channel. The mutable <code>latest</code>{' '}
-        tag currently remains on <code>{MCP_RELEASE.npmLatestVersion}</code>; neither tag
-        is a stable-release claim. The exact version remains pinned in every client
-        example.
+        <code>{MCP_RELEASE.npmDistTag}</code> channel. A mutable distribution tag is not
+        a stable-release claim, so every client example pins the exact release-candidate
+        version.
       </p>
     </div>
     <p>
