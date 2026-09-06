@@ -170,6 +170,8 @@ const roadmapStructuredData = {
 </PageLayout>
 
 <style>
+@layer legacy {
+
   .page-head { padding-bottom: 2.5rem; border-bottom: 1px solid var(--rule); }
   .page-head .eyebrow { margin: 0; }
   .page-head h1 { margin: 0.9rem 0 1.25rem; font-size: clamp(1.9rem, 3.6vw, 2.7rem); line-height: 1.2; letter-spacing: -0.01em; }
@@ -200,4 +202,6 @@ const roadmapStructuredData = {
     .fact-grid, .method-grid { grid-template-columns: minmax(0, 1fr); }
     .method-grid li:nth-child(odd), .method-grid li:nth-child(even) { padding-inline: 0; border-left: 0; }
   }
+
+}
 </style>

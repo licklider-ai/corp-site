@@ -13,7 +13,10 @@ const isActive = (href: string) => {
   <div class="inner">
     <a class="logo" href="/">{SITE_TITLE}</a>
 
-    <nav aria-label="Global navigation">
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="global-navigation" data-ui>
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 8h16M4 16h16" /></svg>
+    </button>
+    <nav id="global-navigation" aria-label="Global navigation">
       <ul>
         {
           GLOBAL_NAV.map((item) => (
@@ -41,6 +44,28 @@ const isActive = (href: string) => {
   const header = document.querySelector<HTMLElement>('.site-header');
 
   if (header) {
+    const toggle = header.querySelector<HTMLButtonElement>('.nav-toggle');
+    const nav = header.querySelector<HTMLElement>('#global-navigation');
+    if (toggle && nav) {
+      header.dataset.enhanced = '';
+      const setOpen = (open: boolean) => {
+        toggle.setAttribute('aria-expanded', String(open));
+        nav.toggleAttribute('data-open', open);
+      };
+      toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+      header.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+          setOpen(false);
+          toggle.focus();
+        }
+      });
+      nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+      const mobile = window.matchMedia('(max-width: 800px)');
+      mobile.addEventListener('change', () => {
+        if (mobile.matches && nav.contains(document.activeElement)) toggle.focus();
+        setOpen(false);
+      });
+    }
     const sync = () => {
       const height = header.offsetHeight;
 
@@ -56,6 +81,8 @@ const isActive = (href: string) => {
 </script>
 
 <style>
+@layer legacy {
+
   /* 固定ヘッダー。高さは --header-h として下位のレイアウトから参照される */
   .site-header {
     position: sticky;
@@ -142,4 +169,6 @@ const isActive = (href: string) => {
       white-space: nowrap;
     }
   }
+
+}
 </style>

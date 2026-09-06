@@ -9,7 +9,8 @@ const isActive = (href: string) => {
 ---
 
 <nav class="side-menu" aria-label="Site sections">
-  <p class="eyebrow">Sections</p>
+  <details class="section-disclosure" open>
+  <summary class="eyebrow">Sections</summary>
   <ul>
     {
       SIDE_NAV.map((item) => (
@@ -27,9 +28,12 @@ const isActive = (href: string) => {
       ))
     }
   </ul>
+  </details>
 </nav>
 
 <style>
+@layer legacy {
+
   /* スクロールに追従して常時表示。ヘッダーの高さぶん下げる */
   .side-menu {
     position: sticky;
@@ -86,4 +90,6 @@ const isActive = (href: string) => {
       border-bottom: 1px solid var(--rule-faint);
     }
   }
+
+}
 </style>

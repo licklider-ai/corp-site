@@ -60,6 +60,8 @@ const pairedTSeries = [
 </PublicationIndexLayout>
 
 <style>
+@layer legacy {
+
   .series { border-bottom: 1px solid var(--rule-faint); background: var(--wash); }
   .series-inner { max-width: var(--shell); margin: 0 auto; padding: 3.5rem var(--gutter); }
   .series h2 { margin: 0.8rem 0 1rem; font-size: clamp(1.5rem, 3vw, 2rem); }
@@ -77,4 +79,6 @@ const pairedTSeries = [
     .series li, .series li:nth-child(odd) { border-left: 1px solid var(--rule); }
     .series li:last-child { grid-column: auto; }
   }
+
+}
 </style>

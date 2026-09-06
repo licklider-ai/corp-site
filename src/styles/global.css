@@ -1,3 +1,6 @@
+@layer legacy, design;
+
+@layer legacy {
 /*
  * Licklider — グローバルスタイル
  * 配色は白と黒 (＋黒の濃淡) のみ。フォントは Times New Roman。
@@ -153,4 +156,6 @@ th {
   :root {
     --gutter: 1.5rem;
   }
+}
+
 }

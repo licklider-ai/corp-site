@@ -3,6 +3,8 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_META_TITLE, SITE_TITLE } from '../consts';
 import '../styles/global.css';
+import '../styles/design.css';
+import InterfaceEnhancements from '../components/InterfaceEnhancements.astro';
 
 interface Props {
   title?: string;
@@ -108,10 +110,13 @@ const jsonLd = {
       <slot />
     </main>
     <Footer />
+    <InterfaceEnhancements />
   </body>
 </html>
 
 <style>
+@layer legacy {
+
   .skip-link {
     position: absolute;
     left: -9999px;
@@ -125,4 +130,6 @@ const jsonLd = {
     padding: 0.5rem 0.75rem;
     border: 1px solid var(--ink);
   }
+
+}
 </style>

@@ -76,7 +76,7 @@ const homeStructuredData = {
   <section class="hero">
     <div class="hero-inner">
       <p class="eyebrow">Licklider</p>
-      <h1>The verification layer<br />for AI research agents</h1>
+      <h1>The <span class="hero-keyword">verification</span> layer<br />for AI research agents</h1>
       <div class="lede">
         <p>
           AI research agents need a separate, inspectable system for decisions they
@@ -417,23 +417,19 @@ const homeStructuredData = {
     <section id="latest" class="band">
       <p class="eyebrow">Latest</p>
       <div class="band-body latest-body">
-        <div class="table-scroll">
-          <table>
-            <tbody>
+        <ol class="latest-list">
               {
                 latest.map((row) => (
-                  <tr>
-                    <td class="latest-date">{row.date}</td>
-                    <td><a href={row.href}>{row.title}</a></td>
-                    <td class="latest-category">
+                  <li>
+                    <span class="latest-date">{row.date}</span>
+                    <a class="latest-title" href={row.href}>{row.title}</a>
+                    <span class="latest-category">
                       <a href={`/${row.category.toLowerCase()}/`}>{row.category}</a>
-                    </td>
-                  </tr>
+                    </span>
+                  </li>
                 ))
               }
-            </tbody>
-          </table>
-        </div>
+        </ol>
         <p class="more"><a href="/latest/">→ All updates</a> · <a href="/rss.xml">RSS →</a> · <a href="/feed.json">JSON Feed →</a></p>
       </div>
     </section>
@@ -441,6 +437,8 @@ const homeStructuredData = {
 </BaseLayout>
 
 <style>
+@layer legacy {
+
   .hero { border-bottom: 1px solid var(--rule-faint); }
   .hero-inner { max-width: var(--shell); margin: 0 auto; padding: 7rem var(--gutter) 6rem; }
   .hero h1 { max-width: 61rem; margin: 1.25rem 0 2.5rem; font-size: clamp(2.7rem, 6vw, 4.45rem); line-height: 1.1; letter-spacing: -0.015em; }
@@ -534,4 +532,6 @@ const homeStructuredData = {
     .contribution-counts > div { min-width: 0; }
     .latest-category { display: none; }
   }
+
+}
 </style>

@@ -46,31 +46,29 @@ const {
 
   <section class="index" aria-labelledby="publication-list">
     <h2 id="publication-list" class="visually-hidden">{title} entries</h2>
-    <div class="table-scroll">
-      <table>
-        <tbody>
+    <ol class="publication-list">
           {
             items.map((item) => (
-              <tr>
-                <td class="date">{item.date}</td>
-                <td>
+              <li>
+                <p class="date">{item.date}</p>
+                <div>
                   <p class="type">
                     {showCategory ? `${item.category} / ${item.type}` : item.type}
                   </p>
                   <h3><a href={item.href}>{item.title}</a></h3>
                   <p class="summary">{item.summary}</p>
                   <p class="status">{item.status}</p>
-                </td>
-              </tr>
+                </div>
+              </li>
             ))
           }
-        </tbody>
-      </table>
-    </div>
+    </ol>
   </section>
 </BaseLayout>
 
 <style>
+@layer legacy {
+
   .page-hero {
     border-bottom: 1px solid var(--rule-faint);
   }
@@ -167,4 +165,6 @@ const {
       width: 8.5rem;
     }
   }
+
+}
 </style>

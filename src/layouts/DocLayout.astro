@@ -44,6 +44,8 @@ const { title, description, status, updated, slug, toc } = Astro.props;
 </PageLayout>
 
 <style>
+@layer legacy {
+
   .doc {
     width: 100%;
     padding-bottom: 1rem;
@@ -147,4 +149,6 @@ const { title, description, status, updated, slug, toc } = Astro.props;
       grid-template-columns: 5.5rem minmax(0, 1fr);
     }
   }
+
+}
 </style>
