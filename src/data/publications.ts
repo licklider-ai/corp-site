@@ -17,6 +17,17 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Upstream report',
     date: 'September 7, 2026',
     sortKey: '2026-09-07',
+    title: 'SciPy’s automatic Mann–Whitney U test can change a result when tests are batched',
+    summary:
+      'An unchanged sample pair crosses the 5% significance threshold when another pair contains repeated values, because SciPy selects one calculation method for the batch.',
+    href: '/engineering/scipy-mannwhitneyu-batch-method-selection/',
+    status: 'Reported to SciPy — issue #26115 open; intended behavior awaiting clarification',
+  },
+  {
+    category: 'Engineering',
+    type: 'Upstream report',
+    date: 'September 7, 2026',
+    sortKey: '2026-09-07',
     title: 'SciPy t-tests can return p=0 or p=1 after exact rescaling',
     summary:
       'SciPy’s one-sample and paired t-tests can reverse a 5% decision after exact power-of-two rescaling because an intermediate variance underflows or overflows.',

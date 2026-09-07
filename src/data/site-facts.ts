@@ -187,6 +187,21 @@ export const CORE_NON_CLAIMS = [
 export const UPSTREAM_CONTRIBUTIONS = [
   {
     project: 'SciPy',
+    title: 'Mann–Whitney U: batching can change a 5% decision',
+    summary:
+      'An unchanged sample pair crosses the 5% significance threshold when another pair contains repeated values, because SciPy selects one calculation method for the batch.',
+    href: '/engineering/scipy-mannwhitneyu-batch-method-selection/',
+    status: 'Reported to SciPy — issue #26115 open; intended behavior awaiting clarification',
+    outcome: 'report_open',
+    comparisonLabel: 'Same pair: alone → batched with a tied pair',
+    observed: '0.04798',
+    reference: '0.05132',
+    evidenceHref: 'https://github.com/scipy/scipy/issues/26115',
+    evidenceLabel: 'SciPy issue #26115',
+    credit: 'Reported by Tasuku Kobayashi · no upstream response as of September 7, 2026',
+  },
+  {
+    project: 'SciPy',
     title: 'SciPy t-tests can return p=0 or p=1 after exact rescaling',
     summary:
       'SciPy’s one-sample and paired t-tests can reverse a 5% decision after exact power-of-two rescaling because an intermediate variance underflows or overflows.',

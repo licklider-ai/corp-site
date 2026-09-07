@@ -1,0 +1,144 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/scipy-mannwhitneyu-batch-method-selection/')!;
+---
+
+<PublicationLayout
+  category={item.category}
+  type={item.type}
+  title={item.title}
+  description={item.summary}
+  published={item.date}
+  status={item.status}
+  toc={[]}
+>
+  <section id="finding">
+    <h2>Same data, different result</h2>
+    <p>
+      Running several statistical tests together can save repetitive work. In the
+      example Licklider reported to SciPy, that change alone moves an unchanged
+      sample pair’s p-value from approximately 0.048 to 0.051. At a 5% significance
+      threshold, the decision changes from rejection to non-rejection.
+    </p>
+    <p>
+      The trigger is a repeated value in a different sample pair. SciPy’s automatic
+      method selection notices that repetition and switches the calculation method
+      for every pair in the call, including the pair whose data did not change.
+    </p>
+    <div class="notice">
+      <p>
+        Licklider founder Tasuku Kobayashi filed <a href="https://github.com/scipy/scipy/issues/26115">SciPy issue #26115</a>
+        on September 7, 2026. As of that date, the issue is open with no upstream
+        response. The report asks whether this automatic selection is intentional;
+        it does not establish a maintainer-confirmed defect or an accepted fix.
+      </p>
+    </div>
+  </section>
+
+  <section id="example">
+    <h2>The reported example</h2>
+    <p>
+      The Mann–Whitney U test compares two independent samples using their ranks.
+      Here the target samples are <code>[0, 1, 2, 3, 9]</code> and
+      <code>[4, 5, 6, 7, 8, 10, 11]</code>. Their pooled values contain no repetitions,
+      or “ties.” A slice means one pair of samples in a batched call.
+    </p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Call</th><th>Target p-value</th></tr></thead>
+        <tbody>
+          <tr><td>Alone, automatic selection</td><td><code>0.04797979797979798</code></td></tr>
+          <tr><td>Batched with another untied pair, automatic selection</td><td><code>0.04797979797979798</code></td></tr>
+          <tr><td>Batched with a pair containing one tie, automatic selection</td><td><code>0.05131990358807116</code></td></tr>
+          <tr><td>Alone, exact method</td><td><code>0.04797979797979798</code></td></tr>
+          <tr><td>Alone, asymptotic method</td><td><code>0.05131990358807116</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Every row reports the same target pair, with U = 5. The test is two-sided,
+      continuity correction is enabled, and no multiple-testing correction is applied.
+      Reversing the batch’s row order leaves the target result unchanged. Ties here
+      mean repeated values within one pooled sample pair, not values shared across pairs.
+    </p>
+  </section>
+
+  <section id="mechanism">
+    <h2>The change comes from method selection</h2>
+    <p>
+      The report records this behavior in SciPy <code>1.18.1</code> and development
+      build <code>2.0.0.dev0+git20260902.fb96fc6</code>, both with NumPy
+      <code>2.3.5</code>. It uses NumPy <code>float64</code> arrays without NaNs,
+      <code>method='auto'</code>, and <code>axis=-1</code>.
+    </p>
+    <p>
+      In the inspected implementation, when either sample size is at most eight,
+      automatic selection chooses the exact method if there are no ties, and the
+      asymptotic method otherwise. The tie check spans the entire call:
+      <code>_mwu_choose_method(n1, n2, xp.any(t &gt; 1))</code>.
+    </p>
+    <p>
+      The asymptotic calculation’s tie correction is still computed separately for
+      each slice. Another pair’s ties change the selected method; they do not enter
+      the target pair’s variance correction.
+    </p>
+    <p>
+      Kobayashi’s mathematical cross-check enumerated all 792 rank allocations for
+      the target pair, giving the inclusive two-sided exact probability
+      <code>38/792 = 19/396</code>. A separate continuity-corrected normal approximation
+      agreed with the asymptotic value. Both numbers match their respective methods
+      in this example. The issue concerns which method is selected.
+    </p>
+  </section>
+
+  <section id="question">
+    <h2>What the report asks SciPy to clarify</h2>
+    <p>
+      If selecting one method for the whole call is intentional, the report requests
+      documentation explaining that another slice can change a result, along with
+      guidance for users who need agreement with separate calls. If automatic
+      selection should happen per slice, it requests a regression test that mixes
+      tied and untied pairs and compares batched results with separate calls.
+    </p>
+    <p>
+      Applying the exact method to every pair is not a general workaround: that
+      method does not correct for ties. The report proposes no particular repair
+      and does not measure how frequently the behavior occurs or its effects on
+      false-positive and false-negative rates.
+    </p>
+  </section>
+
+  <section id="verification">
+    <h2>Why this matters for verification</h2>
+    <p>
+      This example shows why a checkable statistical result needs to identify the
+      calculation method actually used, as well as the data and test name. A workflow
+      change from separate calls to a batch can alter automatic choices even when
+      the target observations stay fixed.
+    </p>
+    <p>
+      For Licklider, the investigation demonstrates reproducible boundary testing,
+      source inspection, and mathematical cross-checks behind our verification work.
+      It does not add Mann–Whitney U support to nomue or establish that nomue detects
+      this behavior. See the <a href="/docs/limits/">current verification scope</a>.
+    </p>
+  </section>
+
+  <section id="evidence">
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/26115">SciPy issue #26115</a>
+        — Kobayashi’s report, executable reproducer, saved results, complete environment
+        information, source analysis, and current discussion.
+      </li>
+    </ul>
+  </section>
+</PublicationLayout>
+
+<style>
+  .table-scroll { overflow-x: auto; margin: 1.75rem 0; }
+  table { min-width: 36rem; }
+</style>
