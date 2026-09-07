@@ -385,6 +385,27 @@ unexplained.
 
 ## 7. Required metadata
 
+### Article layout and images
+
+All Research, Engineering, and News articles use `PublicationLayout.astro`.
+The title, summary, metadata, and body share a centered reading column of at most
+52rem. Text remains left-aligned. The surrounding article canvas remains at most
+62rem; images can use that wider canvas. Both widths shrink to the available
+space on mobile, preserving the page gutters.
+
+For an article thumbnail, pass a `figure` or `img` in the layout's named
+`thumbnail` slot. It appears between the metadata and body at the wide canvas
+width. For body images, place a `figure`, `picture`, or standalone `img` directly
+inside the body or an article section. Image-only paragraphs also expand to the
+wide canvas. Use `figure` with `figcaption` for captioned images; captions retain
+the centered reading width. Keep wide figures outside narrow callouts and tables.
+Provide meaningful `alt` text and intrinsic `width` and `height` on images, and
+use `loading="lazy"` for below-the-fold images. Existing inline icons are not
+treated as wide article media.
+
+This is an in-page image layout convention. It does not generate images or
+change social-sharing image metadata.
+
 ### 7.1 Every item
 
 - title

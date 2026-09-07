@@ -62,6 +62,12 @@ const structuredData = {
       </dl>
     </header>
 
+    {Astro.slots.has('thumbnail') && (
+      <div class="publication-thumbnail">
+        <slot name="thumbnail" />
+      </div>
+    )}
+
     <div class="body">
       <slot />
     </div>
@@ -69,6 +75,73 @@ const structuredData = {
 </PageLayout>
 
 <style>
+  /* The article canvas stays wide; all reading content shares one centered measure. */
+  .publication {
+    --reading-width: 52rem;
+    container-type: inline-size;
+  }
+
+  .page-head,
+  .body {
+    width: 100%;
+    max-width: var(--reading-width);
+    margin-inline: auto;
+    overflow-wrap: anywhere;
+  }
+
+  .page-head .standfirst {
+    max-width: none;
+  }
+
+  .publication-thumbnail {
+    margin-block: 2.5rem 0;
+  }
+
+  /* Full-width media uses the article canvas, including on narrow screens.
+     Use figures (with optional captions) directly in the body or a section. */
+  .body > :global(figure),
+  .body :global(section > figure),
+  .body > :global(img),
+  .body :global(section > img),
+  .body > :global(picture),
+  .body :global(section > picture),
+  .body :global(p:has(> img:only-child)),
+  .body :global(p:has(> picture:only-child)) {
+    display: block;
+    width: 100cqw;
+    max-width: none;
+    margin-inline: calc((100% - 100cqw) / 2);
+    margin-block: 2rem;
+  }
+
+  .publication-thumbnail :global(figure) {
+    margin: 0;
+  }
+
+  .publication-thumbnail :global(img),
+  .body :global(figure img),
+  .body :global(picture img),
+  .body :global(p > img:only-child) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .body > :global(img),
+  .body :global(section > img) {
+    display: block;
+    height: auto;
+  }
+
+  .publication-thumbnail :global(figcaption),
+  .body :global(figcaption) {
+    max-width: var(--reading-width);
+    margin: 0.75rem auto 0;
+    color: var(--ink-2);
+    font-size: 0.875rem;
+  }
+
 @layer legacy {
 
   .publication {
