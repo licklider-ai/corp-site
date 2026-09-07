@@ -13,6 +13,18 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'Engineering',
+    type: 'Upstream report',
+    date: 'September 7, 2026',
+    sortKey: '2026-09-07',
+    title: 'SciPy t-tests can return p=0 or p=1 after exact rescaling',
+    summary:
+      'SciPy’s one-sample and paired t-tests can reverse a 5% decision after exact power-of-two rescaling because an intermediate variance underflows or overflows.',
+    href: '/engineering/scipy-ttest-scale-range-loss/',
+    status:
+      'Reported to SciPy — issue #26113 open; upstream confirmation and fix pending',
+  },
+  {
     category: 'Research',
     type: 'Research note',
     date: 'September 4, 2026',

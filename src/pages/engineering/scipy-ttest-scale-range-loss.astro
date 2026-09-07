@@ -1,0 +1,224 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'current-status', label: 'Current status' },
+  { id: 'observation', label: 'What we observed' },
+  { id: 'expected', label: 'Why the answer should not change' },
+  { id: 'verification', label: 'How we checked it' },
+  { id: 'diagnostic', label: 'Reporter-side diagnostic' },
+  { id: 'scope', label: 'Scope' },
+  { id: 'verification-relation', label: 'Relation to verification' },
+  { id: 'public-evidence', label: 'Public evidence' },
+];
+---
+
+<PublicationLayout
+  category="Engineering"
+  type="Upstream report"
+  title="SciPy t-tests can return p=0 or p=1 after exact rescaling"
+  description="SciPy’s one-sample and paired t-tests can reverse a 5% decision after exact power-of-two rescaling because an intermediate variance underflows or overflows."
+  published="September 7, 2026"
+  status="Reported to SciPy — issue #26113 open; upstream confirmation and fix pending"
+  toc={toc}
+>
+  <section id="current-status">
+    <h2>Current status</h2>
+    <div class="notice">
+      <p>
+        We filed SciPy issue #26113 on September 7, 2026 after reproducing the
+        behavior in released versions and recent development code. The issue is open.
+      </p>
+      <p>
+        SciPy has not publicly confirmed the cause or accepted a repair. The{' '}
+        <code>defect</code> label is assigned by SciPy’s bug-report template and is not
+        treated here as a maintainer decision.
+      </p>
+    </div>
+  </section>
+
+  <section id="observation">
+    <h2>What we observed</h2>
+    <p>
+      For finite, nonconstant <code>float64</code> inputs,{' '}
+      <code>scipy.stats.ttest_1samp</code> and <code>ttest_rel</code> can return
+      <code>p=0</code> or <code>p=1</code> solely because every observation was
+      multiplied by the same exact power of two. The expected t-statistic and p-value
+      do not change under this positive rescaling.
+    </p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Sample</th>
+            <th>Scale</th>
+            <th>Expected</th>
+            <th>SciPy result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>[s, 2s]</code></td>
+            <td><code>s = 2**-600</code></td>
+            <td><code>t=3, p≈0.2048</code></td>
+            <td><code>t=inf, p=0</code></td>
+          </tr>
+          <tr>
+            <td><code>[s, 2s]</code></td>
+            <td><code>s = 2**600</code></td>
+            <td><code>t=3, p≈0.2048</code></td>
+            <td><code>t=0, p=1</code></td>
+          </tr>
+          <tr>
+            <td><code>[2s, 3s, 4s]</code></td>
+            <td><code>s = 2**-600</code></td>
+            <td><code>t=3√3, p≈0.03510</code></td>
+            <td><code>t=inf, p=0</code></td>
+          </tr>
+          <tr>
+            <td><code>[2s, 3s, 4s]</code></td>
+            <td><code>s = 2**600</code></td>
+            <td><code>t=3√3, p≈0.03510</code></td>
+            <td><code>t=0, p=1</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      At a 5% significance threshold, the small two-value sample changes from
+      non-rejection to rejection, while the large three-value sample changes from
+      rejection to non-rejection. This changes the statistical decision in both
+      directions rather than only changing the last digits of a result.
+    </p>
+  </section>
+
+  <section id="expected">
+    <h2>Why the answer should not change</h2>
+    <p>
+      For any positive scale <code>s</code>, the sample <code>[s, 2s]</code> has
+      t-statistic <code>3</code> and a two-sided p-value of approximately{' '}
+      <code>0.20483276469913345</code>. The sample <code>[2s, 3s, 4s]</code> has
+      t-statistic <code>3√3</code> and a two-sided p-value of approximately{' '}
+      <code>0.03509871864598465</code>. These values follow directly from the sample
+      means, unbiased variances, and standard errors and were also checked with a
+      high-precision Student-t tail calculation independent of SciPy.
+    </p>
+    <p>
+      At the small scale, the exact sample variances fall below the smallest positive
+      <code>float64</code> value. At the large scale, they exceed the largest finite
+      value. Their square roots and the resulting t-statistics remain representable.
+      The numerical problem is therefore not that the requested final statistic lies
+      outside the available range.
+    </p>
+  </section>
+
+  <section id="verification">
+    <h2>How we checked it</h2>
+    <p>
+      We reproduced the same numerical results with SciPy 1.17.0, 1.17.1, and 1.18.1
+      release wheels, a <code>2.0.0.dev0</code> development wheel, and a source build
+      of SciPy <code>main</code> at commit <code>b881cb1</code>. The tests used NumPy
+      2.3.5, CPython 3.12, and Linux x86_64.
+    </p>
+    <p>
+      The inputs are normal finite floating-point numbers with substantial relative
+      variation. Scaling by <code>2**600</code> or <code>2**-600</code> changes the
+      exponent exactly, so the failure is not caused by decimal conversion or a
+      nearly constant sample. Under NumPy’s default error settings, the small-scale
+      case returns <code>p=0</code> without a warning. Enabling underflow warnings
+      exposes the intermediate failure.
+    </p>
+  </section>
+
+  <section id="diagnostic">
+    <h2>Reporter-side diagnostic</h2>
+    <p>
+      In the tested development source, <code>ttest_rel</code> delegates to{' '}
+      <code>ttest_1samp</code>. The one-sample implementation obtains its variance
+      through <code>_var</code> and <code>_moment</code>, where the centered values are
+      squared before the standard error is formed. On the reported inputs, that
+      intermediate variance becomes <code>0.0</code> or <code>inf</code>.
+    </p>
+    <p>
+      A demonstration that first scales the centered values before computing their norm
+      recovers the expected t-statistics for these examples. This is evidence about the
+      failure mechanism, not a proposed general repair. A production change would also
+      need to address axes, NaN handling, array backends, and related callers of the
+      shared reduction.
+    </p>
+    <p>
+      This is a reporter-side diagnosis. SciPy has not publicly confirmed the cause or
+      selected a repair strategy.
+    </p>
+  </section>
+
+  <section id="scope">
+    <h2>Scope</h2>
+    <p>
+      The report uses one-sample and paired t-tests as minimal examples because their
+      p-values make the decision change easy to see and their correct values can be
+      derived by hand. NumPy’s variance and standard-deviation reductions show related
+      range loss, and other SciPy functions that use variance reductions can also be
+      affected. The report does not claim that the behavior is exclusive to SciPy or to
+      these two functions.
+    </p>
+    <p>
+      The scales are deliberate stress tests. This report does not estimate how often
+      ordinary datasets reach the failing range, and it does not propose changing the
+      behavior for samples whose mathematical variance is actually zero.
+    </p>
+  </section>
+
+  <section id="verification-relation">
+    <h2>Relation to verification</h2>
+    <p>
+      This case shows why numerical verification must check transformations that should
+      preserve an answer, not only whether the returned p-value lies between zero and
+      one. Both incorrect p-values look valid in isolation, but an exact rescaling test
+      reveals that the decision is unstable.
+    </p>
+    <p>
+      The investigation demonstrates the boundary-testing and independent-reference
+      methods behind Licklider’s verification work. It does not mean that nomue
+      currently verifies SciPy, one-sample t-tests, or paired t-tests, and it does not
+      change the current nomue Protocol support boundary.
+    </p>
+  </section>
+
+  <section id="public-evidence">
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/26113" target="_blank" rel="noopener noreferrer">SciPy issue #26113</a>
+        — report, reproducer, expected values, tested versions, and current upstream state
+      </li>
+      <li>
+        <a href="https://github.com/scipy/scipy/blob/b881cb179463e85a74f3368f6242986d713adbdc/scipy/stats/_stats_py.py" target="_blank" rel="noopener noreferrer">Tested SciPy main source</a>
+        — pinned source for the reporter-side implementation-path diagnosis
+      </li>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/9562" target="_blank" rel="noopener noreferrer">SciPy issue #9562</a>
+        — earlier accepted work avoiding intermediate underflow and overflow in <code>pearsonr</code>
+      </li>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/20136" target="_blank" rel="noopener noreferrer">SciPy issue #20136</a>
+        — open range-protection issue relevant to axis-aware norm calculations
+      </li>
+    </ul>
+  </section>
+</PublicationLayout>
+
+<style>
+@layer legacy {
+
+  .table-scroll {
+    margin: 1.75rem 0;
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 46rem;
+  }
+
+}
+</style>
