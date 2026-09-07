@@ -388,13 +388,13 @@ unexplained.
 ### Article layout and images
 
 All Research, Engineering, and News articles use `PublicationLayout.astro`.
-The title, summary, metadata, and body share a centered reading column of at most
+The title, summary, publication dates, and body share a centered reading column of at most
 52rem. Text remains left-aligned. The surrounding article canvas remains at most
 62rem; images can use that wider canvas. Both widths shrink to the available
 space on mobile, preserving the page gutters.
 
 For an article thumbnail, pass a `figure` or `img` in the layout's named
-`thumbnail` slot. It appears between the metadata and body at the wide canvas
+`thumbnail` slot. It appears between the article header and body at the wide canvas
 width. For body images, place a `figure`, `picture`, or standalone `img` directly
 inside the body or an article section. Image-only paragraphs also expand to the
 wide canvas. Use `figure` with `figcaption` for captioned images; captions retain
@@ -405,6 +405,17 @@ treated as wide article media.
 
 This is an in-page image layout convention. It does not generate images or
 change social-sharing image metadata.
+
+### Visible article metadata
+
+Article headers show only publication dates above the title:
+`Published September 1, 2026 | Updated September 4, 2026`.
+Omit the separator and Updated portion when no update date exists. Use semantic
+`time` elements, keep the line visually simple, and allow wrapping on small screens.
+Do not show the category/type eyebrow or a By/Published/Updated/Status metadata box.
+Keep authorship and category in structured data and the publication registry.
+Material maturity and unresolved scientific or upstream status belong in the article
+body near the relevant claim; they do not require a metadata panel.
 
 ### 7.1 Every item
 

@@ -14,8 +14,7 @@ interface Props {
   toc: TocItem[];
 }
 
-const { category, type, title, description, published, updated, status, toc } = Astro.props;
-const categoryHref = `/${category.toLowerCase()}/`;
+const { category, title, description, published, updated, toc } = Astro.props;
 const publishedTime = new Date(`${published} 00:00:00 UTC`).toISOString();
 const modifiedTime = updated
   ? new Date(`${updated} 00:00:00 UTC`).toISOString()
@@ -46,20 +45,18 @@ const structuredData = {
 >
   <div class="publication">
     <header class="page-head">
-      <p class="eyebrow"><a href={categoryHref}>{category}</a> / {type}</p>
+      <p class="publication-dates">
+        <span>Published <time datetime={publishedTime}>{published}</time></span>
+        {updated && (
+          <>
+            <span class="date-divider" aria-hidden="true">|</span>
+            <span>Updated <time datetime={modifiedTime}>{updated}</time></span>
+          </>
+        )}
+      </p>
       <h1>{title}</h1>
       <p class="standfirst">{description}</p>
 
-      <dl class="metadata">
-        <dt>By</dt>
-        <dd>Licklider</dd>
-        <dt>Published</dt>
-        <dd>{published}</dd>
-        {updated && <dt>Updated</dt>}
-        {updated && <dd>{updated}</dd>}
-        <dt>Status</dt>
-        <dd>{status}</dd>
-      </dl>
     </header>
 
     {Astro.slots.has('thumbnail') && (
@@ -75,6 +72,21 @@ const structuredData = {
 </PageLayout>
 
 <style>
+  .publication-dates {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.75rem;
+    margin: 0;
+    color: var(--ink-3);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .publication-dates > span {
+    white-space: nowrap;
+  }
+
   /* The article canvas stays wide; all reading content shares one centered measure. */
   .publication {
     --reading-width: 52rem;
@@ -154,15 +166,6 @@ const structuredData = {
     border-bottom: 1px solid var(--rule);
   }
 
-  .eyebrow {
-    margin: 0;
-  }
-
-  .eyebrow a {
-    color: inherit;
-    text-decoration: none;
-  }
-
   h1 {
     margin: 1rem 0 1.35rem;
     font-size: clamp(2rem, 4.3vw, 3.15rem);
@@ -174,24 +177,6 @@ const structuredData = {
     margin: 0;
     color: var(--ink-2);
     font-size: 1.1rem;
-  }
-
-  .metadata {
-    display: grid;
-    grid-template-columns: 6.5rem minmax(0, 1fr);
-    margin: 2rem 0 0;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--rule-faint);
-    row-gap: 0.35rem;
-    font-size: 0.88rem;
-  }
-
-  .metadata dt {
-    color: var(--ink-3);
-  }
-
-  .metadata dd {
-    margin: 0;
   }
 
   .body {
@@ -242,11 +227,6 @@ const structuredData = {
     font-size: 0.86em;
   }
 
-  @media (max-width: 700px) {
-    .metadata {
-      grid-template-columns: 5.5rem minmax(0, 1fr);
-    }
-  }
 
 }
 </style>
