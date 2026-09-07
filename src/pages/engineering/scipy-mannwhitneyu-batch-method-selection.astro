@@ -11,6 +11,7 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/scipy-man
   title={item.title}
   description={item.summary}
   published={item.date}
+  updated="September 7, 2026"
   status={item.status}
   toc={[]}
 >
@@ -30,9 +31,12 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/scipy-man
     <div class="notice">
       <p>
         Licklider founder Tasuku Kobayashi filed <a href="https://github.com/scipy/scipy/issues/26115">SciPy issue #26115</a>
-        on September 7, 2026. As of that date, the issue is open with no upstream
-        response. The report asks whether this automatic selection is intentional;
-        it does not establish a maintainer-confirmed defect or an accepted fix.
+        on September 7, 2026. SciPy maintainer and Steering Council member Lucas Colley
+        triaged it into the <code>scipy.stats</code> area. A community contributor then
+        checked current SciPy <code>main</code> and confirmed the global method-selection
+        path and the absence of <code>method='auto'</code> from the existing
+        batched-equivalence test. The issue remains open. Maintainers have not yet decided
+        whether the behavior is intentional or selected a code or documentation change.
       </p>
     </div>
   </section>
@@ -96,6 +100,15 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/scipy-man
   <section id="question">
     <h2>What the report asks SciPy to clarify</h2>
     <p>
+      The public discussion now confirms that existing slice-wise equivalence tests cover
+      explicit <code>"exact"</code> and <code>"asymptotic"</code> modes, while the
+      automatic mode is tested separately only with one-dimensional inputs. The
+      contributor asked maintainers to choose between per-slice selection and documenting
+      the current call-wide behavior. Kobayashi replied that per-slice selection would
+      preserve agreement with separate calls, while leaving the intended API behavior
+      for maintainers to decide.
+    </p>
+    <p>
       If selecting one method for the whole call is intentional, the report requests
       documentation explaining that another slice can change a result, along with
       guidance for users who need agreement with separate calls. If automatic
@@ -132,7 +145,13 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/scipy-man
       <li>
         <a href="https://github.com/scipy/scipy/issues/26115">SciPy issue #26115</a>
         — Kobayashi’s report, executable reproducer, saved results, complete environment
-        information, source analysis, and current discussion.
+        information, maintainer triage into <code>scipy.stats</code>, and current
+        discussion.
+      </li>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/26115#issuecomment-5568743387">Implementation and test-coverage check</a>
+        — a community contributor confirmed the call-wide selection path on current
+        <code>main</code> and identified the missing automatic-mode batch test.
       </li>
     </ul>
   </section>

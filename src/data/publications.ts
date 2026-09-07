@@ -33,7 +33,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     summary:
       'An unchanged sample pair crosses the 5% significance threshold when another pair contains repeated values, because SciPy selects one calculation method for the batch.',
     href: '/engineering/scipy-mannwhitneyu-batch-method-selection/',
-    status: 'Reported to SciPy — issue #26115 open; intended behavior awaiting clarification',
+    status: 'Triaged by a SciPy maintainer into scipy.stats; implementation path confirmed — intended behavior and remedy awaiting decision',
   },
   {
     category: 'Engineering',
