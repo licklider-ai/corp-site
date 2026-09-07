@@ -1,0 +1,145 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const REPO = 'https://github.com/licklider-ai/nomue-protocol';
+const result = `${REPO}/blob/80ad520cf25e8cdf647f20e7d08d5bb426a85633/governance/drafts/release-3-preparation/semantic-source-acquisition-result.md`;
+const primaryReview = `${REPO}/blob/c36318971244c26073078b848ab2f3c52f46010b/review-inputs/r3-src-primary-completion/REVIEW-RESULT.md`;
+const closureReview = `${REPO}/blob/3828b82b0b2e79b7ba05f6eb771288c39d49435b/review-inputs/r3-src-closure-proposal/REVIEW-RESULT.md`;
+const toc = [
+  { id: 'current-status', label: 'Current status' },
+  { id: 'sources', label: 'What the originals resolved' },
+  { id: 'table', label: 'When a table disagrees with its equation' },
+  { id: 'protocol', label: 'What this advances in nomue' },
+  { id: 'evidence', label: 'Evidence and review' },
+];
+---
+
+<PublicationLayout
+  category="Engineering"
+  type="Technical method"
+  title="Checking multiple-testing procedures against their original papers"
+  description="Reviewing six original papers clarified multiple-testing guarantees and exposed a numerical table entry that disagrees with its defining equation."
+  published="September 7, 2026"
+  status="Independently reviewed source evidence — Release 3 preparation; formal acceptance pending"
+  toc={toc}
+>
+  <section id="current-status">
+    <h2>Current status</h2>
+    <p>
+      Six original papers now have a completed primary-source review in nomue Protocol's
+      preparation for multi-group comparisons. The review checked the recorded claims
+      against the original pages and independently recomputed numerical evidence. It
+      returned GO within that six-paper scope.
+    </p>
+    <p>
+      The resulting proposal in <a href={`${REPO}/pull/196`}>PR #196</a> treats one
+      source requirement as ready for closure, with a separate review supporting that
+      treatment. Formal acceptance is pending as of September 7, 2026. This is public
+      research evidence for Release 3 preparation; current product support remains
+      Release 1 Welch Record verification.
+    </p>
+  </section>
+
+  <section id="sources">
+    <h2>What the originals resolved</h2>
+    <p>
+      Our <a href="/engineering/cataloguing-multi-group-procedures/">earlier catalogue</a>
+      covered 49 multi-group procedures. Many entries still depended on unread sources.
+      This follow-up examined papers by Simes, Hochberg, Hommel, Shaffer, Rom, and
+      Holland–Copenhaver to determine exactly which claims their procedures support.
+    </p>
+    <p>
+      Multiple testing asks how to control errors when a family contains several
+      hypotheses. Procedures with similar names or thresholds can make different
+      promises. A result about whether any hypothesis in a family is false does not
+      automatically justify naming individual false hypotheses. A guarantee proved
+      under independence also cannot be silently extended to dependent tests.
+    </p>
+    <p>
+      The source review made those distinctions explicit. Simes's global test and its
+      exploratory individual rejections are separated. Hochberg and Hommel retain the
+      validity conditions required by the Simes tests used in their arguments. Shaffer's
+      procedures distinguish how many hypotheses can remain true from which specific
+      hypotheses have already been rejected.
+    </p>
+    <p>
+      Those details affect executable rules. Hommel's shortcut uses a strict comparison
+      during its search and a non-strict comparison for final rejection. Its general
+      procedure and its logically restricted variant also give different results in
+      the paper's example: three rejections and five, respectively. The review checked
+      both against the printed example. Adjusted-output formulas derived by the
+      investigators remain labelled as derivations, separate from statements printed
+      in the papers.
+    </p>
+  </section>
+
+  <section id="table">
+    <h2>When a table disagrees with its equation</h2>
+    <p>
+      Rom's 1990 paper defines critical values through a recurrence and presents a table
+      obtained from it. In Table 1 on page 664, the modified-Hochberg entry for ten tests
+      at α = 0.01 prints <code>1.01 × 10⁻³</code>. Recomputing from equation (2) gives
+      <code>0.001004472598983613…</code>, which rounds to <code>1.00 × 10⁻³</code> at
+      the table's three significant digits.
+    </p>
+    <p>
+      The primary-source reviewer checked the page image, confirmed the discrepancy,
+      and independently integrated the relevant order-statistic probability using exact
+      polynomial arithmetic. The recurrence constants satisfied the defining probability
+      identity exactly for one through ten tests. The other nineteen modified-Hochberg
+      cells agreed at their printed precision. The conflict is therefore recorded as a
+      disagreement within the source, rather than attributed to PDF extraction.
+    </p>
+    <p>
+      The approved bounded treatment preserves both values in the evidence record. It
+      uses the defining equation and procedure to characterize the method, while
+      excluding the printed table as authority for future numerical constants. Any
+      implementation would require separately reviewed constants and numerical evidence.
+      No formal erratum was verified, and this work makes no claim to be the first to
+      have noticed the discrepancy.
+    </p>
+  </section>
+
+  <section id="protocol">
+    <h2>What this advances in nomue</h2>
+    <p>
+      The practical gain is a more precise basis for deciding what a future verifier
+      could promise. Source statements, investigator derivations, and conflicting
+      numerical evidence now have distinct recorded roles. A later implementation can
+      be reviewed against those roles instead of inheriting an ambiguous method name
+      or copying a table without checking its definition.
+    </p>
+    <p>
+      PR #196 applies that treatment to the source requirement labelled SR-C. Its
+      candidate ledger has four requirements marked CLOSED and ten still incomplete;
+      these are proposed source-result dispositions, not four formally accepted hold
+      closures. Even after this proposal is accepted, the overall source set remains
+      incomplete and the narrowed program scope remains in place. Selecting a procedure,
+      proving its implementation, and opening a Release 3 public RFC are separate steps.
+    </p>
+  </section>
+
+  <section id="evidence">
+    <h2>Evidence and review</h2>
+    <p>
+      The primary-source completion review in PR #195 checked six supplied originals
+      against recorded file hashes and printed-page references. It reported no blocker
+      or should-fix finding within that scope. PR #197 separately reviewed PR #196's
+      application of the approved treatment and returned GO for that change; it also
+      identified a public-language repair in the cited approval record outside the change.
+    </p>
+    <p>
+      Authoring and review used separate LLM-assisted contexts. The records disclose
+      author-side OpenAI assistance, reviewer-side model provenance, and the steward's
+      scoped independence decision. The steward retains responsibility for acceptance.
+      These are project review records, not journal peer review. The papers themselves
+      are not redistributed in the repository.
+    </p>
+    <ul>
+      <li><a href={result}>Source-acquisition result at the reviewed revision</a> — Parts E–F contain the source interpretations and executable diagnostics; Part G records the bounded treatment and candidate ledger.</li>
+      <li><a href={primaryReview}>Primary-source completion review, PR #195</a> — original-page checks, numerical recomputation, and scope.</li>
+      <li><a href={closureReview}>Proposal review, PR #197</a> — treatment, independence boundary, ledger, and remaining acceptance steps.</li>
+      <li><a href={`${REPO}/pull/196`}>PR #196</a> — live proposal and acceptance history.</li>
+    </ul>
+  </section>
+</PublicationLayout>

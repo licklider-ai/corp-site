@@ -108,6 +108,8 @@ ${UPSTREAM_CONTRIBUTIONS.map((item) => `- [${item.project}: ${item.title}](https
 
 ## Evidence and updates
 
+- [Multiple-testing source review](https://www.licklider.ai/engineering/checking-multiple-testing-against-original-papers/): six original papers reviewed; Rom table/equation conflict confirmed in the project review. Release 3 preparation only. PR #196 proposes a bounded source closure; formal acceptance remains pending as of September 7, 2026. Overall sources remain incomplete; no Release 3 support is announced.
+
 - [Research](https://www.licklider.ai/research/): papers and research notes
 - [Engineering](https://www.licklider.ai/engineering/): implementation work and upstream reports
 - [Latest](https://www.licklider.ai/latest/): all public updates in reverse chronological order

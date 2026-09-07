@@ -33,7 +33,7 @@ const roadmapStructuredData = {
   description:
     'Current, next, and planned expansion of nomue from Welch verification into agent-native scientific verification infrastructure.',
   url: new URL('/roadmap/', Astro.site).href,
-  dateModified: '2026-09-04',
+  dateModified: '2026-09-07',
   isPartOf: { '@id': new URL('/#website', Astro.site).href },
   about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
 };
@@ -146,6 +146,13 @@ const roadmapStructuredData = {
     <ul class="method-grid">
       {PLANNED_METHOD_FAMILIES.map((family) => <li>{family}</li>)}
     </ul>
+    <p>
+      Multi-group preparation has advanced through a review of six original
+      multiple-testing papers, clarifying guarantees and a numerical source conflict.
+      This is research evidence for the planned family; procedure selection and
+      Release 3 support remain separate decisions.
+      <a href="/engineering/checking-multiple-testing-against-original-papers/">Read the source-review findings</a>.
+    </p>
     <aside class="expansion-model">
       <h3>How expansion moves faster without weakening evidence</h3>
       <p>{EXPANSION_MODEL}</p>

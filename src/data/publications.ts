@@ -14,6 +14,18 @@ export type PublicationItem = {
 export const PUBLICATIONS: PublicationItem[] = [
   {
     category: 'Engineering',
+    type: 'Technical method',
+    date: 'September 7, 2026',
+    sortKey: '2026-09-07',
+    title: 'Checking multiple-testing procedures against their original papers',
+    summary:
+      'Reviewing six original papers clarified multiple-testing guarantees and exposed a numerical table entry that disagrees with its defining equation.',
+    href: '/engineering/checking-multiple-testing-against-original-papers/',
+    status:
+      'Independently reviewed source evidence — Release 3 preparation; formal acceptance pending',
+  },
+  {
+    category: 'Engineering',
     type: 'Upstream report',
     date: 'September 7, 2026',
     sortKey: '2026-09-07',
