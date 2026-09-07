@@ -186,6 +186,21 @@ export const CORE_NON_CLAIMS = [
 
 export const UPSTREAM_CONTRIBUTIONS = [
   {
+    project: 'SciPy',
+    title: 'SciPy t-tests can return p=0 or p=1 after exact rescaling',
+    summary:
+      'SciPy’s one-sample and paired t-tests can reverse a 5% decision after exact power-of-two rescaling because an intermediate variance underflows or overflows.',
+    href: '/engineering/scipy-ttest-scale-range-loss/',
+    status: 'Reported to SciPy — issue #26113 open; upstream confirmation and fix pending',
+    outcome: 'report_open',
+    comparisonLabel: 'Returned after rescaling → scale-invariant reference',
+    observed: '0.0 / 1.0',
+    reference: '0.2048 / 0.03510',
+    evidenceHref: 'https://github.com/scipy/scipy/issues/26113',
+    evidenceLabel: 'SciPy issue #26113',
+    credit: 'Open; no SciPy maintainer confirmation or accepted fix',
+  },
+  {
     project: 'Julia / HypothesisTests.jl',
     title: 'Exact signed-rank p-value above 1',
     summary:
