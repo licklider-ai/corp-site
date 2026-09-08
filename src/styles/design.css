@@ -118,18 +118,18 @@
   .package-signals a { color: var(--ink-2); font-size: 0.875rem; border-radius: 4px; padding: 0.6rem 0.8rem; gap: 0.65rem; background: white; }
   .package-signals a:hover { color: var(--blue); border-color: var(--blue); background: var(--blue-wash); }
   .package-signals span { font-family: var(--font-serif); color: var(--blue); }
-  div.quickstart { padding: 0; gap: 0; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: var(--wash); }
+  div.quickstart { padding: 0; gap: 0; align-items: stretch; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: var(--wash); }
   div.quickstart > div:not(.code-frame) { padding: 2rem; }
   div.quickstart h3 { font-size: 1.4rem; }
   div.quickstart p { font-size: 0.9375rem; }
   div.quickstart p:last-child { margin-bottom: 0; }
   .quickstart pre, pre.quickstart, .body pre { color: #e6e5df; background: #091726; border: 1px solid #384044; padding: 2rem; font-size: 0.875rem; line-height: 1.85; border-radius: 5px; }
-  div.quickstart > pre { margin: 0; border: 0; border-radius: 0; height: 100%; display: flex; align-items: center; }
+  div.quickstart > pre { margin: 0; border: 0; border-radius: 0; display: flex; align-items: center; }
   .quickstart code, .body pre code { font-size: inherit; }
   .code-frame { position: relative; min-width: 0; margin-block: 1.5rem; background: #091726; border-radius: 5px; }
   .code-frame pre { margin: 0; padding-top: 3.5rem; }
-  div.quickstart > .code-frame { margin: 0; border-radius: 0; }
-  div.quickstart > .code-frame pre { min-height: 100%; border-radius: 0; }
+  div.quickstart > .code-frame { margin: 0; border-radius: 0; display: flex; flex-direction: column; }
+  div.quickstart > .code-frame pre { flex: 1; min-width: 0; border: 0; border-radius: 0; }
   .copy-code { position: absolute; right: 0.5rem; top: 0.5rem; width: 44px; height: 44px; display: grid; place-items: center; color: white; border: 1px solid #666; background: var(--action); border-radius: 4px; }
   .copy-code:hover { background: var(--action-hover); }
   .copy-code:focus-visible { outline-color: var(--gold); }
