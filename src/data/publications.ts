@@ -15,6 +15,26 @@ export const PUBLICATIONS: PublicationItem[] = [
   {
     category: 'Engineering',
     type: 'Technical method',
+    date: 'September 8, 2026',
+    sortKey: '2026-09-08',
+    title: "What a multiple-comparison procedure actually guarantees",
+    summary: "Original-paper checks separated overall tests, individual comparisons, and simultaneous intervals, giving future verification rules a more precise statement of what they protect.",
+    href: "/engineering/what-multiple-comparison-procedures-guarantee/",
+    status: "Source-reviewed Release 3 research; SR-F repairs and disposition pending",
+  },
+  {
+    category: 'Engineering',
+    type: 'Technical method',
+    date: 'September 8, 2026',
+    sortKey: '2026-09-08',
+    title: "When floating-point calculations change a tiny factorial effect",
+    summary: "A 945-case comparison separated effects lost during input rounding from errors introduced by cell means and QR calculations, including cases where centering did not help.",
+    href: "/engineering/floating-point-tiny-factorial-effects/",
+    status: "Steward-accepted, independently reviewed bounded Release 4 numerical research",
+  },
+  {
+    category: 'Engineering',
+    type: 'Technical method',
     date: 'September 7, 2026',
     sortKey: '2026-09-07',
     title: 'Checking multiple-testing procedures against their original papers',
@@ -22,7 +42,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'Reviewing six original papers clarified multiple-testing guarantees and exposed a numerical table entry that disagrees with its defining equation.',
     href: '/engineering/checking-multiple-testing-against-original-papers/',
     status:
-      'Independently reviewed source evidence — Release 3 preparation; formal acceptance pending',
+      'Independently reviewed SR-C source evidence with bounded acceptance recorded; Release 3 preparation',
   },
   {
     category: 'Engineering',

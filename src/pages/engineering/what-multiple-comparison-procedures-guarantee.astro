@@ -1,0 +1,41 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+---
+<PublicationLayout category="Engineering" type="Technical method"
+  title="What a multiple-comparison procedure actually guarantees"
+  description="Original-paper checks separated overall tests, individual comparisons, and simultaneous intervals, giving future verification rules a more precise statement of what they protect."
+  published="September 8, 2026"
+  status="Source-reviewed Release 3 research; SR-F repairs and disposition pending" toc={[]}>
+
+<section id="status"><h2>What the source checks establish</h2>
+<p>Multiple-comparison procedures can protect different claims even when they use similar thresholds. Our latest original-paper checks make those differences explicit enough to guide future verification rules: which comparisons belong to the family, which dependence assumptions apply, and which errors a procedure controls.</p>
+<p>This extends our <a href="/engineering/checking-multiple-testing-against-original-papers/">six-paper review of multiple-testing procedures</a> with Dunn and Šidák, protected and modified LSD, ordered-range procedures, and the GT2 and Genizi–Hochberg interval constructions. These are public research results for Release 3 preparation. Review and acceptance are recorded by scope; they are not journal peer review or new product support.</p>
+<p>The latest GT2/GH source review identified two repairs. Both are recorded in <a href="https://github.com/licklider-ai/nomue-protocol/pull/221">PR #221</a>, which preserves and supersedes the original investigation in #216. At this publication, the successor's close review and bounded disposition remain pending.</p></section>
+<section id="dependence"><h2>A guarantee needs its assumptions</h2>
+<p>The familywise error rate is the probability of making at least one false rejection in a declared family. Strong control requires the promised bound even when some hypotheses are false and others are true.</p>
+<p>For valid individual p-values, Bonferroni's union-bound argument controls that error under arbitrary dependence. Dunn's original planned-comparison intervals provide a particular statistical construction; normality in that construction is not a requirement of the abstract union-bound argument.</p>
+<p>Šidák's calibration requires a different joint-probability argument. The inspected paper supports symmetric Gaussian rectangles and specified common-scale constructions, including dependent cases. That does not justify applying the same formula to arbitrary dependent p-values or arbitrary separate standard errors. An implementation needs the actual joint condition, not an unexplained label such as “positive dependence.”</p></section>
+<section id="comparisons"><h2>An overall test does not identify the differing pairs</h2>
+<p>Protected least significant difference, or LSD, first performs an overall ANOVA test and then tests pairs if the overall test rejects. Under the complete null, that first stage limits the probability of proceeding to false pairwise rejections. Strong familywise control is a different question: when some means differ, the first stage can reject while true pairwise equalities still need protection.</p>
+<p>The Hayter source investigation separates the protected and modified procedures and their model and design conditions. This matters for a verifier: “ANOVA followed by comparisons” does not specify the pairwise guarantee.</p>
+<p>Ordered-range procedures introduce another layer. Their rules can depend on the size of a stretch of ordered means, on containing subsets, and on the ordering of critical values. The Newman, Duncan, Ryan, Einot–Gabriel and Welsch sources therefore cannot be compressed into one interchangeable method name.</p>
+<p>The review recorded a printed monotonicity statement alongside finite numerical examples in which raw range quantiles decrease. The cited proof's conditions remain unresolved. Those diagnostics identify a condition that needs checking; they do not prove that the full procedures violate their error guarantees, and they do not authorize silently adding a new monotonicity rule.</p></section>
+<section id="intervals"><h2>Narrower intervals and valid coverage are different questions</h2>
+<p>GT2 uses the Studentized maximum modulus distribution. The investigated Genizi–Hochberg construction instead uses Studentized range for contrast-preserving transformations and Studentized augmented range for general linear functions. The distributions are different, despite the methods' related purpose.</p>
+<p>The source-backed GT2 model has a common unknown variance scale, a known covariance shape, and an independent variance estimate. Unequal estimator variances under that model do not establish a guarantee for arbitrary unknown population variances.</p>
+<p>The investigated GH improvement is constrained to two distinct sample sizes and specified width restrictions. A smaller average interval width is not the same as smaller width for every pair. The inspected 1979 corrigendum rejects an inference from failure to attain an optimum within a particular family to Kramer's intervals being liberal. The correction itself does not prove Kramer's coverage.</p>
+<p>The review also corrected our own arithmetic interpretation. Averaging the paper's printed rounded components gives 0.998633…, which rounds to its printed 0.9986. Averaging reconstructed, unrounded components gives 0.998662…, which rounds to 0.9987. This difference is not evidence of an error in the source's printed average.</p></section>
+<section id="verification"><h2>Turning source distinctions into verification requirements</h2>
+<p>The engineering result is a more precise specification boundary. A future verifier needs the declared family, target, procedure variant, assumptions and output interpretation before it can decide what a successful check means. Correct arithmetic alone cannot supply those missing choices.</p>
+<p>The cumulative source set is still incomplete and the Release 3 program remains narrowed. The SR-F successor records a partial disposition pending a bounded decision; it does not enact its proposed closure. Algorithms, numerical constants, tolerances and supported domains require separate decisions. Release 3 public discussion has not opened, and current product support remains Release 1 Welch Record verification.</p></section>
+<section id="evidence"><h2>Evidence and review</h2>
+<p>The records distinguish original-page inspection, investigator derivation, numerical diagnostics and steward decisions. Authoring and review disclose LLM assistance and separate contexts; repository identities bind the files, while reviewer independence statements retain their stated limits.</p>
+<ul>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/blob/c6ba9c923d142e0dacbb62ea20009cbd0ecb34c5/governance/drafts/release-3-preparation/semantic-source-acquisition-result.md">Fixed cumulative source report</a>: Parts H–P, including the original results, subsequent corrections and remaining gaps.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/pull/199">Dunn and Šidák primary-source review</a>.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/pull/201">Hayter primary-source review</a> and <a href="https://github.com/licklider-ai/nomue-protocol/pull/203">repair review</a>.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/pull/211">Ordered-range source completion</a>, <a href="https://github.com/licklider-ai/nomue-protocol/pull/212">cross-cutting adversarial review</a>, and <a href="https://github.com/licklider-ai/nomue-protocol/pull/214">monotonicity clarification review</a>.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/blob/ca88a1550165dc9b2f5f16541e91d92d1c79ef82/review-inputs/r3-srf-primary-research/REVIEW-RESULT.md">GT2/GH four-source review</a>: content GO with two should-fix findings; <a href="https://github.com/licklider-ai/nomue-protocol/pull/221">the corrective successor</a> tracks their repair.</li>
+</ul></section>
+
+</PublicationLayout>

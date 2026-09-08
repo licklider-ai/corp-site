@@ -20,7 +20,8 @@ const toc = [
   title="Checking multiple-testing procedures against their original papers"
   description="Reviewing six original papers clarified multiple-testing guarantees and exposed a numerical table entry that disagrees with its defining equation."
   published="September 7, 2026"
-  status="Independently reviewed source evidence — Release 3 preparation; formal acceptance pending"
+  updated="September 8, 2026"
+  status="Independently reviewed SR-C source evidence with bounded acceptance recorded; Release 3 preparation"
   toc={toc}
 >
   <section id="current-status">
@@ -34,7 +35,7 @@ const toc = [
     <p>
       The resulting proposal in <a href={`${REPO}/pull/196`}>PR #196</a> treats one
       source requirement as ready for closure, with a separate review supporting that
-      treatment. Formal acceptance is pending as of September 7, 2026. This is public
+      treatment. The subsequent cumulative source record documents limited steward acceptance of SR-C; this is acceptance of the bounded source treatment, not adoption of the methods. This is public
       research evidence for Release 3 preparation; current product support remains
       Release 1 Welch Record verification.
     </p>
@@ -111,13 +112,15 @@ const toc = [
     </p>
     <p>
       PR #196 applies that treatment to the source requirement labelled SR-C. Its
-      candidate ledger has four requirements marked CLOSED and ten still incomplete;
-      these are proposed source-result dispositions, not four formally accepted hold
-      closures. Even after this proposal is accepted, the overall source set remains
+      original candidate ledger recorded four requirements marked CLOSED and ten still incomplete;
+      that historical count is not a count of four formally accepted hold
+      closures. The subsequent bounded SR-C acceptance leaves the overall source set
       incomplete and the narrowed program scope remains in place. Selecting a procedure,
       proving its implementation, and opening a Release 3 public RFC are separate steps.
     </p>
   </section>
+
+  <p>Our follow-up, <a href="/engineering/what-multiple-comparison-procedures-guarantee/">What a multiple-comparison procedure actually guarantees</a>, extends the source work to dependence assumptions, ordered comparisons and simultaneous intervals. Its latest repair and disposition status are stated separately.</p>
 
   <section id="evidence">
     <h2>Evidence and review</h2>
@@ -131,11 +134,12 @@ const toc = [
     <p>
       Authoring and review used separate LLM-assisted contexts. The records disclose
       author-side OpenAI assistance, reviewer-side model provenance, and the steward's
-      scoped independence decision. The steward retains responsibility for acceptance.
+      scoped independence decision. The steward retains responsibility for each bounded acceptance.
       These are project review records, not journal peer review. The papers themselves
       are not redistributed in the repository.
     </p>
     <ul>
+      <li><a href="https://github.com/licklider-ai/nomue-protocol/blob/c6ba9c923d142e0dacbb62ea20009cbd0ecb34c5/governance/drafts/release-3-preparation/semantic-source-acquisition-result.md">Cumulative source record</a> — Parts H and M record the limited SR-C acceptance and distinguish candidate counts from formally accepted holds.</li>
       <li><a href={result}>Source-acquisition result at the reviewed revision</a> — Parts E–F contain the source interpretations and executable diagnostics; Part G records the bounded treatment and candidate ledger.</li>
       <li><a href={primaryReview}>Primary-source completion review, PR #195</a> — original-page checks, numerical recomputation, and scope.</li>
       <li><a href={closureReview}>Proposal review, PR #197</a> — treatment, independence boundary, ledger, and remaining acceptance steps.</li>

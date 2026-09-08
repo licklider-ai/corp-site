@@ -1,0 +1,44 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+---
+<PublicationLayout category="Engineering" type="Technical method"
+  title="When floating-point calculations change a tiny factorial effect"
+  description="A 945-case comparison separated effects lost during input rounding from errors introduced by cell means and QR calculations, including cases where centering did not help."
+  published="September 8, 2026"
+  status="Steward-accepted, independently reviewed bounded Release 4 numerical research" toc={[]}>
+
+<section id="status"><h2>Separating two ways a small effect can change</h2>
+<p>A tiny difference between experimental groups can disappear when the observations are stored as floating-point numbers. Even when the stored data imply an exact zero effect, a later calculation can produce a nonzero coefficient. We compared those two stages in 945 cases to identify what a future verifier would need to check.</p>
+<p>The experiment and its independent reviews were accepted into nomue Protocol's main branch on September 8, 2026 through <a href="https://github.com/licklider-ai/nomue-protocol/pull/205">PR #205</a>. This is bounded engineering research for Release 4 preparation. It selects no production algorithm and adds no supported statistical capability.</p></section>
+<section id="design"><h2>A design with an exact reference</h2>
+<p>We used a complete, balanced two-by-two factorial design: two factors, two levels each, and equal replication in four cells. This small design exposes two main effects and an interaction while allowing exact algebra for the coefficients.</p>
+<p>The corpus varies observations per cell from 2 to 16, common offsets of 1, 2²⁰ and 2⁴⁰, seven small effect sizes, and each of the three effect axes. The exact reference uses rational numbers reconstructed from the stored binary64 inputs. Intended rational inputs are retained separately, so input rounding is not mistaken for a later arithmetic error.</p>
+<p>We compared CPython builtin-sum cell means, an uncentered QR least-squares calculation, and the same QR route after subtracting the first observation. QR factors a design matrix into orthogonal and triangular parts. The probe calls NumPy's QR operation and then its general linear solver on the triangular factor.</p></section>
+<section id="observations"><h2>What the 945 cases showed</h2>
+<p>All exact orthogonality and sums-of-squares partition checks passed. Input projection changed the selected intended coefficient in 666 cases; 525 selected coefficients became exactly zero in the stored inputs.</p>
+<table><thead><tr><th>Calculation route</th><th>Cases with coefficient error</th><th>Nonzero result for an exact-zero coefficient</th></tr></thead><tbody>
+<tr><td>CPython builtin-sum cell means</td><td>144</td><td>0</td></tr>
+<tr><td>Uncentered QR</td><td>850</td><td>462</td></tr>
+<tr><td>First-observation-centered QR</td><td>885</td><td>501</td></tr>
+</tbody></table>
+<p>These are observations for the chosen coefficient in each case, on the disclosed build. Counting a tiny nonzero residual as an error is not a statistical significance test or an overall algorithm ranking.</p>
+<p>In one witness, with two observations per cell, offset 2⁴⁰ and intended coefficient 2⁻²⁰, input rounding had already reduced the exact coefficient to zero. The cell-mean route returned zero; uncentered QR returned <code>0x1.6a09e667f3bcdp-14</code>. Centered QR returned a much smaller but still nonzero value.</p>
+<p>In a second witness, with three observations per cell, offset 1 and coefficient 2⁻⁴⁰, the stored inputs preserved the coefficient exactly. Centering did not improve that coefficient's error. Centering is itself a floating-point subtraction, so it must be evaluated as part of the computation rather than assumed to be an exact repair.</p></section>
+<section id="reproduce"><h2>Reproducing the comparison</h2>
+<p>The <a href="https://github.com/licklider-ai/nomue-protocol/blob/cd217f88238a2ecc57b72f5835a813d92270f5ad/governance/drafts/release-4-preparation/qr-cancellation-supplement.md">accepted supplement</a> contains the complete executable Python probe, input construction, exact reference and transcript. The original environment was Linux x86_64, CPython 3.12.13, NumPy 2.3.5 and OpenBLAS 0.3.30. Thread count was not pinned.</p>
+<p>The original corpus digest is <code>2371c1ef31a25816e09d08324718dd87329c5b6aa93076fd17ae772373fff55c</code>. It identifies that execution's output, not a portable required result. The independent review reproduced it on CPython 3.12.11; a later review using a different NumPy/OpenBLAS build obtained different QR rows. CPython 3.11 also changed the direct route because builtin floating summation differs from the disclosed 3.12 behavior.</p>
+<p>The initial review identified an inaccurate description of builtin sum as a naive accumulation route. The corrected supplement identifies CPython 3.12's compensated behavior. The close review returned GO with no blocker or should-fix findings and two optional observations about build dependence. Supporting NIST and LAPACK pages were subsequently checked from supplied copies, with provenance limits preserved in the accepted addendum.</p></section>
+<section id="scope"><h2>What this means for verification</h2>
+<p>A verification rule needs to distinguish the intended data, the exact mathematical result for admitted inputs, and the result of a particular operation sequence. This experiment gives concrete cases for all three layers as nomue explores factorial inference.</p>
+<p>The probe evaluates floating-point coefficients. It does not evaluate floating sums of squares, F statistics, p-values, intervals or significance decisions. It establishes no general error bound, and small normwise QR error need not mean small relative error for an individual near-zero coefficient.</p>
+<p>Factorial semantics, unbalanced and rank-deficient designs, numerical propagation and execution admission remain separate work. Release 4 public discussion is not open; no Contract, identifier, tolerance or supported domain was issued by this research acceptance.</p></section>
+<section id="evidence"><h2>Evidence and review</h2>
+<p>The project records disclose author-side OpenAI assistance and model/provider and context separation for the independent reviews. They do not claim independent human investigators or journal peer review.</p>
+<ul>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/commit/cd217f88238a2ecc57b72f5835a813d92270f5ad">Accepted main commit</a> and <a href="https://github.com/licklider-ai/nomue-protocol/pull/205">research integration PR #205</a>.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/pull/208">Initial numerical review #208</a> and <a href="https://github.com/licklider-ai/nomue-protocol/pull/210">close review #210</a>.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/blob/cd217f88238a2ecc57b72f5835a813d92270f5ad/governance/drafts/release-4-preparation/qr-cancellation-review-intake.md">Controlling review intake and bounded steward acceptance</a>, including the build-dependent observations and corrected source status.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/pull/217">Provided-copy source inspection and correcting addendum #217</a>.</li>
+</ul></section>
+
+</PublicationLayout>
