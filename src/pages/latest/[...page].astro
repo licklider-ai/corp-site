@@ -1,0 +1,50 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import PaginationNav from '../../components/PaginationNav.astro';
+import { PUBLICATIONS, type PublicationItem } from '../../data/publications';
+import PublicationIndexLayout from '../../layouts/PublicationIndexLayout.astro';
+
+const description =
+  'Research papers, engineering notes, and company news from Licklider, newest first.';
+
+export const getStaticPaths = (({ paginate }) => {
+  const latest = [...PUBLICATIONS].sort((a, b) =>
+    b.sortKey.localeCompare(a.sortKey),
+  );
+
+  return paginate(latest, {
+    pageSize: 10,
+    format: (url) => (url.endsWith('/') ? url : `${url}/`),
+  });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  page: Page<PublicationItem>;
+}
+
+const { page } = Astro.props;
+const metaTitle =
+  page.currentPage === 1 ? 'Latest' : `Latest — Page ${page.currentPage}`;
+---
+
+<PublicationIndexLayout
+  title="Latest"
+  metaTitle={metaTitle}
+  eyebrow="Research / Engineering / News"
+  description={description}
+  items={page.data}
+  showCategory
+  links={[
+    { label: 'Subscribe via RSS', href: '/rss.xml' },
+    { label: 'JSON Feed', href: '/feed.json' },
+  ]}
+>
+  <Fragment slot="after-list">
+    <PaginationNav
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+      prev={page.url.prev}
+      next={page.url.next}
+    />
+  </Fragment>
+</PublicationIndexLayout>
