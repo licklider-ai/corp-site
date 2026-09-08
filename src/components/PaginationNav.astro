@@ -7,15 +7,40 @@ interface Props {
 }
 
 const { currentPage, lastPage, prev, next } = Astro.props;
+const pageNumbers = Array.from({ length: lastPage }, (_, index) => index + 1);
+const pageUrl = (pageNumber: number) =>
+  pageNumber === 1 ? '/latest/' : `/latest/${pageNumber}/`;
 ---
 
 <nav class="pagination" aria-label="Latest pages">
   <div class="pagination-link pagination-link--newer">
-    {prev && <a href={prev} rel="prev">← Newer posts</a>}
+    {prev && (
+      <a class="pagination-button" href={prev} rel="prev">
+        <span aria-hidden="true">←</span>
+        Newer posts
+      </a>
+    )}
   </div>
-  <p>Page <strong>{currentPage}</strong> of {lastPage}</p>
+  <ol class="pagination-pages" aria-label="Page numbers">
+    {pageNumbers.map((pageNumber) => (
+      <li>
+        <a
+          href={pageUrl(pageNumber)}
+          aria-label={`Page ${pageNumber}`}
+          aria-current={pageNumber === currentPage ? 'page' : undefined}
+        >
+          {pageNumber}
+        </a>
+      </li>
+    ))}
+  </ol>
   <div class="pagination-link pagination-link--older">
-    {next && <a href={next} rel="next">Older posts →</a>}
+    {next && (
+      <a class="pagination-button" href={next} rel="next">
+        Older posts
+        <span aria-hidden="true">→</span>
+      </a>
+    )}
   </div>
 </nav>
 
@@ -27,23 +52,58 @@ const { currentPage, lastPage, prev, next } = Astro.props;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
     gap: 1.5rem;
-    padding: 2rem 0 3rem;
+    padding: 2.5rem 0 3.5rem;
     border-top: 1px solid var(--rule);
+    font-size: 1rem;
   }
 
-  .pagination p {
+  .pagination-pages {
+    display: flex;
+    gap: 0.5rem;
     margin: 0;
-    color: var(--ink-3);
-    font-size: 0.82rem;
+    padding: 0;
+    list-style: none;
   }
 
-  .pagination strong {
+  .pagination-pages a {
+    display: grid;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    place-items: center;
+    border: 1px solid var(--rule);
     color: var(--ink);
-    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .pagination-pages a:hover,
+  .pagination-pages a[aria-current='page'] {
+    border-color: var(--ink);
+    background: var(--wash);
   }
 
   .pagination-link {
     min-width: 0;
+  }
+
+  .pagination-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-width: 10.5rem;
+    min-height: 3.5rem;
+    padding: 0.875rem 1.25rem;
+    border: 1px solid var(--action);
+    border-radius: 4px;
+    background: var(--action);
+    color: white;
+    text-decoration: none;
+  }
+
+  .pagination-button:hover {
+    border-color: var(--action-hover);
+    background: var(--action-hover);
+    color: white;
   }
 
   .pagination-link--older {
@@ -56,10 +116,15 @@ const { currentPage, lastPage, prev, next } = Astro.props;
       gap: 0.75rem 1rem;
     }
 
-    .pagination p {
+    .pagination-pages {
       grid-column: 1 / -1;
       grid-row: 1;
-      text-align: center;
+      justify-content: center;
+    }
+
+    .pagination-button {
+      width: 100%;
+      min-width: 0;
     }
   }
 
