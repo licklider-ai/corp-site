@@ -10,7 +10,6 @@ import {
   NOMUE_GLOBAL_INSTALL_COMMAND,
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
-  PAIRED_T_BOUNDARY,
   PLATFORM_SCOPE,
   PLANNED_METHOD_FAMILIES,
   PRODUCT_CAPABILITY,
@@ -64,15 +63,15 @@ const homeStructuredData = {
   '@id': new URL('/#webpage', Astro.site).href,
   name: 'Licklider — Scientific verification infrastructure for AI agents',
   description:
-    'Licklider builds scientific verification infrastructure for AI research agents, starting with public, independently checkable Welch Record verification.',
+    'Scientific verification infrastructure for AI research agents, with public Welch Record verification and an independently reviewed paired-t candidate for Release 2.',
   url: new URL('/', Astro.site).href,
-  dateModified: '2026-09-07',
+  dateModified: '2026-09-08',
   isPartOf: { '@id': new URL('/#website', Astro.site).href },
   about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
 };
 ---
 
-<BaseLayout structuredData={[homeStructuredData, verifierStructuredData]}>
+<BaseLayout description={homeStructuredData.description} structuredData={[homeStructuredData, verifierStructuredData]}>
   <section class="hero">
     <div class="hero-inner">
       <p class="eyebrow">Licklider</p>
@@ -84,6 +83,11 @@ const homeStructuredData = {
           with machine-readable evidence and next actions.
         </p>
         <p>{ROADMAP_POSITION}</p>
+        <p>
+          Welch verification is public today. The next capability, paired-t for matched
+          observations, has reached independently reviewed final candidate readiness
+          for Release 2. <a href="#paired-t-progress">See the engineering progress</a>.
+        </p>
       </div>
       <div class="cta">
         <a class="cta-primary" href="/docs/record-verification/">Install and run</a>
@@ -101,6 +105,57 @@ const homeStructuredData = {
   </section>
 
   <div class="sections">
+    <section id="paired-t-progress" class="band band--single">
+      <div class="band-inner band-inner--wide">
+        <p class="eyebrow">Release 2 · Reviewed candidate</p>
+        <h2 class="roadmap-title">Paired-t has reached final candidate review readiness.</h2>
+        <p class="roadmap-lead">
+          The candidate connects matched observations to a p-value and a 95% confidence
+          interval, with explicit numerical error checks and a controlled execution
+          environment. Its final review-readiness package received an independent GO
+          with no findings—concrete progress toward a second Protocol capability.
+        </p>
+        <div class="capability-grid">
+          <article>
+            <h3>A reviewed research and data foundation</h3>
+            <p>
+              The paired-t research gate is complete. Four candidate data schemas define
+              the Record, analysis profile, execution outcome, and verification report,
+              with explicit permitted fields and relationships.
+            </p>
+          </article>
+          <article>
+            <h3>Numerical checks through the full calculation</h3>
+            <p>
+              The Student-t probability and 95% confidence-interval numerical work is
+              closed at candidate level. The combined trace checks the calculation,
+              error bounds, table identities, and resource use together.
+            </p>
+          </article>
+          <article>
+            <h3>Execution and compatibility evidence</h3>
+            <p>
+              All four candidate work groups cover scope and resource limits, numerical
+              rules, one controlled runtime, and failure reasons. Migration and historical
+              checks confirm preservation of existing Release 1 behavior in the reviewed work.
+            </p>
+          </article>
+        </div>
+        <p class="package-meaning">
+          <strong>Next: formal adoption and publication.</strong> Public review remains
+          open. The Steward decision, permanent identifiers, authoritative integration,
+          and release steps remain before paired-t becomes supported. The public verifier
+          continues to serve the published Release 1 Welch scope.
+        </p>
+        <p class="more">
+          <a href="/engineering/bounding-paired-t-arithmetic-and-pvalues/">Read the engineering evidence</a> ·{' '}
+          <a href="https://github.com/licklider-ai/nomue-protocol/pull/157" target="_blank" rel="noopener noreferrer">Independent final review</a> ·{' '}
+          <a href="https://github.com/licklider-ai/nomue-protocol/tree/main/governance/drafts/release-2-candidate" target="_blank" rel="noopener noreferrer">Candidate schemas and migration evidence</a> ·{' '}
+          <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">Public review</a>
+        </p>
+      </div>
+    </section>
+
     <section class="band band--single available-band">
       <div class="band-inner band-inner--wide">
         <p class="eyebrow">Available Now</p>
@@ -315,7 +370,7 @@ const homeStructuredData = {
             <p>{LEARNING_LOOP_POSITION}</p>
           </article>
         </div>
-        <p class="roadmap-note"><strong>Next Protocol capability:</strong> {PAIRED_T_BOUNDARY}</p>
+        <p class="roadmap-note"><strong>Next Protocol capability:</strong> Paired-t has reached independently reviewed final Release 2 candidate readiness. <a href="#paired-t-progress">See completed candidate work and the remaining publication steps</a>.</p>
         <p class="scope-note">{MARKET_SCOPE}</p>
         <p class="more"><a href="/roadmap/">See the full product and capability roadmap</a></p>
       </div>
