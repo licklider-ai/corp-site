@@ -1,4 +1,5 @@
 ---
+import ProtocolResearchProgress from '../components/ProtocolResearchProgress.astro';
 import LickliderPortrait from '../components/LickliderPortrait.astro';
 import {
   COMPANY_POSITION,
@@ -33,10 +34,7 @@ const founderSelectedWork = [
   ...UPSTREAM_CONTRIBUTIONS.map((item) => ({
     category: item.project,
     title: item.title,
-    status:
-      item.outcome === 'fix_merged'
-        ? 'Reported by Tasuku Kobayashi · fix merged upstream'
-        : 'Reported by Tasuku Kobayashi · open and unconfirmed',
+    status: `Reported by Tasuku Kobayashi · ${item.status}`,
     href: item.href,
     evidenceHref: item.evidenceHref,
     evidenceLabel: item.evidenceLabel,
@@ -69,7 +67,8 @@ const founderStructuredData = {
       <div class="band-body">
         <p class="lead">A public Protocol and a local verifier that anyone can inspect and run.</p>
         <p>{PUBLIC_CAPABILITY}</p>
-        <p><a href="/docs/record-verification/">Run the verifier</a> · <a href="/nomue/">How nomue works</a></p>
+        <p>Agents can also call the public local MCP release candidate to verify the same Release 1 Records. Verification runs locally after installation, without a Licklider account or hosted service.</p>
+        <p><a href="/docs/mcp-verification/">Connect through MCP</a> · <a href="/docs/record-verification/">Run the verifier</a> · <a href="/nomue/">How nomue works</a></p>
       </div>
     </section>
 
@@ -82,9 +81,10 @@ const founderStructuredData = {
           clearly defined part of that work against evidence.
         </p>
         <p>
-          Our first product, nomue, begins with statistical verification. It gives a
-          research agent a specialist tool for supported decisions, fixed calculations,
-          requests for missing information, safe stopping, and machine-readable results.
+          Our first product, nomue, begins with statistical verification. Its public
+          verifier checks supported Records and returns machine-readable results. The
+          next managed product release adds intake and orchestration, including requests
+          for missing research conditions and explicit clarification or refusal.
         </p>
       </div>
     </section>
@@ -105,6 +105,16 @@ const founderStructuredData = {
           has an explicit contract and an independently checkable basis.
         </p>
         <p><a href="/roadmap/">Product and capability roadmap</a></p>
+      </div>
+    </section>
+
+    <section class="band band--wide">
+      <p class="eyebrow">Research Progress</p>
+      <div>
+        <h2>Building the evidence for broader verification</h2>
+        <p class="lead">Method expansion needs both a precise scientific guarantee and a calculation whose behavior can be checked.</p>
+        <ProtocolResearchProgress />
+        <p>These results demonstrate how we develop those foundations: inspect original sources, compare calculations with exact references, and repair claims when review finds a gap. They are research and candidate milestones, separate from the public Release 1 Welch capability.</p>
       </div>
     </section>
 

@@ -1,3 +1,5 @@
+import { PUBLICATIONS } from './publications';
+
 /**
  * Stable public facts reused across the corporate narrative, product pages, and
  * agent-readable documentation. Exact Protocol and product semantics remain owned
@@ -191,14 +193,14 @@ export const UPSTREAM_CONTRIBUTIONS = [
     summary:
       'An unchanged sample pair crosses the 5% significance threshold when another pair contains repeated values, because SciPy selects one calculation method for the batch.',
     href: '/engineering/scipy-mannwhitneyu-batch-method-selection/',
-    status: 'Reported to SciPy — issue #26115 open; intended behavior awaiting clarification',
+    status: PUBLICATIONS.find((item) => item.href === '/engineering/scipy-mannwhitneyu-batch-method-selection/')!.status,
     outcome: 'report_open',
     comparisonLabel: 'Same pair: alone → batched with a tied pair',
     observed: '0.04798',
     reference: '0.05132',
     evidenceHref: 'https://github.com/scipy/scipy/issues/26115',
     evidenceLabel: 'SciPy issue #26115',
-    credit: 'Reported by Tasuku Kobayashi · no upstream response as of September 7, 2026',
+    credit: 'Reported by Tasuku Kobayashi · maintainer triage and community source check recorded; remedy undecided',
   },
   {
     project: 'SciPy',
@@ -280,3 +282,28 @@ export const UPSTREAM_CONTRIBUTIONS = [
     credit: 'Open and unconfirmed by R Core',
   },
 ] as const;
+
+/** Selected research evidence for company pages; article metadata stays canonical. */
+export const PROTOCOL_RESEARCH_PROGRESS = [
+  {
+    href: '/engineering/bounding-paired-t-arithmetic-and-pvalues/',
+    stage: 'Release 2 · Reviewed candidate',
+    summary: 'The paired-t candidate connects matched observations to a p-value and a 95% confidence interval, with numerical error checks and one controlled runtime. Its final review-readiness package has passed independent review.',
+  },
+  {
+    href: '/engineering/what-multiple-comparison-procedures-guarantee/',
+    stage: 'Release 3 · Source research',
+    summary: 'Original-paper checks distinguish overall tests, individual comparisons and simultaneous intervals. Together with the six-paper source review, they define which assumptions and guarantees a future verification rule must name.',
+    relatedHref: '/engineering/checking-multiple-testing-against-original-papers/',
+    relatedLabel: 'Six-paper review and bounded acceptance',
+  },
+  {
+    href: '/engineering/floating-point-tiny-factorial-effects/',
+    stage: 'Release 4 · Bounded numerical research',
+    summary: 'A reviewed 945-case experiment separates effects lost when inputs are stored from errors introduced by later calculations. It records cases where centering a QR calculation did not improve a tiny effect.',
+  },
+].map((entry) => {
+  const publication = PUBLICATIONS.find((item) => item.href === entry.href);
+  if (!publication) throw new Error(`Missing research publication: ${entry.href}`);
+  return { ...entry, title: publication.title, status: publication.status };
+});

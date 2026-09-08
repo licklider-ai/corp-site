@@ -21,6 +21,7 @@ import {
   UPSTREAM_CONTRIBUTIONS,
   VERIFICATION_CALL_DEFINITION,
 } from '../data/site-facts';
+import ProtocolResearchProgress from '../components/ProtocolResearchProgress.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const latest = [...PUBLICATIONS]
@@ -142,14 +143,14 @@ const homeStructuredData = {
           </article>
         </div>
         <p class="package-meaning">
-          <strong>Next: formal adoption and publication.</strong> Public review remains
+          <strong>Next: final R2-D5 review and the Steward decision.</strong> Public review remains
           open. The Steward decision, permanent identifiers, authoritative integration,
           and release steps remain before paired-t becomes supported. The public verifier
           continues to serve the published Release 1 Welch scope.
         </p>
         <p class="more">
           <a href="/engineering/bounding-paired-t-arithmetic-and-pvalues/">Read the engineering evidence</a> ·{' '}
-          <a href="https://github.com/licklider-ai/nomue-protocol/pull/157" target="_blank" rel="noopener noreferrer">Independent final review</a> ·{' '}
+          <a href="https://github.com/licklider-ai/nomue-protocol/pull/157" target="_blank" rel="noopener noreferrer">Independent review of readiness</a> ·{' '}
           <a href="https://github.com/licklider-ai/nomue-protocol/tree/main/governance/drafts/release-2-candidate" target="_blank" rel="noopener noreferrer">Candidate schemas and migration evidence</a> ·{' '}
           <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">Public review</a>
         </p>
@@ -198,7 +199,7 @@ const homeStructuredData = {
             <h3>Install the public npm package</h3>
             <p>
               The package path is tested on Linux, macOS, and Windows with Node.js 20
-              and 22. The npm <code>latest</code> tag currently points to the
+              and 22. The npm <code>latest</code> tag currently points to the{' '}
               <code>{PUBLIC_RELEASE.verifierPackage}</code> release candidate.
             </p>
           </div>
@@ -211,7 +212,7 @@ const homeStructuredData = {
         <p class="package-meaning">
           The npm package gives an agent workflow a repeatable check: pass a Record to a
           versioned command, receive scoped JSON, and keep the result separate from the
-          research model that requested it. The same CLI also provides
+          research model that requested it. The same CLI also provides{' '}
           <code>canonicalize</code> and <code>digest</code> for local Record processing.
         </p>
         <p class="more"><a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">View on npm</a> · <a href="/docs/record-verification/">Full verifier guide</a> · <a href="/docs/cli-reference/">CLI reference</a> · <a href="/docs/examples.json">Machine-readable examples</a></p>
@@ -373,6 +374,16 @@ const homeStructuredData = {
         <p class="roadmap-note"><strong>Next Protocol capability:</strong> Paired-t has reached independently reviewed final Release 2 candidate readiness. <a href="#paired-t-progress">See completed candidate work and the remaining publication steps</a>.</p>
         <p class="scope-note">{MARKET_SCOPE}</p>
         <p class="more"><a href="/roadmap/">See the full product and capability roadmap</a></p>
+      </div>
+    </section>
+
+    <section id="research-progress" class="band band--single">
+      <div class="band-inner band-inner--wide">
+        <p class="eyebrow">Research Behind Expansion</p>
+        <h2 class="roadmap-title">New methods start with evidence about what a check can guarantee.</h2>
+        <p class="roadmap-lead">Beyond the public Welch verifier, our work now joins reviewed paired-t calculations, original-paper checks of multiple comparisons, and exact-reference experiments on factorial effects.</p>
+        <ProtocolResearchProgress />
+        <p class="roadmap-note">These are candidate and research milestones. They inform future verification rules; they do not expand the currently supported Welch scope. Each article records its review status and remaining decisions.</p>
       </div>
     </section>
 

@@ -1,0 +1,23 @@
+---
+import { PROTOCOL_RESEARCH_PROGRESS } from '../data/site-facts';
+---
+<div class="research-progress">
+  {PROTOCOL_RESEARCH_PROGRESS.map((item) => (
+    <article>
+      <p class="stage">{item.stage}</p>
+      <h3><a href={item.href}>{item.title}</a></h3>
+      <p>{item.summary}</p>
+      <p class="status">{item.status}</p>
+      {'relatedHref' in item && <p><a href={item.relatedHref}>{item.relatedLabel}</a></p>}
+    </article>
+  ))}
+</div>
+<style>
+  .research-progress { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 2rem 0; }
+  article { padding: 1.5rem; border: 1px solid var(--rule); }
+  h3 { margin-bottom: 0.75rem; font-size: 1.08rem; line-height: 1.4; }
+  .stage { color: var(--ink-3); font-size: 0.78rem; }
+  .status { color: var(--ink-2); font-size: 0.85rem; }
+  article > :last-child { margin-bottom: 0; }
+  @media (max-width: 900px) { .research-progress { grid-template-columns: minmax(0, 1fr); } }
+</style>
