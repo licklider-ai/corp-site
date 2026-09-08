@@ -45,8 +45,7 @@ const pageUrl = (pageNumber: number) =>
 </nav>
 
 <style>
-@layer design {
-
+  /* Stay unlayered: this component is emitted before the global layer-order declaration. */
   .pagination {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
@@ -136,16 +135,4 @@ const pageUrl = (pageNumber: number) =>
       min-width: 0;
     }
   }
-
-}
-
-/* Keep button links independent from the site's layered inline-link styles. */
-.pagination .pagination-button,
-.pagination .pagination-button:visited,
-.pagination .pagination-button:hover,
-.pagination .pagination-button:focus-visible {
-  color: #fff;
-  text-decoration: none;
-  text-decoration-color: transparent;
-}
 </style>
