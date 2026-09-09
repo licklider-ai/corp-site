@@ -45,7 +45,7 @@ export const PRODUCT_CAPABILITY =
   'nomue\'s Welch verification is implemented: it keeps the agent from guessing required scientific facts, follows the supported decision path, runs fixed numerical checks, and returns structured outcomes and next actions.';
 
 export const PRODUCT_RELEASE_BOUNDARY =
-  'Use the npm-published Release 1 verifier, the local stdio MCP server, the Protocol, and their machine-readable documentation today. The next managed product release adds agent-facing intake and orchestration: it gathers required research conditions, routes clarification or refusal, runs the registered Welch path, and returns structured evidence and next actions.';
+  'Use the npm-published Release 1 verifier, the local stdio MCP server, the Protocol, and their machine-readable documentation today. The agent-facing Welch capability is now available in limited Release 1 to approved recipients through authenticated MCP and HTTP interfaces; public self-registration is not available.';
 
 export const MCP_RELEASE = {
   displayName: 'nomue Record Verifier',
