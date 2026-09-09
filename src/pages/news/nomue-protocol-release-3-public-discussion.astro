@@ -1,0 +1,65 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+import { R3_DISCUSSION } from '../../data/site-facts';
+
+const publication = PUBLICATIONS.find((item) => item.href === R3_DISCUSSION.articleUrl)!;
+---
+
+<PublicationLayout
+  category={publication.category}
+  type={publication.type}
+  title={publication.title}
+  description={publication.summary}
+  published={publication.date}
+  status={publication.status}
+  toc={[]}
+>
+  <section id="discussion">
+    <h2>Help define what a multi-group verification call should check</h2>
+    <p>Public discussion opened on September 9, 2026 for a nomue Protocol Release 3 proposal covering independent groups and multiple comparisons. Researchers and developers can now challenge how an analysis declares its design, identifies its comparisons, and connects each result to a precise claim.</p>
+    <p>The proposal brings a catalogue of 49 procedures and a bounded evidence record into one public review. <a href={R3_DISCUSSION.proposalUrl}>Read the fixed RFC</a> together with its <a href={R3_DISCUSSION.mapUrl}>scope and evidence map</a>, then <a href={R3_DISCUSSION.issueUrl}>comment on the discussion issue</a>. This is a proposal for future verification rules; method adoption and numerical support remain separate decisions.</p>
+  </section>
+
+  <section id="questions">
+    <h2>Three treatments can produce several different questions</h2>
+    <p>Suppose an experiment compares three treatments using independent experimental units and one continuous measurement per unit. Asking whether the group means differ overall is different from comparing every treatment with a fixed control, comparing all pairs, or examining a contrast chosen after seeing the results.</p>
+    <p>A contrast is a specified comparison of group means. Its meaning depends on which groups are included and how they are weighted. Testing several claims also raises a separate question: what kind of error should be controlled across the whole family of comparisons?</p>
+    <p>The RFC asks a future verification call to preserve those choices explicitly. A method name and a p-value cannot supply the missing experimental design or establish a guarantee for a comparison family that was never declared.</p>
+    <ul>
+      <li><strong>Design and selection:</strong> identify the experimental unit, population, group membership, outcome, assumptions, and when the comparisons were selected.</li>
+      <li><strong>Results and claims:</strong> distinguish an overall test, individual comparisons, simultaneous intervals, and different ways of controlling false positives.</li>
+      <li><strong>Procedure and execution:</strong> identify the exact variant and define when unsupported inputs, missing declarations, or numerical limitations require refusal.</li>
+    </ul>
+  </section>
+
+  <section id="catalogue">
+    <h2>A visible disposition for every catalogued procedure</h2>
+    <p>The proposal retains all 49 catalogue entries: 15 candidates for Release 3, 27 used as research evidence, five transferred to other work, and two rejected with reasons. Two guidance entries and five explicit catalogue exclusions are recorded separately. These classifications make selection open to scrutiny; they do not announce 49 supported methods.</p>
+    <p>The current scope is one-way designs with at least three independent groups and one finite continuous outcome per unit. Paired or clustered observations, factorial designs, automatic data preprocessing or method switching, missing-data defaults, and causal claims remain outside this proposal.</p>
+    <p>The separate <a href="/news/nomue-protocol-release-4-public-discussion/">Release 4 discussion</a> addresses a bounded two-factor design. The programs have distinct evidence and decision requirements. Release 2 dependencies in the Release 3 proposal remain conditional on their authoritative disposition.</p>
+  </section>
+
+  <section id="evidence">
+    <h2>What the opening review established</h2>
+    <p>The source scope is the supplied inventory of 42 numbered originals plus one corrigendum, with later additions allowed through recorded review. That inventory is not a statement that every paper has been fully confirmed or supports every catalogue entry.</p>
+    <p>The first whole-package review found an incomplete connection between some positive scientific claims and their qualifying independent reviews. The repair explicitly removed those claims from the evidence needed to justify opening discussion, while preserving the candidate classifications and earlier approval records.</p>
+    <p>The <a href={R3_DISCUSSION.reviewUrl}>fixed repair review</a> then returned GO for opening readiness, with no blocking or required corrections and one optional link improvement. It confirmed the narrower proposal and reused the earlier package review where applicable. The reviews disclose their assistance and independence limits; this is neither journal peer review nor certification of every method.</p>
+    <p>In particular, positive claims about Welch calibration, Scheffé coverage, and certain false-discovery-rate procedures remain excluded as scientific support for opening. They can remain questions in the catalogue. Using their guarantees in a later method requires the missing, specifically scoped evidence and review connection.</p>
+    <p>Our <a href="/engineering/what-multiple-comparison-procedures-guarantee/">multiple-comparison source work</a>, <a href="/engineering/comparing-with-control-or-best/">control-versus-best comparison</a>, and <a href="/engineering/implementing-multiple-testing-graphs/">testing-graph analysis</a> explain why these distinctions matter. Their historical findings retain their recorded scope; the RFC's evidence map governs which claims can support the present proposal.</p>
+  </section>
+
+  <section id="limits">
+    <h2>The work between discussion and a supported capability</h2>
+    <p>Scientific and numerical decisions remain explicit. The source ledger still records nine bounded closures, one partial item, and four incomplete items; the overall source set remains incomplete. Opening does not close those items or establish general error-control guarantees.</p>
+    <p>All candidate numerical support remains held. Earlier claims of rigorous numerical bounds and brackets were <a href="https://github.com/licklider-ai/nomue-protocol/pull/265">withdrawn in PR #265</a>; the affected algorithms are not validated numerical references. Separate work must establish calculation methods, error bounds, tolerances, supported inputs, resource limits, and execution conditions before implementation is promoted.</p>
+    <p>Current supported scientific scope remains Release 1 Welch, with <a href="/docs/record-verification/">public local Record verification</a> and the separately announced <a href="/news/nomue-welch-limited-release-1/">limited hosted access</a>. This discussion issues no new capability or operational identifier.</p>
+  </section>
+
+  <section id="participate">
+    <h2>How to take part</h2>
+    <p>Comment on <a href={R3_DISCUSSION.issueUrl}>Issue #274</a> with the passage concerned, the question or counterexample, and a proposed correction where possible. Feedback on comparison families, selection timing, result meaning, refusal behavior, compatibility, and the evidence boundaries is welcome.</p>
+    <p>The minimum discussion period is 30 calendar days under the anticipated STABLE-INTENT tier. It began at <time datetime={R3_DISCUSSION.openedAt}>11:50:18 UTC on September 9, 2026</time>. The earliest decision is <time datetime={R3_DISCUSSION.earliestDecisionAt}>11:50:18 UTC on October 9, 2026</time>. That date permits consideration of a decision; it is not automatic adoption or a product release date.</p>
+    <p>Later papers and updates can be added after their identity, inspection, and changed claims are recorded and reviewed. Material changes also require assessment of the discussion scope and window. The <a href={R3_DISCUSSION.receiptUrl}>opening receipt</a> preserves the fixed inputs and actual start time; the pre-opening wording in the frozen RFC remains part of its history.</p>
+  </section>
+</PublicationLayout>

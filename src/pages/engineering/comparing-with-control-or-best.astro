@@ -4,7 +4,7 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
 const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/comparing-with-control-or-best/')!;
 ---
 <PublicationLayout category={item.category} type={item.type} title={item.title}
-  description={item.summary} published={item.date} status={item.status} toc={[]}>
+  description={item.summary} published={item.date} updated="September 9, 2026" status={item.status} toc={[]}>
 
 <section id="question"><h2>Decide what “better” is relative to</h2>
 <p>Comparing several treatments with a preselected control asks a different question from comparing each treatment with the best of the others. The first fixes the reference before observing results. The second has a target involving an unknown maximum, which the procedure must account for.</p>
@@ -33,7 +33,8 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/comparing
 <li><a href="https://github.com/licklider-ai/nomue-protocol/pull/258">Bounded source acceptance</a> and <a href="https://github.com/licklider-ai/nomue-protocol/pull/259">record-application confirmation</a>.</li>
 </ul>
 <p>The source reviews disclose prior-context and tool-assistance limits. This article reuses their recorded findings; it adds no independent PDF inspection or numerical run. The accepted public-branch scope retains unread historical dependencies, wider variants, and implementation requirements. These methods remain research characterizations rather than supported nomue operations.</p>
-<p>For the related distinction between a family of tests and its guarantee, see <a href="/engineering/what-multiple-comparison-procedures-guarantee/">What a multiple-comparison procedure actually guarantees</a>.</p></section>
+<p>For the related distinction between a family of tests and its guarantee, see <a href="/engineering/what-multiple-comparison-procedures-guarantee/">What a multiple-comparison procedure actually guarantees</a>.</p><p><a href="/news/nomue-protocol-release-3-public-discussion/">Release 3 public discussion opened on September 9, 2026</a>. The fixed proposal and evidence map limit the opening to supplied sources and preserve remaining scientific and numerical conditions; these historical findings keep their recorded scope.</p>
+</section>
 
 </PublicationLayout>
 

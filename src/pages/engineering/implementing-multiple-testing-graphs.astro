@@ -4,7 +4,7 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
 const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/implementing-multiple-testing-graphs/')!;
 ---
 <PublicationLayout category={item.category} type={item.type} title={item.title}
-  description={item.summary} published={item.date} status={item.status} toc={[]}>
+  description={item.summary} published={item.date} updated="September 9, 2026" status={item.status} toc={[]}>
 
 <section id="idea"><h2>A graph can make a testing plan easier to inspect</h2>
 <p>A multiple-testing graph assigns error-rate budgets to hypotheses and specifies how rejection can transfer those budgets to other tests. That is a useful way to express a plan. For a computer to execute it faithfully, however, the plan must specify more than arrows and labels.</p>
@@ -36,7 +36,7 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/implement
 <li><a href="https://github.com/licklider-ai/nomue-protocol/pull/241">Additional verification</a> and <a href="https://github.com/licklider-ai/nomue-protocol/pull/244">source-synthesis review</a>.</li>
 <li><a href="https://github.com/licklider-ai/nomue-protocol/pull/245">Scoped acceptance</a> and <a href="https://github.com/licklider-ai/nomue-protocol/pull/247">acceptance-record confirmation</a>.</li>
 </ul>
-<p>This article summarizes those public research records, including their disclosed assistance and independence limits. It adds no new source inspection. Confidence-interval construction, broader variants, numerical implementation, and Release 3 public opening remain separate work. See also our <a href="/engineering/comparing-with-control-or-best/">control-versus-best comparison</a> for why output meaning must be fixed alongside a testing rule.</p></section>
+<p>This article summarizes those public research records, including their disclosed assistance and independence limits. It adds no new source inspection. <a href="/news/nomue-protocol-release-3-public-discussion/">Release 3 public discussion is now open</a> on the bounded supplied-source proposal. Confidence-interval construction, broader variants, and numerical implementation remain separate work. See also our <a href="/engineering/comparing-with-control-or-best/">control-versus-best comparison</a> for why output meaning must be fixed alongside a testing rule.</p></section>
 
 </PublicationLayout>
 

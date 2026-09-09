@@ -15,6 +15,8 @@ import {
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
+  R3_DISCUSSION,
+  R3_SOURCE_PROGRESS,
   R4_DISCUSSION,
   R4_DISCUSSION_BOUNDARY,
   PLANNED_METHOD_FAMILIES,
@@ -66,6 +68,8 @@ const content = `# Licklider
 - [Public MCP source](${MCP_RELEASE.repositoryUrl}), [npm package](${MCP_RELEASE.npmUrl}), [official registry metadata](${MCP_RELEASE.registryUrl}), and [passing cross-platform CI](${MCP_RELEASE.ciUrl})
 - ${PAIRED_T_BOUNDARY}
 - ${R4_DISCUSSION_BOUNDARY}
+- ${R3_SOURCE_PROGRESS}
+- [Release 3 public discussion](${R3_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R3_DISCUSSION.articleUrl})
 - [Release 4 public discussion](${R4_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R4_DISCUSSION.articleUrl})
 - ${EVALUATION_BOUNDARY}
 - ${PLATFORM_SCOPE}
@@ -120,7 +124,7 @@ ${UPSTREAM_CONTRIBUTIONS.map((item) => `- [${item.project}: ${item.title}](https
 - [Control or best](https://www.licklider.ai/engineering/comparing-with-control-or-best/): source-reviewed targets, ordered testing and interval boundaries.
 - [Testing graphs](https://www.licklider.ai/engineering/implementing-multiple-testing-graphs/): source-reviewed closure, ordering, weights and endpoint conventions. Release 3 methods remain unselected and unsupported.
 
-- [Multiple-testing source review](https://www.licklider.ai/engineering/checking-multiple-testing-against-original-papers/): six original papers reviewed; Rom table/equation conflict confirmed in the project review. Release 3 preparation only. Bounded SR-C acceptance is recorded; later SR-F, SR-I, SR-D and SR-J source results also have scoped acceptance. Historical counts describe their pinned snapshots. Overall sources remain incomplete; no Release 3 support is announced.
+- [Multiple-testing source review](https://www.licklider.ai/engineering/checking-multiple-testing-against-original-papers/): six original papers reviewed; Rom table/equation conflict confirmed in the project review. Historical Release 3 source evidence; the bounded supplied-source RFC is now open for discussion. Bounded SR-C acceptance is recorded; later SR-F, SR-I, SR-D and SR-J source results also have scoped acceptance. Historical counts describe their pinned snapshots. Overall sources remain incomplete; no Release 3 support is announced.
 
 - [Research](https://www.licklider.ai/research/): papers and research notes
 - [Engineering](https://www.licklider.ai/engineering/): implementation work and upstream reports

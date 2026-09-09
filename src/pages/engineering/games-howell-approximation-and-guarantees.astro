@@ -4,7 +4,7 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
 const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/games-howell-approximation-and-guarantees/')!;
 ---
 <PublicationLayout category={item.category} type={item.type} title={item.title}
-  description={item.summary} published={item.date} status={item.status} toc={[]}>
+  description={item.summary} published={item.date} updated="September 9, 2026" status={item.status} toc={[]}>
 
 <section id="finding"><h2>A useful approximation still needs an explicit boundary</h2>
 <p>Games–Howell compares groups without replacing their different variances with one pooled estimate. That makes it relevant when group variability differs. To turn it into a verification rule, however, we need to know exactly which formula is used and what evidence supports its error rate.</p>
@@ -34,7 +34,7 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/games-how
 <li><a href="https://github.com/licklider-ai/nomue-protocol/blob/1c013a6bc07f7d066fa43c692abe2be91241b384/governance/drafts/release-3-preparation/semantic-source-acquisition-result.md#part-r--sr-i-author-result-and-independent-investigation-intake-2026-09-09">Part R: construction and claim-to-source map</a>, especially R.3–R.5.</li>
 <li><a href="https://github.com/licklider-ai/nomue-protocol/pull/230">Independent source-result review</a>, <a href="https://github.com/licklider-ai/nomue-protocol/pull/231">bounded acceptance</a>, and <a href="https://github.com/licklider-ai/nomue-protocol/pull/233">acceptance-record confirmation</a>.</li>
 </ul>
-<p>This article summarizes the recorded source work; it is not an additional independent reading of the PDFs or a new simulation. The reviews disclose their assistance and independence limits. Acceptance covers the bounded source characterization on the public research branch. Procedure selection, numerical support, one-sided or adjusted-p extensions, and Release 3 public opening remain separate decisions.</p></section>
+<p>This article summarizes the recorded source work; it is not an additional independent reading of the PDFs or a new simulation. The reviews disclose their assistance and independence limits. Acceptance covers the bounded source characterization on the public research branch. <a href="/news/nomue-protocol-release-3-public-discussion/">Release 3 public discussion is now open</a> on the bounded supplied-source proposal. Procedure adoption, numerical support, and one-sided or adjusted-p extensions remain separate decisions.</p></section>
 
 </PublicationLayout>
 

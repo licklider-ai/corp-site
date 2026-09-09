@@ -48,7 +48,7 @@ export const HOSTED_WELCH_CAPABILITY =
   'Approved recipients can submit data and required scientific declarations for a supported Welch calculation, or submit a claimed result with structured evidence for checking, through authenticated MCP and HTTP. The service returns scoped outcomes, reasons, evidence, and next actions.';
 
 export const R3_SOURCE_PROGRESS =
-  'Release 3 source research now distinguishes unequal-variance pairwise intervals, fixed-control and best-treatment comparisons, and closed-testing graphs. The bounded source results have been reviewed and accepted; method selection, numerical support, and public opening remain separate work.';
+  'Release 3 public discussion is open on independent groups and multiple comparisons. The proposal makes design, comparison families, result meaning, and error-control questions explicit across 49 catalogued procedures. Its evidence scope is limited to supplied originals; method adoption and numerical support remain separate decisions.';
 
 export const PRODUCT_RELEASE_BOUNDARY =
   'Use the npm-published Release 1 verifier, the local stdio MCP server, the Protocol, and their machine-readable documentation today. The agent-facing Welch capability is now available in limited Release 1 to approved recipients through authenticated MCP and HTTP interfaces; public self-registration is not available. The hosted capability does not yet emit public Records for replay through the local verifier.';
@@ -117,6 +117,17 @@ export const NOMUE_CLI_USAGE =
 
 export const PAIRED_T_BOUNDARY =
   'The Release 2 paired-t candidate has reached independently reviewed final review readiness. Its evidence covers the research gate, four candidate schemas, the Student-t probability and 95% confidence-interval paths, numerical error bounds, resource limits, one controlled runtime, failure reasons, and Release 1 preservation. Formal adoption, issuance, and release remain before public support.';
+
+export const R3_DISCUSSION = {
+  articleUrl: '/news/nomue-protocol-release-3-public-discussion/',
+  issueUrl: 'https://github.com/licklider-ai/nomue-protocol/issues/274',
+  proposalUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/545f6eb4c28eb93bd7cc5404dd45afd475822317/governance/drafts/release-3-independent-multigroup-rfc.md',
+  mapUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/545f6eb4c28eb93bd7cc5404dd45afd475822317/governance/drafts/release-3-preparation/supplied-scope-opening-record.md',
+  reviewUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/c97e1dacd779f7e3ecf9167630ecb2de9c15a231/review-inputs/r3-opening-premise-repair-review/REVIEW-RESULT.md',
+  receiptUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/7774242f0df81342c5abca97a8fbe40844306fa6/governance/drafts/release-3-preparation/public-opening-record.md',
+  openedAt: '2026-09-09T11:50:18Z',
+  earliestDecisionAt: '2026-10-09T11:50:18Z',
+} as const;
 
 export const R4_DISCUSSION = {
   articleUrl: '/news/nomue-protocol-release-4-public-discussion/',
@@ -309,8 +320,8 @@ export const PROTOCOL_RESEARCH_PROGRESS = [
     summary: 'The paired-t candidate connects matched observations to a p-value and a 95% confidence interval, with numerical error checks and one controlled runtime. Its final review-readiness package has passed independent review.',
   },
   {
-    href: '/engineering/what-multiple-comparison-procedures-guarantee/',
-    stage: 'Release 3 · Source research',
+    href: R3_DISCUSSION.articleUrl,
+    stage: 'Release 3 · Public discussion',
     summary: R3_SOURCE_PROGRESS,
     relatedHref: '/engineering/games-howell-approximation-and-guarantees/',
     relatedLabel: 'Unequal-variance comparisons: formulas and guarantees',

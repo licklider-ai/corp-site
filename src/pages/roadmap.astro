@@ -7,6 +7,8 @@ import {
   MCP_RELEASE,
   MCP_RELEASE_BOUNDARY,
   PAIRED_T_BOUNDARY,
+  R3_DISCUSSION,
+  R3_SOURCE_PROGRESS,
   R4_DISCUSSION,
   R4_DISCUSSION_BOUNDARY,
   PAIRED_T_RFC_URL,
@@ -54,7 +56,7 @@ const roadmapStructuredData = {
     <p class="standfirst">{ROADMAP_POSITION}</p>
     <p class="roadmap-rule">
       The stages below separate public artifacts, release candidates, next release work,
-      public discussions, and adopted plans. Protocol proposals advance on their own evidence; Release 4 discussion does not depend on Release 3 opening first. These stages do not promise product ship dates.
+      public discussions, and adopted plans. Protocol proposals advance on their own evidence; Release 3 and Release 4 discussions are open with distinct scopes and evidence requirements. These stages do not promise product ship dates.
     </p>
   </header>
 
@@ -116,6 +118,12 @@ const roadmapStructuredData = {
         <h3>Paired-t / Protocol Release 2</h3>
         <p>{PAIRED_T_BOUNDARY}</p>
         <p><a href={PAIRED_T_RFC_URL} target="_blank" rel="noopener noreferrer">Public RFC</a></p>
+      </article>
+      <article>
+        <h3>Independent groups and multiple comparisons / Protocol Release 3</h3>
+        <p>{R3_SOURCE_PROGRESS}</p>
+        <p>The minimum 30-day discussion began September 9, 2026. The earliest decision is October 9 at 11:50:18 UTC. Catalogue entries remain review questions; the window does not promise adoption or support.</p>
+        <p><a href={R3_DISCUSSION.articleUrl}>Scope and evidence</a> · <a href={R3_DISCUSSION.issueUrl}>Public discussion</a></p>
       </article>
       <article>
         <h3>Two-factor experiments / Protocol Release 4</h3>

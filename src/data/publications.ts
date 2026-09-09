@@ -13,6 +13,16 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'News',
+    type: 'Public consultation',
+    date: 'September 9, 2026',
+    sortKey: '2026-09-09',
+    title: 'nomue Protocol opens Release 3 public discussion for independent groups and multiple comparisons',
+    summary: 'Researchers and developers can comment on how a multi-group analysis should declare its design, comparisons, results, and error-control claims.',
+    href: '/news/nomue-protocol-release-3-public-discussion/',
+    status: 'Public discussion open — supplied-source proposal; method adoption and numerical support remain pending',
+  },
+  {
     "category": "Engineering",
     "type": "Technical method",
     "date": "September 9, 2026",
@@ -151,7 +161,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'We catalogued 49 multi-group comparison procedures, gave each an explicit disposition, and found only seven backed by primary text we had actually read.',
     href: '/engineering/cataloguing-multi-group-procedures/',
     status:
-      'Independently reviewed research input — scope narrowed on incomplete sources; no Release 3 RFC is open',
+      'Reviewed catalogue research; bounded Release 3 public discussion now open',
   },
   {
     category: 'Engineering',

@@ -17,6 +17,8 @@ import {
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
   PUBLIC_TRUST_EVIDENCE,
+  R3_DISCUSSION,
+  R3_SOURCE_PROGRESS,
   R4_DISCUSSION,
   R4_DISCUSSION_BOUNDARY,
   ROADMAP_POSITION,
@@ -87,7 +89,7 @@ const homeStructuredData = {
         <p>{ROADMAP_POSITION}</p>
         <p>
           Welch Record verification is public, and hosted Welch calls are available to approved recipients in limited Release 1. Paired-t has reached reviewed candidate
-          readiness, and a two-factor proposal is open for public discussion.
+          readiness, and proposals for independent groups and two-factor experiments are open for public discussion.
           <a href="#protocol-progress">See Protocol progress</a>.
         </p>
       </div>
@@ -112,12 +114,12 @@ const homeStructuredData = {
       <div class="band-inner band-inner--wide">
         <span id="paired-t-progress"></span>
         <p class="eyebrow">Protocol progress</p>
-        <h2 class="roadmap-title">From paired observations to two-factor experiments.</h2>
+        <h2 class="roadmap-title">From paired observations to groups and factorial experiments.</h2>
         <p class="roadmap-lead">
-          Two concrete steps extend the Protocol beyond its public Welch scope:
-          a reviewed paired-t candidate and an open two-factor specification proposal.
+          Three programs extend the Protocol beyond its public Welch scope:
+          a reviewed paired-t candidate and open proposals for independent groups and two-factor experiments.
         </p>
-        <div class="protocol-progress-grid">
+        <div class="protocol-progress-grid protocol-progress-grid--releases">
           <article>
             <p class="step">Release 2 · Reviewed candidate</p>
             <h3>Paired-t: a complete candidate for review</h3>
@@ -129,6 +131,14 @@ const homeStructuredData = {
             </ul>
             <p>Formal adoption, permanent identifiers, authoritative integration, and release remain before paired-t becomes supported.</p>
             <p><a href="/engineering/bounding-paired-t-arithmetic-and-pvalues/">Candidate evidence and reviews</a> · <a href="https://github.com/licklider-ai/nomue-protocol/issues/25">Public review</a></p>
+          </article>
+          <article>
+            <p class="step">Release 3 · Public discussion</p>
+            <h3>Independent groups: make each comparison explicit</h3>
+            <p>{R3_SOURCE_PROGRESS}</p>
+            <p>For example, comparing three treatments raises different questions: whether their means differ overall, which treatments differ from a control, or which pairs to compare.</p>
+            <p>The proposal asks how a future verification call should preserve those choices and the meaning of each result. Comment on its scope, declarations, and evidence boundaries.</p>
+            <p><a href={R3_DISCUSSION.articleUrl}>Read the proposal announcement</a> · <a href={R3_DISCUSSION.issueUrl}>Join the discussion</a></p>
           </article>
           <article>
             <p class="step">Release 4 · Public discussion</p>
@@ -358,7 +368,7 @@ const homeStructuredData = {
             <p>{LEARNING_LOOP_POSITION}</p>
           </article>
         </div>
-        <p class="roadmap-note"><strong>Protocol progress:</strong> Paired-t is a reviewed Release 2 candidate; the bounded Release 4 two-factor proposal is open for public discussion. <a href="#protocol-progress">See both stages and their next steps</a>.</p>
+        <p class="roadmap-note"><strong>Protocol progress:</strong> Paired-t is a reviewed Release 2 candidate; the bounded Release 3 and Release 4 proposals are open for public discussion. <a href="#protocol-progress">See each program and its next steps</a>.</p>
         <p class="scope-note">{MARKET_SCOPE}</p>
         <p class="more"><a href="/roadmap/">See the full product and capability roadmap</a></p>
       </div>
@@ -548,6 +558,8 @@ const homeStructuredData = {
   .step, .scope-label, .layer-label, .evidence-status { margin-bottom: 0.55rem; color: var(--ink-3); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
   .scope-grid article:first-child { background: var(--wash); }
   .protocol-progress-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+  .protocol-progress-grid--releases { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 1000px) { .protocol-progress-grid--releases { grid-template-columns: minmax(0, 1fr); } }
   .protocol-progress-grid article { min-width: 0; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
   .protocol-progress-grid h3 { font-size: 1.3rem; line-height: 1.35; }
   .protocol-progress-grid li { margin-bottom: 0.65rem; }

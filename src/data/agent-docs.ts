@@ -18,6 +18,7 @@ import {
   NOMUE_POSITION,
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
+  R3_DISCUSSION,
   R4_DISCUSSION,
   R4_DISCUSSION_BOUNDARY,
   PLANNED_METHOD_FAMILIES,
@@ -711,7 +712,6 @@ ${NOMUE_NPX_COMMAND}`,
         title: 'Available now',
         paragraphs: [
           HOSTED_WELCH_CAPABILITY,
-  R3_SOURCE_PROGRESS,
           PUBLIC_CAPABILITY,
           `${PUBLIC_RELEASE.protocol} and public npm package ${PUBLIC_RELEASE.npmPackage} ${PUBLIC_RELEASE.verifierPackage} are the current public artifacts.`,
           PRODUCT_RELEASE_BOUNDARY,
@@ -741,7 +741,7 @@ ${NOMUE_NPX_COMMAND}`,
         id: 'development',
         title: 'Protocol candidates and public discussion',
         paragraphs: [PAIRED_T_BOUNDARY, R3_SOURCE_PROGRESS, R4_DISCUSSION_BOUNDARY],
-        links: [{ label: 'Release 4 scope and public discussion', href: R4_DISCUSSION.articleUrl }, { label: 'Comment on the Release 4 proposal', href: R4_DISCUSSION.issueUrl }],
+        links: [{ label: 'Release 3 scope and public discussion', href: R3_DISCUSSION.articleUrl }, { label: 'Comment on the Release 3 proposal', href: R3_DISCUSSION.issueUrl }, { label: 'Release 4 scope and public discussion', href: R4_DISCUSSION.articleUrl }, { label: 'Comment on the Release 4 proposal', href: R4_DISCUSSION.issueUrl }],
         bullets: [
           'An RFC is a review record, not a support declaration.',
           'Implementation evidence does not by itself create a public Protocol capability.',
@@ -920,7 +920,7 @@ ${NOMUE_POSITION}
 - ${MCP_RELEASE_BOUNDARY}
 - ${PAIRED_T_BOUNDARY}
 - ${R3_SOURCE_PROGRESS}
-- [Reviewed multi-group source work](https://www.licklider.ai/engineering/what-multiple-comparison-procedures-guarantee/)
+- [Release 3 public discussion](${R3_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R3_DISCUSSION.articleUrl})
 - ${R4_DISCUSSION_BOUNDARY}
 - [Release 4 public discussion](${R4_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R4_DISCUSSION.articleUrl})
 - ${EVALUATION_BOUNDARY}
