@@ -18,6 +18,7 @@ import {
   R4_DISCUSSION,
   R4_DISCUSSION_BOUNDARY,
   PLANNED_METHOD_FAMILIES,
+  HOSTED_WELCH_CAPABILITY,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
@@ -50,6 +51,13 @@ const content = `# Licklider agent-readable documentation
 - [MCP installation and exact result contract](https://www.licklider.ai/docs/mcp-verification.md)
 - [Official MCP Registry entry](${MCP_RELEASE.registryUrl}): \`${MCP_RELEASE.registryName}\`
 
+## Research behind expansion
+
+- [Power scaling and factorial F](https://www.licklider.ai/engineering/power-scaling-and-factorial-f-statistics/): accepted bounded SS/F and six-fixture numerical exploration; no numerical support established.
+- [Unequal-variance comparisons](https://www.licklider.ai/engineering/games-howell-approximation-and-guarantees/): source-reviewed GH, T2/T2-prime, T3/C distinctions; simulations are not universal error guarantees.
+- [Control or best](https://www.licklider.ai/engineering/comparing-with-control-or-best/): source-reviewed targets, ordered testing and interval boundaries.
+- [Testing graphs](https://www.licklider.ai/engineering/implementing-multiple-testing-graphs/): source-reviewed closure, ordering, weights and endpoint conventions. Release 3 methods remain unselected and unsupported.
+
 ## Start here
 
 - [Documentation index](https://www.licklider.ai/docs/index.md): ${DOCS_INDEX_MARKDOWN.split('\n')[2]?.replace(/^> /, '')}
@@ -64,7 +72,9 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 
 ## Product access
 
+- ${HOSTED_WELCH_CAPABILITY}
 - ${PRODUCT_RELEASE_BOUNDARY}
+- [Hosted limited Release 1](https://www.licklider.ai/news/nomue-welch-limited-release-1/)
 - ${MCP_RELEASE_BOUNDARY}
 - [Public MCP source](${MCP_RELEASE.repositoryUrl}), [npm package](${MCP_RELEASE.npmUrl}), [official registry metadata](${MCP_RELEASE.registryUrl}), and [passing CI](${MCP_RELEASE.ciUrl})
 - ${PAIRED_T_BOUNDARY}

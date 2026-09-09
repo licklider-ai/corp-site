@@ -13,6 +13,46 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    "category": "Engineering",
+    "type": "Technical method",
+    "date": "September 9, 2026",
+    "sortKey": "2026-09-09",
+    "title": "What power-of-two scaling can and cannot repair",
+    "summary": "Exact references show when rescaling recovers a factorial F calculation, and when lost inputs or rounding residuals require a different numerical decision.",
+    "href": "/engineering/power-scaling-and-factorial-f-statistics/",
+    "status": "Reviewed and steward-accepted bounded research; no additional product support"
+  },
+  {
+    "category": "Engineering",
+    "type": "Technical method",
+    "date": "September 9, 2026",
+    "sortKey": "2026-09-09",
+    "title": "What “approximate” means for Games–Howell comparisons",
+    "summary": "Original-paper checks separate the construction of unequal-variance comparisons from simulation evidence and a guaranteed bound on false positives.",
+    "href": "/engineering/games-howell-approximation-and-guarantees/",
+    "status": "Reviewed and steward-accepted bounded research; no additional product support"
+  },
+  {
+    "category": "Engineering",
+    "type": "Technical method",
+    "date": "September 9, 2026",
+    "sortKey": "2026-09-09",
+    "title": "Comparing with a control and comparing with the best answer different questions",
+    "summary": "Source review separates fixed-control tests, step-up and step-down calibration, and intervals that compare each treatment with the best of the others.",
+    "href": "/engineering/comparing-with-control-or-best/",
+    "status": "Reviewed and steward-accepted bounded research; no additional product support"
+  },
+  {
+    "category": "Engineering",
+    "type": "Technical method",
+    "date": "September 9, 2026",
+    "sortKey": "2026-09-09",
+    "title": "What must stay fixed in a multiple-testing graph",
+    "summary": "Closed testing and graphical procedures make error control inspectable, but order, weights, stopping rules, and zero-level behavior still need precise definitions.",
+    "href": "/engineering/implementing-multiple-testing-graphs/",
+    "status": "Reviewed and steward-accepted bounded research; no additional product support"
+  },
+  {
     category: 'News',
     type: 'Public consultation',
     date: 'September 9, 2026',
@@ -41,7 +81,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     title: "What a multiple-comparison procedure actually guarantees",
     summary: "Original-paper checks separated overall tests, individual comparisons, and simultaneous intervals, giving future verification rules a more precise statement of what they protect.",
     href: "/engineering/what-multiple-comparison-procedures-guarantee/",
-    status: "Source-reviewed Release 3 research; SR-F repairs and disposition pending",
+    status: "Source-reviewed Release 3 research; bounded SR-F source acceptance recorded",
   },
   {
     category: 'Engineering',

@@ -1,0 +1,43 @@
+---
+import { PUBLICATIONS } from '../../data/publications';
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/comparing-with-control-or-best/')!;
+---
+<PublicationLayout category={item.category} type={item.type} title={item.title}
+  description={item.summary} published={item.date} status={item.status} toc={[]}>
+
+<section id="question"><h2>Decide what “better” is relative to</h2>
+<p>Comparing several treatments with a preselected control asks a different question from comparing each treatment with the best of the others. The first fixes the reference before observing results. The second has a target involving an unknown maximum, which the procedure must account for.</p>
+<p>Our Release 3 review of Dunnett–Tamhane (1991 and 1992) and Hsu (1984) made those targets and outputs explicit. The bounded source synthesis and its acceptance record have passed review. The practical lesson is to fix the question before choosing a critical value or an interval.</p></section>
+<section id="control"><h2>A fixed control still allows different ordered procedures</h2>
+<p>The inspected many-to-one setting uses normal groups with a common unknown variance. A shared control creates dependence among the treatment comparisons. Accounting for that dependence is part of the procedure, not an optional adjustment after calculating separate t tests.</p>
+<table><thead><tr><th>Source construction</th><th>Rule to preserve</th><th>Important boundary</th></tr></thead><tbody>
+<tr><td>1991 step-down</td><td>Use the appropriate joint maximum critical value for the remaining labelled comparisons, stopping at the first non-rejection.</td><td>Unequal group sizes are allowed in the inspected setting; reordering statistics must also reorder their sample-size and correlation information.</td></tr>
+<tr><td>1992 step-up</td><td>Calibrate critical values through joint ordered-statistic events; the first crossing rejects that comparison and all larger statistics.</td><td>The bounded characterization uses common correlation and valid, nondecreasing calibration. Substituting step-down constants is not justified.</td></tr>
+</tbody></table>
+<p>The adjusted p-value constructions differ too: the step-down construction uses a suffix maximum of local tails, while the step-up construction uses a prefix minimum under the source’s ordering. Local tail probabilities and adjusted p-values cannot be interchanged.</p>
+<p>The source review preserves the 1992 paper’s proof and existence limits. Some arguments are referred to an unread technical report, and a larger-family superiority statement remains a conjecture. The accepted result is conditional on the required calibration; it does not certify an unconditional existence theorem for arbitrary family size.</p></section>
+<section id="best"><h2>The best of the others is a different target</h2>
+<p>Hsu’s inspected target is each population location minus the maximum location among all the other treatments. It is neither a difference from a fixed control nor a comparison with a maximum that includes the treatment itself.</p>
+<p>The inspected theorem assumes independent, equal-size samples from a common continuous location family, translation-equivariant statistics, and its calibrated-event conditions. A location family shifts the same distributional shape between treatments. In the inspected parametric construction, let Δ compare the observed treatment location with the best other observation, and let d be the model-calibrated width. The interval has the form:</p>
+<p><code>[min(Δ − d, 0), max(Δ + d, 0)]</code></p>
+<p>These intervals include zero. Reading them as ordinary all-pairs intervals, or asking them to guarantee a unique winning treatment, loses the source’s intended selection interpretation. The simultaneous coverage statement is a lower bound under its conditions, not equality at every population configuration.</p></section>
+<section id="checking"><h2>Checking printed numbers without inventing an erratum</h2>
+<p>The investigation reconstructed selected table values and checked the meaning of their columns. The independent review used a different numerical construction, including adaptive integration and a cell-count calculation, and checked selected values against printed precision.</p>
+<p>Rounded inputs can explain small differences between a reconstructed result and a printed number. That is why the review separates a wording or formula-target problem from evidence of a numerical erratum. It also distinguishes the single-step confidence bounds printed in the 1991 paper from intervals compatible with its step-down testing rule.</p>
+<p>The finite diagnostic checks support the recorded examples; they are not general coverage proofs or certified numerical error bounds.</p></section>
+<section id="evidence"><h2>Evidence and what follows</h2>
+<ul>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/blob/7e513d174de83a564a91bea9168e45f623c58448/governance/drafts/release-3-preparation/semantic-source-acquisition-result.md#part-w-approved-sr-j-source-basis-exception-and-three-entry-author-synthesis">Part W: the three-entry source and guarantee map</a>, including supplied-PDF identities and W.6’s remaining conditions.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/pull/250">Separate original-source review</a> and <a href="https://github.com/licklider-ai/nomue-protocol/pull/256">integration review</a>.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/pull/258">Bounded source acceptance</a> and <a href="https://github.com/licklider-ai/nomue-protocol/pull/259">record-application confirmation</a>.</li>
+</ul>
+<p>The source reviews disclose prior-context and tool-assistance limits. This article reuses their recorded findings; it adds no independent PDF inspection or numerical run. The accepted public-branch scope retains unread historical dependencies, wider variants, and implementation requirements. These methods remain research characterizations rather than supported nomue operations.</p>
+<p>For the related distinction between a family of tests and its guarantee, see <a href="/engineering/what-multiple-comparison-procedures-guarantee/">What a multiple-comparison procedure actually guarantees</a>.</p></section>
+
+</PublicationLayout>
+
+<style>
+  table { table-layout: fixed; width: 100%; }
+  th:first-child { width: 28%; }
+</style>

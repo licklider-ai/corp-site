@@ -44,8 +44,14 @@ export const PUBLIC_CAPABILITY =
 export const PRODUCT_CAPABILITY =
   'nomue\'s Welch verification is implemented: it keeps the agent from guessing required scientific facts, follows the supported decision path, runs fixed numerical checks, and returns structured outcomes and next actions.';
 
+export const HOSTED_WELCH_CAPABILITY =
+  'Approved recipients can submit data and required scientific declarations for a supported Welch calculation, or submit a claimed result with structured evidence for checking, through authenticated MCP and HTTP. The service returns scoped outcomes, reasons, evidence, and next actions.';
+
+export const R3_SOURCE_PROGRESS =
+  'Release 3 source research now distinguishes unequal-variance pairwise intervals, fixed-control and best-treatment comparisons, and closed-testing graphs. The bounded source results have been reviewed and accepted; method selection, numerical support, and public opening remain separate work.';
+
 export const PRODUCT_RELEASE_BOUNDARY =
-  'Use the npm-published Release 1 verifier, the local stdio MCP server, the Protocol, and their machine-readable documentation today. The agent-facing Welch capability is now available in limited Release 1 to approved recipients through authenticated MCP and HTTP interfaces; public self-registration is not available.';
+  'Use the npm-published Release 1 verifier, the local stdio MCP server, the Protocol, and their machine-readable documentation today. The agent-facing Welch capability is now available in limited Release 1 to approved recipients through authenticated MCP and HTTP interfaces; public self-registration is not available. The hosted capability does not yet emit public Records for replay through the local verifier.';
 
 export const MCP_RELEASE = {
   displayName: 'nomue Record Verifier',
@@ -305,16 +311,16 @@ export const PROTOCOL_RESEARCH_PROGRESS = [
   {
     href: '/engineering/what-multiple-comparison-procedures-guarantee/',
     stage: 'Release 3 · Source research',
-    summary: 'Original-paper checks distinguish overall tests, individual comparisons and simultaneous intervals. Together with the six-paper source review, they define which assumptions and guarantees a future verification rule must name.',
-    relatedHref: '/engineering/checking-multiple-testing-against-original-papers/',
-    relatedLabel: 'Six-paper review and bounded acceptance',
+    summary: R3_SOURCE_PROGRESS,
+    relatedHref: '/engineering/games-howell-approximation-and-guarantees/',
+    relatedLabel: 'Unequal-variance comparisons: formulas and guarantees',
   },
   {
     href: R4_DISCUSSION.articleUrl,
     stage: 'Release 4 · Public discussion',
     summary: 'A balanced two-factor specification proposal is open for public comment. It connects model assumptions, individual effect tests, and verification evidence; numerical implementation remains unresolved.',
-    relatedHref: '/engineering/floating-point-tiny-factorial-effects/',
-    relatedLabel: 'Background: the 945-case numerical study',
+    relatedHref: '/engineering/power-scaling-and-factorial-f-statistics/',
+    relatedLabel: 'SS, SSE, F, and the limits of power scaling',
   },
 ].map((entry) => {
   const publication = PUBLICATIONS.find((item) => item.href === entry.href);

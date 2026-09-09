@@ -1,0 +1,46 @@
+---
+import { PUBLICATIONS } from '../../data/publications';
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/implementing-multiple-testing-graphs/')!;
+---
+<PublicationLayout category={item.category} type={item.type} title={item.title}
+  description={item.summary} published={item.date} status={item.status} toc={[]}>
+
+<section id="idea"><h2>A graph can make a testing plan easier to inspect</h2>
+<p>A multiple-testing graph assigns error-rate budgets to hypotheses and specifies how rejection can transfer those budgets to other tests. That is a useful way to express a plan. For a computer to execute it faithfully, however, the plan must specify more than arrows and labels.</p>
+<p>Our Release 3 source synthesis connects closed testing, fixed sequence, fallback, gatekeeping, and weighted Bonferroni graphs. The bounded source characterization has passed review and steward acceptance. It identifies which assumptions and boundary decisions a future implementation needs to preserve.</p></section>
+<section id="closure"><h2>The guarantee starts with the family of questions</h2>
+<p>Closed testing considers the elementary hypotheses and their intersections. An elementary hypothesis can be rejected only when all the required intersections containing it are rejected. If each local intersection test has a valid level-α bound, the intersection of all true nulls supplies the familywise error bound.</p>
+<p>That framework does not require independence among already-valid local tests. Each local test still needs its own assumptions. Replacing a Bonferroni local test with a different rule therefore requires separate justification.</p>
+<table><thead><tr><th>Plan</th><th>Meaning to preserve</th></tr></thead><tbody>
+<tr><td>Fixed sequence</td><td>Use an order specified in advance and stop at the first non-rejection. Sorting by observed p-values would be a different procedure.</td></tr>
+<tr><td>Fallback</td><td>Keep the predetermined allocations and the rule for carrying or resetting budget after each result.</td></tr>
+<tr><td>Gatekeeping</td><td>Specify the two families, their weights, and exactly which gate condition allows secondary decisions.</td></tr>
+<tr><td>Weighted Bonferroni graph</td><td>Specify nonnegative initial levels, transfer weights and updates, eligible tests, and the stopping rule.</td></tr>
+</tbody></table>
+<p>The inspected graph construction uses a finite, prespecified graph with no self-edges and outgoing weights summing to at most one. Its source relationship to closed testing has a stated scope; it does not make every gatekeeping or closed-testing procedure equivalent to a graph.</p></section>
+<section id="zero"><h2>Zero can change the pointwise behavior</h2>
+<p>Consider allocations (0.05, 0) and p-values (0.1, 0). A fixed-sequence procedure stops after the first non-rejection. A rule that continues and literally checks p ≤ level can treat the second, zero-level test differently. Requiring a positive allocated level gives another behavior.</p>
+<p>A p-value of exactly zero under a true null has probability zero when marginal validity holds. That fact does not settle what an implementation should do with a false-null zero or a represented floating-point zero. A probability guarantee and the function executed for every input are separate specifications.</p>
+<p>Clipping an adjusted value at 1 also needs an endpoint convention. For p = 1 and weight 1/2, the raw ratio is 2 and the clipped value is 1. At α = 1, comparing those two values with α gives different decisions. Neither convention is selected by this research.</p></section>
+<section id="epsilon"><h2>A tiny positive value is not the same as a limit</h2>
+<p>Some graph representations use a positive ε intended to approach zero. The reviewed two-family example shows why taking a small value in code is not automatically the same as the limiting procedure: with ε = 10<sup>−9</sup>, a sufficiently small secondary p-value can permit a rejection before all the intended gates clear.</p>
+<p>The recorded algebra establishes a limit for local weights under the stated positive-weight conditions. It does not establish identical decisions at every finite ε. A verifier must keep the symbolic construction and the executed finite number distinct.</p></section>
+<section id="application"><h2>From source reading to an executable rule</h2>
+<p>The reusable engineering result is a list of decisions that must survive translation into software: family membership, hypotheses, ordering, weights, local tests, allowed α values, zero-level eligibility, transfer updates, and stopping behavior. These should be recoverable from the versioned rule rather than inferred from the observed results.</p>
+<p>Review also separated source statements from investigator derivations. For example, the general fallback argument and the sufficient shortcut argument are recorded as author derivations checked in review, not as newly discovered theorems or quotations from an unread reference.</p></section>
+<section id="evidence"><h2>Evidence and scope</h2>
+<p>The bounded synthesis uses inspected work by Marcus–Peritz–Gabriel (1976), Wiens (2003), Dmitrienko and colleagues (2003), and Bretz and colleagues (2009). A specifically approved source-basis change covers two entries; it does not establish the unread 1995 formulation or historical attribution.</p>
+<ul>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/blob/0624d98715706f1a940025407a91dccf9e8b3881/governance/drafts/release-3-preparation/semantic-source-acquisition-result.md#part-t--sr-d-author-synthesis-under-the-approved-bounded-primary-basis">Part T: six-entry map and numerical boundary examples</a>, especially T.4–T.6.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/pull/241">Additional verification</a> and <a href="https://github.com/licklider-ai/nomue-protocol/pull/244">source-synthesis review</a>.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/pull/245">Scoped acceptance</a> and <a href="https://github.com/licklider-ai/nomue-protocol/pull/247">acceptance-record confirmation</a>.</li>
+</ul>
+<p>This article summarizes those public research records, including their disclosed assistance and independence limits. It adds no new source inspection. Confidence-interval construction, broader variants, numerical implementation, and Release 3 public opening remain separate work. See also our <a href="/engineering/comparing-with-control-or-best/">control-versus-best comparison</a> for why output meaning must be fixed alongside a testing rule.</p></section>
+
+</PublicationLayout>
+
+<style>
+  table { table-layout: fixed; width: 100%; }
+  th:first-child { width: 28%; }
+</style>

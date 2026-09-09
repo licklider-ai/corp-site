@@ -5,12 +5,13 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
   title="What a multiple-comparison procedure actually guarantees"
   description="Original-paper checks separated overall tests, individual comparisons, and simultaneous intervals, giving future verification rules a more precise statement of what they protect."
   published="September 8, 2026"
-  status="Source-reviewed Release 3 research; SR-F repairs and disposition pending" toc={[]}>
+  updated="September 9, 2026"
+  status="Source-reviewed Release 3 research; bounded SR-F source acceptance recorded" toc={[]}>
 
 <section id="status"><h2>What the source checks establish</h2>
 <p>Multiple-comparison procedures can protect different claims even when they use similar thresholds. Our latest original-paper checks make those differences explicit enough to guide future verification rules: which comparisons belong to the family, which dependence assumptions apply, and which errors a procedure controls.</p>
 <p>This extends our <a href="/engineering/checking-multiple-testing-against-original-papers/">six-paper review of multiple-testing procedures</a> with Dunn and Šidák, protected and modified LSD, ordered-range procedures, and the GT2 and Genizi–Hochberg interval constructions. These are public research results for Release 3 preparation. Review and acceptance are recorded by scope; they are not journal peer review or new product support.</p>
-<p>The latest GT2/GH source review identified two repairs. Both are recorded in <a href="https://github.com/licklider-ai/nomue-protocol/pull/221">PR #221</a>, which preserves and supersedes the original investigation in #216. At this publication, the successor's close review and bounded disposition remain pending.</p></section>
+<p>The latest GT2/GH source review identified two repairs. Both are recorded in <a href="https://github.com/licklider-ai/nomue-protocol/pull/221">PR #221</a>, which preserves and supersedes the original investigation in #216. <strong>September 9 update:</strong> the bounded SR-F source acceptance is recorded in <a href="https://github.com/licklider-ai/nomue-protocol/pull/224">PR #224</a>. This supersedes the earlier pending status and does not select the investigated procedures.</p></section>
 <section id="dependence"><h2>A guarantee needs its assumptions</h2>
 <p>The familywise error rate is the probability of making at least one false rejection in a declared family. Strong control requires the promised bound even when some hypotheses are false and others are true.</p>
 <p>For valid individual p-values, Bonferroni's union-bound argument controls that error under arbitrary dependence. Dunn's original planned-comparison intervals provide a particular statistical construction; normality in that construction is not a requirement of the abstract union-bound argument.</p>
@@ -27,7 +28,7 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
 <p>The review also corrected our own arithmetic interpretation. Averaging the paper's printed rounded components gives 0.998633…, which rounds to its printed 0.9986. Averaging reconstructed, unrounded components gives 0.998662…, which rounds to 0.9987. This difference is not evidence of an error in the source's printed average.</p></section>
 <section id="verification"><h2>Turning source distinctions into verification requirements</h2>
 <p>The engineering result is a more precise specification boundary. A future verifier needs the declared family, target, procedure variant, assumptions and output interpretation before it can decide what a successful check means. Correct arithmetic alone cannot supply those missing choices.</p>
-<p>The cumulative source set is still incomplete and the Release 3 program remains narrowed. The SR-F successor records a partial disposition pending a bounded decision; it does not enact its proposed closure. Algorithms, numerical constants, tolerances and supported domains require separate decisions. Release 3 public discussion has not opened, and current product support remains Release 1 Welch Record verification.</p></section>
+<p>The cumulative source set is still incomplete and the Release 3 program remains narrowed. SR-F is accepted as closed for its bounded source-completion scope. Algorithms, numerical constants, tolerances and supported domains require separate decisions. Release 3 public discussion has not opened, and the supported scientific scope remains Welch: public local Record verification and the separately announced <a href="/news/nomue-welch-limited-release-1/">limited hosted capability</a>.</p></section>
 <section id="evidence"><h2>Evidence and review</h2>
 <p>The records distinguish original-page inspection, investigator derivation, numerical diagnostics and steward decisions. Authoring and review disclose LLM assistance and separate contexts; repository identities bind the files, while reviewer independence statements retain their stated limits.</p>
 <ul>
@@ -38,4 +39,5 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
 <li><a href="https://github.com/licklider-ai/nomue-protocol/blob/ca88a1550165dc9b2f5f16541e91d92d1c79ef82/review-inputs/r3-srf-primary-research/REVIEW-RESULT.md">GT2/GH four-source review</a>: content GO with two should-fix findings; <a href="https://github.com/licklider-ai/nomue-protocol/pull/221">the corrective successor</a> tracks their repair.</li>
 </ul></section>
 
+<section id="follow-up"><h2>Further source work</h2><p>Three September 9 articles apply these distinctions to <a href="/engineering/games-howell-approximation-and-guarantees/">unequal-variance comparisons</a>, <a href="/engineering/comparing-with-control-or-best/">control and best-treatment targets</a>, and <a href="/engineering/implementing-multiple-testing-graphs/">closed-testing graphs</a>. Their source maps and acceptance records are separate from this article’s original snapshot.</p></section>
 </PublicationLayout>

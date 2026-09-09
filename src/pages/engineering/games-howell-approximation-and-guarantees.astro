@@ -1,0 +1,44 @@
+---
+import { PUBLICATIONS } from '../../data/publications';
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/games-howell-approximation-and-guarantees/')!;
+---
+<PublicationLayout category={item.category} type={item.type} title={item.title}
+  description={item.summary} published={item.date} status={item.status} toc={[]}>
+
+<section id="finding"><h2>A useful approximation still needs an explicit boundary</h2>
+<p>Games–Howell compares groups without replacing their different variances with one pooled estimate. That makes it relevant when group variability differs. To turn it into a verification rule, however, we need to know exactly which formula is used and what evidence supports its error rate.</p>
+<p>Our Release 3 source review separated Games–Howell, Tamhane T2 and T2′, and Dunnett T3 and C. The bounded source result has passed project review and steward acceptance. These are characterizations for future design, not newly supported nomue methods.</p></section>
+<section id="family"><h2>What the comparison protects</h2>
+<p>The inspected scope is every pair of a fixed set of independent normal groups, with possibly unequal variances and sample sizes. The output under examination is simultaneous two-sided intervals for the true mean differences. “Simultaneous” asks whether all intervals cover their targets together.</p>
+<p>For k groups there are k(k−1)/2 pairs. Each pair has its own standard error. Games–Howell and T2 use a Welch-style estimate of degrees of freedom; the table below distinguishes the other critical-value rules. A statement about one interval therefore cannot automatically establish the behavior of the whole family.</p>
+<table><thead><tr><th>Procedure</th><th>Construction that must remain identifiable</th></tr></thead><tbody>
+<tr><td>Games–Howell</td><td>A Studentized-range critical value using the pair’s Welch degrees of freedom, multiplied by its standard error and divided by √2.</td></tr>
+<tr><td>Tamhane T2</td><td>A t critical value with a family-size tail adjustment and the pair’s Welch degrees of freedom.</td></tr>
+<tr><td>Tamhane T2′</td><td>A specified modification replacing those degrees of freedom with nᵢ + nⱼ − 2 in stated balance cases. Its simulation rows cannot simply be labelled T2.</td></tr>
+<tr><td>Dunnett T3</td><td>A Studentized maximum-modulus critical value. The reference distribution uses one shared random scale, not independently scaled t variables.</td></tr>
+<tr><td>Dunnett C</td><td>A weighted average of two Studentized-range critical values. Averaging the degrees of freedom instead would define a different calculation.</td></tr>
+</tbody></table>
+<p>Even source labels need care: Games–Howell’s “BF” label does not name the Brown–Forsythe procedure called BF in Tamhane’s paper.</p></section>
+<section id="evidence-strength"><h2>A simulated error rate is evidence, not a universal guarantee</h2>
+<p>The inspected papers document configurations where Games–Howell’s estimated familywise error rate exceeds the nominal 5%. Games and Howell’s Table III includes 0.092 for four groups with sample sizes (11, 8, 4, 3) and variances (1, 3, 5, 7). That is an estimate from the paper’s simulation, not an exact probability for all repetitions or a prediction for a new experiment.</p>
+<p>Tamhane’s Table 3 reports joint coverage rather than error rate. Its Games–Howell coverage of 0.916 in an eight-group configuration corresponds to an estimated family error rate of 0.084. Distinguishing coverage from error rate prevents a reversed interpretation.</p>
+<p>For the finite-degrees-of-freedom procedures examined here, the papers supply approximate constructions and simulation assessments. Printed T2 or T3 estimates below 5% do not by themselves prove control over every admissible input. Likewise, a reported exceedance does not justify dismissing a method in every setting.</p>
+<p>The review does not establish a general finite-sample level-α guarantee for Games–Howell from these assigned texts. It also keeps a cited, unread known-variance proof dependency separate from the finite-sample investigation.</p></section>
+<section id="contract"><h2>What an implementer should record</h2>
+<p>A reproducible procedure description needs the comparison family, sidedness, model assumptions, variance estimates, degrees-of-freedom rule, critical-value distribution, and output type. A familiar method name leaves too much of that undecided.</p>
+<p>This follows the broader lesson in <a href="/engineering/what-multiple-comparison-procedures-guarantee/">our earlier multiple-comparison article</a>, now applied to the unequal-variance family. It gives a future verifier something concrete to match: an exact procedure variant with a stated evidence boundary.</p></section>
+<section id="sources"><h2>Sources and accepted scope</h2>
+<p>The reviewed originals are Games and Howell (1976), Tamhane (1979), and Dunnett (1980, JASA 75:796–800). The source map gives printed pages, formulas, simulation settings, supplied-file identities, and distinctions between source statements and investigator reasoning.</p>
+<ul>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/blob/1c013a6bc07f7d066fa43c692abe2be91241b384/governance/drafts/release-3-preparation/semantic-source-acquisition-result.md#part-r--sr-i-author-result-and-independent-investigation-intake-2026-09-09">Part R: construction and claim-to-source map</a>, especially R.3–R.5.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/pull/230">Independent source-result review</a>, <a href="https://github.com/licklider-ai/nomue-protocol/pull/231">bounded acceptance</a>, and <a href="https://github.com/licklider-ai/nomue-protocol/pull/233">acceptance-record confirmation</a>.</li>
+</ul>
+<p>This article summarizes the recorded source work; it is not an additional independent reading of the PDFs or a new simulation. The reviews disclose their assistance and independence limits. Acceptance covers the bounded source characterization on the public research branch. Procedure selection, numerical support, one-sided or adjusted-p extensions, and Release 3 public opening remain separate decisions.</p></section>
+
+</PublicationLayout>
+
+<style>
+  table { table-layout: fixed; width: 100%; }
+  th:first-child { width: 28%; }
+</style>

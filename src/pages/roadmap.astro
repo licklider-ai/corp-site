@@ -12,6 +12,7 @@ import {
   PAIRED_T_RFC_URL,
   PLANNED_METHOD_FAMILIES,
   PLATFORM_EVOLUTION,
+  HOSTED_WELCH_CAPABILITY,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
@@ -107,6 +108,7 @@ const roadmapStructuredData = {
     <div class="status-list">
       <article>
         <h3>Managed agent-facing Welch workflow — limited Release 1</h3>
+        <p>{HOSTED_WELCH_CAPABILITY}</p>
         <p>{PRODUCT_RELEASE_BOUNDARY}</p>
         <p><a href="/news/nomue-welch-limited-release-1/">Read the release announcement</a></p>
       </article>
@@ -119,7 +121,7 @@ const roadmapStructuredData = {
         <h3>Two-factor experiments / Protocol Release 4</h3>
         <p>{R4_DISCUSSION_BOUNDARY}</p>
         <p>The minimum 30-day discussion began September 9, 2026. The earliest decision is October 9 at 05:59:47 UTC; the window does not promise adoption or a product release.</p>
-        <p><a href={R4_DISCUSSION.articleUrl}>Scope and evidence</a> · <a href={R4_DISCUSSION.issueUrl}>Public discussion</a></p>
+        <p><a href={R4_DISCUSSION.articleUrl}>Scope and evidence</a> · <a href={R4_DISCUSSION.issueUrl}>Public discussion</a> · <a href="/engineering/power-scaling-and-factorial-f-statistics/">Numerical scaling study</a></p>
       </article>
       <article>
         <h3>Controlled agent evaluation</h3>
@@ -156,11 +158,13 @@ const roadmapStructuredData = {
       {PLANNED_METHOD_FAMILIES.map((family) => <li>{family}</li>)}
     </ul>
     <p>
-      Multi-group preparation has advanced through a review of six original
-      multiple-testing papers, clarifying guarantees and a numerical source conflict.
-      This is research evidence for the planned family; procedure selection and
-      Release 3 support remain separate decisions.
-      <a href="/engineering/checking-multiple-testing-against-original-papers/">Read the source-review findings</a>.
+      Multi-group preparation now includes reviewed, accepted source characterizations of
+      unequal-variance intervals, control and best-treatment comparisons, and closed-testing
+      graphs. These results clarify the assumptions and outputs a future rule must preserve;
+      they do not select or release those methods.
+      <a href="/engineering/games-howell-approximation-and-guarantees/">Unequal-variance comparisons</a> ·
+      <a href="/engineering/comparing-with-control-or-best/">Control or best?</a> ·
+      <a href="/engineering/implementing-multiple-testing-graphs/">Testing graphs</a>.
     </p>
     <aside class="expansion-model">
       <h3>How expansion moves faster without weakening evidence</h3>
@@ -180,7 +184,7 @@ const roadmapStructuredData = {
   </section>
 
   <footer class="page-foot">
-    <p>Current public scope: Release 1 Welch Record verification.</p>
+    <p>Public: local Welch Record verification. Limited access: hosted Welch calls for approved recipients.</p>
     <p><a href="/docs/record-verification/">Run it now</a></p>
   </footer>
 </PageLayout>

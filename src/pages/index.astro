@@ -86,7 +86,7 @@ const homeStructuredData = {
         </p>
         <p>{ROADMAP_POSITION}</p>
         <p>
-          Welch verification is public today. Paired-t has reached reviewed candidate
+          Welch Record verification is public, and hosted Welch calls are available to approved recipients in limited Release 1. Paired-t has reached reviewed candidate
           readiness, and a two-factor proposal is open for public discussion.
           <a href="#protocol-progress">See Protocol progress</a>.
         </p>
@@ -95,6 +95,7 @@ const homeStructuredData = {
         <a class="cta-primary" href="/docs/record-verification/">Install and run</a>
         <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">npm package</a>
         <a href={PUBLIC_RELEASE.verifierUrl} target="_blank" rel="noopener noreferrer">View source on GitHub</a>
+        <a href="/news/nomue-welch-limited-release-1/">Hosted Welch: limited Release 1</a>
         <a href="/nomue/">How nomue works</a>
         <a href="/roadmap/">Product roadmap</a>
       </div>
@@ -371,13 +372,13 @@ const homeStructuredData = {
         <div class="protocol-progress-grid">
           <article>
             <h3>What multiple-comparison procedures guarantee</h3>
-            <p>Original-paper checks distinguish overall tests, individual comparisons, and simultaneous intervals, and clarify the assumptions that future verification rules must name.</p>
-            <p><a href="/engineering/what-multiple-comparison-procedures-guarantee/">Release 3 source research</a> · <a href="/engineering/checking-multiple-testing-against-original-papers/">Six-paper review</a></p>
+            <p>Reviewed original-paper work now covers unequal-variance pairwise comparisons, comparisons with a control or the best treatment, and closed-testing graphs. Each requires its own assumptions, outputs, and implementation rules.</p>
+            <p><a href="/engineering/games-howell-approximation-and-guarantees/">Games–Howell and related procedures</a> · <a href="/engineering/comparing-with-control-or-best/">Control or best?</a> · <a href="/engineering/implementing-multiple-testing-graphs/">Testing graphs</a></p>
           </article>
           <article>
-            <h3>Where tiny factorial effects change</h3>
-            <p>A reviewed 945-case study separates effects lost during input rounding from errors introduced by cell means and QR calculations.</p>
-            <p><a href="/engineering/floating-point-tiny-factorial-effects/">Release 4 numerical research</a></p>
+            <h3>From tiny effects to the final F calculation</h3>
+            <p>The 945-case study now has an SS/F extension and a six-fixture scaling exploration. Exact references show when normalization recovers a calculation and when input loss or rounding residuals need separate treatment.</p>
+            <p><a href="/engineering/power-scaling-and-factorial-f-statistics/">What scaling can repair</a> · <a href="/engineering/floating-point-tiny-factorial-effects/">Original coefficient study</a></p>
           </article>
         </div>
         <p class="roadmap-note">These are candidate, research, and public-discussion milestones. They inform future verification rules; they do not expand the currently supported Welch scope. Each article records its review status and remaining decisions.</p>
@@ -442,7 +443,8 @@ const homeStructuredData = {
           </article>
         </div>
         <p class="trust-evidence"><strong>Published release evidence:</strong> {PUBLIC_TRUST_EVIDENCE}</p>
-        <p class="more"><a href="/nomue/">How nomue works</a></p>
+        <p class="more"><a href="/news/nomue-welch-limited-release-1/">Hosted Welch: limited Release 1</a>
+        <a href="/nomue/">How nomue works</a></p>
       </div>
     </section>
 

@@ -1,0 +1,45 @@
+---
+import { PUBLICATIONS } from '../../data/publications';
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/power-scaling-and-factorial-f-statistics/')!;
+---
+<PublicationLayout category={item.category} type={item.type} title={item.title}
+  description={item.summary} published={item.date} status={item.status} toc={[]}>
+
+<section id="finding"><h2>A finite answer is only the start of the check</h2>
+<p>Changing measurement units should leave an F statistic unchanged: both its numerator and denominator change by the same squared scale. A computer can still lose that cancellation if either intermediate number becomes zero or infinity. We extended our <a href="/engineering/floating-point-tiny-factorial-effects/">945-case coefficient study</a> to follow sums of squares and F statistics, then examined six small datasets before and after power-of-two normalization.</p>
+<p>The numerical research and its corrections have been reviewed and accepted into nomue Protocol. This article explains those bounded experiments. It establishes neither a production algorithm nor a supported range for factorial inference.</p></section>
+<section id="quantities"><h2>Following the calculation beyond a coefficient</h2>
+<p>The design has two factors, two levels each, and the same number of observations in each of four conditions. A factor sum of squares, SS, measures the variation assigned to an effect. The residual sum of squares, SSE, measures variation left within the conditions. For each of the three effects, the studied F statistic is SS divided by the residual mean square, SSE/df, where df is the residual degrees of freedom.</p>
+<p>With n observations per condition, those residual degrees of freedom are 4(n−1). The probes construct exact rational targets from the stored binary64 inputs, separately from their floating-point execution. This distinction identifies whether an error enters when the input is represented, when an intermediate quantity is calculated, or when the final result is rounded.</p>
+<p>Across 945 datasets, the extension contains 2,835 effect-specific F targets, of which 2,415 are exactly zero. The largest spurious F for a true zero was about 1.9 × 10<sup>−6</sup> for uncentered QR and 7.3 × 10<sup>−30</sup> for centered QR; the builtin-cell route produced none on the recorded CPython 3.12 build. Conversely, that route lost 105 nonzero F targets, all below 5 × 10<sup>−31</sup>. Error counts alone would hide these very different magnitudes. These observations neither rank the algorithms generally nor establish a change in statistical significance.</p></section>
+<section id="scaling"><h2>One transformation, several different outcomes</h2>
+<p>The follow-up uses six fixtures and two transformations per fixture: identity and normalization by a power of two chosen from the largest absolute input. Three execution routes give 36 floating-point evaluations across the 12 rows.</p>
+<table><thead><tr><th>Fixture</th><th>What normalization showed</th></tr></thead><tbody>
+<tr><td>One dataset at scales 1, 2<sup>−600</sup>, and 2<sup>600</sup></td><td>Lossless rescaling recovers each route’s corresponding unit-scale F outputs. The exact targets are 100, 36, and 4.</td></tr>
+<tr><td>A common offset of 2<sup>40</sup></td><td>The transformation loses no inputs, but the routes retain their F errors. It does not repair cancellation caused by the offset.</td></tr>
+<tr><td>Very large and very small inputs together</td><td>A smallest positive subnormal input disappears. The exact F changes, but both the original and transformed targets round to positive infinity.</td></tr>
+<tr><td>An exact-zero-residual dataset</td><td>The intended ratio has a zero denominator. Scaling does not remove spurious positive residuals from the QR calculation.</td></tr>
+</tbody></table>
+<p>At the extreme uniform scales, exact SS and SSE themselves lie outside binary64’s range. Their zero or infinity projections can therefore be correctly rounded, while dividing them produces an invalid 0/0 or infinity/infinity operation. The exact F remains representable. The failure is at the ratio, not necessarily at either projection.</p>
+<p>Power-of-two scaling preserves F when the calculation follows the same operations and stays within the necessary floating-point range. The uniform recovery and offset invariance illustrate that conditional property; 36 evaluations are not evidence for every possible implementation or input.</p></section>
+<section id="mixed"><h2>Input loss and a wrong finite answer can have different causes</h2>
+<p>In the mixed-magnitude fixture, normalization changes the exact F by a relative amount of approximately 2<sup>−1674</sup>. That is evidence of input loss, but not a materially different binary64 F target: both targets project to infinity. The QR routes instead return a finite value of approximately 2<sup>104.9</sup>, about 2<sup>1098</sup> smaller than the exact target.</p>
+<p>The explanation lies in a spurious positive SSE. Coefficient rounding leaves nonzero residuals at the six smaller observations; the two observations equal to 0.5 have zero residual. The computed SSE is <code>0x1.1p-106</code>, while the transformed exact SSE is 2<sup>−1204</sup> and rounds to zero. The earlier attribution of these residuals to the two 0.5 observations was corrected during review; the linked successor applies that correction consistently.</p>
+<p>A verifier therefore needs separate rules for admitted inputs, the exact target, intermediate calculations, and the final representation. “The result is finite” does not establish agreement with the target.</p></section>
+<section id="evidence"><h2>Reproduction and review</h2>
+<p>The SS/F corpus was recorded on CPython 3.12 with NumPy 2.3.5; the scaling author run used CPython 3.12.14. The independent scaling review reproduced the rows on CPython 3.12.3, NumPy 2.3.5, and OpenBLAS 0.3.30. CPython summation behavior and NumPy/BLAS builds can change rows. The stored environment and transcript identify an observation, not a portable bitwise requirement.</p>
+<ul>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/blob/fa82ccc174f33c4e68658a6b279034fd8399e055/governance/drafts/release-4-preparation/ss-f-propagation-supplement.md">Accepted SS/F supplement</a>, with the linked executable probe, exact references, counts, and magnitude qualifications.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/pull/232">Independent programme review</a>, including the extreme-scale fixture.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/blob/dedd26a3e0655001b67e40ccfb741e43ecb07beb/governance/drafts/release-4-preparation/power-scale-exploration.md">Scaling study with the residual-location correction</a>, linking original and successor scripts and transcripts.</li>
+<li><a href="https://github.com/licklider-ai/nomue-protocol/pull/235">Scaling review and repair confirmation</a>. The close review also corrects the reviewer’s earlier statements and discloses reuse of the same review context.</li>
+</ul>
+<p>The project’s reviews disclose tool assistance and the limits of investigator independence; they are not journal peer review. <a href="/news/nomue-protocol-release-4-public-discussion/">Release 4 public discussion is open</a>, while its numerical implementation remains unresolved. No p-value or interval calculation is validated by these SS/F probes.</p></section>
+
+</PublicationLayout>
+
+<style>
+  table { table-layout: fixed; width: 100%; }
+  th:first-child { width: 28%; }
+</style>

@@ -16,6 +16,8 @@ import {
   PLANNED_METHOD_FAMILIES,
   PLATFORM_EVOLUTION,
   PRODUCT_CAPABILITY,
+  HOSTED_WELCH_CAPABILITY,
+  R3_SOURCE_PROGRESS,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
@@ -49,6 +51,7 @@ const toc: TocItem[] = [
       numerical decisions. Welch is the first working vertical slice of a much larger
       capability architecture.
     </p>
+    <p><strong>Limited Release 1:</strong> {HOSTED_WELCH_CAPABILITY} <a href="/news/nomue-welch-limited-release-1/">Access and release scope</a>. Public self-registration is not available. Hosted results are not yet public Records for local replay.</p>
     <p class="head-links"><a href="/docs/record-verification/">Install and run</a> · <a href="/docs/mcp-verification/">Add the MCP server</a> · <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">verifier on npm</a> · <a href={MCP_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">MCP on npm</a> · <a href="/docs/examples/">See examples</a></p>
     <p class="release-facts">Public release candidates · verifier {PUBLIC_RELEASE.verifierPackage} · MCP {MCP_RELEASE.version} / stdio · Linux / macOS / Windows · Node.js 20 / 22</p>
   </header>
@@ -214,6 +217,9 @@ const toc: TocItem[] = [
       <h3>Release 2: reviewed paired-t candidate</h3>
       <p>{PAIRED_T_BOUNDARY}</p>
       <p><a href={PAIRED_T_RFC_URL} target="_blank" rel="noopener noreferrer">Paired-t public RFC</a></p>
+      <h3>Release 3: reviewed multi-group source research</h3>
+      <p>{R3_SOURCE_PROGRESS}</p>
+      <p><a href="/engineering/games-howell-approximation-and-guarantees/">Unequal variances</a> · <a href="/engineering/comparing-with-control-or-best/">Control and best-treatment targets</a> · <a href="/engineering/implementing-multiple-testing-graphs/">Testing graphs</a></p>
       <h3>Release 4: two-factor public discussion</h3>
       <p>{R4_DISCUSSION_BOUNDARY}</p>
       <p><a href={R4_DISCUSSION.articleUrl}>Scope and evidence</a> · <a href={R4_DISCUSSION.issueUrl}>Join the discussion</a></p>
@@ -276,7 +282,7 @@ const toc: TocItem[] = [
   </section>
 
   <footer class="page-foot">
-    <p>Available now: local verification of supported Release 1 Welch Records.</p>
+    <p>Public: local Welch Record verification. Limited access: hosted Welch calls for approved recipients.</p>
     <p><a href="/docs/record-verification/">Run the verifier</a></p>
   </footer>
 </PageLayout>

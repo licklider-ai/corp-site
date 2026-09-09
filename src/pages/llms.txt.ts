@@ -19,6 +19,7 @@ import {
   R4_DISCUSSION_BOUNDARY,
   PLANNED_METHOD_FAMILIES,
   PLATFORM_SCOPE,
+  HOSTED_WELCH_CAPABILITY,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
@@ -58,7 +59,9 @@ const content = `# Licklider
 
 ## Product and platform
 
+- ${HOSTED_WELCH_CAPABILITY}
 - ${PRODUCT_RELEASE_BOUNDARY}
+- [Hosted limited Release 1](https://www.licklider.ai/news/nomue-welch-limited-release-1/)
 - ${MCP_RELEASE_BOUNDARY}
 - [Public MCP source](${MCP_RELEASE.repositoryUrl}), [npm package](${MCP_RELEASE.npmUrl}), [official registry metadata](${MCP_RELEASE.registryUrl}), and [passing cross-platform CI](${MCP_RELEASE.ciUrl})
 - ${PAIRED_T_BOUNDARY}
@@ -112,7 +115,12 @@ ${UPSTREAM_CONTRIBUTIONS.map((item) => `- [${item.project}: ${item.title}](https
 
 ## Evidence and updates
 
-- [Multiple-testing source review](https://www.licklider.ai/engineering/checking-multiple-testing-against-original-papers/): six original papers reviewed; Rom table/equation conflict confirmed in the project review. Release 3 preparation only. PR #196 proposes a bounded source closure; formal acceptance remains pending as of September 7, 2026. Overall sources remain incomplete; no Release 3 support is announced.
+- [Power scaling and factorial F](https://www.licklider.ai/engineering/power-scaling-and-factorial-f-statistics/): accepted bounded SS/F and six-fixture numerical exploration; no numerical support established.
+- [Unequal-variance comparisons](https://www.licklider.ai/engineering/games-howell-approximation-and-guarantees/): source-reviewed GH, T2/T2-prime, T3/C distinctions; simulations are not universal error guarantees.
+- [Control or best](https://www.licklider.ai/engineering/comparing-with-control-or-best/): source-reviewed targets, ordered testing and interval boundaries.
+- [Testing graphs](https://www.licklider.ai/engineering/implementing-multiple-testing-graphs/): source-reviewed closure, ordering, weights and endpoint conventions. Release 3 methods remain unselected and unsupported.
+
+- [Multiple-testing source review](https://www.licklider.ai/engineering/checking-multiple-testing-against-original-papers/): six original papers reviewed; Rom table/equation conflict confirmed in the project review. Release 3 preparation only. Bounded SR-C acceptance is recorded; later SR-F, SR-I, SR-D and SR-J source results also have scoped acceptance. Historical counts describe their pinned snapshots. Overall sources remain incomplete; no Release 3 support is announced.
 
 - [Research](https://www.licklider.ai/research/): papers and research notes
 - [Engineering](https://www.licklider.ai/engineering/): implementation work and upstream reports

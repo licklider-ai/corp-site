@@ -22,6 +22,8 @@ import {
   R4_DISCUSSION_BOUNDARY,
   PLANNED_METHOD_FAMILIES,
   PLATFORM_SCOPE,
+  HOSTED_WELCH_CAPABILITY,
+  R3_SOURCE_PROGRESS,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
@@ -78,7 +80,7 @@ export const AGENT_DOCS: AgentDoc[] = [
       'Clarify material scientific facts that are unresolved; do not infer them from data shape or prose.',
       'Stop at unsupported or inadmissible scope; do not silently substitute a nearby method.',
       'Return the scoped result together with evidence, versions, next action, and explicit non-claims.',
-      'The public implementation available today includes the npm-published Release 1 verifier, the Protocol, and an npm-published local stdio MCP server registered in the official MCP Registry.',
+      'The public implementation includes the Release 1 Record verifier and local stdio MCP server. Approved recipients can also use a distinct hosted Welch capability through authenticated MCP and HTTP; it does not yet emit public Records for local replay.',
     ],
     sections: [
       {
@@ -86,7 +88,7 @@ export const AGENT_DOCS: AgentDoc[] = [
         title: 'Definition',
         paragraphs: [VERIFICATION_CALL_DEFINITION],
         note:
-          'The phrase names a reusable class of interaction. The current public implementation begins with Release 1 Welch Record verification.',
+          'The phrase names a reusable class of interaction. Public Record verification and limited-access hosted Welch calls are distinct current implementations, with different inputs and access requirements.',
       },
       {
         id: 'when-to-use',
@@ -708,6 +710,8 @@ ${NOMUE_NPX_COMMAND}`,
         id: 'current',
         title: 'Available now',
         paragraphs: [
+          HOSTED_WELCH_CAPABILITY,
+  R3_SOURCE_PROGRESS,
           PUBLIC_CAPABILITY,
           `${PUBLIC_RELEASE.protocol} and public npm package ${PUBLIC_RELEASE.npmPackage} ${PUBLIC_RELEASE.verifierPackage} are the current public artifacts.`,
           PRODUCT_RELEASE_BOUNDARY,
@@ -736,7 +740,7 @@ ${NOMUE_NPX_COMMAND}`,
       {
         id: 'development',
         title: 'Protocol candidates and public discussion',
-        paragraphs: [PAIRED_T_BOUNDARY, R4_DISCUSSION_BOUNDARY],
+        paragraphs: [PAIRED_T_BOUNDARY, R3_SOURCE_PROGRESS, R4_DISCUSSION_BOUNDARY],
         links: [{ label: 'Release 4 scope and public discussion', href: R4_DISCUSSION.articleUrl }, { label: 'Comment on the Release 4 proposal', href: R4_DISCUSSION.issueUrl }],
         bullets: [
           'An RFC is a review record, not a support declaration.',
@@ -910,9 +914,13 @@ ${NOMUE_POSITION}
 
 ## Product and roadmap
 
+- ${HOSTED_WELCH_CAPABILITY}
 - ${PRODUCT_RELEASE_BOUNDARY}
+- [Hosted limited Release 1](https://www.licklider.ai/news/nomue-welch-limited-release-1/)
 - ${MCP_RELEASE_BOUNDARY}
 - ${PAIRED_T_BOUNDARY}
+- ${R3_SOURCE_PROGRESS}
+- [Reviewed multi-group source work](https://www.licklider.ai/engineering/what-multiple-comparison-procedures-guarantee/)
 - ${R4_DISCUSSION_BOUNDARY}
 - [Release 4 public discussion](${R4_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R4_DISCUSSION.articleUrl})
 - ${EVALUATION_BOUNDARY}
