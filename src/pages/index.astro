@@ -66,7 +66,7 @@ const homeStructuredData = {
   description:
     'Scientific verification infrastructure for AI research agents, with public Welch Record verification and an independently reviewed paired-t candidate for Release 2.',
   url: new URL('/', Astro.site).href,
-  dateModified: '2026-09-08',
+  dateModified: '2026-09-09',
   isPartOf: { '@id': new URL('/#website', Astro.site).href },
   about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
 };
@@ -350,10 +350,11 @@ const homeStructuredData = {
             <p><a href="/docs/mcp-verification/">Install and use</a> · <a href={MCP_RELEASE.registryUrl} target="_blank" rel="noopener noreferrer">Official Registry</a> · <a href={MCP_RELEASE.repositoryUrl} target="_blank" rel="noopener noreferrer">Source</a></p>
           </article>
           <article>
-            <p class="scope-label">Next product release</p>
+            <p class="scope-label">Limited Release 1</p>
             <h3>Agent-callable Welch</h3>
             <p>{PRODUCT_CAPABILITY}</p>
             <p>{PRODUCT_RELEASE_BOUNDARY}</p>
+            <p><a href="/news/nomue-welch-limited-release-1/">Read the release announcement</a></p>
           </article>
           <article>
             <p class="scope-label">Planned platform</p>
