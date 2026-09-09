@@ -1,0 +1,112 @@
+---
+import { PUBLICATIONS } from '../../data/publications';
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const item = PUBLICATIONS.find(
+  (entry) => entry.href === '/news/nomue-welch-limited-release-1/',
+)!;
+
+const toc = [
+  { id: 'capability', label: 'What the release can do' },
+  { id: 'research-agents', label: 'Why this matters for research agents' },
+];
+---
+
+<PublicationLayout
+  category={item.category}
+  type={item.type}
+  title={item.title}
+  description={item.summary}
+  published={item.date}
+  status={item.status}
+  toc={toc}
+>
+  <p>
+    nomue's first agent-callable Scientific Verification Capability is now available in
+    limited Release 1.
+  </p>
+  <p>
+    Approved recipients can connect a compatible AI agent or HTTP client to nomue and
+    use a hosted verification service for a defined statistical scope: independent
+    two-group continuous data analyzed with a two-sided Welch two-sample t procedure.
+  </p>
+  <p>
+    Public self-registration is not yet available, and access is currently limited to
+    approved recipients.
+  </p>
+
+  <section id="capability">
+    <h2>What the release can do</h2>
+    <p>Limited Release 1 provides two verification paths.</p>
+    <p>
+      <strong>Compute and verify</strong> allows an agent to submit data and the scientific
+      information required for the supported Welch analysis. nomue checks whether the
+      request falls within the supported scope and, when it does, runs the registered
+      deterministic calculation and returns a structured result.
+    </p>
+    <p>
+      <strong>Verify a claimed result</strong> allows an agent to submit a claimed Welch
+      result together with structured evidence. nomue then checks that claim against the
+      registered execution and numerical rules.
+    </p>
+    <p>
+      In both cases, nomue returns the result together with the relevant reasons,
+      evidence, and suggested next action.
+    </p>
+    <p>
+      If important scientific information is missing, nomue asks for clarification
+      instead of filling in the missing meaning itself. Requests that are outside the
+      supported scope are also kept separate from calculation or system failures.
+    </p>
+    <p>The capability is available through authenticated MCP and direct HTTP interfaces.</p>
+  </section>
+
+  <section id="research-agents">
+    <h2>Why this matters for research agents</h2>
+    <p>
+      AI agents can help researchers organize tasks, interpret information, and
+      coordinate workflows. Statistical verification, however, should not depend on an
+      agent inventing missing experimental meaning or treating its own generated answer
+      as the authority for a calculation.
+    </p>
+    <p>nomue provides a separate verification step for those bounded decisions.</p>
+    <p>
+      For supported requests, the numerical result comes from nomue's registered
+      deterministic engine. When a request cannot proceed, the response indicates
+      whether the agent should ask for more information, route the request elsewhere, or
+      stop.
+    </p>
+    <p>
+      This allows an AI agent to carry a scoped verification result back into a research
+      workflow without confusing a successful API call with a successful scientific
+      check.
+    </p>
+    <p>
+      Limited Release 1 is the first operational release of this approach for nomue. It
+      does not make claims about the relative performance of AI models; evaluation of
+      frontier models remains a separate program.
+    </p>
+    <p>
+      This release is limited to the defined Welch scope and does not assess the
+      scientific validity of a study as a whole.
+    </p>
+    <p>
+      Before release, the hosted capability was tested through its registered MCP and
+      HTTP paths using synthetic fixtures. These checks covered both supported capability
+      paths, authentication failures, credential replacement, service recovery, and the
+      deployed runtime configuration.
+    </p>
+    <p>
+      These are operational release checks. They are not an independent security audit
+      and do not guarantee future service availability.
+    </p>
+    <p>
+      Public documentation for the nomue Protocol and the locally runnable Release 1
+      Record verifier remains available through the <a href="/docs/">nomue documentation</a>.
+    </p>
+    <p>
+      The hosted capability does not yet emit public Records for independent replay
+      through the public Record verifier.
+    </p>
+  </section>
+</PublicationLayout>

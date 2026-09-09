@@ -69,7 +69,7 @@ export const AGENT_DOCS: AgentDoc[] = [
     description:
       'A shared model for asking a separate capability to check one bounded part of AI-assisted research.',
     status: 'Conceptual guide for selecting a verification capability',
-    updated: 'September 2, 2026',
+    updated: 'September 9, 2026',
     llmSummary: [
       'A verification call asks a separate capability to check one bounded property.',
       'Use it when the generating model should not be the sole judge of its own output.',
@@ -690,11 +690,11 @@ ${NOMUE_NPX_COMMAND}`,
     title: 'Current capability and boundaries',
     description:
       'What can be used now, what comes next, how the platform expands, and how to interpret a successful result.',
-    status: 'Current public capability map — September 2, 2026',
-    updated: 'September 2, 2026',
+    status: 'Current public capability map — September 9, 2026',
+    updated: 'September 9, 2026',
     llmSummary: [
       `Run the public verifier locally for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
-      'The Release 1 verifier and local stdio MCP server are public on npm. The MCP release candidate is also registered in the official MCP Registry; hosted product access is not open.',
+      'The Release 1 verifier and local stdio MCP server are public on npm. The agent-facing Welch capability is available in limited Release 1 to approved recipients through authenticated MCP and HTTP interfaces; public registration is not available.',
       'Paired t is open Release 2 RFC work, not current Release 1 support.',
       'Verification calls across AI research describe the platform category; each additional capability must be evidenced and released separately.',
       'A supported verification does not establish source-data truth, overall research correctness, causal truth, or publication acceptance.',

@@ -8,7 +8,7 @@ export const SITE_META_TITLE =
 export const SITE_DESCRIPTION =
   'Licklider builds scientific verification infrastructure for AI research agents, starting with public, independently checkable Welch Record verification.';
 export const SITE_VERSION = 'v0.4';
-export const SITE_UPDATED = '2026-09-01';
+export const SITE_UPDATED = '2026-09-09';
 
 export type NavItem = {
   label: string;
