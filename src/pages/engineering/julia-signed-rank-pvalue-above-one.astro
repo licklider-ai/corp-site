@@ -15,10 +15,11 @@ const toc = [
 <PublicationLayout
   category="Engineering"
   type="Upstream report"
-  title="A Julia signed-rank p-value above 1, fixed on master"
-  description="HypothesisTests.jl returned 1.25 for an exact two-sided signed-rank p-value. A matching correction is merged on master, though no registered release contains it yet."
+  title="A Julia signed-rank p-value above 1, now fixed in a release"
+  description="HypothesisTests.jl returned 1.25 for an exact two-sided signed-rank p-value. The matching correction shipped in v0.12.0 and remains in v0.12.1."
   published="September 3, 2026"
-  status="Matching fix merged in HypothesisTests.jl — issue open; awaiting a registered release"
+  updated="September 9, 2026"
+  status="Matching fix released in v0.12.0; present in v0.12.1; issue open"
   toc={toc}
 >
   <section id="current-status">
@@ -31,10 +32,10 @@ const toc = [
         <code>andreasnoack</code> later that day.
       </p>
       <p>
-        The matching correction is present on <code>master</code>. Issue #373 remains
-        open, and the latest registered package version is still <code>0.11.8</code>,
-        which predates the merge. The public tracker does not state that #373 caused
-        #377, so this page does not make that attribution.
+        As of September 9, 2026, the matching correction has shipped in
+        <code>v0.12.0</code> (September 3) and remains in the latest registered version,
+        <code>v0.12.1</code> (September 4). Issue #373 remains open. The public tracker
+        does not state that #373 caused #377, so this page does not make that attribution.
       </p>
     </div>
   </section>
@@ -77,6 +78,11 @@ const toc = [
       <code>1.0</code>. Both checks used assertions on the displayed result rather than
       relying only on source inspection.
     </p>
+    <p>
+      On September 9, we checked the release records, General registry, and v0.12.1
+      source, which retains <code>min(2 * p, 1.0)</code>. This confirms release inclusion
+      by source inspection; the execution results below remain the original pinned runs.
+    </p>
     <div class="table-scroll">
       <table>
         <thead>
@@ -111,10 +117,10 @@ const toc = [
       reach a statistic at the null-distribution center.
     </p>
     <p>
-      A correction on <code>master</code> is not the same as a released correction.
-      Users of the registered <code>0.11.8</code> package should not infer that the
-      fix is already included. The page also separates our report from the independently
-      authored patch because the upstream record does not establish a causal link.
+      Version <code>0.11.8</code> predates the fix; v0.12.0 and v0.12.1 contain it.
+      Release inclusion does not establish correctness for every rank-test path.
+      Our report and the separately authored patch remain distinct because the
+      upstream record does not establish a causal link.
     </p>
   </section>
 
@@ -136,12 +142,24 @@ const toc = [
     <h2>Public evidence</h2>
     <ul>
       <li>
+        <a href="https://github.com/JuliaStats/HypothesisTests.jl/releases/tag/v0.12.0">v0.12.0 release notes</a>
+        — correction #377, plus separate contributions on interval direction (#382),
+        point estimates (#383), interval consistency and zeros (#386), computation
+        limits (#388), and mathematical specifications (#389). These are not additional
+        outcomes attributed to our report; callers should review the breaking changes.
+      </li>
+      <li>
+        <a href="https://github.com/JuliaStats/HypothesisTests.jl/releases/tag/v0.12.1">v0.12.1 release</a>
+        and <a href="https://github.com/JuliaStats/HypothesisTests.jl/blob/v0.12.1/src/wilcoxon.jl">released source</a>
+        — subsequent release and retained correction
+      </li>
+      <li>
         <a href="https://github.com/JuliaStats/HypothesisTests.jl/issues/373" target="_blank" rel="noopener noreferrer">HypothesisTests.jl issue #373</a>
         — report, reproducer, exact enumeration, source diagnosis, and environment
       </li>
       <li>
         <a href="https://github.com/JuliaStats/HypothesisTests.jl/issues/373#issuecomment-5523789035" target="_blank" rel="noopener noreferrer">Reporter follow-up on #373</a>
-        — current master and release-status snapshot
+        — historical September 3 master and release-status snapshot
       </li>
       <li>
         <a href="https://github.com/JuliaStats/HypothesisTests.jl/pull/377" target="_blank" rel="noopener noreferrer">HypothesisTests.jl pull request #377</a>
@@ -153,11 +171,11 @@ const toc = [
       </li>
       <li>
         <a href="https://github.com/JuliaStats/HypothesisTests.jl/releases/tag/v0.11.8" target="_blank" rel="noopener noreferrer">HypothesisTests.jl v0.11.8 release</a>
-        — latest release at publication time, predating the correction
+        — affected release used in the original reproduction
       </li>
       <li>
         <a href="https://github.com/JuliaRegistries/General/blob/master/H/HypothesisTests/Versions.toml" target="_blank" rel="noopener noreferrer">Julia General version registry</a>
-        — registered HypothesisTests.jl versions at publication time
+        — registered versions, including 0.12.0 and 0.12.1 at the September 9 check
       </li>
     </ul>
   </section>

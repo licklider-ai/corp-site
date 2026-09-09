@@ -126,7 +126,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'SciPy’s one-sample and paired t-tests can reverse a 5% decision after exact power-of-two rescaling because an intermediate variance underflows or overflows.',
     href: '/engineering/scipy-ttest-scale-range-loss/',
     status:
-      'Reported to SciPy — issue #26113 open; upstream confirmation and fix pending',
+      'SciPy repair proposed in PR #26135; not yet reviewed or merged; issue #26113 open',
   },
   {
     category: 'Research',
@@ -158,12 +158,12 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Upstream report',
     date: 'September 3, 2026',
     sortKey: '2026-09-03',
-    title: 'A Julia signed-rank p-value above 1, fixed on master',
+    title: 'A Julia signed-rank p-value above 1, now fixed in a release',
     summary:
-      'HypothesisTests.jl returned 1.25 for an exact two-sided signed-rank p-value. A matching correction is merged on master, though no registered release contains it yet.',
+      'HypothesisTests.jl returned 1.25 for an exact two-sided signed-rank p-value. The matching correction shipped in v0.12.0 and remains in v0.12.1.',
     href: '/engineering/julia-signed-rank-pvalue-above-one/',
     status:
-      'Matching fix merged in HypothesisTests.jl — issue open; awaiting a registered release',
+      'Matching fix released in v0.12.0; present in v0.12.1; issue open',
   },
   {
     category: 'News',

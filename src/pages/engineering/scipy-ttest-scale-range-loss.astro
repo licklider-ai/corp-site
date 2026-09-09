@@ -19,7 +19,8 @@ const toc = [
   title="SciPy t-tests can return p=0 or p=1 after exact rescaling"
   description="SciPy’s one-sample and paired t-tests can reverse a 5% decision after exact power-of-two rescaling because an intermediate variance underflows or overflows."
   published="September 7, 2026"
-  status="Reported to SciPy — issue #26113 open; upstream confirmation and fix pending"
+  updated="September 9, 2026"
+  status="SciPy repair proposed in PR #26135; not yet reviewed or merged; issue #26113 open"
   toc={toc}
 >
   <section id="current-status">
@@ -33,6 +34,18 @@ const toc = [
         SciPy has not publicly confirmed the cause or accepted a repair. The{' '}
         <code>defect</code> label is assigned by SciPy’s bug-report template and is not
         treated here as a maintainer decision.
+      </p>
+      <p>
+        As of September 9, <a href="https://github.com/scipy/scipy/pull/26135">PR #26135</a>
+        proposes normalizing centered residuals within each reduction slice and restoring
+        scale after the square root. It is open, with no review recorded or merge at this
+        check. Its author reports regression and high-precision checks; we have not
+        independently rerun the patch. The shared variance implementation is unchanged.
+      </p>
+      <p>
+        Earlier <a href="https://github.com/scipy/scipy/pull/26114">PR #26114</a>
+        closed without merging. A maintainer requested an AI-use declaration and asked
+        the contributor to await an issue response. PR #26135 includes that declaration.
       </p>
     </div>
   </section>
@@ -83,6 +96,18 @@ const toc = [
           </tr>
         </tbody>
       </table>
+      <p>
+        As of September 9, <a href="https://github.com/scipy/scipy/pull/26135">PR #26135</a>
+        proposes normalizing centered residuals within each reduction slice and restoring
+        scale after the square root. It is open, with no review recorded or merge at this
+        check. Its author reports regression and high-precision checks; we have not
+        independently rerun the patch. The shared variance implementation is unchanged.
+      </p>
+      <p>
+        Earlier <a href="https://github.com/scipy/scipy/pull/26114">PR #26114</a>
+        closed without merging. A maintainer requested an AI-use declaration and asked
+        the contributor to await an issue response. PR #26135 includes that declaration.
+      </p>
     </div>
     <p>
       At a 5% significance threshold, the small two-value sample changes from

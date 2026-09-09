@@ -16,6 +16,7 @@ const toc = [
   title="An extreme-tail sign error in SciPy’s Student-t quantile"
   description="A SciPy bug can return positive infinity instead of a large negative value for an extreme-tail Student-t quantile."
   published="August 23, 2026"
+  updated="September 9, 2026"
   status="Fix merged in Boost.Math — not yet released"
   toc={toc}
 >
@@ -39,6 +40,13 @@ const toc = [
         freedom. Boost.Math collaborator <code>jzmaddock</code> authored and merged the
         correction as commit <code>d9fc176</code> on the <code>develop</code> branch. We
         have not confirmed it in a released Boost.Math or SciPy version yet.
+      </p>
+      <p>
+        At the September 9 check, SciPy main still pins Boost.Math at
+        <a href="https://github.com/boostorg/math/blob/7ff2d2b4dec5a01243c215ba875bae3ba6d9aece/include/boost/math/special_functions/detail/t_distribution_inv.hpp"><code>7ff2d2b</code></a>,
+        whose inverse-t calculation lacks this correction. The
+        <a href="https://github.com/scipy/scipy/pull/25970">Boost 1.92 update in SciPy #25970</a>
+        does not include it. Upstream merge and inclusion in SciPy remain separate states.
       </p>
     </div>
   </section>
