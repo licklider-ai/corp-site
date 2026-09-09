@@ -17,11 +17,12 @@ import {
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
   PUBLIC_TRUST_EVIDENCE,
+  R4_DISCUSSION,
+  R4_DISCUSSION_BOUNDARY,
   ROADMAP_POSITION,
   UPSTREAM_CONTRIBUTIONS,
   VERIFICATION_CALL_DEFINITION,
 } from '../data/site-facts';
-import ProtocolResearchProgress from '../components/ProtocolResearchProgress.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const latest = [...PUBLICATIONS]
@@ -64,7 +65,7 @@ const homeStructuredData = {
   '@id': new URL('/#webpage', Astro.site).href,
   name: 'Licklider — Scientific verification infrastructure for AI agents',
   description:
-    'Scientific verification infrastructure for AI research agents, with public Welch Record verification and an independently reviewed paired-t candidate for Release 2.',
+    'Scientific verification infrastructure for AI research agents: public Welch verification, a reviewed paired-t candidate, and public discussion of a two-factor proposal.',
   url: new URL('/', Astro.site).href,
   dateModified: '2026-09-09',
   isPartOf: { '@id': new URL('/#website', Astro.site).href },
@@ -85,9 +86,9 @@ const homeStructuredData = {
         </p>
         <p>{ROADMAP_POSITION}</p>
         <p>
-          Welch verification is public today. The next capability, paired-t for matched
-          observations, has reached independently reviewed final candidate readiness
-          for Release 2. <a href="#paired-t-progress">See the engineering progress</a>.
+          Welch verification is public today. Paired-t has reached reviewed candidate
+          readiness, and a two-factor proposal is open for public discussion.
+          <a href="#protocol-progress">See Protocol progress</a>.
         </p>
       </div>
       <div class="cta">
@@ -106,54 +107,38 @@ const homeStructuredData = {
   </section>
 
   <div class="sections">
-    <section id="paired-t-progress" class="band band--single">
+    <section id="protocol-progress" class="band band--single">
       <div class="band-inner band-inner--wide">
-        <p class="eyebrow">Release 2 · Reviewed candidate</p>
-        <h2 class="roadmap-title">Paired-t has reached final candidate review readiness.</h2>
+        <span id="paired-t-progress"></span>
+        <p class="eyebrow">Protocol progress</p>
+        <h2 class="roadmap-title">From paired observations to two-factor experiments.</h2>
         <p class="roadmap-lead">
-          The candidate connects matched observations to a p-value and a 95% confidence
-          interval, with explicit numerical error checks and a controlled execution
-          environment. Its final review-readiness package received an independent GO
-          with no findings—concrete progress toward a second Protocol capability.
+          Two concrete steps extend the Protocol beyond its public Welch scope:
+          a reviewed paired-t candidate and an open two-factor specification proposal.
         </p>
-        <div class="capability-grid">
+        <div class="protocol-progress-grid">
           <article>
-            <h3>A reviewed research and data foundation</h3>
-            <p>
-              The paired-t research gate is complete. Four candidate data schemas define
-              the Record, analysis profile, execution outcome, and verification report,
-              with explicit permitted fields and relationships.
-            </p>
+            <p class="step">Release 2 · Reviewed candidate</p>
+            <h3>Paired-t: a complete candidate for review</h3>
+            <p>The candidate connects matched observations to a p-value and a 95% confidence interval. Its final review-readiness package received an independent GO with no findings.</p>
+            <ul>
+              <li>Completed research gate and four candidate schemas for the Record, profile, execution outcome, and verification report.</li>
+              <li>Student-t tail and 95% confidence-interval numerical work closed at candidate level, with full-trace error checks.</li>
+              <li>All four work groups cover scope, resource limits, numerical rules, one controlled runtime, and failure reasons; migration evidence preserves Release 1 behavior.</li>
+            </ul>
+            <p>Formal adoption, permanent identifiers, authoritative integration, and release remain before paired-t becomes supported.</p>
+            <p><a href="/engineering/bounding-paired-t-arithmetic-and-pvalues/">Candidate evidence and reviews</a> · <a href="https://github.com/licklider-ai/nomue-protocol/issues/25">Public review</a></p>
           </article>
           <article>
-            <h3>Numerical checks through the full calculation</h3>
-            <p>
-              The Student-t probability and 95% confidence-interval numerical work is
-              closed at candidate level. The combined trace checks the calculation,
-              error bounds, table identities, and resource use together.
-            </p>
-          </article>
-          <article>
-            <h3>Execution and compatibility evidence</h3>
-            <p>
-              All four candidate work groups cover scope and resource limits, numerical
-              rules, one controlled runtime, and failure reasons. Migration and historical
-              checks confirm preservation of existing Release 1 behavior in the reviewed work.
-            </p>
+            <p class="step">Release 4 · Public discussion</p>
+            <h3>Two factors: help shape the specification</h3>
+            <p>{R4_DISCUSSION_BOUNDARY}</p>
+            <p>For example, two temperature levels and two materials make four conditions. The proposal covers each factor’s average effect and whether one factor changes the effect of the other.</p>
+            <p>Discussion opened September 9, 2026, with a minimum 30-day window. Researchers and developers can challenge the scope, evidence format, and failure rules.</p>
+            <p><a href={R4_DISCUSSION.articleUrl}>Read the proposal announcement</a> · <a href={R4_DISCUSSION.issueUrl}>Join the discussion</a></p>
           </article>
         </div>
-        <p class="package-meaning">
-          <strong>Next: final R2-D5 review and the Steward decision.</strong> Public review remains
-          open. The Steward decision, permanent identifiers, authoritative integration,
-          and release steps remain before paired-t becomes supported. The public verifier
-          continues to serve the published Release 1 Welch scope.
-        </p>
-        <p class="more">
-          <a href="/engineering/bounding-paired-t-arithmetic-and-pvalues/">Read the engineering evidence</a> ·{' '}
-          <a href="https://github.com/licklider-ai/nomue-protocol/pull/157" target="_blank" rel="noopener noreferrer">Independent review of readiness</a> ·{' '}
-          <a href="https://github.com/licklider-ai/nomue-protocol/tree/main/governance/drafts/release-2-candidate" target="_blank" rel="noopener noreferrer">Candidate schemas and migration evidence</a> ·{' '}
-          <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">Public review</a>
-        </p>
+        <p class="package-meaning">Current public verifier support remains Release 1 Welch. Each proposed capability has its own evidence, adoption, and release steps.</p>
       </div>
     </section>
 
@@ -372,7 +357,7 @@ const homeStructuredData = {
             <p>{LEARNING_LOOP_POSITION}</p>
           </article>
         </div>
-        <p class="roadmap-note"><strong>Next Protocol capability:</strong> Paired-t has reached independently reviewed final Release 2 candidate readiness. <a href="#paired-t-progress">See completed candidate work and the remaining publication steps</a>.</p>
+        <p class="roadmap-note"><strong>Protocol progress:</strong> Paired-t is a reviewed Release 2 candidate; the bounded Release 4 two-factor proposal is open for public discussion. <a href="#protocol-progress">See both stages and their next steps</a>.</p>
         <p class="scope-note">{MARKET_SCOPE}</p>
         <p class="more"><a href="/roadmap/">See the full product and capability roadmap</a></p>
       </div>
@@ -382,9 +367,20 @@ const homeStructuredData = {
       <div class="band-inner band-inner--wide">
         <p class="eyebrow">Research Behind Expansion</p>
         <h2 class="roadmap-title">New methods start with evidence about what a check can guarantee.</h2>
-        <p class="roadmap-lead">Beyond the public Welch verifier, our work now joins reviewed paired-t calculations, original-paper checks of multiple comparisons, and exact-reference experiments on factorial effects.</p>
-        <ProtocolResearchProgress />
-        <p class="roadmap-note">These are candidate and research milestones. They inform future verification rules; they do not expand the currently supported Welch scope. Each article records its review status and remaining decisions.</p>
+        <p class="roadmap-lead">Beyond the public Welch verifier, our work now joins reviewed paired-t calculations, original-paper checks of multiple comparisons, and a two-factor proposal open for public discussion.</p>
+        <div class="protocol-progress-grid">
+          <article>
+            <h3>What multiple-comparison procedures guarantee</h3>
+            <p>Original-paper checks distinguish overall tests, individual comparisons, and simultaneous intervals, and clarify the assumptions that future verification rules must name.</p>
+            <p><a href="/engineering/what-multiple-comparison-procedures-guarantee/">Release 3 source research</a> · <a href="/engineering/checking-multiple-testing-against-original-papers/">Six-paper review</a></p>
+          </article>
+          <article>
+            <h3>Where tiny factorial effects change</h3>
+            <p>A reviewed 945-case study separates effects lost during input rounding from errors introduced by cell means and QR calculations.</p>
+            <p><a href="/engineering/floating-point-tiny-factorial-effects/">Release 4 numerical research</a></p>
+          </article>
+        </div>
+        <p class="roadmap-note">These are candidate, research, and public-discussion milestones. They inform future verification rules; they do not expand the currently supported Welch scope. Each article records its review status and remaining decisions.</p>
       </div>
     </section>
 
@@ -549,6 +545,11 @@ const homeStructuredData = {
   .capability-grid h3, .call-grid h2, .scope-grid h3, .layers h2 { margin-bottom: 0.75rem; font-size: 1.08rem; }
   .step, .scope-label, .layer-label, .evidence-status { margin-bottom: 0.55rem; color: var(--ink-3); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
   .scope-grid article:first-child { background: var(--wash); }
+  .protocol-progress-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+  .protocol-progress-grid article { min-width: 0; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+  .protocol-progress-grid h3 { font-size: 1.3rem; line-height: 1.35; }
+  .protocol-progress-grid li { margin-bottom: 0.65rem; }
+  @media (max-width: 760px) { .protocol-progress-grid { grid-template-columns: minmax(0, 1fr); } }
   .roadmap-title { max-width: 52rem; margin: 0 0 1rem; font-size: clamp(1.8rem, 3.8vw, 2.8rem); line-height: 1.2; letter-spacing: -0.01em; }
   .roadmap-lead { max-width: 50rem; margin: 0 0 2rem; color: var(--ink-1); font-size: 1.08rem; }
   .availability-note { padding-top: 0.75rem; border-top: 1px solid var(--rule-faint); color: var(--ink-3); font-size: 0.85rem; }

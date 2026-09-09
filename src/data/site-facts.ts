@@ -110,7 +110,19 @@ export const NOMUE_CLI_USAGE =
   'usage: nomue <verify|canonicalize|digest> <record.json> [--format json|json-compact|human]';
 
 export const PAIRED_T_BOUNDARY =
-  'Paired-t is the next Protocol capability. Public work has already produced independently reviewed candidate evidence across deterministic evaluation, two 200-value numerical tables, the observations-to-p-value path, input-specific error bounds, and a confidence-interval execution trace. The remaining review and Release 2 decision will determine when it becomes public support.';
+  'The Release 2 paired-t candidate has reached independently reviewed final review readiness. Its evidence covers the research gate, four candidate schemas, the Student-t probability and 95% confidence-interval paths, numerical error bounds, resource limits, one controlled runtime, failure reasons, and Release 1 preservation. Formal adoption, issuance, and release remain before public support.';
+
+export const R4_DISCUSSION = {
+  articleUrl: '/news/nomue-protocol-release-4-public-discussion/',
+  issueUrl: 'https://github.com/licklider-ai/nomue-protocol/issues/261',
+  proposalUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/21453d82109106e9e811571383228dcef8f60fac/governance/drafts/release-4-preparation/opening-rfc-candidate.md',
+  reviewUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/36b40134321337d99417828368b5f690c70f5d07/review-inputs/r4-opening-rfc-boundary/assessment-20260909/REVIEW-RESULT.md',
+  openedAt: '2026-09-09T05:59:47Z',
+  earliestDecisionAt: '2026-10-09T05:59:47Z',
+} as const;
+
+export const R4_DISCUSSION_BOUNDARY =
+  'Release 4 public discussion is open for a balanced two-by-two fixed-factor proposal: two factors, two levels each, and equal replication in four conditions. The proposal connects declared model assumptions, signed effect estimates, individual F tests, and verification evidence. Numerical support is not established; this is a specification proposal, not a new verifier capability.';
 
 export const PAIRED_T_RFC_URL =
   'https://github.com/licklider-ai/nomue-protocol/issues/25';
@@ -298,9 +310,11 @@ export const PROTOCOL_RESEARCH_PROGRESS = [
     relatedLabel: 'Six-paper review and bounded acceptance',
   },
   {
-    href: '/engineering/floating-point-tiny-factorial-effects/',
-    stage: 'Release 4 · Bounded numerical research',
-    summary: 'A reviewed 945-case experiment separates effects lost when inputs are stored from errors introduced by later calculations. It records cases where centering a QR calculation did not improve a tiny effect.',
+    href: R4_DISCUSSION.articleUrl,
+    stage: 'Release 4 · Public discussion',
+    summary: 'A balanced two-factor specification proposal is open for public comment. It connects model assumptions, individual effect tests, and verification evidence; numerical implementation remains unresolved.',
+    relatedHref: '/engineering/floating-point-tiny-factorial-effects/',
+    relatedLabel: 'Background: the 945-case numerical study',
   },
 ].map((entry) => {
   const publication = PUBLICATIONS.find((item) => item.href === entry.href);

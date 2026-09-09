@@ -14,6 +14,16 @@ export type PublicationItem = {
 export const PUBLICATIONS: PublicationItem[] = [
   {
     category: 'News',
+    type: 'Public consultation',
+    date: 'September 9, 2026',
+    sortKey: '2026-09-09',
+    title: 'nomue Protocol opens Release 4 public discussion for two-factor experiments',
+    summary: 'Researchers and developers can comment on a proposal connecting assumptions, results, and verification evidence for balanced two-factor experiments.',
+    href: '/news/nomue-protocol-release-4-public-discussion/',
+    status: 'Public discussion open — specification proposal; numerical support not established',
+  },
+  {
+    category: 'News',
     type: 'Product',
     date: 'September 9, 2026',
     sortKey: '2026-09-09',

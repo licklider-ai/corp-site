@@ -15,6 +15,8 @@ import {
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
+  R4_DISCUSSION,
+  R4_DISCUSSION_BOUNDARY,
   PLANNED_METHOD_FAMILIES,
   PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
@@ -66,6 +68,8 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 - ${MCP_RELEASE_BOUNDARY}
 - [Public MCP source](${MCP_RELEASE.repositoryUrl}), [npm package](${MCP_RELEASE.npmUrl}), [official registry metadata](${MCP_RELEASE.registryUrl}), and [passing CI](${MCP_RELEASE.ciUrl})
 - ${PAIRED_T_BOUNDARY}
+- ${R4_DISCUSSION_BOUNDARY}
+- [Release 4 public discussion](${R4_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R4_DISCUSSION.articleUrl})
 - ${ROADMAP_POSITION}
 - Planned scientific capability families: ${PLANNED_METHOD_FAMILIES.join('; ')}.
 - [Full roadmap](https://www.licklider.ai/roadmap/)

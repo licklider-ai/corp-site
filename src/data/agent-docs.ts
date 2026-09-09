@@ -18,6 +18,8 @@ import {
   NOMUE_POSITION,
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
+  R4_DISCUSSION,
+  R4_DISCUSSION_BOUNDARY,
   PLANNED_METHOD_FAMILIES,
   PLATFORM_SCOPE,
   PRODUCT_RELEASE_BOUNDARY,
@@ -696,6 +698,7 @@ ${NOMUE_NPX_COMMAND}`,
       `Run the public verifier locally for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
       'The Release 1 verifier and local stdio MCP server are public on npm. The agent-facing Welch capability is available in limited Release 1 to approved recipients through authenticated MCP and HTTP interfaces; public registration is not available.',
       'Paired t is open Release 2 RFC work, not current Release 1 support.',
+      R4_DISCUSSION_BOUNDARY,
       'Verification calls across AI research describe the platform category; each additional capability must be evidenced and released separately.',
       'A supported verification does not establish source-data truth, overall research correctness, causal truth, or publication acceptance.',
       'A controlled comparison is being built before a performance result is published.',
@@ -732,8 +735,9 @@ ${NOMUE_NPX_COMMAND}`,
       },
       {
         id: 'development',
-        title: 'Next method: paired-t',
-        paragraphs: [PAIRED_T_BOUNDARY],
+        title: 'Protocol candidates and public discussion',
+        paragraphs: [PAIRED_T_BOUNDARY, R4_DISCUSSION_BOUNDARY],
+        links: [{ label: 'Release 4 scope and public discussion', href: R4_DISCUSSION.articleUrl }, { label: 'Comment on the Release 4 proposal', href: R4_DISCUSSION.issueUrl }],
         bullets: [
           'An RFC is a review record, not a support declaration.',
           'Implementation evidence does not by itself create a public Protocol capability.',
@@ -909,6 +913,8 @@ ${NOMUE_POSITION}
 - ${PRODUCT_RELEASE_BOUNDARY}
 - ${MCP_RELEASE_BOUNDARY}
 - ${PAIRED_T_BOUNDARY}
+- ${R4_DISCUSSION_BOUNDARY}
+- [Release 4 public discussion](${R4_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R4_DISCUSSION.articleUrl})
 - ${EVALUATION_BOUNDARY}
 - ${ROADMAP_POSITION}
 - Planned method families: ${PLANNED_METHOD_FAMILIES.join('; ')}.

@@ -10,6 +10,8 @@ import {
   NOMUE_POSITION,
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
+  R4_DISCUSSION,
+  R4_DISCUSSION_BOUNDARY,
   PAIRED_T_RFC_URL,
   PLANNED_METHOD_FAMILIES,
   PLATFORM_EVOLUTION,
@@ -208,10 +210,13 @@ const toc: TocItem[] = [
       <p>{EXPANSION_MODEL}</p>
     </div>
     <aside class="next-method">
-      <p class="status-label">Next Protocol capability</p>
-      <h3>Paired-t verification</h3>
+      <p class="status-label">Protocol progress</p>
+      <h3>Release 2: reviewed paired-t candidate</h3>
       <p>{PAIRED_T_BOUNDARY}</p>
-      <p><a href={PAIRED_T_RFC_URL} target="_blank" rel="noopener noreferrer">Public RFC</a></p>
+      <p><a href={PAIRED_T_RFC_URL} target="_blank" rel="noopener noreferrer">Paired-t public RFC</a></p>
+      <h3>Release 4: two-factor public discussion</h3>
+      <p>{R4_DISCUSSION_BOUNDARY}</p>
+      <p><a href={R4_DISCUSSION.articleUrl}>Scope and evidence</a> · <a href={R4_DISCUSSION.issueUrl}>Join the discussion</a></p>
     </aside>
     <p><a href="/roadmap/">See the full roadmap</a> · <a href="/latest/">Follow Latest</a> · <a href="/rss.xml">RSS</a></p>
   </section>

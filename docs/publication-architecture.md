@@ -4,8 +4,8 @@
 **Authority:** Canonical for placement, labels, and required metadata on `licklider.ai`  
 **Claim authority:** Subordinate to `licklider-ai/nomue-app/PUBLIC_COMMUNICATIONS.md`  
 **Outreach authority:** Media outreach is governed separately by `licklider-ai/nomue-pr`  
-**Status:** Active — v1.6<br>
-**Last updated:** 2026-09-08
+**Status:** Active — v1.7<br>
+**Last updated:** 2026-09-09
 
 ---
 
@@ -128,6 +128,7 @@ An Engineering item may report a bug or measurement without becoming a research 
 | Type | Use |
 | --- | --- |
 | `product` | Public product, protocol, specification, verifier, or major availability change |
+| `public_consultation` | An open invitation to comment on a specific public proposal; distinguish discussion from adoption and product support |
 | `company` | Leadership, financing, acquisition, or other material company event |
 | `partnership` | A confirmed external partnership with a public counterparty |
 | `policy_commitment` | A public policy, commitment, response, or material correction |

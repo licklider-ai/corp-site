@@ -1,0 +1,142 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+import { R4_DISCUSSION } from '../../data/site-facts';
+
+const publication = PUBLICATIONS.find((item) => item.href === R4_DISCUSSION.articleUrl)!;
+---
+
+<PublicationLayout
+  category={publication.category}
+  type={publication.type}
+  title={publication.title}
+  description={publication.summary}
+  published={publication.date}
+  status={publication.status}
+  toc={[]}
+>
+  <section id="discussion">
+    <h2>A proposal researchers and developers can now challenge</h2>
+    <p>
+      Public discussion opened on September 9, 2026 for a nomue Protocol Release 4
+      proposal covering balanced two-factor experiments. The proposal brings the
+      statistical scope, data relationships, result meaning, and verification evidence
+      into one document that researchers and developers can inspect and challenge.
+    </p>
+    <p>
+      This is a specification proposal open for comment. Its numerical implementation
+      and supported calculation range remain to be established.
+      <a href={R4_DISCUSSION.proposalUrl}>Read the fixed proposal</a> or
+      <a href={R4_DISCUSSION.issueUrl}>join the public discussion</a>.
+    </p>
+  </section>
+
+  <section id="experiment">
+    <h2>Two factors, four experimental conditions</h2>
+    <p>
+      Consider two temperature levels and two materials. Their combinations make four
+      conditions. With the same number of independent observations in each condition,
+      a two-factor analysis can describe each factor’s average effect and whether the
+      effect of one factor changes with the other. That last quantity is an interaction.
+    </p>
+    <p>
+      The proposal covers two fixed factors with two levels each, at least two
+      independent experimental units per condition, and one continuous outcome.
+      It retains the interaction in the model and declares independent normal errors
+      with a common positive variance. Under that model, it describes signed effect
+      estimates and individual F tests for the two main effects and the interaction.
+      The F tests compare each effect’s variation with residual variation within conditions.
+    </p>
+    <p>
+      This makes the planned expansion beyond two-group comparison concrete: a future
+      verification call would need to identify the exact experimental design, the
+      claim being tested, and the evidence for that claim.
+    </p>
+  </section>
+
+  <section id="proposal">
+    <h2>What the proposal asks a verification record to preserve</h2>
+    <p>
+      A method name and a p-value leave important questions unanswered. Which
+      observations belong to each condition? What model assumptions were declared?
+      Which effect does each result describe? What should happen when a reference
+      points to missing data?
+    </p>
+    <p>The proposed rules address those questions in three connected parts:</p>
+    <ul>
+      <li><strong>Explicit evidence relationships.</strong> Connect observations, conditions, model declarations, and each reported effect without guessing missing facts.</li>
+      <li><strong>Distinct failure meanings.</strong> Separate a malformed record or broken reference from a validly represented design outside the proposed scope, and specify which dependent checks must stop.</li>
+      <li><strong>Compatibility.</strong> Introduce separate proposed data structures and identifiers while preserving existing Release 1 records and their interpretation.</li>
+    </ul>
+    <p>
+      These choices can be discussed before selecting a production numerical algorithm.
+      The bounded proposal uses no Release 3 identifier, schema, or procedure, so its
+      discussion can proceed independently of Release 3’s schedule.
+    </p>
+  </section>
+
+  <section id="evidence">
+    <h2>The evidence behind this stage</h2>
+    <p>
+      The accepted normal-model work separates what the supplied Tian and Styan paper
+      contributes from the project’s probability derivation. A separate review checked
+      that division and independently reconstructed the retained derivation.
+      Subsequent proposal reviews examined the scope, record relationships, failure
+      rules, and compatibility plan; their findings were repaired before opening.
+    </p>
+    <p>
+      The <a href={R4_DISCUSSION.reviewUrl}>final opening confirmation</a> returned GO
+      with no additional findings. It reuses earlier scientific review and discloses
+      its context and independence limits; it is not a new journal peer review or a
+      numerical implementation certification.
+    </p>
+    <p>
+      Our earlier <a href="/engineering/floating-point-tiny-factorial-effects/">945-case
+      floating-point study</a> explains why those numerical questions remain important:
+      storing inputs can change a tiny effect, and later arithmetic can introduce a
+      different error. That study provides bounded coefficient-level evidence, not
+      a guarantee for every F statistic or p-value in the proposal.
+    </p>
+    <p>
+      The <a href="https://github.com/licklider-ai/nomue-protocol/blob/0abdca8f822d0de3faf35f218f762a951fd75e9e/governance/drafts/release-4-preparation/normal-model-steward-acceptance-2026-09-09.md">source and scope acceptance record</a>
+      and <a href="https://github.com/licklider-ai/nomue-protocol/pull/249">draft integration PR</a>
+      preserve the evidence and its boundaries. The proposal does not depend on obtaining
+      every original source for the wider Release 4 research programme; those broader
+      questions remain outside this opening scope.
+    </p>
+  </section>
+
+  <section id="scope">
+    <h2>What remains to be decided and built</h2>
+    <p>
+      The first proposal is deliberately bounded. It excludes unequal or missing cells,
+      repeated or clustered units, random or mixed factors, confidence intervals,
+      multiple-testing guarantees, and causal claims. The three individual tests do
+      not jointly guarantee control of errors across all three claims. The stated
+      normal-model result also does not establish exact calibration after inputs are
+      rounded or selected for admission.
+    </p>
+    <p>
+      Calculation algorithms, error bounds, tolerances, supported input and resource
+      ranges, execution environments, and independent numerical verification evidence
+      remain open work. The discussion issues no operational bundle or permanent
+      identifiers. Current public verifier support remains Release 1 Welch.
+    </p>
+  </section>
+
+  <section id="participate">
+    <h2>How to take part</h2>
+    <p>
+      Comment on <a href={R4_DISCUSSION.issueUrl}>the public discussion issue</a> with
+      the clause or field concerned, a concrete example or counterexample, and a
+      proposed correction where possible. Feedback on the statistical scope, evidence
+      format, failure handling, compatibility, and unresolved numerical design is welcome.
+    </p>
+    <p>
+      The minimum discussion period is 30 calendar days under the Protocol’s
+      STABLE-INTENT process. It began at <time datetime={R4_DISCUSSION.openedAt}>05:59:47 UTC on September 9, 2026</time>.
+      The earliest adoption decision is <time datetime={R4_DISCUSSION.earliestDecisionAt}>05:59:47 UTC on October 9, 2026</time>.
+      That date is neither automatic adoption nor a promised product release.
+    </p>
+  </section>
+</PublicationLayout>

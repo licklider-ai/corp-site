@@ -15,6 +15,8 @@ import {
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
+  R4_DISCUSSION,
+  R4_DISCUSSION_BOUNDARY,
   PLANNED_METHOD_FAMILIES,
   PLATFORM_SCOPE,
   PRODUCT_RELEASE_BOUNDARY,
@@ -60,6 +62,8 @@ const content = `# Licklider
 - ${MCP_RELEASE_BOUNDARY}
 - [Public MCP source](${MCP_RELEASE.repositoryUrl}), [npm package](${MCP_RELEASE.npmUrl}), [official registry metadata](${MCP_RELEASE.registryUrl}), and [passing cross-platform CI](${MCP_RELEASE.ciUrl})
 - ${PAIRED_T_BOUNDARY}
+- ${R4_DISCUSSION_BOUNDARY}
+- [Release 4 public discussion](${R4_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R4_DISCUSSION.articleUrl})
 - ${EVALUATION_BOUNDARY}
 - ${PLATFORM_SCOPE}
 - ${MARKET_SCOPE}
