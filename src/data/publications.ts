@@ -13,6 +13,17 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'News',
+    type: 'Product',
+    date: 'September 9, 2026',
+    sortKey: '2026-09-09',
+    title: 'nomue launches limited Release 1 for agent-callable Welch verification',
+    summary:
+      'nomue now gives approved recipients a way to call bounded Welch statistical verification from compatible AI agents and HTTP clients.',
+    href: '/news/nomue-welch-limited-release-1/',
+    status: 'Limited Release 1 — approved recipients only; no public registration',
+  },
+  {
     category: 'Engineering',
     type: 'Technical method',
     date: 'September 8, 2026',
