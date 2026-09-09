@@ -20,7 +20,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 const toc: TocItem[] = [
   { id: 'now', label: 'Available now' },
   { id: 'candidate', label: 'Local MCP release' },
-  { id: 'next', label: 'Next releases' },
+  { id: 'next', label: 'Limited release and next work' },
   { id: 'platform', label: 'Platform evolution' },
   { id: 'methods', label: 'Method expansion' },
   { id: 'compounding', label: 'Learning system' },
@@ -33,7 +33,7 @@ const roadmapStructuredData = {
   description:
     'Current, next, and planned expansion of nomue from Welch verification into agent-native scientific verification infrastructure.',
   url: new URL('/roadmap/', Astro.site).href,
-  dateModified: '2026-09-07',
+  dateModified: '2026-09-09',
   isPartOf: { '@id': new URL('/#website', Astro.site).href },
   about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
 };
@@ -100,12 +100,13 @@ const roadmapStructuredData = {
   </section>
 
   <section id="next" class="section">
-    <p class="stage-label">Next release work</p>
-    <h2>Add managed orchestration, then widen the evidence</h2>
+    <p class="stage-label">Limited release and next work</p>
+    <h2>Use managed Welch verification, then widen the evidence</h2>
     <div class="status-list">
       <article>
-        <h3>Managed agent-facing Welch workflow</h3>
+        <h3>Managed agent-facing Welch workflow — limited Release 1</h3>
         <p>{PRODUCT_RELEASE_BOUNDARY}</p>
+        <p><a href="/news/nomue-welch-limited-release-1/">Read the release announcement</a></p>
       </article>
       <article>
         <h3>Paired-t / Protocol Release 2</h3>
