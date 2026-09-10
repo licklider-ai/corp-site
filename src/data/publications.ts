@@ -13,6 +13,16 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'Engineering',
+    type: 'Technical method',
+    date: 'September 10, 2026',
+    sortKey: '2026-09-10',
+    title: 'Checking factorial statistics without trusting rounded intermediates',
+    summary: 'Exact arithmetic and probability bounds offer a path beyond scaling repairs, while a review shows why matching rounded answers does not certify an interval.',
+    href: '/engineering/checking-factorial-statistics-and-tail-bounds/',
+    status: 'Limited reviews of unmerged research candidates; no additional supported capability',
+  },
+  {
     "category": "Engineering",
     "type": "Upstream report",
     "date": "September 10, 2026",

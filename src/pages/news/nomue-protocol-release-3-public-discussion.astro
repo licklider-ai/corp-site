@@ -12,6 +12,7 @@ const publication = PUBLICATIONS.find((item) => item.href === R3_DISCUSSION.arti
   title={publication.title}
   description={publication.summary}
   published={publication.date}
+  updated="September 10, 2026"
   status={publication.status}
   toc={[]}
 >
@@ -54,6 +55,11 @@ const publication = PUBLICATIONS.find((item) => item.href === R3_DISCUSSION.arti
     <p>Scientific and numerical decisions remain explicit. The source ledger still records nine bounded closures, one partial item, and four incomplete items; the overall source set remains incomplete. Opening does not close those items or establish general error-control guarantees.</p>
     <p>All candidate numerical support remains held. Earlier claims of rigorous numerical bounds and brackets were <a href="https://github.com/licklider-ai/nomue-protocol/pull/265">withdrawn in PR #265</a>; the affected algorithms are not validated numerical references. Separate work must establish calculation methods, error bounds, tolerances, supported inputs, resource limits, and execution conditions before implementation is promoted.</p>
     <p>Current supported scientific scope remains Release 1 Welch, with <a href="/docs/record-verification/">public local Record verification</a> and the separately announced <a href="/news/nomue-welch-limited-release-1/">limited hosted access</a>. This discussion issues no new capability or operational identifier.</p>
+  </section>
+
+  <section id="preparation-update">
+    <h2>September 10: reviewed preparation for candidate development</h2>
+    <p>A <a href="https://github.com/licklider-ai/nomue-protocol/pull/282">limited review of the 15-candidate evidence map</a> found it suitable for progress management, and a <a href="https://github.com/licklider-ai/nomue-protocol/pull/280">separate structural review</a> found the unissued common declarations and result bindings suitable for further exploration. Ordinary Holm is the first planned candidate; its independent-source-review connection and candidate-specific numerical design remain unresolved. These unmerged drafts adopt no method and establish no numerical support. The <a href="https://github.com/licklider-ai/nomue-protocol/pull/284">round handoff</a> records the limits and next steps; the public-discussion scope and window are unchanged.</p>
   </section>
 
   <section id="participate">
