@@ -13,6 +13,16 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    "category": "Engineering",
+    "type": "Upstream report",
+    "date": "September 10, 2026",
+    "sortKey": "2026-09-10",
+    "title": "Exact rescaling can reverse SciPy’s Welch ANOVA decision",
+    "summary": "At an extreme input scale, SciPy’s Welch ANOVA changes a p-value from 0.02650 to 0.05611, crossing the 5% threshold without losing input information.",
+    "href": "/engineering/scipy-welch-anova-weight-sum-overflow/",
+    "status": "Reported upstream — confirmation pending"
+  },
+  {
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 10, 2026',

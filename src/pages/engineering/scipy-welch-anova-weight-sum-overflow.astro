@@ -1,0 +1,81 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/scipy-welch-anova-weight-sum-overflow/')!;
+---
+
+<PublicationLayout
+  category={item.category}
+  type={item.type}
+  title={item.title}
+  description={item.summary}
+  published={item.date}
+  status={item.status}
+  toc={[]}
+>
+<section id="the-same-data-a-different-decision">
+  <h2>The same data, a different decision</h2>
+
+<p>Multiplying every observation by the same positive constant should preserve Welch’s ANOVA result. This test compares the means of several independent groups while allowing their variances to differ.</p>
+
+<p>In a deliberately extreme example using SciPy 1.18.1, scaling every observation by <code>2**-511</code> changes the returned p-value from approximately <code>0.02650</code> to <code>0.05611</code>. The first is below the conventional 5% significance threshold; the second is above it. The scaled observations retain the original input information exactly.</p>
+
+<p>Tasuku Kobayashi reported the example in <a href="https://github.com/scipy/scipy/issues/26146">SciPy issue #26146</a> on September 10, 2026. As of September 10, 2026, the issue is open with no comments. Upstream confirmation and a correction remain pending.</p>
+
+</section>
+
+<section id="a-nine-observation-example">
+  <h2>A nine-observation example</h2>
+
+<p>The report uses three groups: <code>[-1, 0, 1]</code>, <code>[1, 2, 3]</code>, and <code>[3, 4, 5]</code>. Both calls explicitly select Welch’s ANOVA with <code>equal_var=False</code>.</p>
+
+<pre><code>import numpy as np
+from scipy import stats
+
+a = np.array([-1, 0, 1], dtype=np.float64)
+b = np.array([1, 2, 3], dtype=np.float64)
+c = np.array([3, 4, 5], dtype=np.float64)
+scale = 2.0 ** (-511)
+
+print(&quot;Original:&quot;, stats.f_oneway(a, b, c, equal_var=False))
+print(&quot;Scaled:  &quot;, stats.f_oneway(a * scale, b * scale, c * scale, equal_var=False))</code></pre>
+
+<div class="table-scroll"><table><caption>Reference and reported SciPy results</caption><thead><tr><th scope="col">Calculation</th><th scope="col">F-statistic</th><th scope="col">p-value</th><th scope="col">Below 0.05?</th></tr></thead><tbody><tr><td>Welch reference, either scale</td><td>72/7 ≈ 10.285714</td><td>49/1849 ≈ 0.02650081125</td><td>Yes</td></tr><tr><td>SciPy, original scale</td><td>≈ 10.285714</td><td>≈ 0.02650081125</td><td>Yes</td></tr><tr><td>SciPy, scaled by 2^-511</td><td>≈ 21.81818</td><td>≈ 0.05611184474</td><td>No</td></tr></tbody></table></div>
+
+<p>The reference uses numerator and denominator degrees of freedom of 2 and 4. These are properties of the reference calculation; <code>f_oneway</code> returns the statistic and p-value.</p>
+
+<p>The reported environment is SciPy 1.18.1, NumPy 2.3.5, and Python 3.12.14 on Linux x86_64. The issue includes the reproducer, warning messages, and build configuration.</p>
+
+</section>
+
+<section id="the-overflow-occurs-when-the-weights-are-added">
+  <h2>The overflow occurs when the weights are added</h2>
+
+<p>Welch’s ANOVA gives each group a weight equal to its sample size divided by its sample variance. In this example, each sample variance stays within the normal float64 range, and every individual weight stays finite. Their sum exceeds the largest value that float64 can represent.</p>
+
+<p>That overflow affects the later calculation and produces the reported change in the statistic and p-value. This is the cause analysis in our report; it is separate from a maintainer’s confirmation or choice of repair.</p>
+
+<p>The saved diagnostic script captured two <code>RuntimeWarning: overflow encountered in reduce</code> messages from the scaled <code>f_oneway</code> call with the warning filter set to <code>always</code>. The issue identifies these as captured warning categories and messages, with no recorded source filenames or line numbers. Default warning filtering may suppress a repeated message.</p>
+
+</section>
+
+<section id="what-this-establishes">
+  <h2>What this establishes</h2>
+
+<p>A p-value can remain between zero and one while changing a statistical decision because of an intermediate numerical failure. Checking a transformation that should preserve the result provides another way to expose that failure.</p>
+
+<p>For Licklider, this case demonstrates the use of small reproducible examples and mathematical references to investigate scientific software. The scale was chosen deliberately for a boundary test. We have not estimated how often practical datasets encounter it, and this report does not validate a general repair.</p>
+
+<p>Welch’s multi-group ANOVA and the two-group Welch t-test are different procedures. This report does not add Welch ANOVA verification to nomue; the <a href="/docs/limits/">current product limits</a> remain the reference for supported use.</p>
+
+<p>Read the <a href="https://github.com/scipy/scipy/issues/26146">upstream report and reproducer</a> for the exact inputs, expected result, warnings, and environment.</p>
+
+</section>
+</PublicationLayout>
+
+<style>
+  .table-scroll { overflow-x: auto; margin: 1.75rem 0; }
+  table { min-width: 40rem; }
+  caption { text-align: left; margin-bottom: 0.75rem; }
+</style>

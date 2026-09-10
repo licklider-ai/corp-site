@@ -221,6 +221,21 @@ export const UPSTREAM_REPORTS_AS_OF = 'September 10, 2026';
 
 export const UPSTREAM_CONTRIBUTIONS = [
   {
+    "project": "SciPy",
+    "title": "Welch ANOVA: exact rescaling reverses a 5% decision",
+    "summary": "At an extreme input scale, exact rescaling changes a p-value from 0.02650 to 0.05611 because the sum of finite weights overflows.",
+    "href": "/engineering/scipy-welch-anova-weight-sum-overflow/",
+    "status": PUBLICATIONS.find((item) => item.href === '/engineering/scipy-welch-anova-weight-sum-overflow/')!.status,
+    "outcome": "report_open",
+    "panelStatus": "Reported · unconfirmed",
+    "comparisonLabel": "Original scale → scaled by 2^-511",
+    "observed": "0.02650",
+    "reference": "0.05611",
+    "evidenceHref": "https://github.com/scipy/scipy/issues/26146",
+    "evidenceLabel": "SciPy issue #26146",
+    "credit": "Reported by Tasuku Kobayashi on September 10, 2026; upstream confirmation pending"
+  },
+  {
     project: 'R / agricolae',
     title: 'REGW: renaming groups changes a 5% decision',
     summary: 'Renaming treatment groups changes a p-value from 0.0363 to 0.0791 while the observations and group membership stay the same.',
