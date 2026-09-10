@@ -152,7 +152,25 @@
   .contribution-counts dt { color: var(--gold-ink); font-size: 4.5rem; letter-spacing: -0.015em; font-weight: 400; }
   .contribution-counts dd { font-size: 0.875rem; }
   .count-date { font-family: var(--font-serif); font-size: 0.8125rem; }
-  .upstream-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+  .upstream-band > .band-inner { min-width: 0; }
+  .upstream-carousel { overflow: hidden; }
+  .upstream-track { display: flex; width: max-content; animation: upstream-loop 140s linear infinite; }
+  .upstream-grid { display: flex; flex: none; gap: 1.25rem; padding-right: 1.25rem; }
+  .upstream-grid article { flex: 0 0 clamp(19rem, 32vw, 28rem); width: clamp(19rem, 32vw, 28rem); }
+  @keyframes upstream-loop { to { transform: translateX(-50%); } }
+
+  /* Keyboard navigation and reduced motion use the original seven panels. */
+  .upstream-carousel:has(.upstream-grid:not([aria-hidden]) :focus-visible) { overflow-x: auto; }
+  .upstream-carousel:has(.upstream-grid:not([aria-hidden]) :focus-visible) .upstream-track { animation: none; }
+  .upstream-carousel:has(.upstream-grid:not([aria-hidden]) :focus-visible) .upstream-grid[aria-hidden] { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .upstream-carousel { overflow-x: auto; }
+    .upstream-track { animation: none; }
+    .upstream-grid[aria-hidden] { display: none; }
+  }
+  @media (max-width: 620px) {
+    .upstream-grid article { flex-basis: min(85vw, 28rem); width: min(85vw, 28rem); }
+  }
   .upstream-grid article { padding: 2rem; border-radius: 5px; border-color: var(--rule); background: var(--wash-hi); }
   .upstream-grid h3 { font-size: 1.4rem; }
   .upstream-grid h3 a { text-decoration: underline; text-decoration-color: #b3a17c; }

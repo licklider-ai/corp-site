@@ -31,6 +31,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const latest = [...PUBLICATIONS]
   .sort((a, b) => b.sortKey.localeCompare(a.sortKey))
   .slice(0, 8);
+const upstreamPanels = UPSTREAM_CONTRIBUTIONS.slice(0, 7);
 const upstreamFixCount = UPSTREAM_CONTRIBUTIONS.filter(
   (item) => item.outcome === 'fix_merged',
 ).length;
@@ -246,27 +247,33 @@ const homeStructuredData = {
           </dl>
         </div>
         <p class="count-date">Distinct reports submitted through issue trackers or maintainer email, as of {UPSTREAM_REPORTS_AS_OF}.</p>
-        <div class="upstream-grid">
-          {
-            UPSTREAM_CONTRIBUTIONS.map((item) => (
-              <article>
-                <p class="evidence-status">{item.project} · {item.status}</p>
-                <h3><a href={item.href}>{item.title}</a></h3>
-                <p>{item.summary}</p>
-                <div class="numeric-comparison" aria-label={item.comparisonLabel}>
-                  <span>{item.observed}</span>
-                  <span aria-hidden="true">→</span>
-                  <span>{item.reference}</span>
-                </div>
-                <p class="comparison-label">{item.comparisonLabel}</p>
-                <p class="evidence-links">
-                  <a href={item.href}>Full report</a><br />
-                  <a href={item.evidenceHref} target="_blank" rel="noopener noreferrer">{item.evidenceLabel}</a>
-                </p>
-                <p class="contribution-credit">{item.credit}</p>
-              </article>
-            ))
-          }
+        <div class="upstream-carousel" role="region" aria-label="Upstream reports">
+          <div class="upstream-track">
+            {[false, true].map((duplicate) => (
+              <div class="upstream-grid" aria-hidden={duplicate ? 'true' : undefined}>
+                {
+                  upstreamPanels.map((item) => (
+                    <article>
+                      <p class="evidence-status">{item.project} · {item.status}</p>
+                      <h3><a href={item.href} tabindex={duplicate ? -1 : undefined}>{item.title}</a></h3>
+                      <p>{item.summary}</p>
+                      <div class="numeric-comparison" aria-label={item.comparisonLabel}>
+                        <span>{item.observed}</span>
+                        <span aria-hidden="true">→</span>
+                        <span>{item.reference}</span>
+                      </div>
+                      <p class="comparison-label">{item.comparisonLabel}</p>
+                      <p class="evidence-links">
+                        <a href={item.href} tabindex={duplicate ? -1 : undefined}>Full report</a><br />
+                        <a href={item.evidenceHref} tabindex={duplicate ? -1 : undefined} target="_blank" rel="noopener noreferrer">{item.evidenceLabel}</a>
+                      </p>
+                      <p class="contribution-credit">{item.credit}</p>
+                    </article>
+                  ))
+                }
+              </div>
+            ))}
+          </div>
         </div>
         <p class="more"><a href="/engineering/">All engineering work</a></p>
       </div>

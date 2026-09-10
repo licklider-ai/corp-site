@@ -112,3 +112,15 @@ LLM向けMarkdown、`llms.txt`、機械可読exampleは、同じ公開境界か�
 
 配置、正本境界、必須セクション、machine-readable surface、公開前チェックは
 [`docs/agent-readable-documentation.md`](./docs/agent-readable-documentation.md) を参照してください。
+
+## Homepage upstream panels
+
+The homepage shows the first seven entries from `UPSTREAM_CONTRIBUTIONS` in a
+single automatically looping row. Keep the existing report copy, evidence links,
+and totals sourced from `site-facts.ts`; the seven-panel display limit does not
+limit the cumulative report count. A second, accessibility-hidden copy provides
+the seamless loop and does not represent additional reports.
+
+The row has no pause/arrow controls, drag handling, or helper labels. Keyboard
+focus and the operating system's reduced-motion setting use a static horizontally
+scrollable row of the seven original panels. Styling lives in `src/styles/design.css`.
