@@ -116,8 +116,10 @@ LLM向けMarkdown、`llms.txt`、機械可読exampleは、同じ公開境界か�
 ## Homepage upstream panels
 
 The homepage shows the first seven entries from `UPSTREAM_CONTRIBUTIONS` in a
-single automatically looping row. Keep the existing report copy, evidence links,
-and totals sourced from `site-facts.ts`; the seven-panel display limit does not
+single automatically looping row spanning the full viewport width. Each panel
+keeps the project, title, concise `panelStatus`, numerical comparison with its
+meaning, and one full-report link. Summaries, upstream links, and attribution
+remain in the detailed reports and canonical data. Keep totals sourced from `site-facts.ts`; the seven-panel display limit does not
 limit the cumulative report count. A second, accessibility-hidden copy provides
 the seamless loop and does not represent additional reports.
 

@@ -152,7 +152,7 @@
   .contribution-counts dt { color: var(--gold-ink); font-size: 4.5rem; letter-spacing: -0.015em; font-weight: 400; }
   .contribution-counts dd { font-size: 0.875rem; }
   .count-date { font-family: var(--font-serif); font-size: 0.8125rem; }
-  .upstream-band > .band-inner { min-width: 0; }
+  .upstream-band > .band-inner { min-width: 0; max-width: var(--shell); margin-inline: auto; padding-inline: var(--gutter); }
   .upstream-carousel { overflow: hidden; }
   .upstream-track { display: flex; width: max-content; animation: upstream-loop 140s linear infinite; }
   .upstream-grid { display: flex; flex: none; gap: 1.25rem; padding-right: 1.25rem; }
@@ -171,14 +171,19 @@
   @media (max-width: 620px) {
     .upstream-grid article { flex-basis: min(85vw, 28rem); width: min(85vw, 28rem); }
   }
-  .upstream-grid article { padding: 2rem; border-radius: 5px; border-color: var(--rule); background: var(--wash-hi); }
+  .upstream-grid article { padding: 1.5rem; border-radius: 5px; border-color: var(--rule); background: var(--wash-hi); }
   .upstream-grid h3 { font-size: 1.4rem; }
   .upstream-grid h3 a { text-decoration: underline; text-decoration-color: #b3a17c; }
   .upstream-grid article > p { font-size: 1rem; }
   .upstream-grid .evidence-status, .evidence-status { font-size: 0.8125rem; line-height: 1.6; letter-spacing: 0.035em; color: var(--ink-2); font-family: var(--font-serif); }
   .numeric-comparison { padding-top: 1.5rem; font-size: 1rem; color: var(--blue-deep); gap: 1rem; }
   .comparison-label, .contribution-credit, .upstream-grid .comparison-label, .upstream-grid .contribution-credit { font-size: 0.8125rem; }
-  .upstream-grid .evidence-links { font-size: 0.875rem; line-height: 2; }
+  .upstream-grid .evidence-status { margin: 0 0 0.5rem; }
+  .upstream-grid h3 { margin: 0 0 0.65rem; }
+  .upstream-grid .panel-status { margin: 0 0 1rem; color: var(--ink-2); font-size: 0.875rem; }
+  .upstream-grid .numeric-comparison { padding-top: 0.85rem; font-size: 0.875rem; }
+  .upstream-grid .comparison-label { margin-bottom: 0.75rem; }
+  .upstream-grid .evidence-links { margin: 0; font-size: 0.875rem; line-height: 1.5; }
   .definition { max-width: 65rem; font-size: clamp(1.65rem, 3vw, 2.6rem); line-height: 1.4; letter-spacing: -0.015em; }
   .research-finding { max-width: 56rem; background: var(--blue-wash); border-left: 3px solid var(--gold-ink); padding: 1.75rem 2rem; }
   .research-finding .step { color: var(--blue); }

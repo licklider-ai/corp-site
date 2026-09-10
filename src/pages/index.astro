@@ -217,6 +217,8 @@ const homeStructuredData = {
       </div>
     </section>
 
+  </div>
+
     <section class="band band--single upstream-band">
       <div class="band-inner band-inner--wide">
         <p class="eyebrow">Upstream Contributions</p>
@@ -247,6 +249,7 @@ const homeStructuredData = {
           </dl>
         </div>
         <p class="count-date">Distinct reports submitted through issue trackers or maintainer email, as of {UPSTREAM_REPORTS_AS_OF}.</p>
+      </div>
         <div class="upstream-carousel" role="region" aria-label="Upstream reports">
           <div class="upstream-track">
             {[false, true].map((duplicate) => (
@@ -254,9 +257,9 @@ const homeStructuredData = {
                 {
                   upstreamPanels.map((item) => (
                     <article>
-                      <p class="evidence-status">{item.project} · {item.status}</p>
+                      <p class="evidence-status">{item.project}</p>
                       <h3><a href={item.href} tabindex={duplicate ? -1 : undefined}>{item.title}</a></h3>
-                      <p>{item.summary}</p>
+                      <p class="panel-status">{item.panelStatus}</p>
                       <div class="numeric-comparison" aria-label={item.comparisonLabel}>
                         <span>{item.observed}</span>
                         <span aria-hidden="true">→</span>
@@ -264,10 +267,8 @@ const homeStructuredData = {
                       </div>
                       <p class="comparison-label">{item.comparisonLabel}</p>
                       <p class="evidence-links">
-                        <a href={item.href} tabindex={duplicate ? -1 : undefined}>Full report</a><br />
-                        <a href={item.evidenceHref} tabindex={duplicate ? -1 : undefined} target="_blank" rel="noopener noreferrer">{item.evidenceLabel}</a>
+                        <a href={item.href} tabindex={duplicate ? -1 : undefined}>Full report</a>
                       </p>
-                      <p class="contribution-credit">{item.credit}</p>
                     </article>
                   ))
                 }
@@ -275,10 +276,12 @@ const homeStructuredData = {
             ))}
           </div>
         </div>
+      <div class="band-inner band-inner--wide">
         <p class="more"><a href="/engineering/">All engineering work</a></p>
       </div>
     </section>
 
+  <div class="sections">
     <section class="band">
       <p class="eyebrow">The Missing Call</p>
       <div class="band-body">
