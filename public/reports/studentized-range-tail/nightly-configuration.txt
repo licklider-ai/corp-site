@@ -1,0 +1,83 @@
+2.0.0.dev0+git20260907.41eeb59 2.3.5 sys.version_info(major=3, minor=12, micro=13, releaselevel='final', serial=0)
+SciPy git revision: 41eeb590207dc4d8517abd90fc824a3a240832b5
+{
+  "Compilers": {
+    "c": {
+      "name": "gcc",
+      "linker": "ld.bfd",
+      "version": "14.2.1",
+      "commands": "cc"
+    },
+    "cython": {
+      "name": "cython",
+      "linker": "cython",
+      "version": "3.3.0",
+      "commands": "cython"
+    },
+    "c++": {
+      "name": "gcc",
+      "linker": "ld.bfd",
+      "version": "14.2.1",
+      "commands": "c++"
+    },
+    "pythran": {
+      "version": "0.19.0",
+      "include directory": "../../../opt/python/cp312-cp312/lib/python3.12/site-packages/pythran"
+    }
+  },
+  "Machine Information": {
+    "host": {
+      "cpu": "x86_64",
+      "family": "x86_64",
+      "endian": "little",
+      "system": "linux"
+    },
+    "build": {
+      "cpu": "x86_64",
+      "family": "x86_64",
+      "endian": "little",
+      "system": "linux"
+    },
+    "cross-compiled": false
+  },
+  "Build Dependencies": {
+    "blas": {
+      "name": "scipy-openblas",
+      "found": true,
+      "version": "0.3.34.0.0",
+      "detection method": "pkgconfig",
+      "include directory": "/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/include",
+      "lib directory": "/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/lib",
+      "openblas configuration": "OpenBLAS 0.3.34.0.0 DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64",
+      "pc file directory": "/project/.openblas",
+      "has ilp64": false,
+      "cython blas ilp64": false
+    },
+    "lapack": {
+      "name": "scipy-openblas",
+      "found": true,
+      "version": "0.3.34.0.0",
+      "detection method": "pkgconfig",
+      "include directory": "/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/include",
+      "lib directory": "/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/lib",
+      "openblas configuration": "OpenBLAS 0.3.34.0.0 DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64",
+      "pc file directory": "/project/.openblas",
+      "has ilp64": false
+    },
+    "numpy": {
+      "name": "numpy",
+      "version": "2.5.2",
+      "detection method": "config-tool"
+    },
+    "pybind11": {
+      "name": "pybind11",
+      "version": "3.1.0",
+      "detection method": "config-tool",
+      "include directory": "unknown"
+    }
+  },
+  "Python Information": {
+    "path": "/opt/python/cp312-cp312/bin/python",
+    "version": "3.12"
+  }
+}

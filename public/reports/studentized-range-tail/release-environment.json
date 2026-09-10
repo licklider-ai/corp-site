@@ -1,0 +1,44 @@
+{
+  "python": "3.12.13 (main, Jul 14 2026, 02:09:00) [GCC 14.2.0]",
+  "scipy": "1.18.1",
+  "git_revision": "e4e854eaa8f18d807cd3496028e257e36caa93cc",
+  "numpy": "2.3.5",
+  "runtime": {
+    "python": "3.12.13 (main, Jul 14 2026, 02:09:00) [GCC 14.2.0]",
+    "system": "Linux",
+    "machine": "x86_64",
+    "libc": [
+      "glibc",
+      "2.41"
+    ],
+    "packages": {
+      "numpy": {
+        "version": "2.3.5",
+        "distribution_record_sha256": "7cbd7c95f869df9690b0283c1ab8b6cd1d1b3ee06e68e412ae89e98bc9f25b00"
+      },
+      "scipy": {
+        "version": "1.18.1",
+        "distribution_record_sha256": "3d2096cf2966fbeec7f0bd2035484f619d0a49a53c97630d8f6216cb52ef20c2"
+      },
+      "mpmath": {
+        "version": "1.3.0",
+        "distribution_record_sha256": "98750bf09ab626059be2cd3aaa538eacb69bcaa508890257cb98157002fb9d7e"
+      },
+      "pytest": {
+        "version": "8.4.2",
+        "distribution_record_sha256": "2d1f1fec6976a24c76f1207529f4f249380254c972085f61784670b253d5ef06"
+      },
+      "python-flint": null,
+      "gmpy2": null,
+      "sympy": null
+    },
+    "executables": {
+      "Rscript": null,
+      "julia": null,
+      "docker": null
+    }
+  },
+  "source_hashes": {
+    "compiled_stats": "6ccbb930f99601864c93f92622fc9bd5ec65b86f4387a284875f191350d17f29"
+  }
+}

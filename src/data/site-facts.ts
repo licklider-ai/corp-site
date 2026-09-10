@@ -222,6 +222,21 @@ export const UPSTREAM_REPORTS_AS_OF = 'September 10, 2026';
 export const UPSTREAM_CONTRIBUTIONS = [
   {
     "project": "SciPy",
+    "title": "Studentized range: a nonzero tail returns zero",
+    "summary": "An exact special-case reference shows SciPy returning zero for a probability near 0.00000002, with no warning in the recorded runs.",
+    "href": "/engineering/scipy-studentized-range-tail-loss/",
+    "status": "Additional reproducer reported — upstream confirmation pending",
+    "outcome": "report_open",
+    "panelStatus": "Reported · confirmation pending",
+    "comparisonLabel": "Reported SF → exact special-case reference",
+    "observed": "0.0",
+    "reference": "≈ 2.0e-8",
+    "evidenceHref": "https://github.com/scipy/scipy/issues/17832#issuecomment-5614555048",
+    "evidenceLabel": "Additional example in SciPy #17832",
+    "credit": "Reported by Tasuku Kobayashi on September 10, 2026; upstream confirmation pending"
+  },
+  {
+    "project": "SciPy",
     "title": "Welch ANOVA: exact rescaling reverses a 5% decision",
     "summary": "At an extreme input scale, exact rescaling changes a p-value from 0.02650 to 0.05611 because the sum of finite weights overflows.",
     "href": "/engineering/scipy-welch-anova-weight-sum-overflow/",

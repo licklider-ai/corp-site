@@ -1,0 +1,4 @@
+SciPy: 1.18.1
+{"cdf": 0.894427190999916, "cdf_hex": "0x1.c9f25c5bfeddap-1", "cdf_warnings": [], "df": 2, "k": 2, "q": 4, "reference_cdf": 0.8944271909999159, "reference_sf": 0.10557280900008412, "sf": 0.10557280900008403, "sf_hex": "0x1.b06d1d2009130p-4", "sf_warnings": []}
+{"cdf": 0.999800059980007, "cdf_hex": "0x1.ffe5cb204e51ep-1", "cdf_warnings": [], "df": 2, "k": 2, "q": 100, "reference_cdf": 0.999800059980007, "reference_sf": 0.00019994001999300252, "sf": 0.0001999400199930168, "sf_hex": "0x1.a34dfb1ae2000p-13", "sf_warnings": []}
+{"cdf": 1.0, "cdf_hex": "0x1.0000000000000p+0", "cdf_warnings": [], "df": 2, "k": 2, "q": 10000, "reference_cdf": 0.9999999800000006, "reference_sf": 1.999999940000002e-08, "sf": 0.0, "sf_hex": "0x0.0p+0", "sf_warnings": []}

@@ -17,6 +17,16 @@ export const PUBLICATIONS: PublicationItem[] = [
     "type": "Upstream report",
     "date": "September 10, 2026",
     "sortKey": "2026-09-10",
+    "title": "A nonzero Studentized-range tail disappears in SciPy",
+    "summary": "An exact special-case reference shows SciPy returning zero for a probability near 0.00000002, with no warning in the recorded runs.",
+    "href": "/engineering/scipy-studentized-range-tail-loss/",
+    "status": "Additional reproducer reported — upstream confirmation pending"
+  },
+  {
+    "category": "Engineering",
+    "type": "Upstream report",
+    "date": "September 10, 2026",
+    "sortKey": "2026-09-10",
     "title": "Exact rescaling can reverse SciPy’s Welch ANOVA decision",
     "summary": "At an extreme input scale, SciPy’s Welch ANOVA changes a p-value from 0.02650 to 0.05611, crossing the 5% threshold without losing input information.",
     "href": "/engineering/scipy-welch-anova-weight-sum-overflow/",

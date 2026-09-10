@@ -1,0 +1,22 @@
+.F.F                                                                     [100%]
+=================================== FAILURES ===================================
+_______________________ test_sf_two_means_df_two[10000] ________________________
+test_studentized_range_tail.py:13: in test_sf_two_means_df_two
+    assert float(studentized_range.sf(q, 2, 2)) == pytest.approx(
+E   assert 0.0 == 1.99999994000...e-08 ± 2.0e-16
+E     
+E     comparison failed
+E     Obtained: 0.0
+E     Expected: 1.999999940000002e-08 ± 2.0e-16
+_______________________ test_cdf_two_means_df_two[10000] _______________________
+test_studentized_range_tail.py:19: in test_cdf_two_means_df_two
+    assert float(studentized_range.cdf(q, 2, 2)) == pytest.approx(
+E   assert 1.0 == 0.9999999800000006 ± 1.0e-11
+E     
+E     comparison failed
+E     Obtained: 1.0
+E     Expected: 0.9999999800000006 ± 1.0e-11
+=========================== short test summary info ============================
+FAILED test_studentized_range_tail.py::test_sf_two_means_df_two[10000] - asse...
+FAILED test_studentized_range_tail.py::test_cdf_two_means_df_two[10000] - ass...
+2 failed, 2 passed in 0.63s

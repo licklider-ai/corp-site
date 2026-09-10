@@ -1,0 +1,73 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/scipy-studentized-range-tail-loss/')!;
+const evidence = '/reports/studentized-range-tail/';
+---
+
+<PublicationLayout category={item.category} type={item.type} title={item.title}
+  description={item.summary} published={item.date} status={item.status} toc={[]}>
+  <section id="a-small-probability-is-lost">
+    <h2>A small probability is lost</h2>
+    <p>SciPy returns zero for a Studentized-range upper-tail probability that should be about one in fifty million. The distribution is used in multiple-comparison procedures. An exact formula for a special case gives us a direct way to check this numerical result.</p>
+    <p>Tasuku Kobayashi submitted the <a href="https://github.com/scipy/scipy/issues/17832#issuecomment-5614555048">additional reproducer and proposed regression checks</a> to SciPy’s existing distribution-method tracking issue #17832 on September 10, 2026. Upstream confirmation and a correction remain pending.</p>
+    <p>The input is <code>q=10000</code>, with two groups (<code>k=2</code>) and two degrees of freedom (<code>df=2</code>). The survival function, or SF, gives the probability above the input; the cumulative distribution function, or CDF, gives the probability at or below it.</p>
+    <div class="table-scroll">
+      <table>
+        <caption>Recorded results and correctly rounded binary64 references</caption>
+        <thead><tr><th scope="col">Function</th><th scope="col">SciPy result</th><th scope="col">Reference</th></tr></thead>
+        <tbody>
+          <tr><td><code>sf(10000, 2, 2)</code></td><td><code>0.0</code></td><td><code>1.999999940000002e-8</code></td></tr>
+          <tr><td><code>cdf(10000, 2, 2)</code></td><td><code>1.0</code></td><td><code>0.9999999800000006</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Neither call produced a warning in the recorded runs. The expected tail is a normal, nonzero binary64 value, well within the format’s representable range. This example does not reverse a decision at the 5% significance level: both zero and the reference probability are below 0.05.</p>
+  </section>
+
+  <section id="an-exact-reference">
+    <h2>An exact reference for this case</h2>
+    <p>For two groups and two degrees of freedom, the Studentized-range variable has the same distribution as the absolute value of a Student-t variable with two degrees of freedom, multiplied by the square root of two. For nonnegative <code>q</code>, this gives:</p>
+    <pre><code>s = sqrt(q*q + 4)
+CDF(q) = q / s
+SF(q) = 4 / (s * (s + q))</code></pre>
+    <p>The SF expression avoids subtracting nearly equal numbers. The published <a href={`${evidence}reference.py`}>reference calculation</a> uses integer arithmetic to bound the square root and the resulting probabilities with rational numbers. It checks that both ends of each bound round to the same binary64 value. A separate analytical derivation and rational-arithmetic calculation also checked the reference.</p>
+    <p>The saved diagnostics show that the internal CDF numerical integration already returns <code>1.0</code> before clipping to the interval from zero to one. Clipping is inactive at this input. The final subtraction <code>1 - cdf</code> therefore cannot be the sole explanation: subtracting the correctly rounded reference CDF would still give a nonzero result, approximately <code>1.999999943436137e-8</code>.</p>
+    <p>The detailed cause of the integration error and a general correction remain unresolved. This submission adds a reproducible example to a known numerical problem area; it makes no claim to have discovered a new problem family.</p>
+  </section>
+
+  <section id="reproduce-the-observation">
+    <h2>Reproduce the observation</h2>
+    <pre><code>import scipy
+from scipy.stats import studentized_range
+
+print("SciPy version:", scipy.__version__)
+print("Actual sf: ", studentized_range.sf(10000, 2, 2))
+print("Actual cdf:", studentized_range.cdf(10000, 2, 2))</code></pre>
+    <p>The submitted runs cover SciPy <code>1.18.1</code> (revision <code>e4e854eaa8f18d807cd3496028e257e36caa93cc</code>) and the official development build <code>2.0.0.dev0+git20260907.41eeb59</code> (revision <code>41eeb590207dc4d8517abd90fc824a3a240832b5</code>). Both used Python 3.12.13 and NumPy 2.3.5 on Linux x86_64.</p>
+    <p>The relevant class source also matched main at <code>90d7ff3cf9f2aec2e2840df5cc66dd18cc7dfc2a</code>. That source comparison is separate from executing a build of that revision.</p>
+    <p>Download the <a href="https://github.com/user-attachments/files/32044320/studentized-range-attachments.zip">submitted ZIP</a> for the reference, reproducer, proposed tests, outputs, environments, build configurations, and hashes. Keep the Python files together and run:</p>
+    <pre><code>python reproduce.py
+python -m pytest -q test_studentized_range_tail.py</code></pre>
+    <p>The proposed regression tests record two passes and two failures on each tested version. The <code>q=100</code> checks pass; the <code>q=10000</code> SF and CDF checks fail. These are tests that expose the reported defect, not evidence of a completed fix.</p>
+    <ul>
+      <li>Code: <a href={`${evidence}reference.py`}>reference.py</a>, <a href={`${evidence}reproduce.py`}>reproduce.py</a>, <a href={`${evidence}test_studentized_range_tail.py`}>proposed regression tests</a>.</li>
+      <li>Stable release: <a href={`${evidence}release-observed-output.txt`}>observed output</a>, <a href={`${evidence}release-regression-output.txt`}>test output</a>, <a href={`${evidence}release-environment.json`}>environment</a>, <a href={`${evidence}release-configuration.txt`}>build configuration</a>.</li>
+      <li>Development build: <a href={`${evidence}nightly-observed-output.txt`}>observed output</a>, <a href={`${evidence}nightly-regression-output.txt`}>test output</a>, <a href={`${evidence}nightly-environment.json`}>environment</a>, <a href={`${evidence}nightly-configuration.txt`}>build configuration</a>.</li>
+      <li><a href={`${evidence}SHA256SUMS`}>SHA-256 hashes</a> for the eleven submitted files.</li>
+    </ul>
+  </section>
+
+  <section id="what-the-case-demonstrates">
+    <h2>What the case demonstrates</h2>
+    <p>A result can lie inside the valid probability interval and still lose a representable tail. An exact special case makes that loss visible and provides a small check that a future implementation can run. This is one way Licklider develops evidence for scientific verification: connect a mathematical reference, executable reproduction, and precisely bounded claim.</p>
+    <p>Preparation and reference checking used AI assistance, including a separate AI review; the numerical outputs came from Python execution in the recorded environments. The reporter performed the final review and disclosed AI assistance in the upstream submission. This work does not establish a general repair, estimate prevalence in practical datasets, or add Studentized-range verification to nomue’s <a href="/docs/limits/">supported scope</a>.</p>
+  </section>
+</PublicationLayout>
+
+<style>
+  .table-scroll { overflow-x: auto; margin: 1.75rem 0; }
+  table { min-width: 35rem; }
+  caption { text-align: left; margin-bottom: 0.75rem; }
+</style>
