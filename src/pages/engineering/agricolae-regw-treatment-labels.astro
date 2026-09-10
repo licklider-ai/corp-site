@@ -1,0 +1,150 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/agricolae-regw-treatment-labels/')!;
+const example = "library(agricolae)\ny <- rep(c(0, 13/8, 4, 8), each=6) + rep(c(-1, 1), 12)\nrun <- function(labels) {\n  d <- data.frame(y=y, trt=factor(rep(labels, each=6)))\n  REGW.test(aov(y ~ trt, data=d), \"trt\", group=FALSE)$comparison\n}\nrun(c(\"A\", \"B\", \"C\", \"D\"))[\"A - B\", ]\nrun(c(\"A\", \"D\", \"C\", \"B\"))[\"A - D\", ]";
+---
+
+<PublicationLayout
+  category={item.category}
+  type={item.type}
+  title={item.title}
+  description={item.summary}
+  published={item.date}
+  status={item.status}
+  toc={[]}
+>
+  <section id="finding">
+    <h2>The names change; the observations do not</h2>
+    <p>
+      Treatment names identify groups in an experiment. Renaming them should leave
+      the comparison of the same observations unchanged. In agricolae, an R package for analysing experiments,
+      <code>REGW.test()</code> compares treatment groups. In our example, swapping
+      two group names changes a
+      reported p-value from <code>0.0363</code> to <code>0.0791</code>. The first
+      result is below the 5% significance threshold; the second is above it.
+    </p>
+    <p>
+      The displayed interval and the letters used to summarize group differences
+      also change. Every observation remains in the same numeric group. The effect
+      comes from renaming the groups, without adding, removing or changing data.
+    </p>
+    <div class="notice">
+      <p>
+        Tasuku Kobayashi sent the report and reproduction files to the agricolae
+        maintainer by email on September 10, 2026. <strong>{item.status}.</strong>
+        The submission date is recorded by the sender. There is no public upstream
+        discussion or accepted fix to link to for this report; the technical
+        materials below are published by Licklider for readers to inspect and run.
+      </p>
+    </div>
+  </section>
+
+  <section id="example">
+    <h2>A small example crosses the 5% threshold</h2>
+    <p>
+      The example has four groups of six observations, with means of 0, 1.625, 4
+      and 8. Within each group, observations alternate one unit below and above
+      its mean. We first name the groups A, B, C and D, then exchange the names
+      B and D. The first two numeric groups are therefore compared as A–B before
+      renaming and A–D afterward.
+    </p>
+    <div class="table-scroll">
+      <table>
+        <caption>The same numeric pair before and after renaming</caption>
+        <thead><tr><th>Group labels</th><th>Compared pair</th><th>p-value</th><th>Displayed lower bound</th><th>Displayed upper bound</th></tr></thead>
+        <tbody>
+          <tr><td>A, B, C, D</td><td>A–B</td><td>0.0363</td><td>−3.15369694116</td><td>−0.0963030588423</td></tr>
+          <tr><td>A, D, C, B</td><td>A–D</td><td>0.0791</td><td>−3.39520265094</td><td>0.145202650939</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      The difference between the compared means is −1.625 in both cases. Both
+      fitted models have 20 residual degrees of freedom and residual mean
+      square 1.2. The first displayed interval excludes zero; the second includes it.
+      With <code>group=TRUE</code>, the same two groups change from distinct letters
+      to a shared letter.
+    </p>
+  </section>
+
+  <section id="reproduction">
+    <h2>Run the reported comparison</h2>
+    <p>
+      The recorded environment is CRAN agricolae <code>1.3-7</code> on R
+      <code>4.6.1</code>, Linux x86_64. R prints the package version as
+      <code>1.3.7</code>. The example uses the documented model interface, so the
+      function extracts the model’s error parameters itself.
+    </p>
+    <pre><code>{example}</code></pre>
+    <p>
+      The full script checks that the compared observations are identical after
+      renaming, prints both pairwise comparisons and group displays, and records
+      the R/package versions and model error parameters. It makes four REGW calls
+      using an unmodified installed package, with no random inputs or external data.
+    </p>
+    <ul>
+      <li><a href="/reports/agricolae-regw-labels/reproduce.R" download>reproduce.R</a> — standalone reproduction script.</li>
+      <li><a href="/reports/agricolae-regw-labels/observed-output.txt" download>observed-output.txt</a> — captured execution output.</li>
+      <li><a href="/reports/agricolae-regw-labels/README.md" download>README.md</a> — execution instructions, environment and preparation disclosure.</li>
+      <li><a href="/reports/agricolae-regw-labels/report.md" download>report.md</a> — report title and body.</li>
+      <li><a href="/reports/agricolae-regw-labels/SHA256SUMS" download>SHA256SUMS</a> — hashes for the four files above.</li>
+    </ul>
+    <p>With agricolae installed, run <code>Rscript --vanilla reproduce.R</code> in a clean session.</p>
+  </section>
+
+  <section id="source">
+    <h2>The apparent cause is an ordering by labels</h2>
+    <p>
+      In the <a href="https://github.com/cran/agricolae/blob/06e4e366bff13eb0c651cb9b086384c5487b356a/R/REGW.test.R">inspected source</a>,
+      <code>Omeans &lt;- order(means[, 1], decreasing = TRUE)</code> orders the first
+      column, which contains treatment labels. The response means are in the
+      second column. The resulting ranks affect the range size used for p-values
+      and displayed intervals.
+    </p>
+    <p>
+      For the reported pair, the span in label order changes from two to four
+      while its span in mean order stays two. The report asks whether this ordering
+      should use the response means. That identifies a source location to inspect;
+      it does not establish a complete correction to the REGW procedure.
+    </p>
+  </section>
+
+  <section id="scope">
+    <h2>What this finding establishes</h2>
+    <p>
+      The check is a simple invariance requirement: a one-to-one renaming should
+      preserve inference for the same observations and group membership. Neither
+      observed p-value is treated as a certified reference answer. This example
+      does not estimate how often the issue occurs, prove the procedure’s overall
+      false-positive control, or validate a production patch.
+    </p>
+    <p>
+      For Licklider, the work demonstrates how a small reproducible example and
+      source inspection can expose a consequential change in statistical output.
+      It does not add REGW verification to nomue. See the
+      <a href="/docs/limits/">current verification scope</a>.
+    </p>
+    <p>
+      The report and reproducer were prepared with AI assistance. The published
+      observations come from native R execution. Upstream confirmation and any
+      eventual correction will be recorded separately from this reproduction.
+    </p>
+  </section>
+
+  <section id="references">
+    <h2>Package documentation and reporting route</h2>
+    <ul>
+      <li><a href="https://cran.r-project.org/package=agricolae">agricolae on CRAN</a> — package version and maintainer information.</li>
+      <li><a href="https://search.r-project.org/CRAN/refmans/agricolae/html/REGW.test.html">REGW.test documentation</a> — the supported model-input interface.</li>
+      <li><a href="https://www.r-project.org/bugs.html">R’s bug-reporting guidance</a> — directs contributed-package reports to their maintainer when no dedicated bug-reporting page is specified.</li>
+    </ul>
+  </section>
+</PublicationLayout>
+
+<style>
+  .table-scroll { overflow-x: auto; margin: 1.75rem 0; }
+  table { min-width: 38rem; }
+  caption { text-align: left; margin-bottom: 0.75rem; }
+</style>

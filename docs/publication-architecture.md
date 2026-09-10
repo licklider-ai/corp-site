@@ -4,8 +4,8 @@
 **Authority:** Canonical for placement, labels, and required metadata on `licklider.ai`  
 **Claim authority:** Subordinate to `licklider-ai/nomue-app/PUBLIC_COMMUNICATIONS.md`  
 **Outreach authority:** Media outreach is governed separately by `licklider-ai/nomue-pr`  
-**Status:** Active — v1.7<br>
-**Last updated:** 2026-09-09
+**Status:** Active — v1.8<br>
+**Last updated:** 2026-09-10
 
 ---
 
@@ -122,6 +122,32 @@ A Research item must expose the evidence and its maturity. It must not imply tha
 | `technical_method` | Reusable engineering or verification method |
 
 An Engineering item may report a bug or measurement without becoming a research paper. Its status must track upstream confirmation and resolution separately from Licklider's reproduction.
+
+### 4.2.1 Upstream report counting and email submissions
+
+The company metric **upstream reports** counts distinct problems submitted by
+Licklider or its accountable reporter to the responsible upstream project through
+an issue tracker or the designated maintainer email. A retained submission record
+is required; drafts and unsent candidates are excluded. A sender-confirmed email
+counts as a submission, without implying recipient acknowledgement or acceptance.
+
+Count a problem once across email, issue, article, follow-up, pull request and fix.
+Track reporting channel, our reproduction, upstream confirmation, accepted fix and
+released fix separately. **Fixes merged upstream** requires corresponding upstream
+merge evidence and does not imply that Licklider authored or caused every fix.
+
+The main report total is not restricted to publicly archived correspondence. Avoid
+calling the aggregate a “public record” or saying every report has external tracker
+evidence when email submissions are included. Each entry must state its actual
+status and link to available technical or upstream evidence with an accurate label.
+The report-count date does not imply every upstream disposition was rechecked then.
+
+An Engineering / upstream_report article may publish a reproducible finding before
+upstream confirmation. Provide public code, observed results, environment, scope
+and reporting status. A self-published reproducer supports the technical observation;
+it is not proof that a maintainer received, confirmed or accepted the report. Do not
+publish private correspondence or contact details merely to substantiate a count.
+The usual evidence, confidentiality and publication-authorization rules still apply.
 
 ### 4.3 News
 

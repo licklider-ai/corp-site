@@ -215,7 +215,25 @@ export const CORE_NON_CLAIMS = [
   'publication, regulatory, or clinical acceptance',
 ] as const;
 
+// Count distinct problems submitted to the responsible upstream project, including
+// email submissions. Follow-up issues, articles and fixes do not add another report.
+export const UPSTREAM_REPORTS_AS_OF = 'September 10, 2026';
+
 export const UPSTREAM_CONTRIBUTIONS = [
+  {
+    project: 'R / agricolae',
+    title: 'REGW: renaming groups changes a 5% decision',
+    summary: 'Renaming treatment groups changes a p-value from 0.0363 to 0.0791 while the observations and group membership stay the same.',
+    href: '/engineering/agricolae-regw-treatment-labels/',
+    status: PUBLICATIONS.find((item) => item.href === '/engineering/agricolae-regw-treatment-labels/')!.status,
+    outcome: 'report_open',
+    comparisonLabel: 'Same observations: original labels → renamed labels',
+    observed: '0.0363',
+    reference: '0.0791',
+    evidenceHref: 'https://www.licklider.ai/engineering/agricolae-regw-treatment-labels/#reproduction',
+    evidenceLabel: 'Reproducer and observed output',
+    credit: 'Reported by Tasuku Kobayashi by email on September 10, 2026; upstream confirmation pending',
+  },
   {
     project: 'SciPy',
     title: 'Mann–Whitney U: batching can change a 5% decision',

@@ -13,6 +13,16 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'Engineering',
+    type: 'Upstream report',
+    date: 'September 10, 2026',
+    sortKey: '2026-09-10',
+    title: 'Renaming treatment groups changes agricolae’s REGW result',
+    summary: 'With observations and group membership unchanged, renaming groups changes a p-value from 0.0363 to 0.0791 and reverses a 5% decision.',
+    href: '/engineering/agricolae-regw-treatment-labels/',
+    status: 'Reported by email — upstream confirmation pending',
+  },
+  {
     category: 'News',
     type: 'Public consultation',
     date: 'September 9, 2026',

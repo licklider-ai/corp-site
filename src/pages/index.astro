@@ -23,6 +23,7 @@ import {
   R4_DISCUSSION_BOUNDARY,
   ROADMAP_POSITION,
   UPSTREAM_CONTRIBUTIONS,
+  UPSTREAM_REPORTS_AS_OF,
   VERIFICATION_CALL_DEFINITION,
 } from '../data/site-facts';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -220,23 +221,23 @@ const homeStructuredData = {
         <p class="eyebrow">Upstream Contributions</p>
         <div class="upstream-head">
           <div>
-            <h2 class="upstream-title">Public proof that we can build verification infrastructure.</h2>
+            <h2 class="upstream-title">Engineering evidence behind verification infrastructure.</h2>
             <p class="lead">
               The same work required to build reliable verification—independent
               references, hostile edge cases, reproducible failures, and exact claim
               boundaries—has already exposed numerical errors and method-selection surprises in software used across science.
             </p>
             <p>
-              The current public record—{UPSTREAM_CONTRIBUTIONS.length} reports and{' '}
+              Our upstream work—{UPSTREAM_CONTRIBUTIONS.length} reports and{' '}
               {upstreamFixCount} matching fixes merged upstream—shows the engineering
               depth behind the platform. It is evidence of what Licklider can build,
               not the boundary of the business.
             </p>
           </div>
-          <dl class="contribution-counts" aria-label="Public upstream contribution totals as of September 7, 2026">
+          <dl class="contribution-counts" aria-label={`Upstream contribution totals as of ${UPSTREAM_REPORTS_AS_OF}`}>
             <div>
               <dt>{UPSTREAM_CONTRIBUTIONS.length}</dt>
-              <dd>public upstream reports</dd>
+              <dd>upstream reports</dd>
             </div>
             <div>
               <dt>{upstreamFixCount}</dt>
@@ -244,7 +245,7 @@ const homeStructuredData = {
             </div>
           </dl>
         </div>
-        <p class="count-date">Cumulative public record as of September 7, 2026.</p>
+        <p class="count-date">Distinct reports submitted through issue trackers or maintainer email, as of {UPSTREAM_REPORTS_AS_OF}.</p>
         <div class="upstream-grid">
           {
             UPSTREAM_CONTRIBUTIONS.map((item) => (
