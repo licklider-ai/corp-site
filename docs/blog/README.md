@@ -4,7 +4,7 @@
 **Authority:** Downstream of [site publication policy](../publication-architecture.md)
 and its upstream claim authorities; local to corp-site Blog<br>
 **Owner:** Site editorial steward<br>
-**Status:** Active editorial policy — v1.1; public Blog integration pending<br>
+**Status:** Active editorial policy — v1.2; public Blog integration pending<br>
 **Adopted:** 2026-09-11
 
 ## 1. Scope and authority
@@ -262,6 +262,36 @@ being accessible to the writer does not authorize exposing it.
 Use existing site metadata, visual design, shared layout, and citation conventions.
 Dates remain the visible article-header metadata; do not introduce a Blog-only
 author/status panel, sidebar, color system, or duplicate capability reference.
+
+### 7.1 Required thumbnail and article placement
+
+Every Blog article must have a relevant thumbnail image. This applies to new
+articles and future revisions; it does not impose images on other publication
+classes. A complete draft includes the actual image asset, meaningful alt text,
+intrinsic width and height, and its source/reuse or original-creation record.
+A brief or empty placeholder alone is not a completed thumbnail. Review diagrams
+for factual meaning as well as legibility; identify synthetic examples and do not
+present generated or schematic imagery as experimental evidence.
+
+Use the existing `PublicationLayout.astro` named `thumbnail` slot: it places the
+image between the title/summary header and the article body. Retain its responsive
+wide canvas, natural aspect ratio, and optional caption. Keep the essential image
+content visible without cropping; repeat substantive information in accessible
+body text. Do not add a second hero area or a new layout merely for Blog images.
+Use lazy loading only for genuinely below-the-fold images.
+
+Latest remains a text list: neither its paginated rows nor the homepage Latest
+rows display Blog thumbnails. The image belongs to the article even when discovery
+surfaces do not display it. At Blog index integration, reuse the article's asset
+if thumbnails are shown there. This requirement does not request new social cards
+or change existing Open Graph/X image metadata.
+
+Keep draft assets beside the draft, outside public routes. On authorized article
+integration, move the asset to its final served path, populate the named slot,
+and check the image and caption in the generated article. Blog integration must
+make a missing thumbnail a validation failure for Blog entries, while preserving
+optional images for other classes. Until the Blog runtime exists, WRITE.md B13
+is the enforced editorial check; do not claim a runtime gate has been installed.
 
 ## 8. Review and maintenance
 
