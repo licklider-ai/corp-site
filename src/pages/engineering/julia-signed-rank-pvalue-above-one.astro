@@ -16,10 +16,10 @@ const toc = [
   category="Engineering"
   type="Upstream report"
   title="A Julia signed-rank p-value above 1, now fixed in a release"
-  description="HypothesisTests.jl returned 1.25 for an exact two-sided signed-rank p-value. The matching correction shipped in v0.12.0 and remains in v0.12.1."
+  description="HypothesisTests.jl returned 1.25 for an exact two-sided signed-rank p-value. The matching correction shipped in v0.12.0 and remains in v0.12.2."
   published="September 3, 2026"
-  updated="September 9, 2026"
-  status="Matching fix released in v0.12.0; present in v0.12.1; issue open"
+  updated="September 11, 2026"
+  status="Matching fix released in v0.12.0; present through v0.12.2; issue open"
   toc={toc}
 >
   <section id="current-status">
@@ -32,9 +32,9 @@ const toc = [
         <code>andreasnoack</code> later that day.
       </p>
       <p>
-        As of September 9, 2026, the matching correction has shipped in
+        As of September 11, 2026, the matching correction has shipped in
         <code>v0.12.0</code> (September 3) and remains in the latest registered version,
-        <code>v0.12.1</code> (September 4). Issue #373 remains open. The public tracker
+        <code>v0.12.2</code> (September 10). Issue #373 remains open. The public tracker
         does not state that #373 caused #377, so this page does not make that attribution.
       </p>
     </div>
@@ -79,8 +79,12 @@ const toc = [
       relying only on source inspection.
     </p>
     <p>
-      On September 9, we checked the release records, General registry, and v0.12.1
-      source, which retains <code>min(2 * p, 1.0)</code>. This confirms release inclusion
+      On September 11, we checked the release records, General registry, and v0.12.2
+      source and regression test. The source retains <code>min(2 * p, 1.0)</code>, and
+      the test still requires the three-observation example to return exactly 1.
+      The tagged commit <code>3949d8ca752d815904e24eba561e982c003b0463</code> has
+      tree <code>0b7026cbe6b5380b8f8a5c2a7306363e2ebd2146</code>, matching the
+      registry entry. This confirms release inclusion
       by source inspection; the execution results below remain the original pinned runs.
     </p>
     <div class="table-scroll">
@@ -117,7 +121,7 @@ const toc = [
       reach a statistic at the null-distribution center.
     </p>
     <p>
-      Version <code>0.11.8</code> predates the fix; v0.12.0 and v0.12.1 contain it.
+      Version <code>0.11.8</code> predates the fix; v0.12.0, v0.12.1 and v0.12.2 contain it.
       Release inclusion does not establish correctness for every rank-test path.
       Our report and the separately authored patch remain distinct because the
       upstream record does not establish a causal link.
@@ -149,9 +153,10 @@ const toc = [
         outcomes attributed to our report; callers should review the breaking changes.
       </li>
       <li>
-        <a href="https://github.com/JuliaStats/HypothesisTests.jl/releases/tag/v0.12.1">v0.12.1 release</a>
-        and <a href="https://github.com/JuliaStats/HypothesisTests.jl/blob/v0.12.1/src/wilcoxon.jl">released source</a>
-        — subsequent release and retained correction
+        <a href="https://github.com/JuliaStats/HypothesisTests.jl/releases/tag/v0.12.2">v0.12.2 release</a>,
+        <a href="https://github.com/JuliaStats/HypothesisTests.jl/blob/3949d8ca752d815904e24eba561e982c003b0463/src/wilcoxon.jl">released source</a>
+        and <a href="https://github.com/JuliaStats/HypothesisTests.jl/blob/3949d8ca752d815904e24eba561e982c003b0463/test/wilcoxon.jl">regression test</a>
+        — latest checked release and retained correction; the source and test links are commit-pinned
       </li>
       <li>
         <a href="https://github.com/JuliaStats/HypothesisTests.jl/issues/373" target="_blank" rel="noopener noreferrer">HypothesisTests.jl issue #373</a>
@@ -175,7 +180,7 @@ const toc = [
       </li>
       <li>
         <a href="https://github.com/JuliaRegistries/General/blob/master/H/HypothesisTests/Versions.toml" target="_blank" rel="noopener noreferrer">Julia General version registry</a>
-        — registered versions, including 0.12.0 and 0.12.1 at the September 9 check
+        — registered versions through 0.12.2 at the September 11 check
       </li>
     </ul>
   </section>

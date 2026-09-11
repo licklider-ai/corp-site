@@ -301,9 +301,9 @@ export const UPSTREAM_CONTRIBUTIONS = [
     project: 'Julia / HypothesisTests.jl',
     title: 'Exact signed-rank p-value above 1',
     summary:
-      'We reported a two-sided signed-rank p-value of 1.25. A separately authored correction shipped in v0.12.0 and remains in v0.12.1.',
+      'We reported a two-sided signed-rank p-value of 1.25. A separately authored correction shipped in v0.12.0 and remains in v0.12.2.',
     href: '/engineering/julia-signed-rank-pvalue-above-one/',
-    status: 'Matching fix released in v0.12.0; present in v0.12.1; issue open',
+    status: 'Matching fix released in v0.12.0; present through v0.12.2; issue open',
     outcome: 'fix_merged',
     panelStatus: 'Matching fix released',
     comparisonLabel: 'Registered 0.11.8 → merge commit',

@@ -210,10 +210,10 @@ export const PUBLICATIONS: PublicationItem[] = [
     sortKey: '2026-09-03',
     title: 'A Julia signed-rank p-value above 1, now fixed in a release',
     summary:
-      'HypothesisTests.jl returned 1.25 for an exact two-sided signed-rank p-value. The matching correction shipped in v0.12.0 and remains in v0.12.1.',
+      'HypothesisTests.jl returned 1.25 for an exact two-sided signed-rank p-value. The matching correction shipped in v0.12.0 and remains in v0.12.2.',
     href: '/engineering/julia-signed-rank-pvalue-above-one/',
     status:
-      'Matching fix released in v0.12.0; present in v0.12.1; issue open',
+      'Matching fix released in v0.12.0; present through v0.12.2; issue open',
   },
   {
     category: 'News',
