@@ -41,6 +41,8 @@ const content = `# Licklider
 
 > ${COMPANY_POSITION}
 
+Website publication and update dates use UTC. Known times are recorded in UTC; historical date-only records do not imply midnight.
+
 ## Available now
 
 - ${PUBLIC_CAPABILITY}

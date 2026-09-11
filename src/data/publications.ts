@@ -1,15 +1,33 @@
 export type PublicationCategory = 'Research' | 'Engineering' | 'News' | 'Blog';
 
+type RecordedPublicationTime = {
+  at: string;
+  evidence: string;
+};
+
 export type PublicationItem = {
   category: PublicationCategory;
   type: string;
   date: string;
   updated?: string;
+  publishedTime?: RecordedPublicationTime;
+  updatedTime?: RecordedPublicationTime;
   sortKey: string;
   title: string;
   summary: string;
   href: string;
   status: string;
+};
+
+// Vercel's successful production-deployment notification, not Git merge time.
+// These are recorded completion times, not a claim about the first HTTP response.
+const PRODUCTION_26: RecordedPublicationTime = {
+  at: '2026-09-11T07:57:49Z',
+  evidence: 'https://vercel.com/licklidermvp/website/8V4Pzki1toK4i43sA3RmXpzHmgJy',
+};
+const PRODUCTION_29: RecordedPublicationTime = {
+  at: '2026-09-11T21:21:55Z',
+  evidence: 'https://vercel.com/licklidermvp/website/4wPeCuBQ2xLdrdEhYxpRp21aqVnU',
 };
 
 export const PUBLICATIONS: PublicationItem[] = [
@@ -19,6 +37,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     date: 'September 11, 2026',
     sortKey: '2026-09-11',
     title: 'When a verification call must discard its result',
+    publishedTime: PRODUCTION_29,
     summary: 'An experimental Holm verifier connects Record checks to shared execution budgets, operating-system limits and cleanup evidence before deciding whether a result can be returned.',
     href: '/engineering/when-a-verification-call-must-discard-its-result/',
     status: 'Unissued Holm candidate.3; bounded execution evidence; no additional supported capability',
@@ -29,6 +48,8 @@ export const PUBLICATIONS: PublicationItem[] = [
     date: 'September 11, 2026',
     sortKey: '2026-09-11',
     title: 'Binding Holm corrections to the intended comparisons',
+    publishedTime: PRODUCTION_26,
+    updatedTime: PRODUCTION_29,
     updated: 'September 11, 2026',
     summary: 'An experiment checks exact Holm adjustments together with the expected declaration and supplied p-values, including changes that leave the displayed answer unchanged.',
     href: '/engineering/binding-holm-corrections-to-comparisons/',
@@ -40,6 +61,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     date: 'September 11, 2026',
     sortKey: '2026-09-11',
     title: 'Checking factorial probability evidence against the raw observations',
+    publishedTime: PRODUCTION_26,
     summary: 'A bounded experiment connects raw observations to exact F ratios and checks that submitted probability intervals contain the recomputed enclosures for all three effects.',
     href: '/engineering/checking-factorial-probability-evidence/',
     status: 'Bounded experiment integrated into the public research archive; no additional supported capability',
@@ -61,6 +83,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     date: 'September 10, 2026',
     sortKey: '2026-09-10',
     title: 'Checking factorial statistics without trusting rounded intermediates',
+    updatedTime: PRODUCTION_26,
     summary: 'Exact arithmetic and probability bounds offer a path beyond scaling repairs, while a review shows why matching rounded answers does not certify an interval.',
     href: '/engineering/checking-factorial-statistics-and-tail-bounds/',
     status: 'Reviewed research components now connected experimentally and archived; no additional supported capability',
@@ -448,8 +471,39 @@ export const publicationsFor = (category: PublicationCategory) =>
     b.sortKey.localeCompare(a.sortKey),
   );
 
-export const publicationTimestamp = (date: string) =>
-  new Date(`${date} 00:00:00 UTC`).toISOString();
+// Date-only legacy records retain day precision; this conversion does not
+// represent a publication instant and must never be sent as a feed timestamp.
+export const publicationDate = (date: string) =>
+  new Date(`${date} 00:00:00 UTC`).toISOString().slice(0, 10);
+
+export const publicationPublished = (item: PublicationItem) =>
+  item.publishedTime?.at ?? publicationDate(item.date);
+
+export const publicationModifiedInstant = (item: PublicationItem) =>
+  item.updated ? item.updatedTime?.at : item.publishedTime?.at;
 
 export const publicationModified = (item: PublicationItem) =>
-  publicationTimestamp(item.updated ?? item.date);
+  publicationModifiedInstant(item) ?? publicationDate(item.updated ?? item.date);
+
+// Reject timezone drift and unsupported timestamp backfills during the build.
+for (const item of PUBLICATIONS) {
+  if (publicationDate(item.date) !== item.sortKey) {
+    throw new Error(`Publication date/sortKey mismatch: ${item.href}`);
+  }
+  for (const [record, date] of [
+    [item.publishedTime, item.date],
+    [item.updatedTime, item.updated],
+  ] as const) {
+    if (!record) continue;
+    if (!date || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(record.at)
+      || !Number.isFinite(Date.parse(record.at))
+      || new Date(record.at).toISOString().slice(0, 19) + 'Z' !== record.at
+      || record.at.slice(0, 10) !== publicationDate(date) || !record.evidence) {
+      throw new Error(`Invalid UTC publication time or missing evidence: ${item.href}`);
+    }
+  }
+  if (item.updated && publicationDate(item.updated) < item.sortKey
+    || item.publishedTime && item.updatedTime && item.updatedTime.at < item.publishedTime.at) {
+    throw new Error(`Update precedes publication: ${item.href}`);
+  }
+}

@@ -34,6 +34,8 @@ const content = `# Licklider agent-readable documentation
 
 > Run the public verifier directly or through local MCP, decide when a bounded verification call applies, and interpret its returned evidence.
 
+Website publication and update dates use UTC. Known times are recorded in UTC; historical date-only records do not imply midnight.
+
 ## Available now
 
 - ${PUBLIC_CAPABILITY}

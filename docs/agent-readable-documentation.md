@@ -4,7 +4,7 @@
 **Authority:** Canonical for documentation placement, human/agent presentation, and machine-readable publication on `licklider.ai`
 **Technical authority:** Subordinate to the exact Protocol, verifier, product-contract, and release authorities named below
 **Status:** Active — v1.0
-**Last updated:** 2026-09-01
+**Last updated:** 2026-09-11
 
 ---
 
@@ -108,6 +108,13 @@ the distinctions are published so agents and researchers can understand the same
 boundary.
 
 ## 7. Machine-readable publication
+
+All site dates and operations use UTC under
+[`publication-architecture.md` section 7.5](publication-architecture.md#75-utc-dates-times-and-precision).
+HTML, Markdown, LLM indexes, and machine metadata must agree on the UTC date
+and retain the precision of the source record. Record evidenced update times
+in canonical metadata for future documentation changes; do not invent times
+for existing date-only documents. Publication and event dates remain separate.
 
 The site provides:
 
