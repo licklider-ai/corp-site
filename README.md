@@ -98,6 +98,12 @@ pnpm install
 
 配置、成熟度ラベル、公開文の書き方、公開前チェック、必須メタデータの正本は [`docs/publication-architecture.md`](./docs/publication-architecture.md) を参照してください。
 
+Blogの企画・執筆・改稿・レビューには、その下流にある
+[`docs/blog/README.md`](./docs/blog/README.md)（Blog専用の編集正本）と
+[`docs/blog/WRITE.md`](./docs/blog/WRITE.md)（毎回の執筆手順・確認記録）を使用します。
+Blog専用の方針を既存3分類や製品ページへ広げません。編集運用は開始済みですが、
+公開Blogの分類・ページ・一覧への組み込みは別のサイト実装作業です。
+
 公開更新はHTML一覧に加えて、次の購読用Feedから同じ `PUBLICATIONS` データを配信します。
 
 - `/rss.xml` — RSS 2.0
