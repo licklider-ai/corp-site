@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { PUBLICATIONS } from '../data/publications';
+import { PUBLICATIONS, publicationModified } from '../data/publications';
 
 const SITE_URL = 'https://www.licklider.ai';
 
@@ -23,13 +23,13 @@ const items = [...PUBLICATIONS]
       <guid isPermaLink="true">${escapeXml(url)}</guid>
       <pubDate>${published}</pubDate>
       <category>${escapeXml(item.category)}</category>
-      <description>${escapeXml(item.summary)}</description>
+      <description>${escapeXml(`${item.summary}\n\nStatus: ${item.status}${item.updated ? `\n\nUpdated ${item.updated}.` : ''}`)}</description>
     </item>`;
   })
   .join('\n');
 
 const lastBuildDate = new Date(
-  `${[...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKey))[0]?.sortKey ?? '2026-09-01'}T00:00:00Z`,
+  PUBLICATIONS.map(publicationModified).sort().at(-1) ?? '2026-09-01T00:00:00Z',
 ).toUTCString();
 
 const content = `<?xml version="1.0" encoding="UTF-8"?>

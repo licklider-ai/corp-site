@@ -1,5 +1,6 @@
 ---
 import type { PublicationCategory } from '../data/publications';
+import { PUBLICATIONS } from '../data/publications';
 import type { TocItem } from '../consts';
 import PageLayout from './PageLayout.astro';
 
@@ -14,7 +15,8 @@ interface Props {
   toc: TocItem[];
 }
 
-const { category, title, description, published, updated, toc } = Astro.props;
+const { category, title, description, published, toc } = Astro.props;
+const updated = PUBLICATIONS.find((item) => item.href === Astro.url.pathname)?.updated ?? Astro.props.updated;
 const publishedTime = new Date(`${published} 00:00:00 UTC`).toISOString();
 const modifiedTime = updated
   ? new Date(`${updated} 00:00:00 UTC`).toISOString()

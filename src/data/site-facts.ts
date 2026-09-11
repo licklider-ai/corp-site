@@ -50,6 +50,12 @@ export const HOSTED_WELCH_CAPABILITY =
 export const R3_SOURCE_PROGRESS =
   'Release 3 public discussion is open on independent groups and multiple comparisons. The proposal makes design, comparison families, result meaning, and error-control questions explicit across 49 catalogued procedures. Its evidence scope is limited to supplied originals; method adoption and numerical support remain separate decisions.';
 
+export const R3_EXPERIMENT_PROGRESS =
+  'The public research archive now includes a bounded experiment connecting a caller-selected declaration and supplied p-values to exact Holm adjustments. It checks context and every adjusted result; raw-p recomputation and scientific validity remain outside the claim. This adds no supported public check.';
+
+export const R4_EXPERIMENT_PROGRESS =
+  'The public research archive now includes a bounded two-by-two experiment connecting raw observations to exact F ratios and probability enclosures. Its consumer checks expected input identity and containment for all three effects. Acceptance is conditional on the candidate enclosure; public support and research-gate decisions remain open.';
+
 export const PRODUCT_RELEASE_BOUNDARY =
   'Use the npm-published Release 1 verifier, the local stdio MCP server, the Protocol, and their machine-readable documentation today. The agent-facing Welch capability is now available in limited Release 1 to approved recipients through authenticated MCP and HTTP interfaces; public self-registration is not available. The hosted capability does not yet emit public Records for replay through the local verifier.';
 

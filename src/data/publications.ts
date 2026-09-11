@@ -4,6 +4,7 @@ export type PublicationItem = {
   category: PublicationCategory;
   type: string;
   date: string;
+  updated?: string;
   sortKey: string;
   title: string;
   summary: string;
@@ -43,6 +44,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     "status": "Illustrative planning example; not a tested agent workflow"
   },
   {
+    updated: 'September 11, 2026',
     category: 'Engineering',
     type: 'Technical method',
     date: 'September 10, 2026',
@@ -83,6 +85,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Reported by email — upstream confirmation pending',
   },
   {
+    updated: 'September 10, 2026',
     category: 'News',
     type: 'Public consultation',
     date: 'September 9, 2026',
@@ -103,6 +106,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     "status": "Reviewed and steward-accepted bounded research; no additional product support"
   },
   {
+    updated: 'September 9, 2026',
     "category": "Engineering",
     "type": "Technical method",
     "date": "September 9, 2026",
@@ -113,6 +117,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     "status": "Reviewed and steward-accepted bounded research; no additional product support"
   },
   {
+    updated: 'September 9, 2026',
     "category": "Engineering",
     "type": "Technical method",
     "date": "September 9, 2026",
@@ -123,6 +128,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     "status": "Reviewed and steward-accepted bounded research; no additional product support"
   },
   {
+    updated: 'September 9, 2026',
     "category": "Engineering",
     "type": "Technical method",
     "date": "September 9, 2026",
@@ -133,6 +139,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     "status": "Reviewed and steward-accepted bounded research; no additional product support"
   },
   {
+    updated: 'September 10, 2026',
     category: 'News',
     type: 'Public consultation',
     date: 'September 9, 2026',
@@ -154,6 +161,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Limited Release 1 — approved recipients only; no public registration',
   },
   {
+    updated: 'September 9, 2026',
     category: 'Engineering',
     type: 'Technical method',
     date: 'September 8, 2026',
@@ -164,6 +172,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: "Source-reviewed Release 3 research; bounded SR-F source acceptance recorded",
   },
   {
+    updated: 'September 9, 2026',
     category: 'Engineering',
     type: 'Technical method',
     date: 'September 8, 2026',
@@ -174,6 +183,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: "Steward-accepted, independently reviewed bounded Release 4 numerical research",
   },
   {
+    updated: 'September 9, 2026',
     category: 'Engineering',
     type: 'Technical method',
     date: 'September 7, 2026',
@@ -186,6 +196,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'Independently reviewed SR-C source evidence with bounded acceptance recorded; Release 3 preparation',
   },
   {
+    updated: 'September 7, 2026',
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 7, 2026',
@@ -197,6 +208,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Triaged by a SciPy maintainer into scipy.stats; implementation path confirmed — intended behavior and remedy awaiting decision',
   },
   {
+    updated: 'September 9, 2026',
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 7, 2026',
@@ -222,6 +234,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'Source-bounded research finding — two independent close reviews; not peer reviewed; FND-1 gate open',
   },
   {
+    updated: 'September 9, 2026',
     category: 'Engineering',
     type: 'Technical method',
     date: 'September 4, 2026',
@@ -234,6 +247,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'Reviewed catalogue research; bounded Release 3 public discussion now open',
   },
   {
+    updated: 'September 11, 2026',
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 3, 2026',
@@ -246,6 +260,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'Matching fix released in v0.12.0; present through v0.12.2; issue open',
   },
   {
+    updated: 'September 4, 2026',
     category: 'News',
     type: 'Product',
     date: 'September 2, 2026',
@@ -258,6 +273,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'Public local MCP release candidate — npm rc 0.2.0-rc.0; official MCP Registry',
   },
   {
+    updated: 'September 4, 2026',
     category: 'Research',
     type: 'Research note',
     date: 'September 1, 2026',
@@ -281,6 +297,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Public release candidate — npm latest 0.2.1-rc.0',
   },
   {
+    updated: 'September 2, 2026',
     category: 'Engineering',
     type: 'Implementation note',
     date: 'September 1, 2026',
@@ -304,6 +321,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Reported to R — PR#19144 open and unconfirmed',
   },
   {
+    updated: 'September 1, 2026',
     category: 'Engineering',
     type: 'Implementation note',
     date: 'August 31, 2026',
@@ -316,6 +334,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'Independently reviewed p-value and confidence-interval execution traces; interval proof continues',
   },
   {
+    updated: 'September 1, 2026',
     category: 'Engineering',
     type: 'Implementation note',
     date: 'August 31, 2026',
@@ -328,6 +347,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'Two independently reviewed 200-value tables and input-specific error checks — candidate Release 2 work',
   },
   {
+    updated: 'August 31, 2026',
     category: 'Engineering',
     type: 'Implementation note',
     date: 'August 30, 2026',
@@ -340,6 +360,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'Independently reviewed deterministic evaluator and floating-point boundary evidence — candidate Release 2 work',
   },
   {
+    updated: 'August 31, 2026',
     category: 'Engineering',
     type: 'Technical method',
     date: 'August 28, 2026',
@@ -363,6 +384,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Fix merged in SciPy — awaiting a SciPy release',
   },
   {
+    updated: 'September 1, 2026',
     category: 'News',
     type: 'Product',
     date: 'August 24, 2026',
@@ -385,6 +407,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Preprint v0.2 — not peer reviewed',
   },
   {
+    updated: 'September 9, 2026',
     category: 'Engineering',
     type: 'Bug report',
     date: 'August 23, 2026',
@@ -396,6 +419,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Fix merged in Boost.Math — awaiting a Boost release',
   },
   {
+    updated: 'September 1, 2026',
     category: 'News',
     type: 'Product preview',
     date: 'August 16, 2026',
@@ -412,3 +436,9 @@ export const publicationsFor = (category: PublicationCategory) =>
   PUBLICATIONS.filter((item) => item.category === category).sort((a, b) =>
     b.sortKey.localeCompare(a.sortKey),
   );
+
+export const publicationTimestamp = (date: string) =>
+  new Date(`${date} 00:00:00 UTC`).toISOString();
+
+export const publicationModified = (item: PublicationItem) =>
+  publicationTimestamp(item.updated ?? item.date);

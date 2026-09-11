@@ -16,8 +16,10 @@ import {
   NOMUE_VERIFY_COMMAND,
   PAIRED_T_BOUNDARY,
   R3_DISCUSSION,
+  R3_EXPERIMENT_PROGRESS,
   R3_SOURCE_PROGRESS,
   R4_DISCUSSION,
+  R4_EXPERIMENT_PROGRESS,
   R4_DISCUSSION_BOUNDARY,
   PLANNED_METHOD_FAMILIES,
   HOSTED_WELCH_CAPABILITY,
@@ -55,10 +57,13 @@ const content = `# Licklider agent-readable documentation
 
 ## Research behind expansion
 
+- [Binding Holm corrections](https://www.licklider.ai/engineering/binding-holm-corrections-to-comparisons/): ${R3_EXPERIMENT_PROGRESS}
+- [Checking factorial probability evidence](https://www.licklider.ai/engineering/checking-factorial-probability-evidence/): ${R4_EXPERIMENT_PROGRESS}
+- [Exact factorial arithmetic and tail bounds](https://www.licklider.ai/engineering/checking-factorial-statistics-and-tail-bounds/): updated September 11, 2026 to connect the original numerical findings and overlap-checker limitation to the successor experiments.
 - [Power scaling and factorial F](https://www.licklider.ai/engineering/power-scaling-and-factorial-f-statistics/): accepted bounded SS/F and six-fixture numerical exploration; no numerical support established.
 - [Unequal-variance comparisons](https://www.licklider.ai/engineering/games-howell-approximation-and-guarantees/): source-reviewed GH, T2/T2-prime, T3/C distinctions; simulations are not universal error guarantees.
 - [Control or best](https://www.licklider.ai/engineering/comparing-with-control-or-best/): source-reviewed targets, ordered testing and interval boundaries.
-- [Testing graphs](https://www.licklider.ai/engineering/implementing-multiple-testing-graphs/): source-reviewed closure, ordering, weights and endpoint conventions. Release 3 methods remain unselected and unsupported.
+- [Testing graphs](https://www.licklider.ai/engineering/implementing-multiple-testing-graphs/): source-reviewed closure, ordering, weights and endpoint conventions. Release 3 method adoption and public support remain separate decisions from the experiments.
 
 ## Start here
 
