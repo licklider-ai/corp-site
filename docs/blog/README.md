@@ -4,7 +4,7 @@
 **Authority:** Downstream of [site publication policy](../publication-architecture.md)
 and its upstream claim authorities; local to corp-site Blog<br>
 **Owner:** Site editorial steward<br>
-**Status:** Active editorial policy — v1.0; public Blog integration pending<br>
+**Status:** Active editorial policy — v1.1; public Blog integration pending<br>
 **Adopted:** 2026-09-11
 
 ## 1. Scope and authority
@@ -113,6 +113,77 @@ publishing them as Blog does not bypass scientific or numerical review.
 Avoid generic AI-future essays, acquisition pitches, technical-report rewrites,
 and product promotion without a useful reader decision. No quota requires a
 new article when evidence or a distinct purpose is missing.
+
+### 4.1 Threshold for a new Blog article
+
+Latest is an aggregation, not a backlog to convert one article at a time. Use the
+site publication policy's principle of a distinct durable reader-facing conclusion,
+but apply it to a reader's judgment or action rather than requiring a new event.
+An attractive title, source count, recent date, complex mathematics, a new PR,
+or a severe-looking bug is not sufficient.
+
+Before selecting a topic, complete all five checks below. Each is necessary;
+strength on one does not compensate for failure on another. These are editorial
+criteria, not an empirical score or a new product verdict.
+
+| ID | Necessary condition | Evidence in the selection record |
+| --- | --- | --- |
+| E01 | A specific reader faces a concrete decision or handoff | Name the reader, situation, and what they need to decide or do |
+| E02 | The proposed article adds material value beyond existing content | Identify the nearest article or Docs page and state the new decision support; easier wording, a different headline, or a shorter summary alone is insufficient |
+| E03 | Inspected evidence supports the bounded practical lesson | Name public source sections and their limits; do not base the lesson on an unresolved assertion, unseen source, or unpublished result |
+| E04 | The reader can apply the lesson | Specify the intended decision table, annotated example, comparison, checklist, or concrete question to ask; name at least one situation in which it helps |
+| E05 | The lesson remains useful within truthful scope and maturity | Distinguish general advice, demonstrated current usage, and proposed design; do not depend on unshipped functionality or invented prevalence to make the article useful |
+
+At selection, the E04 output can be a concrete design for the article; it must
+actually be delivered and supported before the article passes final review.
+E03 can reuse an inspected public evidence report within its recorded scope;
+it does not demand a new primary-source investigation or two sources for every
+topic. A reproducible reporter-side finding can support a bounded lesson before
+maintainer confirmation. The later writing and publication checks still apply.
+E05 does not require nomue to implement every topic: a useful manual decision or
+clearly labelled design example is eligible without implying product support.
+
+If one check fails or remains unknown, identify that exact gap. Do not fabricate
+an example, source, metric, or claim to clear it. Work that fills the gap may be
+appropriate when authorized; selection alone is not publication readiness.
+
+### 4.2 Combine, update, retain, or defer
+
+- **Select a new Blog:** all E01–E05 are supported and the article has a distinct job.
+- **Combine sources:** several reports support the same reader decision; select
+  one synthesis, not one Blog per report. Preserve each source's different meaning.
+- **Update or link existing content:** the existing article already delivers the
+  proposed judgment or action. No additional Blog is required.
+- **Defer:** a named evidence, example, or differentiation gap remains; record
+  the condition that would justify reconsideration.
+- **Retain as evidence/news:** the item is valuable as a research finding,
+  engineering record, release, or consultation without a separate Blog treatment.
+
+These outcomes are not mutually exclusive across layers: a selected synthesis
+can reuse several retained source articles. At portfolio level, group candidates
+by reader decision. Publish separate pieces only if each has a distinct situation
+or output that cannot be served clearly by the existing piece. Do not create a
+series solely from development stages, bugs, methods, or publication dates.
+Among eligible candidates, prefer the clearest current reader need and strongest
+evidence with the least duplication and maintenance burden. This is prioritization,
+not a claim of measured demand or a permanent limit on article count.
+
+### 4.3 Reuse is not reclassification
+
+The default is to retain existing canonical URLs, classifications, dates, and
+evidence, then link from a genuinely different Blog article. A practical tone in
+an Engineering article does not by itself make its classification wrong.
+Do not rewrite research maturity as Blog opinion or migrate a release announcement
+to Blog to reduce the Latest count. Any actual reclassification needs a separate
+placement decision under the site policy, preserving URLs or redirects, attribution,
+historical dates, and evidence. Never reset a date to make an old article look new.
+
+Retain a dated selection assessment with the inventory commit, reviewed scope,
+all source-item dispositions, candidate clusters, E01–E05 reasoning, and specific
+revisit conditions. It is a snapshot, subordinate to this policy; refresh it when
+new evidence or reader needs change the selection. The
+[September 11 assessment](assessments/2026-09-11-latest-selection.md) illustrates
+this process; its candidate count and order are not permanent policy.
 
 ## 5. Voice and character
 
