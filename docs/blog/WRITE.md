@@ -2,7 +2,7 @@
 
 **Role:** Executable editorial procedure subordinate to [README.md](README.md).<br>
 **Applies to:** Blog commissions, drafts, revisions, and reviews only.<br>
-**Version:** 1.0 — 2026-09-11.
+**Version:** 1.1 — 2026-09-11.
 
 This is a document-based harness, not a mechanical guarantee of factual accuracy.
 Its completion record makes compliance inspectable. Prompts and templates below
@@ -20,7 +20,9 @@ Default to completing a reviewable draft. Carry forward any existing authorizati
 to publish or implement; do not ask again. If the current task authorizes only a
 draft, do not infer permission for site deployment, outreach, or external messages.
 If the topic is omitted, choose the best evidenced, nonduplicative topic under the
-policy and record the choice. Resolve ordinary editorial choices autonomously.
+policy's E01–E05 threshold and record the choice. Resolve ordinary editorial
+choices autonomously. If no topic clears that threshold, deliver the useful
+selection work and concrete gaps rather than manufacturing an article.
 
 ## 2. Read and locate evidence before drafting
 
@@ -37,11 +39,23 @@ policy and record the choice. Resolve ordinary editorial choices autonomously.
    upstream release evidence for current product statements. Website explanations
    are not substitutes for conflicting or missing upstream authority.
 4. Select the reader, work situation, one outcome, pillar, language, and relationship
-   to existing articles. Fix evidence and the supported claim before the headline.
+   to existing articles. Apply README.md sections 4.1–4.3: record evidence for
+   E01–E05 and choose new Blog, combined synthesis, existing-content update/link,
+   defer, or retain as evidence/news. Fix the supported lesson before the headline.
 5. Record exact source locations and versions for consequential claims. Prior
    conversation and search snippets are leads, not final scientific evidence.
    Reuse accepted evidence within its recorded boundary; do not invent a need to
    repeat all original research when no new scientific claim is introduced.
+
+For a Latest-wide selection task, enumerate the complete current `PUBLICATIONS`
+registry, not just the first paginated page. Record every item's disposition and
+group sources that serve the same reader decision. Inspect relevant article bodies
+and existing Docs, not headlines alone. Identify whether inspection was a selection
+screen, full article reading, source-report review, or new primary-source work.
+Do not claim that a selection screen refreshes every upstream status. Save the
+dated assessment outside public routes; article drafting is a separate deliverable
+unless included in the commission. Do not treat source articles as migration targets
+merely because they can support a Blog.
 
 ## 3. Draft, challenge, and repair
 
@@ -68,7 +82,7 @@ requirement that applies. These labels are editorial only, not product verdicts.
 | ID | Acceptance check |
 | --- | --- |
 | B01 | One primary reader, concrete situation, and useful reader action are clear |
-| B02 | Existing related content is identified; the article adds a distinct outcome or is correctly treated as an update |
+| B02 | E01–E05 selection reasoning and related content are recorded; the delivered article provides the promised additional value, or is correctly treated as an update |
 | B03 | Consequential factual claims are supported by inspected sources; inference and recommendation are distinguishable |
 | B04 | Current feature, version, availability, candidate, and planned states are correct; each asserted end-to-end path is evidenced |
 | B05 | Numerical checks, declared assumptions, study judgment, and responsibility are kept separate |
@@ -113,6 +127,7 @@ a reason instead of silently omitting material items.
 - Language / primary reader / concrete situation:
 - Reader action / pillar:
 - Related existing articles / distinct contribution or update decision:
+- E01–E05 reasoning / selection outcome / source cluster / revisit condition if deferred:
 - Draft path or revision:
 
 | Claim | Fact / inference / recommendation / plan | Inspected source and exact location or revision | Boundary / public-safe citation | Checked date |
