@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { PUBLICATIONS, publicationModified } from '../data/publications';
+import { PUBLICATIONS, publicationModifiedInstant } from '../data/publications';
 
 const SITE_URL = 'https://www.licklider.ai';
 
@@ -27,9 +27,9 @@ const content = JSON.stringify(
           url,
           title: item.title,
           summary: item.summary,
-          content_text: `${item.summary}\n\nStatus: ${item.status}\n\nRead the full article: ${url}`,
-          date_published: `${item.sortKey}T00:00:00Z`,
-          date_modified: publicationModified(item),
+          content_text: `${item.summary}\n\nStatus: ${item.status}\n\nPublished ${item.date} (UTC).${item.updated ? ` Updated ${item.updated} (UTC).` : ''}\n\nRead the full article: ${url}`,
+          date_published: item.publishedTime?.at,
+          date_modified: publicationModifiedInstant(item),
           tags: [item.category, item.type],
         };
       }),

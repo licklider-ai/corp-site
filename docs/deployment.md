@@ -116,6 +116,32 @@ pnpm build
 pnpm preview                   # http://localhost:4321
 ```
 
+## 7. 公開・更新日時の確定（UTC）
+
+日時方針の正本は [`publication-architecture.md` の 7.5 節](./publication-architecture.md#75-utc-dates-times-and-precision)。
+UI、Feed、構造化データ、運用記録をすべてUTCに合わせる。
+
+1. 初回公開と内容更新を区別し、`PUBLICATIONS` にUTCの日付を記録する。
+   内容更新では元の公開日、`sortKey`、URL、Feed IDを維持する。既存の
+   `updatedTime` は新しい内容の時刻として流用せず、いったん外す。
+2. 対象の `main` リビジョンと、本番Vercelデプロイの成功を確認する。
+   Preview成功、コミット時刻、PRマージ時刻を公開完了時刻に代用しない。
+3. 本番デプロイの成功通知の記録時刻を公開完了の運用時刻として採用し、
+   `publishedTime` または `updatedTime` に `{ at, evidence }` を追記する。
+   `at` は秒までのUTC（末尾 `Z`）、`evidence` は対応するデプロイURLとする。
+   リビジョン、成功ステータスID、記録時刻をPRの確認記録に残す。
+   これは最初のHTTP応答が返った瞬間を測定したという意味ではない。
+4. 完了がUTCの日付境界をまたいだ場合、その実際の公開・更新日を台帳へ
+   反映する。初回公開なら `date` と `sortKey`、更新なら `updated` を合わせる。
+5. 日時確定だけの追記をビルド・公開し、HTML、JSON Feed、RSS、sitemapの
+   一致を確認する。この追記は内容更新ではなく、手順3の時刻を維持する。
+   追記のデプロイ時刻で更新し続けない。
+
+時刻の根拠を確認できない場合は日付のみを維持し、不明であることを確認記録に
+残す。過去記事の時刻を憶測で復元しない。通常の再ビルドやデザイン変更で
+記事の公開・内容更新日時を変えない。RSSの `lastBuildDate` だけはFeedの
+実際の生成時刻であり、記事の時刻とは別に扱う。
+
 ## 関連ファイル
 
 - [`vercel.json`](../vercel.json) — Vercel ビルド・リダイレクト設定

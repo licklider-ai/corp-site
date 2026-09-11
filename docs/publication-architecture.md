@@ -4,7 +4,7 @@
 **Authority:** Canonical for placement, labels, and required metadata on `licklider.ai`  
 **Claim authority:** Subordinate to `licklider-ai/nomue-app/PUBLIC_COMMUNICATIONS.md`  
 **Outreach authority:** Media outreach is governed separately by `licklider-ai/nomue-pr`  
-**Status:** Active — v2.0<br>
+**Status:** Active — v2.1<br>
 **Last updated:** 2026-09-11
 
 ---
@@ -501,6 +501,73 @@ body near the relevant claim; they do not require a metadata panel.
 - direct call to action
 - supporting evidence and material non-claims
 
+### 7.5 UTC dates, times, and precision
+
+**Operational decision adopted 2026-09-11 (UTC):** UTC is the single time basis
+for this website. This applies to visible dates, article headers, homepage and
+Latest lists, documentation, Markdown, LLM indexes, feeds, structured data,
+sitemaps, and publication operations. Do not select a date from an operator's
+local timezone or localize it to the reader's timezone. The UI may show only the
+UTC calendar date; displaying a clock time is not required. Dates of external
+events remain source facts, separate from the website's publication/update date;
+preserve source precision and attribution rather than guessing an event time.
+
+`src/data/publications.ts` is the canonical article metadata registry. `date`,
+`updated`, and `sortKey` are UTC calendar dates. Optional `publishedTime` and
+`updatedTime` records contain `at` (RFC 3339 UTC, seconds, trailing `Z`) and an
+`evidence` link. Record both publication and substantive-update times going
+forward. A timestamp's UTC date must agree with its visible date; builds reject
+disagreement, missing evidence, invalid timestamps, or an update before publication.
+
+Use the recorded completion time of the successful production deployment that
+first made the article or substantive revision available. For the current
+Vercel workflow, the successful production-deployment notification is the
+operational completion record. It is not a measurement of the first HTTP
+response. A draft timestamp, PR merge time, preview deployment, or build clock
+does not establish public availability. Finalize timestamps after production
+success using the procedure in `deployment.md`; the metadata-only follow-up
+does not create another substantive update or reset the recorded time.
+
+For historical articles, backfill only when the exact revision and successful
+production completion record can be identified. Otherwise retain the existing
+date and leave the time absent. Do not manufacture midnight, infer a timezone
+change for an unknown historical date, or treat metadata repair as new content.
+If publication time is known but the latest update time is unknown, keep the
+latest modification date at day precision; do not reuse the older instant.
+
+Machine representations must preserve this precision:
+
+- HTML `time` and Article JSON-LD use the recorded UTC instant when known and
+  `YYYY-MM-DD` otherwise. Open Graph article timestamps are omitted if unknown.
+- JSON Feed `date_published` and `date_modified` contain known instants only.
+  These optional RFC 3339 fields are omitted when the relevant time is unknown;
+  the known UTC dates remain in `content_text`.
+- RSS `pubDate` contains the known original instant, rendered as GMT (UTC).
+  Omit it when unknown; retain the UTC publication/update dates in the description.
+  `lastBuildDate` records actual feed generation time, never an article time.
+- Publication sitemap `lastmod` is emitted only for a known latest instant,
+  because the current serializer expands date-only inputs into midnight.
+  Article JSON-LD retains the known date even when sitemap `lastmod` is absent.
+
+Preserve canonical URLs, feed IDs, original publication dates, and original
+`sortKey` on substantive updates. Latest ordering remains by original UTC
+publication day, with stable registry order within a day. Time backfills do not
+reorder historical entries. Documentation's canonical metadata remains in
+`src/data/agent-docs.ts`; the same UTC and evidence/precision rules apply.
+
+#### Verified historical completion records
+
+The initial migration backfills only the following records:
+
+| Production revision | Successful Vercel status | Recorded completion (UTC) | Article metadata affected |
+| --- | --- | --- | --- |
+| `c80d7a39d5c711e5f9ad5fbb690d5e5f83381793` (PR #26) | `53971073923` | `2026-09-11T07:57:49Z` | First publication of Holm binding and factorial probability evidence; update of factorial statistics/tail bounds |
+| `d14a7bcc3316cdd6c017a567ecdd31c21bbd5727` (PR #29) | `54021671154` | `2026-09-11T21:21:55Z` | First publication of verification-call discard controls; update of Holm binding |
+
+The corresponding Vercel deployment links are retained with the registry records.
+Other historical times remain unknown; this is not an assertion that they cannot
+be recovered later.
+
 ---
 
 ## 8. Current routing examples
@@ -538,15 +605,12 @@ difference between scholarly status, technical experience, and company events.
 
 ## 10. Authority boundaries
 
-Publication dates and substantive update dates belong in `PUBLICATIONS`
-(`date` and optional `updated`). Keep the original `sortKey`, URL and feed ID
-when updating an existing article. `PublicationLayout`, JSON Feed modification
-dates and publication sitemap `lastmod` reuse this registry. RSS retains the
-original `pubDate`, includes the update date in its description, and computes
-channel `lastBuildDate` from publication and update dates. Feed text includes
-the article's maturity/status boundary. JSON Feed must include `content_text`
-or `content_html` as well as any summary. Never replace an article's publication
-date with its update date merely to move it to the top of Latest.
+Publication dates and evidenced times belong in `PUBLICATIONS` and follow
+section 7.5. Article layouts, feeds, and publication sitemap metadata reuse
+this registry with their supported precision. Feed text includes the article's
+maturity/status boundary. JSON Feed must include `content_text` or `content_html`
+as well as any summary. Never replace an article's publication date with its
+update date merely to move it to the top of Latest.
 
 - `PUBLIC_COMMUNICATIONS.md` controls what Licklider and nomue may claim.
 - This document controls where an allowed claim is presented and which status metadata must accompany it.

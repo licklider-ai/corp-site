@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { PUBLICATIONS, publicationModified } from '../data/publications';
+import { PUBLICATIONS } from '../data/publications';
 
 const SITE_URL = 'https://www.licklider.ai';
 
@@ -15,22 +15,21 @@ const items = [...PUBLICATIONS]
   .sort((a, b) => b.sortKey.localeCompare(a.sortKey))
   .map((item) => {
     const url = new URL(item.href, SITE_URL).href;
-    const published = new Date(`${item.sortKey}T00:00:00Z`).toUTCString();
+    const published = item.publishedTime ? new Date(item.publishedTime.at).toUTCString() : undefined;
 
     return `    <item>
       <title>${escapeXml(item.title)}</title>
       <link>${escapeXml(url)}</link>
       <guid isPermaLink="true">${escapeXml(url)}</guid>
-      <pubDate>${published}</pubDate>
+      ${published ? `<pubDate>${published}</pubDate>` : ''}
       <category>${escapeXml(item.category)}</category>
-      <description>${escapeXml(`${item.summary}\n\nStatus: ${item.status}${item.updated ? `\n\nUpdated ${item.updated}.` : ''}`)}</description>
+      <description>${escapeXml(`${item.summary}\n\nStatus: ${item.status}\n\nPublished ${item.date} (UTC).${item.updated ? ` Updated ${item.updated} (UTC).` : ''}`)}</description>
     </item>`;
   })
   .join('\n');
 
-const lastBuildDate = new Date(
-  PUBLICATIONS.map(publicationModified).sort().at(-1) ?? '2026-09-01T00:00:00Z',
-).toUTCString();
+// Feed generation time is distinct from an article's publication/update time.
+const lastBuildDate = new Date().toUTCString();
 
 const content = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">

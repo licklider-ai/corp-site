@@ -2,6 +2,12 @@
 
 Follow the repository's documented publication architecture, build, and deployment rules.
 
+All site publication, update, and operational dates use UTC, including visible
+dates and machine-readable metadata. Record evidenced publication/update times
+in UTC; never infer a historical time from a date or use a build time as an
+article time. See the canonical [date policy](docs/publication-architecture.md#75-utc-dates-times-and-precision)
+and [publication completion procedure](docs/deployment.md).
+
 ## Artifact naming and provenance
 
 Use durable product, task, and accountable-role terminology for repository

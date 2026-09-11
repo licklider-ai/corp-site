@@ -1,6 +1,6 @@
 ---
 import type { PublicationCategory } from '../data/publications';
-import { PUBLICATIONS } from '../data/publications';
+import { PUBLICATIONS, publicationDate, publicationPublished, publicationModified, publicationModifiedInstant } from '../data/publications';
 import type { TocItem } from '../consts';
 import PageLayout from './PageLayout.astro';
 
@@ -15,12 +15,12 @@ interface Props {
   toc: TocItem[];
 }
 
-const { category, title, description, published, toc } = Astro.props;
-const updated = PUBLICATIONS.find((item) => item.href === Astro.url.pathname)?.updated ?? Astro.props.updated;
-const publishedTime = new Date(`${published} 00:00:00 UTC`).toISOString();
-const modifiedTime = updated
-  ? new Date(`${updated} 00:00:00 UTC`).toISOString()
-  : publishedTime;
+const { category, title, description, toc } = Astro.props;
+const item = PUBLICATIONS.find((item) => item.href === Astro.url.pathname);
+const published = item?.date ?? Astro.props.published;
+const updated = item ? item.updated : Astro.props.updated;
+const publishedTime = item ? publicationPublished(item) : publicationDate(published);
+const modifiedTime = item ? publicationModified(item) : publicationDate(updated ?? published);
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 const structuredData = {
   '@type': 'Article',
@@ -41,8 +41,8 @@ const structuredData = {
   description={description}
   toc={toc}
   ogType="article"
-  publishedTime={publishedTime}
-  modifiedTime={modifiedTime}
+  publishedTime={item?.publishedTime?.at}
+  modifiedTime={item ? publicationModifiedInstant(item) : undefined}
   structuredData={structuredData}
 >
   <div class="publication">
