@@ -2,7 +2,7 @@
 
 **Role:** Executable editorial procedure subordinate to [README.md](README.md).<br>
 **Applies to:** Blog commissions, drafts, revisions, and reviews only.<br>
-**Version:** 1.1 — 2026-09-11.
+**Version:** 1.2 — 2026-09-11.
 
 This is a document-based harness, not a mechanical guarantee of factual accuracy.
 Its completion record makes compliance inspectable. Prompts and templates below
@@ -65,6 +65,11 @@ Separate demonstrated usage from conceptual workflow proposals. Include commands
 only when relevant and copied from or checked against the exact public artifact.
 Do not invent UI, API arguments, product outcomes, quotations, or customer examples.
 
+Include the required thumbnail asset under README.md section 7.1, its alt text,
+intrinsic dimensions, placement, and source/reuse record. A diagram is subject to
+the same claim checks as the prose. Keep draft image references resolvable; a
+placeholder or promised later image is not a complete draft.
+
 Then perform a separate adversarial self-review pass. Ask whether a reader could
 mistake a scoped check for study approval, a declaration for established reality,
 a proposed workflow for a shipped path, or an extreme failure for common prevalence.
@@ -93,6 +98,7 @@ requirement that applies. These labels are editorial only, not product verdicts.
 | B10 | Product connection and next action are truthful and proportionate; hypothetical benefits and regulated-use claims have the right boundary |
 | B11 | Public text and public working records expose only authorized public material; sources and instructions are not fabricated |
 | B12 | Applicable upstream/site publication checks, fresh release checks, metadata, links, rendered presentation, registry/feed consistency, and authorization are satisfied for the requested delivery stage |
+| B13 | The actual thumbnail, alt text, dimensions, provenance/reuse basis, and article placement are present and checked; public integration uses the shared thumbnail slot and keeps Latest rows image-free |
 
 For draft-only work, B12 may pass **for draft delivery** with publication checks
 explicitly pending. This is never evidence of publication readiness. An unpublished
@@ -129,6 +135,7 @@ a reason instead of silently omitting material items.
 - Related existing articles / distinct contribution or update decision:
 - E01–E05 reasoning / selection outcome / source cluster / revisit condition if deferred:
 - Draft path or revision:
+- Thumbnail path / alt text / dimensions / caption / source and reuse basis:
 
 | Claim | Fact / inference / recommendation / plan | Inspected source and exact location or revision | Boundary / public-safe citation | Checked date |
 | --- | --- | --- | --- | --- |
@@ -140,7 +147,7 @@ a reason instead of silently omitting material items.
 
 | Check | PASS / FAIL / NOT_APPLICABLE | Reason and evidence reference |
 | --- | --- | --- |
-<!-- Fill B01 through B12; do not deliver this placeholder as a review. -->
+<!-- Fill B01 through B13; do not deliver this placeholder as a review. -->
 
 - Findings / repairs / remaining publication dependencies:
 - Validation performed and not performed:
