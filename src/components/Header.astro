@@ -12,8 +12,8 @@ const isActive = (href: string) => {
 <header class="site-header">
   <div class="inner">
     <a class="logo" href="/">
-      <span>{SITE_TITLE}</span>
       <img class="logo-mark" src="/favicon.svg" alt="" aria-hidden="true" />
+      <span class="logo-text">{SITE_TITLE}</span>
     </a>
 
     <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="global-navigation" data-ui>
@@ -115,6 +115,10 @@ const isActive = (href: string) => {
     text-decoration: none;
     color: var(--ink);
     flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-size: 0.83em;
   }
 
   .logo-mark {
