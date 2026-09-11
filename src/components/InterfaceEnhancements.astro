@@ -52,9 +52,15 @@
   }
 
   // Make overflow surfaces reachable with a keyboard, without trapping page scroll.
-  document.querySelectorAll<HTMLElement>('pre, .table-scroll').forEach((surface) => {
-    const sync = () => {
-      if (surface.scrollWidth > surface.clientWidth + 1) {
+  // The observer supplies the initial check after layout, including code wrappers.
+  // Read every changed surface before writing any accessibility attributes.
+  const overflowObserver = new ResizeObserver((entries) => {
+    const measurements = entries.map(({ target }) => {
+      const surface = target as HTMLElement;
+      return { surface, overflows: surface.scrollWidth > surface.clientWidth + 1 };
+    });
+    measurements.forEach(({ surface, overflows }) => {
+      if (overflows) {
         surface.tabIndex = 0;
         surface.setAttribute('role', 'region');
         surface.setAttribute('aria-label', surface.tagName === 'PRE' ? 'Code example' : 'Scrollable table');
@@ -63,8 +69,9 @@
         surface.removeAttribute('role');
         surface.removeAttribute('aria-label');
       }
-    };
-    new ResizeObserver(sync).observe(surface);
-    sync();
+    });
+  });
+  document.querySelectorAll<HTMLElement>('pre, .table-scroll').forEach((surface) => {
+    overflowObserver.observe(surface);
   });
 </script>
