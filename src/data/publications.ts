@@ -13,6 +13,26 @@ export type PublicationItem = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'Engineering',
+    type: 'Implementation note',
+    date: 'September 11, 2026',
+    sortKey: '2026-09-11',
+    title: 'Binding Holm corrections to the intended comparisons',
+    summary: 'An experiment checks exact Holm adjustments together with the expected declaration and supplied p-values, including changes that leave the displayed answer unchanged.',
+    href: '/engineering/binding-holm-corrections-to-comparisons/',
+    status: 'Bounded experiment integrated into the public research archive; no additional supported capability',
+  },
+  {
+    category: 'Engineering',
+    type: 'Implementation note',
+    date: 'September 11, 2026',
+    sortKey: '2026-09-11',
+    title: 'Checking factorial probability evidence against the raw observations',
+    summary: 'A bounded experiment connects raw observations to exact F ratios and checks that submitted probability intervals contain the recomputed enclosures for all three effects.',
+    href: '/engineering/checking-factorial-probability-evidence/',
+    status: 'Bounded experiment integrated into the public research archive; no additional supported capability',
+  },
+  {
     "category": "Blog",
     "type": "Practical guide",
     "date": "September 11, 2026",
@@ -30,7 +50,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     title: 'Checking factorial statistics without trusting rounded intermediates',
     summary: 'Exact arithmetic and probability bounds offer a path beyond scaling repairs, while a review shows why matching rounded answers does not certify an interval.',
     href: '/engineering/checking-factorial-statistics-and-tail-bounds/',
-    status: 'Limited reviews of unmerged research candidates; no additional supported capability',
+    status: 'Reviewed research components now connected experimentally and archived; no additional supported capability',
   },
   {
     "category": "Engineering",

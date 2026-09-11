@@ -1,0 +1,47 @@
+---
+import { PUBLICATIONS } from '../../data/publications';
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/checking-factorial-probability-evidence/')!;
+const source = 'https://github.com/licklider-ai/nomue-protocol/blob/11921d1ee22eab71c6341bd9e00e9aa25f44dbdf/';
+---
+<PublicationLayout category={item.category} type={item.type} title={item.title}
+  description={item.summary} published={item.date} status={item.status} toc={[]}>
+
+<section id="connection">
+  <h2>Connect the observations to the submitted probability evidence</h2>
+  <p>Our Release 4 experiment now connects stored observations to exact factorial F ratios, bounded upper-tail probabilities and a check of submitted probability intervals. The code and review records are integrated into nomue Protocol’s public research archive. The connection remains experimental and adds no supported public verification capability.</p>
+  <p>The scope is a balanced, replicated two-by-two design: two factors, two levels each, and an equal number of observations in all four cells. It computes the two main effects and their interaction. For a caller checking a result, the useful change is a single inspectable path from expected raw inputs to all three probability rows.</p>
+</section>
+
+<section id="exact-input">
+  <h2>Pass the exact F ratio to the probability calculation</h2>
+  <p>Our <a href="/engineering/checking-factorial-statistics-and-tail-bounds/">earlier article</a> described separate arithmetic and fixed-F probability candidates. The new connection carries the exact rational F derived from the stored binary64 observations into the tail calculation. Rounding F first would change the input to that calculation.</p>
+  <p>For numerator degrees of freedom one and residual degrees of freedom 4(n−1), the tail candidate uses a finite sum of positive terms with bounded arithmetic. It returns lower and upper probability endpoints. If both endpoints round to the same binary64 value, they determine the displayed result for any probability inside the enclosure.</p>
+  <p>The wrapper checks representation and work limits for all three effects before starting tail evaluation. Exactly zero residual sum of squares stops the calculation; a positive residual sum that rounds to zero is refused under this output policy. If a probability remains unresolved within the scheduled work, diagnostics can be retained but the complete result is not accepted.</p>
+</section>
+
+<section id="consumer">
+  <h2>Require the submitted interval to contain the recomputed enclosure</h2>
+  <p>The consumer receives expected raw cells and a revision independently of the submitted evidence. It checks submission shape, endpoint types and integer-size limits before expensive endpoint arithmetic. Input identity and degrees of freedom must agree before the single recomputation begins.</p>
+  <p>Each submitted interval must contain the fixed enclosure recomputed by the candidate. Its endpoints must also round to the submitted and expected encodings. All three rows must pass. Overlap with a reference interval, a small numerical difference, or agreement in displayed digits is insufficient.</p>
+  <p>This is a conservative consistency rule conditional on the candidate enclosure being valid. A mathematically valid interval that is tighter than the recomputed enclosure can be rejected. The runtime does not call the separate probability oracle used in the tests, so acceptance is not an independent proof that the candidate contains the true probability.</p>
+</section>
+
+<section id="counterexample">
+  <h2>A false interval can display the expected answer</h2>
+  <p>The retained regression uses four cells containing [0, 1], [0, 1], [1, 2] and [1, 2]. For the first factor, the exact F is 4 with degrees of freedom (1, 4).</p>
+  <p>A deliberately false singleton interval lies inside a coarser oracle interval but below a refined lower bound. It therefore excludes the probability while sharing its binary64 display. The new consumer rejects it for failing candidate containment. This turns the earlier overlap-checker finding into an executable regression on raw data.</p>
+  <p>The reported suite contains 124 consumer checks and 318 wrapper checks, with matching results in normal and optimized Python modes. It includes altered input identity, malformed endpoints, a false final row, tighter valid intervals, unresolved calculations and one-complete-recomputation controls. The wrapper tests use separate arithmetic formulas and a probability oracle.</p>
+</section>
+
+<section id="scope">
+  <h2>The remaining boundary is explicit</h2>
+  <p>The implementation admits only bounded inputs and operand sizes. Its outer range of 2–65 observations per cell is not a promise that every dataset in that range passes: admission also depends on representation and workload. Recorded resource probes describe their hosts and cases, not portable latency or memory guarantees.</p>
+  <p>The public evidence discloses OpenAI Codex authoring, an attributed user-supplied implementation review and subsequent archive review. These records support bounded implementation claims; they do not close the research gate or establish scientific model validity. The expected-input interface is an in-memory experiment, with public Record binding, check registration and execution policy still separate adoption work.</p>
+  <ul>
+    <li><a href={source + 'governance/drafts/release-4-preparation/complete-output-experiment-20260911/REPORT.md'}>Complete-output wrapper, representation policy and tests</a>.</li>
+    <li><a href={source + 'governance/drafts/release-4-preparation/tail-evidence-experiment-20260911/REPORT.md'}>Submitted-evidence consumer, regression witness, reproduction commands and review receipt</a>.</li>
+    <li><a href={source + 'review-inputs/research-asset-review-20260911/r4/R4-ASSET-ARCHIVE-REVIEW.md'}>R4 archive review</a>; <a href={source + 'governance/drafts/research-asset-integration-20260911/PROMOTION-INTAKE.md'}>integration scope and remaining promotion decisions</a>.</li>
+  </ul>
+</section>
+</PublicationLayout>

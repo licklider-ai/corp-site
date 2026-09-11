@@ -1,0 +1,47 @@
+---
+import { PUBLICATIONS } from '../../data/publications';
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/binding-holm-corrections-to-comparisons/')!;
+const source = 'https://github.com/licklider-ai/nomue-protocol/blob/11921d1ee22eab71c6341bd9e00e9aa25f44dbdf/';
+---
+<PublicationLayout category={item.category} type={item.type} title={item.title}
+  description={item.summary} published={item.date} status={item.status} toc={[]}>
+
+<section id="connection">
+  <h2>A correction belongs to a particular set of comparisons</h2>
+  <p>A numerical correction can be internally consistent and still belong to the wrong analysis. For someone checking an agent’s result, the question includes which comparisons were requested, which inputs were supplied, and whether every returned value belongs to that request.</p>
+  <p>Our Release 3 experiment now connects a caller-selected declaration and supplied p-values to an exact Holm calculation, then checks the submitted context and every adjusted result. The implementation and review records are integrated into nomue Protocol’s public research archive. This is a bounded experiment; it adds no supported public check or product capability.</p>
+</section>
+
+<section id="binding">
+  <h2>Take the expected context from the caller</h2>
+  <p>The experimental entry point accepts three raw JSON strings: the expected declaration, the expected supplied-p input, and the submitted evidence. The first two establish what the caller intends to check. The submitted evidence cannot choose its own expected analysis.</p>
+  <p>The connection covers a selected all-pairs family with 3–16 groups and 3–120 comparisons. After input size, structure and declaration-relation checks, it compares the full declaration and supplied inputs using JSON Canonicalization Scheme equality. Object-key order and whitespace can vary; array order remains part of identity.</p>
+  <p>This binds more than comparison names. Reusing those names with a changed analysis, hypothesis, sidedness, source, revision or other declaration context is rejected. The experiment checks correspondence to the caller’s declaration; it does not establish that the declared experiment actually occurred.</p>
+</section>
+
+<section id="arithmetic">
+  <h2>Keep the exact adjusted value and its display separate</h2>
+  <p>The numerical worker treats each supplied binary64 p-value as an exact multiple of 2<sup>−1074</sup>. It sorts those exact values, applies the Holm rank multipliers, takes successive maxima, caps at one, and maps the adjusted values back to the original comparisons.</p>
+  <p>The submitted result must match both that exact arithmetic and its nearest, ties-to-even binary64 display. Two different exact adjusted values can round to the same display. A recorded counterexample exercises precisely this case: matching the displayed number alone would miss the changed result.</p>
+  <p>The connection checks every row. A false final row cannot inherit success from the preceding rows. Context failures stop before the worker starts; an arithmetic mismatch returns no scoped success. A worker failure is recorded as an experiment error rather than treated as an ordinary input refusal.</p>
+</section>
+
+<section id="evidence">
+  <h2>Test the connection as well as the formula</h2>
+  <p>The retained connection suite records 157 checks in both normal and optimized Python modes, with matching labels and outcomes. These are check counts, not independent datasets. Separate controls cover input substitution, malformed submissions, dependency changes and worker isolation. Small comparison families are also checked against a separately constructed all-subsets Bonferroni reference.</p>
+  <p>The review led to concrete repairs: honoring the configured Python executable in the integrity suite, isolating the worker from Python path injection, and restoring a dependency alias between tampering controls. A later intake also corrected an overstatement about memory measurements. Live samples and process-reported peaks have different observation windows; the recorded probes do not establish a portable memory bound.</p>
+  <p>The public records disclose OpenAI Codex authoring, an attributed user-supplied implementation review, and subsequent archive review. Their scopes and provenance are recorded separately. This work is not journal peer review or a new primary-source investigation.</p>
+</section>
+
+<section id="scope">
+  <h2>What the result establishes</h2>
+  <p>The accepted outcome is narrowly named <code>declaration_bound_supplied_p_arithmetic_consistent</code>. It establishes agreement with the expected declaration and supplied-p arithmetic under the experiment’s contract. It does not recompute the raw p-values, establish their statistical validity, or return a significance decision. Scientific validity remains explicitly unasserted.</p>
+  <p>The next adoption decision must address the public contract, registration, supported execution environment and remaining research conditions. The engineering result already makes one useful boundary inspectable: numerical agreement is checked together with the analysis and inputs to which it belongs.</p>
+  <ul>
+    <li><a href={source + 'governance/drafts/release-3-preparation/holm-experiment-20260911/REPORT.md'}>Exact Holm arithmetic experiment</a>.</li>
+    <li><a href={source + 'governance/drafts/release-3-preparation/holm-declaration-binding-experiment-20260911/REPORT.md'}>Declaration connection, reproduction commands, review repairs and author intake</a>.</li>
+    <li><a href={source + 'review-inputs/research-asset-review-20260911/r3/REPORT.md'}>R3 archive review</a>; <a href={source + 'governance/drafts/release-3-preparation/holm-promotion-proposal-20260911/PROMOTION-CONDITIONS.md'}>remaining promotion conditions</a>.</li>
+  </ul>
+</section>
+</PublicationLayout>
