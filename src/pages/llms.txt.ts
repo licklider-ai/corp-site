@@ -122,7 +122,8 @@ ${UPSTREAM_CONTRIBUTIONS.map((item) => `- [${item.project}: ${item.title}](https
 
 ## Evidence and updates
 
-- [Binding Holm corrections](https://www.licklider.ai/engineering/binding-holm-corrections-to-comparisons/): ${R3_EXPERIMENT_PROGRESS}
+- [When a verification call must discard its result](https://www.licklider.ai/engineering/when-a-verification-call-must-discard-its-result/): ${R3_EXPERIMENT_PROGRESS}
+- [Binding Holm corrections](https://www.licklider.ai/engineering/binding-holm-corrections-to-comparisons/): original declaration and supplied-p arithmetic experiment, updated with the candidate.3 successor and execution-control evidence; no added public support.
 - [Checking factorial probability evidence](https://www.licklider.ai/engineering/checking-factorial-probability-evidence/): ${R4_EXPERIMENT_PROGRESS}
 - [Exact factorial arithmetic and tail bounds](https://www.licklider.ai/engineering/checking-factorial-statistics-and-tail-bounds/): updated September 11, 2026 to connect the original numerical findings and overlap-checker limitation to the successor experiments.
 - [Power scaling and factorial F](https://www.licklider.ai/engineering/power-scaling-and-factorial-f-statistics/): accepted bounded SS/F and six-fixture numerical exploration; no numerical support established.

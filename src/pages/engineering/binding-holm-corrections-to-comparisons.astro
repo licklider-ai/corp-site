@@ -13,6 +13,12 @@ const source = 'https://github.com/licklider-ai/nomue-protocol/blob/11921d1ee22e
   <p>Our Release 3 experiment now connects a caller-selected declaration and supplied p-values to an exact Holm calculation, then checks the submitted context and every adjusted result. The implementation and review records are integrated into nomue Protocol’s public research archive. This is a bounded experiment; it adds no supported public check or product capability.</p>
 </section>
 
+<section id="successor">
+  <h2>The successor now checks the whole call</h2>
+  <p>The original connection described here is preserved at its fixed source revision. Subsequent work has assembled the unissued <code>0.3.0-candidate.3</code>: Record-wide checks, a budget shared across verification passes, operating-system execution controls and rules that discard results after enforcement or cleanup failure.</p>
+  <p>The <a href="/engineering/when-a-verification-call-must-discard-its-result/">new execution-control article</a> explains those mechanisms and their actual-host evidence. The numerical kernel remains unchanged; this advances the conditions for returning evidence rather than the accuracy of Holm arithmetic. Formal adoption, public registration and final review applicability remain separate decisions, as recorded in the <a href="https://github.com/licklider-ai/nomue-protocol/blob/4a62f8e1768049560cb0ce8f09ef1676cb42130b/governance/drafts/RELEASE-STATUS.md">current release status</a>.</p>
+</section>
+
 <section id="binding">
   <h2>Take the expected context from the caller</h2>
   <p>The experimental entry point accepts three raw JSON strings: the expected declaration, the expected supplied-p input, and the submitted evidence. The first two establish what the caller intends to check. The submitted evidence cannot choose its own expected analysis.</p>
