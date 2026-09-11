@@ -1,0 +1,14 @@
+---
+import { publicationsFor } from '../../data/publications';
+import PublicationIndexLayout from '../../layouts/PublicationIndexLayout.astro';
+---
+<PublicationIndexLayout
+  title="Blog"
+  description="Practical guidance for researchers using AI: define the question, examine the evidence, and decide what to do next."
+  items={publicationsFor('Blog')}
+  links={[
+    { label: 'All publications', href: '/latest/' },
+    { label: 'Subscribe via RSS', href: '/rss.xml' },
+    { label: 'JSON Feed', href: '/feed.json' },
+  ]}
+/>

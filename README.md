@@ -94,15 +94,17 @@ pnpm install
 
 ## 公開情報の分類
 
-公開記事は **Research / Engineering / News** の3系統に分けます。`/latest/` とホームの **Latest** は3系統を時系列でまとめ、ヘッダーはLatestを共通入口とします。各項目には分類を表示します。
+公開記事は **Research / Engineering / News / Blog** の4系統に分けます。`/latest/` とホームの **Latest** は4系統を時系列でまとめ、ヘッダーはLatestを共通入口とします。各項目には分類を表示します。
 
 配置、成熟度ラベル、公開文の書き方、公開前チェック、必須メタデータの正本は [`docs/publication-architecture.md`](./docs/publication-architecture.md) を参照してください。
 
 Blogの企画・執筆・改稿・レビューには、その下流にある
 [`docs/blog/README.md`](./docs/blog/README.md)（Blog専用の編集正本）と
 [`docs/blog/WRITE.md`](./docs/blog/WRITE.md)（毎回の執筆手順・確認記録）を使用します。
-Blog専用の方針を既存3分類や製品ページへ広げません。編集運用は開始済みですが、
-公開Blogの分類・ページ・一覧への組み込みは別のサイト実装作業です。
+Blog専用の方針を既存3分類や製品ページへ広げません。`/blog/` と各記事は
+共通の掲載台帳を使い、Latest・トップページ・Feedへ反映されます。
+サムネイルは任意です。使用する場合は記事のタイトル・要約と本文の間に配置し、
+Latest一覧では表示しません。
 
 公開更新はHTML一覧に加えて、次の購読用Feedから同じ `PUBLICATIONS` データを配信します。
 
@@ -113,7 +115,7 @@ Blog専用の方針を既存3分類や製品ページへ広げません。編集
 
 ## Agent-readable documentation
 
-`/docs/` は Research / Engineering / News とは別の技術文書面です。人間向けHTML、
+`/docs/` は Research / Engineering / News / Blog とは別の技術文書面です。人間向けHTML、
 LLM向けMarkdown、`llms.txt`、機械可読exampleは、同じ公開境界から生成します。
 
 配置、正本境界、必須セクション、machine-readable surface、公開前チェックは

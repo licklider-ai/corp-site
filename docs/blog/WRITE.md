@@ -2,7 +2,7 @@
 
 **Role:** Executable editorial procedure subordinate to [README.md](README.md).<br>
 **Applies to:** Blog commissions, drafts, revisions, and reviews only.<br>
-**Version:** 1.2 — 2026-09-11.
+**Version:** 1.3 — 2026-09-11.
 
 This is a document-based harness, not a mechanical guarantee of factual accuracy.
 Its completion record makes compliance inspectable. Prompts and templates below
@@ -65,10 +65,11 @@ Separate demonstrated usage from conceptual workflow proposals. Include commands
 only when relevant and copied from or checked against the exact public artifact.
 Do not invent UI, API arguments, product outcomes, quotations, or customer examples.
 
-Include the required thumbnail asset under README.md section 7.1, its alt text,
-intrinsic dimensions, placement, and source/reuse record. A diagram is subject to
-the same claim checks as the prose. Keep draft image references resolvable; a
-placeholder or promised later image is not a complete draft.
+Decide whether a thumbnail helps under README.md section 7.1. It is optional.
+When included, supply the actual asset, alt text, intrinsic dimensions, placement,
+and source/reuse record, and keep image references resolvable. A diagram follows
+the same claim checks as prose. When omitted, record `none`; do not block delivery
+or add an empty placeholder.
 
 Then perform a separate adversarial self-review pass. Ask whether a reader could
 mistake a scoped check for study approval, a declaration for established reality,
@@ -98,7 +99,7 @@ requirement that applies. These labels are editorial only, not product verdicts.
 | B10 | Product connection and next action are truthful and proportionate; hypothetical benefits and regulated-use claims have the right boundary |
 | B11 | Public text and public working records expose only authorized public material; sources and instructions are not fabricated |
 | B12 | Applicable upstream/site publication checks, fresh release checks, metadata, links, rendered presentation, registry/feed consistency, and authorization are satisfied for the requested delivery stage |
-| B13 | The actual thumbnail, alt text, dimensions, provenance/reuse basis, and article placement are present and checked; public integration uses the shared thumbnail slot and keeps Latest rows image-free |
+| B13 | If a thumbnail is used, its asset, alt text, dimensions, provenance/reuse basis, and shared-slot placement are checked; omission is allowed with no placeholder, and Latest rows remain image-free |
 
 For draft-only work, B12 may pass **for draft delivery** with publication checks
 explicitly pending. This is never evidence of publication readiness. An unpublished

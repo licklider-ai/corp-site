@@ -4,7 +4,7 @@
 **Authority:** Downstream of [site publication policy](../publication-architecture.md)
 and its upstream claim authorities; local to corp-site Blog<br>
 **Owner:** Site editorial steward<br>
-**Status:** Active editorial policy — v1.2; public Blog integration pending<br>
+**Status:** Active editorial policy — v1.3; public Blog integrated<br>
 **Adopted:** 2026-09-11
 
 ## 1. Scope and authority
@@ -263,35 +263,32 @@ Use existing site metadata, visual design, shared layout, and citation conventio
 Dates remain the visible article-header metadata; do not introduce a Blog-only
 author/status panel, sidebar, color system, or duplicate capability reference.
 
-### 7.1 Required thumbnail and article placement
+### 7.1 Optional thumbnail and article placement
 
-Every Blog article must have a relevant thumbnail image. This applies to new
-articles and future revisions; it does not impose images on other publication
-classes. A complete draft includes the actual image asset, meaningful alt text,
-intrinsic width and height, and its source/reuse or original-creation record.
-A brief or empty placeholder alone is not a completed thumbnail. Review diagrams
-for factual meaning as well as legibility; identify synthetic examples and do not
-present generated or schematic imagery as experimental evidence.
+A thumbnail is optional for Blog. Choose an image when it helps explain the
+article; its absence does not block drafting, review, or publication. Do not
+create a placeholder, empty image region, or mandatory image-validation gate.
 
-Use the existing `PublicationLayout.astro` named `thumbnail` slot: it places the
-image between the title/summary header and the article body. Retain its responsive
-wide canvas, natural aspect ratio, and optional caption. Keep the essential image
-content visible without cropping; repeat substantive information in accessible
-body text. Do not add a second hero area or a new layout merely for Blog images.
-Use lazy loading only for genuinely below-the-fold images.
+When an image is used, include the actual asset, meaningful alt text, intrinsic
+width and height, and its source/reuse or original-creation record. Check diagrams
+for factual meaning and legibility. Identify synthetic examples; schematic or
+generated imagery must not be presented as experimental evidence.
 
-Latest remains a text list: neither its paginated rows nor the homepage Latest
-rows display Blog thumbnails. The image belongs to the article even when discovery
-surfaces do not display it. At Blog index integration, reuse the article's asset
-if thumbnails are shown there. This requirement does not request new social cards
+Use `PublicationLayout.astro`'s named `thumbnail` slot, between the title/summary
+header and the article body. The layout renders that region only when supplied.
+Retain its responsive wide canvas, natural aspect ratio, and optional caption.
+Keep essential content visible without cropping and repeat substantive information
+in accessible body text. Use lazy loading only for genuinely below-the-fold images.
+
+Latest's paginated rows and homepage rows remain image-free. The Blog index uses
+the shared text-list layout as well. This policy does not require new social cards
 or change existing Open Graph/X image metadata.
 
-Keep draft assets beside the draft, outside public routes. On authorized article
-integration, move the asset to its final served path, populate the named slot,
-and check the image and caption in the generated article. Blog integration must
-make a missing thumbnail a validation failure for Blog entries, while preserving
-optional images for other classes. Until the Blog runtime exists, WRITE.md B13
-is the enforced editorial check; do not claim a runtime gate has been installed.
+Keep draft assets beside the draft. For publication, copy or move the selected
+asset to its served path, populate the named slot, and check the generated article.
+Use WRITE.md B13 for conditional image checks; when there is no thumbnail, record
+that choice without treating it as a defect. These Blog choices do not impose
+images on other publication classes.
 
 ## 8. Review and maintenance
 
@@ -318,16 +315,15 @@ views from adoption and hypothesized benefits from measured outcomes.
 
 ## 9. Public integration boundary
 
-Editorial use is active immediately. `/blog/`, `/blog/{slug}/`, a Blog publication
-class, and Blog discovery are planned integration, not already available features.
-The present runtime still supports Research / Engineering / News only.
+Blog uses `/blog/`, `/blog/{slug}/`, and the Blog publication class. Each article
+has one canonical page and one entry in `PUBLICATIONS`, which supplies the Blog
+index, Latest, homepage Latest, RSS, and JSON Feed. The shared article layout and
+existing design apply. The global header retains Latest as the mixed-publication
+entry point; Latest and article links provide Blog discovery.
 
-When integration is commissioned, use one canonical article, a Blog index, and
-the existing `PUBLICATIONS` registry for Latest and both feeds. Update taxonomy,
-types, navigation, shared layout compatibility, and policy descriptions together;
-do not publish a Blog article disguised as Engineering just to fit the old union.
-Preserve existing article URLs. A curated first-reading entry point can be added
-with the corresponding homepage work; this policy does not install it.
+Preserve existing article URLs and classifications. Do not publish Blog under an
+unrelated class. Keep taxonomy descriptions and machine-readable discovery aligned
+when integration changes. A curated first-reading homepage feature is separate work.
 
 Unlike an event report, a Blog can justify a new article through a distinct,
 evidence-backed reader action without a new release or research event. This local

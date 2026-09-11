@@ -38,6 +38,7 @@ export const SIDE_NAV: NavItem[] = [
   { label: 'Research', href: '/research/', ready: true },
   { label: 'Engineering', href: '/engineering/', ready: true },
   { label: 'News', href: '/news/', ready: true },
+  { label: 'Blog', href: '/blog/', ready: true },
 ];
 
 /** In-page table of contents item. */

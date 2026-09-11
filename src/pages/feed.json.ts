@@ -9,7 +9,7 @@ const content = JSON.stringify(
     title: 'Licklider — Latest',
     home_page_url: `${SITE_URL}/latest/`,
     feed_url: `${SITE_URL}/feed.json`,
-    description: 'Research, engineering, and company updates from Licklider.',
+    description: 'Research, engineering, company news, and practical Blog articles from Licklider.',
     language: 'en',
     authors: [
       {
