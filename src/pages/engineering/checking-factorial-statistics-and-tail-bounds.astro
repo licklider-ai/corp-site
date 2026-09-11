@@ -4,12 +4,13 @@ import PublicationLayout from '../../layouts/PublicationLayout.astro';
 const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/checking-factorial-statistics-and-tail-bounds/')!;
 ---
 <PublicationLayout category={item.category} type={item.type} title={item.title}
-  description={item.summary} published={item.date} status={item.status} toc={[]}>
+  description={item.summary} published={item.date} updated="September 11, 2026" status={item.status} toc={[]}>
 
 <section id="progress">
   <h2>From finding numerical failures to checking candidate calculations</h2>
   <p>Our <a href="/engineering/power-scaling-and-factorial-f-statistics/">earlier factorial study</a> showed why rescaling data cannot repair every floating-point error. The next step is to calculate exact targets for the stored observations and keep uncertainty explicit when converting those targets into a computer’s output format.</p>
-  <p>Two Release 4 research candidates now have limited technical reviews: one computes estimates, sums of squares and F statistics with integer arithmetic; the other encloses upper-tail probabilities for fixed F inputs. The candidates remain unmerged drafts. They are separate components, not a validated path from raw data to a p-value, and add no supported nomue capability.</p>
+  <p>The initial Release 4 candidates separately computed exact arithmetic targets and enclosed upper-tail probabilities for fixed F inputs. Since this article was first published, a successor experiment has connected the raw observations, exact rational F and submitted probability evidence. The candidates and review records are now integrated into the public research archive. They remain experimental and add no supported nomue capability.</p>
+  <p>This update preserves the original numerical findings below. The <a href="/engineering/checking-factorial-probability-evidence/">new connection article</a> explains the complete-output and evidence-consumer experiments, including the regression for the interval-checker finding.</p>
 </section>
 
 <section id="residuals">
@@ -28,7 +29,7 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/checking-
 
 <section id="tails">
   <h2>Enclose a small probability instead of subtracting it away</h2>
-  <p>The tail candidate starts with a fixed binary64 F, treated as an exact number. For the retained degrees of freedom—numerator one and residual 4(n−1)—a change of variable expresses the upper-tail probability as a finite sum of positive terms. This avoids obtaining a tiny tail by subtracting two nearly equal approximate numbers.</p>
+  <p>The original tail candidate starts with a fixed binary64 F, treated as an exact number. For the retained degrees of freedom—numerator one and residual 4(n−1)—a change of variable expresses the upper-tail probability as a finite sum of positive terms. This avoids obtaining a tiny tail by subtracting two nearly equal approximate numbers.</p>
   <p>Exact fraction arithmetic and a bounded square root provide lower and upper probability bounds. Separate polynomial-integral and remainder-bounded series calculations supply comparison evidence. When both endpoints round to the same binary64 value, that value is determined for every probability inside the interval.</p>
   <p>Both routes resolved the same rounded value in 220 cases. In 56 cases a strictly positive mathematical probability rounded to zero. That is different from claiming the probability is exactly zero. High-precision Decimal output was used as a diagnostic, not as proof of an error bound.</p>
 </section>
@@ -37,18 +38,19 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/checking-
   <h2>Matching rounded answers does not prove an interval is valid</h2>
   <p>The tail review found an important limit in the research evidence checker. A supplied interval can overlap the oracle interval and produce the correct rounded answer while still excluding the true probability. The reviewer constructed such a replacement interval at n = 2 and F = 4; the checker accepted it.</p>
   <p>This does not show a wrong probability in the delivered candidate: the fixed results were reproduced byte for byte, and the enclosure derivation was checked. It shows that the checker’s overlap test is insufficient to certify a supplied interval. Some auxiliary fields and complete-corpus membership are also outside its checks.</p>
-  <p>Before that checker is reused as an interval verifier, it needs containment evidence—for example, recomputing a bound at fixed precision and checking that the supplied interval contains it—alongside the independent oracle check and a fixed input roster. Matching output digits is a weaker property.</p>
+  <p>The successor evidence consumer now recomputes a fixed candidate enclosure and requires each submitted interval to contain it, with matching endpoint rounding and expected raw-input identity. It rejects a raw-data version of this false-interval witness. This is conditional consistency with the candidate: a tighter valid interval can fail the conservative containment rule, and the runtime does not use the separate test oracle. The original checker and its finding remain preserved in the historical evidence.</p>
 </section>
 
 <section id="remaining">
-  <h2>The components still need a reviewed connection</h2>
-  <p>The arithmetic component produces an exact rational F; the current tail API accepts floating-point inputs only. Connecting them requires the same input and contrast identity, exact degrees of freedom, positive-SSE evidence and outward propagation of uncertainty. For a guaranteed F interval [L, U], the decreasing tail satisfies Q(U) ≤ Q(F) ≤ Q(L), with the endpoint calculations themselves bounded.</p>
-  <p>Input limits, execution budgets, supported environments and final comparison rules remain open. The reviews disclose OpenAI Codex assistance and do not establish a separate-model primary-source pass or journal peer review. The required research gate remains incomplete. <a href="/news/nomue-protocol-release-4-public-discussion/">Release 4 public discussion</a> continues independently of these engineering results.</p>
+  <h2>The connection is experimental; public adoption remains open</h2>
+  <p>The successor passes exact rational F values into the tail calculation and checks all three effects before accepting a complete result. Its input, representation and work limits are explicit experiment policies. Formal public input limits, execution budgets, supported environments, Record binding and check registration remain adoption decisions.</p>
+  <p>The public records disclose OpenAI Codex assistance, attributed implementation-review receipts and subsequent archive review; they do not establish journal peer review or closure of the whole research gate. <a href="/news/nomue-protocol-release-4-public-discussion/">Release 4 public discussion</a> continues independently of these engineering results.</p>
 </section>
 
 <section id="evidence">
   <h2>Fixed evidence and reviews</h2>
   <ul>
+    <li><a href="https://github.com/licklider-ai/nomue-protocol/blob/11921d1ee22eab71c6341bd9e00e9aa25f44dbdf/governance/drafts/release-4-preparation/tail-evidence-experiment-20260911/REPORT.md">Successor evidence consumer and implementation-review receipt</a>; <a href="https://github.com/licklider-ai/nomue-protocol/blob/11921d1ee22eab71c6341bd9e00e9aa25f44dbdf/governance/drafts/research-asset-integration-20260911/PROMOTION-INTAKE.md">archive integration and remaining promotion conditions</a>.</li>
     <li><a href="https://github.com/licklider-ai/nomue-protocol/blob/2864903316b4b4b2b219a56b42c535bfec7935b3/governance/drafts/release-4-preparation/arithmetic-candidate-20260910/REPORT.md">Arithmetic candidate, formulas and reproduction record</a>; <a href="https://github.com/licklider-ai/nomue-protocol/pull/281">limited arithmetic review</a>.</li>
     <li><a href="https://github.com/licklider-ai/nomue-protocol/blob/8d1979a4cf91012d86d57df40e5a847e2f00a358/governance/drafts/release-4-preparation/tail-feasibility-20260910/REPORT.md">Fixed-F tail candidate and source boundaries</a>; <a href="https://github.com/licklider-ai/nomue-protocol/blob/e7ddd16f6d2272cb7c9267f7f2aa8d35103f1c44/review-inputs/r4-tail-8d1979a/REVIEW-RESULT.md">tail review and checker counterexamples</a>.</li>
     <li><a href="https://github.com/licklider-ai/nomue-protocol/blob/880a5bf6efb4e047772dfeec606a3f55acdaf0cf/governance/drafts/preparation-round-close-20260910/REPORT.md">Preparation-round handoff</a>, preserving completed work, usage limits and remaining conditions.</li>
