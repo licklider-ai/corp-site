@@ -1,0 +1,56 @@
+---
+import { PUBLICATIONS } from '../../data/publications';
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/when-a-verification-call-must-discard-its-result/')!;
+const source = 'https://github.com/licklider-ai/nomue-protocol/blob/4a62f8e1768049560cb0ce8f09ef1676cb42130b/';
+---
+<PublicationLayout category={item.category} type={item.type} title={item.title}
+  description={item.summary} published={item.date} status={item.status} toc={[]}>
+
+<section id="result">
+  <h2>A result needs a completed execution behind it</h2>
+  <p>A verification worker can produce plausible output just before its process runs out of memory, exceeds a deadline, or leaves a child process running. Returning that output as an ordinary result would hide an execution failure from the caller.</p>
+  <p>Our Release 3 Holm candidate now connects Record verification to execution controls that discard results after those failures. The current implementation, <code>0.3.0-candidate.3</code>, is an unissued research candidate with retained code, tests and review evidence. It adds no formally adopted Holm support to the public verifier.</p>
+  <p>The <a href="/engineering/binding-holm-corrections-to-comparisons/">earlier Holm experiment</a> checked whether adjusted p-values belonged to the expected comparisons and inputs. The successor asks an additional question: did the whole call complete under the conditions required to return its evidence?</p>
+</section>
+
+<section id="record">
+  <h2>Keep the checked Record attached to the result</h2>
+  <p>The candidate takes a Record and independently supplied expected context. Its staged checks cover stored integrity, context agreement and the declared supplied-p calculation. The caller cannot establish expected context merely by accepting whatever the submitted Record says.</p>
+  <p>When all scoped checks pass, the controlled path can forward the original saved Record bytes. It does not reopen the input file after verification, when another process might have changed it. The output adapter also checks that the forwarded bytes match the report’s Record identity and content digest.</p>
+  <p>A completed call can still report a failed check or a refusal. Completion describes execution; it is not a single overall verdict on the research.</p>
+</section>
+
+<section id="budgets">
+  <h2>Use one budget for the call, with an outer limit for stalls</h2>
+  <p>The file entry makes two verification passes to preserve the order of input refusals. One inner budget starts before Record file reading and is shared by both passes, so entering the second pass does not reset the clock. Checkpoints continue through worker completion, report validation and final output serialization.</p>
+  <p>The experimental inner limits are 5,000 milliseconds and 512 MiB of sampled JavaScript heap. Exceeding either replaces eligible output with a processing-limit refusal. Partial checks, payload and verified Record bytes are discarded.</p>
+  <p>A checkpoint cannot interrupt work between checkpoints. Five seconds is therefore not a hard stopping guarantee, and JavaScript heap measurements exclude Python memory and native allocations. A separate supervisor applies a 30-second outer deadline and Linux cgroup limits to the call’s process group. Those controls cover failures that the inner observations cannot detect in time.</p>
+</section>
+
+<section id="discard">
+  <h2>An ordinary process exit cannot override an enforcement event</h2>
+  <p>The supervisor inspects operating-system counters as well as the worker’s exit status. An observed memory-limit or process-count enforcement event invalidates output even if the main process exits with code zero. Cancellation, deadline expiry, output overflow and cleanup failure also prevent result forwarding.</p>
+  <p>Cleanup runs on successful exits too. The supervisor terminates the call subtree, drains its output, reaps adopted descendants and checks that the call group is empty before removing its resources. Sending a kill request alone is insufficient evidence that cleanup finished.</p>
+  <p>The private execution receipt retains the observed causes. A separate adapter converts it into a scoped report or refusal. That adapter assumes a locally trusted supervisor receipt; it does not authenticate a receipt supplied by a remote party.</p>
+</section>
+
+<section id="evidence">
+  <h2>Exercise the failure paths on an actual host</h2>
+  <p>The retained follow-up CI record reports 33 cgroup controls and 28 receipt-projection checks, including five original-byte forwards. An additional test runs an actual Node 22 executable against the Node 24.19.0 candidate: it exits with the reserved unsupported-host code before input access, forwards no result and completes cleanup. These are finite control counts, not workload coverage or a portability guarantee.</p>
+  <p>Review also repaired a host guard that loaded runtime dependencies too early, restored candidate-identity checks and separated test observations from committed expected snapshots. The active candidate keeps the numerical kernel unchanged. Its result-discard behavior is an execution property, not evidence of improved numerical accuracy.</p>
+  <p>The public records disclose OpenAI Codex implementation work and the user’s report of joint human and Claude reviews covering PRs #318–#325. Individual reviewer identities and primary-source coverage are not reconstructed where absent. These records do not establish journal peer review or automatically close the remaining research gate.</p>
+</section>
+
+<section id="remaining">
+  <h2>What remains before public support</h2>
+  <p>This implementation round is at a documented stopping point. Formal adoption still requires matching the final candidate’s claims to applicable reviews, settling the public input/output and execution contract, and coordinating identifiers, schemas, checks and conformance expectations under the open RFC.</p>
+  <p>The candidate checks ordinary unweighted Holm arithmetic over supplied p-values and its declared context. It does not generate those p-values or establish their scientific validity. The engineering result is a narrower, inspectable rule for delivery: a numerical result survives only when the required verification and execution conditions both permit it.</p>
+  <ul>
+    <li><a href={source + 'governance/drafts/release-3-preparation/holm-repaired-candidate-20260911/README.md'}>Current candidate, commands and limits</a>; <a href={source + 'governance/drafts/release-3-preparation/holm-repaired-candidate-20260911/entry.mjs'}>shared-budget entry</a>; <a href={source + 'governance/drafts/release-3-preparation/holm-repaired-candidate-20260911/public.mjs'}>receipt and original-byte checks</a>.</li>
+    <li><a href={source + 'governance/drafts/release-3-preparation/holm-controlled-execution-20260911/README.md'}>Predecessor supervisor design and enforcement boundaries</a>.</li>
+    <li><a href={source + 'governance/drafts/release-3-preparation/r3-followup-review-20260911/ci/README.md'}>Actual-host CI evidence</a>; <a href={source + 'governance/drafts/release-3-preparation/r3-followup-review-20260911/README.md'}>review repairs and provenance clarification</a>.</li>
+    <li><a href={source + 'governance/drafts/RELEASE-STATUS.md'}>Current release status and remaining adoption decisions</a>.</li>
+  </ul>
+</section>
+</PublicationLayout>
