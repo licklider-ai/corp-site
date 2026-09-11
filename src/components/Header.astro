@@ -69,17 +69,18 @@ const isActive = (href: string) => {
         setOpen(false);
       });
     }
-    const sync = () => {
-      const height = header.offsetHeight;
+    let previousHeight = 0;
+    new ResizeObserver(([entry]) => {
+      // Use the completed layout's border box instead of forcing a fresh layout.
+      // Round like offsetHeight, preserving the existing anchor offset.
+      const height = Math.round(entry.borderBoxSize?.[0]?.blockSize ?? header.offsetHeight);
 
       // ヘッダーが描画されていないときは 0 になる。CSS 側の既定値を潰さないよう無視する
-      if (height > 0) {
+      if (height > 0 && height !== previousHeight) {
+        previousHeight = height;
         document.documentElement.style.setProperty('--header-h', `${height}px`);
       }
-    };
-
-    sync();
-    new ResizeObserver(sync).observe(header);
+    }).observe(header, { box: 'border-box' });
   }
 </script>
 
