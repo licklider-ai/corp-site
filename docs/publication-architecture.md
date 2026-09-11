@@ -4,8 +4,8 @@
 **Authority:** Canonical for placement, labels, and required metadata on `licklider.ai`  
 **Claim authority:** Subordinate to `licklider-ai/nomue-app/PUBLIC_COMMUNICATIONS.md`  
 **Outreach authority:** Media outreach is governed separately by `licklider-ai/nomue-pr`  
-**Status:** Active — v1.8<br>
-**Last updated:** 2026-09-10
+**Status:** Active — v1.9<br>
+**Last updated:** 2026-09-11
 
 ---
 
@@ -530,3 +530,22 @@ difference between scholarly status, technical experience, and company events.
 - This document controls where an allowed claim is presented and which status metadata must accompany it.
 - `nomue-pr` controls whether a published item becomes a media-outreach campaign.
 - A page on `licklider.ai` is an owned publication surface, not a new scientific or protocol authority.
+
+## 11. Blog-specific downstream policy
+
+[Blog editorial policy](blog/README.md) is the canonical downstream policy for
+Blog audience, purpose, voice, topic selection, and editorial acceptance.
+[Blog writing procedure](blog/WRITE.md) applies it to each commission. It does
+not change the rules for Research, Engineering, News, Docs, or other site pages.
+
+Blog drafting is active; the public Blog class and routes are pending site
+integration. Sections 1–9 describe the currently implemented three-class system.
+At Blog integration, update those descriptions, types, indexes, and feeds together.
+Until then, do not create a Blog registry entry under an unrelated existing class.
+
+For Blog only, a distinct evidence-backed reader judgment or action can justify
+a new article without a new event under section 3.1. The Blog narrative follows
+its reader situation rather than the event-first order in section 6.2. Site-wide
+claim boundaries, positive framing, limitation density, metadata, and publication
+checks still apply. This delegation does not itself publish an article, change
+the live site, or authorize outreach.
