@@ -37,7 +37,7 @@ const content = `<?xml version="1.0" encoding="UTF-8"?>
   <channel>
     <title>Licklider — Latest</title>
     <link>${SITE_URL}/latest/</link>
-    <description>Research, engineering, and company updates from Licklider.</description>
+    <description>Research, engineering, company news, and practical Blog articles from Licklider.</description>
     <language>en</language>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
     <atom:link href="${SITE_URL}/rss.xml" rel="self" type="application/rss+xml" />

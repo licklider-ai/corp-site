@@ -5,7 +5,7 @@ import { PUBLICATIONS, type PublicationItem } from '../../data/publications';
 import PublicationIndexLayout from '../../layouts/PublicationIndexLayout.astro';
 
 const description =
-  'Research papers, engineering notes, and company news from Licklider, newest first.';
+  'Research papers, engineering notes, company news, and practical Blog articles from Licklider, newest first.';
 
 export const getStaticPaths = (({ paginate }) => {
   const latest = [...PUBLICATIONS].sort((a, b) =>
@@ -30,11 +30,12 @@ const metaTitle =
 <PublicationIndexLayout
   title="Latest"
   metaTitle={metaTitle}
-  eyebrow="Research / Engineering / News"
+  eyebrow="Research / Engineering / News / Blog"
   description={description}
   items={page.data}
   showCategory
   links={[
+    { label: 'Blog', href: '/blog/' },
     { label: 'Subscribe via RSS', href: '/rss.xml' },
     { label: 'JSON Feed', href: '/feed.json' },
   ]}

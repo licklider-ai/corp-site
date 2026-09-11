@@ -26,7 +26,7 @@ benefit: correct discovery, selection, input, stopping, and interpretation.
 ## 2. Documentation is not a publication class
 
 `/docs/` is a product and technical documentation surface. It is separate from the
-Research / Engineering / News taxonomy governed by
+Research / Engineering / News / Blog taxonomy governed by
 [`publication-architecture.md`](publication-architecture.md).
 
 - A documentation page does not appear in Latest merely because it was added or edited.

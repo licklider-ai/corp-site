@@ -129,6 +129,7 @@ ${UPSTREAM_CONTRIBUTIONS.map((item) => `- [${item.project}: ${item.title}](https
 
 - [Research](https://www.licklider.ai/research/): papers and research notes
 - [Engineering](https://www.licklider.ai/engineering/): implementation work and upstream reports
+- [Blog](https://www.licklider.ai/blog/): practical guidance for researchers using AI
 - [Latest](https://www.licklider.ai/latest/): all public updates in reverse chronological order
 - [RSS](https://www.licklider.ai/rss.xml): RSS 2.0 feed for all public updates
 - [JSON Feed](https://www.licklider.ai/feed.json): JSON Feed 1.1 for all public updates

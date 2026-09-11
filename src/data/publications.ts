@@ -1,4 +1,4 @@
-export type PublicationCategory = 'Research' | 'Engineering' | 'News';
+export type PublicationCategory = 'Research' | 'Engineering' | 'News' | 'Blog';
 
 export type PublicationItem = {
   category: PublicationCategory;
@@ -12,6 +12,16 @@ export type PublicationItem = {
 };
 
 export const PUBLICATIONS: PublicationItem[] = [
+  {
+    "category": "Blog",
+    "type": "Practical guide",
+    "date": "September 11, 2026",
+    "sortKey": "2026-09-11",
+    "title": "What to decide before asking an agent to compare several groups",
+    "summary": "Specify the comparisons, research conditions, and outputs you need so an agent can propose an analysis that answers your question.",
+    "href": "/blog/before-asking-an-agent-to-compare-groups/",
+    "status": "Illustrative planning example; not a tested agent workflow"
+  },
   {
     category: 'Engineering',
     type: 'Technical method',

@@ -4,23 +4,24 @@
 **Authority:** Canonical for placement, labels, and required metadata on `licklider.ai`  
 **Claim authority:** Subordinate to `licklider-ai/nomue-app/PUBLIC_COMMUNICATIONS.md`  
 **Outreach authority:** Media outreach is governed separately by `licklider-ai/nomue-pr`  
-**Status:** Active — v1.9<br>
+**Status:** Active — v2.0<br>
 **Last updated:** 2026-09-11
 
 ---
 
 ## 1. Decision
 
-Licklider publishes through three primary classes:
+Licklider publishes through four primary classes:
 
 | Primary class | Question answered | Canonical index |
 | --- | --- | --- |
 | **Research** | What did we study or find? | `/research/` |
 | **Engineering** | What did we build, debug, measure, or learn in implementation? | `/engineering/` |
 | **News** | What externally meaningful event happened? | `/news/` |
+| **Blog** | What can a reader decide or do using the evidence? | `/blog/` |
 
-`/latest/` is the chronological view across all three classes. The global header links to
-**Latest**, rather than listing all three classes. The class indexes remain canonical,
+`/latest/` is the chronological view across all four classes. The global header links to
+**Latest**, rather than listing all four classes. The class indexes remain canonical,
 and every item in a mixed list must show its primary class.
 
 `/rss.xml` (RSS 2.0) and `/feed.json` (JSON Feed 1.1) are subscription views of the same
@@ -37,7 +38,7 @@ An item has exactly **one primary class**. It may be linked from another index, 
 
 These classes describe the nature of the public item. They do **not** determine whether media outreach is appropriate.
 
-Product and technical documentation under `/docs/` is not a fourth publication class.
+Product and technical documentation under `/docs/` is not a publication class.
 Documentation placement, human/agent variants, and machine-readable discovery are
 governed by [`agent-readable-documentation.md`](agent-readable-documentation.md).
 Ordinary documentation changes do not create Latest entries.
@@ -55,7 +56,7 @@ The reviewed peers separate editorial purpose from research maturity:
 - [OpenAI Research Index](https://openai.com/research/index/) separately distinguishes output or maturity types such as Publication, Conclusion, Milestone, and Release.
 - OpenAI describes [Engineering](https://openai.com/news/engineering/) as stories about its technology and builders.
 
-The adopted lesson is not to copy every peer category. Licklider is smaller and should keep only the three distinctions that prevent material misunderstanding: research evidence, engineering experience, and externally meaningful events.
+The adopted lesson is not to copy every peer category. Licklider is smaller and should keep distinctions that prevent material misunderstanding: research evidence, engineering experience, externally meaningful events, and practical reader guidance. Blog was added on September 11, 2026 under the downstream policy in section 11.
 
 **Observation date:** 2026-08-23. Peer structures are precedent evidence, not authority for Licklider claims.
 
@@ -71,6 +72,8 @@ Classify by the article's primary contribution.
    → **Engineering**
 3. Does it announce availability, a release, partnership, company action, policy, commitment, or correction?  
    → **News**
+4. Does it apply existing evidence to a distinct reader decision or action?
+   → **Blog**, subject to the downstream E01–E05 selection threshold
 
 When one event supports more than one useful article, the articles must have different jobs. Example: a protocol release can have one News announcement about availability and one Engineering article about design and verification. Neither may copy the other as a second canonical announcement.
 
@@ -163,6 +166,12 @@ The usual evidence, confidentiality and publication-authorization rules still ap
 News is not the catch-all for every new URL, repository commit, paper version, or submission milestone.
 
 ---
+
+### 4.4 Blog
+
+Use `practical_guide` (display: **Practical guide**) for evidence-backed explanations
+and worked planning examples. Follow [Blog policy](blog/README.md) and its E01–E05
+threshold. A Blog is not evidence of new research, product support, or peer review.
 
 ## 5. Research maturity labels
 
@@ -420,11 +429,14 @@ unexplained.
 
 ### Article layout and images
 
-All Research, Engineering, and News articles use `PublicationLayout.astro`.
+All Research, Engineering, News, and Blog articles use `PublicationLayout.astro`.
 The title, summary, publication dates, and body share a centered reading column of at most
 52rem. Text remains left-aligned. The surrounding article canvas remains at most
 62rem; images can use that wider canvas. Both widths shrink to the available
 space on mobile, preserving the page gutters.
+
+Thumbnails are optional, including for Blog. Without a thumbnail, no image region
+or placeholder is rendered. Latest and homepage Latest rows remain image-free.
 
 For an article thumbnail, pass a `figure` or `img` in the layout's named
 `thumbnail` slot. It appears between the article header and body at the wide canvas
@@ -508,13 +520,13 @@ body near the relevant claim; they do not require a metadata panel.
 
 ## 9. Latest aggregation and navigation rule
 
-Research, Engineering, and News remain distinct canonical classes and retain their own
-indexes and article URLs. **Latest** is an aggregation, not a fourth class.
+Research, Engineering, News, and Blog remain distinct canonical classes and retain their own
+indexes and article URLs. **Latest** is an aggregation, not a publication class.
 
 The required public structure is:
 
-- `/latest/` lists all three classes in reverse chronological order;
-- the global header links to **Latest**, rather than repeating all three class links;
+- `/latest/` lists all four classes in reverse chronological order;
+- the global header links to **Latest**, rather than repeating all four class links;
 - every mixed row shows its primary class and links to the canonical article;
 - category indexes remain available from item labels and lower-page navigation; and
 - the home-page mixed list is named **Latest** and follows the same classification rule.
@@ -538,10 +550,9 @@ Blog audience, purpose, voice, topic selection, and editorial acceptance.
 [Blog writing procedure](blog/WRITE.md) applies it to each commission. It does
 not change the rules for Research, Engineering, News, Docs, or other site pages.
 
-Blog drafting is active; the public Blog class and routes are pending site
-integration. Sections 1–9 describe the currently implemented three-class system.
-At Blog integration, update those descriptions, types, indexes, and feeds together.
-Until then, do not create a Blog registry entry under an unrelated existing class.
+Blog is integrated through `/blog/`, canonical article routes, and `PUBLICATIONS`.
+Latest, homepage Latest, RSS and JSON Feed reuse that registry. Thumbnails remain
+optional under the Blog policy; the shared article layout provides their placement.
 
 For Blog only, a distinct evidence-backed reader judgment or action can justify
 a new article without a new event under section 3.1. The Blog narrative follows
