@@ -11,7 +11,10 @@ const isActive = (href: string) => {
 
 <header class="site-header">
   <div class="inner">
-    <a class="logo" href="/">{SITE_TITLE}</a>
+    <a class="logo" href="/">
+      <span>{SITE_TITLE}</span>
+      <img class="logo-mark" src="/favicon.svg" alt="" aria-hidden="true" />
+    </a>
 
     <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="global-navigation" data-ui>
       <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 8h16M4 16h16" /></svg>
@@ -103,11 +106,23 @@ const isActive = (href: string) => {
   }
 
   .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.44em;
     font-size: 1.4rem;
+    line-height: 1;
     letter-spacing: 0.02em;
     text-decoration: none;
     color: var(--ink);
     flex-shrink: 0;
+  }
+
+  .logo-mark {
+    display: block;
+    width: auto;
+    height: 0.88em;
+    flex: 0 0 auto;
+    transform: translateY(-0.015em);
   }
 
   .logo:hover {
