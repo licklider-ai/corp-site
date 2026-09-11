@@ -538,6 +538,16 @@ difference between scholarly status, technical experience, and company events.
 
 ## 10. Authority boundaries
 
+Publication dates and substantive update dates belong in `PUBLICATIONS`
+(`date` and optional `updated`). Keep the original `sortKey`, URL and feed ID
+when updating an existing article. `PublicationLayout`, JSON Feed modification
+dates and publication sitemap `lastmod` reuse this registry. RSS retains the
+original `pubDate`, includes the update date in its description, and computes
+channel `lastBuildDate` from publication and update dates. Feed text includes
+the article's maturity/status boundary. JSON Feed must include `content_text`
+or `content_html` as well as any summary. Never replace an article's publication
+date with its update date merely to move it to the top of Latest.
+
 - `PUBLIC_COMMUNICATIONS.md` controls what Licklider and nomue may claim.
 - This document controls where an allowed claim is presented and which status metadata must accompany it.
 - `nomue-pr` controls whether a published item becomes a media-outreach campaign.
