@@ -31,7 +31,7 @@ on Python 3.12.14 / SciPy 1.18.1 / NumPy 2.3.5 / mpmath 1.3.0, Linux x86_64.
 - Interval scoring is explained as a method; this small reproducer uses rational
   moments and elementary/high-precision references, not a new Arb certification run.
 
-## Duplicate and upstream checks
+## Initial duplicate and upstream checks (before submission)
 
 Bounded tracker searches for ttest_ind/underflow, Welch/df/underflow and the helper
 name found related reports #26113, #26146, #10269, #6409 and #5686, but no directly
@@ -40,9 +40,9 @@ errors, not the unequal-variance helper. This is not an exhaustive novelty claim
 
 SciPy's current AI policy reserves developer communication to humans, except
 translation/grammar assistance. Accordingly, no automatically generated issue was
-posted. The owner-facing source packet is for a person's own report. Public status
-is reproduction completed / submission pending; UPSTREAM_CONTRIBUTIONS and its
-count stay unchanged. No maintainer receipt, acceptance or confirmation is implied.
+posted. The owner-facing source packet is for a person's own report. At initial publication, public status
+was reproduction completed / submission pending; UPSTREAM_CONTRIBUTIONS and its
+count stayed unchanged. No maintainer receipt, acceptance or confirmation is implied.
 Policy checked: https://scipy.github.io/devdocs/dev/conduct/ai_policy.html
 
 ## Editorial and implementation review
@@ -60,3 +60,47 @@ not an independent human or maintainer review. The public README discloses assis
 Publication follows normal PR/build/merge/Vercel checks. The successful production
 completion time will be added to the registry after the deployment is observed;
 no draft or build timestamp is used as publication time.
+
+
+## Upstream submission received — 2026-09-12 (UTC)
+
+The owner supplied SciPy issue https://github.com/scipy/scipy/issues/26169 and
+requested homepage, Latest and related-site updates through production deployment.
+The issue was created by tasuku-kobayashi at 2026-09-12T09:38:13Z. On inspection it
+was open with no comments; submission is verified, while maintainer confirmation,
+an accepted fix and a released fix remain unestablished.
+
+The posted samples, scales, t/df/p outputs, finite variances, warning settings,
+source identity and independent-reference claims agree with the existing public
+reproducer. The 5% decision remains unchanged in the displayed example. The
+failure stage differs from #26113 (variance range) and #26146 (ANOVA weight sum);
+#26135 is a proposed repair for one-sample/paired APIs, not this Welch helper.
+
+The existing Engineering article already covers the same finding. Update its
+submission status and classify it as an Upstream report, preserving its title,
+URL, original publication time and Latest position. Do not create a duplicate
+article or a separate News item. Add the distinct problem once to the shared
+upstream registry: 10 reports, with the existing 3 matching merged fixes unchanged.
+Homepage panels, totals, About selected work and the site LLM index reuse this
+registry. Other reports retain their previously recorded observation status;
+the count date does not imply a fresh review of every upstream issue.
+
+Update the public reproduction README and its checksum together. The scripts,
+recorded outputs and their hashes remain unchanged. The pre-submission bundle
+is preserved in revision e18ca9394730cff7bfb2d3fbce6b8e8a0dc08bcb. The public
+assistance disclosure remains. No upstream comment or message is sent by this work.
+
+Record the substantive article-update time only after successful production
+completion, using the UTC procedure in deployment.md. A metadata-only follow-up
+must retain that observed time, not its own deployment time.
+
+Validation for the submission update: the five evidence-file hashes were checked.
+Exact Fraction moments independently recover df=4 and t²=6 for all three actual
+binary64 input scales. A 100-digit Decimal evaluation of the elementary probability
+agrees with the saved reference to within 1e-61. The saved finite variances,
+returned t/df/p and warning counts agree with the issue. SciPy was not rerun in
+this editing environment; this check is not a new independent execution review.
+Astro check and production build passed (78 source files, 60 pages). Generated
+outputs retain 38 unique publication entries, the original article URL and
+publication time, 10 reports and 3 matching merged fixes. The article, homepage,
+About, Latest, Engineering index, LLM index, feeds and evidence hashes agree.

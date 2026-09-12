@@ -9,7 +9,7 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/checking-
 <h2>A finite answer can still need checking</h2>
 <p>A six-observation example exposes a numerical failure in SciPy 1.18.1: an exact change of scale leaves the Welch t statistic unchanged, but changes the returned degrees of freedom and p-value. The smaller-scale call emits no warning. We publish the inputs, executable checks and recorded results so another developer can inspect the same behavior.</p>
 <p>The useful lesson is a testing method: start with a transformation that should preserve the answer, calculate a reference independently, and inspect each returned field. A successful call and a p-value between zero and one are useful checks, but do not establish numerical accuracy.</p>
-<p>As of September 12, 2026, Licklider has reproduced this example in the fixed environment below. Submission of this distinct Welch degrees-of-freedom observation to SciPy is pending; it is not an upstream-confirmed defect or an accepted repair.</p>
+<p>Reported to SciPy on September 12, 2026 as <a href="https://github.com/scipy/scipy/issues/26169">issue #26169</a>. Licklider has reproduced the example in the fixed environment below. The issue is open; upstream confirmation and an accepted repair are pending.</p>
 </section>
 <section>
 <h2>Change the scale without changing the problem</h2>
