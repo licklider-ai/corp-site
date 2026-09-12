@@ -33,6 +33,16 @@ const PRODUCTION_29: RecordedPublicationTime = {
 export const PUBLICATIONS: PublicationItem[] = [
   {
     category: 'Engineering',
+    type: 'Technical method',
+    date: 'September 12, 2026',
+    sortKey: '2026-09-12',
+    title: 'Checking Welch results with exact rescaling',
+    summary: 'Exact inputs and independent references expose a changed Welch p-value despite a finite result and no warning in a SciPy boundary test.',
+    href: '/engineering/checking-welch-results-with-exact-rescaling/',
+    status: 'Reproduced in SciPy 1.18.1; upstream submission pending; no general repair established',
+  },
+  {
+    category: 'Engineering',
     type: 'Implementation note',
     date: 'September 11, 2026',
     sortKey: '2026-09-11',
@@ -507,3 +517,4 @@ for (const item of PUBLICATIONS) {
     throw new Error(`Update precedes publication: ${item.href}`);
   }
 }
+

@@ -124,6 +124,8 @@ ${UPSTREAM_CONTRIBUTIONS.map((item) => `- [${item.project}: ${item.title}](https
 
 ## Evidence and updates
 
+- [Checking Welch results with exact rescaling](https://www.licklider.ai/engineering/checking-welch-results-with-exact-rescaling/): a six-observation SciPy 1.18.1 reproducer with exact inputs, independent references, warning capture and source diagnostics. Upstream submission of this distinct df observation is pending; it is excluded from the submitted-report total.
+
 - [When a verification call must discard its result](https://www.licklider.ai/engineering/when-a-verification-call-must-discard-its-result/): ${R3_EXPERIMENT_PROGRESS}
 - [Binding Holm corrections](https://www.licklider.ai/engineering/binding-holm-corrections-to-comparisons/): original declaration and supplied-p arithmetic experiment, updated with the candidate.3 successor and execution-control evidence; no added public support.
 - [Checking factorial probability evidence](https://www.licklider.ai/engineering/checking-factorial-probability-evidence/): ${R4_EXPERIMENT_PROGRESS}
@@ -149,3 +151,4 @@ export const GET: APIRoute = () =>
       'Content-Type': 'text/plain; charset=utf-8',
     },
   });
+

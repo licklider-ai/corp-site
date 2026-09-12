@@ -1,0 +1,79 @@
+SciPy: 1.18.1 e4e854eaa8f18d807cd3496028e257e36caa93cc
+NumPy: 2.3.5
+Python: 3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]
+Platform: Linux-6.18.35-x86_64-with-glibc2.39
+NumPy error settings: {'divide': 'warn', 'over': 'warn', 'under': 'ignore', 'invalid': 'warn'}
+stats source SHA256: bfd5ab202427ec19ad39a7d985b8fe3a5b283718ae1adec0bd8fc42f605e5988
+{"exponent": 0, "x_hex": ["-0x1.0000000000000p+0", "0x0.0p+0", "0x1.0000000000000p+0"], "y_hex": ["0x1.0000000000000p+0", "0x1.0000000000000p+1", "0x1.8000000000000p+1"], "variance_x": 1.0, "variance_y": 1.0, "exact_df": "4", "exact_t_squared": "6", "t": -2.449489742783178, "df": 4.0, "p": 0.07048399691021992, "ci_low": -4.266957935527519, "ci_high": 0.2669579355275191, "ci_low_rescaled": -4.266957935527519, "ci_high_rescaled": 0.2669579355275191, "df_numerator": "0.4444444444444444", "df_denominator": "0.1111111111111111", "raw_df": "4.0", "warnings": []}
+{"exponent": -300, "x_hex": ["-0x1.0000000000000p-300", "0x0.0p+0", "0x1.0000000000000p-300"], "y_hex": ["0x1.0000000000000p-300", "0x1.0000000000000p-299", "0x1.8000000000000p-299"], "variance_x": 2.409919865102884e-181, "variance_y": 2.409919865102884e-181, "exact_df": "4", "exact_t_squared": "6", "t": -2.449489742783178, "df": 1.0, "p": 0.24675171442884988, "ci_low": -6.07479340935429e-90, "ci_high": 4.111156023235199e-90, "ci_low_rescaled": -12.374572723654317, "ci_high_rescaled": 8.374572723654317, "df_numerator": "0.0", "df_denominator": "0.0", "raw_df": "nan", "warnings": []}
+{"exponent": 300, "x_hex": ["-0x1.0000000000000p+300", "0x0.0p+0", "0x1.0000000000000p+300"], "y_hex": ["0x1.0000000000000p+300", "0x1.0000000000000p+301", "0x1.8000000000000p+301"], "variance_x": 4.149515568880993e+180, "variance_y": 4.149515568880993e+180, "exact_df": "4", "exact_t_squared": "6", "t": -2.449489742783178, "df": 1.0, "p": 0.24675171442884988, "ci_low": -2.5207449829851273e+91, "ci_high": 1.705930592451333e+91, "ci_low_rescaled": -12.374572723654317, "ci_high_rescaled": 8.374572723654317, "df_numerator": "inf", "df_denominator": "inf", "raw_df": "nan", "warnings": [{"category": "RuntimeWarning", "message": "overflow encountered in scalar power"}, {"category": "RuntimeWarning", "message": "overflow encountered in scalar power"}, {"category": "RuntimeWarning", "message": "overflow encountered in scalar power"}]}
+NaN replacement in inspected helper:
+df = xp.where(xp.isnan(df), 1., df)
+Build configuration:
+Build Dependencies:
+  blas:
+    cython blas ilp64: false
+    detection method: pkgconfig
+    found: true
+    has ilp64: false
+    include directory: /opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/include
+    lib directory: /opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/lib
+    name: scipy-openblas
+    openblas configuration: OpenBLAS 0.3.31.dev DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64
+    pc file directory: /project/.openblas
+    version: 0.3.31.dev
+  lapack:
+    detection method: pkgconfig
+    found: true
+    has ilp64: false
+    include directory: /opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/include
+    lib directory: /opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas32/lib
+    name: scipy-openblas
+    openblas configuration: OpenBLAS 0.3.31.dev DYNAMIC_ARCH NO_AFFINITY Haswell MAX_THREADS=64
+    pc file directory: /project/.openblas
+    version: 0.3.31.dev
+  pybind11:
+    detection method: config-tool
+    include directory: unknown
+    name: pybind11
+    version: 3.0.4
+Compilers:
+  c:
+    commands: cc
+    linker: ld.bfd
+    name: gcc
+    version: 14.2.1
+  c++:
+    commands: c++
+    linker: ld.bfd
+    name: gcc
+    version: 14.2.1
+  cython:
+    commands: cython
+    linker: cython
+    name: cython
+    version: 3.2.9
+  fortran:
+    commands: gfortran
+    linker: ld.bfd
+    name: gcc
+    version: 14.2.1
+  pythran:
+    include directory: ../../../tmp/build-env-3zxzwx9o/lib/python3.12/site-packages/pythran
+    version: 0.19.0
+Machine Information:
+  build:
+    cpu: x86_64
+    endian: little
+    family: x86_64
+    system: linux
+  cross-compiled: false
+  host:
+    cpu: x86_64
+    endian: little
+    family: x86_64
+    system: linux
+Python Information:
+  path: /tmp/build-env-3zxzwx9o/bin/python
+  version: '3.12'
+

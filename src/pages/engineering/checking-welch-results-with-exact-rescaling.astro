@@ -1,0 +1,57 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/checking-welch-results-with-exact-rescaling/')!;
+---
+<PublicationLayout category={item.category} type={item.type} title={item.title}
+  description={item.summary} published={item.date} status={item.status} toc={[]}>
+<section>
+<h2>A finite answer can still need checking</h2>
+<p>A six-observation example exposes a numerical failure in SciPy 1.18.1: an exact change of scale leaves the Welch t statistic unchanged, but changes the returned degrees of freedom and p-value. The smaller-scale call emits no warning. We publish the inputs, executable checks and recorded results so another developer can inspect the same behavior.</p>
+<p>The useful lesson is a testing method: start with a transformation that should preserve the answer, calculate a reference independently, and inspect each returned field. A successful call and a p-value between zero and one are useful checks, but do not establish numerical accuracy.</p>
+<p>As of September 12, 2026, Licklider has reproduced this example in the fixed environment below. Submission of this distinct Welch degrees-of-freedom observation to SciPy is pending; it is not an upstream-confirmed defect or an accepted repair.</p>
+</section>
+<section>
+<h2>Change the scale without changing the problem</h2>
+<p>Welch’s two-sample t-test compares two independent group means while allowing different variances. Multiplying both groups by the same positive constant preserves its t statistic, degrees of freedom and p-value. The confidence interval should change by that same constant.</p>
+<p>Use <code>[-1, 0, 1]</code> and <code>[1, 2, 3]</code>. Each group has sample variance 1 and three observations. The exact reference is <code>t = −√6</code> and <code>df = 4</code>. Here, df is the degrees-of-freedom parameter used to turn t into a probability.</p>
+<pre><code>{`import numpy as np
+from scipy import stats
+
+for k in (0, -300, 300):
+    x = np.ldexp(np.array([-1., 0., 1.]), k)
+    y = np.ldexp(np.array([1., 2., 3.]), k)
+    result = stats.ttest_ind(x, y, equal_var=False)
+    print(k, result.statistic, result.df, result.pvalue)`}</code></pre>
+<p>The powers of two in this example preserve the input values exactly. The two-sided reference probability is <code>1 − (6/5)√(3/5)</code>, approximately <code>0.07048399691</code>.</p>
+<div class="table-scroll"><table>
+<caption>SciPy 1.18.1 results; the reference df is 4 at every scale</caption>
+<thead><tr><th scope="col">Scale</th><th scope="col">Returned t</th><th scope="col">Returned df</th><th scope="col">Returned p</th><th scope="col">Captured warnings</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>−2.44949</td><td>4</td><td>0.070484</td><td>None</td></tr>
+<tr><td>2^-300</td><td>−2.44949</td><td>1</td><td>0.246752</td><td>None</td></tr>
+<tr><td>2^300</td><td>−2.44949</td><td>1</td><td>0.246752</td><td>Three overflow warnings</td></tr>
+</tbody></table></div>
+<p>Both returned probabilities stay above 0.05 in this example. The finding concerns numerical accuracy and the confidence interval, rather than a changed 5% decision. The deliberately extreme scales do not estimate how often this occurs in practical data.</p>
+</section>
+<section>
+<h2>Find the first calculation that loses information</h2>
+<p>The computed sample variances remain positive and finite: approximately <code>2.41 × 10^-181</code> at the small scale and <code>4.15 × 10^180</code> at the large scale. The failure occurs when the degrees-of-freedom formula squares the variance contributions. Its numerator and denominator become either both zero or both infinite.</p>
+<p>The resulting ratio is NaN, meaning the floating-point calculation did not produce a numerical value. The inspected <a href="https://github.com/scipy/scipy/blob/e4e854eaa8f18d807cd3496028e257e36caa93cc/scipy/stats/_stats_py.py#L6369-L6380">SciPy 1.18.1 helper</a> replaces NaN degrees of freedom with 1. A separate diagnostic in our reproducer checks this expression and the installed helper. The installed source hash matches that upstream revision.</p>
+<p>The helper’s zero-variance explanation does not cover this example: both variances are nonzero. The replacement produces a plausible finite probability using the wrong degrees of freedom. Rescaling the reported 95% interval back to the original units gives approximately <code>[−12.3746, 8.3746]</code>, compared with the unscaled call’s <code>[−4.2670, 0.2670]</code>.</p>
+<p>This differs from our <a href="/engineering/scipy-ttest-scale-range-loss/">one-sample and paired t-test report</a>, where the variance itself loses range, and from the <a href="/engineering/scipy-welch-anova-weight-sum-overflow/">Welch ANOVA report</a>, where summing group weights overflows. The related <a href="https://github.com/scipy/scipy/pull/26135">SciPy PR #26135</a> proposes a repair for the one-sample and paired APIs, rather than this Welch helper.</p>
+</section>
+<section>
+<h2>Keep the evidence separate from the implementation</h2>
+<p>The downloadable check reconstructs each actual binary64 input as an exact rational number and calculates the moments without rounding. A separate script uses mpmath at 100 decimal digits to compare the elementary probability formula with a beta-integral calculation. Neither reference calls SciPy or nomue.</p>
+<p>For more complicated cases, interval arithmetic offers another reference form: a narrow range containing the target value. A tolerance check can pass when the whole error range is below its threshold, fail when it is above, and remain unresolved when it crosses the threshold. Such numerical containment concerns the specified calculation; it does not establish that the research assumptions are suitable.</p>
+<p>Exact hexadecimal inputs preserve what was actually computed. Saved outputs, warning settings and package versions make the observation repeatable. File hashes identify the evidence, while separate checks establish its numerical meaning. These serve different purposes.</p>
+<p>For nomue, an agent-callable verification product, this provides a concrete engineering lesson: test the result delivered at the API boundary, including numerical fields and failure signals. Putting range handling inside a tool reduces dependence on callers adding the right preprocessing. Agents can generate preprocessing, so this is a design motivation, not a claim that they always omit it or that nomue improves model performance.</p>
+<p>Download the <a href="/reports/welch-df-fallback/README.md">reproduction instructions</a>, <a href="/reports/welch-df-fallback/reproduce.py">SciPy reproducer</a>, <a href="/reports/welch-df-fallback/reference.py">independent reference</a>, <a href="/reports/welch-df-fallback/observed-output.txt">recorded outputs and environment</a>, <a href="/reports/welch-df-fallback/reference-output.txt">reference output</a>, and <a href="/reports/welch-df-fallback/SHA256SUMS">file hashes</a>. The run used Python 3.12.14, SciPy 1.18.1, NumPy 2.3.5 and mpmath 1.3.0 on Linux x86_64. It establishes this release-specific example, not a general repair or product ranking.</p>
+</section>
+</PublicationLayout>
+<style>
+.table-scroll { overflow-x: auto; margin: 1.75rem 0; }
+table { min-width: 40rem; }
+caption { text-align: left; margin-bottom: 0.75rem; }
+</style>
