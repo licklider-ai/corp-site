@@ -223,9 +223,24 @@ export const CORE_NON_CLAIMS = [
 
 // Count distinct problems submitted to the responsible upstream project, including
 // email submissions. Follow-up issues, articles and fixes do not add another report.
-export const UPSTREAM_REPORTS_AS_OF = 'September 10, 2026';
+export const UPSTREAM_REPORTS_AS_OF = 'September 12, 2026';
 
 export const UPSTREAM_CONTRIBUTIONS = [
+  {
+    project: 'SciPy',
+    title: 'Welch t-test: finite variances, wrong degrees of freedom',
+    summary: 'Exact rescaling leaves the sample variances finite and the t statistic unchanged, but changes the degrees of freedom from 4 to 1 and the p-value from 0.070484 to 0.246752.',
+    href: '/engineering/checking-welch-results-with-exact-rescaling/',
+    status: PUBLICATIONS.find((item) => item.href === '/engineering/checking-welch-results-with-exact-rescaling/')!.status,
+    outcome: 'report_open',
+    panelStatus: 'Reported · confirmation pending',
+    comparisonLabel: 'Returned degrees of freedom → exact reference',
+    observed: '1',
+    reference: '4',
+    evidenceHref: 'https://github.com/scipy/scipy/issues/26169',
+    evidenceLabel: 'SciPy issue #26169',
+    credit: 'Reported by Tasuku Kobayashi on September 12, 2026; upstream confirmation pending',
+  },
   {
     "project": "SciPy",
     "title": "Studentized range: a nonzero tail returns zero",

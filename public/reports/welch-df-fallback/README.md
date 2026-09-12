@@ -40,16 +40,21 @@ a future corrected release would not itself indicate a new defect.
 
 ## Status and related reports
 
-This reproducer is published by Licklider. Upstream submission of this distinct
-Welch df observation is pending. It is not a submitted report or a maintainer
-confirmation, and does not add to Licklider's upstream-report count.
+This reproducer is published by Licklider. Tasuku Kobayashi submitted this distinct
+Welch df observation to SciPy on 2026-09-12 at 09:38:13 UTC:
+https://github.com/scipy/scipy/issues/26169
+
+As checked on 2026-09-12 (UTC), the issue is open with no comments. Upstream
+confirmation and an accepted repair are pending. The submission adds one distinct
+problem to Licklider's upstream-report count; this article and its attachments do
+not add separate reports.
 
 Related, different failures:
 - https://github.com/scipy/scipy/issues/26113 — one-sample/paired variance range loss.
 - https://github.com/scipy/scipy/pull/26135 — proposed repair for those APIs, not this helper.
 - https://github.com/scipy/scipy/issues/26146 — Welch ANOVA weight-sum overflow.
 
-Code generation, source inspection, execution and drafting used OpenAI Codex under
-the account holder's direction. No independent human review is claimed. SciPy's
-communication policy reserves issue explanations to people; the publication of
-these test materials is separate from submitting an issue.
+Code generation, source inspection, execution and drafting of these test materials
+used OpenAI Codex under the account holder's direction. No independent human review
+is claimed. The upstream issue was submitted by Tasuku Kobayashi and contains its
+own assistance disclosure. Submission does not imply maintainer confirmation.

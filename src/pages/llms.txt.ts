@@ -107,7 +107,7 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 - [Tasuku Kobayashi](https://www.licklider.ai/about/#tasuku-kobayashi) is Licklider's founder and CEO. He leads product, Protocol, research, and engineering work.
 - He previously worked at Recruit and founded two companies before Licklider, exiting both through share sales.
 - He is the sole author of [Correctly Rounded or Refused — preprint v0.2](https://zenodo.org/records/22025200), which has not been peer reviewed.
-- The ${UPSTREAM_CONTRIBUTIONS.length} numerical and method-selection reports listed below span SciPy, Boost.Math, R, agricolae, and Julia/HypothesisTests.jl and were submitted under his name through issue trackers or maintainer email. The agricolae REGW report was emailed on September 10, 2026; upstream confirmation is pending. ${upstreamFixCount} have matching fixes merged upstream. The SciPy variance-range, Mann–Whitney U method-selection, Welch ANOVA weight-sum, and Studentized-range tail reports and the R report remain open without accepted fixes; the Julia matching fix shipped in v0.12.0 and remains in v0.12.1. SciPy PR #26135 proposes a variance-range repair but is not yet reviewed or merged. The R tracker could not be rechecked on September 9; its open status is the last recorded state.
+- The ${UPSTREAM_CONTRIBUTIONS.length} numerical and method-selection reports listed below span SciPy, Boost.Math, R, agricolae, and Julia/HypothesisTests.jl and were submitted under his name through issue trackers or maintainer email. The agricolae REGW report was emailed on September 10, 2026; upstream confirmation is pending. ${upstreamFixCount} have matching fixes merged upstream. The SciPy variance-range, Mann–Whitney U method-selection, Welch ANOVA weight-sum, Welch t-test degrees-of-freedom, and Studentized-range tail reports and the R report remain open without accepted fixes; the Julia matching fix shipped in v0.12.0 and remains in v0.12.1. SciPy PR #26135 proposes a variance-range repair but is not yet reviewed or merged. The R tracker could not be rechecked on September 9; its open status is the last recorded state.
 
 ## Public technical authority
 
@@ -124,7 +124,7 @@ ${UPSTREAM_CONTRIBUTIONS.map((item) => `- [${item.project}: ${item.title}](https
 
 ## Evidence and updates
 
-- [Checking Welch results with exact rescaling](https://www.licklider.ai/engineering/checking-welch-results-with-exact-rescaling/): a six-observation SciPy 1.18.1 reproducer with exact inputs, independent references, warning capture and source diagnostics. Upstream submission of this distinct df observation is pending; it is excluded from the submitted-report total.
+- [Checking Welch results with exact rescaling](https://www.licklider.ai/engineering/checking-welch-results-with-exact-rescaling/): a six-observation SciPy 1.18.1 reproducer with exact inputs, independent references, warning capture and source diagnostics. Reported to SciPy as [issue #26169](https://github.com/scipy/scipy/issues/26169) on September 12, 2026; upstream confirmation and repair are pending. Counted once in the submitted-report total.
 
 - [When a verification call must discard its result](https://www.licklider.ai/engineering/when-a-verification-call-must-discard-its-result/): ${R3_EXPERIMENT_PROGRESS}
 - [Binding Holm corrections](https://www.licklider.ai/engineering/binding-holm-corrections-to-comparisons/): original declaration and supplied-p arithmetic experiment, updated with the candidate.3 successor and execution-control evidence; no added public support.
