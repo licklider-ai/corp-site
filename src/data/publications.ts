@@ -37,6 +37,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     date: 'September 12, 2026',
     sortKey: '2026-09-12',
     title: 'Checking Welch results with exact rescaling',
+    publishedTime: { at: '2026-09-12T05:05:29Z', evidence: 'https://vercel.com/licklidermvp/website/75p6gK4JMBZQTgfGzsFshNj2fU35' },
     summary: 'Exact inputs and independent references expose a changed Welch p-value despite a finite result and no warning in a SciPy boundary test.',
     href: '/engineering/checking-welch-results-with-exact-rescaling/',
     status: 'Reproduced in SciPy 1.18.1; upstream submission pending; no general repair established',
