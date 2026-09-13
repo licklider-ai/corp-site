@@ -32,6 +32,16 @@ const PRODUCTION_29: RecordedPublicationTime = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'Engineering',
+    type: 'Implementation note',
+    date: 'September 13, 2026',
+    sortKey: '2026-09-13',
+    title: 'Separating format checks from verification results',
+    summary: 'An experimental Holm verifier separates format and declaration checks from integrity, context and arithmetic results, preserving explicit outcomes for checks that did not run.',
+    href: '/engineering/separating-record-conformance-from-verification/',
+    status: 'Unissued Holm candidate.4 in a draft PR; output separation implemented; design decisions and public adoption remain open',
+  },
+  {
     updatedTime: { at: '2026-09-13T06:25:54Z', evidence: 'https://vercel.com/licklidermvp/website/2SkpoaNXnoQcKpv239PDUAfmSVxj' },
     updated: 'September 13, 2026',
     category: 'Engineering',
@@ -50,10 +60,11 @@ export const PUBLICATIONS: PublicationItem[] = [
     date: 'September 11, 2026',
     sortKey: '2026-09-11',
     title: 'When a verification call must discard its result',
+    updated: 'September 13, 2026',
     publishedTime: PRODUCTION_29,
     summary: 'An experimental Holm verifier connects Record checks to shared execution budgets, operating-system limits and cleanup evidence before deciding whether a result can be returned.',
     href: '/engineering/when-a-verification-call-must-discard-its-result/',
-    status: 'Unissued Holm candidate.3; bounded execution evidence; no additional supported capability',
+    status: 'Unissued Holm execution candidate; candidate.4 separates public results while retaining execution controls; no additional supported capability',
   },
   {
     category: 'Engineering',
@@ -74,10 +85,11 @@ export const PUBLICATIONS: PublicationItem[] = [
     date: 'September 11, 2026',
     sortKey: '2026-09-11',
     title: 'Checking factorial probability evidence against the raw observations',
+    updated: 'September 13, 2026',
     publishedTime: PRODUCTION_26,
-    summary: 'A bounded experiment connects raw observations to exact F ratios and checks that submitted probability intervals contain the recomputed enclosures for all three effects.',
+    summary: 'An experiment checks probability evidence against raw observations; a successor adds worker limits, cancellation cleanup and suppression of incomplete results.',
     href: '/engineering/checking-factorial-probability-evidence/',
-    status: 'Bounded experiment integrated into the public research archive; no additional supported capability',
+    status: 'Archived numerical experiment with a draft controlled-execution successor; final review and public support remain open',
   },
   {
     "category": "Blog",

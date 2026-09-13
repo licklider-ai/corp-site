@@ -1,0 +1,49 @@
+---
+import { PUBLICATIONS } from '../../data/publications';
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/separating-record-conformance-from-verification/')!;
+const source = 'https://github.com/licklider-ai/nomue-protocol/blob/b52389fd3efc6b8968613f59f147a578d5bbb55d/governance/drafts/release-3-preparation/';
+---
+<PublicationLayout category={item.category} type={item.type} title={item.title}
+  description={item.summary} published={item.date} status={item.status} toc={[]}>
+
+<section id="result">
+  <h2>Show which kind of check produced the result</h2>
+  <p>Our experimental Holm verifier now reports whether a Record follows its format and declaration rules separately from checks of its integrity, requested context and arithmetic. A caller can inspect those different results without treating a well-formed Record as proof that its calculation was checked.</p>
+  <p>A Record is the saved analysis and evidence submitted for verification. Conformance means meeting the rules for its structure and declared relationships. Verification checks particular claims about that Record. Both need explicit outcomes: a check that did not run must remain distinguishable from one that passed.</p>
+  <p>The implementation is the unissued <code>0.3.0-candidate.4</code> in <a href="https://github.com/licklider-ai/nomue-protocol/pull/330">PR #330</a>, currently a draft proposal. It checks ordinary unweighted Holm corrections over supplied p-values. Public verifier support and formal adoption remain unchanged.</p>
+</section>
+
+<section id="sections">
+  <h2>Separate the results without inventing another verdict</h2>
+  <p>The preceding candidate placed five checks in one array. The successor places declaration and input-admission results under <code>conformance</code>, alongside evidence that schema admission succeeded. Integrity, equality with the caller’s expected context, and arithmetic results appear under <code>verification_results</code>.</p>
+  <p>The schema-admission row means that the input passed the format checks needed to produce this candidate report. It does not mean that later semantic checks ran or passed. Schema-invalid input currently produces a refusal, so that row is not a general model for reporting both successful and failed schema checks.</p>
+  <p>The adapter validates the two sections together. Moving a check to the wrong role, deleting a required result, changing its identity or manufacturing success fails validation. The previous top-level array is rejected in candidate.4. Earlier Records retain their version; the verifier does not silently convert them.</p>
+  <p>Conformance has no combined verdict, and the report does not declare the research scientifically valid. For an agent consuming the response, the useful evidence is the named check, its outcome and its dependencies.</p>
+</section>
+
+<section id="order">
+  <h2>A new layout does not change which checks can run</h2>
+  <p>Evaluation still proceeds through integrity, caller context, declaration, input admission and arithmetic. The output adapter reconstructs that order when validating the report. Separating the public sections therefore preserves the existing rules for skipped checks and for forwarding the original Record bytes.</p>
+  <p>For example, a mismatch with the caller’s expected context currently prevents the later declaration checks from running. Their correct result is “not run”; the new section name does not turn them into an independent judgment of the Record. Whether Record-local checks should still run in that case is an explicit question in the <a href="https://github.com/licklider-ai/nomue-protocol/issues/274#issuecomment-5650143054">public design discussion</a>.</p>
+  <p>The <a href="/engineering/when-a-verification-call-must-discard-its-result/">execution controls</a> also remain in place. An outer execution failure or refusal discards both sections and any forwarded Record bytes. This prevents a partially completed call from retaining an apparently usable fragment of success.</p>
+</section>
+
+<section id="evidence">
+  <h2>Test misleading combinations as well as valid reports</h2>
+  <p>The author’s retained evidence includes 14 separation controls and nine fixed fixtures with expected outcomes prepared before execution. Existing suites cover 82 envelope controls, 93 public-output controls and 38 budget controls. These are finite check counts, not measurements of agent comprehension or scientific accuracy.</p>
+  <p>Reproduction uses Node 24.19.0, Python 3.12.14 and the repository lockfile. Actual-host execution records include 33 execution controls, 28 valid public receipts and five original-byte forwards. The numerical sources remain unchanged; these results concern report meaning and execution, rather than an improvement in Holm arithmetic.</p>
+  <p>An attributed external review reported sound output separation and conditional readiness for bounded reuse. It used different Node and Python versions; envelope and packet snapshot checks did not pass on that environment. Its additional probe scripts and raw logs were not supplied. The <a href={source + 'holm-adoption-preparation-20260912/EXTERNAL-REVIEW-INTAKE.md'}>fixed review intake</a> retains these limits and does not close final review or adoption.</p>
+</section>
+
+<section id="next">
+  <h2>Make the remaining interpretation choices explicit</h2>
+  <p>Three related questions remain open in the public record: whether Record-local checks should depend on caller-context agreement; when a format failure can be returned as a failed check rather than a refusal; and how to represent schema admission once that boundary is settled. Resolving them requires a versioned contract and tests of the resulting behavior.</p>
+  <p>This implementation makes the current distinction inspectable. It advances Licklider’s verification infrastructure by giving callers more precise evidence about what was checked. It does not recompute the supplied raw p-values, prove their statistical validity or demonstrate that an agent will interpret every response correctly.</p>
+  <ul>
+    <li><a href={source + 'holm-separated-candidate-20260912/README.md'}>Candidate.4 behavior, version boundaries and reproduction commands</a>.</li>
+    <li><a href={source + 'holm-adoption-preparation-20260912/VALIDATION.json'}>Retained author validation</a>; <a href={source + 'holm-adoption-preparation-20260912/ci/README.md'}>exact execution receipts and custody limits</a>.</li>
+    <li><a href={source + 'holm-adoption-preparation-20260912/CONTRACT-PROPOSAL.md'}>Bounded operation and output proposal</a>; <a href={source + 'holm-adoption-preparation-20260912/README.md'}>remaining adoption work and authorship disclosures</a>.</li>
+  </ul>
+</section>
+</PublicationLayout>
