@@ -47,3 +47,23 @@ scope is not broadened by the website.
   because the local Playwright browser executable was absent; no visual pass claimed.
 - Exact production completion time is recorded only after Vercel success, through
   the metadata-only follow-up required by docs/deployment.md.
+
+## Production completion
+
+Content PR #37 merged as `a0044ed87c6da2871730e78dcdcec6dba681deca`.
+Its uploaded tree matched the locally validated tree
+`e1844edbdbea5371025d90c21aba69ea21125d5a`. Hosted build and Vercel preview
+both succeeded before merge.
+
+Production Vercel success status `54071381527`, recorded
+`2026-09-13T12:56:31Z`, identifies
+<https://vercel.com/licklidermvp/website/GNEnE5vjZhHbVymW5E1bJJtA8zAv>.
+This instant supplies the new article's publishedTime and the two substantive
+updates' updatedTime. The following metadata-only deployment preserves that
+instant, original article identities and publication dates.
+
+After content deployment, the live Cloud Browser confirmed all three article
+headings, the new output-separation article, both successor sections and visible
+UTC publication/update dates. Search retrieval still showed an older cached
+article, so it was not used as production-state evidence. The metadata build
+checks HTML, JSON Feed, RSS and sitemap timestamps against the recorded instant.
