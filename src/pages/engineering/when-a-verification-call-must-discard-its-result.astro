@@ -10,8 +10,14 @@ const source = 'https://github.com/licklider-ai/nomue-protocol/blob/4a62f8e17680
 <section id="result">
   <h2>A result needs a completed execution behind it</h2>
   <p>A verification worker can produce plausible output just before its process runs out of memory, exceeds a deadline, or leaves a child process running. Returning that output as an ordinary result would hide an execution failure from the caller.</p>
-  <p>Our Release 3 Holm candidate now connects Record verification to execution controls that discard results after those failures. The current implementation, <code>0.3.0-candidate.3</code>, is an unissued research candidate with retained code, tests and review evidence. It adds no formally adopted Holm support to the public verifier.</p>
+  <p>Our Release 3 Holm candidate now connects Record verification to execution controls that discard results after those failures. The implementation described below, <code>0.3.0-candidate.3</code>, is an unissued research candidate with retained code, tests and review evidence. It adds no formally adopted Holm support to the public verifier.</p>
   <p>The <a href="/engineering/binding-holm-corrections-to-comparisons/">earlier Holm experiment</a> checked whether adjusted p-values belonged to the expected comparisons and inputs. The successor asks an additional question: did the whole call complete under the conditions required to return its evidence?</p>
+</section>
+
+<section id="separated-output">
+  <h2>The successor separates the returned checks</h2>
+  <p>The draft <code>0.3.0-candidate.4</code> now reports Record conformance separately from integrity, caller-context and arithmetic checks. It retains the private evaluation order, shared budgets, execution controls and original-byte forwarding rules described here. An outer execution failure or refusal still discards both result sections and the forwarded bytes.</p>
+  <p>The <a href="/engineering/separating-record-conformance-from-verification/">output-separation article</a> explains the new report and its additional controls. The <a href="https://github.com/licklider-ai/nomue-protocol/blob/b52389fd3efc6b8968613f59f147a578d5bbb55d/governance/drafts/release-3-preparation/holm-separated-candidate-20260912/README.md">fixed candidate.4 source</a> preserves the numerical kernel. Its final report/refusal boundary and dependency design remain open in the public discussion; this is an unissued successor, not newly available Holm support.</p>
 </section>
 
 <section id="record">
@@ -44,7 +50,7 @@ const source = 'https://github.com/licklider-ai/nomue-protocol/blob/4a62f8e17680
 
 <section id="remaining">
   <h2>What remains before public support</h2>
-  <p>This implementation round is at a documented stopping point. Formal adoption still requires matching the final candidate’s claims to applicable reviews, settling the public input/output and execution contract, and coordinating identifiers, schemas, checks and conformance expectations under the open RFC.</p>
+  <p>The candidate.3 execution evidence remains preserved at its fixed revision. The candidate.4 successor is now in adoption preparation. Formal adoption still requires matching the final candidate’s claims to applicable reviews, settling the public input/output and execution contract, and coordinating identifiers, schemas, checks and conformance expectations under the open RFC.</p>
   <p>The candidate checks ordinary unweighted Holm arithmetic over supplied p-values and its declared context. It does not generate those p-values or establish their scientific validity. The engineering result is a narrower, inspectable rule for delivery: a numerical result survives only when the required verification and execution conditions both permit it.</p>
   <ul>
     <li><a href={source + 'governance/drafts/release-3-preparation/holm-repaired-candidate-20260911/README.md'}>Current candidate, commands and limits</a>; <a href={source + 'governance/drafts/release-3-preparation/holm-repaired-candidate-20260911/entry.mjs'}>shared-budget entry</a>; <a href={source + 'governance/drafts/release-3-preparation/holm-repaired-candidate-20260911/public.mjs'}>receipt and original-byte checks</a>.</li>
