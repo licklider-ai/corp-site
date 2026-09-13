@@ -32,6 +32,7 @@ const PRODUCTION_29: RecordedPublicationTime = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    updatedTime: { at: '2026-09-13T06:25:54Z', evidence: 'https://vercel.com/licklidermvp/website/2SkpoaNXnoQcKpv239PDUAfmSVxj' },
     updated: 'September 13, 2026',
     category: 'Engineering',
     type: 'Upstream report',
@@ -111,6 +112,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     "status": "Additional reproducer reported — upstream confirmation pending"
   },
   {
+    updatedTime: { at: '2026-09-13T06:25:54Z', evidence: 'https://vercel.com/licklidermvp/website/2SkpoaNXnoQcKpv239PDUAfmSVxj' },
     updated: 'September 13, 2026',
     "category": "Engineering",
     "type": "Upstream report",
@@ -255,6 +257,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Triaged by a SciPy maintainer into scipy.stats; implementation path confirmed — intended behavior and remedy awaiting decision',
   },
   {
+    updatedTime: { at: '2026-09-13T06:25:54Z', evidence: 'https://vercel.com/licklidermvp/website/2SkpoaNXnoQcKpv239PDUAfmSVxj' },
     updated: 'September 13, 2026',
     category: 'Engineering',
     type: 'Upstream report',
