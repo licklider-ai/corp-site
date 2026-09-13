@@ -9,7 +9,12 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/checking-
 <h2>A finite answer can still need checking</h2>
 <p>A six-observation example exposes a numerical failure in SciPy 1.18.1: an exact change of scale leaves the Welch t statistic unchanged, but changes the returned degrees of freedom and p-value. The smaller-scale call emits no warning. We publish the inputs, executable checks and recorded results so another developer can inspect the same behavior.</p>
 <p>The useful lesson is a testing method: start with a transformation that should preserve the answer, calculate a reference independently, and inspect each returned field. A successful call and a p-value between zero and one are useful checks, but do not establish numerical accuracy.</p>
-<p>Reported to SciPy on September 12, 2026 as <a href="https://github.com/scipy/scipy/issues/26169">issue #26169</a>. Licklider has reproduced the example in the fixed environment below. The issue is open; upstream confirmation and an accepted repair are pending.</p>
+<p>Reported to SciPy on September 12, 2026 as <a href="https://github.com/scipy/scipy/issues/26169">issue #26169</a>. Licklider has reproduced the example in the fixed environment below. On September 13, maintainer mdhaber posted the high-precision results described below. The issue remains open.</p>
+</section>
+<section id="upstream-update">
+<h2>September 13 update: high-precision results match the reference</h2>
+<p>In <a href="https://github.com/scipy/scipy/issues/26169#issuecomment-5651532894">the maintainer’s run</a>, mpmath was set to 100 decimal digits. At scales 1, 2^-300 and 2^300, the reported results all give <code>t ≈ −2.449489743</code>, <code>df = 4</code> and <code>p ≈ 0.07048399691</code>, with no captured warnings.</p>
+<p>The demonstration uses <a href="https://github.com/scipy/scipy/pull/24840">PR #24840</a> and <code>mparray</code>, an array backend that computes with mpmath at adjustable precision. Its <code>dtype=float64</code> label does not mean ordinary NumPy float64 arithmetic. As of September 13, 2026, the PR is unmerged and the issue remains open with <code>needs-decision</code>. These posted results do not establish a repair for ordinary NumPy inputs or a released fix.</p>
 </section>
 <section>
 <h2>Change the scale without changing the problem</h2>

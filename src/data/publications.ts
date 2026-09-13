@@ -32,17 +32,16 @@ const PRODUCTION_29: RecordedPublicationTime = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    updated: 'September 13, 2026',
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 12, 2026',
-    updated: 'September 12, 2026',
     sortKey: '2026-09-12',
     title: 'Checking Welch results with exact rescaling',
-    updatedTime: { at: '2026-09-12T09:47:27Z', evidence: 'https://vercel.com/licklidermvp/website/CxvETBS1msK17gBwVUK21Fwddtwy' },
     publishedTime: { at: '2026-09-12T05:05:29Z', evidence: 'https://vercel.com/licklidermvp/website/75p6gK4JMBZQTgfGzsFshNj2fU35' },
     summary: 'Exact inputs and independent references expose a changed Welch p-value despite a finite result and no warning in a SciPy boundary test.',
     href: '/engineering/checking-welch-results-with-exact-rescaling/',
-    status: 'Reported to SciPy as #26169; reproduced in 1.18.1; upstream confirmation and repair pending',
+    status: "Maintainer posted matching high-precision results using PR #24840; NumPy float64 repair unconfirmed; issue #26169 open",
   },
   {
     category: 'Engineering',
@@ -112,6 +111,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     "status": "Additional reproducer reported — upstream confirmation pending"
   },
   {
+    updated: 'September 13, 2026',
     "category": "Engineering",
     "type": "Upstream report",
     "date": "September 10, 2026",
@@ -119,7 +119,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     "title": "Exact rescaling can reverse SciPy’s Welch ANOVA decision",
     "summary": "At an extreme input scale, SciPy’s Welch ANOVA changes a p-value from 0.02650 to 0.05611, crossing the 5% threshold without losing input information.",
     "href": "/engineering/scipy-welch-anova-weight-sum-overflow/",
-    "status": "Reported upstream — confirmation pending"
+    "status": "Maintainer posted matching high-precision results using PR #24840; NumPy float64 repair unconfirmed; issue #26146 open"
   },
   {
     category: 'Engineering',
@@ -255,7 +255,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Triaged by a SciPy maintainer into scipy.stats; implementation path confirmed — intended behavior and remedy awaiting decision',
   },
   {
-    updated: 'September 9, 2026',
+    updated: 'September 13, 2026',
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 7, 2026',
@@ -265,7 +265,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'SciPy’s one-sample and paired t-tests can reverse a 5% decision after exact power-of-two rescaling because an intermediate variance underflows or overflows.',
     href: '/engineering/scipy-ttest-scale-range-loss/',
     status:
-      'SciPy repair proposed in PR #26135; not yet reviewed or merged; issue #26113 open',
+      "Maintainer posted matching high-precision results using PR #24840; repair PR #26135 open and unmerged; NumPy float64 repair unconfirmed; issue #26113 open",
   },
   {
     category: 'Research',

@@ -21,8 +21,14 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/scipy-wel
 
 <p>In a deliberately extreme example using SciPy 1.18.1, scaling every observation by <code>2**-511</code> changes the returned p-value from approximately <code>0.02650</code> to <code>0.05611</code>. The first is below the conventional 5% significance threshold; the second is above it. The scaled observations retain the original input information exactly.</p>
 
-<p>Tasuku Kobayashi reported the example in <a href="https://github.com/scipy/scipy/issues/26146">SciPy issue #26146</a> on September 10, 2026. As of September 10, 2026, the issue is open with no comments. Upstream confirmation and a correction remain pending.</p>
+<p>Tasuku Kobayashi reported the example in <a href="https://github.com/scipy/scipy/issues/26146">SciPy issue #26146</a> on September 10, 2026. On September 13, maintainer mdhaber posted the high-precision results described below. The issue remains open.</p>
 
+</section>
+
+<section id="upstream-update">
+<h2>September 13 update: high-precision results preserve the decision</h2>
+<p>In <a href="https://github.com/scipy/scipy/issues/26146#issuecomment-5651544800">the maintainer’s run</a>, mpmath was set to 30 decimal digits. Both the original and scaled samples return <code>F ≈ 10.28571428571</code> and <code>p ≈ 0.02650081125</code>, matching the reference and staying below 0.05.</p>
+<p>The demonstration uses <a href="https://github.com/scipy/scipy/pull/24840">PR #24840</a> and <code>mparray</code>, an array backend that computes with mpmath at adjustable precision. Its <code>dtype=float64</code> label does not mean ordinary NumPy float64 arithmetic. As of September 13, 2026, the PR is unmerged and the issue remains open with <code>needs-decision</code>. These posted results do not establish a repair for ordinary NumPy inputs or a released fix.</p>
 </section>
 
 <section id="a-nine-observation-example">

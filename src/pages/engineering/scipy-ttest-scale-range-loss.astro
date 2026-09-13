@@ -19,8 +19,8 @@ const toc = [
   title="SciPy t-tests can return p=0 or p=1 after exact rescaling"
   description="SciPy’s one-sample and paired t-tests can reverse a 5% decision after exact power-of-two rescaling because an intermediate variance underflows or overflows."
   published="September 7, 2026"
-  updated="September 9, 2026"
-  status="SciPy repair proposed in PR #26135; not yet reviewed or merged; issue #26113 open"
+  updated="September 13, 2026"
+  status="Maintainer posted matching high-precision results using PR #24840; repair PR #26135 open and unmerged; NumPy float64 repair unconfirmed; issue #26113 open"
   toc={toc}
 >
   <section id="current-status">
@@ -30,16 +30,12 @@ const toc = [
         We filed SciPy issue #26113 on September 7, 2026 after reproducing the
         behavior in released versions and recent development code. The issue is open.
       </p>
+      <p>On September 13, 2026, <a href="https://github.com/scipy/scipy/issues/26113#issuecomment-5651568993">maintainer mdhaber posted a run</a> with mpmath set to 30 decimal digits. For both APIs and all three scales, the two-value sample gives <code>t = 3, p ≈ 0.20483276470</code> and the three-value sample gives <code>t ≈ 5.196152423, p ≈ 0.03509871865</code>. No warnings were captured.</p>
+      <p>The demonstration uses <a href="https://github.com/scipy/scipy/pull/24840">PR #24840</a> and <code>mparray</code>, an array backend that computes with mpmath at adjustable precision. Its <code>dtype=float64</code> label does not mean ordinary NumPy float64 arithmetic. As of September 13, 2026, the PR is unmerged and the issue remains open with <code>needs-decision</code>. These posted results do not establish a repair for ordinary NumPy inputs or a released fix.</p>
       <p>
-        SciPy has not publicly confirmed the cause or accepted a repair. The{' '}
-        <code>defect</code> label is assigned by SciPy’s bug-report template and is not
-        treated here as a maintainer decision.
-      </p>
-      <p>
-        As of September 9, <a href="https://github.com/scipy/scipy/pull/26135">PR #26135</a>
+        As of September 13, 2026, <a href="https://github.com/scipy/scipy/pull/26135">PR #26135</a>
         proposes normalizing centered residuals within each reduction slice and restoring
-        scale after the square root. It is open, with no review recorded or merge at this
-        check. Its author reports regression and high-precision checks; we have not
+        scale after the square root. It remains open and unmerged. Its author reports regression and high-precision checks; we have not
         independently rerun the patch. The shared variance implementation is unchanged.
       </p>
       <p>
@@ -96,18 +92,7 @@ const toc = [
           </tr>
         </tbody>
       </table>
-      <p>
-        As of September 9, <a href="https://github.com/scipy/scipy/pull/26135">PR #26135</a>
-        proposes normalizing centered residuals within each reduction slice and restoring
-        scale after the square root. It is open, with no review recorded or merge at this
-        check. Its author reports regression and high-precision checks; we have not
-        independently rerun the patch. The shared variance implementation is unchanged.
-      </p>
-      <p>
-        Earlier <a href="https://github.com/scipy/scipy/pull/26114">PR #26114</a>
-        closed without merging. A maintainer requested an AI-use declaration and asked
-        the contributor to await an issue response. PR #26135 includes that declaration.
-      </p>
+
     </div>
     <p>
       At a 5% significance threshold, the small two-value sample changes from
