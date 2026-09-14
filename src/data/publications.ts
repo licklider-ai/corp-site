@@ -99,6 +99,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     sortKey: '2026-09-11',
     title: 'Checking factorial probability evidence against the raw observations',
     updated: 'September 14, 2026',
+    updatedTime: { at: '2026-09-14T08:30:46Z', evidence: 'https://vercel.com/licklidermvp/website/4LcGWhK4HbnTeW5pNgBRCDEaFSKG' },
     publishedTime: PRODUCTION_26,
     summary: 'An experiment checks probability evidence against raw observations; follow-up validation checks the host and actual execution modes, while a public candidate assigns evidence generation to the verifier.',
     href: '/engineering/checking-factorial-probability-evidence/',
