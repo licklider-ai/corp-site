@@ -36,6 +36,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Upstream report',
     date: 'September 14, 2026',
     sortKey: '2026-09-14',
+    publishedTime: { at: '2026-09-14T06:28:07Z', evidence: 'https://vercel.com/licklidermvp/website/CUNtCMyhc3aJqiYYv94QEsr6MVF4' },
     title: 'statsmodels loses finite Welch results when an intermediate sum overflows',
     summary: 'Four exactly represented observations per group make statsmodels overflow an intermediate sum, losing finite variances and Welch t-test results.',
     href: '/engineering/statsmodels-welch-sumsquares-overflow/',
