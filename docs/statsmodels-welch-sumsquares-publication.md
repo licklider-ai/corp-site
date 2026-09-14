@@ -39,10 +39,9 @@ homepage Latest, RSS, and JSON Feed. Add the distinct problem once to
 matching merged fixes unchanged. The shared registry supplies the homepage upstream
 panel, About selected work, and the agent-readable site index.
 
-The homepage modification time and the article's exact publication time must be
-recorded only after a successful production deployment, following `deployment.md`.
-Until then, preserve date-only metadata and do not infer a publication instant from
-the issue, commit, pull request, preview, or build time.
+The homepage modification time and the article's exact publication time are taken
+from the successful production deployment following `deployment.md`, rather than
+from the issue, commit, pull request, preview, or build time.
 
 ## Assistance and validation
 
@@ -59,6 +58,12 @@ three matching merged fixes, the new report in Latest, and the new panel in both
 visible and accessibility-hidden carousel copies. About and llms.txt each include the
 new report; the JSON Feed contains 40 unique publication items.
 
-Record the observed production completion time in a separate follow-up after deployment
-succeeds. Recheck the live canonical page, feeds, sitemap, homepage, About, Engineering,
-Latest, and llms.txt after publication.
+Initial production completion: PR #39, revision
+`3ff029f01881dc1ef8ca5661442968e1689d3458`, Vercel success status
+`54096722660`, recorded at `2026-09-14T06:28:07Z`. Deployment:
+https://vercel.com/licklidermvp/website/CUNtCMyhc3aJqiYYv94QEsr6MVF4. This instant is
+the article publication time and homepage modification time. The metadata-only
+follow-up preserves it and does not substitute its own deployment time.
+
+After the metadata follow-up reaches production, recheck the live canonical page,
+feeds, sitemap, homepage, About, Engineering, Latest, and llms.txt.
