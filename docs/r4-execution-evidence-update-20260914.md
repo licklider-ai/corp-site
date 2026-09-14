@@ -61,3 +61,16 @@ indexes, Latest, Engineering, RSS and JSON Feed checks passed. The article occur
 once in JSON Feed, with its original publication instant and no invented update
 instant. Git whitespace checks pass. No layout or styling changes were made.
 Hosted Node 22/pnpm validation and production completion are checked separately.
+
+## Production completion
+
+Content PR #42 merged as `2363bc7828d0ac459c530ceff25d5cd0d9f98bde` after
+the final head `98015a5d5b36c0e6a310996a53de4b69786870a7` passed hosted build
+and Vercel preview. Its uploaded tree `fc5f99523fdc45fd8e6551c905051213c0887bc1`
+matches the locally tested tree. Vercel production success status `54101808682`
+records completion at `2026-09-14T08:30:46Z`:
+<https://vercel.com/licklidermvp/website/4LcGWhK4HbnTeW5pNgBRCDEaFSKG>.
+
+This instant supplies the existing article's updatedTime. The metadata-only
+follow-up preserves that content completion time, first-publication instant,
+URL and sort key; its own rebuild does not create another substantive update.
