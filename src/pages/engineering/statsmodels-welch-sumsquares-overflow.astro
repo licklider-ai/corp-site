@@ -1,0 +1,153 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+
+const item = PUBLICATIONS.find(
+  (entry) => entry.href === '/engineering/statsmodels-welch-sumsquares-overflow/',
+)!;
+---
+
+<PublicationLayout
+  category={item.category}
+  type={item.type}
+  title={item.title}
+  description={item.summary}
+  published={item.date}
+  status={item.status}
+  toc={[]}
+>
+  <section>
+    <h2>Four observations expose a lost finite result</h2>
+    <p>
+      A compact boundary test makes statsmodels return infinite variances and a Welch
+      result of <code>(−0.0, NaN, NaN)</code>, even though the variances, t statistic,
+      degrees of freedom, and p-value all have finite float64 approximations. The first
+      overflow occurs in an intermediate sum of squared deviations.
+    </p>
+    <p>
+      Tasuku Kobayashi reported the example in{' '}
+      <a href="https://github.com/statsmodels/statsmodels/issues/10252">statsmodels issue #10252</a>{' '}
+      on September 14, 2026. Licklider reproduced it with the statsmodels 0.15.0 Windows
+      wheel and with the Python source at <code>main</code> commit <code>77ecdfa3e</code>.
+      The issue is open and labeled <code>type-bug</code>; upstream confirmation and a
+      repair remain pending.
+    </p>
+  </section>
+
+  <section>
+    <h2>Scale the inputs without losing their information</h2>
+    <p>
+      Each group contains four values. The second run multiplies every value by the exact
+      power of two <code>2**511</code>. This changes the magnitude, but it should not change
+      the Welch t statistic, degrees of freedom, or p-value.
+    </p>
+    <pre><code>{`import warnings
+import numpy as np
+import scipy, statsmodels
+from statsmodels.stats.weightstats import DescrStatsW, CompareMeans
+
+print(np.__version__, scipy.__version__, statsmodels.__version__)
+for k in (0, 511):
+    x = np.ldexp(np.array([-1., 1.] * 2), k)
+    y = np.ldexp(np.array([0., 2.] * 2), k)
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter('always')
+        a, b = DescrStatsW(x), DescrStatsW(y)
+        result = CompareMeans(a, b).ttest_ind(usevar='unequal')
+    print(k, result, a.sumsquares, b.sumsquares)
+    print([str(w.message) for w in caught])`}</code></pre>
+    <div class="table-scroll">
+      <table>
+        <caption>Recorded statsmodels main results</caption>
+        <thead>
+          <tr>
+            <th scope="col">Scale</th>
+            <th scope="col">Returned t</th>
+            <th scope="col">Returned p</th>
+            <th scope="col">Returned df</th>
+            <th scope="col">Each sumsquares</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>2^0</td><td>−1.2247448714</td><td>0.2665697034</td><td>6</td><td>4</td></tr>
+          <tr><td>2^511</td><td>−0.0</td><td>NaN</td><td>NaN</td><td>∞</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      The large-scale call emitted two <code>overflow encountered in dot</code> warnings
+      and two <code>invalid value encountered in scalar divide</code> warnings. It raised no
+      exception. The recorded environment used Python 3.12.10, NumPy 2.5.3, SciPy
+      1.16.3, and statsmodels <code>0.15.1.dev41+g77ecdfa3e</code> on Windows AMD64.
+    </p>
+  </section>
+
+  <section>
+    <h2>The sum overflows before the variance should</h2>
+    <p>
+      Let <code>s = 2**511</code>. The group means are zero and <code>s</code>, and every
+      deviation is either <code>−s</code> or <code>s</code>. The inputs, means, deviations,
+      and each individual squared deviation <code>s² = 2^1022</code> are exactly
+      representable and finite.
+    </p>
+    <p>
+      Adding the four squared deviations produces <code>4s² = 2^1024</code>. That exact
+      unnormalized sum exceeds the largest finite float64 value. The quantities needed
+      after division are still in range: the population variance is <code>2^1022</code>,
+      and the unbiased sample variance is <code>2^1024 / 3</code>, approximately{' '}
+      <code>5.992310449541053 × 10^307</code>. The latter is rounded in float64, but finite.
+    </p>
+    <p>
+      In the{' '}
+      <a href="https://github.com/statsmodels/statsmodels/blob/77ecdfa3e93ea16ec2179e696753af885759fb01/statsmodels/stats/weightstats.py#L150-L152">inspected source</a>,{' '}
+      <code>DescrStatsW.sumsquares</code> calculates{' '}
+      <code>np.dot((self.demeaned ** 2).T, self.weights)</code>. Its inputs are finite, but
+      the reduction becomes infinity. Later variance calculations divide that infinity,
+      and the Welch degrees-of-freedom path forms <code>inf / inf</code>. This is the cause
+      analysis in the submitted report, separate from a maintainer's confirmation or
+      choice of repair.
+    </p>
+  </section>
+
+  <section>
+    <h2>Independent references recover the finite answer</h2>
+    <p>
+      Exact rational moments reconstructed from the actual binary64 inputs give{' '}
+      <code>t = −√(3/2)</code> and <code>df = 6</code>. Three arbitrary-precision Student-t
+      tail calculations—regularized incomplete beta, a finite polynomial integral for
+      six degrees of freedom, and direct density quadrature—agree on the two-sided result:
+    </p>
+    <pre><code>{`t  = -1.224744871391589049098642037...
+df = 6
+p  = 0.26656970338006897957779103665614139...`}</code></pre>
+    <p>
+      These reference calculations do not call NumPy, SciPy, or statsmodels for the
+      moments or probability. The{' '}
+      <a href="https://github.com/statsmodels/statsmodels/issues/10252">upstream issue</a>{' '}
+      contains the complete submitted reproducer, outputs, source trace, and environment.
+    </p>
+  </section>
+
+  <section>
+    <h2>What this establishes</h2>
+    <p>
+      The example shows that a finite statistical result can be lost when software first
+      materializes a larger intermediate quantity. Exact power-of-two scaling, small
+      inputs, independent references, and warning capture make the first range loss
+      inspectable. Those are the same engineering methods Licklider uses to build
+      scientific verification infrastructure.
+    </p>
+    <p>
+      This is a deliberately extreme synthetic example. Its frequency in practical data
+      has not been measured, and the report does not establish a general repair or claim
+      that every statsmodels t-test follows this path. The finding does not add a new
+      method to nomue's supported scope.
+    </p>
+  </section>
+</PublicationLayout>
+
+<style>
+  .table-scroll { overflow-x: auto; margin: 1.75rem 0; }
+  table { min-width: 40rem; }
+  caption { text-align: left; margin-bottom: 0.75rem; }
+</style>

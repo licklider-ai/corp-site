@@ -33,6 +33,16 @@ const PRODUCTION_29: RecordedPublicationTime = {
 export const PUBLICATIONS: PublicationItem[] = [
   {
     category: 'Engineering',
+    type: 'Upstream report',
+    date: 'September 14, 2026',
+    sortKey: '2026-09-14',
+    title: 'statsmodels loses finite Welch results when an intermediate sum overflows',
+    summary: 'Four exactly represented observations per group make statsmodels overflow an intermediate sum, losing finite variances and Welch t-test results.',
+    href: '/engineering/statsmodels-welch-sumsquares-overflow/',
+    status: 'Reported in statsmodels issue #10252 — upstream confirmation pending',
+  },
+  {
+    category: 'Engineering',
     type: 'Implementation note',
     date: 'September 13, 2026',
     sortKey: '2026-09-13',
