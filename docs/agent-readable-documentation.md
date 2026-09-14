@@ -200,3 +200,11 @@ The September 2026 public surface includes:
 It does not publish a hosted API, remote HTTP MCP endpoint, or installable Agent Skill.
 Those surfaces are added only after their exact public product identity, version,
 availability, and authority are established.
+
+## 12. Coordinated content changes — 2026-09-14
+
+Follow content-workflow.md whenever a content change affects discovery, usage,
+scope, version or interpretation. Inspect both llms.txt indexes, Markdown/HTML
+representations and examples through their shared data sources. The build's
+content-impact report is an inspection aid; factual review remains the task's work.
+Do not expand an index with unrelated articles merely because they are new.
