@@ -634,3 +634,12 @@ its reader situation rather than the event-first order in section 6.2. Site-wide
 claim boundaries, positive framing, limitation density, metadata, and publication
 checks still apply. This delegation does not itself publish an article, change
 the live site, or authorize outreach.
+
+## 12. Commercial clarity and disclosure execution — 2026-09-14
+
+The founder confirms strong startup positioning grounded in correct scoped claims.
+Use docs/content-workflow.md for fixed disclosure classes, article preparation and
+change-driven inspection of affected human/machine surfaces. This applies to every
+content class while preserving Blog's reader-led order and the existing claim,
+taxonomy, metadata and publication authorities. Do not create a second copy of
+shared facts or weaken evidence to conceal production implementation details.

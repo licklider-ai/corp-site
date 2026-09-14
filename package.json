@@ -12,10 +12,12 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "node scripts/content-impact.mjs && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "astro check"
+    "check": "astro check",
+    "content:impact": "node scripts/content-impact.mjs",
+    "test:content-impact": "node --test scripts/content-impact.test.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
