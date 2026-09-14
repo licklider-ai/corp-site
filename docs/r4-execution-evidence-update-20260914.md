@@ -19,6 +19,9 @@ captures are author-run CI evidence on the named repair commit; the later eviden
 commit does not change the execution target. The historical 17-value oracle
 comparison is not a numerical recheck of the new captures. Public-candidate policy
 selection does not implement a new report, CLI contract or supported bundle.
+The T03 decision records the user's supplied T02 CLOSE - GO for packet 2732a26;
+the article attributes that later bounded disposition rather than presenting the
+earlier repair document's pending close review as the current status.
 
 ## Publication and review scope
 
