@@ -54,7 +54,7 @@ export const R3_EXPERIMENT_PROGRESS =
   'The draft Holm candidate.4 separates Record conformance from integrity, caller-context and arithmetic results while retaining execution controls. The numerical kernel is unchanged. Final design decisions and public adoption remain open; supplied p-values and scientific validity are not established by these checks.';
 
 export const R4_EXPERIMENT_PROGRESS =
-  'The archived two-by-two experiment connects raw observations to exact F ratios and probability evidence. A draft successor adds single-worker execution limits, cancellation cleanup and complete-output validation. Evidence acceptance remains conditional on candidate enclosures. Public Record integration and support remain open.';
+  'The archived two-by-two experiment connects raw observations to exact F ratios and probability evidence. Follow-up validation checks the controlled worker’s host and actual execution modes. The next public candidate assigns numerical evidence generation to the verifier; its policy is recorded, while public Record integration and support remain open.';
 
 export const PRODUCT_RELEASE_BOUNDARY =
   'Use the npm-published Release 1 verifier, the local stdio MCP server, the Protocol, and their machine-readable documentation today. The agent-facing Welch capability is now available in limited Release 1 to approved recipients through authenticated MCP and HTTP interfaces; public self-registration is not available. The hosted capability does not yet emit public Records for replay through the local verifier.';
