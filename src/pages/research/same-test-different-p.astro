@@ -1,0 +1,102 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+const toc = [
+  { id: 'finding', label: 'What the paper finds' },
+  { id: 'evidence', label: 'Read and reproduce' },
+  { id: 'limits', label: 'Scope and interpretation' },
+  { id: 'relation', label: 'Relation to nomue' },
+];
+---
+
+<PublicationLayout
+  category="Research"
+  type="Publication"
+  title="Same Test, Different p — preprint v1.0"
+  description="An audit of R, SciPy, and Julia shows why matching statistical decisions can still hide differences in definitions, numerical precision, and valid probability values."
+  published="September 15, 2026"
+  status="Preprint v1.0 — not peer reviewed; reproducibility data and code available"
+  toc={toc}
+>
+  <p><strong>Preprint v1.0 — not peer reviewed.</strong> Tasuku Kobayashi's paper and its reproducibility dataset were published on Zenodo on September 15, 2026.</p>
+  <p>
+    The same statistical test can produce different numbers in different software,
+    even when the final decision agrees. This study gives researchers and library
+    developers a way to distinguish a different mathematical convention from a small
+    rounding error or an implementation defect. The paper and runnable audit materials
+    are now available for inspection and reuse.
+  </p>
+
+  <section id="finding">
+    <h2>What the paper finds</h2>
+    <p>
+      The audit uses 5,461 deterministic test cases across nine version-specific
+      environments of R, SciPy, and Julia. It covers paired t, Wilcoxon signed-rank,
+      and Wilcoxon–Mann–Whitney tests. Exact rational probabilities provide the
+      rank-test reference; paired-t probabilities are evaluated at high precision
+      using a fixed binary64 test statistic, the standard floating-point number format.
+    </p>
+    <p>
+      Default statistical decisions largely agree. Looking at the returned probabilities
+      reveals additional differences: how zero differences are handled, whether an
+      “exact” result is rounded to the nearest representable number, and whether a
+      probability falls outside the valid range from zero to one without a warning.
+    </p>
+    <p>
+      On SciPy's tie-free, zero-free exact signed-rank path, 35 distinct input–alternative
+      pairs from 17 test cases were not correctly rounded in the three releases studied
+      (1.14.1, 1.15.3, and 1.17.1). Three equivalent zero-method settings make these
+      105 API calls. Four pairs, or 12 calls, returned zero for a positive exact probability.
+      SciPy maintainers diagnosed incorrect survival-function tail selection and merged
+      a fix with a regression test on the day of the report. The paper documents the
+      diagnosis and post-fix checks in Section 6.10.
+    </p>
+    <p>
+      The largest absolute error in that 35-pair set was approximately
+      2.52 × 10<sup>−16</sup>. None changed a decision at the tested significance
+      thresholds of 0.05, 0.01, and 0.001. This distinction matters: numerical accuracy
+      and the effect on a statistical decision are separate measurements.
+    </p>
+  </section>
+
+  <section id="evidence">
+    <h2>Read and reproduce</h2>
+    <ul>
+      <li><a href="https://doi.org/10.5281/zenodo.22763598">Read the paper on Zenodo</a> — manuscript v1.0, including appendices A, B, and C.</li>
+      <li><a href="https://doi.org/10.5281/zenodo.22763654">Download the reproducibility dataset and code</a> — fixtures, reference calculations, runners, saved measurements, summary tables, tests, and instructions.</li>
+    </ul>
+    <p>
+      Start with the dataset's README. Its <code>stat-audit replicate-quick</code>
+      workflow checks the fixed inputs, reference calculations, saved-data aggregation,
+      and generated appendices. It uses archived measurements rather than executing
+      all nine statistical libraries again. Data and documentation are CC BY 4.0;
+      source code is GPL-3.0-only, with license scopes recorded in the archive.
+    </p>
+  </section>
+
+  <section id="limits">
+    <h2>Scope and interpretation</h2>
+    <p>
+      These are deliberately constructed test cases, not a representative sample of
+      research practice. Their rates do not measure how often ordinary analyses go
+      wrong. Agreement with a numerical reference also does not establish that a
+      study chose an appropriate statistical method or reached a valid scientific conclusion.
+    </p>
+    <p>
+      The artifact distinguishes preserved aggregate evidence from regenerated per-call
+      logs: the original historical logs were lost, and some detailed runtime probes
+      remain unrecovered. The manuscript discloses AI assistance and the author's
+      company affiliation. Preparation-context checks are not independent scientific
+      replication; the optional R/coin cross-check was not run in the packaging environment.
+    </p>
+  </section>
+
+  <section id="relation">
+    <h2>Relation to nomue</h2>
+    <p>
+      This work demonstrates Licklider's ability to turn numerical reference checks
+      into inspectable evidence and actionable library reports. It informs the
+      verification approach behind nomue. The paper does not define or change
+      nomue Protocol, add supported product methods, or certify nomue's overall accuracy.
+    </p>
+  </section>
+</PublicationLayout>

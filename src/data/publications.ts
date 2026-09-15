@@ -32,6 +32,16 @@ const PRODUCTION_29: RecordedPublicationTime = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'Research',
+    type: 'Publication',
+    date: 'September 15, 2026',
+    sortKey: '2026-09-15',
+    title: 'Same Test, Different p — preprint v1.0',
+    summary: 'An audit of R, SciPy, and Julia shows why matching statistical decisions can still hide differences in definitions, numerical precision, and valid probability values.',
+    href: '/research/same-test-different-p/',
+    status: 'Preprint v1.0 — not peer reviewed; reproducibility data and code available',
+  },
+  {
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 14, 2026',
