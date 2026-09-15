@@ -36,6 +36,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Publication',
     date: 'September 15, 2026',
     sortKey: '2026-09-15',
+    publishedTime: { at: '2026-09-15T08:01:43Z', evidence: 'https://vercel.com/licklidermvp/website/CHHMgnUwj5VwvbuUpud1dfYdb88w' },
     title: 'Same Test, Different p — preprint v1.0',
     summary: 'An audit of R, SciPy, and Julia shows why matching statistical decisions can still hide differences in definitions, numerical precision, and valid probability values.',
     href: '/research/same-test-different-p/',
