@@ -1,0 +1,53 @@
+---
+import { PUBLICATIONS } from '../../data/publications';
+import { PRODUCT_DEVELOPMENT } from '../../data/site-facts';
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+const item = PUBLICATIONS.find((entry) => entry.href === PRODUCT_DEVELOPMENT.url)!;
+---
+<PublicationLayout category={item.category} type={item.type} title={item.title}
+  description={item.summary} published={item.date} status={item.status} toc={[]}>
+  <p>nomue development now handles more difficult Welch calculations, tells an agent which checks actually ran, and separates the reproduction of an old result from whether its method is still accepted for current use. These changes make a verification result easier to carry into a research workflow and revisit later.</p>
+  <p>This update covers development since the <a href="/news/nomue-welch-limited-release-1/">September 9 limited Release 1</a> announcement. The calculation improvements are versioned candidates integrated into the product codebase. Historical-result handling and safe-import work have completed their internal milestones. This is a development report, not a new hosted release.</p>
+
+  <section>
+    <h2>Return the calculation the agent actually needs</h2>
+    <p>A request for the basic Welch result should not depend on an additional effect-size interval finishing. The new core candidate separates seven basic Welch quantities from the fuller result. A separate candidate improves completion of the full calculation; it returns all eleven required fields or refuses, rather than presenting an incomplete result as complete.</p>
+    <p>An extended-range candidate also represents variances beyond the ordinary floating-point range. This addresses cases where intermediate representation limits lose a usable calculation. It does not imply that every extreme input is supported.</p>
+    <p>In one retained development case, three alternating comparisons under the same 30-second subprocess limit each ended in a timeout for the predecessor, while the successor completed in 0.42–0.46 seconds. This is a case-specific local observation, not a general latency promise or a measured speedup for all requests.</p>
+  </section>
+
+  <section>
+    <h2>Say what was calculated, compared and left unchecked</h2>
+    <p>A calculation completing does not establish that a submitted result agrees with it. The candidate response now describes the fields actually calculated, the fields actually compared, any mismatches, and properties it has not established.</p>
+    <p>For example, recalculating a p-value answers one question. Comparing that value with the submitted p-value answers another. Neither proves that the observations are true or that the study design supports a causal conclusion. A field that was never checked must not look like a passing check.</p>
+    <p>The candidate interfaces also reject missing or conflicting request modes and versions. An agent's request to check a submitted result must not silently become a request to calculate a fresh one.</p>
+  </section>
+
+  <section>
+    <h2>Keep old results meaningful as versions change</h2>
+    <p>Research results can outlive the software version that produced them. The completed historical-result work binds replay to the recorded version and separates four questions: did replay run, are the old and current versions compatible, is the method currently accepted, and what does a version change or withdrawal mean for the result?</p>
+    <p>A withdrawn method can still reproduce its old numbers. That reproduction does not restore its current standing. When the historical execution is unavailable, the system reports that condition instead of silently replacing it with today's calculation.</p>
+    <p>Follow-up repairs preserve activated version records across restarts, strengthen the binding between a historical result and its recorded identity, and derive version status from the registered source rather than caller assertions.</p>
+  </section>
+
+  <section>
+    <h2>Strengthen the path from a file to a verification call</h2>
+    <p>The safe-import milestone includes file-path confinement and rejection of unsafe file kinds and malformed input. Follow-up checks cover files that could block reading and path changes during acquisition. Internal file paths stay out of agent-facing responses.</p>
+    <p>These controls support a bounded input path. They are not a claim that arbitrary files are safe. Credential lifecycle and incident-handling work also advances the operating foundation, while broader authentication and production-enablement work remains separate.</p>
+  </section>
+
+  <section>
+    <h2>What the development checks establish</h2>
+    <p>The retained full-result panel covered 96 development cases. Direct calculation met its expected numerical checks in 96 cases; authenticated local MCP completed and met those checks in 90. Six CSV inputs exceeded the existing 1 MiB import limit and remained refusals in the denominator. Direct calculation and MCP ingestion therefore have different tested boundaries.</p>
+    <p>Additional checks covered submitted-value mismatches, malformed requests, missing declarations, output completeness and prior-result regression. Separate high-precision calculations were used for numerical development checks. Implementation and adversarial self-review used the same OpenAI Codex assistant; this work does not claim independent reviewer clearance, a rigorous numerical proof, or improved final answers from a population of AI agents.</p>
+    <p>The <a href="/reports/product-development-20260915/summary.md">publication evidence summary</a> records the candidate identities, measurement scope and limits. It is an owner-approved summary of internal development evidence, not a public reproducibility package. Comparative agent evaluation remains a <a href="/evaluation/">separate program</a>.</p>
+  </section>
+
+  <section>
+    <h2>What is available, and what comes next</h2>
+    <p>The public local Welch Record verifier and local MCP release candidate remain available. Hosted Welch remains limited Release 1 for approved recipients. This update does not announce deployment or default activation of the newer calculation candidates.</p>
+    <p>{PRODUCT_DEVELOPMENT.next}</p>
+    <p>Hosted results are not yet public Records for independent replay through the local verifier. Protocol proposals for additional methods retain their own evidence, adoption and release decisions.</p>
+    <p>Welch is the first working example of the larger product: verification calls whose outputs remain understandable across tools, versions and time. <a href="/nomue/">Choose the current nomue path</a>, <a href="/docs/">read the documentation</a>, or <a href="/roadmap/">inspect the roadmap</a>.</p>
+  </section>
+</PublicationLayout>

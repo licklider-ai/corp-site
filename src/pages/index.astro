@@ -1,4 +1,5 @@
 ---
+import ProductDevelopmentUpdate from '../components/ProductDevelopmentUpdate.astro';
 import { PUBLICATIONS } from '../data/publications';
 import {
   EVALUATION_BOUNDARY,
@@ -73,7 +74,7 @@ const homeStructuredData = {
   description:
     'Scientific verification infrastructure for AI research agents: public Welch verification, a reviewed paired-t candidate, and experimental Holm and factorial evidence checks.',
   url: new URL('/', Astro.site).href,
-  dateModified: '2026-09-14T06:28:07Z',
+  dateModified: '2026-09-15',
   isPartOf: { '@id': new URL('/#website', Astro.site).href },
   about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
 };
@@ -114,6 +115,7 @@ const homeStructuredData = {
   </section>
 
   <div class="sections">
+<ProductDevelopmentUpdate />
     <section id="protocol-progress" class="band band--single">
       <div class="band-inner band-inner--wide">
         <span id="paired-t-progress"></span>

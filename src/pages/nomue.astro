@@ -1,4 +1,5 @@
 ---
+import ProductDevelopmentUpdate from '../components/ProductDevelopmentUpdate.astro';
 import type { TocItem } from '../consts';
 import {
   CORE_NON_CLAIMS,
@@ -56,6 +57,8 @@ const toc: TocItem[] = [
     <p class="head-links"><a href="/docs/record-verification/">Install and run</a> · <a href="/docs/mcp-verification/">Add the MCP server</a> · <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">verifier on npm</a> · <a href={MCP_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">MCP on npm</a> · <a href="/docs/examples/">See examples</a></p>
     <p class="release-facts">Public release candidates · verifier {PUBLIC_RELEASE.verifierPackage} · MCP {MCP_RELEASE.version} / stdio · Linux / macOS / Windows · Node.js 20 / 22</p>
   </header>
+
+  <ProductDevelopmentUpdate />
 
   <section id="available" class="section section--lead">
     <p class="eyebrow">Available now</p>
