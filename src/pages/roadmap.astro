@@ -1,7 +1,9 @@
 ---
+import ProductDevelopmentUpdate from '../components/ProductDevelopmentUpdate.astro';
 import type { TocItem } from '../consts';
 import {
   EVALUATION_BOUNDARY,
+  PRODUCT_DEVELOPMENT,
   EXPANSION_MODEL,
   LEARNING_LOOP_POSITION,
   MCP_RELEASE,
@@ -38,7 +40,7 @@ const roadmapStructuredData = {
   description:
     'Current, next, and planned expansion of nomue from Welch verification into agent-native scientific verification infrastructure.',
   url: new URL('/roadmap/', Astro.site).href,
-  dateModified: '2026-09-09',
+  dateModified: '2026-09-15',
   isPartOf: { '@id': new URL('/#website', Astro.site).href },
   about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
 };
@@ -59,6 +61,8 @@ const roadmapStructuredData = {
       public discussions, and adopted plans. Protocol proposals advance on their own evidence; Release 3 and Release 4 discussions are open with distinct scopes and evidence requirements. These stages do not promise product ship dates.
     </p>
   </header>
+
+  <ProductDevelopmentUpdate />
 
   <section id="now" class="section section--lead">
     <p class="stage-label">Available now</p>
@@ -142,6 +146,7 @@ const roadmapStructuredData = {
   <section id="platform" class="section">
     <p class="stage-label">Planned platform evolution</p>
     <h2>Make each verification call portable, persistent, and reusable</h2>
+    <p>{PRODUCT_DEVELOPMENT.next}</p>
     <div class="evolution-list">
       {PLATFORM_EVOLUTION.map((step, index) => (
         <article>

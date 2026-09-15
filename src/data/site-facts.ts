@@ -54,7 +54,15 @@ export const R3_EXPERIMENT_PROGRESS =
   'The draft Holm candidate.4 separates Record conformance from integrity, caller-context and arithmetic results while retaining execution controls. The numerical kernel is unchanged. Final design decisions and public adoption remain open; supplied p-values and scientific validity are not established by these checks.';
 
 export const R4_EXPERIMENT_PROGRESS =
-  'The archived two-by-two experiment connects raw observations to exact F ratios and probability evidence. Follow-up validation checks the controlled worker’s host and actual execution modes. The next public candidate assigns numerical evidence generation to the verifier; its policy is recorded, while public Record integration and support remain open.';
+  'The archived two-by-two experiment connects raw observations to exact F ratios and probability evidence. The controlled execution candidate is now integrated into the public research archive; automated checks reject altered saved evidence and unsuccessful historical oracle comparisons. The next public candidate assigns numerical evidence generation to the verifier; its policy is recorded, while public Record integration and support remain open.';
+
+export const PRODUCT_DEVELOPMENT = {
+  url: '/engineering/making-verification-results-useful-to-agents/',
+  title: 'Making verification results more useful to research agents',
+  summary: 'Since limited Release 1, nomue development has expanded candidate calculation range, improved completion of difficult calculations, clarified what was checked, and added historical-result handling.',
+  boundary: 'Development update: integrated candidates and completed internal milestones are not a new hosted release or an expansion of public verifier support.',
+  next: 'Record assembly and emission has entered development. The adopted initial invite-free release plan targets Welch, independent multi-group and paired two-condition capabilities; delivery and scientific activation remain future gates, with no promised date.',
+} as const;
 
 export const PRODUCT_RELEASE_BOUNDARY =
   'Use the npm-published Release 1 verifier, the local stdio MCP server, the Protocol, and their machine-readable documentation today. The agent-facing Welch capability is now available in limited Release 1 to approved recipients through authenticated MCP and HTTP interfaces; public self-registration is not available. The hosted capability does not yet emit public Records for replay through the local verifier.';

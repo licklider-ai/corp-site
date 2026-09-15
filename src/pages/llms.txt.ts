@@ -25,6 +25,7 @@ import {
   PLATFORM_SCOPE,
   HOSTED_WELCH_CAPABILITY,
   PRODUCT_RELEASE_BOUNDARY,
+  PRODUCT_DEVELOPMENT,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
   PUBLIC_TRUST_EVIDENCE,
@@ -68,6 +69,8 @@ Website publication and update dates use UTC. Known times are recorded in UTC; h
 
 - ${HOSTED_WELCH_CAPABILITY}
 - ${PRODUCT_RELEASE_BOUNDARY}
+- [${PRODUCT_DEVELOPMENT.title}](https://www.licklider.ai${PRODUCT_DEVELOPMENT.url}): ${PRODUCT_DEVELOPMENT.summary} ${PRODUCT_DEVELOPMENT.boundary}
+- ${PRODUCT_DEVELOPMENT.next}
 - [Hosted limited Release 1](https://www.licklider.ai/news/nomue-welch-limited-release-1/)
 - ${MCP_RELEASE_BOUNDARY}
 - [Public MCP source](${MCP_RELEASE.repositoryUrl}), [npm package](${MCP_RELEASE.npmUrl}), [official registry metadata](${MCP_RELEASE.registryUrl}), and [passing cross-platform CI](${MCP_RELEASE.ciUrl})

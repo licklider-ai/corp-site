@@ -32,6 +32,16 @@ const PRODUCTION_29: RecordedPublicationTime = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'Engineering',
+    type: 'Implementation note',
+    date: 'September 15, 2026',
+    sortKey: '2026-09-15',
+    title: 'Making verification results more useful to research agents',
+    summary: 'nomue development improves difficult calculations, makes completed checks explicit, and preserves the meaning of historical results as versions change.',
+    href: '/engineering/making-verification-results-useful-to-agents/',
+    status: 'Product development update — integrated candidates and internal milestones; no new hosted release or public verifier support',
+  },
+  {
     category: 'Research',
     type: 'Publication',
     date: 'September 15, 2026',
@@ -109,12 +119,11 @@ export const PUBLICATIONS: PublicationItem[] = [
     date: 'September 11, 2026',
     sortKey: '2026-09-11',
     title: 'Checking factorial probability evidence against the raw observations',
-    updated: 'September 14, 2026',
-    updatedTime: { at: '2026-09-14T08:30:46Z', evidence: 'https://vercel.com/licklidermvp/website/4LcGWhK4HbnTeW5pNgBRCDEaFSKG' },
+    updated: 'September 15, 2026',
     publishedTime: PRODUCTION_26,
-    summary: 'An experiment checks probability evidence against raw observations; follow-up validation checks the host and actual execution modes, while a public candidate assigns evidence generation to the verifier.',
+    summary: 'The factorial experiment now includes archived execution controls and automated rejection of altered evidence or unsuccessful historical reference comparisons.',
     href: '/engineering/checking-factorial-probability-evidence/',
-    status: 'Experimental successor with host and execution-mode evidence; public-candidate policy recorded; formal adoption and public support remain open',
+    status: 'Execution candidate and evidence validation integrated; numerical-method adoption and public support remain open',
   },
   {
     "category": "Blog",

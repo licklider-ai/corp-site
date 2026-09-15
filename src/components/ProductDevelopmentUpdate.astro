@@ -1,0 +1,14 @@
+---
+import { PRODUCT_DEVELOPMENT } from '../data/site-facts';
+---
+<section class="development-update" aria-labelledby="product-development-heading">
+  <h2 id="product-development-heading">Product development since limited Release 1</h2>
+  <p>{PRODUCT_DEVELOPMENT.summary}</p>
+  <p>{PRODUCT_DEVELOPMENT.boundary}</p>
+  <p><a href={PRODUCT_DEVELOPMENT.url}>{PRODUCT_DEVELOPMENT.title}</a></p>
+</section>
+<style>
+  .development-update { margin-block: 2rem; padding-block: 1.5rem; border-block: 1px solid var(--rule); }
+  h2 { font-size: 1.35rem; }
+  p { max-width: 52rem; }
+</style>
