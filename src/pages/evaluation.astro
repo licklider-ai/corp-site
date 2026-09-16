@@ -1,171 +1,232 @@
 ---
 import type { TocItem } from '../consts';
-import { EVALUATION_BOUNDARY } from '../data/site-facts';
 import PageLayout from '../layouts/PageLayout.astro';
 
 const toc: TocItem[] = [
-  { id: 'question', label: 'The question' },
-  { id: 'design', label: 'Comparison design' },
-  { id: 'score', label: 'What is scored' },
-  { id: 'status', label: 'Current status' },
-  { id: 'limits', label: 'Limits' },
+  { id: 'result', label: 'Published result' },
+  { id: 'design', label: 'What was compared' },
+  { id: 'failures', label: 'What the score reveals' },
+  { id: 'meaning', label: 'What it means' },
+  { id: 'evidence', label: 'Evidence and reproduction' },
 ];
 ---
 
 <PageLayout
   title="Evaluation"
-  description="How Licklider is testing whether adding nomue improves the statistical reliability of AI research agents."
+  description="Published evidence from a 648-session fixed-panel comparison of three configurations for complete Welch-report verification."
   toc={toc}
 >
   <header class="page-head">
     <p class="eyebrow">Evaluation</p>
-    <h1>Does adding nomue actually improve a research agent?</h1>
+    <h1>From recalculating a test to checking the whole submission</h1>
     <p class="standfirst">
-      We are building a controlled evaluation to measure the incremental effect of adding nomue to an otherwise identical statistical tool environment.
+      A 648-session study tested whether three tool-assisted configurations could return
+      the complete expected assessment of a Welch report—not just a plausible number.
     </p>
   </header>
 
-  <section id="question" class="section">
-    <h2>The question</h2>
-    <p>
-      A useful architecture is not enough. We want to measure whether a frontier model makes better statistical decisions when nomue is available, rather than assuming that it does.
-    </p>
-    <p>
-      The first study starts with the exact Welch scope covered by the founding
-      verification capability, where the treatment difference and expected outcomes can
-      be fixed precisely.
+  <section id="result" class="section">
+    <p class="eyebrow">Published result</p>
+    <h2>The bound verifier returned 216 of 216 expected reports</h2>
+    <div class="score-grid">
+      <article>
+        <p class="arm-label">B · General Python</p>
+        <p class="score">132 / 216</p>
+        <p>61.11% complete-report correctness</p>
+      </article>
+      <article>
+        <p class="arm-label">W · Stable Welch wrapper</p>
+        <p class="score">131 / 216</p>
+        <p>60.65% complete-report correctness</p>
+      </article>
+      <article class="featured">
+        <p class="arm-label">C · Bound verifier</p>
+        <p class="score">216 / 216</p>
+        <p>100% on this fixed constructed panel</p>
+      </article>
+    </div>
+    <p class="primary">
+      <strong>The measured outcome is exact correctness of a five-field submission report.</strong>
+      These rates are not estimates of general research accuracy. They describe one fixed
+      model, one constructed panel, and the complete configurations tested in September 2026.
     </p>
   </section>
 
   <section id="design" class="section">
-    <h2>Comparison design</h2>
+    <h2>What was compared</h2>
+    <p>
+      The experiment used 72 newly generated questions in nine predefined Welch-report
+      families. Each question was run three times in each of three configurations, for
+      648 independently scored sessions. All configurations used
+      <code>gpt-4.1-mini-2025-04-14</code>, the same case surface, and the same session
+      limits. Expected outcomes were fixed independently of the scored model output.
+    </p>
     <div class="arms">
       <article>
-        <p class="arm-label">A · Diagnostic</p>
-        <h3>Model only</h3>
-        <p>The model receives the scientific task without statistical tools.</p>
-      </article>
-      <article>
         <p class="arm-label">B · Control</p>
-        <h3>Model + baseline tools</h3>
-        <p>The same model receives a fixed generic Python/statistics tool surface.</p>
+        <h3>General calculation tools</h3>
+        <p>The model used Python and assembled the five-field report itself.</p>
       </article>
       <article>
-        <p class="arm-label">C · Treatment</p>
-        <h3>Same environment + nomue</h3>
-        <p>The model receives the same baseline tools as B, with nomue added as the only treatment difference.</p>
+        <p class="arm-label">W · Numerical wrapper</p>
+        <h3>Stable Welch calculation</h3>
+        <p>A stable wrapper supplied the calculation, while the model still assembled the report.</p>
+      </article>
+      <article>
+        <p class="arm-label">C · Bound verifier</p>
+        <h3>Submission-level assessment</h3>
+        <p>An argument-free tool call returned the assessment bound to the submitted data and conditions.</p>
       </article>
     </div>
-    <p class="primary">
-      <strong>Primary comparison: C − B.</strong> A is useful context, but it is not the primary estimate of nomue's effect because B and C are the arms designed to differ only by the addition of nomue.
+    <p>
+      This design compares complete configurations. C changes binding, field provenance,
+      and structured return together, so the study does not identify a binding-only causal
+      effect. C's result path was deterministic and confirmed before the live run; its
+      216/216 result is not evidence of stochastic model stability.
     </p>
   </section>
 
-  <section id="score" class="section">
-    <h2>What is scored</h2>
+  <section id="failures" class="section">
+    <h2>What the score reveals</h2>
     <p>
-      The evaluated model is not allowed to be the judge of whether its own answer is correct. Expected outcomes are fixed before scored outputs are inspected, using independent numerical evidence, registered contracts, conformance fixtures, or pre-adjudicated scientific cases as appropriate.
+      A correct calculation can still produce an incorrect submission assessment. The
+      five scored fields cover the overall verdict, numerical correctness, named error
+      fields, missing fields, and conflicts between requested and submitted conditions.
+      The largest differences appeared in cases with missing information or undefined
+      inference, where the correct response was not a conventional numeric result.
     </p>
-    <p>The evaluation separates several kinds of correctness:</p>
+    <p>
+      Adding a stable Welch wrapper did not improve whole-report correctness on this
+      panel: W scored 131/216, compared with B's 132/216. This does not show that numerical
+      stability is unhelpful. The panel did not contain near-boundary numerical cases that
+      could detect such a benefit; its numerical discrepancies were deliberately large.
+    </p>
+    <p>
+      Output acceptance also mattered. Fifteen B sessions and one W session returned the
+      five fields as bare JSON rather than inside the required wrapper. A sensitivity
+      analysis accepting that form raised B to 142/216 (65.74%). It did not change the
+      qualitative comparison with C.
+    </p>
+  </section>
+
+  <section id="meaning" class="section">
+    <h2>What the result means—and what it does not</h2>
+    <p>
+      The evidence supports a bounded claim: for these 72 constructed Welch-report
+      questions and this fixed model, the bound-verifier configuration produced the
+      expected complete assessments more reliably than configurations in which the model
+      assembled the final report.
+    </p>
+    <p>It does not establish that:</p>
     <ul>
-      <li>whether the agent chose the right action — execute, clarify, refuse, or report unsupported scope;</li>
-      <li>whether it respected the supported statistical method and declarations;</li>
-      <li>whether numerical outputs satisfy the applicable comparison rule;</li>
-      <li>whether it silently invented scientific facts needed to proceed;</li>
-      <li>whether it overreached when the correct behavior was clarification or refusal; and</li>
-      <li>whether it called and interpreted the verification capability at the correct boundary.</li>
+      <li>binding alone caused the difference;</li>
+      <li>nomue is 100% accurate on real research submissions or other statistical methods;</li>
+      <li>the stable numerical wrapper has no value near floating-point boundaries;</li>
+      <li>B and W lacked all recognition of missing or undefined information; or</li>
+      <li>another model, prompt, task distribution, or future version will reproduce the same rates.</li>
     </ul>
     <p>
-      Results are intended to be reported by case class rather than collapsed into one headline score that hides where failures occur.
+      The study was developer-led, not preregistered, and has not been peer reviewed.
+      Tasuku Kobayashi is Licklider's founder and CEO. Kaori Saito, PhD in Statistics,
+      reviewed the calculations, scoring endpoint, oracle independence, evidence integrity,
+      and claim limits, but did not rerun the live provider sessions. Generative AI assisted
+      drafting, checking, and adversarial review; that work is not independent peer review.
     </p>
   </section>
 
-  <section id="status" class="section">
-    <h2>Current status</h2>
+  <section id="evidence" class="section">
+    <h2>Evidence and reproduction</h2>
     <p>
-      The comparison design, scoring boundary, baseline tool, model-provider adapter foundation, and exact nomue runtime binding are under active development and review. Development fixtures can exercise the A/B/C pipeline without being treated as model-performance evidence.
+      The preprint and reproducibility package are archived together on Zenodo. The package
+      contains the 648 scored rows, panel inputs and expected outputs, reference calculations,
+      aggregation and checking code, integrity manifests, saved tool definitions, and frozen
+      source material.
+    </p>
+    <p class="actions">
+      <a href="https://zenodo.org/records/22784595">Open the Zenodo record</a>
+      <a href="/research/whole-submission-welch-verification/">Read the publication note</a>
     </p>
     <p>
-      The next stages are live adapter checks, a frozen scored run plan, a sufficiently broad case set, protected holdout handling, live B/C execution, analysis, and adversarial review of the resulting claim.
-    </p>
-    <div class="status-box">
-      <p class="status-label">Evaluation progress</p>
-      <p><strong>{EVALUATION_BOUNDARY}</strong></p>
-      <p>The published result will state the measured tasks, models, versions, prompts, tool configuration, effect estimate, and uncertainty together.</p>
-    </div>
-  </section>
-
-  <section id="limits" class="section">
-    <h2>What a positive result would and would not mean</h2>
-    <p>
-      A positive C − B result would support a bounded statement: under the measured Welch tasks, models, versions, prompts, and tool configuration, adding nomue improved the predeclared outcomes.
-    </p>
-    <p>It would not by itself show that:</p>
-    <ul>
-      <li>frontier AI is generally bad at statistics;</li>
-      <li>nomue makes AI-generated science correct in general;</li>
-      <li>the measured effect transfers unchanged to other statistical methods; or</li>
-      <li>a future model version will reproduce the same effect without remeasurement.</li>
-    </ul>
-    <p>
-      The point of the evaluation is to make these boundaries visible and testable.
+      The saved evidence can be rescored without provider calls. The private C verifier is
+      not included, so the original C sessions cannot be rerun independently from the public
+      package. Reproduction of the archived results and a live replication are different claims.
     </p>
   </section>
 
   <footer class="page-foot">
-    <p>Founding evaluation scope: Welch only.</p>
-    <p><a href="/nomue/">Back to nomue</a></p>
+    <p>Published September 16, 2026 · Preprint v1.0 · Not peer reviewed</p>
+    <p><a href="/nomue/">How nomue works</a></p>
   </footer>
 </PageLayout>
 
 <style>
 @layer legacy {
-
   .page-head {
     padding-bottom: 2.5rem;
     border-bottom: 1px solid var(--rule);
   }
 
-  .page-head .eyebrow {
+  .page-head .eyebrow,
+  .section > .eyebrow {
     margin: 0;
   }
 
   .page-head h1 {
-    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
-    line-height: 1.25;
-    letter-spacing: -0.01em;
+    max-width: 18ch;
+    font-size: clamp(2rem, 4.5vw, 3.35rem);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
     margin: 0.9rem 0 1.25rem;
   }
 
   .standfirst {
+    max-width: 48rem;
     margin: 0;
-    font-size: 1.08rem;
+    font-size: 1.12rem;
     color: var(--ink-2);
   }
 
   .section {
-    padding: 2.75rem 0;
+    padding: 3rem 0;
     border-bottom: 1px solid var(--rule-faint);
   }
 
   .section h2 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
+    max-width: 30ch;
+    font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+    margin: 0.75rem 0 1.25rem;
   }
 
-  .section > :last-child {
+  .section > :last-child,
+  .arms p:last-child,
+  .score-grid p:last-child {
     margin-bottom: 0;
   }
 
+  .score-grid,
   .arms {
     display: grid;
     gap: 1rem;
     margin: 1.75rem 0;
   }
 
+  .score-grid article,
   .arms article {
     border: 1px solid var(--rule);
     padding: 1.25rem;
+  }
+
+  .score-grid .featured {
+    background: var(--wash);
+    border-color: var(--ink-3);
+  }
+
+  .score {
+    margin: 0.6rem 0 0.35rem;
+    font-size: clamp(1.65rem, 3.5vw, 2.35rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--ink);
   }
 
   .arms h3 {
@@ -173,12 +234,7 @@ const toc: TocItem[] = [
     margin-bottom: 0.5rem;
   }
 
-  .arms p:last-child {
-    margin-bottom: 0;
-  }
-
-  .arm-label,
-  .status-label {
+  .arm-label {
     margin-bottom: 0.4rem;
     color: var(--ink-3);
     font-size: 0.75rem;
@@ -187,23 +243,19 @@ const toc: TocItem[] = [
   }
 
   .primary {
-    border-left: 1px solid var(--ink);
+    border-left: 2px solid var(--ink);
     padding-left: 1.25rem;
   }
 
   strong {
-    font-weight: 400;
+    font-weight: 500;
     color: var(--ink);
   }
 
-  .status-box {
-    margin-top: 2rem;
-    padding: 1.25rem;
-    background: var(--wash);
-  }
-
-  .status-box p:last-child {
-    margin-bottom: 0;
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
   }
 
   .page-foot {
@@ -220,5 +272,11 @@ const toc: TocItem[] = [
     margin: 0;
   }
 
+  @media (min-width: 760px) {
+    .score-grid,
+    .arms {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
 }
 </style>
