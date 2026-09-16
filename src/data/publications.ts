@@ -36,6 +36,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Publication',
     date: 'September 16, 2026',
     sortKey: '2026-09-16',
+    publishedTime: { at: '2026-09-16T05:35:06Z', evidence: 'https://vercel.com/licklidermvp/website/GGxPeW2w2nGXEY1duYLyTdpSzQqP' },
     title: 'Comparing three tool-assisted AI configurations for whole-submission verification of Welch reports — preprint v1.0',
     summary: 'A 648-session fixed-panel study compares general Python, a stable Welch wrapper, and a bound verifier for complete five-field report correctness.',
     href: '/research/whole-submission-welch-verification/',
