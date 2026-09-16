@@ -2,7 +2,6 @@
 import ProductDevelopmentUpdate from '../components/ProductDevelopmentUpdate.astro';
 import { PUBLICATIONS } from '../data/publications';
 import {
-  EVALUATION_BOUNDARY,
   LEARNING_LOOP_POSITION,
   MARKET_SCOPE,
   MCP_RELEASE,
@@ -476,15 +475,14 @@ const homeStructuredData = {
     <section class="band">
       <p class="eyebrow">Evaluation</p>
       <div class="band-body">
-        <p class="lead">Does adding nomue actually improve a research agent?</p>
+        <p class="lead">A complete verifier returned all 216 expected reports in a fixed Welch-report study.</p>
         <p>
-          We are building a controlled comparison of the same model and baseline tools,
-          with and without nomue. The model is not allowed to judge whether its own
-          answer is correct, and clarification, refusal, and unsupported scope are
-          scored separately from numerical answers.
+          The 648-session experiment compared general Python, a stable Welch wrapper,
+          and a bound verifier. The first two configurations returned 132 and 131
+          correct complete reports; the bound verifier returned 216. The study measures
+          the full configurations on a constructed panel, not nomue's accuracy in general.
         </p>
-        <p>{EVALUATION_BOUNDARY}</p>
-        <p class="more"><a href="/evaluation/">Evaluation design and status</a></p>
+        <p class="more"><a href="/evaluation/">See the design, failures, evidence, and limits</a></p>
       </div>
     </section>
 

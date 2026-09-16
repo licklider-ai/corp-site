@@ -1,0 +1,146 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+
+const toc = [
+  { id: 'study', label: 'What the study compares' },
+  { id: 'results', label: 'Results' },
+  { id: 'interpretation', label: 'Interpretation and limits' },
+  { id: 'evidence', label: 'Read and reproduce' },
+  { id: 'disclosures', label: 'Disclosures' },
+];
+---
+
+<PublicationLayout
+  category="Research"
+  type="Publication"
+  title="Comparing three tool-assisted AI configurations for whole-submission verification of Welch reports — preprint v1.0"
+  description="A 648-session fixed-panel study compares general Python, a stable Welch wrapper, and a bound verifier for complete five-field report correctness."
+  published="September 16, 2026"
+  status="Preprint v1.0 — not peer reviewed; fixed constructed panel; reproducibility package available"
+  toc={toc}
+>
+  <div class="notice">
+    <p><strong>Preprint v1.0 — not peer reviewed or preregistered.</strong></p>
+    <p>
+      This is a developer-led evaluation of three complete configurations on a fixed,
+      constructed panel. It is not an estimate of accuracy in general research use.
+    </p>
+  </div>
+
+  <p>
+    Recomputing a Welch test is only part of checking a submitted statistical report.
+    A complete check may also need to identify missing claims, undefined inference,
+    and conflicts between requested and submitted conditions. This study asks how
+    three tool-assisted AI configurations differ when the scored output is the complete
+    five-field report rather than an explanation or an isolated number.
+  </p>
+
+  <section id="study">
+    <h2>What the study compares</h2>
+    <p>
+      The fixed panel contains 72 newly generated questions in nine predefined families.
+      Each question was run in three fresh sessions under each configuration, producing
+      648 scored sessions. All arms used the same fixed model,
+      <code>gpt-4.1-mini-2025-04-14</code>, the same case surface, and the
+      same session limits. The outcome was exact correctness of a five-field report,
+      using order-independent comparison for set-valued fields.
+    </p>
+    <ul>
+      <li><strong>B</strong> gave the model general Python tools and required it to assemble the report.</li>
+      <li><strong>W</strong> added a stable Welch-calculation wrapper, while the model still assembled the report.</li>
+      <li><strong>C</strong> exposed a bound verifier that returned the completed assessment after an argument-free tool call.</li>
+    </ul>
+    <p>
+      This is therefore a comparison of complete configurations. It does not isolate
+      binding as a causal factor: binding, field provenance, and structured return differ
+      together in C.
+    </p>
+  </section>
+
+  <section id="results">
+    <h2>Results</h2>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Configuration</th>
+          <th scope="col">Correct reports</th>
+          <th scope="col">Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>B — general Python</td><td>132 / 216</td><td>61.11%</td></tr>
+        <tr><td>W — stable Welch wrapper</td><td>131 / 216</td><td>60.65%</td></tr>
+        <tr><td>C — bound verifier</td><td>216 / 216</td><td>100%</td></tr>
+      </tbody>
+    </table>
+    <p>
+      A prespecified output wrapper affected some B and W scores. In a sensitivity
+      analysis that also accepted a bare five-field JSON object, B reached 142 of 216
+      sessions (65.74%); the C-minus-B difference was 34.26 percentage points. The
+      W wrapper did not improve complete-report correctness on this panel.
+    </p>
+  </section>
+
+  <section id="interpretation">
+    <h2>Interpretation and limits</h2>
+    <p>
+      The result supports a narrow operational claim: in this fixed experiment, the
+      bound-verifier configuration returned the expected complete report more reliably
+      than configurations in which the model assembled that report. C's 216 successful
+      sessions do not measure stochastic model reasoning or stability. Its deterministic
+      result path had been confirmed in preflight, and the model made one argument-free
+      tool call before the verifier supplied the assessment.
+    </p>
+    <p>
+      The panel was designed to test reporting and verification structure, not difficult
+      numerical conditioning. Numerical discrepancies were far outside the comparison
+      tolerance, so the study cannot establish whether a stable numerical wrapper helps
+      near floating-point boundaries. The missing and degenerate families also test
+      adherence to canonical reporting conventions; B and W were not given the complete
+      canonical field vocabulary. Their failures should not be read simply as failures
+      to notice missing information.
+    </p>
+    <p>
+      Other limits include one fixed model, one constructed Welch-report panel, three
+      repetitions, no preregistration, and developer control of case construction,
+      implementation, and primary evaluation. The findings do not establish nomue's
+      accuracy for other statistical methods, real-world submissions, other models, or
+      research conclusions as a whole.
+    </p>
+  </section>
+
+  <section id="evidence">
+    <h2>Read and reproduce</h2>
+    <p>
+      <a href="https://doi.org/10.5281/zenodo.22784595">The manuscript and reproducibility package are archived together on Zenodo</a>.
+      The package preserves the 648 scored rows, fixed inputs and oracle outputs,
+      aggregation code, tests, integrity manifests, tool definitions, and a frozen copy
+      of the relevant source. Its saved evidence can be rescored without provider calls.
+      The private C verifier itself is not included, so the original C sessions cannot be
+      rerun independently from the public package.
+    </p>
+    <p>
+      The release review reproduced all reported aggregates from the archived evidence,
+      regenerated the 72-question panel and references, and verified the package hashes.
+      This is reproducibility of the preserved evidence, not a live replication of the
+      provider sessions.
+    </p>
+  </section>
+
+  <section id="disclosures">
+    <h2>Disclosures</h2>
+    <p>
+      Tasuku Kobayashi is the sole author, founder and CEO of Licklider, Inc., which
+      develops nomue. No external funding was received. Kaori Saito, PhD in Statistics,
+      reviewed the statistical calculations, scoring endpoint, oracle independence,
+      evidence integrity, and limits of the claims for both the predecessor 36-question
+      evaluation and this 72-question evaluation. She did not rerun the live provider
+      sessions and reported no conflict of interest.
+    </p>
+    <p>
+      Generative AI assisted with drafting, experiment checks, and adversarial review.
+      The author remained responsible for the study design, evidence decisions, final
+      text, and publication. AI-assisted review is not independent scientific peer review.
+    </p>
+  </section>
+</PublicationLayout>
