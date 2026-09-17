@@ -155,6 +155,20 @@ export const R4_DISCUSSION = {
 export const R4_DISCUSSION_BOUNDARY =
   'Release 4 public discussion is open for a balanced two-by-two fixed-factor proposal: two factors, two levels each, and equal replication in four conditions. The proposal connects declared model assumptions, signed effect estimates, individual F tests, and verification evidence. Numerical support is not established; this is a specification proposal, not a new verifier capability.';
 
+export const R5_DISCUSSION = {
+  articleUrl: '/news/nomue-protocol-release-5-public-discussion/',
+  issueUrl: 'https://github.com/licklider-ai/nomue-protocol/issues/346',
+  proposalUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/976b8d0c18413322e6fbf775c4b990cc632a54ed/governance/drafts/release-5-preparation/opening-rfc-candidate.md',
+  holdsUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/976b8d0c18413322e6fbf775c4b990cc632a54ed/governance/drafts/release-5-preparation/opening-authorization-request.md',
+  reviewUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/976b8d0c18413322e6fbf775c4b990cc632a54ed/governance/drafts/release-5-preparation/opening-fresh-context-review-result.md',
+  confirmationUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/976b8d0c18413322e6fbf775c4b990cc632a54ed/governance/drafts/release-5-preparation/opening-fresh-context-diff-confirmation.md',
+  openedAt: '2026-09-17T00:38:15Z',
+  earliestDecisionAt: '2026-10-17T00:38:15Z',
+} as const;
+
+export const R5_DISCUSSION_BOUNDARY =
+  'Release 5 public discussion is open on a common evidence view for declared study design and selection timing across analysis families. The proposal covers versioned mappings, timing declarations, explicit limits on what a passing check means, and a shared report view. All three candidate families require separately accepted successors; no new verification capability is available.';
+
 export const PAIRED_T_RFC_URL =
   'https://github.com/licklider-ai/nomue-protocol/issues/25';
 
@@ -431,6 +445,11 @@ export const PROTOCOL_RESEARCH_PROGRESS = [
     summary: 'A balanced two-factor specification proposal is open for public comment. It connects model assumptions, individual effect tests, and verification evidence; numerical implementation remains unresolved.',
     relatedHref: '/engineering/power-scaling-and-factorial-f-statistics/',
     relatedLabel: 'SS, SSE, F, and the limits of power scaling',
+  },
+  {
+    href: R5_DISCUSSION.articleUrl,
+    stage: 'Release 5 · Public discussion',
+    summary: 'A proposal asks how researchers and agents can inspect declared study design and selection timing through one common evidence view across analysis families. Every family remains conditional on separately accepted successors.',
   },
 ].map((entry) => {
   const publication = PUBLICATIONS.find((item) => item.href === entry.href);

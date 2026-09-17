@@ -32,6 +32,16 @@ const PRODUCTION_29: RecordedPublicationTime = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'News',
+    type: 'Public consultation',
+    date: 'September 17, 2026',
+    sortKey: '2026-09-17',
+    title: 'nomue Protocol opens Release 5 discussion on shared evidence for study design and selection timing',
+    summary: 'Researchers and developers can help define how declared study design and selection timing should appear in a common verification report across analysis families.',
+    href: '/news/nomue-protocol-release-5-public-discussion/',
+    status: 'Public discussion open — conditional family scope; research and design holds remain; no new supported capability',
+  },
+  {
     category: 'Research',
     type: 'Publication',
     date: 'September 16, 2026',

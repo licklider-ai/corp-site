@@ -20,6 +20,8 @@ import {
   PAIRED_T_BOUNDARY,
   R3_DISCUSSION,
   R4_DISCUSSION,
+  R5_DISCUSSION,
+  R5_DISCUSSION_BOUNDARY,
   R4_DISCUSSION_BOUNDARY,
   PLANNED_METHOD_FAMILIES,
   PLATFORM_SCOPE,
@@ -696,13 +698,14 @@ ${NOMUE_NPX_COMMAND}`,
     title: 'Current capability and boundaries',
     description:
       'What can be used now, what comes next, how the platform expands, and how to interpret a successful result.',
-    status: 'Current public capability map — September 9, 2026',
-    updated: 'September 9, 2026',
+    status: 'Current public capability map — September 17, 2026',
+    updated: 'September 17, 2026',
     llmSummary: [
       `Run the public verifier locally for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
       'The Release 1 verifier and local stdio MCP server are public on npm. The agent-facing Welch capability is available in limited Release 1 to approved recipients through authenticated MCP and HTTP interfaces; public registration is not available.',
       'Paired t is open Release 2 RFC work, not current Release 1 support.',
       R4_DISCUSSION_BOUNDARY,
+      R5_DISCUSSION_BOUNDARY,
       'Verification calls across AI research describe the platform category; each additional capability must be evidenced and released separately.',
       'A supported verification does not establish source-data truth, overall research correctness, causal truth, or publication acceptance.',
       'A controlled comparison is being built before a performance result is published.',
@@ -741,8 +744,8 @@ ${NOMUE_NPX_COMMAND}`,
       {
         id: 'development',
         title: 'Protocol candidates and public discussion',
-        paragraphs: [PAIRED_T_BOUNDARY, R3_SOURCE_PROGRESS, R4_DISCUSSION_BOUNDARY],
-        links: [{ label: 'Release 3 scope and public discussion', href: R3_DISCUSSION.articleUrl }, { label: 'Comment on the Release 3 proposal', href: R3_DISCUSSION.issueUrl }, { label: 'Release 4 scope and public discussion', href: R4_DISCUSSION.articleUrl }, { label: 'Comment on the Release 4 proposal', href: R4_DISCUSSION.issueUrl }],
+        paragraphs: [PAIRED_T_BOUNDARY, R3_SOURCE_PROGRESS, R4_DISCUSSION_BOUNDARY, R5_DISCUSSION_BOUNDARY],
+        links: [{ label: 'Release 3 scope and public discussion', href: R3_DISCUSSION.articleUrl }, { label: 'Comment on the Release 3 proposal', href: R3_DISCUSSION.issueUrl }, { label: 'Release 4 scope and public discussion', href: R4_DISCUSSION.articleUrl }, { label: 'Comment on the Release 4 proposal', href: R4_DISCUSSION.issueUrl }, { label: 'Release 5 scope and public discussion', href: R5_DISCUSSION.articleUrl }, { label: 'Comment on the Release 5 proposal', href: R5_DISCUSSION.issueUrl }],
         bullets: [
           'An RFC is a review record, not a support declaration.',
           'Implementation evidence does not by itself create a public Protocol capability.',
@@ -926,6 +929,8 @@ ${NOMUE_POSITION}
 - [Release 3 public discussion](${R3_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R3_DISCUSSION.articleUrl})
 - ${R4_DISCUSSION_BOUNDARY}
 - [Release 4 public discussion](${R4_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R4_DISCUSSION.articleUrl})
+- ${R5_DISCUSSION_BOUNDARY}
+- [Release 5 public discussion](${R5_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R5_DISCUSSION.articleUrl})
 - ${EVALUATION_BOUNDARY}
 - ${ROADMAP_POSITION}
 - Planned method families: ${PLANNED_METHOD_FAMILIES.join('; ')}.

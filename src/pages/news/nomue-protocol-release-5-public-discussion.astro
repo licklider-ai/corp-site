@@ -1,0 +1,67 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+import { R5_DISCUSSION } from '../../data/site-facts';
+
+const publication = PUBLICATIONS.find((item) => item.href === R5_DISCUSSION.articleUrl)!;
+---
+
+<PublicationLayout
+  category={publication.category}
+  type={publication.type}
+  title={publication.title}
+  description={publication.summary}
+  published={publication.date}
+  status={publication.status}
+  toc={[]}
+>
+  <section id="discussion">
+    <h2>Help make study-design choices easier to inspect</h2>
+    <p>Public discussion is now open on how nomue Protocol should present declared study design and selection timing in a common verification report. Researchers and developers can read the <a href={R5_DISCUSSION.proposalUrl}>fixed Release 5 proposal</a> and <a href={R5_DISCUSSION.issueUrl}>comment on Issue #346</a>.</p>
+    <p>The intended benefit is continuity as an analysis changes: a researcher or agent should be able to inspect the declared design, its source fields and its interpretation limits across different analysis families. The proposal is open for comment; research and design work remain before adoption or implementation support.</p>
+  </section>
+
+  <section id="why">
+    <h2>The same questions across different analyses</h2>
+    <p>Consider separate studies comparing two independent groups, measuring the same units twice, or comparing several independent groups. Each needs its own design declarations and procedure. A reader still wants to ask common questions: what counts as an experimental unit, are observations paired, how many groups were declared, and were some observations excluded?</p>
+    <p>The proposal would define how to read those shared facts from each versioned Profile—the specification for an analysis family's declared inputs. A common report would identify both the fact and its exact source. Each design fact keeps one authoritative place in the Profile's declarations; the common view is derived from it.</p>
+    <p>This is one step toward portable scientific evidence for AI research agents: the evidence should remain inspectable as the set of supported analyses grows.</p>
+  </section>
+
+  <section id="proposal">
+    <h2>Four additions under discussion</h2>
+    <ul>
+      <li><strong>Versioned mappings:</strong> explicit rules for reading shared design facts from each participating Profile, including a requirement that the necessary declarations are complete.</li>
+      <li><strong>Selection timing:</strong> a declaration of whether the selected analysis identities and relevant design declarations were finalized before access to observed outcomes, after access, or at an unknown time.</li>
+      <li><strong>Interpretation limits:</strong> a common statement of what a passing check establishes and what it leaves unproved.</li>
+      <li><strong>A shared report view:</strong> the mapped facts, their source paths, mapping version, timing status and the existing checks on which the result depends.</li>
+    </ul>
+    <p>The first slice considers continuous outcomes in three families: independent two-group, paired two-condition and independent multi-group analysis. Every family requires separately accepted successor specifications, including the two-group family. The existing Welch method identifier does not stand in for the explicit Contract identity the proposal needs.</p>
+    <p>The separate Release 4 factorial proposal is outside this slice. Rank-based, permutation, repeated, clustered and other broader designs also remain outside it. Each family's scientific and numerical rules continue to have their own owners and review requirements.</p>
+  </section>
+
+  <section id="timing">
+    <h2>Make the timing declaration visible alongside the result</h2>
+    <p>The proposed timing declaration covers both the selected analysis identities and every declaration used in the common design view. Access means access to any observed outcome in the supplied dataset, including values later excluded from the analysis. A later change to those choices prevents that Record revision from declaring selection before outcome access, even if an earlier value is restored.</p>
+    <p>This dataset-wide boundary is a proposed Protocol convention, and its methodological assessment remains open. The report would retain an after-access or unknown declaration alongside a passing result, so that the status alone cannot conceal the timing. The declaration does not prove when access occurred or establish preregistration.</p>
+  </section>
+
+  <section id="boundary">
+    <h2>What the proposal would establish</h2>
+    <p>A passing check would establish consistency between the declared facts, their mapping and the existing analysis evidence. Method recommendations and selection algorithms remain a separate product concern. R5 would not certify that a method was best, unique, unbiased or chosen by a particular policy.</p>
+    <p>The RFC's <a href={R5_DISCUSSION.proposalUrl + '#non-claim-boundary'}>eleven explicit interpretation limits</a> also exclude declaration truth, scientific-assumption truth, numerical correctness, whole-project validity and declarant authentication. Family boundaries are Protocol conventions rather than scientific classifications. Numerical checks retain their own separate scope.</p>
+    <p>Opening discussion adds no supported method or verification check. Current public verifier support remains <a href="/docs/record-verification/">Release 1 Welch Record verification</a>; current access paths are described in <a href="/docs/limits/">the capability map</a>.</p>
+  </section>
+
+  <section id="evidence">
+    <h2>Reviewed for opening, with the remaining work visible</h2>
+    <p>The preparation package includes a <a href={R5_DISCUSSION.reviewUrl}>fresh-context opening review</a> and its <a href={R5_DISCUSSION.confirmationUrl}>close-only confirmation</a>. The required final clarification was applied before opening. The confirmation continues the same reviewer session; it is not a second independent review. These AI-assisted project reviews address opening readiness and are not journal peer review or new scientific clearance.</p>
+    <p>The <a href={R5_DISCUSSION.holdsUrl + '#named-holds-retained-during-discussion'}>named holds</a> remain public: full-text source confirmation and a methodological addendum, acceptance of each family's exact specifications, detailed mapping and report definitions, and fixtures showing preservation of earlier behavior. Opening the discussion closes none of those research or design requirements.</p>
+  </section>
+
+  <section id="participate">
+    <h2>How to take part</h2>
+    <p>Comment on <a href={R5_DISCUSSION.issueUrl}>Issue #346</a> with the passage concerned, a question or counterexample, and a proposed correction where possible. Feedback on the common facts, the dataset-wide timing convention, interpretation limits and family dependencies is especially useful.</p>
+    <p>The discussion opened at <time datetime={R5_DISCUSSION.openedAt}>00:38:15 UTC on September 17, 2026</time>. Under the provisional additive STABLE-INTENT assessment, the minimum window is 30 days and the earliest decision is <time datetime={R5_DISCUSSION.earliestDecisionAt}>00:38:15 UTC on October 17, 2026</time>. The final impact assessment may require a longer process. That date is neither automatic adoption nor a product release date.</p>
+  </section>
+</PublicationLayout>
