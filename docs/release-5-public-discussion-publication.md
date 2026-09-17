@@ -73,9 +73,15 @@ support. No private product implementation was read or copied for this publicati
 - This pass checks source and generated output; it does not claim browser rendering
   validation or new independent scientific review.
 
-Production completion and its UTC timestamp are recorded after the deployment
-succeeds, following `docs/deployment.md`. This task authorizes this site update;
-it does not authorize email, social posts or media outreach.
+Production completed for main revision `996236b8569bc297251f7ccd84a1f6b98b8db730`
+after [PR #51](https://github.com/licklider-ai/corp-site/pull/51). GitHub's Vercel
+success status `54333613479` records **2026-09-17T00:51:14Z** with
+[the production deployment](https://vercel.com/licklidermvp/website/F5mtxnwh7r6XT2HWAeuyo53Unpmb).
+That is the operational publication/update time for the article and the affected
+current-state pages. It is separate from the RFC's issue creation time. The
+metadata-only follow-up retains this instant; its own deployment does not reset it.
+Generated HTML, JSON Feed, RSS and sitemap are checked against this same value.
+This task does not authorize email, social posts or media outreach.
 
 ## Process disclosure and follow-up
 

@@ -36,6 +36,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Public consultation',
     date: 'September 17, 2026',
     sortKey: '2026-09-17',
+    publishedTime: { at: '2026-09-17T00:51:14Z', evidence: 'https://vercel.com/licklidermvp/website/F5mtxnwh7r6XT2HWAeuyo53Unpmb' },
     title: 'nomue Protocol opens Release 5 discussion on shared evidence for study design and selection timing',
     summary: 'Researchers and developers can help define how declared study design and selection timing should appear in a common verification report across analysis families.',
     href: '/news/nomue-protocol-release-5-public-discussion/',
