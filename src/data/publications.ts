@@ -258,6 +258,17 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Public discussion open — specification proposal; numerical support not established',
   },
   {
+    updated: 'September 17, 2026',
+    category: 'News',
+    type: 'Public consultation',
+    date: 'September 17, 2026',
+    sortKey: '2026-09-17',
+    title: 'nomue Protocol opens Release 5 public discussion on declared-design evidence',
+    summary: 'Researchers and developers can comment on a proposal for cross-family design projections, selection timing, non-claims, and a common verification-report view.',
+    href: '/news/nomue-protocol-release-5-public-discussion/',
+    status: 'Public discussion open — informative proposal; no capability or adoption issued',
+  },
+  {
     category: 'News',
     type: 'Product',
     date: 'September 9, 2026',

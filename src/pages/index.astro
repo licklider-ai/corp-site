@@ -23,6 +23,8 @@ import {
   R4_DISCUSSION,
   R4_EXPERIMENT_PROGRESS,
   R4_DISCUSSION_BOUNDARY,
+  R5_DISCUSSION,
+  R5_DISCUSSION_BOUNDARY,
   ROADMAP_POSITION,
   UPSTREAM_CONTRIBUTIONS,
   UPSTREAM_REPORTS_AS_OF,
@@ -152,6 +154,13 @@ const homeStructuredData = {
             <p>For example, two temperature levels and two materials make four conditions. The proposal covers each factor’s average effect and whether one factor changes the effect of the other.</p>
             <p>Discussion opened September 9, 2026, with a minimum 30-day window. Researchers and developers can challenge the scope, evidence format, and failure rules.</p>
             <p><a href={R4_DISCUSSION.articleUrl}>Read the proposal announcement</a> · <a href={R4_DISCUSSION.issueUrl}>Join the discussion</a></p>
+          </article>
+          <article>
+            <p class="step">Release 5 · Public discussion</p>
+            <h3>Declared design: make cross-family evidence inspectable</h3>
+            <p>{R5_DISCUSSION_BOUNDARY}</p>
+            <p>Discussion opened September 17, 2026, with a minimum 30-day window. Public discussion does not imply adoption, identifiers, or supported capability.</p>
+            <p><a href={R5_DISCUSSION.articleUrl}>Read the proposal announcement</a> · <a href={R5_DISCUSSION.issueUrl}>Join the discussion</a></p>
           </article>
         </div>
         <p class="package-meaning">Current public verifier support remains Release 1 Welch. Each proposed capability has its own evidence, adoption, and release steps.</p>
@@ -382,7 +391,7 @@ const homeStructuredData = {
             <p>{LEARNING_LOOP_POSITION}</p>
           </article>
         </div>
-        <p class="roadmap-note"><strong>Protocol progress:</strong> Paired-t is a reviewed Release 2 candidate; the bounded Release 3 and Release 4 proposals are open for public discussion. <a href="#protocol-progress">See each program and its next steps</a>.</p>
+        <p class="roadmap-note"><strong>Protocol progress:</strong> Paired-t is a reviewed Release 2 candidate; the bounded Release 3, Release 4, and Release 5 proposals are open for public discussion. <a href="#protocol-progress">See each program and its next steps</a>.</p>
         <p class="scope-note">{MARKET_SCOPE}</p>
         <p class="more"><a href="/roadmap/">See the full product and capability roadmap</a></p>
       </div>

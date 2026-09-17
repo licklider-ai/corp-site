@@ -1,0 +1,79 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+import { R5_DISCUSSION } from '../../data/site-facts';
+
+const publication = PUBLICATIONS.find((item) => item.href === R5_DISCUSSION.articleUrl)!;
+---
+
+<PublicationLayout
+  category={publication.category}
+  type={publication.type}
+  title={publication.title}
+  description={publication.summary}
+  published={publication.date}
+  updated={publication.updated}
+  status={publication.status}
+  toc={[]}
+>
+  <section id="discussion">
+    <h2>A proposal for inspectable evidence across design families</h2>
+    <p>
+      Public discussion opened on September 17, 2026 for a nomue Protocol Release 5
+      proposal covering cross-family declared-design evidence. The proposal asks how
+      different design families can expose compatible evidence without making the
+      Protocol responsible for product-side method selection.
+    </p>
+    <p>
+      This is an informative proposal open for comment. It issues no identifier,
+      schema, check, bundle, supported capability, or adoption. <a
+        href={R5_DISCUSSION.proposalUrl}>Read the fixed candidate</a> or <a
+        href={R5_DISCUSSION.issueUrl}>join the public discussion</a>.
+    </p>
+  </section>
+
+  <section id="proposal">
+    <h2>Four proposed additions</h2>
+    <p>
+      Release 5 proposes versioned per-Profile projection mappings, a selection-timing
+      status, an explicit successor non-claim boundary, and a common inspectable
+      verification-report view. The projection would consume existing family-owned
+      identities and admissibility results rather than creating duplicate authority.
+    </p>
+    <p>
+      The first slice considers independent two-group, paired two-condition, and
+      independent multi-group designs. Each family remains conditional on a separately
+      accepted Contract and bundle. The proposal does not standardize a product’s
+      selection policy or claim that a selected tuple is optimal, fair, scientifically
+      true, or numerically correct.
+    </p>
+  </section>
+
+  <section id="boundary">
+    <h2>What remains open</h2>
+    <p>
+      The opening record retains holds for independent methodological review, family
+      Contract/Profile/schema/bundle acceptance, exact mappings and report encoding,
+      historical-preservation fixtures, and the final impact assessment. Public
+      discussion is reversible preparation, not a normative design freeze.
+    </p>
+    <p>
+      The minimum discussion period is 30 calendar days under the provisional
+      STABLE-INTENT assessment. It began at <time datetime={R5_DISCUSSION.openedAt}>00:38:15 UTC on September 17, 2026</time>;
+      the earliest decision is <time datetime={R5_DISCUSSION.earliestDecisionAt}>00:38:15 UTC on October 17, 2026</time>.
+      Elapsed time does not imply adoption or a product release.
+    </p>
+  </section>
+
+  <section id="participate">
+    <h2>How to take part</h2>
+    <p>
+      Comment on <a href={R5_DISCUSSION.issueUrl}>the public discussion issue</a> with
+      the clause or example concerned, an interoperability or methodological issue,
+      and a proposed correction or counterexample where possible. The proposal
+      particularly welcomes scrutiny of projection ownership, timing conventions,
+      non-claims, and conditional family dependencies.
+    </p>
+    <p><a href={R5_DISCUSSION.openingRecordUrl}>Read the opening record</a>.</p>
+  </section>
+</PublicationLayout>

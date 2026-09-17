@@ -21,6 +21,8 @@ import {
   R4_DISCUSSION,
   R4_EXPERIMENT_PROGRESS,
   R4_DISCUSSION_BOUNDARY,
+  R5_DISCUSSION,
+  R5_DISCUSSION_BOUNDARY,
   PLANNED_METHOD_FAMILIES,
   PLATFORM_SCOPE,
   HOSTED_WELCH_CAPABILITY,
@@ -76,9 +78,11 @@ Website publication and update dates use UTC. Known times are recorded in UTC; h
 - [Public MCP source](${MCP_RELEASE.repositoryUrl}), [npm package](${MCP_RELEASE.npmUrl}), [official registry metadata](${MCP_RELEASE.registryUrl}), and [passing cross-platform CI](${MCP_RELEASE.ciUrl})
 - ${PAIRED_T_BOUNDARY}
 - ${R4_DISCUSSION_BOUNDARY}
+- ${R5_DISCUSSION_BOUNDARY}
 - ${R3_SOURCE_PROGRESS}
 - [Release 3 public discussion](${R3_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R3_DISCUSSION.articleUrl})
 - [Release 4 public discussion](${R4_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R4_DISCUSSION.articleUrl})
+- [Release 5 public discussion](${R5_DISCUSSION.issueUrl}); [scope and evidence](https://www.licklider.ai${R5_DISCUSSION.articleUrl})
 - ${EVALUATION_BOUNDARY}
 - ${PLATFORM_SCOPE}
 - ${MARKET_SCOPE}
