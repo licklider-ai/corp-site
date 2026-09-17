@@ -1,31 +1,14 @@
 ---
-import ProductDevelopmentUpdate from '../components/ProductDevelopmentUpdate.astro';
 import { PUBLICATIONS } from '../data/publications';
 import {
-  LEARNING_LOOP_POSITION,
-  MARKET_SCOPE,
-  MCP_RELEASE,
-  MCP_PUBLIC_SOURCE,
-  METHOD_IDENTITY_FINDING,
   NOMUE_GLOBAL_INSTALL_COMMAND,
   NOMUE_NPX_COMMAND,
   NOMUE_VERIFY_COMMAND,
-  PLATFORM_SCOPE,
-  PLANNED_METHOD_FAMILIES,
-  PRODUCT_CAPABILITY,
-  PRODUCT_RELEASE_BOUNDARY,
   PUBLIC_CAPABILITY,
   PUBLIC_RELEASE,
-  PUBLIC_TRUST_EVIDENCE,
   R3_DISCUSSION,
-  R3_EXPERIMENT_PROGRESS,
-  R3_SOURCE_PROGRESS,
   R4_DISCUSSION,
   R5_DISCUSSION,
-  R5_DISCUSSION_BOUNDARY,
-  R4_EXPERIMENT_PROGRESS,
-  R4_DISCUSSION_BOUNDARY,
-  ROADMAP_POSITION,
   UPSTREAM_CONTRIBUTIONS,
   UPSTREAM_REPORTS_AS_OF,
   VERIFICATION_CALL_DEFINITION,
@@ -92,20 +75,15 @@ const homeStructuredData = {
           should not grade themselves. nomue gives them versioned verification calls
           with machine-readable evidence and next actions.
         </p>
-        <p>{ROADMAP_POSITION}</p>
         <p>
-          Welch Record verification is public, and hosted Welch calls are available to approved recipients in limited Release 1. Paired-t has reached reviewed candidate
-          readiness, and proposals for independent groups and two-factor experiments are open for public discussion.
-          <a href="#protocol-progress">See Protocol progress</a>.
+          Verify supported Welch Records locally today. Hosted Welch calls are available
+          to approved recipients in limited Release 1.
         </p>
       </div>
       <div class="cta">
         <a class="cta-primary" href="/docs/record-verification/">Install and run</a>
-        <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">npm package</a>
         <a href={PUBLIC_RELEASE.verifierUrl} target="_blank" rel="noopener noreferrer">View source on GitHub</a>
-        <a href="/news/nomue-welch-limited-release-1/">Hosted Welch: limited Release 1</a>
         <a href="/nomue/">How nomue works</a>
-        <a href="/roadmap/">Product roadmap</a>
       </div>
       <p class="hero-facts">
         {PUBLIC_RELEASE.npmPackage} · npm <code>{PUBLIC_RELEASE.npmDistTag}</code>: {PUBLIC_RELEASE.verifierPackage} release candidate ·{' '}
@@ -116,81 +94,11 @@ const homeStructuredData = {
   </section>
 
   <div class="sections">
-<ProductDevelopmentUpdate />
-    <section id="protocol-progress" class="band band--single">
-      <div class="band-inner band-inner--wide">
-        <span id="paired-t-progress"></span>
-        <p class="eyebrow">Protocol progress</p>
-        <h2 class="roadmap-title">More analysis families. Evidence that stays inspectable.</h2>
-        <p class="roadmap-lead">
-          Four programs extend the Protocol beyond its public Welch scope:
-          a reviewed paired-t candidate, open proposals for independent groups and two-factor experiments,
-          and a new discussion on a common view of declared study design and selection timing.
-        </p>
-        <div class="protocol-progress-grid protocol-progress-grid--releases">
-          <article>
-            <p class="step">Release 2 · Reviewed candidate</p>
-            <h3>Paired-t: a complete candidate for review</h3>
-            <p>The candidate connects matched observations to a p-value and a 95% confidence interval. Its final review-readiness package received an independent GO with no findings.</p>
-            <ul>
-              <li>Completed research gate and four candidate schemas for the Record, profile, execution outcome, and verification report.</li>
-              <li>Student-t tail and 95% confidence-interval numerical work closed at candidate level, with full-trace error checks.</li>
-              <li>All four work groups cover scope, resource limits, numerical rules, one controlled runtime, and failure reasons; migration evidence preserves Release 1 behavior.</li>
-            </ul>
-            <p>Formal adoption, permanent identifiers, authoritative integration, and release remain before paired-t becomes supported.</p>
-            <p><a href="/engineering/bounding-paired-t-arithmetic-and-pvalues/">Candidate evidence and reviews</a> · <a href="https://github.com/licklider-ai/nomue-protocol/issues/25">Public review</a></p>
-          </article>
-          <article>
-            <p class="step">Release 3 · Public discussion</p>
-            <h3>Independent groups: make each comparison explicit</h3>
-            <p>{R3_SOURCE_PROGRESS}</p>
-            <p>For example, comparing three treatments raises different questions: whether their means differ overall, which treatments differ from a control, or which pairs to compare.</p>
-            <p>The proposal asks how a future verification call should preserve those choices and the meaning of each result. Comment on its scope, declarations, and evidence boundaries.</p>
-            <p><a href={R3_DISCUSSION.articleUrl}>Read the proposal announcement</a> · <a href={R3_DISCUSSION.issueUrl}>Join the discussion</a></p>
-          </article>
-          <article>
-            <p class="step">Release 4 · Public discussion</p>
-            <h3>Two factors: help shape the specification</h3>
-            <p>{R4_DISCUSSION_BOUNDARY}</p>
-            <p>For example, two temperature levels and two materials make four conditions. The proposal covers each factor’s average effect and whether one factor changes the effect of the other.</p>
-            <p>Discussion opened September 9, 2026, with a minimum 30-day window. Researchers and developers can challenge the scope, evidence format, and failure rules.</p>
-            <p><a href={R4_DISCUSSION.articleUrl}>Read the proposal announcement</a> · <a href={R4_DISCUSSION.issueUrl}>Join the discussion</a></p>
-          </article>
-          <article>
-            <p class="step">Release 5 · Public discussion</p>
-            <h3>Make design choices inspectable across analyses</h3>
-            <p>{R5_DISCUSSION_BOUNDARY}</p>
-            <p>A researcher or agent could inspect which design was declared, where each fact came from, and whether the selection was declared complete before access to outcomes.</p>
-            <p>Comment on the shared evidence, timing convention and interpretation limits. The minimum discussion window began September 17, 2026.</p>
-            <p><a href={R5_DISCUSSION.articleUrl}>Read the proposal announcement</a> · <a href={R5_DISCUSSION.issueUrl}>Join the discussion</a></p>
-          </article>
-        </div>
-        <p class="package-meaning">Current public verifier support remains Release 1 Welch. Each proposed capability has its own evidence, adoption, and release steps.</p>
-      </div>
-    </section>
-
     <section class="band band--single available-band">
       <div class="band-inner band-inner--wide">
         <p class="eyebrow">Available Now</p>
         <h2 class="available-title">Verify a supported Welch Record locally</h2>
         <p class="available-copy">{PUBLIC_CAPABILITY}</p>
-        <div class="capability-grid">
-          <article>
-            <p class="step">1 · Check the scope</p>
-            <h3>Confirm the exact procedure</h3>
-            <p>Make sure the Record matches the published Release 1 bundle and Welch scope.</p>
-          </article>
-          <article>
-            <p class="step">2 · Recompute</p>
-            <h3>Check the covered numbers</h3>
-            <p>Recalculate the listed quantities and compare them using the published rule.</p>
-          </article>
-          <article>
-            <p class="step">3 · Return evidence</p>
-            <h3>Produce a machine-readable report</h3>
-            <p>Give the research agent scoped results, versions, and an actionable outcome.</p>
-          </article>
-        </div>
         <nav class="package-signals" aria-label="Public verifier package facts">
           <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">
             <span>npm</span> {PUBLIC_RELEASE.verifierPackage} RC
@@ -222,15 +130,95 @@ const homeStructuredData = {
 {NOMUE_NPX_COMMAND}</code></pre>
         </div>
         <p class="package-meaning">
-          The npm package gives an agent workflow a repeatable check: pass a Record to a
-          versioned command, receive scoped JSON, and keep the result separate from the
-          research model that requested it. The same CLI also provides{' '}
-          <code>canonicalize</code> and <code>digest</code> for local Record processing.
+          Pass a Record to a versioned command and receive a scoped, machine-readable result.
         </p>
         <p class="more"><a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">View on npm</a> · <a href="/docs/record-verification/">Full verifier guide</a> · <a href="/docs/cli-reference/">CLI reference</a> · <a href="/docs/examples.json">Machine-readable examples</a></p>
       </div>
     </section>
 
+    <section class="band band--single">
+      <div class="band-inner band-inner--wide">
+        <p class="eyebrow">Verification Call</p>
+        <p class="definition">{VERIFICATION_CALL_DEFINITION}</p>
+        <div class="call-grid">
+          <article>
+            <p class="step">1 · Request</p>
+            <h2>Send one bounded check</h2>
+            <p>
+              The request names the check, version, evidence, and scientific facts
+              needed to answer it.
+            </p>
+          </article>
+          <article>
+            <p class="step">2 · Decision</p>
+            <h2>Get an actionable decision</h2>
+            <p>
+              The tool can proceed, ask for missing information, report that the request
+              is outside its scope, stop safely, or preserve a failed check.
+            </p>
+          </article>
+          <article>
+            <p class="step">3 · Evidence</p>
+            <h2>Preserve a checkable record</h2>
+            <p>
+              The result travels with what passed or failed, the evidence and versions
+              used, the next action, and exactly how far the check reaches.
+            </p>
+          </article>
+        </div>
+        <p class="more"><a href="/nomue/">How nomue works</a> · <a href="/docs/">Read the docs</a></p>
+      </div>
+    </section>
+
+    <section id="protocol-progress" class="band band--single">
+      <div class="band-inner band-inner--wide">
+        <span id="paired-t-progress"></span>
+        <p class="eyebrow">Protocol progress</p>
+        <h2 class="roadmap-title">More analysis families. Evidence that stays inspectable.</h2>
+        <p class="roadmap-lead">Release 1 Welch is public. Four bounded programs extend the Protocol.</p>
+        <div class="protocol-progress-grid protocol-progress-grid--releases">
+          <article>
+            <p class="step">Release 2 · Reviewed candidate</p>
+            <h3>Paired-t</h3>
+            <p>A complete candidate covers matched observations, p-values, and 95% confidence intervals. Adoption and release remain.</p>
+            <p><a href="/engineering/bounding-paired-t-arithmetic-and-pvalues/">Evidence and reviews</a> · <a href="https://github.com/licklider-ai/nomue-protocol/issues/25">Public review</a></p>
+          </article>
+          <article>
+            <p class="step">Release 3 · Public discussion</p>
+            <h3>Independent groups</h3>
+            <p>The proposal makes comparison choices and error control explicit. Numerical support is not yet adopted.</p>
+            <p><a href={R3_DISCUSSION.articleUrl}>Read the proposal</a> · <a href={R3_DISCUSSION.issueUrl}>Join the discussion</a></p>
+          </article>
+          <article>
+            <p class="step">Release 4 · Public discussion</p>
+            <h3>Two-factor experiments</h3>
+            <p>The proposal covers a balanced two-by-two design, including main effects and interaction. Numerical support is not yet adopted.</p>
+            <p><a href={R4_DISCUSSION.articleUrl}>Read the proposal</a> · <a href={R4_DISCUSSION.issueUrl}>Join the discussion</a></p>
+          </article>
+          <article>
+            <p class="step">Release 5 · Public discussion</p>
+            <h3>Shared study-design evidence</h3>
+            <p>The proposal makes declared design and selection timing inspectable across analysis families. It adds no current capability.</p>
+            <p><a href={R5_DISCUSSION.articleUrl}>Read the proposal</a> · <a href={R5_DISCUSSION.issueUrl}>Join the discussion</a></p>
+          </article>
+        </div>
+        <p class="more"><a href="/roadmap/">See the full product and capability roadmap</a></p>
+      </div>
+    </section>
+
+    <section class="band">
+      <p class="eyebrow">Evaluation</p>
+      <div class="band-body">
+        <p class="lead">A complete verifier returned all 216 expected reports in a fixed Welch-report study.</p>
+        <p>
+          The 648-session experiment compared general Python, a stable Welch wrapper,
+          and a bound verifier. The first two configurations returned 132 and 131
+          correct complete reports; the bound verifier returned 216. The study measures
+          the full configurations on a constructed panel, not nomue's accuracy in general.
+        </p>
+        <p class="more"><a href="/evaluation/">See the design, failures, evidence, and limits</a></p>
+      </div>
+    </section>
   </div>
 
     <section class="band band--single upstream-band">
@@ -240,15 +228,8 @@ const homeStructuredData = {
           <div>
             <h2 class="upstream-title">Engineering evidence behind verification infrastructure.</h2>
             <p class="lead">
-              The same work required to build reliable verification—independent
-              references, hostile edge cases, reproducible failures, and exact claim
-              boundaries—has already exposed numerical errors and method-selection surprises in software used across science.
-            </p>
-            <p>
-              Our upstream work—{UPSTREAM_CONTRIBUTIONS.length} reports and{' '}
-              {upstreamFixCount} matching fixes merged upstream—shows the engineering
-              depth behind the platform. It is evidence of what Licklider can build,
-              not the boundary of the business.
+              Independent references and hostile edge cases have exposed numerical errors
+              and method-selection surprises in scientific software.
             </p>
           </div>
           <dl class="contribution-counts" aria-label={`Upstream contribution totals as of ${UPSTREAM_REPORTS_AS_OF}`}>
@@ -296,219 +277,14 @@ const homeStructuredData = {
     </section>
 
   <div class="sections">
-    <section class="band">
-      <p class="eyebrow">The Missing Call</p>
-      <div class="band-body">
-        <p class="lead">Generation has interfaces. Verification needs one too.</p>
-        <p>
-          A research agent can already call a literature search, a code runner, or a
-          statistical library. But a calculation completing is not the same as knowing
-          whether the design is covered, whether a required scientific fact is missing,
-          whether a reported number agrees with a published calculation, or
-          whether the system should stop.
-        </p>
-        <p>
-          Licklider builds the specialist layer that general research agents can call
-          when a bounded part of the work needs separate verification.
-        </p>
-      </div>
-    </section>
-
-    <section class="band band--single">
-      <div class="band-inner band-inner--wide">
-        <p class="eyebrow">Verification Call</p>
-        <p class="definition">{VERIFICATION_CALL_DEFINITION}</p>
-        <aside class="research-finding">
-          <p class="step">What our source review found</p>
-          <p><strong>{METHOD_IDENTITY_FINDING}</strong></p>
-          <p><a href="/research/why-statistical-method-names-are-not-enough/">Read the independently checked Research note</a></p>
-        </aside>
-        <div class="call-grid">
-          <article>
-            <p class="step">1 · Request</p>
-            <h2>Send one bounded check</h2>
-            <p>
-              The request names the check, version, evidence, and scientific facts
-              needed to answer it.
-            </p>
-          </article>
-          <article>
-            <p class="step">2 · Decision</p>
-            <h2>Get an actionable decision</h2>
-            <p>
-              The tool can proceed, ask for missing information, report that the request
-              is outside its scope, stop safely, or preserve a failed check.
-            </p>
-          </article>
-          <article>
-            <p class="step">3 · Evidence</p>
-            <h2>Preserve a checkable record</h2>
-            <p>
-              The result travels with what passed or failed, the evidence and versions
-              used, the next action, and exactly how far the check reaches.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="band band--single">
-      <div class="band-inner band-inner--wide">
-        <p class="eyebrow">Product Roadmap</p>
-        <h2 class="roadmap-title">One verification call is the entry point, not the destination.</h2>
-        <p class="roadmap-lead">{PLATFORM_SCOPE}</p>
-        <div class="scope-grid">
-          <article>
-            <p class="scope-label">Available now</p>
-            <h3>Public Welch trust layer</h3>
-            <p>{PUBLIC_CAPABILITY}</p>
-            <p><a href="/docs/record-verification/">Run the verifier</a></p>
-          </article>
-          <article>
-            <p class="scope-label">Available now — release candidate</p>
-            <h3>Local MCP server</h3>
-            <p>{MCP_PUBLIC_SOURCE}</p>
-            <p><a href="/docs/mcp-verification/">Install and use</a> · <a href={MCP_RELEASE.registryUrl} target="_blank" rel="noopener noreferrer">Official Registry</a> · <a href={MCP_RELEASE.repositoryUrl} target="_blank" rel="noopener noreferrer">Source</a></p>
-          </article>
-          <article>
-            <p class="scope-label">Limited Release 1</p>
-            <h3>Agent-callable Welch</h3>
-            <p>{PRODUCT_CAPABILITY}</p>
-            <p>{PRODUCT_RELEASE_BOUNDARY}</p>
-            <p><a href="/news/nomue-welch-limited-release-1/">Read the release announcement</a></p>
-          </article>
-          <article>
-            <p class="scope-label">Planned platform</p>
-            <h3>Persistent agent infrastructure</h3>
-            <p>Independently verifiable Records, agent-native Project state, resumability, and a generalized capability kernel.</p>
-          </article>
-          <article>
-            <p class="scope-label">Planned methods</p>
-            <h3>Ten capability families</h3>
-            <p>{PLANNED_METHOD_FAMILIES.slice(0, 5).join(', ')}, and five further families covering rank-based, categorical, linear-model, survival, and count outcomes.</p>
-          </article>
-          <article>
-            <p class="scope-label">Compounding system</p>
-            <h3>Governed learning from real use</h3>
-            <p>{LEARNING_LOOP_POSITION}</p>
-          </article>
-        </div>
-        <p class="roadmap-note"><strong>Protocol progress:</strong> Paired-t is a reviewed Release 2 candidate; the bounded Release 3, Release 4 and Release 5 proposals are open for public discussion. <a href="#protocol-progress">See each program and its next steps</a>.</p>
-        <p class="scope-note">{MARKET_SCOPE}</p>
-        <p class="more"><a href="/roadmap/">See the full product and capability roadmap</a></p>
-      </div>
-    </section>
-
-    <section id="research-progress" class="band band--single">
-      <div class="band-inner band-inner--wide">
-        <p class="eyebrow">Research Behind Expansion</p>
-        <h2 class="roadmap-title">New methods start with evidence about what a check can guarantee.</h2>
-        <p class="roadmap-lead">Beyond the public Welch verifier, our research now connects declared comparisons to exact Holm corrections and raw two-factor observations to submitted probability evidence. These bounded experiments are archived for inspection; public adoption remains open.</p>
-        <div class="protocol-progress-grid">
-          <article>
-            <h3>Return evidence only after the whole call passes its controls</h3>
-            <p>{R3_EXPERIMENT_PROGRESS}</p>
-            <p><a href="/engineering/separating-record-conformance-from-verification/">Separate conformance and verification results</a> · <a href="/engineering/when-a-verification-call-must-discard-its-result/">Execution controls and result discard</a> · <a href="/engineering/binding-holm-corrections-to-comparisons/">Declaration and arithmetic checks</a></p>
-          </article>
-          <article>
-            <h3>Check probability evidence against raw observations</h3>
-            <p>{R4_EXPERIMENT_PROGRESS}</p>
-            <p><a href="/engineering/checking-factorial-probability-evidence/">The connected evidence experiment</a> · <a href="/engineering/checking-factorial-statistics-and-tail-bounds/">Arithmetic findings and updated checker boundary</a></p>
-          </article>
-        </div>
-        <p class="roadmap-note">These are candidate, research, and public-discussion milestones. They inform future verification rules; they do not expand the currently supported Welch scope. Each article records its review status and remaining decisions.</p>
-      </div>
-    </section>
-
-    <section class="band band--single">
-      <div class="band-inner">
-        <p class="eyebrow">Agent-readable by Design</p>
-        <div class="band-body band-body--wide">
-          <h2 class="section-title">One underlying contract, two readers</h2>
-          <p class="lead">
-            Research agents and researchers should be able to inspect the same scope,
-            required declarations, possible outcomes, and limits.
-          </p>
-          <p>
-            Licklider publishes small discovery indexes, clean Markdown pages, explicit
-            when-to-use and when-not-to-use guidance, and machine-readable examples. The
-            purpose is not to make a model sound confident. It is to reduce wrong calls,
-            prevent silent inference, and make the basis of a result easier for a
-            researcher to review.
-          </p>
-          <div class="reader-grid">
-            <article>
-              <h3>For the research agent</h3>
-              <p>Discover the right capability, provide the right facts, and stop at the stated boundary.</p>
-            </article>
-            <article>
-              <h3>For the researcher</h3>
-              <p>See what the agent asked, what was checked, and what still requires human judgment.</p>
-            </article>
-          </div>
-          <p class="more">
-            <a href="/docs/">Read the docs</a> · <a href="/llms.txt">llms.txt</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="band band--single">
-      <div class="band-inner band-inner--wide">
-        <p class="eyebrow">What We Build</p>
-        <div class="layers">
-          <article>
-            <p class="layer-label">Public trust layer</p>
-            <h2>Protocol, Record, verifier</h2>
-            <p>
-              The public Protocol defines how supported evidence and scoped verification
-              results are represented. A local verifier lets third parties check covered
-              properties without depending on Licklider's service.
-            </p>
-          </article>
-          <article>
-            <p class="layer-label">Product layer</p>
-            <h2>Agent-callable verification capabilities</h2>
-            <p>
-              nomue gathers the required facts, asks for clarification when needed,
-              decides whether a request is supported, runs the fixed calculation, and
-              returns a machine-readable next action. Product implementation details stay
-              separate from the public Protocol.
-            </p>
-          </article>
-        </div>
-        <p class="trust-evidence"><strong>Published release evidence:</strong> {PUBLIC_TRUST_EVIDENCE}</p>
-        <p class="more"><a href="/news/nomue-welch-limited-release-1/">Hosted Welch: limited Release 1</a>
-        <a href="/nomue/">How nomue works</a></p>
-      </div>
-    </section>
-
-    <section class="band">
-      <p class="eyebrow">Evaluation</p>
-      <div class="band-body">
-        <p class="lead">A complete verifier returned all 216 expected reports in a fixed Welch-report study.</p>
-        <p>
-          The 648-session experiment compared general Python, a stable Welch wrapper,
-          and a bound verifier. The first two configurations returned 132 and 131
-          correct complete reports; the bound verifier returned 216. The study measures
-          the full configurations on a constructed panel, not nomue's accuracy in general.
-        </p>
-        <p class="more"><a href="/evaluation/">See the design, failures, evidence, and limits</a></p>
-      </div>
-    </section>
 
     <section class="band">
       <p class="eyebrow">Thesis</p>
       <div class="band-body">
         <h2 class="section-title">Approval needs a checkable basis</h2>
         <p>
-          AI has scaled generation. As more intellectual work is produced by machines,
-          approval remains meaningful only when it stays connected to evidence that can
-          be checked.
-        </p>
-        <p>
-          We are not trying to automate responsibility. We are building the verification
-          infrastructure that lets researchers exercise judgment with a clearer basis.
+          As AI scales generation, approval must stay connected to checkable evidence.
+          Licklider builds the infrastructure that helps researchers make that judgment.
         </p>
         <p class="more"><a href="/thesis/">Read the thesis</a></p>
       </div>
@@ -558,7 +334,6 @@ const homeStructuredData = {
   .band-inner--wide { display: block; }
   .band-inner--wide > .eyebrow { margin-bottom: 2rem; }
   .band-body { max-width: var(--measure); }
-  .band-body--wide { max-width: 46rem; }
   .band-body > :last-child, article > :last-child { margin-bottom: 0; }
   .lead { color: var(--ink); font-size: 1.15rem; }
   .available-band { padding-top: 4.5rem; }
@@ -574,30 +349,19 @@ const homeStructuredData = {
   .quickstart code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
   .package-meaning { max-width: 48rem; margin: 1.5rem 0 0; color: var(--ink-1); }
   .definition { max-width: 52rem; margin: 0 0 2.5rem; color: var(--ink); font-size: clamp(1.35rem, 2.8vw, 2rem); line-height: 1.45; }
-  .research-finding { max-width: 52rem; margin: 0 0 2rem; padding: 1.25rem 1.4rem; border-left: 2px solid var(--ink); background: var(--wash); }
-  .research-finding p:last-child { margin-bottom: 0; }
-  .capability-grid, .call-grid, .scope-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-  .capability-grid article, .call-grid article, .scope-grid article { padding: 1.5rem; border: 1px solid var(--rule); }
-  .capability-grid h3, .call-grid h2, .scope-grid h3, .layers h2 { margin-bottom: 0.75rem; font-size: 1.08rem; }
-  .step, .scope-label, .layer-label, .evidence-status { margin-bottom: 0.55rem; color: var(--ink-3); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
-  .scope-grid article:first-child { background: var(--wash); }
+  .call-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .call-grid article { padding: 1.5rem; border: 1px solid var(--rule); }
+  .call-grid h2 { margin-bottom: 0.75rem; font-size: 1.08rem; }
+  .step, .evidence-status { margin-bottom: 0.55rem; color: var(--ink-3); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
   .protocol-progress-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
   .protocol-progress-grid--releases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   @media (max-width: 1000px) { .protocol-progress-grid--releases { grid-template-columns: minmax(0, 1fr); } }
   .protocol-progress-grid article { min-width: 0; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
   .protocol-progress-grid h3 { font-size: 1.3rem; line-height: 1.35; }
-  .protocol-progress-grid li { margin-bottom: 0.65rem; }
   @media (max-width: 760px) { .protocol-progress-grid { grid-template-columns: minmax(0, 1fr); } }
   .roadmap-title { max-width: 52rem; margin: 0 0 1rem; font-size: clamp(1.8rem, 3.8vw, 2.8rem); line-height: 1.2; letter-spacing: -0.01em; }
   .roadmap-lead { max-width: 50rem; margin: 0 0 2rem; color: var(--ink-1); font-size: 1.08rem; }
-  .availability-note { padding-top: 0.75rem; border-top: 1px solid var(--rule-faint); color: var(--ink-3); font-size: 0.85rem; }
-  .roadmap-note { max-width: 50rem; margin: 1.5rem 0 0; font-size: 0.9rem; color: var(--ink-2); }
-  .scope-note { max-width: 47rem; margin: 2rem 0 0; padding-left: 1.25rem; border-left: 1px solid var(--ink); }
-  .trust-evidence { max-width: 48rem; margin: 1.5rem 0 0; color: var(--ink-2); }
   .section-title { margin-bottom: 1rem; font-size: 1.3rem; }
-  .reader-grid, .layers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
-  .reader-grid article, .layers article { padding: 1.5rem; border: 1px solid var(--rule); }
-  .reader-grid h3 { margin-bottom: 0.65rem; font-size: 1rem; }
   .upstream-band { padding-top: 5rem; }
   .upstream-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3rem; align-items: end; }
   .upstream-head > div:first-child { max-width: 46rem; }
@@ -627,14 +391,13 @@ const homeStructuredData = {
   @media (max-width: 900px) {
     .hero-inner { padding: 4.5rem var(--gutter) 4rem; }
     .band, .band-inner { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
-    .capability-grid, .call-grid, .scope-grid, .upstream-grid { grid-template-columns: minmax(0, 1fr); }
+    .call-grid, .upstream-grid { grid-template-columns: minmax(0, 1fr); }
     .quickstart, .upstream-head { grid-template-columns: minmax(0, 1fr); }
     .contribution-counts { justify-content: flex-start; }
     .latest-date { width: 8rem; }
   }
 
   @media (max-width: 620px) {
-    .reader-grid, .layers { grid-template-columns: minmax(0, 1fr); }
     .contribution-counts { flex-direction: column; }
     .contribution-counts > div { min-width: 0; }
     .latest-category { display: none; }
