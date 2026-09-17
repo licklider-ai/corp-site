@@ -54,7 +54,7 @@ export const R3_EXPERIMENT_PROGRESS =
   'The draft Holm candidate.4 separates Record conformance from integrity, caller-context and arithmetic results while retaining execution controls. The numerical kernel is unchanged. Final design decisions and public adoption remain open; supplied p-values and scientific validity are not established by these checks.';
 
 export const R4_EXPERIMENT_PROGRESS =
-  'The archived two-by-two experiment connects raw observations to exact F ratios and probability evidence. The controlled execution candidate is now integrated into the public research archive; automated checks reject altered saved evidence and unsuccessful historical oracle comparisons. The next public candidate assigns numerical evidence generation to the verifier; its policy is recorded, while public Record integration and support remain open.';
+  'The two-by-two experiment now has its arithmetic, tail, complete-output, submitted-evidence, and controlled-execution research assets integrated into nomue Protocol main with review receipts. The scope remains experimental: evidence acceptance is conditional on the recorded candidate boundaries, and public Record integration, formal adoption, and supported numerical behavior remain open.';
 
 export const PRODUCT_DEVELOPMENT = {
   url: '/engineering/making-verification-results-useful-to-agents/',

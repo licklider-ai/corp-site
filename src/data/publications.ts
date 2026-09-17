@@ -147,7 +147,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     publishedTime: PRODUCTION_26,
     summary: 'The factorial experiment now includes archived execution controls and automated rejection of altered evidence or unsuccessful historical reference comparisons.',
     href: '/engineering/checking-factorial-probability-evidence/',
-    status: 'Execution candidate and evidence validation integrated; numerical-method adoption and public support remain open',
+    status: 'Research assets integrated into Protocol main with review receipts; formal adoption and public support remain open',
   },
   {
     "category": "Blog",
