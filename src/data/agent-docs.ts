@@ -163,8 +163,8 @@ export const AGENT_DOCS: AgentDoc[] = [
     title: 'Verify a Release 1 nomue Record',
     description:
       'When and how to use the public local verifier for the exact Release 1 Public Draft support target.',
-    status: 'Public npm release candidate — @licklider/nomue-verifier 0.2.1-rc.0',
-    updated: 'September 2, 2026',
+    status: 'Public npm release candidate — @licklider/nomue-verifier 0.2.1-rc.1',
+    updated: 'September 18, 2026',
     llmSummary: [
       `Run the public verifier locally for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}.`,
       `The exact Release 1 bundle is ${PUBLIC_RELEASE.bundle}.`,
@@ -173,7 +173,7 @@ export const AGENT_DOCS: AgentDoc[] = [
       'Exit code 0 means all applicable scoped checks passed, not that the research is verified overall.',
       `Install ${PUBLIC_RELEASE.npmPackage} from npm globally, or run it through npx without a global install.`,
       'After installation, Record verification runs locally and does not call a nomue server.',
-      'The npm latest dist-tag currently points to 0.2.1-rc.0, which is a release candidate, not a stable release.',
+      'The npm rc dist-tag currently points to 0.2.1-rc.1; the examples pin that exact release candidate rather than relying on a mutable tag.',
     ],
     sections: [
       {
@@ -225,7 +225,7 @@ ${NOMUE_VERIFY_COMMAND}
 ${NOMUE_NPX_COMMAND}`,
         example: true,
         note:
-          'The npm latest dist-tag currently resolves to 0.2.1-rc.0. This is a release candidate, not a stable release. Scripts must inspect the JSON report to learn the exact scoped outcomes.',
+          'The commands pin 0.2.1-rc.1 exactly. This is a release candidate, not a stable release. Scripts must inspect the JSON report to learn the exact scoped outcomes.',
       },
       {
         id: 'package-behavior',
@@ -257,7 +257,7 @@ ${NOMUE_NPX_COMMAND}`,
         title: 'Common mistakes LLMs make with statistical verification',
         bullets: [
           'Treating exit code 0 as an overall VERIFIED status.',
-          'Treating the npm latest dist-tag as a stable-release claim; the published version is 0.2.1-rc.0.',
+          'Treating the npm rc dist-tag as a stable-release claim; the documented version is 0.2.1-rc.1 and the commands pin it exactly.',
           'Assuming that a nearby bundle version or similar statistical method is supported.',
           'Assuming that numerical agreement establishes scientific truth.',
           'Allowing the verifier to fetch a Record-supplied URI or execute Record-supplied code; the public verifier does neither.',
@@ -288,8 +288,8 @@ ${NOMUE_NPX_COMMAND}`,
     title: 'Use nomue Record verification over MCP',
     description:
       'Install the public local stdio server, decide when its method-neutral Record tool applies, and replay the current Release 1 Welch result with the independent verifier.',
-    status: 'Public local MCP release candidate — @licklider/nomue-verifier-mcp 0.2.0-rc.0',
-    updated: 'September 4, 2026',
+    status: 'Public local MCP release candidate — @licklider/nomue-verifier-mcp 0.2.0-rc.1',
+    updated: 'September 18, 2026',
     llmSummary: [
       `Start the exact release candidate with ${NOMUE_MCP_NPX_COMMAND}.`,
       `The sole method-neutral tool is ${MCP_RELEASE.tool}; its input field record_json contains complete Record JSON text, not a parsed object. The current supported scientific scope remains the Release 1 Welch bundle.`,
@@ -423,13 +423,13 @@ ${NOMUE_NPX_COMMAND}`,
     slug: 'cli-reference',
     title: 'nomue CLI reference',
     description:
-      'The exact public command surface shipped by @licklider/nomue-verifier 0.2.1-rc.0, including current help and version boundaries.',
-    status: 'Public CLI reference — release candidate 0.2.1-rc.0',
-    updated: 'September 1, 2026',
+      'The exact public command surface shipped by @licklider/nomue-verifier 0.2.1-rc.1, including current help and version boundaries.',
+    status: 'Public CLI reference — release candidate 0.2.1-rc.1',
+    updated: 'September 18, 2026',
     llmSummary: [
       `Install ${PUBLIC_RELEASE.npmPackage} globally or run the package through npx.`,
       'The current public subcommands are verify, canonicalize, and digest.',
-      'nomue --help and nomue --version are not implemented commands in 0.2.1-rc.0.',
+      'nomue --help and nomue --version are not implemented commands in 0.2.1-rc.1.',
       'Do not invent help or version output; use this reference and npm package metadata.',
       'verify always writes machine-readable JSON to stdout; --format controls whether and how a human summary is also written to stderr.',
       'canonicalize and digest are Record-processing utilities, not broader scientific-verification claims.',
@@ -444,7 +444,7 @@ ${NOMUE_NPX_COMMAND}`,
 ${NOMUE_NPX_COMMAND}`,
         example: true,
         note:
-          'The npm latest dist-tag currently points to 0.2.1-rc.0, a release candidate rather than a stable release.',
+          'The commands pin 0.2.1-rc.1 exactly; it is a release candidate rather than a stable release.',
       },
       {
         id: 'commands',
@@ -479,7 +479,7 @@ ${NOMUE_NPX_COMMAND}`,
       },
       {
         id: 'help-version',
-        title: 'Help and version behavior in 0.2.1-rc.0',
+        title: 'Help and version behavior in 0.2.1-rc.1',
         paragraphs: [
           'The current release candidate does not implement nomue --help, nomue verify --help, or nomue --version as commands. Do not construct a tool call that assumes those flags exist.',
           'nomue --help and nomue --version produce the usage-error path because a file argument is missing. nomue verify --help treats --help as a file path rather than as a help flag. The package version should be read from npm metadata or package.json.',

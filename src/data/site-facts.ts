@@ -22,12 +22,12 @@ export const PUBLIC_RELEASE = {
   bundle: 'urn:nomue:bundle:itgc-guarantee:0.2.1-draft.1',
   profile: 'independent two-group continuous outcomes',
   procedure: 'two-sided Welch two-sample t procedure',
-  verifierPackage: '0.2.1-rc.0',
+  verifierPackage: '0.2.1-rc.1',
   verifierMaturity: 'experimental release-candidate package',
   npmPackage: '@licklider/nomue-verifier',
-  npmDistTag: 'latest',
+  npmDistTag: 'rc',
   npmAccess: 'public',
-  npmUrl: 'https://www.npmjs.com/package/@licklider/nomue-verifier',
+  npmUrl: 'https://www.npmjs.com/package/@licklider/nomue-verifier/v/0.2.1-rc.1',
   supportedOperatingSystems: ['Linux', 'macOS', 'Windows'],
   testedNodeVersions: ['20', '22'],
   protocolUrl: 'https://github.com/licklider-ai/nomue-protocol',
@@ -71,21 +71,21 @@ export const MCP_RELEASE = {
   displayName: 'nomue Record Verifier',
   configName: 'nomue-verify',
   package: '@licklider/nomue-verifier-mcp',
-  version: '0.2.0-rc.0',
+  version: '0.2.0-rc.1',
   maturity: 'public npm release candidate',
   npmDistTag: 'rc',
-  npmUrl: 'https://www.npmjs.com/package/@licklider/nomue-verifier-mcp/v/0.2.0-rc.0',
+  npmUrl: 'https://www.npmjs.com/package/@licklider/nomue-verifier-mcp/v/0.2.0-rc.1',
   transport: 'stdio',
   tool: 'verify_nomue_record',
   registryName: 'io.github.licklider-ai/nomue-verifier-mcp',
   registryUrl:
     'https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.licklider-ai%2Fnomue-verifier-mcp',
   verifierPackage: '@licklider/nomue-verifier',
-  verifierVersion: '0.2.1-rc.0',
+  verifierVersion: '0.2.1-rc.1',
   repositoryUrl: 'https://github.com/licklider-ai/nomue-verifier-mcp',
   ciUrl: 'https://github.com/licklider-ai/nomue-verifier-mcp/actions',
   registryCiUrl:
-    'https://github.com/licklider-ai/nomue-verifier-mcp/actions/runs/33843999286',
+    'https://github.com/licklider-ai/nomue-verifier-mcp/actions/runs/35301000323',
   testedOperatingSystems: ['Linux', 'macOS', 'Windows'],
   testedNodeVersions: ['20', '22'],
 } as const;
@@ -118,10 +118,10 @@ export const NOMUE_MCP_WHEN_NOT_TO_USE =
   'Do not use to calculate a Welch test from raw samples, select a method, judge scientific truth or causality, verify paired-t, Wilcoxon, Mann–Whitney, or interpret an unsupported bundle.';
 
 export const NOMUE_GLOBAL_INSTALL_COMMAND =
-  `npm install --global ${PUBLIC_RELEASE.npmPackage}`;
+  `npm install --global ${PUBLIC_RELEASE.npmPackage}@${PUBLIC_RELEASE.verifierPackage}`;
 
 export const NOMUE_NPX_COMMAND =
-  `npx --yes ${PUBLIC_RELEASE.npmPackage} verify ./record.json --format json`;
+  `npx --yes ${PUBLIC_RELEASE.npmPackage}@${PUBLIC_RELEASE.verifierPackage} verify ./record.json --format json`;
 
 export const NOMUE_VERIFY_COMMAND =
   'nomue verify ./record.json --format json';
