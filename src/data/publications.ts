@@ -32,6 +32,16 @@ const PRODUCTION_29: RecordedPublicationTime = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'Engineering',
+    type: 'Implementation note',
+    date: 'September 18, 2026',
+    sortKey: '2026-09-18',
+    title: 'Preserving Student-t probability near zero at one degree of freedom',
+    summary: 'A closed-form calculation keeps small but representable probability differences from disappearing and gives the public nomue verifier an independent regression check for a known numerical failure.',
+    href: '/engineering/student-t-df1-center-precision/',
+    status: 'Implemented in @licklider/nomue-verifier 0.2.1-rc.1; SciPy issue #25667 remains open; no Protocol scope change',
+  },
+  {
     category: 'News',
     type: 'Public consultation',
     date: 'September 17, 2026',
@@ -380,7 +390,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'Matching fix released in v0.12.0; present through v0.12.2; issue open',
   },
   {
-    updated: 'September 4, 2026',
+    updated: 'September 18, 2026',
     category: 'News',
     type: 'Product',
     date: 'September 2, 2026',
@@ -390,7 +400,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'The public @licklider/nomue-verifier-mcp package exposes a method-neutral Record verification tool over local stdio; the current release supports the Release 1 Welch bundle.',
     href: '/news/nomue-mcp-on-npm/',
     status:
-      'Public local MCP release candidate — npm rc 0.2.0-rc.0; official MCP Registry',
+      'Public local MCP release candidate — npm rc 0.2.0-rc.1; official MCP Registry',
   },
   {
     updated: 'September 4, 2026',
@@ -406,6 +416,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'Independently checked research note — three source questions closed; wider source review continues; not peer reviewed',
   },
   {
+    updated: 'September 18, 2026',
     category: 'News',
     type: 'Product',
     date: 'September 1, 2026',
@@ -414,7 +425,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     summary:
       'The public @licklider/nomue-verifier package provides a direct local command for checking supported nomue Release 1 Records.',
     href: '/news/nomue-verifier-on-npm/',
-    status: 'Public release candidate — npm latest 0.2.1-rc.0',
+    status: 'Public release candidate — npm rc 0.2.1-rc.1',
   },
   {
     updated: 'September 2, 2026',
@@ -504,7 +515,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Fix merged in SciPy — awaiting a SciPy release',
   },
   {
-    updated: 'September 1, 2026',
+    updated: 'September 18, 2026',
     category: 'News',
     type: 'Product',
     date: 'August 24, 2026',
@@ -539,7 +550,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Fix merged in Boost.Math — awaiting a Boost release',
   },
   {
-    updated: 'September 1, 2026',
+    updated: 'September 18, 2026',
     category: 'News',
     type: 'Product preview',
     date: 'August 16, 2026',
@@ -548,7 +559,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     summary:
       'The experimental local verifier is available for anyone to inspect and test and is now pinned to nomue Protocol Release 1.',
     href: '/news/nomue-verifier-release-1-candidate/',
-    status: 'Experimental verifier — 0.2.1-rc.0; pinned to Protocol Release 1',
+    status: 'Experimental verifier — 0.2.1-rc.1; pinned to Protocol Release 1',
   },
 ];
 

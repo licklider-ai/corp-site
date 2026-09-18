@@ -1,0 +1,111 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+import { MCP_RELEASE, PUBLIC_RELEASE } from '../../data/site-facts';
+
+const item = PUBLICATIONS.find(
+  (entry) => entry.href === '/engineering/student-t-df1-center-precision/',
+)!;
+
+const sourceRevision = '940b8fb6990632029bcebd2ebdf6ce9dca8e9244';
+const sourceUrl = `${PUBLIC_RELEASE.verifierUrl}/blob/${sourceRevision}/reference/stats-kernel/src/t-distribution.ts`;
+const regressionUrl = `${PUBLIC_RELEASE.verifierUrl}/blob/${sourceRevision}/tests/smoke.ts`;
+---
+
+<PublicationLayout
+  category={item.category}
+  type={item.type}
+  title={item.title}
+  description={item.summary}
+  published={item.date}
+  status={item.status}
+  toc={[]}
+>
+  <section>
+    <h2>The corrected verifier keeps a real difference visible</h2>
+    <p>
+      The public <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer"><code>{PUBLIC_RELEASE.npmPackage}@{PUBLIC_RELEASE.verifierPackage}</code></a>
+      {' '}release candidate now preserves small probability differences when a Student-t
+      distribution has one degree of freedom and the test statistic is close to zero.
+      At the published regression point, a nomue Record carrying the flattened
+      <code>p = 1</code> value fails the verifier's p-value comparison rather than
+      silently agreeing with its recomputation.
+    </p>
+    <p>
+      The same correction is available through
+      {' '}<a href={MCP_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer"><code>{MCP_RELEASE.package}@{MCP_RELEASE.version}</code></a>,
+      which delegates to that exact verifier version. This is a numerical repair inside
+      the existing Release 1 Welch verification path, not a new statistical procedure or
+      an expansion of Protocol support.
+    </p>
+  </section>
+
+  <section>
+    <h2>A known dependency failure erased information near the center</h2>
+    <p>
+      <a href="https://github.com/scipy/scipy/issues/25667" target="_blank" rel="noopener noreferrer">SciPy issue #25667</a>
+      {' '}documents an accuracy regression in <code>stdtr(1, t)</code>. For sufficiently
+      small nonzero <code>t</code>, the affected path returns exactly <code>0.5</code>
+      instead of retaining the small representable departure from one half. Larger nearby
+      inputs are quantized in visible steps. The issue was reported upstream before this
+      nomue change; Licklider is not claiming discovery of it.
+    </p>
+    <p>
+      nomue does not call SciPy for this calculation. We used the public SciPy case as a
+      regression input and found that the verifier's separate Student-t dependency path
+      could also erase the center difference. The verifier repair and tests apply to the
+      public nomue implementation.
+    </p>
+    <p>
+      The failure matters to verification because a plausible finite answer can still be
+      numerically wrong. A successful library call, a value inside the interval from zero
+      to one, and the absence of a warning do not establish that the probability retained
+      all available information.
+    </p>
+  </section>
+
+  <section>
+    <h2>Use the exact one-degree-of-freedom form where it is stable</h2>
+    <p>
+      At one degree of freedom, Student-t is the Cauchy distribution. Its cumulative
+      probability has the closed form <code>0.5 + atan(t) / π</code>. The
+      {' '}<a href={sourceUrl} target="_blank" rel="noopener noreferrer">released verifier implementation</a>
+      uses that expression for <code>df = 1</code> when <code>|t| ≤ 1</code>, where it
+      avoids the center cancellation. Outside that interval it retains the existing tail
+      path, avoiding a new loss from subtracting nearly equal values in the tails.
+    </p>
+    <p>
+      This is a bounded repair rather than a replacement of the full probability engine.
+      The condition is explicit, the mathematical identity is exact, and the unchanged
+      path remains responsible for the rest of the supported domain.
+    </p>
+  </section>
+
+  <section>
+    <h2>The release test is independent of the affected path</h2>
+    <p>
+      The <a href={regressionUrl} target="_blank" rel="noopener noreferrer">public regression test</a>
+      {' '}uses <code>t = 7.45 × 10^-9</code> and calculates its expected cumulative and
+      two-sided probabilities from the exact Cauchy expression, rather than asking the
+      dependency under test for the expected value. The package then runs its normal
+      cross-platform release checks before publication.
+    </p>
+    <p>
+      Release candidate <code>{PUBLIC_RELEASE.verifierPackage}</code> is available on npm's
+      <code>{PUBLIC_RELEASE.npmDistTag}</code> channel. The local MCP package pins the same
+      verifier exactly, and the official MCP Registry identifies version
+      <code>{MCP_RELEASE.version}</code>. Both remain release candidates.
+    </p>
+  </section>
+
+  <section>
+    <h2>The Protocol identity and scientific boundary do not change</h2>
+    <p>
+      This repair does not modify nomue Protocol Release 1, its interpretation bundle,
+      Record schema, supported study design, or meaning of a passing check. The verifier
+      still checks only the existing independent two-group Welch Record scope. It does
+      not establish that the inputs are true, that Welch is the right scientific method,
+      or that a study's conclusion is valid overall.
+    </p>
+  </section>
+</PublicationLayout>

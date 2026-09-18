@@ -1,5 +1,10 @@
 ---
 import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import {
+  NOMUE_GLOBAL_INSTALL_COMMAND,
+  NOMUE_NPX_COMMAND,
+  NOMUE_VERIFY_COMMAND,
+} from '../../data/site-facts';
 
 const toc = [
   { id: 'availability', label: 'What is available' },
@@ -16,7 +21,7 @@ const toc = [
   title="nomue Protocol Release 1 Public Draft is now available"
   description="The first public draft of the nomue Protocol is available with a machine-readable Record specification, local verification, public fixtures, and signed release artifacts."
   published="August 24, 2026"
-  updated="September 1, 2026"
+  updated="September 18, 2026"
   status="Public Draft — experimental"
   toc={toc}
 >
@@ -51,11 +56,11 @@ const toc = [
       and whether stored Welch results match a fresh calculation under the registered
       rules.
     </p>
-    <pre><code>npm install --global @licklider/nomue-verifier
-nomue verify ./record.json --format json
+    <pre><code>{NOMUE_GLOBAL_INSTALL_COMMAND}
+{NOMUE_VERIFY_COMMAND}
 
 # Or run without a global install
-npx --yes @licklider/nomue-verifier verify ./record.json --format json</code></pre>
+{NOMUE_NPX_COMMAND}</code></pre>
     <p>
       The verifier source repository also carries a valid public fixture and an
       intentionally mismatched fixture for inspecting both result paths.
