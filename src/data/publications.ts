@@ -36,6 +36,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Implementation note',
     date: 'September 18, 2026',
     sortKey: '2026-09-18',
+    publishedTime: { at: '2026-09-18T03:16:02Z', evidence: 'https://vercel.com/licklidermvp/website/CX1BpgrdbLMaqtuey3wPssLHzCDT' },
     title: 'Preserving Student-t probability near zero at one degree of freedom',
     summary: 'A closed-form calculation keeps small but representable probability differences from disappearing and gives the public nomue verifier an independent regression check for a known numerical failure.',
     href: '/engineering/student-t-df1-center-precision/',
@@ -391,6 +392,7 @@ export const PUBLICATIONS: PublicationItem[] = [
   },
   {
     updated: 'September 18, 2026',
+    updatedTime: { at: '2026-09-18T03:16:02Z', evidence: 'https://vercel.com/licklidermvp/website/CX1BpgrdbLMaqtuey3wPssLHzCDT' },
     category: 'News',
     type: 'Product',
     date: 'September 2, 2026',
@@ -417,6 +419,7 @@ export const PUBLICATIONS: PublicationItem[] = [
   },
   {
     updated: 'September 18, 2026',
+    updatedTime: { at: '2026-09-18T03:16:02Z', evidence: 'https://vercel.com/licklidermvp/website/CX1BpgrdbLMaqtuey3wPssLHzCDT' },
     category: 'News',
     type: 'Product',
     date: 'September 1, 2026',
@@ -516,6 +519,7 @@ export const PUBLICATIONS: PublicationItem[] = [
   },
   {
     updated: 'September 18, 2026',
+    updatedTime: { at: '2026-09-18T03:16:02Z', evidence: 'https://vercel.com/licklidermvp/website/CX1BpgrdbLMaqtuey3wPssLHzCDT' },
     category: 'News',
     type: 'Product',
     date: 'August 24, 2026',
@@ -551,6 +555,7 @@ export const PUBLICATIONS: PublicationItem[] = [
   },
   {
     updated: 'September 18, 2026',
+    updatedTime: { at: '2026-09-18T03:16:02Z', evidence: 'https://vercel.com/licklidermvp/website/CX1BpgrdbLMaqtuey3wPssLHzCDT' },
     category: 'News',
     type: 'Product preview',
     date: 'August 16, 2026',
