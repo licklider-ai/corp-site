@@ -154,6 +154,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     sortKey: '2026-09-11',
     title: 'Checking factorial probability evidence against the raw observations',
     updated: 'September 18, 2026',
+    updatedTime: { at: '2026-09-18T08:36:05Z', evidence: 'https://vercel.com/licklidermvp/website/DKG2aW1uhUia1FEdCGaMpBq7mDUN' },
     publishedTime: PRODUCTION_26,
     summary: 'The factorial candidate now joins Record checks, exact probability evidence, a complete report and controlled execution in an independently reviewed readiness package.',
     href: '/engineering/checking-factorial-probability-evidence/',
@@ -214,7 +215,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Reported by email — upstream confirmation pending',
   },
   {
-    updated: 'September 18, 2026',
+    updated: 'September 10, 2026',
     category: 'News',
     type: 'Public consultation',
     date: 'September 9, 2026',
@@ -268,7 +269,8 @@ export const PUBLICATIONS: PublicationItem[] = [
     "status": "Reviewed and steward-accepted bounded research; no additional product support"
   },
   {
-    updated: 'September 10, 2026',
+    updated: 'September 18, 2026',
+    updatedTime: { at: '2026-09-18T08:36:05Z', evidence: 'https://vercel.com/licklidermvp/website/DKG2aW1uhUia1FEdCGaMpBq7mDUN' },
     category: 'News',
     type: 'Public consultation',
     date: 'September 9, 2026',
