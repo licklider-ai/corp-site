@@ -54,7 +54,7 @@ export const R3_EXPERIMENT_PROGRESS =
   'The draft Holm candidate.4 separates Record conformance from integrity, caller-context and arithmetic results while retaining execution controls. The numerical kernel is unchanged. Final design decisions and public adoption remain open; supplied p-values and scientific validity are not established by these checks.';
 
 export const R4_EXPERIMENT_PROGRESS =
-  'The archived two-by-two experiment connects raw observations to exact F ratios and probability evidence. The controlled execution candidate is now integrated into the public research archive; automated checks reject altered saved evidence and unsuccessful historical oracle comparisons. The next public candidate assigns numerical evidence generation to the verifier; its policy is recorded, while public Record integration and support remain open.';
+  'The unissued two-by-two candidate now connects Record checks, exact F ratios, bounded probability evidence, a completed report and controlled execution. Its frozen candidate and adoption-readiness packet have independent GO dispositions. Formal adoption, authoritative registration, public CLI treatment and support activation remain open.';
 
 export const PRODUCT_DEVELOPMENT = {
   url: '/engineering/making-verification-results-useful-to-agents/',
@@ -148,12 +148,18 @@ export const R4_DISCUSSION = {
   issueUrl: 'https://github.com/licklider-ai/nomue-protocol/issues/261',
   proposalUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/21453d82109106e9e811571383228dcef8f60fac/governance/drafts/release-4-preparation/opening-rfc-candidate.md',
   reviewUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/36b40134321337d99417828368b5f690c70f5d07/review-inputs/r4-opening-rfc-boundary/assessment-20260909/REVIEW-RESULT.md',
+  readinessUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/554818683d037d378ef3c11f1758b848adca1ec3/governance/drafts/release-4-preparation/r4-adoption-readiness-a1-20260917/README.md',
+  finalReadinessUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/554818683d037d378ef3c11f1758b848adca1ec3/governance/drafts/release-4-preparation/r4-adoption-readiness-a1-20260917/T14-RESULT-INTAKE.md',
+  amendmentCommentUrl: 'https://github.com/licklider-ai/nomue-protocol/issues/261#issuecomment-5723844738',
+  amendmentInputUrl: 'https://github.com/licklider-ai/nomue-protocol/tree/5996da5a7869f2b21ae8f73407c434285c9862bb/governance/drafts/release-4-preparation/rfc-261-d01-d07-delta-readiness-20260918',
   openedAt: '2026-09-09T05:59:47Z',
   earliestDecisionAt: '2026-10-09T05:59:47Z',
+  amendmentOpenedAt: '2026-09-18T01:50:49Z',
+  amendmentEarliestDecisionAt: '2026-10-18T01:50:49Z',
 } as const;
 
 export const R4_DISCUSSION_BOUNDARY =
-  'Release 4 public discussion is open for a balanced two-by-two fixed-factor proposal: two factors, two levels each, and equal replication in four conditions. The proposal connects declared model assumptions, signed effect estimates, individual F tests, and verification evidence. Numerical support is not established; this is a specification proposal, not a new verifier capability.';
+  'Release 4 public discussion is open for a balanced two-by-two fixed-factor proposal. Its unissued numerical, report and controlled-execution candidate has reached independently reviewed final readiness, without establishing Protocol support. A separate amendment discussion covers strict binary64 comparison and completed indeterminate results; it changes neither the current verifier nor the original RFC clock.';
 
 export const R5_DISCUSSION = {
   articleUrl: '/news/nomue-protocol-release-5-public-discussion/',
@@ -442,7 +448,7 @@ export const PROTOCOL_RESEARCH_PROGRESS = [
   {
     href: R4_DISCUSSION.articleUrl,
     stage: 'Release 4 · Public discussion',
-    summary: 'A balanced two-factor specification proposal is open for public comment. It connects model assumptions, individual effect tests, and verification evidence; numerical implementation remains unresolved.',
+    summary: R4_DISCUSSION_BOUNDARY,
     relatedHref: '/engineering/power-scaling-and-factorial-f-statistics/',
     relatedLabel: 'SS, SSE, F, and the limits of power scaling',
   },

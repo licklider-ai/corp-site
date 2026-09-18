@@ -68,6 +68,36 @@ and agent-readable output together. The maintainer owns that correction path.
 Useful outcomes are substantive discussion comments and reproducible
 counterexamples; no traffic, adoption, or superiority result is claimed.
 
+## September 18 readiness and amendment update
+
+The existing News and Engineering pages were updated in place. No new Latest
+entry was created, and the original publication dates and sort order were kept.
+
+- PR #348 integrated the T09–T14 candidate chain. The fixed candidate connects
+  Record checks, exact F ratios, bounded probability evidence, a complete report
+  and controlled execution.
+- PR #350 preserved the A1 adoption-readiness packet. The public T14 intake and
+  A1 close-only intake record GO dispositions with no remaining finding, while
+  disclosing that they are maintainer-provided result intakes rather than complete
+  original reviewer receipts.
+- The candidate remains unissued. Requirement and permanent identifiers,
+  schemas, checks, reasons, bundle, public CLI treatment, dispatcher and support
+  activation, final Steward adoption and Release 4 remain open.
+- A separate D01/D07 amendment discussion opened at
+  `2026-09-18T01:50:49Z` on
+  [issue #261](https://github.com/licklider-ai/nomue-protocol/issues/261#issuecomment-5723844738).
+  Its fixed input is commit `5996da5a7869f2b21ae8f73407c434285c9862bb`.
+  The amendment's earliest decision is `2026-10-18T01:50:49Z`; it neither
+  resets nor extends the original RFC's `2026-10-09T05:59:47Z` earliest-decision
+  clock.
+- D01 proposes nearest-ties-to-even binary64 projection followed by strict
+  equality. D07 proposes pass, proved mismatch, or completed indeterminate
+  comparison without inventing a point result. The existing five CLI exit-code
+  meanings are unchanged.
+
+These are candidate-readiness and public-discussion facts, not an announcement
+of implementation approval, Protocol support or release.
+
 ## Validation
 
 - Reconciled the intervening main commit

@@ -5,7 +5,7 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/checking-
 const source = 'https://github.com/licklider-ai/nomue-protocol/blob/11921d1ee22eab71c6341bd9e00e9aa25f44dbdf/';
 ---
 <PublicationLayout category={item.category} type={item.type} title={item.title}
-  description={item.summary} published={item.date} status={item.status} toc={[]}>
+  description={item.summary} published={item.date} updated={item.updated} status={item.status} toc={[]}>
 
 <section id="connection">
   <h2>Connect the observations to the submitted probability evidence</h2>
@@ -62,13 +62,26 @@ const source = 'https://github.com/licklider-ai/nomue-protocol/blob/11921d1ee22e
   <h2>Let the verifier generate the evidence needed for a comparison</h2>
   <p>The selected policy for the next public candidate requires the producer to declare the p-value, with numerical evidence generated and checked by the verifier. It does not require the producer to submit the probability intervals used in the historical consumer experiment above. That experiment remains evidence about a fixed consistency check, rather than the required public Record format.</p>
   <p>The policy also distinguishes a proved mismatch from an undecided comparison. If the evidence rules out a declared value, the check can fail even when another quantity remains undecided. A check passes only when every required comparison passes. A timeout or failed execution does not become an undecided numerical result, and a positive probability that rounds to zero cannot match a declared zero.</p>
-  <p>These are <a href="https://github.com/licklider-ai/nomue-protocol/blob/d9ec6984f55f09caa2f65d7714af72190d63c6d4/governance/drafts/release-4-preparation/t03-candidate-numerical-policy-decision-20260914.md">recorded candidate policy choices</a>, not behavior newly available in the public verifier. Concrete numerical procedures, supported inputs, report and command-line contracts, independent review and formal adoption remain separate work. The execution experiment continues to use in-memory inputs.</p>
+  <p>These are <a href="https://github.com/licklider-ai/nomue-protocol/blob/d9ec6984f55f09caa2f65d7714af72190d63c6d4/governance/drafts/release-4-preparation/t03-candidate-numerical-policy-decision-20260914.md">recorded candidate policy choices</a>, not behavior newly available in the public verifier. Subsequent work selected concrete candidate procedures, bounded inputs and execution conditions, report and command-line behavior, and review evidence. Formal adoption, authoritative registration, public CLI treatment and support activation remain separate work.</p>
+</section>
+
+<section id="final-readiness">
+  <h2>Join the numerical path to a complete candidate report</h2>
+  <p>The T09–T14 candidate chain connects Record admission, the exact factorial ratios and bounded tail calculations described above, comparison results, a complete report and controlled execution. The integrated candidate and its checks entered the Protocol research archive through <a href="https://github.com/licklider-ai/nomue-protocol/pull/348">PR #348</a>.</p>
+  <p>The <a href="https://github.com/licklider-ai/nomue-protocol/blob/554818683d037d378ef3c11f1758b848adca1ec3/governance/drafts/release-4-preparation/r4-adoption-readiness-a1-20260917/T14-RESULT-INTAKE.md">final-readiness intake</a> records a GO disposition for the fixed candidate. The <a href="https://github.com/licklider-ai/nomue-protocol/blob/554818683d037d378ef3c11f1758b848adca1ec3/governance/drafts/release-4-preparation/r4-adoption-readiness-a1-20260917/README.md">adoption-readiness packet</a>, preserved through <a href="https://github.com/licklider-ai/nomue-protocol/pull/350">PR #350</a>, records that the remaining A1 review findings were closed without a new finding.</p>
+  <p>The public intake discloses that it preserves maintainer-provided review results rather than every original reviewer receipt. The result is therefore a reviewed, unissued candidate ready for a formal adoption decision—not an issued Requirement, public verifier feature or supported Release 4 capability.</p>
+</section>
+
+<section id="amendment">
+  <h2>Keep two proposed comparison rules on their own clock</h2>
+  <p>A <a href="https://github.com/licklider-ai/nomue-protocol/issues/261#issuecomment-5723844738">separate amendment discussion</a> now covers D01 and D07. D01 first projects both values to binary64 with nearest-ties-to-even rounding, then requires strict equality. D07 distinguishes a completed indeterminate comparison from both a pass and a proved mismatch, without fabricating a point result.</p>
+  <p>The <a href="https://github.com/licklider-ai/nomue-protocol/tree/5996da5a7869f2b21ae8f73407c434285c9862bb/governance/drafts/release-4-preparation/rfc-261-d01-d07-delta-readiness-20260918">fixed amendment input</a> does not change the existing five CLI exit-code meanings. Its 30-day window began September 18 at 01:50:49 UTC, with an earliest decision on October 18 at the same time. That does not reset the original proposal’s October 9 earliest-decision clock, and neither date automatically adopts the candidate.</p>
 </section>
 
 <section id="scope">
   <h2>The remaining boundary is explicit</h2>
   <p>The implementation admits only bounded inputs and operand sizes. Its outer range of 2–65 observations per cell is not a promise that every dataset in that range passes: admission also depends on representation and workload. Recorded resource probes describe their hosts and cases, not portable latency or memory guarantees.</p>
-  <p>The public evidence discloses OpenAI Codex authoring, an attributed user-supplied implementation review and subsequent archive review. These records support bounded implementation claims; they do not close the research gate or establish scientific model validity. The expected-input interface is an in-memory experiment, with public Record binding and check registration still separate adoption work. The successor makes execution policy concrete for review; formal selection of supported inputs, environments and limits remains open.</p>
+  <p>The public evidence discloses OpenAI Codex authoring, attributed user-supplied review results and subsequent archive review. These records support bounded implementation claims; they do not establish scientific model validity. The successor candidate now binds a Record to a complete report and selects bounded inputs, execution conditions and limits for review. Formal registration, public CLI treatment, support activation and Release 4 adoption remain open.</p>
   <ul>
     <li><a href={source + 'governance/drafts/release-4-preparation/complete-output-experiment-20260911/REPORT.md'}>Complete-output wrapper, representation policy and tests</a>.</li>
     <li><a href={source + 'governance/drafts/release-4-preparation/tail-evidence-experiment-20260911/REPORT.md'}>Submitted-evidence consumer, regression witness, reproduction commands and review receipt</a>.</li>
