@@ -137,9 +137,10 @@ ${UPSTREAM_CONTRIBUTIONS.map((item) => `- [${item.project}: ${item.title}](https
 
 - [Checking Welch results with exact rescaling](https://www.licklider.ai/engineering/checking-welch-results-with-exact-rescaling/): a six-observation SciPy 1.18.1 reproducer with exact inputs, independent references, warning capture and source diagnostics. Reported to SciPy as [issue #26169](https://github.com/scipy/scipy/issues/26169) on September 12, 2026; upstream confirmation and repair are pending. Counted once in the submitted-report total.
 
-- [Separating format checks from verification results](https://www.licklider.ai/engineering/separating-record-conformance-from-verification/): ${R3_EXPERIMENT_PROGRESS}
+- [Keeping independent checks visible](https://www.licklider.ai/engineering/keeping-independent-checks-visible/): ${R3_EXPERIMENT_PROGRESS}
+- [Separating format checks from verification results](https://www.licklider.ai/engineering/separating-record-conformance-from-verification/): historical candidate.4 output separation; the successor link above explains changed dependencies.
 - [When a verification call must discard its result](https://www.licklider.ai/engineering/when-a-verification-call-must-discard-its-result/): shared budgets, operating-system limits and cleanup evidence; draft candidate.4 retains these controls while separating returned checks.
-- [Binding Holm corrections](https://www.licklider.ai/engineering/binding-holm-corrections-to-comparisons/): original declaration and supplied-p arithmetic experiment, updated with the candidate.3 successor and execution-control evidence; no added public support.
+- [Binding Holm corrections](https://www.licklider.ai/engineering/binding-holm-corrections-to-comparisons/): original declaration and supplied-p arithmetic experiment, updated with scoped source/numerical review and a deterministic sort bound; no added public support.
 - [Checking factorial probability evidence](https://www.licklider.ai/engineering/checking-factorial-probability-evidence/): ${R4_EXPERIMENT_PROGRESS}
 - [Exact factorial arithmetic and tail bounds](https://www.licklider.ai/engineering/checking-factorial-statistics-and-tail-bounds/): updated September 11, 2026 to connect the original numerical findings and overlap-checker limitation to the successor experiments.
 - [Power scaling and factorial F](https://www.licklider.ai/engineering/power-scaling-and-factorial-f-statistics/): accepted bounded SS/F and six-fixture numerical exploration; no numerical support established.

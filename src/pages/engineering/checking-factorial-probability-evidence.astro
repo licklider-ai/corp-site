@@ -1,5 +1,6 @@
 ---
 import { PUBLICATIONS } from '../../data/publications';
+import { R4_DISCUSSION } from '../../data/site-facts';
 import PublicationLayout from '../../layouts/PublicationLayout.astro';
 const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/checking-factorial-probability-evidence/')!;
 const source = 'https://github.com/licklider-ai/nomue-protocol/blob/11921d1ee22eab71c6341bd9e00e9aa25f44dbdf/';
@@ -75,7 +76,8 @@ const source = 'https://github.com/licklider-ai/nomue-protocol/blob/11921d1ee22e
 <section id="amendment">
   <h2>Keep two proposed comparison rules on their own clock</h2>
   <p>A <a href="https://github.com/licklider-ai/nomue-protocol/issues/261#issuecomment-5723844738">separate amendment discussion</a> now covers D01 and D07. D01 first projects both values to binary64 with nearest-ties-to-even rounding, then requires strict equality. D07 distinguishes a completed indeterminate comparison from both a pass and a proved mismatch, without fabricating a point result.</p>
-  <p>The <a href="https://github.com/licklider-ai/nomue-protocol/tree/5996da5a7869f2b21ae8f73407c434285c9862bb/governance/drafts/release-4-preparation/rfc-261-d01-d07-delta-readiness-20260918">fixed amendment input</a> does not change the existing five CLI exit-code meanings. Its 30-day window began September 18 at 01:50:49 UTC, with an earliest decision on October 18 at the same time. That does not reset the original proposal’s October 9 earliest-decision clock, and neither date automatically adopts the candidate.</p>
+  <p>The <a href={R4_DISCUSSION.amendmentInputUrl}>fixed amendment input</a> does not change the existing five CLI exit-code meanings. Its controlling 30-day window starts from GitHub's comment creation time, <time datetime={R4_DISCUSSION.amendmentOpenedAt}>September 18 at 01:51:08 UTC</time>, with an earliest decision on <time datetime={R4_DISCUSSION.amendmentEarliestDecisionAt}>October 18 at 01:51:08 UTC</time>. This corrects the previously reported body-declared time of 01:50:49 UTC. It does not reset the original proposal’s October 9 clock, and neither date automatically adopts the candidate.</p>
+  <p>The <a href={R4_DISCUSSION.decisionPacketUrl}>formal decision packet and close-only repair confirmation</a> are now merged. Packet review is complete; steward decisions and the coupled Protocol/verifier integration remain open. A completed indeterminate-only report cannot use exit code zero under the existing meanings: the required decision must constrain the supported procedure to resolved outcomes or defer that report state to a separately versioned successor.</p>
 </section>
 
 <section id="scope">

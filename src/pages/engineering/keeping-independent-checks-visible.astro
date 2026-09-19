@@ -1,0 +1,46 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/keeping-independent-checks-visible/')!;
+const source = 'https://github.com/licklider-ai/nomue-verifier/blob/7f97a58c27cfb92d268c7eb03519bc5dc8cd0e00/development/r3-holm/';
+const packet = 'https://github.com/licklider-ai/nomue-protocol/blob/cbf65da86519359ef6e39a738ccf44bb18ae62cb/governance/drafts/release-3-preparation/holm-d1-checkpoint-close-20260918/';
+---
+<PublicationLayout category={item.category} type={item.type} title={item.title}
+  description={item.summary} published={item.date} status={item.status} toc={[]}>
+  <section>
+    <h2>A different request should not erase an independent check</h2>
+    <p>A saved analysis can disagree with the caller's request while still containing properties that can be checked on their own. Our experimental Holm verifier now retains those independent Record checks instead of hiding them behind the request mismatch. Checks that cannot run carry the reasons and prerequisite checks that blocked them.</p>
+    <p>This successor uses the unissued <code>candidate.5</code> contract in Verifier's development directory. Its implementation and evidence are merged, with the reviewed helper-repair tree fixed at <code>7f97a58</code>. It is outside the released CLI and npm package; Release 3 implementation and research review remain open.</p>
+  </section>
+  <section>
+    <h2>Separate a Record's properties from the caller's intended analysis</h2>
+    <p>A Record is the saved analysis and evidence submitted for checking. Expected context is supplied separately by the caller: the Record identity, revision, declaration and inputs that the caller intends to verify. A mismatch means the Record does not match that request. It does not, by itself, answer whether the Record's own declared relationships are consistent.</p>
+    <p>The <a href="/engineering/separating-record-conformance-from-verification/">earlier candidate.4 report</a> separated format-related results from verification results, but retained an order in which context disagreement stopped later declaration checks. The successor changes that dependency, not merely the presentation.</p>
+    <table>
+      <thead><tr><th>Condition</th><th>Successor behavior</th></tr></thead>
+      <tbody>
+        <tr><td>Expected context differs or cannot be read</td><td>Record-local checks remain available where their own prerequisites pass. Context records the mismatch or access error; arithmetic does not run.</td></tr>
+        <tr><td>Stored bytes are not in the required canonical form</td><td>The storage check fails and the declared-digest check does not run. Eligible declaration and context checks remain separate.</td></tr>
+        <tr><td>Record schema fails, but the call is otherwise reportable</td><td>Schema failure is reported; dependent checks do not run and expected context is not read.</td></tr>
+      </tbody>
+    </table>
+    <p>A skipped check names its blockers and carries their actual reason codes, including propagated causes. Arithmetic starts only after all six preceding checks pass. Parsing, resource or execution refusals still replace the whole report; preserving independent results is not permission to return partial output from a failed call.</p>
+  </section>
+  <section>
+    <h2>Test whether the tests notice a broken comparison</h2>
+    <p>The <a href={source + 'CONTEXT-MATRIX-HANDOFF.md'}>context matrix</a> crosses seven Record conditions with fifteen expected-context conditions: 105 cases. These cover missing and malformed context and changes to all four compared fields. Expected result rows are written separately from the candidate's dependency graph and evaluator.</p>
+    <p>Review found that an earlier matrix missed changes to the supplied inputs. A deliberately broken comparison that ignored those inputs could still pass that matrix. The repair added the missing column and a mutation test: deliberately removing inputs from the comparison must now be detected in all six schema-valid Record conditions.</p>
+    <p>Five deliberately broken variants now have minimum detection counts, rather than merely requiring one failed test. The actual-host lane also runs the 105 cases through the supervisor and worker path. This provides evidence for specific behavior, not a measured improvement in how an AI agent interprets the report.</p>
+  </section>
+  <section>
+    <h2>Refuse malformed internal results without overstating the protection</h2>
+    <p>A separate <a href={source + 'HELPER-FAULTS-HANDOFF.md'}>fault-injection checkpoint</a> tests helpers that throw or return the wrong type. Review found that returning text instead of bytes could produce a report with the wrong reference digest for a noncanonical Record. The repaired path checks that the helper returned a byte buffer before comparison or hashing, and preserves already classified resource failures.</p>
+    <p>A helper returning the right type with wrong bytes is a different problem. A retained negative control on noncanonical input still produces an incorrect failure-reference report; an independently constructed byte oracle detects it in the tests. The storage failure prevents integrity success and forwarding, but the runtime does not detect every possible corrupted helper. That limitation remains open.</p>
+  </section>
+  <section>
+    <h2>Public evidence, with a defined stopping point</h2>
+    <p>The <a href={packet + 'README.md'}>preserved checkpoint</a> retains the original CI archives and their source identities. At the repaired head, recorded local Node 24.19.0 / Python 3.12.14 checks passed all 245 component tests without skips. Hosted evidence records 211 checks: 163 ordinary calls, fourteen fault-entry cases, thirteen lifecycle controls and twenty-one isolated source-copy cases—not 211 ordinary calls.</p>
+    <p>Author-hosted execution is separate from review. The <a href={packet + 'REVIEW-DISPOSITION.md'}>close-only confirmation</a> closed five implementation findings; its reviewer continued the earlier review session and explicitly did not provide independent Research Gate clearance. Implementation used OpenAI Codex and the supplied review used a continuing Claude session; neither is human expert or journal peer review.</p>
+    <p>Actual failed-cleanup and supervisor-loss evidence, broader boundary coverage and independent review of earlier oracle changes remain next steps. Formal adoption and public support remain separate. Developers can inspect the <a href={source + 'README.md'}>fixed implementation and reproduction commands</a> to see which checks remain meaningful when another check fails, without treating any one result as an overall scientific verdict.</p>
+  </section>
+</PublicationLayout>

@@ -183,9 +183,32 @@ const publication = PUBLICATIONS.find((item) => item.href === R4_DISCUSSION.arti
       That date is neither automatic adoption nor a promised product release.
     </p>
     <p>
-      The D01/D07 amendment began at <time datetime={R4_DISCUSSION.amendmentOpenedAt}>01:50:49 UTC on September 18, 2026</time>.
-      Its separate earliest decision is <time datetime={R4_DISCUSSION.amendmentEarliestDecisionAt}>01:50:49 UTC on October 18, 2026</time>.
+      GitHub recorded the D01/D07 amendment comment at <time datetime={R4_DISCUSSION.amendmentOpenedAt}>01:51:08 UTC on September 18, 2026</time>.
+      Its separate earliest decision is <time datetime={R4_DISCUSSION.amendmentEarliestDecisionAt}>01:51:08 UTC on October 18, 2026</time>.
       The two clocks must not be substituted for one another.
+    </p>
+    <p>
+      September 19 timing clarification: the comment body declared
+      <time datetime={R4_DISCUSSION.amendmentDeclaredAt}>01:50:49 UTC</time>.
+      The later GitHub creation time controls the minimum window, correcting this
+      article's earlier amendment time by nineteen seconds. A unified decision
+      including D01/D07 must wait for that later window.
+    </p>
+  </section>
+
+  <section id="decision-packet">
+    <h2>The formal decision packet has completed its review</h2>
+    <p>
+      The <a href={R4_DISCUSSION.decisionPacketUrl}>formal decision packet</a> and
+      its repair confirmation are now merged. They collect the fixed inputs,
+      evidence and decisions still required from the steward. This closes the
+      packet review, not adoption, implementation approval or Release 4 publication.
+    </p>
+    <p>
+      One required decision concerns a completed report containing an indeterminate
+      result but no failed check. It cannot use exit code zero under the unchanged
+      CLI meanings. The decision must constrain the supported procedure to resolved
+      outcomes or defer that report state to a separately versioned successor.
     </p>
   </section>
 </PublicationLayout>
