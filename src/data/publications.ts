@@ -29,6 +29,10 @@ const PRODUCTION_29: RecordedPublicationTime = {
   at: '2026-09-11T21:21:55Z',
   evidence: 'https://vercel.com/licklidermvp/website/4wPeCuBQ2xLdrdEhYxpRp21aqVnU',
 };
+const PRODUCTION_59: RecordedPublicationTime = {
+  at: '2026-09-19T09:18:14Z',
+  evidence: 'https://vercel.com/licklidermvp/website/HptMaRKYXxkKC5DWV6pXZHmvUQJ9',
+};
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
@@ -37,6 +41,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     date: 'September 19, 2026',
     sortKey: '2026-09-19',
     title: 'Preserving Welch confidence intervals near zero',
+    publishedTime: PRODUCTION_59,
     summary: 'A public-source verifier repair retains precision before nearly equal quantities are subtracted, with independent reference checks around the boundary where the repair takes over.',
     href: '/engineering/preserving-welch-confidence-intervals-near-zero/',
     status: 'Merged source repair; not in the published npm 0.2.1-rc.1; no Protocol scope or tolerance change',
@@ -47,6 +52,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     date: 'September 19, 2026',
     sortKey: '2026-09-19',
     title: 'Keeping independent checks visible when verification fails',
+    publishedTime: PRODUCTION_59,
     summary: 'An experimental Holm verifier preserves eligible Record checks when the caller’s expected context differs, and explains why dependent checks cannot run.',
     href: '/engineering/keeping-independent-checks-visible/',
     status: 'Unissued candidate.5 development checkpoint merged; implementation and Research Gate remain open; no additional public support',
@@ -124,6 +130,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     sortKey: '2026-09-13',
     title: 'Separating format checks from verification results',
     updated: 'September 19, 2026',
+    updatedTime: PRODUCTION_59,
     publishedTime: { at: '2026-09-13T12:56:31Z', evidence: 'https://vercel.com/licklidermvp/website/GNEnE5vjZhHbVymW5E1bJJtA8zAv' },
     summary: 'An experimental Holm verifier separates format and declaration checks from integrity, context and arithmetic results, preserving explicit outcomes for checks that did not run.',
     href: '/engineering/separating-record-conformance-from-verification/',
@@ -149,6 +156,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     sortKey: '2026-09-11',
     title: 'When a verification call must discard its result',
     updated: 'September 19, 2026',
+    updatedTime: PRODUCTION_59,
     publishedTime: PRODUCTION_29,
     summary: 'An experimental Holm verifier connects Record checks to shared execution budgets, operating-system limits and cleanup evidence before deciding whether a result can be returned.',
     href: '/engineering/when-a-verification-call-must-discard-its-result/',
@@ -162,6 +170,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     title: 'Binding Holm corrections to the intended comparisons',
     publishedTime: PRODUCTION_26,
     updated: 'September 19, 2026',
+    updatedTime: PRODUCTION_59,
     summary: 'An experiment checks exact Holm adjustments together with the expected declaration and supplied p-values, including changes that leave the displayed answer unchanged.',
     href: '/engineering/binding-holm-corrections-to-comparisons/',
     status: 'Original binding experiment preserved; successor includes scoped numerical review and deterministic sort repair; no additional supported capability',
@@ -173,6 +182,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     sortKey: '2026-09-11',
     title: 'Checking factorial probability evidence against the raw observations',
     updated: 'September 19, 2026',
+    updatedTime: PRODUCTION_59,
     publishedTime: PRODUCTION_26,
     summary: 'The factorial candidate now joins Record checks, exact probability evidence, a complete report and controlled execution in an independently reviewed readiness package.',
     href: '/engineering/checking-factorial-probability-evidence/',
@@ -289,6 +299,7 @@ export const PUBLICATIONS: PublicationItem[] = [
   {
     updated: 'September 19, 2026',
     category: 'News',
+    updatedTime: PRODUCTION_59,
     type: 'Public consultation',
     date: 'September 9, 2026',
     sortKey: '2026-09-09',
