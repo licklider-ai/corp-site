@@ -11,7 +11,8 @@ const source = 'https://github.com/licklider-ai/nomue-protocol/blob/b52389fd3efc
   <h2>Show which kind of check produced the result</h2>
   <p>Our experimental Holm verifier now reports whether a Record follows its format and declaration rules separately from checks of its integrity, requested context and arithmetic. A caller can inspect those different results without treating a well-formed Record as proof that its calculation was checked.</p>
   <p>A Record is the saved analysis and evidence submitted for verification. Conformance means meeting the rules for its structure and declared relationships. Verification checks particular claims about that Record. Both need explicit outcomes: a check that did not run must remain distinguishable from one that passed.</p>
-  <p>The implementation is the unissued <code>0.3.0-candidate.4</code> in <a href="https://github.com/licklider-ai/nomue-protocol/pull/330">PR #330</a>, currently a draft proposal. It checks ordinary unweighted Holm corrections over supplied p-values. Public verifier support and formal adoption remain unchanged.</p>
+  <p>The implementation described below is the historical unissued <code>0.3.0-candidate.4</code> in <a href="https://github.com/licklider-ai/nomue-protocol/pull/330">PR #330</a>. It checks ordinary unweighted Holm corrections over supplied p-values. Public verifier support and formal adoption remain unchanged.</p>
+  <p>September 19 update: the <a href="/engineering/keeping-independent-checks-visible/">candidate.5 successor now preserves eligible Record checks when caller context differs</a> and can report schema failure when the call is otherwise reportable. Its development checkpoint is merged, not publicly supported. The candidate.4 behavior and evidence below remain the historical record.</p>
 </section>
 
 <section id="sections">
@@ -38,7 +39,7 @@ const source = 'https://github.com/licklider-ai/nomue-protocol/blob/b52389fd3efc
 
 <section id="next">
   <h2>Make the remaining interpretation choices explicit</h2>
-  <p>Three related questions remain open in the public record: whether Record-local checks should depend on caller-context agreement; when a format failure can be returned as a failed check rather than a refusal; and how to represent schema admission once that boundary is settled. Resolving them requires a versioned contract and tests of the resulting behavior.</p>
+  <p>Three questions were open at this candidate.4 checkpoint: whether Record-local checks should depend on caller-context agreement; when a format failure can be returned as a failed check rather than a refusal; and how to represent schema admission. The successor's reviewed development design and implementation now address those questions. Formal adoption and the remaining implementation evidence are still separate.</p>
   <p>This implementation makes the current distinction inspectable. It advances Licklider’s verification infrastructure by giving callers more precise evidence about what was checked. It does not recompute the supplied raw p-values, prove their statistical validity or demonstrate that an agent will interpret every response correctly.</p>
   <ul>
     <li><a href={source + 'holm-separated-candidate-20260912/README.md'}>Candidate.4 behavior, version boundaries and reproduction commands</a>.</li>

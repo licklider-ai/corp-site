@@ -51,7 +51,7 @@ export const R3_SOURCE_PROGRESS =
   'Release 3 public discussion is open on independent groups and multiple comparisons. The proposal makes design, comparison families, result meaning, and error-control questions explicit across 49 catalogued procedures. Its evidence scope is limited to supplied originals; method adoption and numerical support remain separate decisions.';
 
 export const R3_EXPERIMENT_PROGRESS =
-  'The draft Holm candidate.4 separates Record conformance from integrity, caller-context and arithmetic results while retaining execution controls. The numerical kernel is unchanged. Final design decisions and public adoption remain open; supplied p-values and scientific validity are not established by these checks.';
+  'The unissued Holm candidate.5 preserves eligible Record-local checks when independent expected context differs and records the reasons that block dependent checks. Its context and helper-repair checkpoint is merged, but implementation, Research Gate review and public adoption remain open. This development path is not shipped in the public verifier.';
 
 export const R4_EXPERIMENT_PROGRESS =
   'The unissued two-by-two candidate now connects Record checks, exact F ratios, bounded probability evidence, a completed report and controlled execution. Its frozen candidate and adoption-readiness packet have independent GO dispositions. Formal adoption, authoritative registration, public CLI treatment and support activation remain open.';
@@ -152,10 +152,12 @@ export const R4_DISCUSSION = {
   finalReadinessUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/554818683d037d378ef3c11f1758b848adca1ec3/governance/drafts/release-4-preparation/r4-adoption-readiness-a1-20260917/T14-RESULT-INTAKE.md',
   amendmentCommentUrl: 'https://github.com/licklider-ai/nomue-protocol/issues/261#issuecomment-5723844738',
   amendmentInputUrl: 'https://github.com/licklider-ai/nomue-protocol/tree/5996da5a7869f2b21ae8f73407c434285c9862bb/governance/drafts/release-4-preparation/rfc-261-d01-d07-delta-readiness-20260918',
+  decisionPacketUrl: 'https://github.com/licklider-ai/nomue-protocol/blob/cbf65da86519359ef6e39a738ccf44bb18ae62cb/governance/drafts/release-4-formal-decision-packet-20260918/README.md',
   openedAt: '2026-09-09T05:59:47Z',
   earliestDecisionAt: '2026-10-09T05:59:47Z',
-  amendmentOpenedAt: '2026-09-18T01:50:49Z',
-  amendmentEarliestDecisionAt: '2026-10-18T01:50:49Z',
+  amendmentDeclaredAt: '2026-09-18T01:50:49Z',
+  amendmentOpenedAt: '2026-09-18T01:51:08Z',
+  amendmentEarliestDecisionAt: '2026-10-18T01:51:08Z',
 } as const;
 
 export const R4_DISCUSSION_BOUNDARY =

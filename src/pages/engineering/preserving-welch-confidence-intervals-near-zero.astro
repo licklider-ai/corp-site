@@ -1,0 +1,37 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/preserving-welch-confidence-intervals-near-zero/')!;
+const source = 'https://github.com/licklider-ai/nomue-verifier/blob/421756e69e9911858a79f1f9314aa883b466c6ac/';
+---
+<PublicationLayout category={item.category} type={item.type} title={item.title}
+  description={item.summary} published={item.date} status={item.status} toc={[]}>
+  <section>
+    <h2>Keep a small interval endpoint from losing its useful digits</h2>
+    <p>A Welch confidence interval can lose accuracy when one endpoint is close to zero. The public nomue verifier's development source now repairs this case by retaining extra precision through the calculations that produce the endpoint, rather than correcting only the final subtraction.</p>
+    <p>The repair was merged in <a href="https://github.com/licklider-ai/nomue-verifier/pull/21">Verifier PR #21</a> at <code>421756e</code>. Its source and regression tests are public. As of September 19, it is not included in the published npm release candidate <code>0.2.1-rc.1</code>; a new package version and release evidence are still required.</p>
+  </section>
+  <section>
+    <h2>The error starts before the subtraction</h2>
+    <p>Welch's interval describes uncertainty around the difference between two independent group means. Each endpoint combines that difference with a margin calculated from the standard error and a Student-t critical value. When the difference and margin nearly cancel, small errors in either can dominate the much smaller endpoint.</p>
+    <p>Improving the last subtraction alone cannot recover digits already lost when calculating the variances, degrees of freedom or critical value. The repair instead carries extra precision through those steps and rounds the endpoints at the end. The normal calculation path remains in use away from the cancellation region.</p>
+    <p>This is a different problem from the <a href="/engineering/student-t-df1-center-precision/">released one-degree-of-freedom probability repair</a>. That change preserves small probability differences near the center of a distribution; this one addresses confidence-interval endpoints formed from nearly equal quantities.</p>
+  </section>
+  <section>
+    <h2>Check the boundary of the repair, not just its best example</h2>
+    <p>The <a href={source + 'tests/generate-ci-reference.py'}>reference generator</a> starts from the exact values represented by the floating-point observations. It calculates moments with rational arithmetic and uses mpmath at 100 decimal digits for the reference calculation. Student-t quantiles obtained through beta inversion are cross-checked by integrating the Student density. The implementation under test does not supply its own expected answers.</p>
+    <p>The retained synthetic panel contains 96 rows: 72 exercise the refined path and 24 the normal path. It covers both endpoint signs, four sample-size pairs and exact power-of-two rescaling. Tests also check group reversal, input order and isolation from a caller's decimal-arithmetic settings.</p>
+    <p>Review exposed a gap in the first repair's switching condition. Restoring that earlier condition makes all 48 newly covered refined-path rows fail the stricter accuracy check; four also exceed the registered endpoint tolerance. The corrected condition passes all 96 rows. This distinguishes a development accuracy target from the Protocol's unchanged acceptance tolerance.</p>
+  </section>
+  <section>
+    <h2>Preserve the calculation's meaning</h2>
+    <p>The refined path updates the group summaries, mean difference, standard error, degrees of freedom and test statistic as well as the interval. The existing probability routine then uses the refined statistic and degrees of freedom. If the bounded refinement does not converge, the kernel refuses the calculation instead of silently returning the inaccurate fallback.</p>
+    <p>The mathematical method, confidence-level interface, registered tolerances and supported scientific scope are unchanged. These finite regressions do not prove correctly rounded answers for every input or provide a certified numerical error enclosure. They do show how a concrete precision defect can be repaired without weakening the comparison rules.</p>
+  </section>
+  <section>
+    <h2>Inspect and reproduce</h2>
+    <p>The <a href={source + 'CI-ACCURACY-REPAIR.md'}>fixed repair record</a> gives the source, conditions, affected fields and reproduction commands. The recorded local run used Node 24.19.0; the <a href="https://github.com/licklider-ai/nomue-verifier/actions/runs/35341349012">repair-head CI</a> passed all seven jobs, including cross-platform Node 20/22 tests and package checks.</p>
+    <p>Implementation and self-review used OpenAI Codex, followed by founder-supplied review findings and repairs. Independent numerical reference calculations are not independent scientific review. The public source lets developers inspect the narrower engineering result: preserving a small answer requires checking the precision of the whole calculation that produces it.</p>
+    <p>Use the <a href="/docs/record-verification/">current verifier documentation</a> for the published package. The source repair described here does not change the installed release or announce a new supported method.</p>
+  </section>
+</PublicationLayout>

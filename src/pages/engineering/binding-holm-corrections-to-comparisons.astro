@@ -20,6 +20,13 @@ const source = 'https://github.com/licklider-ai/nomue-protocol/blob/11921d1ee22e
   <p>Related reading: <a href="/engineering/separating-record-conformance-from-verification/">separating format checks from verification results</a>.</p>
 </section>
 
+<section id="numerical-review-update">
+  <h2>September 19: source review and a deterministic sorting bound</h2>
+  <p>The successor now retains a <a href="https://github.com/licklider-ai/nomue-protocol/blob/cbf65da86519359ef6e39a738ccf44bb18ae62cb/review-inputs/r3-holm-b2-numerical-review-20260918/REVIEW-RESULT.md">bounded numerical review using Holm's original paper</a>. It checks the downstream adjusted-value derivation for significance levels strictly between zero and one, exact decoding and display rounding, ties and evidence comparison. Adjusted p-values are a downstream derivation, not a formula quoted from the paper; supplied raw p-value generation remains outside these checks.</p>
+  <p>A separate stable merge-sort repair removes dependence on the interpreter's sorting strategy for the comparison-count guard. Its derived worst-case bound is 9,217 comparisons at 1,024 members, below the existing 10,240 guard. The actual all-pairs worker remains limited to 120 members; the larger bound is not an expansion of its admitted scope.</p>
+  <p>The numerical reviewer also authored that repair. A <a href="https://github.com/licklider-ai/nomue-protocol/blob/cbf65da86519359ef6e39a738ccf44bb18ae62cb/review-inputs/r3-holm-d1-b2-integration-20260918/REVIEW-RESULT.md">separate implementation review</a> subsequently checked the bound and worker wiring, with its shared-trust-base and execution limits disclosed. These AI-assisted reviews do not close the whole Research Gate. The <a href="/engineering/keeping-independent-checks-visible/">latest development checkpoint</a> explains the successor's report behavior and remaining work.</p>
+</section>
+
 <section id="binding">
   <h2>Take the expected context from the caller</h2>
   <p>The experimental entry point accepts three raw JSON strings: the expected declaration, the expected supplied-p input, and the submitted evidence. The first two establish what the caller intends to check. The submitted evidence cannot choose its own expected analysis.</p>
