@@ -460,17 +460,17 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Public release candidate — npm rc 0.2.1-rc.1',
   },
   {
-    updated: 'September 2, 2026',
+    updated: 'September 20, 2026',
     category: 'Engineering',
     type: 'Implementation note',
     date: 'September 1, 2026',
     sortKey: '2026-09-01',
     title: 'From numerical bounds to a controlled paired-t execution candidate',
     summary:
-      'We assembled and independently reviewed the final decision package for the paired-t candidate while leaving Protocol ratification, issuance, and support open.',
+      'The reviewed Release 2 formal decision packet now assembles the paired-t evidence and required decisions without adopting or issuing Protocol support.',
     href: '/engineering/bounding-paired-t-arithmetic-and-pvalues/',
     status:
-      'Independently reviewed final Release 2 candidate review-readiness — not ratified, issued, or supported',
+      'Independently reviewed Release 2 formal decision-readiness package — not adopted, issued, or supported',
   },
   {
     category: 'Engineering',

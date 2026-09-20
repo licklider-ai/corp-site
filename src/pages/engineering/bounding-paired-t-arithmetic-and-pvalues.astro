@@ -1,5 +1,6 @@
 ---
 import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { R2_DECISION } from '../../data/site-facts';
 
 const toc = [
   { id: 'current-status', label: 'Current status' },
@@ -9,6 +10,7 @@ const toc = [
   { id: 'controlled-execution', label: 'One controlled execution candidate' },
   { id: 'evidence', label: 'What the review tested' },
   { id: 'review-readiness', label: 'Final review readiness' },
+  { id: 'formal-decision-packet', label: 'Formal decision packet' },
   { id: 'scope', label: 'What remains open' },
   { id: 'public-evidence', label: 'Public evidence' },
 ];
@@ -18,10 +20,10 @@ const toc = [
   category="Engineering"
   type="Implementation note"
   title="From numerical bounds to a controlled paired-t execution candidate"
-  description="We assembled and independently reviewed the final decision package for the paired-t candidate while leaving Protocol ratification, issuance, and support open."
+  description="The reviewed Release 2 formal decision packet now assembles the paired-t evidence and required decisions without adopting or issuing Protocol support."
   published="September 1, 2026"
-  updated="September 2, 2026"
-  status="Independently reviewed final Release 2 candidate review-readiness — not ratified, issued, or supported"
+  updated="September 20, 2026"
+  status="Independently reviewed Release 2 formal decision-readiness package — not adopted, issued, or supported"
   toc={toc}
 >
   <section id="current-status">
@@ -46,6 +48,12 @@ const toc = [
         consistent as decision-preparation material. Those structural candidates remain
         unissued and have not yet been adopted.
       </p>
+      <p>
+        The repository has now assembled those reviewed inputs into a formal D1–D6
+        decision packet. Its first independent review required two major and seven minor
+        repairs. A close-only review confirmed every finding closed and returned GO. The
+        packet prepares a decision; it does not make one.
+      </p>
     </div>
   </section>
 
@@ -65,11 +73,11 @@ const toc = [
       explicit and rejects execution outside it.
     </p>
     <p>
-      The latest step closes the remaining candidate decision inventory and checks the
-      bindings across all four groups. Instead of asking readers or the Steward to
-      assemble separate review records, the repository now provides one pinned package
-      that states the proposed decisions, evidence, review results, and remaining
-      authority boundary together.
+      The latest step moves beyond the numerical work-group package. It assembles the
+      complete D1–D6 decision ledger, evidence and review receipts, and the future
+      authoritative landing order. Instead of asking the Steward to infer which reviewed
+      candidate maps to which decision, the repository now provides one repaired and
+      independently reviewed formal-decision input.
     </p>
   </section>
 
@@ -181,14 +189,44 @@ const toc = [
     </p>
   </section>
 
+  <section id="formal-decision-packet">
+    <h2>The formal decision packet is ready</h2>
+    <p>
+      The <a href={R2_DECISION.packetUrl} target="_blank" rel="noopener noreferrer">merged formal decision packet</a>{' '}
+      separates six decisions: completion of public discussion; identifiers and
+      Requirement namespaces; schemas and public surfaces; ordered Checks and bundle
+      composition; the numerical contract; and the bounded release candidate. Existing
+      candidate reviews are evidence for those decisions, not the decisions themselves.
+    </p>
+    <p>
+      Its initial independent review returned <strong>REPAIR_REQUIRED</strong> with no
+      blocker, two major findings, and seven minor findings. The repairs added omitted
+      D5 and D6 evidence requirements, the public-contract-surface and authority
+      assignments, exact reviewed-head identities, later-drift accounting, and the rule
+      that a material scope or semantic change restarts the applicable discussion
+      window. The close-only review returned <strong>GO</strong> and found no change to
+      the candidate decisions, evidence receipts, authority boundary, or Release 1
+      behavior.
+    </p>
+    <p>
+      If the Steward later approves the required decisions, the packet requires one
+      coupled authoritative change set: registries, schemas, ordered Public Checks,
+      bundle composition, source pin, conformance, authority assignments, generated
+      views, and Release 1 compatibility evidence must land together. This prevents a
+      partial publication from silently creating support before all parts agree.
+    </p>
+  </section>
+
   <section id="scope">
     <h2>What remains open</h2>
     <p>
-      The remaining step is the formal Steward disposition after the public review
-      window reaches its earliest decision time. Until then, the reviewed package does
-      not create an authoritative supported domain, execution allowlist, runtime
-      activation rule, final reason-code set, Public Check, bundle, or permanent
-      paired-t identifier.
+      The remaining step is the formal Steward disposition of D1 through D6. The public
+      review window reaches its earliest decision time at{' '}
+      <time datetime={R2_DECISION.earliestDecisionAt}>20:52:54 UTC on September 25, 2026</time>.
+      Reaching that time does not adopt the proposal. Until an affirmative disposition
+      and the coupled landing complete, the reviewed packet creates no authoritative
+      supported domain, execution allowlist, runtime activation rule, final reason-code
+      set, Public Check, bundle, or permanent paired-t identifier.
     </p>
     <p>
       The numerical contract is not formally frozen. Release 2 D2 through D5 are not
@@ -250,7 +288,19 @@ const toc = [
         — GO for later decision preparation, with one nice-to-have hardening note
       </li>
       <li>
-        <a href="https://github.com/licklider-ai/nomue-protocol/issues/25" target="_blank" rel="noopener noreferrer">Release 2 public review issue #25</a>{' '}
+        <a href="https://github.com/licklider-ai/nomue-protocol/pull/354" target="_blank" rel="noopener noreferrer">nomue Protocol pull request #354</a>{' '}
+        — merged Release 2 formal decision packet
+      </li>
+      <li>
+        <a href={R2_DECISION.reviewUrl} target="_blank" rel="noopener noreferrer">Formal packet independent-review result</a>{' '}
+        — REPAIR_REQUIRED with no blocker, two major findings, and seven minor findings
+      </li>
+      <li>
+        <a href={R2_DECISION.repairUrl} target="_blank" rel="noopener noreferrer">Formal packet repair confirmation</a>{' '}
+        — close-only GO after all findings were closed
+      </li>
+      <li>
+        <a href={R2_DECISION.issueUrl} target="_blank" rel="noopener noreferrer">Release 2 public review issue #25</a>{' '}
         — open discussion and future decision record
       </li>
     </ul>

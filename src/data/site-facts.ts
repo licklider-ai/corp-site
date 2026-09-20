@@ -130,7 +130,19 @@ export const NOMUE_CLI_USAGE =
   'usage: nomue <verify|canonicalize|digest> <record.json> [--format json|json-compact|human]';
 
 export const PAIRED_T_BOUNDARY =
-  'The Release 2 paired-t candidate has reached independently reviewed final review readiness. Its evidence covers the research gate, four candidate schemas, the Student-t probability and 95% confidence-interval paths, numerical error bounds, resource limits, one controlled runtime, failure reasons, and Release 1 preservation. Formal adoption, issuance, and release remain before public support.';
+  'The Release 2 paired-t candidate now has an independently reviewed formal decision-readiness packet. It assembles the D1–D6 decision ledger, numerical and execution evidence, structural candidates, review dispositions, Release 1 safeguards, and the required coupled landing order. The Steward decisions, authoritative issuance, support activation, and release remain open.';
+
+export const R2_DECISION = {
+  issueUrl: 'https://github.com/licklider-ai/nomue-protocol/issues/25',
+  packetUrl:
+    'https://github.com/licklider-ai/nomue-protocol/blob/b02b3bcc681d259c72edde2afcc513a79d944bd0/governance/drafts/release-2-formal-decision-packet-20260918/README.md',
+  reviewUrl:
+    'https://github.com/licklider-ai/nomue-protocol/blob/b02b3bcc681d259c72edde2afcc513a79d944bd0/review-inputs/r2-formal-decision-packet-20260918/REVIEW-RESULT.md',
+  repairUrl:
+    'https://github.com/licklider-ai/nomue-protocol/blob/b02b3bcc681d259c72edde2afcc513a79d944bd0/review-inputs/r2-formal-decision-packet-20260918/REPAIR-CONFIRMATION.md',
+  openedAt: '2026-08-26T20:52:54Z',
+  earliestDecisionAt: '2026-09-25T20:52:54Z',
+} as const;
 
 export const R3_DISCUSSION = {
   articleUrl: '/news/nomue-protocol-release-3-public-discussion/',
@@ -438,7 +450,7 @@ export const PROTOCOL_RESEARCH_PROGRESS = [
   {
     href: '/engineering/bounding-paired-t-arithmetic-and-pvalues/',
     stage: 'Release 2 · Reviewed candidate',
-    summary: 'The paired-t candidate connects matched observations to a p-value and a 95% confidence interval, with numerical error checks and one controlled runtime. Its final review-readiness package has passed independent review.',
+    summary: 'The paired-t candidate connects matched observations to a p-value and a 95% confidence interval, with numerical error checks and one controlled runtime. Its formal D1–D6 decision packet has passed repair review.',
   },
   {
     href: R3_DISCUSSION.articleUrl,
