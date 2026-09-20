@@ -461,6 +461,7 @@ export const PUBLICATIONS: PublicationItem[] = [
   },
   {
     updated: 'September 20, 2026',
+    updatedTime: { at: '2026-09-20T09:45:33Z', evidence: 'https://vercel.com/licklidermvp/website/HqhXswBtUnYQpMG54u1r89Z1iAJT' },
     category: 'Engineering',
     type: 'Implementation note',
     date: 'September 1, 2026',
