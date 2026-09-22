@@ -37,6 +37,16 @@ const PRODUCTION_59: RecordedPublicationTime = {
 export const PUBLICATIONS: PublicationItem[] = [
   {
     category: 'Engineering',
+    type: 'Upstream report',
+    date: 'September 22, 2026',
+    sortKey: '2026-09-22',
+    title: 'statsmodels returns zero for a representable chi-square tail',
+    summary: 'A 2-by-2 contingency table makes statsmodels return p = 0 although the chi-square upper-tail probability is a representable positive float64 value.',
+    href: '/engineering/statsmodels-contingency-table-tail-loss/',
+    status: 'Reported in statsmodels issue #10274 — upstream confirmation pending',
+  },
+  {
+    category: 'Engineering',
     type: 'Implementation note',
     date: 'September 19, 2026',
     sortKey: '2026-09-19',
