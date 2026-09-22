@@ -33,6 +33,10 @@ const PRODUCTION_59: RecordedPublicationTime = {
   at: '2026-09-19T09:18:14Z',
   evidence: 'https://vercel.com/licklidermvp/website/HptMaRKYXxkKC5DWV6pXZHmvUQJ9',
 };
+const PRODUCTION_61: RecordedPublicationTime = {
+  at: '2026-09-22T12:57:15Z',
+  evidence: 'https://vercel.com/licklidermvp/website/EkotyncMr26RNG5nD8yLzrqe6ysm',
+};
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
@@ -40,6 +44,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Upstream report',
     date: 'September 22, 2026',
     sortKey: '2026-09-22',
+    publishedTime: PRODUCTION_61,
     title: 'statsmodels returns zero for a representable chi-square tail',
     summary: 'A 2-by-2 contingency table makes statsmodels return p = 0 although the chi-square upper-tail probability is a representable positive float64 value.',
     href: '/engineering/statsmodels-contingency-table-tail-loss/',
