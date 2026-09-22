@@ -1,0 +1,114 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+
+const item = PUBLICATIONS.find(
+  (entry) => entry.href === '/engineering/statsmodels-contingency-table-tail-loss/',
+)!;
+---
+
+<PublicationLayout
+  category={item.category}
+  type={item.type}
+  title={item.title}
+  description={item.summary}
+  published={item.date}
+  status={item.status}
+  toc={[]}
+>
+  <section>
+    <h2>A finite probability disappears in the final subtraction</h2>
+    <p>
+      For the 2-by-2 contingency table <code>[[40, 1], [1, 40]]</code>, statsmodels’{' '}
+      <code>Table.test_nominal_association</code> returns a p-value of exactly <code>0.0</code>.
+      The Pearson statistic is finite, and the corresponding chi-square upper-tail
+      probability is approximately <code>7.076 × 10^-18</code>—a representable positive
+      float64 value.
+    </p>
+    <p>
+      Tasuku Kobayashi reported the example in{' '}
+      <a href="https://github.com/statsmodels/statsmodels/issues/10274">statsmodels issue #10274</a>{' '}
+      on September 22, 2026. It was reproduced in a fresh environment with statsmodels
+      0.15.0 and in a source build of <code>main</code> commit <code>2cb70c2ce</code>. The
+      issue is open and labeled <code>type-bug</code>; upstream confirmation and a repair
+      remain pending.
+    </p>
+  </section>
+
+  <section>
+    <h2>Reproducing the zero result</h2>
+    <pre><code>{`import numpy as np
+from scipy import stats
+from statsmodels.stats.contingency_tables import Table
+
+table = np.array([[40, 1], [1, 40]], dtype=float)
+res = Table(table, shift_zeros=False).test_nominal_association()
+
+print(res.statistic, res.df, res.pvalue)
+print(stats.chi2.sf(res.statistic, res.df))
+print(1 - stats.chi2.cdf(res.statistic, res.df))`}</code></pre>
+    <pre><code>{`74.19512195121949 1 0.0
+7.07649484571079e-18
+0.0`}</code></pre>
+    <p>
+      The release reproduction used Python 3.11.15, NumPy 2.4.6, SciPy 1.17.1,
+      pandas 3.0.6, patsy 1.0.3, and statsmodels 0.15.0 on Linux x86_64. The table
+      contains no zero cells, so the default <code>shift_zeros=True</code> produces the
+      same result.
+    </p>
+  </section>
+
+  <section>
+    <h2>The survival function preserves the tail</h2>
+    <p>
+      The implementation forms the p-value as <code>1 - stats.chi2.cdf(statistic, df)</code>.
+      At this statistic, the cumulative probability rounds to exactly <code>1.0</code>, so
+      subtracting it from one cancels the entire tail. This is not underflow of the
+      probability itself: the positive result is roughly 306 orders of magnitude above
+      the smallest positive float64 subnormal value.
+    </p>
+    <p>
+      The survival function <code>stats.chi2.sf</code> evaluates the upper tail directly
+      and returns a nonzero value. statsmodels already uses that function in other paths
+      in the same module, including McNemar's test and Cochran's Q test.
+    </p>
+    <p>
+      Loss of precision begins before the answer reaches zero. For
+      <code>[[30, 1], [1, 30]]</code>, the method returns
+      <code>1.758593271006248e-13</code>, while the survival function returns
+      <code>1.7581411194883224e-13</code>, a relative difference of about
+      <code>2.57 × 10^-4</code>.
+    </p>
+  </section>
+
+  <section>
+    <h2>An independent reference confirms the magnitude</h2>
+    <p>
+      Every row and column total is 41, and every expected count is 20.5. The Pearson
+      statistic is therefore exactly <code>3042/41</code>. With one degree of freedom,
+      the upper tail is <code>erfc(sqrt(x/2))</code>. Evaluated at 100 decimal digits,
+      it is <code>7.0764948457107158... × 10^-18</code>; the nearest float64 is
+      <code>7.076494845710716 × 10^-18</code>. This reference does not depend on SciPy
+      or statsmodels.
+    </p>
+  </section>
+
+  <section>
+    <h2>What this establishes</h2>
+    <p>
+      The reject-or-do-not-reject decision is unchanged in this example because both
+      probabilities are extremely small. The error matters when downstream work uses
+      the p-value's magnitude—for example, <code>-log10(p)</code> or meta-analytic
+      p-value combination—because a finite probability becomes indistinguishable from
+      mathematical zero.
+    </p>
+    <p>
+      The independent check covers <code>Table.test_nominal_association</code>. Similar
+      <code>1 - stats.chi2.cdf(...)</code> expressions elsewhere in the module are audit
+      targets, not validated claims about additional failures or a complete repair. The
+      finding does not add a method to nomue's supported scope. It demonstrates the
+      bounded, independently referenced verification work Licklider uses when reporting
+      numerical behavior upstream.
+    </p>
+  </section>
+</PublicationLayout>
