@@ -51,3 +51,11 @@ OpenAI Codex inspected the submitted issue and the recorded reproductions, draft
 the article and integration changes under the owner's direction, and performed local
 consistency checks. This is not independent human or maintainer review. No upstream
 comment, issue edit, pull request, or other external message is part of this site work.
+
+Initial production completion: PR #61 source was promoted from preview commit
+`e1939fd6ba8846b08ba90c04cddf6a0515752503` to Vercel production deployment
+`EkotyncMr26RNG5nD8yLzrqe6ysm`. GitHub deployment status `18675980489` recorded
+success at `2026-09-22T12:57:15Z`. Deployment:
+https://vercel.com/licklidermvp/website/EkotyncMr26RNG5nD8yLzrqe6ysm. This instant
+is the article publication time and homepage modification time. The metadata-only
+follow-up preserves it and does not substitute its own deployment time.
