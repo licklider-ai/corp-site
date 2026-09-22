@@ -265,9 +265,24 @@ export const CORE_NON_CLAIMS = [
 
 // Count distinct problems submitted to the responsible upstream project, including
 // email submissions. Follow-up issues, articles and fixes do not add another report.
-export const UPSTREAM_REPORTS_AS_OF = 'September 14, 2026';
+export const UPSTREAM_REPORTS_AS_OF = 'September 22, 2026';
 
 export const UPSTREAM_CONTRIBUTIONS = [
+  {
+    project: 'statsmodels',
+    title: 'Contingency-table test: a representable chi-square tail returns zero',
+    summary: 'For a 2-by-2 table, statsmodels returns p = 0 although an independent high-precision reference gives a positive probability near 7.076e-18.',
+    href: '/engineering/statsmodels-contingency-table-tail-loss/',
+    status: PUBLICATIONS.find((item) => item.href === '/engineering/statsmodels-contingency-table-tail-loss/')!.status,
+    outcome: 'report_open',
+    panelStatus: 'Reported · confirmation pending',
+    comparisonLabel: 'Returned p-value → independent reference',
+    observed: '0.0',
+    reference: '≈ 7.076e-18',
+    evidenceHref: 'https://github.com/statsmodels/statsmodels/issues/10274',
+    evidenceLabel: 'statsmodels issue #10274',
+    credit: 'Reported by Tasuku Kobayashi on September 22, 2026; upstream confirmation pending',
+  },
   {
     project: 'statsmodels',
     title: 'Welch t-test: a finite result is lost after sumsquares overflow',
