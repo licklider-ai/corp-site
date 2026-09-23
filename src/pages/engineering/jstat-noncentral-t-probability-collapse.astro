@@ -1,0 +1,150 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+
+const item = PUBLICATIONS.find(
+  (entry) => entry.href === '/engineering/jstat-noncentral-t-probability-collapse/',
+)!;
+---
+
+<PublicationLayout
+  category={item.category}
+  type={item.type}
+  title={item.title}
+  description={item.summary}
+  published={item.date}
+  status={item.status}
+  toc={[]}
+>
+  <section>
+    <h2>A substantial probability disappears</h2>
+    <p>
+      jStat 1.9.6 returns zero for a probability of approximately 44.10%.
+      Another nearby example returns about 1.89 × 10<sup>−40</sup> instead of
+      44.14%. Both calls use small, exactly represented integer arguments and
+      return without an exception. A plausible-looking number within the range
+      from zero to one can therefore conceal a large numerical error.
+    </p>
+    <p>
+      The affected function evaluates the noncentral t distribution, which is used
+      in statistical power calculations and some confidence intervals for effect
+      sizes. A wrong probability can affect calculations that search for an
+      interval endpoint by repeatedly evaluating the distribution.
+    </p>
+    <div class="notice">
+      <p>
+        Tasuku Kobayashi submitted the reproducer and independent evidence in{' '}
+        <a href="https://github.com/jstat/jstat/issues/300">jStat issue #300</a>{' '}
+        on September 23, 2026. The issue is open; upstream confirmation and a repair
+        remain pending. This follows up a convergence concern discussed during the
+        original implementation, rather than claiming that the general limitation
+        was previously unknown.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Reproduce the result</h2>
+    <pre><code>{`npm install jstat@1.9.6`}</code></pre>
+    <pre><code>{`const { jStat } = require('jstat');
+for (const ncp of [25, 30, 40]) {
+  console.log(ncp, jStat.noncentralt.cdf(ncp, 10, ncp));
+}`}</code></pre>
+    <p>
+      The arguments are the evaluation point, degrees of freedom, and
+      noncentrality parameter, respectively. The CDF is the probability of a
+      value at or below the evaluation point.
+    </p>
+    <table>
+      <thead><tr><th>Evaluation point / noncentrality</th><th>Degrees of freedom</th><th>jStat 1.9.6</th><th>Independent reference</th></tr></thead>
+      <tbody>
+        <tr><td>25 / 25</td><td>10</td><td><code>0.441856633690276</code></td><td><code>0.4418566371100132</code></td></tr>
+        <tr><td>30 / 30</td><td>10</td><td><code>1.8920048548927194e-40</code></td><td><code>0.4414484587168333</code></td></tr>
+        <tr><td>40 / 40</td><td>10</td><td><code>0</code></td><td><code>0.4410353509508114</code></td></tr>
+      </tbody>
+    </table>
+    <p>
+      The recorded environment used Node.js v24.19.0 on Linux x86_64. The first row
+      is a control near the largest noncentrality in the existing CDF tests; the
+      report concerns the large failures in the next two rows.
+    </p>
+  </section>
+
+  <section>
+    <h2>A mathematical bound rules out the returned values</h2>
+    <p>
+      The noncentral t variable is defined as{' '}
+      <code>T = (Z + delta) / sqrt(V / nu)</code>, where <code>Z</code> is standard
+      normal and <code>V</code> is an independent chi-square variable with
+      <code>nu</code> degrees of freedom. When the evaluation point equals a
+      positive <code>delta</code>, the event <code>Z ≤ 0</code> and
+      <code>V ≥ nu</code> implies <code>T ≤ delta</code>.
+    </p>
+    <p>
+      At ten degrees of freedom, this gives an elementary lower bound of
+      <code>0.5 × exp(−5) × Σ(k=0…4) 5^k/k! ≈ 0.2202466425326062</code>.
+      The probability must be at least 22.02%. This disproves both near-zero
+      results without relying on agreement with another statistical library.
+    </p>
+    <p>
+      Integrating the defining distribution independently with mpmath at 50 and
+      80 decimal digits gives the reference values above, agreeing to more than
+      45 decimal places. That agreement is a precision check, not a certified
+      interval error bound. SciPy 1.17.0 provides an additional cross-check.
+      The public evidence bundle contains the integration script and outputs.
+    </p>
+  </section>
+
+  <section>
+    <h2>Two failures in the same forward sum</h2>
+    <p>
+      The implementation sums a series from its first term and allows termination
+      after at least 200 iterations when the last two contributions are small.
+      For noncentrality 30, the important weights lie farther into the series:
+      the Poisson weight has mean 450. Small early terms do not establish that
+      the remaining sum is small.
+    </p>
+    <p>
+      Increasing the minimum to 1000 iterations as a diagnostic recovers an
+      approximation near 0.44144846 for that example. It does not recover the
+      noncentrality-40 example: the initial coefficients involve
+      <code>exp(−800)</code>, which rounds to zero in binary64, so subsequent
+      multiplications cannot recover them. Simply raising a fixed iteration
+      count does not address both failures.
+    </p>
+    <p>
+      The unchanged distribution module from upstream commit{' '}
+      <a href="https://github.com/jstat/jstat/blob/72f367f6dbd45c2d903053ee3f9981489912cad4/src/distribution.js"><code>72f367f</code></a>{' '}
+      reproduced the same results when evaluated over the released package's
+      core and special functions. This was a module-level check, not a clean
+      build of the entire upstream repository.
+    </p>
+  </section>
+
+  <section>
+    <h2>What this establishes</h2>
+    <p>
+      The report supplies concrete failures beyond the original implementation's
+      tested noncentralities of 2, 5 and 25. It extends the earlier discussion in{' '}
+      <a href="https://github.com/jstat/jstat/issues/131">issue #131</a> and{' '}
+      <a href="https://github.com/jstat/jstat/pull/135">pull request #135</a>, which
+      introduced the 200-iteration safeguard.
+    </p>
+    <p>
+      This demonstrates Licklider's verification approach: use the mathematical
+      definition to check an implementation, then make the failure and evidence
+      reproducible upstream. The finding does not establish practical prevalence,
+      a completed repair, or nomue's superiority on these cases. It adds no new
+      supported product method.
+    </p>
+  </section>
+
+  <section>
+    <h2>Public evidence</h2>
+    <ul>
+      <li><a href="https://github.com/jstat/jstat/issues/300">jStat issue #300</a> — submitted report, source diagnosis and current discussion</li>
+      <li><a href="https://github.com/user-attachments/files/32572193/upstream-13-public-evidence.zip">Reproduction and independent-reference bundle</a> — scripts, recorded outputs, environment details and checksums</li>
+      <li><a href="https://github.com/jstat/jstat/blob/72f367f6dbd45c2d903053ee3f9981489912cad4/test/distribution/noncentralt-test.js">Upstream tests at the inspected revision</a> — existing moderate-parameter coverage</li>
+    </ul>
+  </section>
+</PublicationLayout>

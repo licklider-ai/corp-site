@@ -46,6 +46,16 @@ export const PUBLICATIONS: PublicationItem[] = [
   {
     category: 'Engineering',
     type: 'Upstream report',
+    date: 'September 23, 2026',
+    sortKey: '2026-09-23',
+    title: 'jStat returns zero for a probability near 44%',
+    summary: 'Independent integration and a mathematical lower bound expose a noncentral-t probability collapse that remains after an earlier convergence safeguard.',
+    href: '/engineering/jstat-noncentral-t-probability-collapse/',
+    status: 'Reported in jStat issue #300 — upstream confirmation pending',
+  },
+  {
+    category: 'Engineering',
+    type: 'Upstream report',
     date: 'September 22, 2026',
     updated: 'September 23, 2026',
     updatedTime: PRODUCTION_63,
