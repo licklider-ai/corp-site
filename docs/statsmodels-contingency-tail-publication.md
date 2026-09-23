@@ -59,3 +59,11 @@ success at `2026-09-22T12:57:15Z`. Deployment:
 https://vercel.com/licklidermvp/website/EkotyncMr26RNG5nD8yLzrqe6ysm. This instant
 is the article publication time and homepage modification time. The metadata-only
 follow-up preserves it and does not substitute its own deployment time.
+
+Substantive update completion: PR #63 recorded the upstream merge disposition and
+was squash-merged as `a578630c9d339f6601b5a625157176c2f4f0d906`. Vercel production
+deployment `5KFLMyqXosE9h8bWH7os2FqrYcUK` completed successfully, with GitHub commit
+status `54749405985` recorded at `2026-09-23T11:59:24Z`. Deployment:
+https://vercel.com/licklidermvp/website/5KFLMyqXosE9h8bWH7os2FqrYcUK. This instant is
+the article update time and homepage modification time. The metadata-only follow-up
+preserves it and does not substitute its own deployment time.
