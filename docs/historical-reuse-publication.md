@@ -43,3 +43,12 @@ Validation: content impact checked against base
 passes Astro check and generates all pages. Record the successful production
 completion evidence in PUBLICATIONS after deployment, preserving it on the
 metadata-only follow-up.
+
+## Production completion
+
+PR #68 merged as 288386a705e3aa631423ad7ba2a1af653dad581a. Vercel production
+deployment J1Qx8fALqXzZsLguUWRhDgJB5rxv reported success at
+2026-09-23T20:04:09Z through the main commit's GitHub Vercel status.
+Evidence: https://vercel.com/licklidermvp/website/J1Qx8fALqXzZsLguUWRhDgJB5rxv.
+This instant is the article publication time and homepage modification time;
+the metadata-only follow-up preserves it.
