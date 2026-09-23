@@ -37,6 +37,10 @@ const PRODUCTION_61: RecordedPublicationTime = {
   at: '2026-09-22T12:57:15Z',
   evidence: 'https://vercel.com/licklidermvp/website/EkotyncMr26RNG5nD8yLzrqe6ysm',
 };
+const PRODUCTION_63: RecordedPublicationTime = {
+  at: '2026-09-23T11:59:24Z',
+  evidence: 'https://vercel.com/licklidermvp/website/5KFLMyqXosE9h8bWH7os2FqrYcUK',
+};
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
@@ -44,6 +48,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Upstream report',
     date: 'September 22, 2026',
     updated: 'September 23, 2026',
+    updatedTime: PRODUCTION_63,
     sortKey: '2026-09-22',
     publishedTime: PRODUCTION_61,
     title: 'statsmodels returns zero for a representable chi-square tail',
