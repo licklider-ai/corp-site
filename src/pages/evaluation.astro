@@ -1,8 +1,10 @@
 ---
+import { HISTORICAL_REUSE } from '../data/historical-reuse';
 import type { TocItem } from '../consts';
 import PageLayout from '../layouts/PageLayout.astro';
 
 const toc: TocItem[] = [
+  { id: 'historical-reuse', label: 'Historical-analysis reuse' },
   { id: 'result', label: 'Published result' },
   { id: 'design', label: 'What was compared' },
   { id: 'failures', label: 'What the score reveals' },
@@ -13,20 +15,31 @@ const toc: TocItem[] = [
 
 <PageLayout
   title="Evaluation"
-  description="Published evidence from a 648-session fixed-panel comparison of three configurations for complete Welch-report verification."
+  description="Two published evaluations examine historical-analysis reuse efficiency and complete Welch-report correctness in tool-assisted research workflows."
   toc={toc}
 >
   <header class="page-head">
     <p class="eyebrow">Evaluation</p>
-    <h1>From recalculating a test to checking the whole submission</h1>
+    <h1>What verification changes in an agent workflow</h1>
     <p class="standfirst">
-      A 648-session study tested whether three tool-assisted configurations could return
-      the complete expected assessment of a Welch report—not just a plausible number.
+      Two studies examine complementary outcomes: the resources needed to decide whether
+      an earlier analysis can be reused, and the correctness of a complete Welch-report assessment.
+      Both are preprints, not peer reviewed; their models, tasks and results are reported separately.
     </p>
   </header>
 
+  <section id="historical-reuse" class="section">
+    <p class="eyebrow">Historical-analysis reuse · September 2026</p>
+    <h2>{HISTORICAL_REUSE.headline}</h2>
+    <p>{HISTORICAL_REUSE.summary} {HISTORICAL_REUSE.scope}</p>
+    <p>Both configurations received the same historical raw data, archived Welch program, current declarations, policies and ordinary Python/file tools. The nomue configuration additionally required use of its historical-analysis recheck capability through MCP.</p>
+    <p>Across all 144 scheduled pairs, reductions were 72.9% in usage-priced API cost and 55.9% in summed task time. Conservative cumulative-budget reservations stopped 33 comparator sessions. In the first two repetitions, both configurations completed all 48 tasks: cost fell 76.7% and time 61.2% across those 96 pairs.</p>
+    <p>The 103-pair result matches nomue to the comparator’s correctly solved tasks; it excludes comparator failures and incomplete sessions. It describes that subset, with the full schedule and budget-uninterrupted comparison reported alongside it. Time is summed per-task elapsed time, not parallel-run wall-clock duration.</p>
+    <p><a href={HISTORICAL_REUSE.href}>Study design, scoring sensitivity and limitations</a> · <a href={HISTORICAL_REUSE.doi}>Manuscript and aggregate reproduction supplement</a></p>
+  </section>
+
   <section id="result" class="section">
-    <p class="eyebrow">Published result</p>
+    <p class="eyebrow">Whole-submission Welch verification · September 2026</p>
     <h2>The bound verifier returned 216 of 216 expected reports</h2>
     <div class="score-grid">
       <article>

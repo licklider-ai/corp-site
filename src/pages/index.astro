@@ -1,4 +1,5 @@
 ---
+import { HISTORICAL_REUSE } from '../data/historical-reuse';
 import { PUBLICATIONS } from '../data/publications';
 import {
   NOMUE_GLOBAL_INSTALL_COMMAND,
@@ -209,14 +210,11 @@ const homeStructuredData = {
     <section class="band">
       <p class="eyebrow">Evaluation</p>
       <div class="band-body">
-        <p class="lead">A complete verifier returned all 216 expected reports in a fixed Welch-report study.</p>
-        <p>
-          The 648-session experiment compared general Python, a stable Welch wrapper,
-          and a bound verifier. The first two configurations returned 132 and 131
-          correct complete reports; the bound verifier returned 216. The study measures
-          the full configurations on a constructed panel, not nomue's accuracy in general.
-        </p>
-        <p class="more"><a href="/evaluation/">See the design, failures, evidence, and limits</a></p>
+        <p class="lead">{HISTORICAL_REUSE.headline}</p>
+        <p>Adding nomue reduced the work needed to decide whether a historical analysis could be reused—on the same tasks the ordinary-tool comparator also solved.</p>
+        <p>{HISTORICAL_REUSE.scope} Preprint v1, not peer reviewed.</p>
+        <p class="more"><a href={HISTORICAL_REUSE.href}>Read the paired evaluation and its evidence</a></p>
+        <p>An earlier study measured complete Welch-report correctness across 648 sessions. <a href="/evaluation/">Explore both evaluations</a>.</p>
       </div>
     </section>
   </div>
