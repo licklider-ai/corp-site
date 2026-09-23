@@ -1,4 +1,5 @@
 ---
+import { HISTORICAL_REUSE } from '../data/historical-reuse';
 import ProductDevelopmentUpdate from '../components/ProductDevelopmentUpdate.astro';
 import type { TocItem } from '../consts';
 import {
@@ -31,6 +32,7 @@ import {
 import PageLayout from '../layouts/PageLayout.astro';
 
 const toc: TocItem[] = [
+  { id: 'measured-benefit', label: 'Measured workflow benefit' },
   { id: 'available', label: 'What you can use now' },
   { id: 'what', label: 'What nomue is' },
   { id: 'roles', label: 'Division of roles' },
@@ -290,6 +292,13 @@ const toc: TocItem[] = [
       Keeping these questions separate makes the positive result useful: each passing
       check says exactly what can be relied on and why.
     </p>
+  </section>
+
+  <section id="measured-benefit" class="section">
+    <h2>Less work to reach a historical-analysis reuse decision</h2>
+    <p>{HISTORICAL_REUSE.summary} {HISTORICAL_REUSE.scope}</p>
+    <p>The preprint evaluates assigned use of nomue’s historical-analysis recheck capability. This product evaluation is separate from the public local Record Verifier MCP package and does not expand its released support.</p>
+    <p><a href={HISTORICAL_REUSE.href}>Read the study and its limits</a> · <a href={HISTORICAL_REUSE.doi}>Preprint v1 and supplement</a> (not peer reviewed)</p>
   </section>
 
   <footer class="page-foot">

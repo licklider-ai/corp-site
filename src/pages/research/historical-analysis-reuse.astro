@@ -1,0 +1,67 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { HISTORICAL_REUSE } from '../../data/historical-reuse';
+const toc = [
+  { id: 'study', label: 'Same task, same evidence' },
+  { id: 'results', label: 'Efficiency results' },
+  { id: 'scoring', label: 'Completion and scoring' },
+  { id: 'meaning', label: 'What this establishes' },
+  { id: 'evidence', label: 'Read and reproduce' },
+];
+---
+<PublicationLayout category="Research" type="Publication"
+  title={HISTORICAL_REUSE.title} description={HISTORICAL_REUSE.summary}
+  published="September 23, 2026" status={HISTORICAL_REUSE.status} toc={toc}>
+  <p><strong>Preprint v1 · not peer reviewed.</strong> Published on Zenodo with a supplement for reproducing the reported aggregates.</p>
+  <p>An earlier analysis can still reproduce its original numbers while no longer being suitable for current use. An agent needs to distinguish the historical computation, current compatibility, method status and permission to use. This study asks whether nomue reduces the work needed to make those decisions from the same evidence.</p>
+  <p>On the 103 matched pairs where the ordinary-tool comparator also reached the correct decision, adding nomue reduced usage-priced API cost by <strong>78.1%</strong> and summed task time by <strong>62.9%</strong>. The comparison matches nomue to tasks the comparator solved correctly, excluding comparator failures and incomplete sessions. The full scheduled comparison and a budget-uninterrupted sensitivity analysis also show lower cost and time.</p>
+
+  <section id="study">
+    <h2>Same task, same evidence</h2>
+    <p>The panel contains 48 synthetic, template-derived Welch-analysis tasks: 16 with resolved current bindings, 16 with rollbacks and 16 with conflicting bindings. Three repetitions per configuration produced 144 scheduled pairs, or 288 sessions. Repetitions do not turn these into 144 independent tasks.</p>
+    <p>Both configurations used <code>gpt-5.6-sol</code> and received the same historical raw data, archived Welch program, current declarations and policies, plus ordinary Python and file tools. The comparator used those ordinary tools. The nomue configuration additionally required a real call to its historical-analysis recheck capability through MCP.</p>
+    <p>The outcome was a six-field reuse decision backed by actual execution evidence. This evaluates an assigned workflow; it does not test whether an agent independently chooses to adopt nomue.</p>
+  </section>
+
+  <section id="results">
+    <h2>Lower cost and time across three comparisons</h2>
+    <table>
+      <thead><tr><th scope="col">Comparison</th><th scope="col">Pairs</th><th scope="col">API cost reduction</th><th scope="col">Task time reduction</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">All scheduled pairs</th><td>144</td><td>72.9%</td><td>55.9%</td></tr>
+        <tr><th scope="row">Comparator-correct matched pairs</th><td>103</td><td>78.1%</td><td>62.9%</td></tr>
+        <tr><th scope="row">First two repetitions, both configurations complete</th><td>96</td><td>76.7%</td><td>61.2%</td></tr>
+      </tbody>
+    </table>
+    <p>The 103 pairs cover 47 task roots and have correct decisions in both configurations under the frozen task contract. They answer the practical question: when the ordinary-tool workflow succeeds, how much work does nomue save on the same task? This is a supplementary comparison conditional on success, not an estimate over all scheduled attempts.</p>
+    <p>The 96-pair comparison covers all 48 task roots and was examined after the run to remove the third repetition’s budget interruptions. It is a post-run sensitivity analysis. Among the 103 comparator-correct pairs, nomue had higher API cost on three pairs and was slower on none.</p>
+    <p>Across the full schedule, usage-priced API cost was $16.490831 for the comparator and $4.475933 with nomue. Costs exclude hosting, labor and tool fees. Time is the sum of individual task durations, not the elapsed duration of the parallel experiment.</p>
+  </section>
+
+  <section id="scoring">
+    <h2>Completion, scoring and a comparator-favorable sensitivity</h2>
+    <p>The comparator completed 111 of 144 sessions; nomue completed 144. Conservative cumulative-budget reservations stopped 33 comparator sessions in the third repetition. Those stops are not 33 demonstrated reasoning failures, and the completion difference does not estimate unrestricted decision ability.</p>
+    <p>Automated six-field scoring counted 99 correct comparator answers and 139 with nomue. Review of answers and execution evidence under the frozen task contract counted 103 and 144, respectively. Correctness here covers those fields and execution evidence, rather than every sentence of the explanation.</p>
+    <p>Four of the comparator’s eight remaining errors are disputed under a different interpretation of which current source takes precedence. A sensitivity that credits those four comparator answers expands the matched set to 107 pairs and retains reductions of <strong>78.1% in cost</strong> and <strong>63.0% in time</strong>. It keeps nomue’s frozen-contract scores; it is a comparator-favorable scoring sensitivity, not a symmetric rescoring under an alternative authority rule.</p>
+  </section>
+
+  <section id="meaning">
+    <h2>What this establishes</h2>
+    <p>The result supports a concrete workflow benefit: for these historical-analysis reuse decisions, an agent using nomue spent less API budget and task time than the same model assembling the decision with ordinary tools and equal underlying evidence.</p>
+    <p>The study uses one model and provider, synthetic tasks and intact archives. It does not establish numerical superiority or general reliability across research settings. Diagnostic explanations can remain imperfect even when the scored decision is correct: some conflicts were described as a missing connection rather than a contradiction between active sources.</p>
+    <p>This product recheck evaluation is separate from the public local nomue Record Verifier MCP package. The paper is evidence about the tested workflow, not an announcement of broader released support. <a href="/nomue/">See current product availability</a>.</p>
+    <p>The author is nomue’s developer and Licklider’s founder. Review included author-led review with AI assistance and AI adversarial review; this is not independent human peer review. The public supplement reproduces aggregates from disclosed rows, not the full private product execution.</p>
+  </section>
+
+  <section id="evidence">
+    <h2>Read the paper and reproduce the aggregates</h2>
+    <ul>
+      <li><a href={HISTORICAL_REUSE.doi}>Zenodo v1: manuscript and supplement</a> — DOI 10.5281/zenodo.22924377.</li>
+      <li><a href="https://zenodo.org/records/22924377/files/nomue-historical-reuse-v1.pdf?download=1">Download the manuscript PDF</a>.</li>
+      <li><a href="https://zenodo.org/records/22924377/files/nomue-historical-reuse-v1-supplement.zip?download=1">Download the aggregate reproduction supplement</a> — 288 session rows, answers, reference fields, case facts, scoring contract, analysis plan and aggregation script.</li>
+    </ul>
+    <p>The Zenodo record is licensed CC BY 4.0. Full raw traces, execution workspaces and product internals are not included in the public supplement.</p>
+    <p>The frozen experiment dates to September 23, 2026 UTC. The manuscript labels its preprint date September 24 in Japan; Zenodo records the publication date as September 23.</p>
+    <p><a href="/evaluation/">Compare the two published evaluations</a> · <a href="/research/whole-submission-welch-verification/">Earlier study: whole-submission Welch verification</a></p>
+  </section>
+</PublicationLayout>

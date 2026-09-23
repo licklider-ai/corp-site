@@ -1,3 +1,5 @@
+import { HISTORICAL_REUSE } from './historical-reuse';
+
 export type PublicationCategory = 'Research' | 'Engineering' | 'News' | 'Blog';
 
 type RecordedPublicationTime = {
@@ -43,6 +45,16 @@ const PRODUCTION_63: RecordedPublicationTime = {
 };
 
 export const PUBLICATIONS: PublicationItem[] = [
+  {
+    category: 'Research',
+    type: 'Publication',
+    date: 'September 23, 2026',
+    sortKey: '2026-09-23',
+    title: HISTORICAL_REUSE.title,
+    summary: HISTORICAL_REUSE.summary,
+    href: HISTORICAL_REUSE.href,
+    status: HISTORICAL_REUSE.status,
+  },
   {
     category: 'Engineering',
     type: 'Upstream report',

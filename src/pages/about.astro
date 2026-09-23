@@ -1,4 +1,5 @@
 ---
+import { HISTORICAL_REUSE } from '../data/historical-reuse';
 import ProtocolResearchProgress from '../components/ProtocolResearchProgress.astro';
 import LickliderPortrait from '../components/LickliderPortrait.astro';
 import {
@@ -25,6 +26,14 @@ const mergedUpstreamFixes = UPSTREAM_CONTRIBUTIONS.filter(
   (item) => item.outcome === 'fix_merged',
 );
 const founderSelectedWork = [
+  {
+    category: 'Research',
+    title: HISTORICAL_REUSE.title,
+    status: 'Sole-author preprint v1 · not peer reviewed',
+    href: HISTORICAL_REUSE.href,
+    evidenceHref: HISTORICAL_REUSE.doi,
+    evidenceLabel: 'Zenodo manuscript and aggregate reproduction supplement',
+  },
   {
     category: 'Research',
     title: 'Comparing three tool-assisted AI configurations for whole-submission verification of Welch reports — preprint v1.0',
@@ -132,6 +141,7 @@ const founderStructuredData = {
       <div>
         <h2>Building the evidence for broader verification</h2>
         <p class="lead">Method expansion needs both a precise scientific guarantee and a calculation whose behavior can be checked.</p>
+        <p>We also measure what verification changes for an agent doing research work. In a paired historical-analysis reuse study, adding nomue reduced API cost by 78.1% and task time by 62.9% on 103 pairs the ordinary-tool comparator also answered correctly. The study uses 48 synthetic Welch tasks and one model; it is a preprint, not peer reviewed. <a href={HISTORICAL_REUSE.href}>Read the efficiency evaluation</a>.</p>
         <ProtocolResearchProgress />
         <p>These results demonstrate how we develop those foundations: inspect original sources, compare calculations with exact references, and repair claims when review finds a gap. The Release 3 independent-group, Release 4 two-factor and Release 5 shared design-evidence proposals are open for public discussion. <a href="/news/nomue-protocol-release-3-public-discussion/">See the multi-group proposal and invitation to comment</a>, or <a href="/news/nomue-protocol-release-5-public-discussion/">help shape common design and timing evidence</a>. These research, candidate, and discussion milestones remain separate from the released Welch scope and its distinct public-local and limited-hosted access paths.</p>
       </div>
