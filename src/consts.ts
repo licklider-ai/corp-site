@@ -20,7 +20,7 @@ export type NavItem = {
 /** Global navigation */
 export const GLOBAL_NAV: NavItem[] = [
   { label: 'nomue', href: '/nomue/', ready: true },
-  { label: 'Roadmap', href: '/roadmap/', ready: true },
+  { label: 'Evaluation', href: '/evaluation/', ready: true },
   { label: 'Docs', href: '/docs/', ready: true },
   { label: 'Research', href: '/research/', ready: true },
   { label: 'Latest', href: '/latest/', ready: true },
