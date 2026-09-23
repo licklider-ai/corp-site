@@ -107,6 +107,7 @@ ${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.
 - [nomue](https://www.licklider.ai/nomue/): scientific verification product, scope, availability, and limits
 - [Roadmap](https://www.licklider.ai/roadmap/): current artifacts, next releases, platform evolution, and planned scientific capability families
 - [Evaluation](https://www.licklider.ai/evaluation/): comparison design and current claim boundary
+- [Evaluation cases](https://www.licklider.ai/evaluation/cases/): three constructed Welch-report cases with observed reports, repetitions, and archived evidence
 - [Thesis](https://www.licklider.ai/thesis/): why AI-generated work needs a separate verification layer
 
 ## Founder
