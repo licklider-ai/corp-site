@@ -13,9 +13,29 @@ const item = PUBLICATIONS.find(
   title={item.title}
   description={item.summary}
   published={item.date}
+  updated={item.updated}
   status={item.status}
   toc={[]}
 >
+  <section>
+    <h2>Current status</h2>
+    <div class="notice">
+      <p>
+        statsmodels closed issue #10274 as completed after merging{' '}
+        <a href="https://github.com/statsmodels/statsmodels/pull/10276">pull request #10276</a>{' '}
+        into <code>main</code> on September 23, 2026. The merged change replaces the
+        cancellation-prone subtraction with the chi-square survival function and adds
+        regression tests for the reported path and related contingency-table paths.
+      </p>
+      <p>
+        Chetan Sahney authored the repair, and Kevin Sheppard merged it as commit{' '}
+        <a href="https://github.com/statsmodels/statsmodels/commit/9f49dcd7281bd27747d0b6f988c07a13a4db747e"><code>9f49dcd</code></a>.
+        The fix is present on the development branch; this page does not claim that a
+        released statsmodels version contains it yet.
+      </p>
+    </div>
+  </section>
+
   <section>
     <h2>A finite probability disappears in the final subtraction</h2>
     <p>
@@ -30,8 +50,7 @@ const item = PUBLICATIONS.find(
       <a href="https://github.com/statsmodels/statsmodels/issues/10274">statsmodels issue #10274</a>{' '}
       on September 22, 2026. It was reproduced in a fresh environment with statsmodels
       0.15.0 and in a source build of <code>main</code> commit <code>2cb70c2ce</code>. The
-      issue is open and labeled <code>type-bug</code>; upstream confirmation and a repair
-      remain pending.
+      upstream issue was subsequently resolved by PR #10276.
     </p>
   </section>
 
@@ -82,6 +101,28 @@ print(1 - stats.chi2.cdf(res.statistic, res.df))`}</code></pre>
   </section>
 
   <section>
+    <h2>What statsmodels changed</h2>
+    <p>
+      The merged patch changes <code>Table.test_nominal_association</code> from{' '}
+      <code>1 - stats.chi2.cdf(statistic, df)</code> to{' '}
+      <code>stats.chi2.sf(statistic, df)</code>. Its regression test requires the
+      reported <code>[[40, 1], [1, 40]]</code> case to stay positive and agree with the
+      survival-function result within a relative tolerance of <code>1e-12</code>. It also
+      covers the earlier-loss <code>[[30, 1], [1, 30]]</code> case.
+    </p>
+    <p>
+      The pull request applies the same numerical correction to three other
+      contingency-table calculations and to related cancellation-prone chi-square and
+      normal upper-tail call sites identified elsewhere in statsmodels. Additional
+      regression tests exercise
+      <code>SquareTable.homogeneity</code> and{' '}
+      <code>StratifiedTable.test_null_odds</code>. This is broader than the single method
+      established by our original reproducer; those added paths are upstream's repair
+      scope, not additional Licklider reports.
+    </p>
+  </section>
+
+  <section>
     <h2>An independent reference confirms the magnitude</h2>
     <p>
       Every row and column total is 41, and every expected count is 20.5. The Pearson
@@ -104,11 +145,30 @@ print(1 - stats.chi2.cdf(res.statistic, res.df))`}</code></pre>
     </p>
     <p>
       The independent check covers <code>Table.test_nominal_association</code>. Similar
-      <code>1 - stats.chi2.cdf(...)</code> expressions elsewhere in the module are audit
-      targets, not validated claims about additional failures or a complete repair. The
-      finding does not add a method to nomue's supported scope. It demonstrates the
-      bounded, independently referenced verification work Licklider uses when reporting
-      numerical behavior upstream.
+      <code>1 - stats.chi2.cdf(...)</code> expressions elsewhere in the module were audit
+      targets rather than claims established by our report; upstream chose to include
+      related paths in its repair and regression coverage. The finding and upstream fix
+      do not add a method to nomue's supported scope. They demonstrate the bounded,
+      independently referenced verification work Licklider uses when reporting numerical
+      behavior upstream.
     </p>
+  </section>
+
+  <section>
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/statsmodels/statsmodels/issues/10274">statsmodels issue #10274</a>
+        — original report, reproducer, numerical diagnosis, and completed disposition
+      </li>
+      <li>
+        <a href="https://github.com/statsmodels/statsmodels/pull/10276">statsmodels pull request #10276</a>
+        — repair, regression tests, review, and merge record
+      </li>
+      <li>
+        <a href="https://github.com/statsmodels/statsmodels/commit/9f49dcd7281bd27747d0b6f988c07a13a4db747e">statsmodels merge commit 9f49dcd</a>
+        — exact revision merged into <code>main</code>
+      </li>
+    </ul>
   </section>
 </PublicationLayout>
