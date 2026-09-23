@@ -52,3 +52,18 @@ Baseline: corp-site 40c7fa78e074c52642595203792f92c9f723175c.
 Run content:impact against that baseline before and after editing; build and inspect
 generated human/machine views. Record the successful production revision and time
 below once available, then backfill article/homepage timestamps per deployment.md.
+
+## Production completion
+
+PR #66 merged as d1b6b9754e51911f5db83f2af4a23b47a1d26fdf. GitHub Actions
+CI run 35890668912 passed; Vercel's successful production notification is status
+54772630335, recorded at 2026-09-23T16:44:12Z, for deployment
+https://vercel.com/licklidermvp/website/BPM9tT6bvDZ9isHNihgJGBnWG2xD.
+Live article, homepage, Latest and JSON Feed returned HTTP 200 with the new entry.
+Local Astro validation reported zero errors and warnings, built 73 pages, and
+confirmed the article in all eight affected generated surfaces, 13 reports,
+four merged fixes, pending-confirmation wording and the canonical URL.
+
+This metadata-only follow-up records that initial completion instant in the
+article and homepage. It does not represent a substantive article update or
+substitute the follow-up deployment's time.
