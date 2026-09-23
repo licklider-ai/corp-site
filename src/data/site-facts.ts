@@ -269,6 +269,21 @@ export const UPSTREAM_REPORTS_AS_OF = 'September 23, 2026';
 
 export const UPSTREAM_CONTRIBUTIONS = [
   {
+    project: 'jStat',
+    title: 'Noncentral t: a probability near 44% returns zero',
+    summary: 'A defining-distribution integral and an elementary lower bound expose premature stopping and zero initial series weights in jStat 1.9.6.',
+    href: '/engineering/jstat-noncentral-t-probability-collapse/',
+    status: PUBLICATIONS.find((item) => item.href === '/engineering/jstat-noncentral-t-probability-collapse/')!.status,
+    outcome: 'report_open',
+    panelStatus: 'Reported · confirmation pending',
+    comparisonLabel: 'Returned CDF → independent reference',
+    observed: '0.0',
+    reference: '≈ 0.4410',
+    evidenceHref: 'https://github.com/jstat/jstat/issues/300',
+    evidenceLabel: 'jStat issue #300',
+    credit: 'Reported by Tasuku Kobayashi on September 23, 2026; upstream confirmation pending',
+  },
+  {
     project: 'statsmodels',
     title: 'Contingency-table test: a representable chi-square tail returns zero',
     summary: 'We reported a 2-by-2 table for which statsmodels returned p = 0 instead of a positive probability near 7.076e-18. A separately authored repair is now merged upstream.',
