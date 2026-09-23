@@ -1,0 +1,168 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const toc = [
+  { id: 'version', label: 'Version conflict' },
+  { id: 'missing', label: 'Missing claim' },
+  { id: 'interval', label: 'Interval mismatch' },
+  { id: 'source', label: 'Inspect the evidence' },
+];
+
+const cases = [
+  {
+    id: 'version',
+    number: '01',
+    title: 'The numbers matched. The dataset version did not.',
+    caseId: 's16_condition_label_01',
+    problem: 'The requested analysis named dataset version fresh-panel-8-0-v2. The submitted report named fresh-panel-8-0-v1. Its reported Welch numbers matched the reference for the supplied data.',
+    result: 'The correct five-field report records a dataset_version conflict and marks the overall submission MISMATCH, even though its numerical field is MATCH.',
+    observations: [
+      ['B · General Python', 'MATCH', 'MISMATCH', 'MATCH'],
+      ['W · Stable wrapper', 'MATCH', 'MATCH', 'MISMATCH'],
+      ['C · Bound verifier', 'MISMATCH', 'MISMATCH', 'MISMATCH'],
+    ],
+    detail: 'In the first run, both B and W explicitly listed the version conflict but still returned overall: MATCH. C listed the same conflict and returned overall: MISMATCH. The other repetitions show that B and W could also get the overall verdict right.',
+  },
+  {
+    id: 'missing',
+    number: '02',
+    title: 'A missing standard error changed the answer.',
+    caseId: 's16_missing_01',
+    problem: 'The submitted Welch report omitted mean_difference_standard_error. Other numerical claims were present.',
+    result: 'The expected report names the missing field and returns UNVERIFIABLE for both the numerical and overall assessment. It does not fill in the absent claim from a fresh calculation.',
+    observations: [
+      ['B · General Python', 'MATCH', 'No report', 'MATCH'],
+      ['W · Stable wrapper', 'No report', 'No report', 'No report'],
+      ['C · Bound verifier', 'UNVERIFIABLE', 'UNVERIFIABLE', 'UNVERIFIABLE'],
+    ],
+    detail: 'In two B runs, the final report listed no missing fields and returned MATCH. C named the absent standard error in each run. “No report” means the run did not yield an accepted five-field report; it is not an incorrect MATCH verdict. The study did not give B and W the complete canonical field vocabulary, which limits how their behavior on missing-field cases should be interpreted.',
+  },
+  {
+    id: 'interval',
+    number: '03',
+    title: 'One confidence-interval endpoint escaped review.',
+    caseId: 's16_single_04',
+    problem: 'The submitted Welch report included an incorrect upper endpoint for its 95% confidence interval while the other reported fields matched the reference.',
+    result: 'The expected report identifies mean_difference_ci_high as the single mismatched field and returns MISMATCH for the numerical and overall assessment.',
+    observations: [
+      ['B · General Python', 'MATCH', 'MATCH', 'MISMATCH'],
+      ['W · Stable wrapper', 'MATCH', 'MATCH', 'No report'],
+      ['C · Bound verifier', 'MISMATCH', 'MISMATCH', 'MISMATCH'],
+    ],
+    detail: 'In the first two runs, B and W accepted the submission as MATCH. C identified the upper endpoint in all three runs. B got the complete report right on its third run; W produced no accepted report on that run.',
+  },
+] as const;
+---
+
+<PageLayout
+  title="Three Welch report cases from the evaluation"
+  description="Inspect three fixed-panel Welch-report cases where general tools and a bound verifier returned different complete assessments, with all repetitions and evidence links."
+  toc={toc}
+>
+  <header class="page-head">
+    <p class="eyebrow">Evaluation cases</p>
+    <h1>What a plausible report can miss</h1>
+    <p class="standfirst">
+      A correct calculation is only part of checking a submitted result. These three
+      cases show where the complete assessment changed when the reporting conditions,
+      a required claim, or one interval endpoint was checked.
+    </p>
+    <p class="scope">
+      From a developer-led study of 72 <strong>constructed</strong> Welch-report questions,
+      using <code>gpt-4.1-mini-2025-04-14</code>. B, W, and C were separate sessions
+      on the same inputs, each repeated three times. They are not a transcript in
+      which nomue intercepted an error made by B or W.
+    </p>
+  </header>
+
+  {cases.map((item) => (
+    <section id={item.id} class="case-section">
+      <p class="case-number">Case {item.number} · <code>{item.caseId}</code></p>
+      <h2>{item.title}</h2>
+      <div class="case-story">
+        <div>
+          <h3>Submitted report</h3>
+          <p>{item.problem}</p>
+        </div>
+        <div>
+          <h3>Expected assessment</h3>
+          <p>{item.result}</p>
+        </div>
+      </div>
+      <h3>Observed overall verdicts</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th scope="col">Configuration</th><th scope="col">Run 1</th><th scope="col">Run 2</th><th scope="col">Run 3</th></tr>
+          </thead>
+          <tbody>
+            {item.observations.map((row) => (
+              <tr><th scope="row">{row[0]}</th><td>{row[1]}</td><td>{row[2]}</td><td>{row[3]}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="detail">{item.detail}</p>
+    </section>
+  ))}
+
+  <section id="source" class="case-section evidence">
+    <h2>Inspect the evidence</h2>
+    <p>
+      These are selected illustrations from the published fixed panel, not a sample
+      of everyday research submissions or an estimate of real-world error rates.
+      B used general Python, W added a stable Welch calculation wrapper, and C used
+      a bound verifier that returned the completed five-field assessment. Binding,
+      report construction, and the structured return changed together in C.
+    </p>
+    <p>
+      The original study scored complete five-field reports: B returned 132/216,
+      W returned 131/216, and C returned 216/216 expected reports. C's result path
+      was deterministic and confirmed before the scored run. The comparison does
+      not isolate a binding-only effect or establish nomue's accuracy on real
+      research submissions, other methods, or other models.
+    </p>
+    <p>
+      To inspect these cases, download the replication package from Zenodo and
+      search their case IDs in <code>INPUTS.json</code>, <code>EXPECTED.json</code>,
+      and the 648 rows of <code>RESULT.sanitized.json</code>. Run
+      <code>python reproduce.py</code> from the extracted package to rescore every
+      saved report. <code>ANSWERS.json</code> retains final messages needed for the
+      study's output-format sensitivity analysis.
+    </p>
+    <p>
+      The public archive supports rescoring saved evidence. It does not contain
+      the private C verifier or complete provider transcripts, so it does not
+      independently rerun the original sessions. These cases are not public
+      nomue Records for the local Release 1 verifier.
+    </p>
+    <p class="actions">
+      <a href="https://zenodo.org/records/22784595">Download the source package</a>
+      <a href="/evaluation/">Read the study design and limits</a>
+      <a href="/docs/">Explore current nomue capabilities</a>
+    </p>
+  </section>
+</PageLayout>
+
+<style>
+  .page-head { padding-bottom: 2.5rem; border-bottom: 1px solid var(--rule); }
+  .page-head h1 { max-width: 20ch; margin: 0.9rem 0 1.25rem; font-size: clamp(2.2rem, 5vw, 3.6rem); }
+  .standfirst { max-width: 46rem; font-size: 1.15rem; color: var(--ink-2); }
+  .scope { max-width: 47rem; margin: 2rem 0 0; padding: 1rem 1.25rem; border-left: 2px solid var(--gold); background: var(--wash-hi); font-size: 0.96rem; }
+  .case-section { padding: 3rem 0; border-bottom: 1px solid var(--rule-faint); }
+  .case-number { margin: 0 0 0.75rem; color: var(--gold-ink); font-size: 0.9rem; }
+  .case-section h2 { max-width: 28ch; margin: 0 0 1.5rem; font-size: clamp(1.6rem, 3vw, 2.25rem); }
+  .case-section h3 { margin: 1.5rem 0 0.5rem; font-size: 1.08rem; }
+  .case-story { display: grid; gap: 1rem; margin: 1.75rem 0; }
+  .case-story > div { padding: 1rem 1.25rem; border: 1px solid var(--rule); }
+  .case-story h3 { margin-top: 0; }
+  .case-story p { margin-bottom: 0; }
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; min-width: 35rem; border-collapse: collapse; }
+  th, td { text-align: left; border-bottom: 1px solid var(--rule-faint); }
+  .detail { max-width: 50rem; margin-top: 1.25rem; }
+  .evidence { border-bottom: 0; }
+  .evidence > p { max-width: 50rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.7rem 1.5rem; }
+  @media (min-width: 760px) { .case-story { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
