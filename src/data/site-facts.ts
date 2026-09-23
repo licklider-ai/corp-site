@@ -193,7 +193,7 @@ export const PAIRED_T_RFC_URL =
   'https://github.com/licklider-ai/nomue-protocol/issues/25';
 
 export const EVALUATION_BOUNDARY =
-  'A published fixed-panel study ran 72 constructed Welch-report questions through three configurations and three fresh sessions each. The bound-verifier configuration returned the expected complete report in 216/216 sessions; general Python and a stable Welch wrapper returned 132/216 and 131/216. This is a complete-configuration result, not a binding-only effect or a measure of accuracy in general research use.';
+  'The evaluation program examines nomue through decision quality, cost and time, and concrete cases, with explicit comparisons and linked reproduction materials. Current evidence includes two developer-led preprints on constructed Welch workflows and selected cases from the whole-submission study. Results remain specific to their tasks, models and configurations; public archives support reproducing disclosed results, not independently rerunning the private nomue implementations.';
 
 export const PLATFORM_SCOPE =
   'Licklider is building shared infrastructure for verification calls across AI research. Welch is the first working vertical slice of a broader architecture for portable evidence, persistent agent-native project state, resumability, and expanding scientific capabilities.';

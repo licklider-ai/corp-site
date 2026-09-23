@@ -1,296 +1,158 @@
 ---
 import { HISTORICAL_REUSE } from '../data/historical-reuse';
-import type { TocItem } from '../consts';
 import PageLayout from '../layouts/PageLayout.astro';
 
-const toc: TocItem[] = [
-  { id: 'historical-reuse', label: 'Historical-analysis reuse' },
-  { id: 'result', label: 'Published result' },
-  { id: 'design', label: 'What was compared' },
-  { id: 'failures', label: 'What the score reveals' },
-  { id: 'meaning', label: 'What it means' },
-  { id: 'evidence', label: 'Evidence and reproduction' },
+const toc = [
+  { id: 'result', label: 'Decision quality' },
+  { id: 'historical-reuse', label: 'Cost and time' },
+  { id: 'failures', label: 'Concrete cases' },
+  { id: 'design', label: 'How to assess the evidence' },
+  { id: 'evidence', label: 'Inspect and reproduce' },
 ];
 ---
 
 <PageLayout
   title="Evaluation"
-  description="Two published evaluations examine historical-analysis reuse efficiency and complete Welch-report correctness in tool-assisted research workflows."
+  description="Evaluate nomue through measured decision quality, cost and time, and concrete cases. Inspect the methods, results and reproduction materials behind each claim."
   toc={toc}
 >
   <header class="page-head">
     <p class="eyebrow">Evaluation</p>
-    <h1>What verification changes in an agent workflow</h1>
+    <h1>Measure where nomue makes a difference</h1>
     <p class="standfirst">
-      Two studies examine complementary outcomes: the resources needed to decide whether
-      an earlier analysis can be reused, and the correctness of a complete Welch-report assessment.
-      Both are preprints, not peer reviewed; their models, tasks and results are reported separately.
+      Does nomue help an agent reach the right decision? Does it reduce the work needed?
+      What changes in a concrete case? We evaluate these questions through explicit
+      comparisons, inspectable evidence and reproducible analysis.
     </p>
+    <p>This page brings that evidence together as the evaluation program grows. Papers,
+      benchmarks and case studies each address part of the question. Start with the
+      dimension that matters to you, then inspect the conditions and materials behind the result.</p>
+    <nav class="entry-grid" aria-label="Explore the evaluation">
+      <a href="#result"><strong>Decision quality</strong><span>Does the complete assessment match the expected answer?</span></a>
+      <a href="#historical-reuse"><strong>Cost and time</strong><span>How much work does it take to reach the decision?</span></a>
+      <a href="#failures"><strong>Concrete cases</strong><span>Where do the observed answers differ, and why?</span></a>
+    </nav>
   </header>
 
-  <section id="historical-reuse" class="section">
-    <p class="eyebrow">Historical-analysis reuse · September 2026</p>
-    <h2>{HISTORICAL_REUSE.headline}</h2>
-    <p>{HISTORICAL_REUSE.summary} {HISTORICAL_REUSE.scope}</p>
-    <p>Both configurations received the same historical raw data, archived Welch program, current declarations, policies and ordinary Python/file tools. The nomue configuration additionally required use of its historical-analysis recheck capability through MCP.</p>
-    <p>Across all 144 scheduled pairs, reductions were 72.9% in usage-priced API cost and 55.9% in summed task time. Conservative cumulative-budget reservations stopped 33 comparator sessions. In the first two repetitions, both configurations completed all 48 tasks: cost fell 76.7% and time 61.2% across those 96 pairs.</p>
-    <p>The 103-pair result matches nomue to the comparator’s correctly solved tasks; it excludes comparator failures and incomplete sessions. It describes that subset, with the full schedule and budget-uninterrupted comparison reported alongside it. Time is summed per-task elapsed time, not parallel-run wall-clock duration.</p>
-    <p><a href={HISTORICAL_REUSE.href}>Study design, scoring sensitivity and limitations</a> · <a href={HISTORICAL_REUSE.doi}>Manuscript and aggregate reproduction supplement</a></p>
-  </section>
-
   <section id="result" class="section">
-    <p class="eyebrow">Whole-submission Welch verification · September 2026</p>
-    <h2>The bound verifier returned 216 of 216 expected reports</h2>
-    <div class="score-grid">
-      <article>
-        <p class="arm-label">B · General Python</p>
-        <p class="score">132 / 216</p>
-        <p>61.11% complete-report correctness</p>
-      </article>
-      <article>
-        <p class="arm-label">W · Stable Welch wrapper</p>
-        <p class="score">131 / 216</p>
-        <p>60.65% complete-report correctness</p>
-      </article>
-      <article class="featured">
-        <p class="arm-label">C · Bound verifier</p>
-        <p class="score">216 / 216</p>
-        <p>100% on this fixed constructed panel</p>
-      </article>
-    </div>
-    <p class="primary">
-      <strong>The measured outcome is exact correctness of a five-field submission report.</strong>
-      These rates are not estimates of general research accuracy. They describe one fixed
-      model, one constructed panel, and the complete configurations tested in September 2026.
-    </p>
+    <p class="eyebrow">Decision quality</p>
+    <h2>Checking the whole submission</h2>
+    <p>Can an agent assess a submitted statistical report, including missing claims and
+      conflicts with the requested conditions? The measured outcome is exact correctness
+      of the complete five-field assessment.</p>
+    <p class="finding"><strong>216 / 216 expected reports with the bound verifier</strong>,
+      compared with 132 / 216 using general Python and 131 / 216 using a stable Welch wrapper.</p>
+    <p><strong>Tested scope:</strong> 72 constructed Welch-report questions, three repetitions
+      and three configurations: 648 sessions using <code>gpt-4.1-mini-2025-04-14</code>.</p>
+    <p><strong>How to read it:</strong> This compares complete configurations on a fixed panel.
+      The verifier’s result path was deterministic. Accepting an alternative output format
+      raises the Python score to 142 / 216. These are complete-report results on the tested
+      tasks, not a general research-accuracy rate.</p>
+    <p class="actions"><a href="/research/whole-submission-welch-verification/">Study, methods and limits</a>
+      <a href="https://doi.org/10.5281/zenodo.22784595">Paper and reproduction package</a></p>
+    <p class="status">Developer-led evaluation · Preprint v1.0 · Not peer reviewed</p>
   </section>
 
-  <section id="design" class="section">
-    <h2>What was compared</h2>
-    <p>
-      The experiment used 72 newly generated questions in nine predefined Welch-report
-      families. Each question was run three times in each of three configurations, for
-      648 independently scored sessions. All configurations used
-      <code>gpt-4.1-mini-2025-04-14</code>, the same case surface, and the same session
-      limits. Expected outcomes were fixed independently of the scored model output.
-    </p>
-    <div class="arms">
-      <article>
-        <p class="arm-label">B · Control</p>
-        <h3>General calculation tools</h3>
-        <p>The model used Python and assembled the five-field report itself.</p>
-      </article>
-      <article>
-        <p class="arm-label">W · Numerical wrapper</p>
-        <h3>Stable Welch calculation</h3>
-        <p>A stable wrapper supplied the calculation, while the model still assembled the report.</p>
-      </article>
-      <article>
-        <p class="arm-label">C · Bound verifier</p>
-        <h3>Submission-level assessment</h3>
-        <p>An argument-free tool call returned the assessment bound to the submitted data and conditions.</p>
-      </article>
-    </div>
-    <p>
-      This design compares complete configurations. C changes binding, field provenance,
-      and structured return together, so the study does not identify a binding-only causal
-      effect. C's result path was deterministic and confirmed before the live run; its
-      216/216 result is not evidence of stochastic model stability.
-    </p>
+  <section id="historical-reuse" class="section">
+    <p class="eyebrow">Cost and time</p>
+    <h2>Reaching a reuse decision with less work</h2>
+    <p>When an agent checks whether an earlier analysis can be reused, does adding nomue
+      reduce API cost and task time? Both configurations received the same underlying
+      historical evidence and ordinary tools; one also required nomue’s recheck capability.</p>
+    <p class="finding"><strong>78.1% lower API cost and 62.9% less task time</strong>
+      on the 103 matched pairs the ordinary-tool comparator also answered correctly.</p>
+    <p><strong>Tested scope:</strong> 48 synthetic Welch-analysis tasks, three repetitions
+      and two configurations: 288 scheduled sessions using <code>gpt-5.6-sol</code>.</p>
+    <p><strong>How to read it:</strong> The matched comparison excludes comparator failures
+      and incomplete sessions. Across all 144 scheduled pairs, reductions were 72.9% and
+      55.9%. Budget reservations stopped 33 comparator sessions; the 96 pairs in the first
+      two repetitions, where both configurations completed every task, showed reductions
+      of 76.7% and 61.2%. Cost is usage-priced API cost; time is summed task duration.</p>
+    <p class="actions"><a href={HISTORICAL_REUSE.href}>Study, scoring sensitivity and limits</a>
+      <a href={HISTORICAL_REUSE.doi}>Paper and aggregate reproduction supplement</a></p>
+    <p class="status">Developer-led evaluation · Preprint v1 · Not peer reviewed</p>
   </section>
 
   <section id="failures" class="section">
-    <h2>What the score reveals</h2>
-    <p>
-      A correct calculation can still produce an incorrect submission assessment. The
-      five scored fields cover the overall verdict, numerical correctness, named error
-      fields, missing fields, and conflicts between requested and submitted conditions.
-      The largest differences appeared in cases with missing information or undefined
-      inference, where the correct response was not a conventional numeric result.
-    </p>
-    <p>
-      Adding a stable Welch wrapper did not improve whole-report correctness on this
-      panel: W scored 131/216, compared with B's 132/216. This does not show that numerical
-      stability is unhelpful. The panel did not contain near-boundary numerical cases that
-      could detect such a benefit; its numerical discrepancies were deliberately large.
-    </p>
-    <p>
-      Output acceptance also mattered. Fifteen B sessions and one W session returned the
-      five fields as bare JSON rather than inside the required wrapper. A sensitivity
-      analysis accepting that form raised B to 142/216 (65.74%). It did not change the
-      qualitative comparison with C.
-    </p>
-    <p class="actions"><a href="/evaluation/cases/">See three cases and all three repetitions</a></p>
+    <p class="eyebrow">Concrete cases</p>
+    <h2>See what changes in the answer</h2>
+    <p>Inspect the submitted information, expected assessment and observed outputs side
+      by side. The current collection explains three cases from the whole-submission study.</p>
+    <ul class="case-links">
+      <li><a href="/evaluation/cases/#version">A dataset-version conflict despite matching numbers</a></li>
+      <li><a href="/evaluation/cases/#missing">A missing standard-error claim</a></li>
+      <li><a href="/evaluation/cases/#interval">An incorrect confidence-interval endpoint</a></li>
+    </ul>
+    <p><strong>Tested scope:</strong> Three selected cases, with all three repetitions for
+      each configuration and case IDs that connect the display to the archived evidence.</p>
+    <p><strong>How to read it:</strong> These examples explain observed differences; they
+      are not an additional independent study or an estimate of how often these problems
+      occur. The configurations ran in separate sessions, rather than nomue intervening
+      in another agent’s conversation.</p>
+    <p class="actions"><a href="/evaluation/cases/">Inspect the cases and their source evidence</a></p>
   </section>
 
-  <section id="meaning" class="section">
-    <h2>What the result means—and what it does not</h2>
-    <p>
-      The evidence supports a bounded claim: for these 72 constructed Welch-report
-      questions and this fixed model, the bound-verifier configuration produced the
-      expected complete assessments more reliably than configurations in which the model
-      assembled the final report.
-    </p>
-    <p>It does not establish that:</p>
+  <section id="design" class="section">
+    <h2>How to assess the evidence</h2>
+    <p>Our aim is to make each claim checkable: what was tested, what counted as success,
+      what the comparator could use, and what another reader can reproduce. As new
+      evaluations are published, they will extend the relevant dimension or add another.</p>
     <ul>
-      <li>binding alone caused the difference;</li>
-      <li>nomue is 100% accurate on real research submissions or other statistical methods;</li>
-      <li>the stable numerical wrapper has no value near floating-point boundaries;</li>
-      <li>B and W lacked all recognition of missing or undefined information; or</li>
-      <li>another model, prompt, task distribution, or future version will reproduce the same rates.</li>
+      <li><strong>Defined questions:</strong> Identify the task, expected output, metric and tested scope.</li>
+      <li><strong>Visible comparisons:</strong> State the model, tools, supplied evidence and material differences between configurations.</li>
+      <li><strong>Inspectable outcomes:</strong> Report denominators, repetitions, interruptions and relevant scoring sensitivities.</li>
+      <li><strong>Reproduction materials:</strong> Link data and code, and say whether they reproduce saved results or rerun the original workflow.</li>
     </ul>
-    <p>
-      The study was developer-led, not preregistered, and has not been peer reviewed.
-      Tasuku Kobayashi is Licklider's founder and CEO. Kaori Saito, PhD in Statistics,
-      reviewed the calculations, scoring endpoint, oracle independence, evidence integrity,
-      and claim limits, but did not rerun the live provider sessions. Generative AI assisted
-      drafting, checking, and adversarial review; that work is not independent peer review.
-    </p>
+    <div id="meaning">
+      <p>The current studies provide evidence on specific Welch workflows. They use different
+        tasks, models and endpoints, so their scores are kept separate. They do not yet
+        establish performance across research domains or all released nomue interfaces.</p>
+      <p>Both studies were led by nomue’s developer. Their individual research pages disclose
+        author interests, review and AI assistance. A published preprint and an archived
+        dataset make evidence available for inspection; they do not constitute independent peer review.</p>
+    </div>
   </section>
 
   <section id="evidence" class="section">
-    <h2>Evidence and reproduction</h2>
-    <p>
-      The preprint and reproducibility package are archived together on Zenodo. The package
-      contains the 648 scored rows, panel inputs and expected outputs, reference calculations,
-      aggregation and checking code, integrity manifests, saved tool definitions, and frozen
-      source material.
-    </p>
-    <p class="actions">
-      <a href="https://zenodo.org/records/22784595">Open the Zenodo record</a>
-      <a href="/research/whole-submission-welch-verification/">Read the publication note</a>
-    </p>
-    <p>
-      The saved evidence can be rescored without provider calls. The private C verifier is
-      not included, so the original C sessions cannot be rerun independently from the public
-      package. Reproduction of the archived results and a live replication are different claims.
-    </p>
+    <h2>Inspect and reproduce</h2>
+    <p>Start with the public materials for the result you want to check.</p>
+    <ul>
+      <li><a href="https://doi.org/10.5281/zenodo.22784595">Whole-submission verification package</a>:
+        rescore the 648 saved session rows, inspect panel inputs and expected outputs,
+        and reproduce reported aggregates. The case collection uses this same evidence.</li>
+      <li><a href={HISTORICAL_REUSE.doi}>Historical-analysis reuse supplement</a>:
+        reproduce reported aggregates from 288 session rows, answers, reference fields,
+        case facts, the scoring contract, analysis plan and aggregation script.</li>
+    </ul>
+    <p>These archives support reproduction of the disclosed results. They do not include
+      the private product implementations needed to independently rerun the original
+      nomue sessions. Each study specifies its additional reproduction limits.</p>
   </section>
 
   <footer class="page-foot">
-    <p>Published September 16, 2026 · Preprint v1.0 · Not peer reviewed</p>
-    <p><a href="/nomue/">How nomue works</a></p>
+    <p><a href="/research/">Research publications</a></p>
+    <p><a href="/nomue/">Current nomue capabilities</a></p>
   </footer>
 </PageLayout>
 
 <style>
-@layer legacy {
-  .page-head {
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .page-head .eyebrow,
-  .section > .eyebrow {
-    margin: 0;
-  }
-
-  .page-head h1 {
-    max-width: 18ch;
-    font-size: clamp(2rem, 4.5vw, 3.35rem);
-    line-height: 1.08;
-    letter-spacing: -0.025em;
-    margin: 0.9rem 0 1.25rem;
-  }
-
-  .standfirst {
-    max-width: 48rem;
-    margin: 0;
-    font-size: 1.12rem;
-    color: var(--ink-2);
-  }
-
-  .section {
-    padding: 3rem 0;
-    border-bottom: 1px solid var(--rule-faint);
-  }
-
-  .section h2 {
-    max-width: 30ch;
-    font-size: clamp(1.35rem, 2.5vw, 1.8rem);
-    margin: 0.75rem 0 1.25rem;
-  }
-
-  .section > :last-child,
-  .arms p:last-child,
-  .score-grid p:last-child {
-    margin-bottom: 0;
-  }
-
-  .score-grid,
-  .arms {
-    display: grid;
-    gap: 1rem;
-    margin: 1.75rem 0;
-  }
-
-  .score-grid article,
-  .arms article {
-    border: 1px solid var(--rule);
-    padding: 1.25rem;
-  }
-
-  .score-grid .featured {
-    background: var(--wash);
-    border-color: var(--ink-3);
-  }
-
-  .score {
-    margin: 0.6rem 0 0.35rem;
-    font-size: clamp(1.65rem, 3.5vw, 2.35rem);
-    line-height: 1;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-  }
-
-  .arms h3 {
-    font-size: 1.05rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .arm-label {
-    margin-bottom: 0.4rem;
-    color: var(--ink-3);
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .primary {
-    border-left: 2px solid var(--ink);
-    padding-left: 1.25rem;
-  }
-
-  strong {
-    font-weight: 500;
-    color: var(--ink);
-  }
-
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem 1.5rem;
-  }
-
-  .page-foot {
-    display: flex;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    padding: 2rem 0 0;
-    font-size: 0.85rem;
-    color: var(--ink-3);
-  }
-
-  .page-foot p {
-    margin: 0;
-  }
-
-  @media (min-width: 760px) {
-    .score-grid,
-    .arms {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-}
+  .page-head { padding-bottom: 2.5rem; border-bottom: 1px solid var(--rule); }
+  .page-head .eyebrow { margin: 0; }
+  .page-head h1 { max-width: 21ch; margin: 0.9rem 0 1.25rem; font-size: clamp(2rem, 4.5vw, 3.35rem); line-height: 1.08; letter-spacing: -0.025em; }
+  .standfirst { max-width: 48rem; font-size: 1.12rem; color: var(--ink-2); }
+  .entry-grid { display: grid; gap: 0.8rem; margin-top: 2rem; }
+  .entry-grid a { display: block; padding: 1.15rem; border: 1px solid var(--rule); background: var(--wash); text-decoration: none; }
+  .entry-grid a:hover, .entry-grid a:focus-visible { border-color: var(--gold-ink); }
+  .entry-grid strong, .entry-grid span { display: block; }
+  .entry-grid span { margin-top: 0.5rem; font-size: 0.9rem; color: var(--ink-2); }
+  .section { padding: 2.75rem 0; border-bottom: 1px solid var(--rule-faint); }
+  .section h2 { margin: 0.75rem 0 1.25rem; font-size: clamp(1.35rem, 2.5vw, 1.8rem); }
+  .section > :last-child { margin-bottom: 0; }
+  .finding { padding: 1rem 1.25rem; border-left: 2px solid var(--gold); background: var(--wash); }
+  .status { font-size: 0.85rem; color: var(--ink-3); }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+  .case-links li { margin-bottom: 0.5rem; }
+  .page-foot { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; padding-top: 2rem; font-size: 0.85rem; }
+  .page-foot p { margin: 0; }
+  @media (min-width: 760px) { .entry-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 </style>
