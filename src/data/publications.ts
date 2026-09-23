@@ -50,6 +50,10 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Publication',
     date: 'September 23, 2026',
     sortKey: '2026-09-23',
+    publishedTime: {
+      at: '2026-09-23T20:04:09Z',
+      evidence: 'https://vercel.com/licklidermvp/website/J1Qx8fALqXzZsLguUWRhDgJB5rxv',
+    },
     title: HISTORICAL_REUSE.title,
     summary: HISTORICAL_REUSE.summary,
     href: HISTORICAL_REUSE.href,
