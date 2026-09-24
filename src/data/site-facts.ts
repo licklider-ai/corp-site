@@ -403,7 +403,7 @@ export const UPSTREAM_CONTRIBUTIONS = [
     reference: '0.2048 / 0.03510',
     evidenceHref: 'https://github.com/scipy/scipy/pull/26135',
     evidenceLabel: 'SciPy repair PR #26135',
-    credit: "Reported by Tasuku Kobayashi; mdhaber posted high-precision results on September 13, 2026; NumPy float64 repair unconfirmed",
+    credit: "Reported by Tasuku Kobayashi; mdhaber posted high-precision results on September 13, 2026; mparray support merged in PR #24840 on September 23, 2026; NumPy float64 repair PR #26135 remains open",
   },
   {
     project: 'Julia / HypothesisTests.jl',
