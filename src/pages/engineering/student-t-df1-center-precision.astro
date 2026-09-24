@@ -108,4 +108,12 @@ const regressionUrl = `${PUBLIC_RELEASE.verifierUrl}/blob/${sourceRevision}/test
       or that a study's conclusion is valid overall.
     </p>
   </section>
+
+  <section id="erratum">
+    <h2>Release 1 erratum records the published-snapshot defect</h2>
+    <p>
+      The nomue Protocol now records <a href="https://github.com/licklider-ai/nomue-protocol/blob/9146a342ce40881b16aad198c80dbf94d7e24332/ERRATA.md" target="_blank" rel="noopener noreferrer">erratum ER-1</a> for the published Release 1 reference verifier. At near-zero test statistics with Welch-Satterthwaite <code>df = 1</code>, the old path could quantize the two-sided probability to <code>1</code>. It could therefore accept that wrong declared value and reject the mathematically correct value <code>0.9999999952571827</code>.</p>
+    <p>
+      The affected region is inside the published Release 1 conformance boundary. ER-1 is an informative correction to the non-normative reference implementation: it does not withdraw the published snapshot, change Protocol semantics, reopen a Release 1 gate, or resign the release. Users with affected cases should re-run them with the corrected verifier release candidate rather than treat the old result as reliable.</p>
+  </section>
 </PublicationLayout>
