@@ -172,7 +172,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     title: 'statsmodels loses finite Welch results when an intermediate sum overflows',
     summary: 'Four exactly represented observations per group make statsmodels overflow an intermediate sum, losing finite variances and Welch t-test results.',
     href: '/engineering/statsmodels-welch-sumsquares-overflow/',
-    status: 'Reported in statsmodels issue #10252 — upstream confirmation pending',
+    status: 'Repair PR #10255 open and unreviewed; reported case fixed in the proposed patch; not merged',
   },
   {
     category: 'Engineering',
