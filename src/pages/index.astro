@@ -1,11 +1,14 @@
 ---
 import { PUBLICATIONS } from '../data/publications';
-import { PUBLIC_RELEASE } from '../data/site-facts';
+import { PUBLIC_RELEASE, UPSTREAM_CONTRIBUTIONS } from '../data/site-facts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const latest = [...PUBLICATIONS]
   .sort((a, b) => b.sortKey.localeCompare(a.sortKey))
   .slice(0, 3);
+const upstreamFixCount = UPSTREAM_CONTRIBUTIONS.filter(
+  (item) => item.outcome === 'fix_merged',
+).length;
 
 const verifierStructuredData = {
   '@type': 'SoftwareApplication',
@@ -150,6 +153,40 @@ const homeStructuredData = {
       </div>
     </section>
 
+    <section class="band band--single open-work-band">
+      <div class="band-inner band-inner--wide">
+        <p class="eyebrow">Open work</p>
+        <h2 class="open-work-title">Evidence in the open.</h2>
+        <p class="open-work-lede">
+          Determinization requires more than a product. We report failures in scientific
+          software, contribute repairs upstream and publish the evidence behind nomue's claims.
+        </p>
+        <div class="open-work-grid">
+          <article>
+            <p class="scope-label">Upstream reports</p>
+            <p class="work-counts">
+              <span><strong>{UPSTREAM_CONTRIBUTIONS.length}</strong> reports submitted</span>
+              <span><strong>{upstreamFixCount}</strong> fixes merged upstream</span>
+            </p>
+            <p>
+              We test the tools that scientific claims depend on and report the failures
+              we can reproduce.
+            </p>
+            <p><a href="/engineering/">View upstream work</a></p>
+          </article>
+          <article>
+            <p class="scope-label">Research</p>
+            <h3>Methods, comparisons, results and limits</h3>
+            <p>
+              We publish how nomue is evaluated, including the evidence that supports a
+              claim and the boundaries that qualify it.
+            </p>
+            <p><a href="/research/">Read the research</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="latest" class="band follow-band">
       <p class="eyebrow">Follow the evidence</p>
       <div class="band-body latest-body">
@@ -168,6 +205,18 @@ const homeStructuredData = {
           }
         </ol>
         <p class="more"><a class="link-button" href="/latest/">All updates</a> · <a href="/research/">Research</a> · <a href="/engineering/">Engineering</a></p>
+      </div>
+    </section>
+
+    <section class="band company-band">
+      <p class="eyebrow">Company</p>
+      <div class="band-body company-body">
+        <h2>Built by Licklider.</h2>
+        <p>
+          nomue is developed by Licklider, Inc. We publish what it checks, the evidence
+          behind it and where it stops.
+        </p>
+        <p class="more"><a href="/about/">About Licklider</a></p>
       </div>
     </section>
   </div>
@@ -193,7 +242,7 @@ const homeStructuredData = {
   .band-body { max-width: var(--measure); }
   .band-body--wide { max-width: 56rem; }
   .lead { color: var(--ink); font-size: clamp(1.2rem, 2vw, 1.5rem); }
-  .section-title, .evidence-title, .scope-title { max-width: 60rem; margin: 0 0 1.5rem; font-size: clamp(2rem, 4.5vw, 3.8rem); line-height: 1.12; }
+  .section-title, .evidence-title, .scope-title, .open-work-title { max-width: 60rem; margin: 0 0 1.5rem; font-size: clamp(2rem, 4.5vw, 3.8rem); line-height: 1.12; }
   .sequence { margin: 2.5rem 0 0; font-size: clamp(1.35rem, 2.5vw, 2rem); }
   .sequence strong { color: var(--blue); font-weight: 400; }
 
@@ -214,6 +263,14 @@ const homeStructuredData = {
   .scope-grid h3 { margin: 0 0 1rem; font-size: 1.55rem; }
   .scope-label { margin: 0 0 1.5rem; color: var(--blue); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
 
+  .open-work-lede { max-width: 58rem; font-size: clamp(1.15rem, 2vw, 1.4rem); }
+  .open-work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 2.5rem; border: 1px solid var(--rule); background: var(--rule); }
+  .open-work-grid article { padding: clamp(1.75rem, 4vw, 3rem); background: var(--paper); }
+  .open-work-grid h3 { margin: 0 0 1rem; font-size: 1.55rem; }
+  .work-counts { display: flex; gap: 1.5rem 2.5rem; flex-wrap: wrap; margin: 0 0 1.5rem; }
+  .work-counts span { color: var(--ink-2); }
+  .work-counts strong { display: block; color: var(--gold-ink); font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 400; line-height: 1; }
+
   .follow-copy { margin-top: 0; font-size: 1.15rem; }
   .latest-body { max-width: none; }
   .latest-list { list-style: none; margin: 2rem 0 0; padding: 0; border-top: 1px solid var(--rule); }
@@ -222,10 +279,12 @@ const homeStructuredData = {
   .latest-title { color: var(--ink); font-size: 1.15rem; line-height: 1.45; text-decoration: none; }
   .latest-category a { color: var(--ink-3); font-size: 0.85rem; text-decoration: none; }
   .more { margin: 2rem 0 0; font-size: 0.92rem; }
+  .company-body h2 { margin: 0 0 1rem; font-size: clamp(1.8rem, 3.5vw, 3rem); }
+  .company-body > p:not(.more) { max-width: 48rem; font-size: 1.15rem; }
 
   @media (max-width: 900px) {
     .band { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
-    .evidence-grid, .scope-grid { grid-template-columns: minmax(0, 1fr); }
+    .evidence-grid, .scope-grid, .open-work-grid { grid-template-columns: minmax(0, 1fr); }
     .latest-list li { grid-template-columns: 6.5rem minmax(0, 1fr); gap: 1rem; }
     .latest-category { display: none; }
   }
