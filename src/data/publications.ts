@@ -198,7 +198,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     publishedTime: { at: '2026-09-12T05:05:29Z', evidence: 'https://vercel.com/licklidermvp/website/75p6gK4JMBZQTgfGzsFshNj2fU35' },
     summary: 'Exact inputs and independent references expose a changed Welch p-value despite a finite result and no warning in a SciPy boundary test.',
     href: '/engineering/checking-welch-results-with-exact-rescaling/',
-    status: "Repair PR #26209 open for Welch t-test numerical stability; current CI has an Array API indexing failure in the proposed Welch ANOVA change; issue #26169 open",
+    status: "PR #24840 merged with the mparray high-precision backend; NumPy float64 repair PR #26209 remains open for Welch t-test numerical stability; issue #26169 open",
   },
   {
     category: 'Engineering',
@@ -281,7 +281,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     "title": "Exact rescaling can reverse SciPy’s Welch ANOVA decision",
     "summary": "At an extreme input scale, SciPy’s Welch ANOVA changes a p-value from 0.02650 to 0.05611, crossing the 5% threshold without losing input information.",
     "href": "/engineering/scipy-welch-anova-weight-sum-overflow/",
-    "status": "Repair PR #26209 open for Welch ANOVA numerical stability; current CI has an Array API indexing failure with a one-line fix identified; issue #26146 open"
+    "status": "PR #24840 merged with the mparray high-precision backend; NumPy float64 repair PR #26209 remains open for Welch ANOVA numerical stability; current CI has an Array API indexing failure with a one-line fix identified; issue #26146 open"
   },
   {
     category: 'Engineering',
@@ -429,7 +429,7 @@ export const PUBLICATIONS: PublicationItem[] = [
       'SciPy’s one-sample and paired t-tests can reverse a 5% decision after exact power-of-two rescaling because an intermediate variance underflows or overflows.',
     href: '/engineering/scipy-ttest-scale-range-loss/',
     status:
-      "Maintainer posted matching high-precision results using PR #24840; repair PR #26135 open and unmerged; NumPy float64 repair unconfirmed; issue #26113 open",
+      "PR #24840 merged with the mparray high-precision backend; NumPy float64 repair PR #26135 remains open and unreviewed; issue #26113 open",
   },
   {
     category: 'Research',
