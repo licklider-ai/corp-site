@@ -8,7 +8,7 @@ import { PUBLICATIONS } from './publications';
  */
 
 export const COMPANY_POSITION =
-  'Licklider builds scientific verification infrastructure that AI research agents can call when a result needs an independent, versioned check. Statistics is the first working domain.';
+  'Licklider builds nomue to check AI-generated claims independently. Public support begins with Welch analyses; life sciences, finance, and chemistry are long-term directions.';
 
 export const VERIFICATION_CALL_DEFINITION =
   'A verification call asks a separate tool to check one clearly defined property of an analysis, result, or evidence chain. It returns a machine-readable answer that says what was checked, which evidence and version were used, what should happen next, and where the result stops.';

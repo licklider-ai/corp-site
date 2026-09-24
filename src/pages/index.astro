@@ -1,28 +1,12 @@
 ---
-import { HISTORICAL_REUSE } from '../data/historical-reuse';
 import { PUBLICATIONS } from '../data/publications';
-import {
-  NOMUE_GLOBAL_INSTALL_COMMAND,
-  NOMUE_NPX_COMMAND,
-  NOMUE_VERIFY_COMMAND,
-  PUBLIC_CAPABILITY,
-  PUBLIC_RELEASE,
-  R3_DISCUSSION,
-  R4_DISCUSSION,
-  R5_DISCUSSION,
-  UPSTREAM_CONTRIBUTIONS,
-  UPSTREAM_REPORTS_AS_OF,
-  VERIFICATION_CALL_DEFINITION,
-} from '../data/site-facts';
+import { PUBLIC_RELEASE } from '../data/site-facts';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const latest = [...PUBLICATIONS]
   .sort((a, b) => b.sortKey.localeCompare(a.sortKey))
-  .slice(0, 8);
-const upstreamPanels = UPSTREAM_CONTRIBUTIONS.slice(0, 7);
-const upstreamFixCount = UPSTREAM_CONTRIBUTIONS.filter(
-  (item) => item.outcome === 'fix_merged',
-).length;
+  .slice(0, 3);
+
 const verifierStructuredData = {
   '@type': 'SoftwareApplication',
   '@id': new URL('/#nomue-verifier', Astro.site).href,
@@ -52,14 +36,15 @@ const verifierStructuredData = {
     'Local Record content digest recomputation',
   ],
 };
+
 const homeStructuredData = {
   '@type': 'WebPage',
   '@id': new URL('/#webpage', Astro.site).href,
-  name: 'Licklider — Scientific verification infrastructure for AI agents',
+  name: 'Licklider — Determinize AI',
   description:
-    'Scientific verification infrastructure for AI research agents: public Welch verification, a reviewed paired-t candidate, and experimental Holm and factorial evidence checks.',
+    'Licklider builds nomue to check AI-generated claims independently. Public support begins with Welch analyses; life sciences, finance, and chemistry are long-term directions.',
   url: new URL('/', Astro.site).href,
-  dateModified: '2026-09-23T20:04:09Z',
+  dateModified: '2026-09-24',
   isPartOf: { '@id': new URL('/#website', Astro.site).href },
   about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
 };
@@ -68,243 +53,121 @@ const homeStructuredData = {
 <BaseLayout description={homeStructuredData.description} structuredData={[homeStructuredData, verifierStructuredData]}>
   <section class="hero">
     <div class="hero-inner">
-      <p class="eyebrow">Licklider</p>
-      <h1>The <span class="hero-keyword">verification</span> layer<br />for AI research agents</h1>
-      <div class="lede">
-        <p>
-          AI research agents need a separate, inspectable system for decisions they
-          should not grade themselves. nomue gives them versioned verification calls
-          with machine-readable evidence and next actions.
-        </p>
-        <p>
-          Verify supported Welch Records locally today. Hosted Welch calls are available
-          to approved recipients in limited Release 1.
-        </p>
-      </div>
-      <div class="cta">
-        <a class="cta-primary" href="/docs/record-verification/">Install and run</a>
-        <a href={PUBLIC_RELEASE.verifierUrl} target="_blank" rel="noopener noreferrer">View source on GitHub</a>
-        <a href="/nomue/">How nomue works</a>
-      </div>
-      <p class="hero-facts">
-        {PUBLIC_RELEASE.npmPackage} · npm <code>{PUBLIC_RELEASE.npmDistTag}</code>: {PUBLIC_RELEASE.verifierPackage} release candidate ·{' '}
-        {PUBLIC_RELEASE.supportedOperatingSystems.join(' / ')} · Node.js {PUBLIC_RELEASE.testedNodeVersions.join(' / ')} ·{' '}
-        <a href={PUBLIC_RELEASE.protocolUrl} target="_blank" rel="noopener noreferrer">Protocol on GitHub</a>
+      <h1>Determinize AI.</h1>
+      <p class="hero-lede">
+        nomue checks AI-generated claims independently, so people and agents can act on evidence.
       </p>
+      <p class="hero-scope">Life sciences. Finance. Chemistry. Wherever claims must hold.</p>
+      <div class="cta">
+        <a class="cta-primary" href="#scope">Explore the scope</a>
+        <a href="#evidence">View the evidence</a>
+      </div>
     </div>
   </section>
 
   <div class="sections">
-    <section class="band band--single available-band">
-      <div class="band-inner band-inner--wide">
-        <p class="eyebrow">Available Now</p>
-        <h2 class="available-title">Verify a supported Welch Record locally</h2>
-        <p class="available-copy">{PUBLIC_CAPABILITY}</p>
-        <nav class="package-signals" aria-label="Public verifier package facts">
-          <a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">
-            <span>npm</span> {PUBLIC_RELEASE.verifierPackage} RC
-          </a>
-          <a href={PUBLIC_RELEASE.verifierCiUrl} target="_blank" rel="noopener noreferrer">
-            <span>CI</span> 3 OS × 2 Node versions
-          </a>
-          <a href={PUBLIC_RELEASE.verifierLicenseUrl} target="_blank" rel="noopener noreferrer">
-            <span>License</span> Apache-2.0
-          </a>
-          <a href="/docs/cli-reference/">
-            <span>CLI</span> 3 commands
-          </a>
-        </nav>
-        <div class="quickstart">
-          <div>
-            <p class="step">Quick start</p>
-            <h3>Install the public npm package</h3>
-            <p>
-              The package path is tested on Linux, macOS, and Windows with Node.js 20
-              and 22. The npm <code>{PUBLIC_RELEASE.npmDistTag}</code> tag currently points to the{' '}
-              <code>{PUBLIC_RELEASE.verifierPackage}</code> release candidate.
-            </p>
-          </div>
-          <pre><code>{NOMUE_GLOBAL_INSTALL_COMMAND}
-{NOMUE_VERIFY_COMMAND}
-
-# Or run without a global install
-{NOMUE_NPX_COMMAND}</code></pre>
-        </div>
-        <p class="package-meaning">
-          Pass a Record to a versioned command and receive a scoped, machine-readable result.
+    <section class="band thesis-band">
+      <p class="eyebrow">Why</p>
+      <div class="band-body band-body--wide">
+        <h2 class="section-title">Generation is fast. Approval is the bottleneck.</h2>
+        <p class="lead">
+          AI can produce analysis in seconds. Using it still requires a separate answer:
+          does this result hold?
         </p>
-        <p class="more"><a href={PUBLIC_RELEASE.npmUrl} target="_blank" rel="noopener noreferrer">View on npm</a> · <a href="/docs/record-verification/">Full verifier guide</a> · <a href="/docs/cli-reference/">CLI reference</a> · <a href="/docs/examples.json">Machine-readable examples</a></p>
+        <p class="sequence">The model generates. <strong>nomue checks.</strong> People decide.</p>
+        <p class="more"><a href="/nomue/">See how nomue works</a></p>
       </div>
     </section>
 
-    <section class="band band--single">
+    <section id="evidence" class="band band--single evidence-band">
       <div class="band-inner band-inner--wide">
-        <p class="eyebrow">Verification Call</p>
-        <p class="definition">{VERIFICATION_CALL_DEFINITION}</p>
-        <div class="call-grid">
+        <p class="eyebrow">Evidence</p>
+        <h2 class="evidence-title">Measured, not assumed.</h2>
+        <div class="evidence-grid">
           <article>
-            <p class="step">1 · Request</p>
-            <h2>Send one bounded check</h2>
+            <p class="metric">216 / 216</p>
+            <h3>Expected complete reports with nomue</h3>
             <p>
-              The request names the check, version, evidence, and scientific facts
-              needed to answer it.
+              Compared with 132 / 216 using general Python and 131 / 216 using a stable
+              Welch wrapper.
             </p>
+            <p class="study-scope">72 constructed Welch-report questions · three repetitions · 648 sessions</p>
+            <p><a href="/evaluation/#result">View the decision-quality study</a></p>
           </article>
           <article>
-            <p class="step">2 · Decision</p>
-            <h2>Get an actionable decision</h2>
-            <p>
-              The tool can proceed, ask for missing information, report that the request
-              is outside its scope, stop safely, or preserve a failed check.
-            </p>
-          </article>
-          <article>
-            <p class="step">3 · Evidence</p>
-            <h2>Preserve a checkable record</h2>
-            <p>
-              The result travels with what passed or failed, the evidence and versions
-              used, the next action, and exactly how far the check reaches.
-            </p>
-          </article>
-        </div>
-        <p class="more"><a href="/nomue/">How nomue works</a> · <a href="/docs/">Read the docs</a></p>
-      </div>
-    </section>
-
-    <section id="protocol-progress" class="band band--single">
-      <div class="band-inner band-inner--wide">
-        <span id="paired-t-progress"></span>
-        <p class="eyebrow">Protocol progress</p>
-        <h2 class="roadmap-title">More analysis families. Evidence that stays inspectable.</h2>
-        <p class="roadmap-lead">Release 1 Welch is public. Four bounded programs extend the Protocol.</p>
-        <div class="protocol-progress-grid protocol-progress-grid--releases">
-          <article>
-            <p class="step">Release 2 · Reviewed candidate</p>
-            <h3>Paired-t</h3>
-            <p>The formal decision packet assembles the reviewed paired-t candidate and its D1–D6 decisions. Adoption, issuance, and release remain.</p>
-            <p><a href="/engineering/bounding-paired-t-arithmetic-and-pvalues/">Evidence and reviews</a> · <a href="https://github.com/licklider-ai/nomue-protocol/issues/25">Public review</a></p>
-          </article>
-          <article>
-            <p class="step">Release 3 · Public discussion</p>
-            <h3>Independent groups</h3>
-            <p>The proposal makes comparison choices and error control explicit. Numerical support is not yet adopted.</p>
-            <p><a href={R3_DISCUSSION.articleUrl}>Read the proposal</a> · <a href={R3_DISCUSSION.issueUrl}>Join the discussion</a></p>
-          </article>
-          <article>
-            <p class="step">Release 4 · Public discussion</p>
-            <h3>Two-factor experiments</h3>
-            <p>The proposal covers a balanced two-by-two design, including main effects and interaction. Numerical support is not yet adopted.</p>
-            <p><a href={R4_DISCUSSION.articleUrl}>Read the proposal</a> · <a href={R4_DISCUSSION.issueUrl}>Join the discussion</a></p>
-          </article>
-          <article>
-            <p class="step">Release 5 · Public discussion</p>
-            <h3>Shared study-design evidence</h3>
-            <p>The proposal makes declared design and selection timing inspectable across analysis families. It adds no current capability.</p>
-            <p><a href={R5_DISCUSSION.articleUrl}>Read the proposal</a> · <a href={R5_DISCUSSION.issueUrl}>Join the discussion</a></p>
-          </article>
-        </div>
-        <p class="more"><a href="/roadmap/">See the full product and capability roadmap</a></p>
-      </div>
-    </section>
-
-    <section class="band">
-      <p class="eyebrow">Evaluation</p>
-      <div class="band-body">
-        <p class="lead">{HISTORICAL_REUSE.headline}</p>
-        <p>Adding nomue reduced the work needed to decide whether a historical analysis could be reused—on the same tasks the ordinary-tool comparator also solved.</p>
-        <p>{HISTORICAL_REUSE.scope} Preprint v1, not peer reviewed.</p>
-        <p class="more"><a href={HISTORICAL_REUSE.href}>Read the paired evaluation and its evidence</a></p>
-        <p>An earlier study measured complete Welch-report correctness across 648 sessions. <a href="/evaluation/">Explore the evaluation evidence</a>.</p>
-      </div>
-    </section>
-  </div>
-
-    <section class="band band--single upstream-band">
-      <div class="band-inner band-inner--wide">
-        <p class="eyebrow">Upstream Contributions</p>
-        <div class="upstream-head">
-          <div>
-            <h2 class="upstream-title">Engineering evidence behind verification infrastructure.</h2>
-            <p class="lead">
-              Independent references and hostile edge cases have exposed numerical errors
-              and method-selection surprises in scientific software.
-            </p>
-          </div>
-          <dl class="contribution-counts" aria-label={`Upstream contribution totals as of ${UPSTREAM_REPORTS_AS_OF}`}>
-            <div>
-              <dt>{UPSTREAM_CONTRIBUTIONS.length}</dt>
-              <dd>upstream reports</dd>
+            <div class="paired-metrics" aria-label="Measured cost and time reductions">
+              <p><span class="metric">78.1%</span><span>lower API cost</span></p>
+              <p><span class="metric">62.9%</span><span>less task time</span></p>
             </div>
-            <div>
-              <dt>{upstreamFixCount}</dt>
-              <dd>fixes merged upstream</dd>
-            </div>
-          </dl>
+            <h3>With nomue, compared with ordinary tools alone</h3>
+            <p>
+              Measured across 103 matched pairs where both configurations reached the
+              correct answer.
+            </p>
+            <p class="study-scope">48 synthetic Welch tasks · three repetitions · 288 scheduled sessions</p>
+            <p><a href="/evaluation/#historical-reuse">View the cost-and-time study</a></p>
+          </article>
         </div>
-        <p class="count-date">Distinct reports submitted through issue trackers or maintainer email, as of {UPSTREAM_REPORTS_AS_OF}.</p>
-      </div>
-        <div class="upstream-carousel" role="region" aria-label="Upstream reports">
-          <div class="upstream-track">
-            {[false, true].map((duplicate) => (
-              <div class="upstream-grid" aria-hidden={duplicate ? 'true' : undefined}>
-                {
-                  upstreamPanels.map((item) => (
-                    <article>
-                      <p class="evidence-status">{item.project}</p>
-                      <h3><a href={item.href} tabindex={duplicate ? -1 : undefined}>{item.title}</a></h3>
-                      <p class="panel-status">{item.panelStatus}</p>
-                      <div class="numeric-comparison" aria-label={item.comparisonLabel}>
-                        <span>{item.observed}</span>
-                        <span aria-hidden="true">→</span>
-                        <span>{item.reference}</span>
-                      </div>
-                      <p class="comparison-label">{item.comparisonLabel}</p>
-                      <p class="evidence-links">
-                        <a href={item.href} tabindex={duplicate ? -1 : undefined}>Full report</a>
-                      </p>
-                    </article>
-                  ))
-                }
-              </div>
-            ))}
-          </div>
-        </div>
-      <div class="band-inner band-inner--wide">
-        <p class="more"><a href="/engineering/">All engineering work</a></p>
-      </div>
-    </section>
-
-  <div class="sections">
-
-    <section class="band">
-      <p class="eyebrow">Thesis</p>
-      <div class="band-body">
-        <h2 class="section-title">Approval needs a checkable basis</h2>
-        <p>
-          As AI scales generation, approval must stay connected to checkable evidence.
-          Licklider builds the infrastructure that helps researchers make that judgment.
+        <p class="evidence-boundary">
+          These results apply to the tested Welch workflows. Both studies were led by
+          nomue's developer and published as preprints, not peer-reviewed findings.
         </p>
-        <p class="more"><a href="/thesis/">Read the thesis</a></p>
+        <p class="more"><a href="/evaluation/">View all evidence</a></p>
       </div>
     </section>
 
-    <section id="latest" class="band">
-      <p class="eyebrow">Latest</p>
+    <section id="scope" class="band band--single scope-band">
+      <div class="band-inner band-inner--wide">
+        <p class="eyebrow">Scope</p>
+        <h2 class="scope-title">Proven narrowly. Built to expand.</h2>
+        <div class="scope-grid home-scope-grid">
+          <article>
+            <p class="scope-label">Available today</p>
+            <h3>Welch checks on your own machine</h3>
+            <p>
+              The public nomue package checks supported two-sided Welch analyses locally
+              on Linux, macOS and Windows.
+            </p>
+            <p>
+              Hosted Welch checks are available to approved recipients in limited Release 1.
+            </p>
+            <p><a href="/docs/record-verification/">Use nomue today</a></p>
+          </article>
+          <article>
+            <p class="scope-label">Long-term direction</p>
+            <h3>Life sciences. Finance. Chemistry.</h3>
+            <p>
+              The long-term scope is any field where AI-generated claims can be checked
+              against declared data, calculations or rules.
+            </p>
+            <p>
+              Each new capability will state what it checks, the evidence behind it and
+              where it stops.
+            </p>
+            <p><a href="/roadmap/">Explore the scope</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="latest" class="band follow-band">
+      <p class="eyebrow">Follow the evidence</p>
       <div class="band-body latest-body">
+        <p class="follow-copy">New results are published with their tested scope, evidence and limits.</p>
         <ol class="latest-list">
-              {
-                latest.map((row) => (
-                  <li>
-                    <span class="latest-date">{row.date}</span>
-                    <a class="latest-title" href={row.href}>{row.title}</a>
-                    <span class="latest-category">
-                      <a href={`/${row.category.toLowerCase()}/`}>{row.category}</a>
-                    </span>
-                  </li>
-                ))
-              }
+          {
+            latest.map((row) => (
+              <li>
+                <span class="latest-date">{row.date}</span>
+                <a class="latest-title" href={row.href}>{row.title}</a>
+                <span class="latest-category">
+                  <a href={`/${row.category.toLowerCase()}/`}>{row.category}</a>
+                </span>
+              </li>
+            ))
+          }
         </ol>
-        <p class="more"><a class="link-button" href="/latest/">All updates</a> · <a href="/rss.xml">RSS</a> · <a href="/feed.json">JSON Feed</a></p>
+        <p class="more"><a class="link-button" href="/latest/">All updates</a> · <a href="/research/">Research</a> · <a href="/engineering/">Engineering</a></p>
       </div>
     </section>
   </div>
@@ -312,94 +175,67 @@ const homeStructuredData = {
 
 <style>
 @layer legacy {
-
   .hero { border-bottom: 1px solid var(--rule-faint); }
-  .hero-inner { max-width: var(--shell); margin: 0 auto; padding: 7rem var(--gutter) 6rem; }
-  .hero h1 { max-width: 61rem; margin: 1.25rem 0 2.5rem; font-size: clamp(2.7rem, 6vw, 4.45rem); line-height: 1.1; letter-spacing: -0.015em; }
-  .lede { max-width: 45rem; font-size: 1.15rem; color: var(--ink-1); }
-  .cta { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 3rem; font-size: 0.95rem; }
+  .hero-inner { max-width: var(--shell); margin: 0 auto; padding: clamp(5rem, 10vw, 9rem) var(--gutter) clamp(4rem, 8vw, 7rem); }
+  .hero h1 { max-width: 72rem; margin: 0; font-size: clamp(4.1rem, 10vw, 9rem); line-height: 0.95; letter-spacing: -0.045em; }
+  .hero-lede { max-width: 47rem; margin: 3rem 0 0; color: var(--ink-1); font-size: clamp(1.25rem, 2.25vw, 1.75rem); line-height: 1.5; }
+  .hero-scope { margin: 1.25rem 0 0; color: var(--ink-3); font-size: 1rem; }
+  .cta { display: flex; gap: 1rem 1.75rem; flex-wrap: wrap; align-items: center; margin-top: 3rem; font-size: 0.95rem; }
   .cta a { padding-bottom: 3px; border-bottom: 1px solid var(--ink); text-decoration: none; }
-  .cta .cta-primary { padding: 0.65rem 0.9rem; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); }
-  .hero-facts { margin: 1.35rem 0 0; color: var(--ink-3); font-size: 0.8rem; }
-  .hero-facts a { color: inherit; }
+  .cta .cta-primary { padding: 0.8rem 1.15rem; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); }
+
   .sections { max-width: var(--shell); margin: 0 auto; padding: 0 var(--gutter); }
-  .band { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 3rem; padding: 4rem 0; border-bottom: 1px solid var(--rule-faint); }
+  .band { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 4rem; padding: clamp(4rem, 7vw, 6.5rem) 0; border-bottom: 1px solid var(--rule-faint); }
   .band:last-child { border-bottom: 0; }
   .band > .eyebrow { margin: 0.35rem 0 0; }
   .band--single { display: block; }
-  .band-inner { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 3rem; }
-  .band-inner > .eyebrow { margin: 0.35rem 0 0; }
-  .band-inner--wide { display: block; }
   .band-inner--wide > .eyebrow { margin-bottom: 2rem; }
   .band-body { max-width: var(--measure); }
-  .band-body > :last-child, article > :last-child { margin-bottom: 0; }
-  .lead { color: var(--ink); font-size: 1.15rem; }
-  .available-band { padding-top: 4.5rem; }
-  .available-title { max-width: 48rem; margin: 0 0 1rem; font-size: clamp(1.8rem, 3.8vw, 2.8rem); line-height: 1.2; letter-spacing: -0.01em; }
-  .available-copy { max-width: 48rem; margin-bottom: 2.25rem; color: var(--ink-1); font-size: 1.08rem; }
-  .package-signals { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 1.25rem 0; }
-  .package-signals a { display: inline-flex; gap: 0.45rem; align-items: center; padding: 0.42rem 0.62rem; border: 1px solid var(--rule); color: var(--ink-2); font-size: 0.75rem; text-decoration: none; }
-  .package-signals a:hover { border-color: var(--ink); color: var(--ink); }
-  .package-signals span { color: var(--ink); font-weight: 600; }
-  .quickstart { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.5fr); gap: 2rem; align-items: start; margin-top: 1rem; padding: 1.5rem; border: 1px solid var(--rule); background: var(--wash); }
-  .quickstart h3 { margin-bottom: 0.65rem; font-size: 1.08rem; }
-  .quickstart pre { margin: 0; overflow-x: auto; font-size: 0.78rem; line-height: 1.65; }
-  .quickstart code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-  .package-meaning { max-width: 48rem; margin: 1.5rem 0 0; color: var(--ink-1); }
-  .definition { max-width: 52rem; margin: 0 0 2.5rem; color: var(--ink); font-size: clamp(1.35rem, 2.8vw, 2rem); line-height: 1.45; }
-  .call-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-  .call-grid article { padding: 1.5rem; border: 1px solid var(--rule); }
-  .call-grid h2 { margin-bottom: 0.75rem; font-size: 1.08rem; }
-  .step, .evidence-status { margin-bottom: 0.55rem; color: var(--ink-3); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
-  .protocol-progress-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
-  .protocol-progress-grid--releases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  @media (max-width: 1000px) { .protocol-progress-grid--releases { grid-template-columns: minmax(0, 1fr); } }
-  .protocol-progress-grid article { min-width: 0; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
-  .protocol-progress-grid h3 { font-size: 1.3rem; line-height: 1.35; }
-  @media (max-width: 760px) { .protocol-progress-grid { grid-template-columns: minmax(0, 1fr); } }
-  .roadmap-title { max-width: 52rem; margin: 0 0 1rem; font-size: clamp(1.8rem, 3.8vw, 2.8rem); line-height: 1.2; letter-spacing: -0.01em; }
-  .roadmap-lead { max-width: 50rem; margin: 0 0 2rem; color: var(--ink-1); font-size: 1.08rem; }
-  .section-title { margin-bottom: 1rem; font-size: 1.3rem; }
-  .upstream-band { padding-top: 5rem; }
-  .upstream-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3rem; align-items: end; }
-  .upstream-head > div:first-child { max-width: 46rem; }
-  .upstream-title { max-width: 44rem; margin: 0 0 1rem; font-size: clamp(1.8rem, 3.8vw, 2.8rem); line-height: 1.2; letter-spacing: -0.01em; }
-  .contribution-counts { display: flex; gap: 1rem; margin: 0; }
-  .contribution-counts > div { min-width: 9.5rem; padding: 1.1rem 1.2rem; border: 1px solid var(--ink); }
-  .contribution-counts dt { font-size: 2.2rem; line-height: 1; }
-  .contribution-counts dd { margin: 0.55rem 0 0; color: var(--ink-2); font-size: 0.78rem; }
-  .count-date { margin: 1.25rem 0 2rem; color: var(--ink-3); font-size: 0.78rem; }
-  .upstream-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-  .upstream-grid article { display: flex; flex-direction: column; padding: 1.5rem; border: 1px solid var(--rule); }
-  .upstream-grid h3 { margin-bottom: 0.75rem; font-size: 1.08rem; }
-  .upstream-grid h3 a { text-decoration: none; }
-  .numeric-comparison { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 0.55rem; align-items: center; margin-top: auto; padding: 1rem 0 0.35rem; border-top: 1px solid var(--rule-faint); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.82rem; }
-  .numeric-comparison span:last-child { text-align: right; }
-  .comparison-label, .contribution-credit { color: var(--ink-3); font-size: 0.75rem; }
-  .comparison-label { margin: 0 0 1rem; }
-  .evidence-links { font-size: 0.84rem; }
-  .contribution-credit { margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--rule-faint); }
-  .more { margin: 2rem 0 0; font-size: 0.92rem; }
-  .table-scroll { overflow-x: auto; }
+  .band-body--wide { max-width: 56rem; }
+  .lead { color: var(--ink); font-size: clamp(1.2rem, 2vw, 1.5rem); }
+  .section-title, .evidence-title, .scope-title { max-width: 60rem; margin: 0 0 1.5rem; font-size: clamp(2rem, 4.5vw, 3.8rem); line-height: 1.12; }
+  .sequence { margin: 2.5rem 0 0; font-size: clamp(1.35rem, 2.5vw, 2rem); }
+  .sequence strong { color: var(--blue); font-weight: 400; }
+
+  .evidence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 2.5rem; border: 1px solid var(--rule); background: var(--rule); }
+  .evidence-grid article { padding: clamp(1.75rem, 4vw, 3rem); background: var(--paper); }
+  .evidence-grid h3 { margin: 1.5rem 0 0.85rem; font-size: 1.4rem; }
+  .metric { margin: 0; color: var(--gold-ink); font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.95; letter-spacing: -0.035em; }
+  .paired-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+  .paired-metrics p { margin: 0; }
+  .paired-metrics span { display: block; }
+  .paired-metrics span:last-child { margin-top: 0.7rem; color: var(--ink-2); font-size: 0.9rem; }
+  .study-scope { color: var(--ink-3); font-size: 0.85rem; }
+  .evidence-boundary { max-width: 55rem; margin: 2rem 0 0; color: var(--ink-2); }
+
+  .scope-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 2.5rem; border: 1px solid var(--rule); background: var(--rule); }
+  .scope-grid article { padding: clamp(1.75rem, 4vw, 3rem); background: var(--paper); }
+  .scope-grid article:first-child { background: var(--blue-wash); box-shadow: inset 0 2px var(--gold-ink); }
+  .scope-grid h3 { margin: 0 0 1rem; font-size: 1.55rem; }
+  .scope-label { margin: 0 0 1.5rem; color: var(--blue); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .follow-copy { margin-top: 0; font-size: 1.15rem; }
   .latest-body { max-width: none; }
-  .latest-date { width: 10rem; white-space: nowrap; color: var(--ink-3); }
-  .latest-category { width: 7rem; white-space: nowrap; text-align: right; }
-  .latest-category a { color: var(--ink-3); text-decoration: none; }
+  .latest-list { list-style: none; margin: 2rem 0 0; padding: 0; border-top: 1px solid var(--rule); }
+  .latest-list li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr) auto; gap: 1.5rem; align-items: baseline; margin: 0; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+  .latest-date { color: var(--ink-3); font-size: 0.875rem; }
+  .latest-title { color: var(--ink); font-size: 1.15rem; line-height: 1.45; text-decoration: none; }
+  .latest-category a { color: var(--ink-3); font-size: 0.85rem; text-decoration: none; }
+  .more { margin: 2rem 0 0; font-size: 0.92rem; }
 
   @media (max-width: 900px) {
-    .hero-inner { padding: 4.5rem var(--gutter) 4rem; }
-    .band, .band-inner { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
-    .call-grid, .upstream-grid { grid-template-columns: minmax(0, 1fr); }
-    .quickstart, .upstream-head { grid-template-columns: minmax(0, 1fr); }
-    .contribution-counts { justify-content: flex-start; }
-    .latest-date { width: 8rem; }
-  }
-
-  @media (max-width: 620px) {
-    .contribution-counts { flex-direction: column; }
-    .contribution-counts > div { min-width: 0; }
+    .band { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+    .evidence-grid, .scope-grid { grid-template-columns: minmax(0, 1fr); }
+    .latest-list li { grid-template-columns: 6.5rem minmax(0, 1fr); gap: 1rem; }
     .latest-category { display: none; }
   }
 
+  @media (max-width: 620px) {
+    .hero-inner { padding-top: 4rem; }
+    .hero h1 { font-size: clamp(3.5rem, 19vw, 5.2rem); }
+    .hero-lede { margin-top: 2rem; }
+    .paired-metrics { grid-template-columns: minmax(0, 1fr); }
+    .latest-list li { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
+  }
 }
 </style>
