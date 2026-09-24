@@ -320,13 +320,13 @@ export const UPSTREAM_CONTRIBUTIONS = [
     href: '/engineering/checking-welch-results-with-exact-rescaling/',
     status: PUBLICATIONS.find((item) => item.href === '/engineering/checking-welch-results-with-exact-rescaling/')!.status,
     outcome: 'report_open',
-    panelStatus: "Maintainer response · high-precision results posted",
+    panelStatus: "Repair proposed · PR #26209 open",
     comparisonLabel: 'Returned degrees of freedom → exact reference',
     observed: '1',
     reference: '4',
     evidenceHref: 'https://github.com/scipy/scipy/issues/26169',
     evidenceLabel: 'SciPy issue #26169',
-    credit: "Reported by Tasuku Kobayashi; mdhaber posted high-precision results on September 13, 2026; NumPy float64 repair unconfirmed",
+    credit: "Reported by Tasuku Kobayashi; mdhaber posted high-precision results on September 13, 2026; alvaroborras opened repair PR #26209 on September 18, 2026",
   },
   {
     "project": "SciPy",
@@ -350,13 +350,13 @@ export const UPSTREAM_CONTRIBUTIONS = [
     "href": "/engineering/scipy-welch-anova-weight-sum-overflow/",
     "status": PUBLICATIONS.find((item) => item.href === '/engineering/scipy-welch-anova-weight-sum-overflow/')!.status,
     "outcome": "report_open",
-    "panelStatus": "Maintainer response · high-precision results posted",
+    "panelStatus": "Repair proposed · PR #26209 open",
     "comparisonLabel": "Original scale → scaled by 2^-511",
     "observed": "0.02650",
     "reference": "0.05611",
     "evidenceHref": "https://github.com/scipy/scipy/issues/26146",
     "evidenceLabel": "SciPy issue #26146",
-    "credit": "Reported by Tasuku Kobayashi; mdhaber posted high-precision results on September 13, 2026; NumPy float64 repair unconfirmed"
+    "credit": "Reported by Tasuku Kobayashi; mdhaber posted high-precision results on September 13, 2026; alvaroborras opened repair PR #26209 on September 18, 2026"
   },
   {
     project: 'R / agricolae',
