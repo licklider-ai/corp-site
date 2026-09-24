@@ -29,8 +29,11 @@ const item = PUBLICATIONS.find(
       <a href="https://github.com/statsmodels/statsmodels/issues/10252">statsmodels issue #10252</a>{' '}
       on September 14, 2026. Licklider reproduced it with the statsmodels 0.15.0 Windows
       wheel and with the Python source at <code>main</code> commit <code>77ecdfa3e</code>.
-      The issue is open and labeled <code>type-bug</code>; upstream confirmation and a
-      repair remain pending.
+      The issue is open and labeled <code>type-bug</code>. On September 15, 2026,
+      <a href="https://github.com/statsmodels/statsmodels/pull/10255">repair PR #10255</a>{' '}
+      was opened. The proposed patch rescales deviations before squaring and reports
+      that the original example returns the finite reference result. The PR remains
+      open and unreviewed.
     </p>
   </section>
 

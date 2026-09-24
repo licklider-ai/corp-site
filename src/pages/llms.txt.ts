@@ -136,7 +136,7 @@ ${UPSTREAM_CONTRIBUTIONS.map((item) => `- [${item.project}: ${item.title}](https
 
 ## Evidence and updates
 
-- [A finite Welch result is lost after sumsquares overflow](https://www.licklider.ai/engineering/statsmodels-welch-sumsquares-overflow/): a four-observation-per-group statsmodels reproducer with exact inputs, independent references, warning capture and source diagnostics. Reported as [statsmodels issue #10252](https://github.com/statsmodels/statsmodels/issues/10252) on September 14, 2026; upstream confirmation and repair are pending. Counted once in the submitted-report total.
+- [A finite Welch result is lost after sumsquares overflow](https://www.licklider.ai/engineering/statsmodels-welch-sumsquares-overflow/): a four-observation-per-group statsmodels reproducer with exact inputs, independent references, warning capture and source diagnostics. Reported as [statsmodels issue #10252](https://github.com/statsmodels/statsmodels/issues/10252) on September 14, 2026. [Repair PR #10255](https://github.com/statsmodels/statsmodels/pull/10255) opened on September 15 and remains open and unreviewed; its proposed patch fixes the reported example but is not merged. Counted once in the submitted-report total.
 
 - [Checking Welch results with exact rescaling](https://www.licklider.ai/engineering/checking-welch-results-with-exact-rescaling/): a six-observation SciPy 1.18.1 reproducer with exact inputs, independent references, warning capture and source diagnostics. Reported to SciPy as [issue #26169](https://github.com/scipy/scipy/issues/26169) on September 12, 2026; upstream confirmation and repair are pending. Counted once in the submitted-report total.
 

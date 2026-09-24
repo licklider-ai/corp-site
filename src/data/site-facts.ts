@@ -275,7 +275,7 @@ export const UPSTREAM_CONTRIBUTIONS = [
     href: '/engineering/jstat-noncentral-t-probability-collapse/',
     status: PUBLICATIONS.find((item) => item.href === '/engineering/jstat-noncentral-t-probability-collapse/')!.status,
     outcome: 'report_open',
-    panelStatus: 'Reported · confirmation pending',
+    panelStatus: 'Repair proposed · PR #10255 open',
     comparisonLabel: 'Returned CDF → independent reference',
     observed: '0.0',
     reference: '≈ 0.4410',
@@ -311,7 +311,7 @@ export const UPSTREAM_CONTRIBUTIONS = [
     reference: '≈ 0.26657',
     evidenceHref: 'https://github.com/statsmodels/statsmodels/issues/10252',
     evidenceLabel: 'statsmodels issue #10252',
-    credit: 'Reported by Tasuku Kobayashi on September 14, 2026; upstream confirmation pending',
+    credit: 'Reported by Tasuku Kobayashi on September 14, 2026; twelfthlabor opened repair PR #10255 on September 15, 2026; not merged',
   },
   {
     project: 'SciPy',
