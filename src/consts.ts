@@ -4,9 +4,9 @@
 
 export const SITE_TITLE = 'Licklider';
 export const SITE_META_TITLE =
-  'Licklider — Scientific verification infrastructure for AI agents';
+  'Licklider — Determinize AI';
 export const SITE_DESCRIPTION =
-  'Licklider builds scientific verification infrastructure for AI research agents, starting with public, independently checkable Welch Record verification.';
+  'Licklider builds nomue to check AI-generated claims independently. Public support begins with Welch analyses; life sciences, finance, and chemistry are long-term directions.';
 export const SITE_VERSION = 'v0.4';
 export const SITE_UPDATED = '2026-09-09';
 

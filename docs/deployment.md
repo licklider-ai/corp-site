@@ -72,7 +72,7 @@ vercel --prod        # 本番デプロイ
 
 デプロイ後に以下を確認:
 
-- [ ] トップページの Hero 見出しが "The verification layer for AI research agents"
+- [ ] トップページの Hero 見出しが "Determinize AI."
 - [ ] `/roadmap/` が表示され、Available / candidate / next / planned が区別される
 - [ ] `/thesis/` が表示される
 - [ ] `favicon.svg` / `robots.txt` / `sitemap-index.xml` が配信される

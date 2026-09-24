@@ -190,6 +190,7 @@
   .scope-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--rule); background: var(--rule); border-radius: 5px; overflow: hidden; }
   .scope-grid article { border: 0; padding: 2rem; background: white; }
   .scope-grid article:first-child, .scope-grid article:nth-child(2) { background: var(--blue-wash); box-shadow: inset 0 2px var(--gold-ink); }
+  .home-scope-grid article:nth-child(2) { background: white; box-shadow: none; }
   .scope-grid h3, .layers h2 { font-size: 1.4rem; }
   .scope-grid p { font-size: 1rem; }
   .scope-grid .scope-label { font-size: 0.8125rem; margin-bottom: 1.5rem; }
