@@ -109,6 +109,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Unissued candidate.5 development checkpoint merged; implementation and Research Gate remain open; no additional public support',
   },
   {
+    updated: 'September 24, 2026',
     category: 'Engineering',
     type: 'Implementation note',
     date: 'September 18, 2026',
@@ -117,7 +118,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     title: 'Preserving Student-t probability near zero at one degree of freedom',
     summary: 'A closed-form calculation keeps small but representable probability differences from disappearing and gives the public nomue verifier an independent regression check for a known numerical failure.',
     href: '/engineering/student-t-df1-center-precision/',
-    status: 'Implemented in @licklider/nomue-verifier 0.2.1-rc.1; SciPy issue #25667 remains open; no Protocol scope change',
+    status: 'Implemented in @licklider/nomue-verifier 0.2.1-rc.1; Protocol Release 1 erratum ER-1 records the published-snapshot defect; no Protocol scope change',
   },
   {
     category: 'News',

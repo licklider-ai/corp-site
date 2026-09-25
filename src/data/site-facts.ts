@@ -39,7 +39,7 @@ export const PUBLIC_RELEASE = {
 } as const;
 
 export const PUBLIC_CAPABILITY =
-  `Anyone can install the public ${PUBLIC_RELEASE.npmPackage} package from npm and run nomue verify locally to check a conforming Release 1 Record for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}. It recomputes the covered numerical quantities and returns a machine-readable report of the scoped checks without calling a nomue server after installation.`;
+  `Anyone can install the public ${PUBLIC_RELEASE.npmPackage} package from npm and run nomue verify locally to check a conforming Release 1 Record for ${PUBLIC_RELEASE.profile} under the ${PUBLIC_RELEASE.procedure}. It recomputes the covered numerical quantities and returns a machine-readable report of the scoped checks without calling a nomue server after installation. Release 1 erratum ER-1 records a defect in the published reference snapshot for near-zero Student-t probabilities at Welch-Satterthwaite df = 1; affected cases should be re-run with the corrected verifier release candidate.`;
 
 export const PRODUCT_CAPABILITY =
   'nomue\'s Welch verification is implemented: it keeps the agent from guessing required scientific facts, follows the supported decision path, runs fixed numerical checks, and returns structured outcomes and next actions.';
