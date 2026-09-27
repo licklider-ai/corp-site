@@ -189,6 +189,21 @@ export const R5_DISCUSSION = {
 export const R5_DISCUSSION_BOUNDARY =
   'Release 5 public discussion is open on a common evidence view for declared study design and selection timing across analysis families. The proposal covers versioned mappings, timing declarations, explicit limits on what a passing check means, and a shared report view. All three candidate families require separately accepted successors; no new verification capability is available.';
 
+
+export const WELCH_SUCCESSOR_DISCUSSION = {
+  articleUrl: '/news/nomue-protocol-welch-successor-public-discussion/',
+  issueUrl: 'https://github.com/licklider-ai/nomue-protocol/issues/372',
+  proposalUrl:
+    'https://github.com/licklider-ai/nomue-protocol/blob/e66a3caacd5f6ff801a048a61313a438c9f4be26/spec/proposals/welch-successor-20260928.md',
+  recordUrl:
+    'https://github.com/licklider-ai/nomue-protocol/tree/e66a3caacd5f6ff801a048a61313a438c9f4be26/spec/proposals/welch-successor-20260928',
+  openedAt: '2026-09-27T16:36:17Z',
+  earliestDecisionAt: '2026-10-04T16:36:17Z',
+} as const;
+
+export const WELCH_SUCCESSOR_DISCUSSION_BOUNDARY =
+  'Public discussion is open on a proposed bounded successor for exact-value Welch checks. It does not change Release 1, add current verifier support, adopt the proposal, or authorize issuance.';
+
 export const PAIRED_T_RFC_URL =
   'https://github.com/licklider-ai/nomue-protocol/issues/25';
 

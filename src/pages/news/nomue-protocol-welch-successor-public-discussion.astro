@@ -1,0 +1,53 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+import { WELCH_SUCCESSOR_DISCUSSION } from '../../data/site-facts';
+
+const publication = PUBLICATIONS.find((item) => item.href === WELCH_SUCCESSOR_DISCUSSION.articleUrl)!;
+---
+
+<PublicationLayout
+  category={publication.category}
+  type={publication.type}
+  title={publication.title}
+  description={publication.summary}
+  published={publication.date}
+  status={publication.status}
+  toc={[]}
+>
+  <section id="discussion">
+    <h2>Public comment is open on a bounded Welch successor</h2>
+    <p>nomue Protocol has opened public discussion on a proposed successor for exact-value Welch checks. Researchers and developers can read the <a href={WELCH_SUCCESSOR_DISCUSSION.proposalUrl}>proposal</a>, inspect its <a href={WELCH_SUCCESSOR_DISCUSSION.recordUrl}>public record and fixtures</a>, and <a href={WELCH_SUCCESSOR_DISCUSSION.issueUrl}>comment on Issue #372</a>.</p>
+    <p>The proposal is intended to make a claimed Welch result easier to check without treating rounded binary64 calculations as the authority for its numerical meaning. It is a discussion draft: it does not change Release 1, add verifier support, adopt a Protocol version, or authorize issuance.</p>
+  </section>
+
+  <section id="proposal">
+    <h2>One numerical authority, carried by an inspectable Record</h2>
+    <p>The proposed successor places the numerical meaning of a Welch claim in one versioned semantics document. A separate Contract identifies the exact numerical rule, and the Record carries the identity, evidence and report fields needed for an independent checker to determine what it can check.</p>
+    <p>This separation is deliberate. The Contract and Record identify the claimed procedure; the numerical semantics define the quantities. A checker would preserve independent outcomes rather than turning a tool failure or resource limit into a statistical failure. The proposal describes the candidate interface and its tests, not a currently available verifier.</p>
+  </section>
+
+  <section id="scope">
+    <h2>A narrow domain with visible limits</h2>
+    <p>The initial proposal is deliberately bounded: it covers supplied independent two-group Welch Records with finite, supported quantities under the stated group-size and magnitude limits. Its exact checks use the supplied binary64 values as evidence, while retaining a defined tolerance only where the proposal calls for a rounded reported probability.</p>
+    <p>Records outside that domain are not reclassified as statistical failures. The proposed handling keeps the reason visible, including domain exclusion, computation error or resource limit. Nonfinite computation is outside the initial domain; it is reserved for a later, explicit extension rather than being silently folded into a pass or fail result.</p>
+  </section>
+
+  <section id="continuity">
+    <h2>Release 1 remains unchanged</h2>
+    <p>Release 1 remains the current public Protocol and verifier scope. The proposal records historical differences rather than claiming to reproduce or revise Release 1 behavior. In particular, some inputs that Release 1 could pass would be unsupported by the proposed successor's narrower initial domain. That is a disclosed boundary, not a retroactive judgment about an earlier Record.</p>
+    <p>The public discussion therefore does not alter how to use the current <a href="/docs/record-verification/">Release 1 Welch Record verification</a>. The capability map remains the source for what is available today.</p>
+  </section>
+
+  <section id="review">
+    <h2>What feedback is useful now</h2>
+    <p>The proposal includes representative Records, report examples and machine-readable bindings so reviewers can test the boundaries between record structure, numerical semantics and reported results. Comments are especially useful on the stated domain, exact-value comparison rules, reason codes, evidence identity, and whether the proposed limits are clear enough to implement and review independently.</p>
+    <p>This public discussion follows preparation and review work, but it does not close the remaining Research Gate or design holds. Any candidate changes still require review before a freeze, adoption, publication or issuance decision.</p>
+  </section>
+
+  <section id="participate">
+    <h2>How to participate</h2>
+    <p>Comment on <a href={WELCH_SUCCESSOR_DISCUSSION.issueUrl}>Issue #372</a> with the passage concerned, a counterexample or test case, and a proposed correction where possible. Link to reproducible public evidence when it helps assess a numerical or interoperability claim.</p>
+    <p>The discussion opened at <time datetime={WELCH_SUCCESSOR_DISCUSSION.openedAt}>16:36:17 UTC on September 27, 2026</time>. The earliest decision is <time datetime={WELCH_SUCCESSOR_DISCUSSION.earliestDecisionAt}>16:36:17 UTC on October 4, 2026</time>. That date is not automatic adoption, a Protocol release date, or an availability commitment.</p>
+  </section>
+</PublicationLayout>
