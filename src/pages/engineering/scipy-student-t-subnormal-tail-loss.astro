@@ -13,9 +13,30 @@ const item = PUBLICATIONS.find(
   title={item.title}
   description={item.summary}
   published={item.date}
+  updated={item.updated}
   status={item.status}
   toc={[]}
 >
+  <section>
+    <h2>Current upstream disposition</h2>
+    <div class="notice">
+      <p>
+        SciPy contributor mdhaber reproduced the positive reference value with the
+        current development version and the arbitrary-precision MPArray backend. That
+        run returned <code>3.504710110487091...e-316</code> through the otherwise
+        unchanged <code>stats.ttest_ind</code> interface.
+      </p>
+      <p>
+        The contributor advised against spending maintainer time on preserving the
+        bounded subnormal range in the NumPy backend. MPArray already supports much
+        smaller probabilities, while this reported case does not change an ordinary
+        significance decision. Licklider accepts that prioritization and will not
+        pursue a NumPy-backend correction through this report. The issue remains open
+        as of the latest check.
+      </p>
+    </div>
+  </section>
+
   <section>
     <h2>A positive Welch p-value disappears</h2>
     <p>
@@ -27,8 +48,8 @@ const item = PUBLICATIONS.find(
     <p>
       Tasuku Kobayashi reported the case in{' '}
       <a href="https://github.com/scipy/scipy/issues/26290">SciPy issue #26290</a> on
-      September 27, 2026. The issue is open. No maintainer has yet confirmed the
-      diagnosis or accepted a correction.
+      September 27, 2026. The NumPy-backend behavior remains unchanged; the upstream
+      response identifies MPArray as the available path when these extreme tails matter.
     </p>
   </section>
 
@@ -115,6 +136,10 @@ TtestResult(statistic=-120.29962593458053, pvalue=0.0, df=400.0)
         <a href="https://github.com/scipy/scipy/issues/26290">SciPy issue #26290</a>
         — complete reproducer, version comparison, high-precision reference, independent
         series check, bounds, and current upstream status
+      </li>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/26290#issuecomment-5858319705">SciPy contributor response</a>
+        — MPArray reproduction, recommended backend path, and prioritization rationale
       </li>
       <li>
         <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html">SciPy <code>ttest_ind</code> documentation</a>

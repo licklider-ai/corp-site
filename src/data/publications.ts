@@ -49,6 +49,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 27, 2026',
+    updated: 'September 27, 2026',
     sortKey: '2026-09-27',
     publishedTime: {
       at: '2026-09-27T17:37:21Z',
@@ -57,7 +58,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     title: 'SciPy returns zero for a representable Student-t tail',
     summary: 'A Welch test and two lower-level Student-t functions return zero for a positive subnormal probability that remains representable in binary64.',
     href: '/engineering/scipy-student-t-subnormal-tail-loss/',
-    status: 'Reported in SciPy issue #26290 — upstream confirmation pending',
+    status: 'SciPy contributor recommends MPArray instead of a NumPy-backend repair; issue remains open',
   },
   {
     category: 'News',
