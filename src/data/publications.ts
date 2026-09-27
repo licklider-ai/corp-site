@@ -46,6 +46,16 @@ const PRODUCTION_63: RecordedPublicationTime = {
 
 export const PUBLICATIONS: PublicationItem[] = [
   {
+    category: 'News',
+    type: 'Public consultation',
+    date: 'September 27, 2026',
+    sortKey: '2026-09-27',
+    title: 'nomue Protocol opens public discussion on an exact-value Welch successor',
+    summary: 'Public comment is open on a proposed bounded successor for Welch checks, with exact-value evidence, explicit domain limits and a Contract-bearing Record format.',
+    href: '/news/nomue-protocol-welch-successor-public-discussion/',
+    status: 'Public discussion open — proposed bounded successor; Release 1 unchanged; no new supported capability',
+  },
+  {
     category: 'Research',
     type: 'Publication',
     date: 'September 23, 2026',
