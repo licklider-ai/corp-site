@@ -50,6 +50,10 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Public consultation',
     date: 'September 27, 2026',
     sortKey: '2026-09-27',
+    publishedTime: {
+      at: '2026-09-27T16:53:10Z',
+      evidence: 'https://vercel.com/licklidermvp/website/8eqH8NcEir3WunsLqm47VbwuyYz9',
+    },
     title: 'nomue Protocol opens public discussion on an exact-value Welch successor',
     summary: 'Public comment is open on a proposed bounded successor for Welch checks, with exact-value evidence, explicit domain limits and a Contract-bearing Record format.',
     href: '/news/nomue-protocol-welch-successor-public-discussion/',
