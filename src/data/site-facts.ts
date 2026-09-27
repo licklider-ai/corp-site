@@ -280,9 +280,24 @@ export const CORE_NON_CLAIMS = [
 
 // Count distinct problems submitted to the responsible upstream project, including
 // email submissions. Follow-up issues, articles and fixes do not add another report.
-export const UPSTREAM_REPORTS_AS_OF = 'September 23, 2026';
+export const UPSTREAM_REPORTS_AS_OF = 'September 27, 2026';
 
 export const UPSTREAM_CONTRIBUTIONS = [
+  {
+    project: 'SciPy',
+    title: 'Student-t: a representable subnormal tail returns zero',
+    summary: 'A Welch test and two lower-level Student-t functions return zero for a positive probability near 3.505e-316 that is representable in binary64.',
+    href: '/engineering/scipy-student-t-subnormal-tail-loss/',
+    status: PUBLICATIONS.find((item) => item.href === '/engineering/scipy-student-t-subnormal-tail-loss/')!.status,
+    outcome: 'report_open',
+    panelStatus: 'Reported · confirmation pending',
+    comparisonLabel: 'Returned two-sided p → independent reference',
+    observed: '0.0',
+    reference: '≈ 3.505e-316',
+    evidenceHref: 'https://github.com/scipy/scipy/issues/26290',
+    evidenceLabel: 'SciPy issue #26290',
+    credit: 'Reported by Tasuku Kobayashi on September 27, 2026; upstream confirmation pending',
+  },
   {
     project: 'jStat',
     title: 'Noncentral t: a probability near 44% returns zero',

@@ -1,0 +1,129 @@
+---
+import PublicationLayout from '../../layouts/PublicationLayout.astro';
+import { PUBLICATIONS } from '../../data/publications';
+
+const item = PUBLICATIONS.find(
+  (entry) => entry.href === '/engineering/scipy-student-t-subnormal-tail-loss/',
+)!;
+---
+
+<PublicationLayout
+  category={item.category}
+  type={item.type}
+  title={item.title}
+  description={item.summary}
+  published={item.date}
+  status={item.status}
+  toc={[]}
+>
+  <section>
+    <h2>A positive Welch p-value disappears</h2>
+    <p>
+      SciPy 1.18.1 returns a two-sided Welch p-value of exactly <code>0.0</code> for
+      two groups whose mathematical p-value is approximately
+      <code>3.504710110487091e-316</code>. That probability is extremely small, but it
+      remains representable as a positive binary64 subnormal value.
+    </p>
+    <p>
+      Tasuku Kobayashi reported the case in{' '}
+      <a href="https://github.com/scipy/scipy/issues/26290">SciPy issue #26290</a> on
+      September 27, 2026. The issue is open. No maintainer has yet confirmed the
+      diagnosis or accepted a correction.
+    </p>
+  </section>
+
+  <section>
+    <h2>A small exact dataset reproduces the zero</h2>
+    <p>
+      Each group contains 201 exactly representable observations. The first has 100
+      copies of <code>-1</code>, one <code>0</code>, and 100 copies of <code>1</code>.
+      The second is the first group shifted upward by 12. Their means are 0 and 12,
+      and both unbiased sample variances are exactly 1.
+    </p>
+    <pre><code>{`import warnings
+
+import numpy as np
+import scipy
+from scipy import special, stats
+
+x = np.r_[np.full(100, -1.0), 0.0, np.full(100, 1.0)]
+y = x + 12.0
+
+with warnings.catch_warnings(record=True) as caught:
+    warnings.simplefilter("always")
+    result = stats.ttest_ind(x, y, equal_var=False)
+    sf = stats.t.sf(abs(result.statistic), result.df)
+    cdf = special.stdtr(result.df, -abs(result.statistic))
+
+print(scipy.__version__)
+print(result)
+print(sf, cdf)
+print([str(w.message) for w in caught])`}</code></pre>
+    <pre><code>{`1.18.1
+TtestResult(statistic=-120.29962593458053, pvalue=0.0, df=400.0)
+0.0 0.0
+[]`}</code></pre>
+    <p>
+      The statistic and 400 degrees of freedom are correct, and the recorded run emits
+      no warning. The same input returned a positive two-sided value of
+      <code>3.5047101e-316</code> in SciPy 1.16.1, while SciPy 1.17.0 and 1.18.1 returned
+      zero. The lower-level <code>stats.t.sf</code> and <code>special.stdtr</code> calls
+      also return zero, placing the observed loss at or below the Student-t probability
+      calculation. The report does not claim a more specific internal cause.
+    </p>
+  </section>
+
+  <section>
+    <h2>An independent reference stays positive</h2>
+    <p>
+      For this dataset, the squared statistic is exactly 14,472 and the two-sided
+      probability is the regularized incomplete-beta value
+      <code>I_(50/1859)(200, 1/2)</code>. A 130-digit calculation gives
+      <code>3.5047101104870913387606868475703e-316</code>. Converting that result to a
+      Python float produces the positive value <code>3.5047101e-316</code>.
+    </p>
+    <p>
+      The report also checks the result with a separately evaluated positive-term
+      series. Simple analytical bounds place the p-value strictly between
+      <code>3.457494873756592e-316</code> and <code>3.504951044561724e-316</code>.
+      Both checks establish that the mathematical probability is positive and does not
+      have to round to zero in binary64.
+    </p>
+  </section>
+
+  <section>
+    <h2>What the case establishes</h2>
+    <p>
+      This example does not change a decision at the 5% level: both zero and the
+      reference value are far below 0.05. It does show that an ordinary finite dataset
+      can make a Welch result lose the distinction between an extremely small finite
+      probability and mathematical zero. That distinction can matter when later work
+      transforms, ranks, stores, or combines reported probabilities.
+    </p>
+    <p>
+      The finding is limited to the reported inputs, functions, and versions. It does
+      not estimate how often practical analyses enter this range, establish the root
+      cause, or provide a general repair. It also does not expand nomue's supported
+      scope or change nomue Protocol Release 1.
+    </p>
+  </section>
+
+  <section>
+    <h2>Public evidence</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/26290">SciPy issue #26290</a>
+        — complete reproducer, version comparison, high-precision reference, independent
+        series check, bounds, and current upstream status
+      </li>
+      <li>
+        <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html">SciPy <code>ttest_ind</code> documentation</a>
+        — public documentation for the reported Welch-test entry point
+      </li>
+      <li>
+        <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.stdtr.html">SciPy <code>stdtr</code> documentation</a>
+        — public documentation for the lower-level Student-t cumulative distribution function
+      </li>
+    </ul>
+  </section>
+</PublicationLayout>
