@@ -50,6 +50,10 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Upstream report',
     date: 'September 27, 2026',
     sortKey: '2026-09-27',
+    publishedTime: {
+      at: '2026-09-27T17:37:21Z',
+      evidence: 'https://vercel.com/licklidermvp/website/9zsZpbptF6r7RAQ8sAVhAXuu3tgp',
+    },
     title: 'SciPy returns zero for a representable Student-t tail',
     summary: 'A Welch test and two lower-level Student-t functions return zero for a positive subnormal probability that remains representable in binary64.',
     href: '/engineering/scipy-student-t-subnormal-tail-loss/',
