@@ -50,6 +50,10 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Upstream report',
     date: 'September 27, 2026',
     updated: 'September 27, 2026',
+    updatedTime: {
+      at: '2026-09-27T23:15:58Z',
+      evidence: 'https://vercel.com/licklidermvp/website/H22iTP2WFjytMw2N5hv8F44Vnvf8',
+    },
     sortKey: '2026-09-27',
     publishedTime: {
       at: '2026-09-27T17:37:21Z',
