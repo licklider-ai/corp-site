@@ -297,4 +297,26 @@ const homeStructuredData = {
     .latest-list li { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
   }
 }
+@layer design {
+  .hero {
+    box-sizing: border-box;
+    min-height: 90vh;
+    min-height: 90dvh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-inner {
+    box-sizing: border-box;
+    width: 100%;
+    padding-block: clamp(2rem, 5vh, 4rem);
+  }
+
+  .hero h1 { margin-top: 0; }
+
+  @media print {
+    .hero { min-height: auto; }
+    .hero-inner { padding-block: 1.5rem; }
+  }
+}
 </style>
