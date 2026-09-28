@@ -159,7 +159,7 @@
   .upstream-grid article { flex: 0 0 clamp(19rem, 32vw, 28rem); width: clamp(19rem, 32vw, 28rem); }
   @keyframes upstream-loop { to { transform: translateX(-50%); } }
 
-  /* Keyboard navigation and reduced motion use the original seven panels. */
+  /* Keyboard navigation and reduced motion use the original report panels. */
   .upstream-carousel:has(.upstream-grid:not([aria-hidden]) :focus-visible) { overflow-x: auto; }
   .upstream-carousel:has(.upstream-grid:not([aria-hidden]) :focus-visible) .upstream-track { animation: none; }
   .upstream-carousel:has(.upstream-grid:not([aria-hidden]) :focus-visible) .upstream-grid[aria-hidden] { display: none; }

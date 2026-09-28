@@ -5,7 +5,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const latest = [...PUBLICATIONS]
   .sort((a, b) => b.sortKey.localeCompare(a.sortKey))
-  .slice(0, 3);
+  .slice(0, 8);
+const papers = PUBLICATIONS
+  .filter((item) => item.category === 'Research' && item.type === 'Publication')
+  .sort((a, b) => b.sortKey.localeCompare(a.sortKey));
 const upstreamFixCount = UPSTREAM_CONTRIBUTIONS.filter(
   (item) => item.outcome === 'fix_merged',
 ).length;
@@ -153,40 +156,67 @@ const homeStructuredData = {
       </div>
     </section>
 
-    <section class="band band--single open-work-band">
-      <div class="band-inner band-inner--wide">
-        <p class="eyebrow">Open work</p>
-        <h2 class="open-work-title">Evidence in the open.</h2>
-        <p class="open-work-lede">
-          Determinization requires more than a product. We report failures in scientific
-          software, contribute repairs upstream and publish the evidence behind nomue's claims.
-        </p>
-        <div class="open-work-grid">
-          <article>
-            <p class="scope-label">Upstream reports</p>
-            <p class="work-counts">
-              <span><strong>{UPSTREAM_CONTRIBUTIONS.length}</strong> reports submitted</span>
-              <span><strong>{upstreamFixCount}</strong> fixes merged upstream</span>
-            </p>
-            <p>
-              We test the tools that scientific claims depend on and report the failures
-              we can reproduce.
-            </p>
-            <p><a href="/engineering/">View upstream work</a></p>
-          </article>
-          <article>
-            <p class="scope-label">Research</p>
-            <h3>Methods, comparisons, results and limits</h3>
-            <p>
-              We publish how nomue is evaluated, including the evidence that supports a
-              claim and the boundaries that qualify it.
-            </p>
-            <p><a href="/research/">Read the research</a></p>
-          </article>
-        </div>
-      </div>
-    </section>
+  </div>
 
+  <section class="open-work" aria-labelledby="open-work-title">
+    <div class="open-work-heading">
+      <p class="eyebrow">Open work</p>
+      <h2 id="open-work-title" class="open-work-title">Evidence in the open.</h2>
+      <p class="open-work-lede">
+        We test the software scientific claims depend on, report the failures we can
+        reproduce, and publish the research behind nomue.
+      </p>
+      <div class="upstream-heading">
+        <div>
+          <h3>Upstream reports</h3>
+          <p class="upstream-totals"><strong>{UPSTREAM_CONTRIBUTIONS.length}</strong> reports submitted <span aria-hidden="true">/</span> <strong>{upstreamFixCount}</strong> fixes merged upstream</p>
+        </div>
+        <a href="/engineering/">Explore upstream work <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="upstream-carousel" role="region" aria-label="Upstream reports">
+      <div class="upstream-track">
+        {[false, true].map((duplicate) => (
+          <div class="upstream-grid" aria-hidden={duplicate ? 'true' : undefined}>
+            {UPSTREAM_CONTRIBUTIONS.map((item) => (
+              <article class="report-card">
+                <p class="evidence-status">{item.project}</p>
+                <h4>{item.title}</h4>
+                <p class="panel-status">{item.panelStatus}</p>
+                <div class="report-result">
+                  <p class="comparison-label">{item.comparisonLabel}</p>
+                  <p class="report-values"><span>{item.observed}</span><span aria-hidden="true">→</span><strong>{item.reference}</strong></p>
+                </div>
+                <a class="report-link" href={item.href} tabindex={duplicate ? -1 : undefined}>Read the report <span aria-hidden="true">↗</span></a>
+              </article>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="research-library">
+      <div class="research-heading">
+        <div>
+          <p class="eyebrow">Research papers</p>
+          <h3>Results worth examining.</h3>
+        </div>
+        <a href="/research/">Explore the research <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="paper-grid">
+        {papers.map((paper, index) => (
+          <article class="paper-card">
+            <div class="paper-meta"><span>Research paper</span><span class="paper-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span></div>
+            <h4><a href={paper.href}>{paper.title.replace(/ — preprint v[\d.]+$/, '')}</a></h4>
+            <p class="paper-summary">{paper.summary}</p>
+            <p class="paper-status">{paper.status}</p>
+            <div class="paper-footer"><time datetime={paper.sortKey}>{paper.date}</time><span class="paper-action" aria-hidden="true">Read the paper <span>↗</span></span></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="sections">
     <section id="latest" class="band follow-band">
       <p class="eyebrow">Follow the evidence</p>
       <div class="band-body latest-body">
@@ -264,13 +294,6 @@ const homeStructuredData = {
   .scope-label { margin: 0 0 1.5rem; color: var(--blue); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
 
   .open-work-lede { max-width: 58rem; font-size: clamp(1.15rem, 2vw, 1.4rem); }
-  .open-work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 2.5rem; border: 1px solid var(--rule); background: var(--rule); }
-  .open-work-grid article { padding: clamp(1.75rem, 4vw, 3rem); background: var(--paper); }
-  .open-work-grid h3 { margin: 0 0 1rem; font-size: 1.55rem; }
-  .work-counts { display: flex; gap: 1.5rem 2.5rem; flex-wrap: wrap; margin: 0 0 1.5rem; }
-  .work-counts span { color: var(--ink-2); }
-  .work-counts strong { display: block; color: var(--gold-ink); font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 400; line-height: 1; }
-
   .follow-copy { margin-top: 0; font-size: 1.15rem; }
   .latest-body { max-width: none; }
   .latest-list { list-style: none; margin: 2rem 0 0; padding: 0; border-top: 1px solid var(--rule); }
@@ -284,7 +307,7 @@ const homeStructuredData = {
 
   @media (max-width: 900px) {
     .band { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
-    .evidence-grid, .scope-grid, .open-work-grid { grid-template-columns: minmax(0, 1fr); }
+    .evidence-grid, .scope-grid { grid-template-columns: minmax(0, 1fr); }
     .latest-list li { grid-template-columns: 6.5rem minmax(0, 1fr); gap: 1rem; }
     .latest-category { display: none; }
   }
@@ -300,8 +323,8 @@ const homeStructuredData = {
 @layer design {
   .hero {
     box-sizing: border-box;
-    min-height: 90vh;
-    min-height: 90dvh;
+    min-height: 75vh;
+    min-height: 75dvh;
     display: flex;
     align-items: center;
   }
@@ -313,6 +336,61 @@ const homeStructuredData = {
   }
 
   .hero h1 { margin-top: 0; }
+
+  .open-work { padding-top: clamp(4rem, 7vw, 6.5rem); border-bottom: 1px solid var(--rule-faint); }
+  .open-work-heading, .research-library { max-width: var(--shell); margin-inline: auto; padding-inline: var(--gutter); }
+  .open-work-heading > .eyebrow { margin: 0 0 2rem; }
+  .open-work-title { max-width: 60rem; margin: 0 0 1.5rem; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.08; }
+  .open-work-lede { max-width: 48rem; margin: 0; color: var(--ink-2); }
+  .upstream-heading, .research-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; }
+  .upstream-heading { margin: 3.5rem 0 1.75rem; }
+  .upstream-heading h3 { margin: 0 0 0.5rem; font-size: 1.5rem; }
+  .upstream-heading > a, .research-heading > a { flex-shrink: 0; font-size: 0.95rem; }
+  .upstream-totals { margin: 0; color: var(--ink-2); font-size: 0.95rem; }
+  .upstream-totals strong { color: var(--ink); font-size: 1.25rem; }
+  .upstream-totals > span { margin-inline: 0.75rem; color: var(--rule); }
+  .upstream-carousel:hover .upstream-track { animation-play-state: paused; }
+  .upstream-grid .report-card { display: flex; flex-direction: column; box-sizing: border-box; padding: 1.75rem; border: 1px solid var(--rule); border-radius: 0; background: var(--wash-hi); }
+  .report-card h4 { margin: 0.75rem 0 1rem; font-size: 1.5rem; line-height: 1.25; }
+  .report-card .panel-status { padding-left: 0.75rem; border-left: 2px solid var(--gold-ink); }
+  .report-result { margin-top: auto; padding-top: 1.5rem; }
+  .report-result .comparison-label { margin: 0; color: var(--ink-3); }
+  .report-values { display: flex; flex-wrap: wrap; gap: 0.5rem 0.85rem; align-items: baseline; margin: 0.75rem 0 1.5rem; font-size: 1.45rem; line-height: 1.25; }
+  .report-values strong { color: var(--blue); font-weight: 400; }
+  .report-values > span:first-child { color: var(--ink-3); }
+  .report-link { align-self: start; font-size: 0.9rem; }
+  .research-library { padding-top: clamp(4rem, 7vw, 6rem); padding-bottom: clamp(4rem, 7vw, 6rem); }
+  .research-heading { margin-bottom: 2rem; }
+  .research-heading .eyebrow { margin: 0 0 1rem; }
+  .research-heading h3 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; }
+  .paper-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+  .paper-card { position: relative; display: flex; flex-direction: column; min-width: 0; padding: clamp(1.5rem, 3vw, 3rem); border: 1px solid var(--rule); border-top: 3px solid var(--blue); background: var(--paper); transition: background-color 160ms; }
+  .paper-card:hover { background: var(--wash-hi); }
+  .paper-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; color: var(--ink-3); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.09em; }
+  .paper-number { color: var(--gold-ink); font-size: 1.5rem; letter-spacing: 0; }
+  .paper-card h4 { margin: 2rem 0 1.25rem; font-size: clamp(1.6rem, 2.5vw, 2.1rem); line-height: 1.22; text-wrap: pretty; }
+  .paper-card h4 a { color: var(--ink); text-decoration: none; }
+  .paper-card h4 a::after { content: ''; position: absolute; inset: 0; }
+  .paper-card h4 a:focus-visible { outline: none; }
+  .paper-card:has(a:focus-visible) { outline: 3px solid var(--blue); outline-offset: 4px; }
+  .paper-summary { margin: 0 0 2rem; color: var(--ink-2); font-size: 1.05rem; line-height: 1.65; }
+  .paper-status { margin: auto 0 1.5rem; color: var(--ink-3); font-size: 0.82rem; line-height: 1.6; }
+  .paper-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--rule-faint); font-size: 0.875rem; }
+  .paper-footer time { color: var(--ink-3); }
+  .paper-action { color: var(--blue); }
+  .paper-action > span { margin-left: 0.75rem; }
+  @media (max-width: 700px) {
+    .upstream-heading, .research-heading { flex-direction: column; align-items: start; gap: 1rem; }
+    .paper-grid { grid-template-columns: minmax(0, 1fr); }
+    .upstream-totals > span { margin-inline: 0.35rem; }
+  }
+  @media print {
+    .upstream-carousel { overflow: visible; }
+    .upstream-track { width: auto; animation: none; }
+    .upstream-grid { flex-wrap: wrap; }
+    .upstream-grid[aria-hidden] { display: none; }
+    .paper-card, .report-card { break-inside: avoid; }
+  }
 
   @media print {
     .hero { min-height: auto; }

@@ -123,14 +123,20 @@ LLM向けMarkdown、`llms.txt`、機械可読exampleは、同じ公開境界か�
 
 ## Homepage upstream panels
 
-The homepage shows the first seven entries from `UPSTREAM_CONTRIBUTIONS` in a
+The homepage shows all entries from `UPSTREAM_CONTRIBUTIONS` in a
 single automatically looping row spanning the full viewport width. Each panel
 keeps the project, title, concise `panelStatus`, numerical comparison with its
 meaning, and one full-report link. Summaries, upstream links, and attribution
-remain in the detailed reports and canonical data. Keep totals sourced from `site-facts.ts`; the seven-panel display limit does not
-limit the cumulative report count. A second, accessibility-hidden copy provides
+remain in the detailed reports and canonical data. Keep totals sourced from `site-facts.ts`; the displayed reports and cumulative counts use the same registry. A second, accessibility-hidden copy provides
 the seamless loop and does not represent additional reports.
 
 The row has no pause/arrow controls, drag handling, or helper labels. Keyboard
 focus and the operating system's reduced-motion setting use a static horizontally
-scrollable row of the seven original panels. Styling lives in `src/styles/design.css`.
+scrollable row of the original panels. The animation pauses while a pointer hovers over the row. Styling lives in `src/styles/design.css`.
+
+## Homepage research and Latest
+
+Research papers use one card per `PUBLICATIONS` entry classified as Research /
+Publication, newest first. Each card retains the canonical title, summary, date,
+and publication status. Research notes stay discoverable through Research.
+The homepage Latest list shows the eight newest entries across all categories.
