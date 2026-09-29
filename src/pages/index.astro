@@ -2,6 +2,7 @@
 import { PUBLICATIONS } from '../data/publications';
 import { PUBLIC_RELEASE, UPSTREAM_CONTRIBUTIONS } from '../data/site-facts';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_DESCRIPTION } from '../consts';
 
 const latest = [...PUBLICATIONS]
   .sort((a, b) => b.sortKey.localeCompare(a.sortKey))
@@ -47,10 +48,9 @@ const homeStructuredData = {
   '@type': 'WebPage',
   '@id': new URL('/#webpage', Astro.site).href,
   name: 'Licklider — Determinize AI',
-  description:
-    'Licklider builds nomue to check AI-generated claims independently. Public support begins with Welch analyses; life sciences, finance, and chemistry are long-term directions.',
+  description: SITE_DESCRIPTION,
   url: new URL('/', Astro.site).href,
-  dateModified: '2026-09-27',
+  dateModified: '2026-09-29',
   isPartOf: { '@id': new URL('/#website', Astro.site).href },
   about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
 };
@@ -61,11 +61,12 @@ const homeStructuredData = {
     <div class="hero-inner">
       <h1>Determinize AI.</h1>
       <p class="hero-lede">
-        nomue checks AI-generated claims independently, so people and agents can act on evidence.
+        nomue gives AI-driven statistical analysis a clear path to proceed,
+        verifiable results, and next actions grounded in evidence.
       </p>
       <p class="hero-scope">Life sciences. Finance. Chemistry. Wherever claims must hold.</p>
       <div class="cta">
-        <a class="cta-primary" href="#scope">Explore the scope</a>
+        <a class="cta-primary" href="#how-nomue-helps">See how nomue helps</a>
         <a href="#evidence">View the evidence</a>
       </div>
     </div>
@@ -75,13 +76,41 @@ const homeStructuredData = {
     <section class="band thesis-band">
       <p class="eyebrow">Why</p>
       <div class="band-body band-body--wide">
-        <h2 class="section-title">Generation is fast. Approval is the bottleneck.</h2>
+        <h2 class="section-title">Every analysis needs a basis to proceed.</h2>
         <p class="lead">
-          AI can produce analysis in seconds. Using it still requires a separate answer:
-          does this result hold?
+          Before a calculation, an agent needs to know whether the required research
+          conditions are met. Afterward, it needs to know what the result establishes
+          and what to do next.
         </p>
-        <p class="sequence">The model generates. <strong>nomue checks.</strong> People decide.</p>
-        <p class="more"><a href="/nomue/">See how nomue works</a></p>
+        <p class="sequence"><strong>nomue turns declared conditions and evidence into machine-readable decisions.</strong></p>
+      </div>
+    </section>
+
+    <section id="how-nomue-helps" class="band band--single value-band" aria-labelledby="value-title">
+      <div class="band-inner band-inner--wide">
+        <p class="eyebrow">What nomue does</p>
+        <h2 id="value-title" class="section-title">A clear decision. Evidence. A next step.</h2>
+        <div class="value-grid">
+          <article>
+            <p class="value-number" aria-hidden="true">01</p>
+            <h3>Know when to proceed.</h3>
+            <p>Check whether the required research conditions are in place. Proceed with a
+              supported analysis, ask for missing facts, or stop when the request cannot proceed.</p>
+          </article>
+          <article>
+            <p class="value-number" aria-hidden="true">02</p>
+            <h3>Know what was checked.</h3>
+            <p>Check supported calculations and claims against the supplied data and evidence.
+              See what passed, what failed, and what each check establishes.</p>
+          </article>
+          <article>
+            <p class="value-number" aria-hidden="true">03</p>
+            <h3>Know what comes next.</h3>
+            <p>Give the agent a structured outcome, reasons, and next actions, so it can
+              continue the workflow or bring a question back to the researcher.</p>
+          </article>
+        </div>
+        <p class="more"><a href="/nomue/">Explore the current Welch capabilities and how to use them</a></p>
       </div>
     </section>
 
@@ -336,6 +365,17 @@ const homeStructuredData = {
   }
 
   .hero h1 { margin-top: 0; }
+
+  .value-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+  .value-grid article { padding: clamp(1.5rem, 2.5vw, 2.5rem); border: 1px solid var(--rule); border-top: 2px solid var(--gold); background: var(--wash-hi); }
+  .value-number { margin: 0 0 2rem; color: var(--gold-ink); font-size: 1rem; }
+  .value-grid h3 { margin: 0 0 1rem; color: var(--blue); font-size: clamp(1.55rem, 2.1vw, 2rem); line-height: 1.2; }
+  .value-grid article > p:last-child { margin: 0; color: var(--ink-2); }
+
+  @media (max-width: 900px) {
+    .value-grid { grid-template-columns: minmax(0, 1fr); }
+    .value-number { margin-bottom: 1rem; }
+  }
 
   .open-work { padding-top: clamp(4rem, 7vw, 6.5rem); border-bottom: 1px solid var(--rule-faint); }
   .open-work-heading, .research-library { max-width: var(--shell); margin-inline: auto; padding-inline: var(--gutter); }

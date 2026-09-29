@@ -6,7 +6,7 @@ export const SITE_TITLE = 'Licklider';
 export const SITE_META_TITLE =
   'Licklider — Determinize AI';
 export const SITE_DESCRIPTION =
-  'Licklider builds nomue to check AI-generated claims independently. Public support begins with Welch analyses; life sciences, finance, and chemistry are long-term directions.';
+  'nomue gives AI-driven statistical analysis execution decisions, verifiable results, and evidence-based next actions. Current capabilities begin with Welch analyses.';
 export const SITE_VERSION = 'v0.4';
 export const SITE_UPDATED = '2026-09-09';
 
