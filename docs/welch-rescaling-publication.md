@@ -114,3 +114,9 @@ degrees-of-freedom calculation and the related Welch ANOVA weight calculation.
 At head `621ef46923643946801023569b46d64869709d43`, all 56 GitHub check runs
 pass and GitHub reports the PR clean and mergeable. The PR and issue #26169
 remain open; the change is not merged or released.
+
+Production completion for this status update: revision
+`a051a46b0cc2f9baf3a5538ac082a4f53cdef905`, Vercel success status
+`55228660097`, recorded at `2026-09-30T00:50:00Z`. Deployment:
+https://vercel.com/licklidermvp/website/28Yshum1BRebyB8tCeFU4U1HLzZY. The
+metadata-only follow-up preserves this time.

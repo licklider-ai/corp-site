@@ -201,6 +201,10 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Upstream report',
     date: 'September 14, 2026',
     updated: 'September 30, 2026',
+    updatedTime: {
+      at: '2026-09-30T00:50:00Z',
+      evidence: 'https://vercel.com/licklidermvp/website/28Yshum1BRebyB8tCeFU4U1HLzZY',
+    },
     sortKey: '2026-09-14',
     publishedTime: { at: '2026-09-14T06:28:07Z', evidence: 'https://vercel.com/licklidermvp/website/CUNtCMyhc3aJqiYYv94QEsr6MVF4' },
     title: 'statsmodels loses finite Welch results when an intermediate sum overflows',
@@ -223,6 +227,10 @@ export const PUBLICATIONS: PublicationItem[] = [
   },
   {
     updated: 'September 30, 2026',
+    updatedTime: {
+      at: '2026-09-30T00:50:00Z',
+      evidence: 'https://vercel.com/licklidermvp/website/28Yshum1BRebyB8tCeFU4U1HLzZY',
+    },
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 12, 2026',
@@ -306,6 +314,10 @@ export const PUBLICATIONS: PublicationItem[] = [
   },
   {
     updated: 'September 30, 2026',
+    updatedTime: {
+      at: '2026-09-30T00:50:00Z',
+      evidence: 'https://vercel.com/licklidermvp/website/28Yshum1BRebyB8tCeFU4U1HLzZY',
+    },
     "category": "Engineering",
     "type": "Upstream report",
     "date": "September 10, 2026",

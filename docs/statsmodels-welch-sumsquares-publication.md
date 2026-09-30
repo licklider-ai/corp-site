@@ -82,3 +82,9 @@ matching-fix count from four to five, updates the article and agent-readable ind
 and preserves the original publication date, URL, feed identity, and sort order.
 The latest public statsmodels release remains v0.15.0, published before this merge,
 so the status is “merged upstream — not yet released.”
+
+Production completion for this status update: revision
+`a051a46b0cc2f9baf3a5538ac082a4f53cdef905`, Vercel success status
+`55228660097`, recorded at `2026-09-30T00:50:00Z`. Deployment:
+https://vercel.com/licklidermvp/website/28Yshum1BRebyB8tCeFU4U1HLzZY. The
+metadata-only follow-up preserves this time.
