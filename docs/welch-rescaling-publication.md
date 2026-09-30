@@ -106,3 +106,11 @@ publication time, 10 reports and 3 matching merged fixes. The article, homepage,
 About, Latest, Engineering index, LLM index, feeds and evidence hashes agree.
 
 Production completion for the submission update: PR #33, revision `66ddb1ff6e4374db5dd39612df64eff9e0f78cbb`, Vercel success status `54040942987`, recorded at `2026-09-12T09:47:27Z`. Deployment: https://vercel.com/licklidermvp/website/CxvETBS1msK17gBwVUK21Fwddtwy. This instant is the article update and homepage modification time. The follow-up that records it does not reset it. Original article publication remains `2026-09-12T05:05:29Z`.
+
+## Repair-candidate status update — September 30, 2026
+
+SciPy PR #26209 now proposes a NumPy float64 repair for the two-group Welch
+degrees-of-freedom calculation and the related Welch ANOVA weight calculation.
+At head `621ef46923643946801023569b46d64869709d43`, all 56 GitHub check runs
+pass and GitHub reports the PR clean and mergeable. The PR and issue #26169
+remain open; the change is not merged or released.

@@ -200,12 +200,13 @@ export const PUBLICATIONS: PublicationItem[] = [
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 14, 2026',
+    updated: 'September 30, 2026',
     sortKey: '2026-09-14',
     publishedTime: { at: '2026-09-14T06:28:07Z', evidence: 'https://vercel.com/licklidermvp/website/CUNtCMyhc3aJqiYYv94QEsr6MVF4' },
     title: 'statsmodels loses finite Welch results when an intermediate sum overflows',
     summary: 'Four exactly represented observations per group make statsmodels overflow an intermediate sum, losing finite variances and Welch t-test results.',
     href: '/engineering/statsmodels-welch-sumsquares-overflow/',
-    status: 'Repair PR #10255 open and unreviewed; reported case fixed in the proposed patch; not merged',
+    status: 'Fix merged into statsmodels main in PR #10255 — not yet released',
   },
   {
     category: 'Engineering',
@@ -221,8 +222,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     status: 'Historical unissued candidate.4; candidate.5 now implements revised dependencies; formal adoption and support remain open',
   },
   {
-    updatedTime: { at: '2026-09-13T06:25:54Z', evidence: 'https://vercel.com/licklidermvp/website/2SkpoaNXnoQcKpv239PDUAfmSVxj' },
-    updated: 'September 13, 2026',
+    updated: 'September 30, 2026',
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 12, 2026',
@@ -231,7 +231,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     publishedTime: { at: '2026-09-12T05:05:29Z', evidence: 'https://vercel.com/licklidermvp/website/75p6gK4JMBZQTgfGzsFshNj2fU35' },
     summary: 'Exact inputs and independent references expose a changed Welch p-value despite a finite result and no warning in a SciPy boundary test.',
     href: '/engineering/checking-welch-results-with-exact-rescaling/',
-    status: "PR #24840 merged with the mparray high-precision backend; NumPy float64 repair PR #26209 remains open for Welch t-test numerical stability; issue #26169 open",
+    status: "NumPy float64 repair PR #26209 open; current head is mergeable with 56 / 56 checks passing; issue #26169 open; not merged or released",
   },
   {
     category: 'Engineering',
@@ -305,8 +305,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     "status": "Additional reproducer reported — upstream confirmation pending"
   },
   {
-    updatedTime: { at: '2026-09-13T06:25:54Z', evidence: 'https://vercel.com/licklidermvp/website/2SkpoaNXnoQcKpv239PDUAfmSVxj' },
-    updated: 'September 13, 2026',
+    updated: 'September 30, 2026',
     "category": "Engineering",
     "type": "Upstream report",
     "date": "September 10, 2026",
@@ -314,7 +313,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     "title": "Exact rescaling can reverse SciPy’s Welch ANOVA decision",
     "summary": "At an extreme input scale, SciPy’s Welch ANOVA changes a p-value from 0.02650 to 0.05611, crossing the 5% threshold without losing input information.",
     "href": "/engineering/scipy-welch-anova-weight-sum-overflow/",
-    "status": "PR #24840 merged with the mparray high-precision backend; NumPy float64 repair PR #26209 remains open for Welch ANOVA numerical stability; current CI has an Array API indexing failure with a one-line fix identified; issue #26146 open"
+    "status": "NumPy float64 repair PR #26209 open; current head is mergeable with 56 / 56 checks passing; issue #26146 open; not merged or released"
   },
   {
     category: 'Engineering',

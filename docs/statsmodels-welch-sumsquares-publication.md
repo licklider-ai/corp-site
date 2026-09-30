@@ -67,3 +67,18 @@ follow-up preserves it and does not substitute its own deployment time.
 
 After the metadata follow-up reaches production, recheck the live canonical page,
 feeds, sitemap, homepage, About, Engineering, Latest, and llms.txt.
+
+## Upstream fix update — September 29, 2026
+
+statsmodels maintainer Kevin Sheppard merged repair PR #10255 at
+`2026-09-29T14:19:52Z` as merge commit
+`1767776211acde4058305ba305ec31759746dc77`; issue #10252 was then closed as
+completed. The merged patch rescales centered deviations, normalizes variance
+contributions before combining them, and adds regression tests for the original
+reported example and the adjacent combination boundary raised during PR review.
+
+The site update changes the shared outcome to `fix_merged`, raises the aggregate
+matching-fix count from four to five, updates the article and agent-readable index,
+and preserves the original publication date, URL, feed identity, and sort order.
+The latest public statsmodels release remains v0.15.0, published before this merge,
+so the status is “merged upstream — not yet released.”

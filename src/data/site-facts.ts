@@ -280,7 +280,7 @@ export const CORE_NON_CLAIMS = [
 
 // Count distinct problems submitted to the responsible upstream project, including
 // email submissions. Follow-up issues, articles and fixes do not add another report.
-export const UPSTREAM_REPORTS_AS_OF = 'September 27, 2026';
+export const UPSTREAM_REPORTS_AS_OF = 'September 30, 2026';
 
 export const UPSTREAM_CONTRIBUTIONS = [
   {
@@ -331,17 +331,17 @@ export const UPSTREAM_CONTRIBUTIONS = [
   {
     project: 'statsmodels',
     title: 'Welch t-test: a finite result is lost after sumsquares overflow',
-    summary: 'With four exactly represented observations per group, an intermediate sum overflows even though the variances and Welch t-test result have finite float64 approximations.',
+    summary: 'With four exactly represented observations per group, an intermediate sum overflowed even though the variances and Welch result were finite. A regression-tested repair is now merged upstream.',
     href: '/engineering/statsmodels-welch-sumsquares-overflow/',
     status: PUBLICATIONS.find((item) => item.href === '/engineering/statsmodels-welch-sumsquares-overflow/')!.status,
-    outcome: 'report_open',
-    panelStatus: 'Repair proposed · PR #10255 open',
-    comparisonLabel: 'Returned Welch p → independent reference',
+    outcome: 'fix_merged',
+    panelStatus: 'Fix merged upstream',
+    comparisonLabel: 'Before patch → after patch',
     observed: 'NaN',
     reference: '≈ 0.26657',
-    evidenceHref: 'https://github.com/statsmodels/statsmodels/issues/10252',
-    evidenceLabel: 'statsmodels issue #10252',
-    credit: 'Reported by Tasuku Kobayashi on September 14, 2026; twelfthlabor opened repair PR #10255 on September 15, 2026; not merged',
+    evidenceHref: 'https://github.com/statsmodels/statsmodels/commit/1767776211acde4058305ba305ec31759746dc77',
+    evidenceLabel: 'statsmodels merge commit 1767776',
+    credit: 'Reported by Tasuku Kobayashi · fix authored by twelfthlabor · merged by Kevin Sheppard',
   },
   {
     project: 'SciPy',
@@ -350,13 +350,13 @@ export const UPSTREAM_CONTRIBUTIONS = [
     href: '/engineering/checking-welch-results-with-exact-rescaling/',
     status: PUBLICATIONS.find((item) => item.href === '/engineering/checking-welch-results-with-exact-rescaling/')!.status,
     outcome: 'report_open',
-    panelStatus: "Repair proposed · PR #26209 open",
+    panelStatus: "Repair proposed · checks passing",
     comparisonLabel: 'Returned degrees of freedom → exact reference',
     observed: '1',
     reference: '4',
     evidenceHref: 'https://github.com/scipy/scipy/issues/26169',
     evidenceLabel: 'SciPy issue #26169',
-    credit: "Reported by Tasuku Kobayashi; mdhaber posted high-precision results on September 13, 2026; alvaroborras opened repair PR #26209 on September 18, 2026",
+    credit: "Reported by Tasuku Kobayashi; alvaroborras opened repair PR #26209; all 56 checks passed on the current head as checked September 30, 2026",
   },
   {
     "project": "SciPy",
@@ -380,13 +380,13 @@ export const UPSTREAM_CONTRIBUTIONS = [
     "href": "/engineering/scipy-welch-anova-weight-sum-overflow/",
     "status": PUBLICATIONS.find((item) => item.href === '/engineering/scipy-welch-anova-weight-sum-overflow/')!.status,
     "outcome": "report_open",
-    "panelStatus": "Repair proposed · PR #26209 open",
+    "panelStatus": "Repair proposed · checks passing",
     "comparisonLabel": "Original scale → scaled by 2^-511",
     "observed": "0.02650",
     "reference": "0.05611",
     "evidenceHref": "https://github.com/scipy/scipy/issues/26146",
     "evidenceLabel": "SciPy issue #26146",
-    "credit": "Reported by Tasuku Kobayashi; mdhaber posted high-precision results on September 13, 2026; alvaroborras opened repair PR #26209 on September 18, 2026"
+    "credit": "Reported by Tasuku Kobayashi; alvaroborras opened repair PR #26209; all 56 checks passed on the current head as checked September 30, 2026"
   },
   {
     project: 'R / agricolae',

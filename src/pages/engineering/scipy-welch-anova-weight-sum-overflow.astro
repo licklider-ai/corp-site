@@ -29,6 +29,7 @@ const item = PUBLICATIONS.find((entry) => entry.href === '/engineering/scipy-wel
 <h2>September 13 update: high-precision results preserve the decision</h2>
 <p>In <a href="https://github.com/scipy/scipy/issues/26146#issuecomment-5651544800">the maintainer’s run</a>, mpmath was set to 30 decimal digits. Both the original and scaled samples return <code>F ≈ 10.28571428571</code> and <code>p ≈ 0.02650081125</code>, matching the reference and staying below 0.05.</p>
 <p>The demonstration uses <a href="https://github.com/scipy/scipy/pull/24840">PR #24840</a> and <code>mparray</code>, an array backend that computes with mpmath at adjustable precision. Its <code>dtype=float64</code> label does not mean ordinary NumPy float64 arithmetic. As of September 13, 2026, the PR is unmerged and the issue remains open with <code>needs-decision</code>. These posted results do not establish a repair for ordinary NumPy inputs or a released fix.</p>
+<p>Since that run, PR #24840 has merged. A separate <a href="https://github.com/scipy/scipy/pull/26209">NumPy float64 repair PR #26209</a> now proposes normalized weights for this Welch ANOVA path and a normalized degrees-of-freedom calculation for the related two-group Welch path. At head <code>621ef469</code>, all 56 GitHub checks pass and GitHub reports the PR clean and mergeable. The PR and both issues remain open; passing checks do not establish maintainer approval, merge, or release.</p>
 </section>
 
 <section id="a-nine-observation-example">

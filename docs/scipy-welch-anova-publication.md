@@ -34,3 +34,11 @@ code, table, canonical URL, feeds, sitemap, About, llms.txt, report totals and s
 panels with an aria-hidden non-focusable duplicate group. Browser screenshot QA
 was not performed because the browser executable could not be downloaded in the
 working environment. Carousel layout/style files are unchanged.
+
+## Repair-candidate status update — September 30, 2026
+
+SciPy PR #26209 now proposes a NumPy float64 repair for the Welch ANOVA weight
+calculation and the related two-group Welch degrees-of-freedom calculation. At
+head `621ef46923643946801023569b46d64869709d43`, all 56 GitHub check runs pass
+and GitHub reports the PR clean and mergeable. The PR and issue #26146 remain
+open; the change is not merged or released.
