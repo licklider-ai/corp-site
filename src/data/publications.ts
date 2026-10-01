@@ -49,11 +49,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     category: 'Engineering',
     type: 'Upstream report',
     date: 'September 27, 2026',
-    updated: 'September 27, 2026',
-    updatedTime: {
-      at: '2026-09-27T23:15:58Z',
-      evidence: 'https://vercel.com/licklidermvp/website/H22iTP2WFjytMw2N5hv8F44Vnvf8',
-    },
+    updated: 'October 1, 2026',
     sortKey: '2026-09-27',
     publishedTime: {
       at: '2026-09-27T17:37:21Z',
@@ -62,7 +58,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     title: 'SciPy returns zero for a representable Student-t tail',
     summary: 'A Welch test and two lower-level Student-t functions return zero for a positive subnormal probability that remains representable in binary64.',
     href: '/engineering/scipy-student-t-subnormal-tail-loss/',
-    status: 'SciPy contributor recommends MPArray instead of a NumPy-backend repair; issue remains open',
+    status: 'Closed as not planned on September 30, 2026 — MPArray recommended; no NumPy-backend fix merged',
   },
   {
     category: 'News',
@@ -574,6 +570,7 @@ export const PUBLICATIONS: PublicationItem[] = [
     date: 'September 1, 2026',
     sortKey: '2026-09-01',
     title: 'R’s exact Wilcoxon test can return p-values outside the valid range',
+    updated: 'October 1, 2026',
     summary:
       'R’s exact Wilcoxon test returned negative p-values and a value above 1 on a zero-difference input; we reported it with three independent exact-arithmetic checks.',
     href: '/engineering/r-wilcoxon-exact-pvalue-out-of-range/',

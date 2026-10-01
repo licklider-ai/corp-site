@@ -31,7 +31,16 @@ const toc = [
       </p>
       <p>
         R Core has not publicly confirmed the cause or accepted a repair. No upstream
-        fix had been recorded when this page was published.
+        fix is recorded in the tracker as checked on October 1, 2026.
+      </p>
+      <p>
+        An upstream commenter did not reproduce the out-of-range symptom with
+        R-devel <code>r90467</code> on ARM macOS on September 2. That run returned
+        in-range probabilities. In a September 3 follow-up, the reporter compared
+        those posted values with the exact reference and noted a remaining tail
+        accuracy difference. The discussion therefore leaves the out-of-range
+        symptom dependent on the tested build; it does not establish an upstream
+        diagnosis or a repair.
       </p>
     </div>
   </section>

@@ -139,6 +139,13 @@ Track reporting channel, our reproduction, upstream confirmation, accepted fix a
 released fix separately. **Fixes merged upstream** requires corresponding upstream
 merge evidence and does not imply that Licklider authored or caused every fix.
 
+When upstream closes a report without a planned repair, retain the submission in
+the report total and state the disposition, available alternative and evidenced
+reason in its article and status. Do not count closure or a workaround as a merged
+fix, infer confirmation from a label or closure alone, or describe a practical-impact
+judgment as a measured occurrence rate. Merge counts describe code adoption;
+they are not a standalone measure of report validity.
+
 The main report total is not restricted to publicly archived correspondence. Avoid
 calling the aggregate a “public record” or saying every report has external tracker
 evidence when email submissions are included. Each entry must state its actual

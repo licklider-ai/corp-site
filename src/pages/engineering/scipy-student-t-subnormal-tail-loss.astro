@@ -31,8 +31,15 @@ const item = PUBLICATIONS.find(
         bounded subnormal range in the NumPy backend. MPArray already supports much
         smaller probabilities, while this reported case does not change an ordinary
         significance decision. Licklider accepts that prioritization and will not
-        pursue a NumPy-backend correction through this report. The issue remains open
-        as of the latest check.
+        pursue a NumPy-backend correction through this report. The issue was closed
+        as <strong>not planned on September 30, 2026</strong>. No NumPy-backend fix
+        was merged for this report.
+      </p>
+      <p>
+        This disposition records a practical trade-off: the demonstrated numerical
+        difference remains, while upstream recommends a different backend for users
+        who need these probabilities. The discussion does not measure how often this
+        failure occurs in real workflows.
       </p>
     </div>
   </section>
@@ -140,6 +147,11 @@ TtestResult(statistic=-120.29962593458053, pvalue=0.0, df=400.0)
       <li>
         <a href="https://github.com/scipy/scipy/issues/26290#issuecomment-5858319705">SciPy contributor response</a>
         — MPArray reproduction, recommended backend path, and prioritization rationale
+      </li>
+      <li>
+        <a href="https://github.com/scipy/scipy/issues/26290#issuecomment-5860814406">Reporter’s acceptance of the proposed disposition</a>
+        — agreement to close without a NumPy-backend repair and prioritize reports
+        affecting realistic workflows, decisions, or commonly used numerical ranges
       </li>
       <li>
         <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html">SciPy <code>ttest_ind</code> documentation</a>

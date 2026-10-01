@@ -1,7 +1,10 @@
 ---
 import { publicationsFor } from '../../data/publications';
-import { PAIRED_T_BOUNDARY } from '../../data/site-facts';
+import { PAIRED_T_BOUNDARY, UPSTREAM_CONTRIBUTIONS } from '../../data/site-facts';
 import PublicationIndexLayout from '../../layouts/PublicationIndexLayout.astro';
+
+const mergedFixCount = UPSTREAM_CONTRIBUTIONS.filter((item) => item.outcome === 'fix_merged').length;
+const closedWithoutFix = UPSTREAM_CONTRIBUTIONS.filter((item) => item.outcome === 'closed_not_planned');
 
 const pairedTSeries = [
   {
@@ -37,7 +40,37 @@ const pairedTSeries = [
   description="Reproducible numerical checks, implementation work, and upstream contributions to scientific software including SciPy, Boost.Math, R, and Julia."
   items={publicationsFor('Engineering')}
 >
-  <section slot="before-list" class="series" aria-labelledby="paired-t-series">
+  <Fragment slot="before-list">
+  <section class="upstream-status" aria-labelledby="upstream-status">
+    <div class="series-inner">
+      <p class="eyebrow">Upstream reports</p>
+      <h2 id="upstream-status">Findings and upstream outcomes</h2>
+      <p class="upstream-counts">
+        <strong>{UPSTREAM_CONTRIBUTIONS.length}</strong> reports submitted ·
+        <strong>{mergedFixCount}</strong> matching fixes merged ·
+        <strong>{closedWithoutFix.length}</strong> closed without a planned fix
+      </p>
+      <p>
+        Each report separates the behavior we reproduced, the upstream response,
+        and the status of a repair. A merged fix records code adoption; the report
+        also states whether that fix has reached a release. A proposed repair or
+        a recommended alternative has its own status.
+      </p>
+      <p>
+        Maintainers weigh practical impact, implementation cost, and available
+        alternatives when deciding whether to change code. A report can therefore
+        close without a repair while retaining its reproducible finding.
+      </p>
+      {closedWithoutFix.map((report) => (
+        <p>
+          <a href={report.href}>{report.project}: {report.title}</a> — {report.status}.
+          The report records the rationale and the available alternative. It remains
+          in the submitted-report total and is excluded from the merged-fix total.
+        </p>
+      ))}
+    </div>
+  </section>
+  <section class="series" aria-labelledby="paired-t-series">
     <div class="series-inner">
       <p class="eyebrow">Engineering series</p>
       <h2 id="paired-t-series">How the paired-t evidence was built</h2>
@@ -57,12 +90,17 @@ const pairedTSeries = [
       <p class="series-status">{PAIRED_T_BOUNDARY}</p>
     </div>
   </section>
+  </Fragment>
 </PublicationIndexLayout>
 
 <style>
 @layer legacy {
 
   .series { border-bottom: 1px solid var(--rule-faint); background: var(--wash); }
+  .upstream-status { border-bottom: 1px solid var(--rule-faint); }
+  .upstream-status h2 { margin: 0.8rem 0 1rem; font-size: clamp(1.5rem, 3vw, 2rem); }
+  .upstream-status p { max-width: 48rem; }
+  .upstream-status .upstream-counts { color: var(--ink-2); }
   .series-inner { max-width: var(--shell); margin: 0 auto; padding: 3.5rem var(--gutter); }
   .series h2 { margin: 0.8rem 0 1rem; font-size: clamp(1.5rem, 3vw, 2rem); }
   .series-lead, .series-status { max-width: 48rem; }
