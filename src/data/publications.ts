@@ -50,6 +50,10 @@ export const PUBLICATIONS: PublicationItem[] = [
     type: 'Upstream report',
     date: 'September 27, 2026',
     updated: 'October 1, 2026',
+    updatedTime: {
+      at: '2026-10-01T03:59:39Z',
+      evidence: 'https://vercel.com/licklidermvp/website/CujDhKMnqDcLg9yVG332rTuqQm5Y',
+    },
     sortKey: '2026-09-27',
     publishedTime: {
       at: '2026-09-27T17:37:21Z',
@@ -571,6 +575,10 @@ export const PUBLICATIONS: PublicationItem[] = [
     sortKey: '2026-09-01',
     title: 'R’s exact Wilcoxon test can return p-values outside the valid range',
     updated: 'October 1, 2026',
+    updatedTime: {
+      at: '2026-10-01T03:59:39Z',
+      evidence: 'https://vercel.com/licklidermvp/website/CujDhKMnqDcLg9yVG332rTuqQm5Y',
+    },
     summary:
       'R’s exact Wilcoxon test returned negative p-values and a value above 1 on a zero-difference input; we reported it with three independent exact-arithmetic checks.',
     href: '/engineering/r-wilcoxon-exact-pvalue-out-of-range/',

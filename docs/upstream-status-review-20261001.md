@@ -75,5 +75,14 @@ updated articles, JSON Feed, RSS and `llms.txt` were checked for consistent coun
 disposition, canonical URLs and retained publication identity. No numerical
 calculation or capability contract changed.
 
-Publication completion and its evidenced UTC timestamp will be recorded after the
-production deployment succeeds, following `docs/deployment.md`.
+## Production completion
+
+- Content revision: `3e6a518b52d83aa52f3783f6a1783d89ea2517c6`.
+- Vercel production success status: `55329891493`.
+- Recorded completion: `2026-10-01T03:59:39Z`.
+- [Successful deployment](https://vercel.com/licklidermvp/website/CujDhKMnqDcLg9yVG332rTuqQm5Y).
+- GitHub Actions [CI run 36813006833](https://github.com/licklider-ai/corp-site/actions/runs/36813006833) succeeded.
+- The public Engineering outcome section was opened and its rendered counts,
+  closure wording and layout verified.
+- The metadata-only follow-up records this completion time for the two updated
+  articles; it does not create another content update.
