@@ -4,6 +4,7 @@ import { GLOBAL_NAV, SITE_TITLE } from '../consts';
 const current = Astro.url.pathname;
 const isActive = (href: string) => {
   if (href.includes('#')) return false;
+  if (href === '/docs/' && current === '/docs/sciground-connect/') return false;
   const base = href.replace(/\/$/, '');
   return current === href || current === base || current.startsWith(`${base}/`);
 };

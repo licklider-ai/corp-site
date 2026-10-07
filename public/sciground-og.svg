@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#fafaf8"/>
+<path d="M64 116h1072M64 552h1072" stroke="#d6d3cc"/>
+<g font-family="Georgia, 'Times New Roman', serif">
+<text x="64" y="81" fill="#091726" font-size="30">SciGround <tspan fill="#646970" font-size="22">by Licklider</tspan></text>
+<text x="64" y="223" fill="#091726" font-size="59">Make Your AI-Assisted Research</text>
+<text x="64" y="302" fill="#826936" font-size="67">Mathematically Verifiable.</text>
+<text x="64" y="405" fill="#091726" font-size="38">From Design to Claim.</text>
+<text x="64" y="501" fill="#45484c" font-size="23">Mathematical verification for life sciences research.</text>
+<text x="64" y="592" fill="#646970" font-size="21">licklider.ai</text>
+</g>
+</svg>

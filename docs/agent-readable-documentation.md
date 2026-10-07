@@ -45,6 +45,7 @@ semantics.
 | Released local verifier behavior, package version, commands, and exit codes | `licklider-ai/nomue-verifier` |
 | Agent-callable product behavior, clarification, product-side admissibility, execution, and next actions | Current versioned contract in `licklider-ai/nomue-app` |
 | Comparative evaluation method, runs, and results | `licklider-ai/nomue-evaluation` |
+| SciGround product narrative and workflow boundaries | Founder-approved complete-ADY product presentation; `licklider-ai/SciGround` product direction and portfolio |
 | Reader-facing explanation and machine-readable site routing | `licklider-ai/corp-site` |
 
 When an upstream authority and the website conflict, publication or update is blocked.
@@ -208,3 +209,17 @@ scope, version or interpretation. Inspect both llms.txt indexes, Markdown/HTML
 representations and examples through their shared data sources. The build's
 content-impact report is an inspection aid; factual review remains the task's work.
 Do not expand an index with unrelated articles merely because they are new.
+
+## SciGround presentation — 2026-10-07
+
+The founder explicitly approved a SciGround site describing the complete adopted
+ADY product, with no implementation-progress framing. This task-specific product
+presentation supersedes the older marketing-scope rules for those pages; it does
+not relabel historical research, nomue releases, or actual deployment availability.
+SciGround product copy lives in `src/data/sciground.ts`, with structured guides in
+`src/data/sciground-docs.ts`. HTML and Markdown guides use the same records.
+The docs index and discovery indexes lead to SciGround. Existing nomue commands,
+examples, versions, and artifacts remain under their original URLs, grouped at
+`/docs/nomue/`. Do not substitute their packages for a SciGround connection.
+Connection instructions refer to access-issued credentials and specifications;
+no unverified universal endpoint, package, free tier, or signup is advertised.

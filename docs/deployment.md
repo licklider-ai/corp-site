@@ -72,8 +72,8 @@ vercel --prod        # 本番デプロイ
 
 デプロイ後に以下を確認:
 
-- [ ] トップページの Hero 見出しが "Determinize AI."
-- [ ] `/roadmap/` が表示され、Available / candidate / next / planned が区別される
+- [ ] トップページの Hero 見出しが "Make Your AI-Assisted Research Mathematically Verifiable."
+- [ ] `/docs/sciground-connect/` と `/docs/sciground-scope/` が表示される。`/roadmap/` は nomue の参照資料として区別される
 - [ ] `/thesis/` が表示される
 - [ ] `favicon.svg` / `robots.txt` / `sitemap-index.xml` が配信される
 - [ ] OGP メタタグが出力されている

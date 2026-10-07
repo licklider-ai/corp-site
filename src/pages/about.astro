@@ -1,16 +1,8 @@
 ---
 import { HISTORICAL_REUSE } from '../data/historical-reuse';
-import ProtocolResearchProgress from '../components/ProtocolResearchProgress.astro';
 import LickliderPortrait from '../components/LickliderPortrait.astro';
 import {
   COMPANY_POSITION,
-  MARKET_SCOPE,
-  METHOD_IDENTITY_FINDING,
-  PLATFORM_SCOPE,
-  HOSTED_WELCH_CAPABILITY,
-  PRODUCT_RELEASE_BOUNDARY,
-  PUBLIC_CAPABILITY,
-  ROADMAP_POSITION,
   UPSTREAM_CONTRIBUTIONS,
   VERIFICATION_WORKING_METHOD,
 } from '../data/site-facts';
@@ -90,80 +82,21 @@ const founderStructuredData = {
 
   <div class="sections">
     <section class="band">
-      <p class="eyebrow">Available Today</p>
+      <p class="eyebrow">SciGround</p>
       <div class="band-body">
-        <p class="lead">Public local verification and a hosted capability for approved research agents.</p>
-        <p>{HOSTED_WELCH_CAPABILITY}</p>
-        <p>Hosted access is limited to approved recipients, with no public registration or public Record emission yet. <a href="/news/nomue-welch-limited-release-1/">Read the limited Release 1 announcement</a>.</p>
-        <p>{PUBLIC_CAPABILITY}</p>
-        <p>Agents can also call the public local MCP release candidate to verify the same Release 1 Records. Verification runs locally after installation, without a Licklider account or hosted service.</p>
-        <p><a href="/docs/mcp-verification/">Connect through MCP</a> · <a href="/docs/record-verification/">Run the verifier</a> · <a href="/nomue/">How nomue works</a></p>
+        <h2>From available evidence to supported claims.</h2>
+        <p>SciGround establishes what research materials support and carries the relevant conditions into the next stage. It connects design, data, statistical analysis, and claims through checks of their targets, assumptions, and numerical evidence.</p>
+        <p>Researchers work through their AI environment. SciGround maintains the versioned research record, verifies the connections, and puts affected results back through checking when the research changes.</p>
+        <p><a href="/#verification">How verification connects</a> · <a href="/docs/sciground-start/">Choose a starting point</a></p>
       </div>
     </section>
-
     <section class="band">
-      <p class="eyebrow">What We Do</p>
+      <p class="eyebrow">Our work</p>
       <div class="band-body">
-        <p>
-          Research agents can generate analyses, code, figures, and scientific prose.
-          Licklider works on the separate moment when a workflow needs to check one
-          clearly defined part of that work against evidence.
-        </p>
-        <p>
-          Our first product, nomue, begins with statistical verification. Its public
-          verifier checks supported Records and returns machine-readable results.
-        </p>
-        <p>{PRODUCT_RELEASE_BOUNDARY}</p>
-      </div>
-    </section>
-
-    <section class="band">
-      <p class="eyebrow">Platform</p>
-      <div class="band-body">
-        <p class="lead">{ROADMAP_POSITION}</p>
-        <p>{PLATFORM_SCOPE}</p>
-        <p>{MARKET_SCOPE}</p>
-        <p>
-          Licklider sits between research agents and the evidence they rely on. The same
-          verification layer can serve different agents and research workflows without
-          replacing the general-purpose interface each researcher chooses.
-        </p>
-        <p>
-          We expand the platform one evidenced capability at a time, so each new method
-          has an explicit contract and an independently checkable basis.
-        </p>
-        <p><a href="/roadmap/">Product and capability roadmap</a></p>
-      </div>
-    </section>
-
-    <section class="band band--wide">
-      <p class="eyebrow">Research Progress</p>
-      <div>
-        <h2>Building the evidence for broader verification</h2>
-        <p class="lead">Method expansion needs both a precise scientific guarantee and a calculation whose behavior can be checked.</p>
-        <p>We also measure what verification changes for an agent doing research work. In a paired historical-analysis reuse study, adding nomue reduced API cost by 78.1% and task time by 62.9% on 103 pairs the ordinary-tool comparator also answered correctly. The study uses 48 synthetic Welch tasks and one model; it is a preprint, not peer reviewed. <a href={HISTORICAL_REUSE.href}>Read the efficiency evaluation</a>.</p>
-        <ProtocolResearchProgress />
-        <p>These results demonstrate how we develop those foundations: inspect original sources, compare calculations with exact references, and repair claims when review finds a gap. The Release 3 independent-group, Release 4 two-factor and Release 5 shared design-evidence proposals are open for public discussion. <a href="/news/nomue-protocol-release-3-public-discussion/">See the multi-group proposal and invitation to comment</a>, or <a href="/news/nomue-protocol-release-5-public-discussion/">help shape common design and timing evidence</a>. These research, candidate, and discussion milestones remain separate from the released Welch scope and its distinct public-local and limited-hosted access paths.</p>
-      </div>
-    </section>
-
-    <section class="band">
-      <p class="eyebrow">Shared Language</p>
-      <div class="band-body">
-        <p>
-          Verification is useful only when people and machines can tell what a result
-          means. We publish clear distinctions between execution, clarification,
-          unsupported scope, refusal, failed checks, and properties that were not
-          asserted.
-        </p>
-        <p><strong>{METHOD_IDENTITY_FINDING}</strong></p>
-        <p>
-          The purpose is practical: help a research agent avoid silent assumptions and
-          help a researcher see the exact basis and limit of an AI-assisted result. We
-          publish it as shared working language, not as a claim of ownership over how
-          researchers speak.
-        </p>
-        <p><a href="/docs/decision-vocabulary/">Decision vocabulary</a></p>
+        <h2>Publish the basis. Keep the boundaries clear.</h2>
+        <p>We study numerical reliability, verification of AI-assisted statistical work, and the conditions under which results support claims. We publish research and report reproducible problems to the developers of scientific software.</p>
+        <p>Earlier research and artifacts retain the nomue name and their own evidence, versions, and limits. Their individual findings do not by themselves establish the full SciGround workflow.</p>
+        <p><a href="/research/">Research papers</a> · <a href="/engineering/">Engineering and upstream reports</a> · <a href="/docs/nomue/">nomue references</a></p>
       </div>
     </section>
 
@@ -180,7 +113,7 @@ const founderStructuredData = {
           <p>
             When that work finds a defect in scientific software, we report it back to
             the project. The contribution matters even when the finding never becomes a
-            nomue capability.
+            product capability.
           </p>
           <p>
             Our upstream work includes {UPSTREAM_CONTRIBUTIONS.length} upstream

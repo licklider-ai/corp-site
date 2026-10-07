@@ -650,3 +650,15 @@ change-driven inspection of affected human/machine surfaces. This applies to eve
 content class while preserving Blog's reader-led order and the existing claim,
 taxonomy, metadata and publication authorities. Do not create a second copy of
 shared facts or weaken evidence to conceal production implementation details.
+
+## SciGround homepage direction — 2026-10-07
+
+The founder approved the complete adopted-ADY SciGround product presentation and
+production publication. Its narrative is Hero → verification and cross-stage
+conditions → entry points and research scope → public work → FAQ → connection.
+The global header follows those product tasks; Latest remains available from the
+public-work section and footer. This explicit task direction supersedes the
+older homepage maturity-first and header-link prescriptions for the relaunch.
+Research and upstream evidence retain their original names, scope, status, and
+dates. The product presentation does not turn nomue studies into end-to-end
+SciGround evidence or rename old packages. Existing article URLs are preserved.

@@ -8,7 +8,7 @@ import { PUBLICATIONS } from './publications';
  */
 
 export const COMPANY_POSITION =
-  'Licklider builds nomue to check AI-generated claims independently. Public support begins with Welch analyses; life sciences, finance, and chemistry are long-term directions.';
+  'Licklider builds SciGround: mathematical verification that connects research design, data, statistical analysis, and supported claims in the life sciences.';
 
 export const VERIFICATION_CALL_DEFINITION =
   'A verification call asks a separate tool to check one clearly defined property of an analysis, result, or evidence chain. It returns a machine-readable answer that says what was checked, which evidence and version were used, what should happen next, and where the result stops.';

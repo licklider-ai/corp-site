@@ -1,442 +1,168 @@
 ---
 import { PUBLICATIONS } from '../data/publications';
-import { PUBLIC_RELEASE, UPSTREAM_CONTRIBUTIONS } from '../data/site-facts';
+import { UPSTREAM_CONTRIBUTIONS } from '../data/site-facts';
+import { SCIGROUND, RESEARCH_STAGES, ENTRY_POINTS, RESEARCH_SCOPE, SCIGROUND_FAQ } from '../data/sciground';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE_DESCRIPTION } from '../consts';
+import '../styles/sciground.css';
 
-const latest = [...PUBLICATIONS]
-  .sort((a, b) => b.sortKey.localeCompare(a.sortKey))
-  .slice(0, 8);
-const papers = PUBLICATIONS
-  .filter((item) => item.category === 'Research' && item.type === 'Publication')
+const papers = PUBLICATIONS.filter((item) => item.category === 'Research' && item.type === 'Publication')
   .sort((a, b) => b.sortKey.localeCompare(a.sortKey));
-const upstreamFixCount = UPSTREAM_CONTRIBUTIONS.filter(
-  (item) => item.outcome === 'fix_merged',
-).length;
-
-const verifierStructuredData = {
-  '@type': 'SoftwareApplication',
-  '@id': new URL('/#nomue-verifier', Astro.site).href,
-  name: 'nomue verifier',
-  applicationCategory: 'ScientificApplication',
-  operatingSystem: PUBLIC_RELEASE.supportedOperatingSystems.join(', '),
-  softwareVersion: PUBLIC_RELEASE.verifierPackage,
-  description:
-    'npm-published open-source local verification for supported nomue Release 1 Welch Records.',
-  url: new URL('/docs/record-verification/', Astro.site).href,
-  downloadUrl: PUBLIC_RELEASE.npmUrl,
-  codeRepository: PUBLIC_RELEASE.verifierUrl,
-  softwareRequirements: `Node.js ${PUBLIC_RELEASE.testedNodeVersions.join(' or ')}`,
-  license: 'https://www.apache.org/licenses/LICENSE-2.0',
-  isAccessibleForFree: true,
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-  },
-  provider: { '@id': new URL('/#organization', Astro.site).href },
-  featureList: [
-    'Local and offline Record verification',
-    'Welch result recomputation',
-    'Machine-readable scoped verification reports',
-    'Local Record canonical digest projection',
-    'Local Record content digest recomputation',
-  ],
-};
-
-const homeStructuredData = {
+const latest = [...PUBLICATIONS].sort((a, b) => b.sortKey.localeCompare(a.sortKey)).slice(0, 8);
+const upstreamFixCount = UPSTREAM_CONTRIBUTIONS.filter((item) => item.outcome === 'fix_merged').length;
+const structuredData = {
   '@type': 'WebPage',
   '@id': new URL('/#webpage', Astro.site).href,
-  name: 'Licklider — Determinize AI',
-  description: SITE_DESCRIPTION,
+  name: 'SciGround — From Design to Claim',
+  description: SCIGROUND.description,
   url: new URL('/', Astro.site).href,
-  dateModified: '2026-09-30',
+  dateModified: SCIGROUND.updated,
   isPartOf: { '@id': new URL('/#website', Astro.site).href },
-  about: { '@id': new URL('/#nomue-verifier', Astro.site).href },
+  about: { '@type': 'Thing', name: 'SciGround', description: SCIGROUND.description },
 };
 ---
 
-<BaseLayout description={homeStructuredData.description} structuredData={[homeStructuredData, verifierStructuredData]}>
-  <section class="hero">
-    <div class="hero-inner">
-      <h1>Determinize AI.</h1>
-      <p class="hero-lede">
-        nomue gives AI-driven statistical analysis a clear path to proceed,
-        verifiable results, and next actions grounded in evidence.
-      </p>
-      <p class="hero-scope">Life sciences. Finance. Chemistry. Wherever claims must hold.</p>
-      <div class="cta">
-        <a class="cta-primary" href="#how-nomue-helps">See how nomue helps</a>
-        <a href="#evidence">View the evidence</a>
-      </div>
-    </div>
-  </section>
-
-  <div class="sections">
-    <section class="band thesis-band">
-      <p class="eyebrow">Why</p>
-      <div class="band-body band-body--wide">
-        <h2 class="section-title">Every analysis needs a basis to proceed.</h2>
-        <p class="lead">
-          Before a calculation, an agent needs to know whether the required research
-          conditions are met. Afterward, it needs to know what the result establishes
-          and what to do next.
-        </p>
-        <p class="sequence"><strong>nomue turns declared conditions and evidence into machine-readable decisions.</strong></p>
+<BaseLayout structuredData={structuredData}>
+  <div class="sg-home">
+    <section class="sg-hero" aria-labelledby="hero-title">
+      <div class="sg-container sg-hero-inner">
+        <p class="sg-label">SciGround <span>by Licklider</span></p>
+        <h1 id="hero-title">Make Your AI-Assisted Research<br class="sg-desktop-break" /> <em>Mathematically Verifiable.</em></h1>
+        <p class="sg-tagline">From Design to Claim.</p>
+        <div class="sg-actions">
+          <a class="sg-button" href="#verification">See how it works <span aria-hidden="true">↗</span></a>
+          <a class="sg-text-link" href="#start">Find your starting point <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="sg-hero-foot">Mathematical verification for AI-assisted life sciences research.</p>
       </div>
     </section>
 
-    <section id="how-nomue-helps" class="band band--single value-band" aria-labelledby="value-title">
-      <div class="band-inner band-inner--wide">
-        <p class="eyebrow">What nomue does</p>
-        <h2 id="value-title" class="section-title">A clear decision. Evidence. A next step.</h2>
-        <div class="value-grid">
-          <article>
-            <p class="value-number" aria-hidden="true">01</p>
-            <h3>Know when to proceed.</h3>
-            <p>Check whether the required research conditions are in place. Proceed with a
-              supported analysis, ask for missing facts, or stop when the request cannot proceed.</p>
-          </article>
-          <article>
-            <p class="value-number" aria-hidden="true">02</p>
-            <h3>Know what was checked.</h3>
-            <p>Check supported calculations and claims against the supplied data and evidence.
-              See what passed, what failed, and what each check establishes.</p>
-          </article>
-          <article>
-            <p class="value-number" aria-hidden="true">03</p>
-            <h3>Know what comes next.</h3>
-            <p>Give the agent a structured outcome, reasons, and next actions, so it can
-              continue the workflow or bring a question back to the researcher.</p>
-          </article>
+    <section id="verification" class="sg-section sg-verification" aria-labelledby="verification-title">
+      <div class="sg-container">
+        <div class="sg-section-head">
+          <p class="sg-kicker">01 / Verification, connected</p>
+          <h2 id="verification-title">What can your design<br />and data support?</h2>
+          <p class="sg-lead">SciGround establishes what your research materials support and under which assumptions. It checks that those conditions hold at the next stage, carrying verified evidence toward the claims you can make.</p>
         </div>
-        <p class="more"><a href="/nomue/">Explore the current Welch capabilities and how to use them</a></p>
-      </div>
-    </section>
-
-    <section id="evidence" class="band band--single evidence-band">
-      <div class="band-inner band-inner--wide">
-        <p class="eyebrow">Evidence</p>
-        <h2 class="evidence-title">Measured, not assumed.</h2>
-        <div class="evidence-grid">
-          <article>
-            <p class="metric">216 / 216</p>
-            <h3>Expected complete reports with nomue</h3>
-            <p>
-              Compared with 132 / 216 using general Python and 131 / 216 using a stable
-              Welch wrapper.
-            </p>
-            <p class="study-scope">72 constructed Welch-report questions · three repetitions · 648 sessions</p>
-            <p><a href="/evaluation/#result">View the decision-quality study</a></p>
-          </article>
-          <article>
-            <div class="paired-metrics" aria-label="Measured cost and time reductions">
-              <p><span class="metric">78.1%</span><span>lower API cost</span></p>
-              <p><span class="metric">62.9%</span><span>less task time</span></p>
-            </div>
-            <h3>With nomue, compared with ordinary tools alone</h3>
-            <p>
-              Measured across 103 matched pairs where both configurations reached the
-              correct answer.
-            </p>
-            <p class="study-scope">48 synthetic Welch tasks · three repetitions · 288 scheduled sessions</p>
-            <p><a href="/evaluation/#historical-reuse">View the cost-and-time study</a></p>
-          </article>
-        </div>
-        <p class="evidence-boundary">
-          These results apply to the tested Welch workflows. Both studies were led by
-          nomue's developer and published as preprints, not peer-reviewed findings.
-        </p>
-        <p class="more"><a href="/evaluation/">View all evidence</a></p>
-      </div>
-    </section>
-
-    <section id="scope" class="band band--single scope-band">
-      <div class="band-inner band-inner--wide">
-        <p class="eyebrow">Scope</p>
-        <h2 class="scope-title">Proven narrowly. Built to expand.</h2>
-        <div class="scope-grid home-scope-grid">
-          <article>
-            <p class="scope-label">Available today</p>
-            <h3>Welch checks on your own machine</h3>
-            <p>
-              The public nomue package checks supported two-sided Welch analyses locally
-              on Linux, macOS and Windows.
-            </p>
-            <p>
-              Hosted Welch checks are available to approved recipients in limited Release 1.
-            </p>
-            <p><a href="/docs/record-verification/">Use nomue today</a></p>
-          </article>
-          <article>
-            <p class="scope-label">Long-term direction</p>
-            <h3>Life sciences. Finance. Chemistry.</h3>
-            <p>
-              The long-term scope is any field where AI-generated claims can be checked
-              against declared data, calculations or rules.
-            </p>
-            <p>
-              Each new capability will state what it checks, the evidence behind it and
-              where it stops.
-            </p>
-            <p><a href="/roadmap/">Explore the scope</a></p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-  <section class="open-work" aria-labelledby="open-work-title">
-    <div class="open-work-heading">
-      <p class="eyebrow">Open work</p>
-      <h2 id="open-work-title" class="open-work-title">Evidence in the open.</h2>
-      <p class="open-work-lede">
-        We test the software scientific claims depend on, report the failures we can
-        reproduce, and publish the research behind nomue.
-      </p>
-      <div class="upstream-heading">
-        <div>
-          <h3>Upstream reports</h3>
-          <p class="upstream-totals"><strong>{UPSTREAM_CONTRIBUTIONS.length}</strong> reports submitted <span aria-hidden="true">·</span> <strong>{upstreamFixCount}</strong> fixes merged upstream</p>
-          <p class="upstream-context">Each report records the finding and the upstream decision. <a href="/engineering/#upstream-status">How to read the outcomes</a></p>
-        </div>
-        <a href="/engineering/">Explore upstream work <span aria-hidden="true">↗</span></a>
-      </div>
-    </div>
-    <div class="upstream-carousel" role="region" aria-label="Upstream reports">
-      <div class="upstream-track">
-        {[false, true].map((duplicate) => (
-          <div class="upstream-grid" aria-hidden={duplicate ? 'true' : undefined}>
-            {UPSTREAM_CONTRIBUTIONS.map((item) => (
-              <article class="report-card">
-                <p class="evidence-status">{item.project}</p>
-                <h4>{item.title}</h4>
-                <p class="panel-status">{item.panelStatus}</p>
-                <div class="report-result">
-                  <p class="comparison-label">{item.comparisonLabel}</p>
-                  <p class="report-values"><span>{item.observed}</span><span aria-hidden="true">→</span><strong>{item.reference}</strong></p>
-                </div>
-                <a class="report-link" href={item.href} tabindex={duplicate ? -1 : undefined}>Read the report <span aria-hidden="true">↗</span></a>
+        <ol class="sg-chain" aria-label="Design to Claim, including checks between stages">
+          {RESEARCH_STAGES.map((stage, index) => (
+            <li>
+              <article class="sg-stage">
+                <div class="sg-stage-top"><span>{String(index + 1).padStart(2, '0')}</span><h3>{stage.label}</h3></div>
+                <h4>{stage.question}</h4>
+                <p>{stage.text}</p>
               </article>
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-    <div class="research-library">
-      <div class="research-heading">
-        <div>
-          <p class="eyebrow">Research papers</p>
-          <h3>Results worth examining.</h3>
-        </div>
-        <a href="/research/">Explore the research <span aria-hidden="true">↗</span></a>
-      </div>
-      <div class="paper-grid">
-        {papers.map((paper, index) => (
-          <article class="paper-card">
-            <div class="paper-meta"><span>Research paper</span><span class="paper-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span></div>
-            <h4><a href={paper.href}>{paper.title.replace(/ — preprint v[\d.]+$/, '')}</a></h4>
-            <p class="paper-summary">{paper.summary}</p>
-            <p class="paper-status">{paper.status}</p>
-            <div class="paper-footer"><time datetime={paper.sortKey}>{paper.date}</time><span class="paper-action" aria-hidden="true">Read the paper <span>↗</span></span></div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <div class="sections">
-    <section id="latest" class="band follow-band">
-      <p class="eyebrow">Follow the evidence</p>
-      <div class="band-body latest-body">
-        <p class="follow-copy">New results are published with their tested scope, evidence and limits.</p>
-        <ol class="latest-list">
-          {
-            latest.map((row) => (
-              <li>
-                <span class="latest-date">{row.date}</span>
-                <a class="latest-title" href={row.href}>{row.title}</a>
-                <span class="latest-category">
-                  <a href={`/${row.category.toLowerCase()}/`}>{row.category}</a>
-                </span>
-              </li>
-            ))
-          }
+              {stage.handoff && <div class="sg-handoff"><span class="sg-handoff-arrow" aria-hidden="true">→</span><div><strong>{stage.handoff}</strong><p>{stage.handoffText}</p></div></div>}
+            </li>
+          ))}
         </ol>
-        <p class="more"><a class="link-button" href="/latest/">All updates</a> · <a href="/research/">Research</a> · <a href="/engineering/">Engineering</a></p>
+        <div class="sg-connection-note">
+          <span class="sg-note-mark" aria-hidden="true">↳</span>
+          <div><h3>The connections are checked, too.</h3><p>The samples analyzed must match the research target. The method must meet its conditions. The claim must refer to the comparison actually performed. A guarantee moves forward with the conditions that make it valid.</p></div>
+        </div>
+        <div class="sg-explain-grid">
+          <article>
+            <p class="sg-kicker">A precise meaning</p>
+            <h3>What does “mathematically verified” mean?</h3>
+            <p>The target and conditions are expressed as rules that calculations and logic can check. SciGround checks whether the evidence meets those rules.</p>
+            <p>The AI proposes and explains. SciGround’s verification process determines what is established.</p>
+            <ul class="sg-outcomes" aria-label="Distinct verification outcomes">
+              <li><span class="sg-outcome-dot sg-established" aria-hidden="true"></span>Established within the stated conditions</li>
+              <li><span class="sg-outcome-dot sg-conflict" aria-hidden="true"></span>A condition is not met</li>
+              <li><span class="sg-outcome-dot sg-unresolved" aria-hidden="true"></span>Not enough evidence or precision to decide</li>
+            </ul>
+            <p class="sg-fine">Measurement reliability and sample independence remain explicit research assumptions. Mathematical verification does not remove statistical uncertainty.</p>
+          </article>
+          <article>
+            <p class="sg-kicker">Through revisions</p>
+            <h3>When the research changes,<br />check the guarantee again.</h3>
+            <p>A sample value, a group assignment, a set of comparisons. Changes put the affected analyses and claims back through verification.</p>
+            <div class="sg-revision" aria-label="A correction creates a new version and requires new checks">
+              <div><span>Earlier version</span><strong>Record preserved</strong></div>
+              <span aria-hidden="true">↓</span>
+              <div><span>Data or conditions change</span><strong>Affected results need rechecking</strong></div>
+              <span aria-hidden="true">↓</span>
+              <div><span>New version</span><strong>A new result, with its own evidence</strong></div>
+            </div>
+            <p class="sg-fine">A past result and a result you can apply to the current research are kept distinct.</p>
+          </article>
+        </div>
+        <a class="sg-text-link" href="/docs/sciground-verification/">Read the verification principles <span aria-hidden="true">↗</span></a>
       </div>
     </section>
 
-    <section class="band company-band">
-      <p class="eyebrow">Company</p>
-      <div class="band-body company-body">
-        <h2>Built by Licklider.</h2>
-        <p>
-          nomue is developed by Licklider, Inc. We publish what it checks, the evidence
-          behind it and where it stops.
-        </p>
-        <p class="more"><a href="/about/">About Licklider</a></p>
+    <section id="start" class="sg-section sg-start" aria-labelledby="start-title">
+      <div class="sg-container">
+        <div class="sg-section-head">
+          <p class="sg-kicker">02 / Your starting point</p>
+          <h2 id="start-title">Start with what you have.</h2>
+          <p class="sg-lead">A study you are planning. Data you have collected. An analysis already in progress. Begin with the available materials and establish what can be checked.</p>
+        </div>
+        <div class="sg-entry-grid">
+          {ENTRY_POINTS.map((entry) => <article>
+            <span class="sg-entry-number" aria-hidden="true">{entry.number}</span>
+            <h3>{entry.title}</h3>
+            <p>{entry.description}</p>
+            <div class="sg-example"><span>For example</span><p>{entry.example}</p></div>
+            <a class="sg-text-link" href={entry.href}>{entry.link} <span aria-hidden="true">↗</span></a>
+          </article>)}
+        </div>
+        <div class="sg-deliverable"><h3>A result, with its basis.</h3><p>Receive methods, result tables, supported claims, assumptions, and limits together. Share them with collaborators alongside the evidence and instructions to check the recorded result.</p></div>
       </div>
     </section>
+
+    <section id="scope" class="sg-section sg-scope" aria-labelledby="scope-title">
+      <div class="sg-container">
+        <div class="sg-section-head sg-split-head">
+          <div><p class="sg-kicker">Research fit</p><h2 id="scope-title">Does it fit<br />your research?</h2></div>
+          <p class="sg-lead">Built around comparison studies in the life sciences. Each workflow has defined inputs, assumptions, and verification boundaries.</p>
+        </div>
+        <div class="sg-scope-list">
+          {RESEARCH_SCOPE.map((item) => <a href={`/docs/sciground-scope/#${item.id}`}><h3>{item.title}</h3><p>{item.summary}</p><span aria-hidden="true">↗</span></a>)}
+        </div>
+        <p class="sg-fine sg-scope-note">Each workflow has its own conditions. Listed methods and features cannot all be combined freely. <a href="/docs/sciground-scope/">Read the input requirements and scope</a>.</p>
+        <aside class="sg-stability">
+          <div><p class="sg-kicker">A further check</p><h3>Would removing a few samples change the decision?</h3></div>
+          <div><p>For supported small two-group comparisons, check whether the decision can be proved unchanged across a specified set of sample removals. A confirmed change and an unresolved result are reported separately.</p><a class="sg-text-link" href="/docs/sciground-scope/#sample-removal">See the sample-removal conditions <span aria-hidden="true">↗</span></a></div>
+        </aside>
+        <div id="connect" class="sg-connect">
+          <div><p class="sg-kicker">MCP + API</p><h3>Connect SciGround to the AI you work with.</h3><p>Use an MCP-compatible AI environment to confirm a design, run an analysis, and receive verification results. Use the API to integrate SciGround into a research tool or agent.</p></div>
+          <div class="sg-connect-actions"><a class="sg-button" href="/docs/sciground-connect/#mcp">MCP connection guide <span aria-hidden="true">↗</span></a><a class="sg-text-link" href="/docs/sciground-connect/#api">API integration guide <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="evidence" class="sg-section sg-evidence" aria-labelledby="evidence-title">
+      <div class="sg-container">
+        <div class="sg-section-head"><p class="sg-kicker">03 / Research in the open</p><h2 id="evidence-title">Examine the work<br />behind the technology.</h2><p class="sg-lead">Reliable numerical calculations. Verification of AI-generated results. Reproducible findings in statistical software. Licklider publishes the methods and evidence behind this work.</p></div>
+        <div class="sg-subhead"><h3>Research papers</h3><a class="sg-text-link" href="/research/">All research <span aria-hidden="true">↗</span></a></div>
+        <div class="sg-paper-grid">
+          {papers.map((paper, index) => <article>
+            <div class="sg-paper-top"><span>Research / Publication</span><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span></div>
+            <h4><a href={paper.href}>{paper.title.replace(/ — preprint v[\d.]+$/, '')}</a></h4>
+            <p>{paper.summary}</p><p class="sg-paper-status">{paper.status}</p>
+            <div class="sg-paper-bottom"><time datetime={paper.sortKey}>{paper.date}</time><a href={paper.href}>Read the paper <span aria-hidden="true">↗</span></a></div>
+          </article>)}
+        </div>
+        <div class="sg-upstream-head"><div><p class="sg-kicker">Upstream reports</p><h3>Improving the software research relies on.</h3><p>We investigate conditions that cause statistical software to lose or miscalculate results, and report reproducible findings to its developers.</p></div><p class="sg-upstream-count"><strong>{UPSTREAM_CONTRIBUTIONS.length}</strong> reports submitted<br /><strong>{upstreamFixCount}</strong> fixes merged upstream</p></div>
+      </div>
+      <div class="upstream-carousel sg-carousel" role="region" aria-label="Upstream reports">
+        <div class="upstream-track">
+          {[false, true].map((duplicate) => <div class="upstream-grid" aria-hidden={duplicate ? 'true' : undefined}>
+            {UPSTREAM_CONTRIBUTIONS.map((item) => <article class="sg-report">
+              <p class="sg-kicker">{item.project}</p><h4>{item.title}</h4><p class="panel-status">{item.panelStatus}</p>
+              <p class="comparison-label">{item.comparisonLabel}</p><p class="sg-report-values"><span>{item.observed}</span><span aria-hidden="true">→</span><strong>{item.reference}</strong></p>
+              <a href={item.href} tabindex={duplicate ? -1 : undefined}>Read the report <span aria-hidden="true">↗</span></a>
+            </article>)}
+          </div>)}
+        </div>
+      </div>
+      <div class="sg-container"><p class="sg-fine sg-evidence-note">Each publication establishes findings within its studied conditions. Earlier work retains the nomue name and its original scope. For SciGround’s verification boundaries, see the <a href="/docs/sciground-scope/">product documentation</a>. <a href="/engineering/#upstream-status">How to read upstream outcomes</a>.</p>
+        <details class="sg-latest"><summary>Latest research and engineering updates <span>View the latest eight</span></summary><ol>{latest.map((row) => <li><time datetime={row.sortKey}>{row.date}</time><a href={row.href}>{row.title}</a><span>{row.category}</span></li>)}</ol><a class="sg-text-link" href="/latest/">All updates <span aria-hidden="true">↗</span></a></details>
+      </div>
+    </section>
+
+    <section id="faq" class="sg-section sg-faq" aria-labelledby="faq-title"><div class="sg-container sg-faq-layout"><div><p class="sg-kicker">04 / Before you begin</p><h2 id="faq-title">A few things<br />worth knowing.</h2></div><div class="sg-faq-list">{SCIGROUND_FAQ.map((item) => <details><summary>{item.question}<span aria-hidden="true">+</span></summary><p>{item.answer}</p></details>)}</div></div></section>
+
+    <section class="sg-final" aria-labelledby="final-title"><div class="sg-container"><p class="sg-kicker">SciGround / From Design to Claim</p><h2 id="final-title">Give your research<br />a basis you can check.</h2><p>Start with a design, your data, or an existing analysis.<br />Establish what the evidence supports.</p><div class="sg-actions"><a class="sg-button" href="/docs/sciground-connect/">See how to connect <span aria-hidden="true">↗</span></a><a class="sg-text-link" href="/docs/sciground-scope/">Check your research fit <span aria-hidden="true">↗</span></a></div></div></section>
   </div>
 </BaseLayout>
-
-<style>
-@layer legacy {
-  .hero { border-bottom: 1px solid var(--rule-faint); }
-  .hero-inner { max-width: var(--shell); margin: 0 auto; padding: clamp(5rem, 10vw, 9rem) var(--gutter) clamp(4rem, 8vw, 7rem); }
-  .hero h1 { max-width: 72rem; margin: 0; font-size: clamp(4.1rem, 10vw, 9rem); line-height: 0.95; letter-spacing: -0.045em; }
-  .hero-lede { max-width: 47rem; margin: 3rem 0 0; color: var(--ink-1); font-size: clamp(1.25rem, 2.25vw, 1.75rem); line-height: 1.5; }
-  .hero-scope { margin: 1.25rem 0 0; color: var(--ink-3); font-size: 1rem; }
-  .cta { display: flex; gap: 1rem 1.75rem; flex-wrap: wrap; align-items: center; margin-top: 3rem; font-size: 0.95rem; }
-  .cta a { padding-bottom: 3px; border-bottom: 1px solid var(--ink); text-decoration: none; }
-  .cta .cta-primary { padding: 0.8rem 1.15rem; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); }
-
-  .sections { max-width: var(--shell); margin: 0 auto; padding: 0 var(--gutter); }
-  .band { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 4rem; padding: clamp(4rem, 7vw, 6.5rem) 0; border-bottom: 1px solid var(--rule-faint); }
-  .band:last-child { border-bottom: 0; }
-  .band > .eyebrow { margin: 0.35rem 0 0; }
-  .band--single { display: block; }
-  .band-inner--wide > .eyebrow { margin-bottom: 2rem; }
-  .band-body { max-width: var(--measure); }
-  .band-body--wide { max-width: 56rem; }
-  .lead { color: var(--ink); font-size: clamp(1.2rem, 2vw, 1.5rem); }
-  .section-title, .evidence-title, .scope-title, .open-work-title { max-width: 60rem; margin: 0 0 1.5rem; font-size: clamp(2rem, 4.5vw, 3.8rem); line-height: 1.12; }
-  .sequence { margin: 2.5rem 0 0; font-size: clamp(1.35rem, 2.5vw, 2rem); }
-  .sequence strong { color: var(--blue); font-weight: 400; }
-
-  .evidence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 2.5rem; border: 1px solid var(--rule); background: var(--rule); }
-  .evidence-grid article { padding: clamp(1.75rem, 4vw, 3rem); background: var(--paper); }
-  .evidence-grid h3 { margin: 1.5rem 0 0.85rem; font-size: 1.4rem; }
-  .metric { margin: 0; color: var(--gold-ink); font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.95; letter-spacing: -0.035em; }
-  .paired-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
-  .paired-metrics p { margin: 0; }
-  .paired-metrics span { display: block; }
-  .paired-metrics span:last-child { margin-top: 0.7rem; color: var(--ink-2); font-size: 0.9rem; }
-  .study-scope { color: var(--ink-3); font-size: 0.85rem; }
-  .evidence-boundary { max-width: 55rem; margin: 2rem 0 0; color: var(--ink-2); }
-
-  .scope-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 2.5rem; border: 1px solid var(--rule); background: var(--rule); }
-  .scope-grid article { padding: clamp(1.75rem, 4vw, 3rem); background: var(--paper); }
-  .scope-grid article:first-child { background: var(--blue-wash); box-shadow: inset 0 2px var(--gold-ink); }
-  .scope-grid h3 { margin: 0 0 1rem; font-size: 1.55rem; }
-  .scope-label { margin: 0 0 1.5rem; color: var(--blue); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
-
-  .open-work-lede { max-width: 58rem; font-size: clamp(1.15rem, 2vw, 1.4rem); }
-  .follow-copy { margin-top: 0; font-size: 1.15rem; }
-  .latest-body { max-width: none; }
-  .latest-list { list-style: none; margin: 2rem 0 0; padding: 0; border-top: 1px solid var(--rule); }
-  .latest-list li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr) auto; gap: 1.5rem; align-items: baseline; margin: 0; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
-  .latest-date { color: var(--ink-3); font-size: 0.875rem; }
-  .latest-title { color: var(--ink); font-size: 1.15rem; line-height: 1.45; text-decoration: none; }
-  .latest-category a { color: var(--ink-3); font-size: 0.85rem; text-decoration: none; }
-  .more { margin: 2rem 0 0; font-size: 0.92rem; }
-  .company-body h2 { margin: 0 0 1rem; font-size: clamp(1.8rem, 3.5vw, 3rem); }
-  .company-body > p:not(.more) { max-width: 48rem; font-size: 1.15rem; }
-
-  @media (max-width: 900px) {
-    .band { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
-    .evidence-grid, .scope-grid { grid-template-columns: minmax(0, 1fr); }
-    .latest-list li { grid-template-columns: 6.5rem minmax(0, 1fr); gap: 1rem; }
-    .latest-category { display: none; }
-  }
-
-  @media (max-width: 620px) {
-    .hero-inner { padding-top: 4rem; }
-    .hero h1 { font-size: clamp(3.5rem, 19vw, 5.2rem); }
-    .hero-lede { margin-top: 2rem; }
-    .paired-metrics { grid-template-columns: minmax(0, 1fr); }
-    .latest-list li { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
-  }
-}
-@layer design {
-  .hero {
-    box-sizing: border-box;
-    min-height: 75vh;
-    min-height: 75dvh;
-    display: flex;
-    align-items: center;
-  }
-
-  .hero-inner {
-    box-sizing: border-box;
-    width: 100%;
-    padding-block: clamp(2rem, 5vh, 4rem);
-  }
-
-  .hero h1 { margin-top: 0; }
-
-  .value-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
-  .value-grid article { padding: clamp(1.5rem, 2.5vw, 2.5rem); border: 1px solid var(--rule); border-top: 2px solid var(--gold); background: var(--wash-hi); }
-  .value-number { margin: 0 0 2rem; color: var(--gold-ink); font-size: 1rem; }
-  .value-grid h3 { margin: 0 0 1rem; color: var(--blue); font-size: clamp(1.55rem, 2.1vw, 2rem); line-height: 1.2; }
-  .value-grid article > p:last-child { margin: 0; color: var(--ink-2); }
-
-  @media (max-width: 900px) {
-    .value-grid { grid-template-columns: minmax(0, 1fr); }
-    .value-number { margin-bottom: 1rem; }
-  }
-
-  .open-work { padding-top: clamp(4rem, 7vw, 6.5rem); border-bottom: 1px solid var(--rule-faint); }
-  .open-work-heading, .research-library { max-width: var(--shell); margin-inline: auto; padding-inline: var(--gutter); }
-  .open-work-heading > .eyebrow { margin: 0 0 2rem; }
-  .open-work-title { max-width: 60rem; margin: 0 0 1.5rem; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.08; }
-  .open-work-lede { max-width: 48rem; margin: 0; color: var(--ink-2); }
-  .upstream-heading, .research-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; }
-  .upstream-heading { margin: 3.5rem 0 1.75rem; }
-  .upstream-heading h3 { margin: 0 0 0.5rem; font-size: 1.5rem; }
-  .upstream-heading > a, .research-heading > a { flex-shrink: 0; font-size: 0.95rem; }
-  .upstream-totals { margin: 0; color: var(--ink-2); font-size: 0.95rem; }
-  .upstream-totals strong { color: var(--ink); font-size: 1.25rem; }
-  .upstream-totals > span { margin-inline: 0.75rem; color: var(--rule); }
-  .upstream-context { max-width: 40rem; margin: 0.65rem 0 0; color: var(--ink-2); font-size: 0.85rem; }
-  .upstream-carousel:hover .upstream-track { animation-play-state: paused; }
-  .upstream-grid .report-card { display: flex; flex-direction: column; box-sizing: border-box; padding: 1.75rem; border: 1px solid var(--rule); border-radius: 0; background: var(--wash-hi); }
-  .report-card h4 { margin: 0.75rem 0 1rem; font-size: 1.5rem; line-height: 1.25; }
-  .report-card .panel-status { padding-left: 0.75rem; border-left: 2px solid var(--gold-ink); }
-  .report-result { margin-top: auto; padding-top: 1.5rem; }
-  .report-result .comparison-label { margin: 0; color: var(--ink-3); }
-  .report-values { display: flex; flex-wrap: wrap; gap: 0.5rem 0.85rem; align-items: baseline; margin: 0.75rem 0 1.5rem; font-size: 1.45rem; line-height: 1.25; }
-  .report-values strong { color: var(--blue); font-weight: 400; }
-  .report-values > span:first-child { color: var(--ink-3); }
-  .report-link { align-self: start; font-size: 0.9rem; }
-  .research-library { padding-top: clamp(4rem, 7vw, 6rem); padding-bottom: clamp(4rem, 7vw, 6rem); }
-  .research-heading { margin-bottom: 2rem; }
-  .research-heading .eyebrow { margin: 0 0 1rem; }
-  .research-heading h3 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; }
-  .paper-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
-  .paper-card { position: relative; display: flex; flex-direction: column; min-width: 0; padding: clamp(1.5rem, 3vw, 3rem); border: 1px solid var(--rule); border-top: 3px solid var(--blue); background: var(--paper); transition: background-color 160ms; }
-  .paper-card:hover { background: var(--wash-hi); }
-  .paper-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; color: var(--ink-3); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.09em; }
-  .paper-number { color: var(--gold-ink); font-size: 1.5rem; letter-spacing: 0; }
-  .paper-card h4 { margin: 2rem 0 1.25rem; font-size: clamp(1.6rem, 2.5vw, 2.1rem); line-height: 1.22; text-wrap: pretty; }
-  .paper-card h4 a { color: var(--ink); text-decoration: none; }
-  .paper-card h4 a::after { content: ''; position: absolute; inset: 0; }
-  .paper-card h4 a:focus-visible { outline: none; }
-  .paper-card:has(a:focus-visible) { outline: 3px solid var(--blue); outline-offset: 4px; }
-  .paper-summary { margin: 0 0 2rem; color: var(--ink-2); font-size: 1.05rem; line-height: 1.65; }
-  .paper-status { margin: auto 0 1.5rem; color: var(--ink-3); font-size: 0.82rem; line-height: 1.6; }
-  .paper-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--rule-faint); font-size: 0.875rem; }
-  .paper-footer time { color: var(--ink-3); }
-  .paper-action { color: var(--blue); }
-  .paper-action > span { margin-left: 0.75rem; }
-  @media (max-width: 700px) {
-    .upstream-heading, .research-heading { flex-direction: column; align-items: start; gap: 1rem; }
-    .paper-grid { grid-template-columns: minmax(0, 1fr); }
-    .upstream-totals > span { margin-inline: 0.35rem; }
-  }
-  @media print {
-    .upstream-carousel { overflow: visible; }
-    .upstream-track { width: auto; animation: none; }
-    .upstream-grid { flex-wrap: wrap; }
-    .upstream-grid[aria-hidden] { display: none; }
-    .paper-card, .report-card { break-inside: avoid; }
-  }
-
-  @media print {
-    .hero { min-height: auto; }
-    .hero-inner { padding-block: 1.5rem; }
-  }
-}
-</style>
