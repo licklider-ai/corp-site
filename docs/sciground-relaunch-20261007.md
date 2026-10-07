@@ -68,3 +68,21 @@ artifact-specific body, evidence, metadata, and dates remain unchanged.
 - Browser rendering and deployment confirmation follow on the hosted preview;
   local Playwright's browser download was unavailable. Do not count a static
   link check as a visual review.
+
+## Hosted preview review
+
+PR: https://github.com/licklider-ai/corp-site/pull/81
+
+- Initial preview rendered the approved content and working FAQ disclosure.
+- Found a CSS cascade-layer ordering defect affecting action text contrast.
+  Commit fb9f8106d5fd980bedf0bc47cc5ea988cd40a0f9 establishes the layer order
+  before homepage rules. A shared head declaration also fixes the ordering for
+  docs index styles regardless of Astro stylesheet extraction order.
+- Corrected hosted Hero action computes white text on rgb(36,36,36), with no
+  inherited underline. Header action is readable.
+- Inspected the Hero, four-stage flow, three entry columns, FAQ expansion, and
+  MCP/API guide navigation in the cloud browser. No desktop horizontal overflow.
+- CI run 37559010083 succeeded; Vercel preview bM6HZFpeYLfm8UYfagi7riQpQf8w ready.
+- Mobile media rules and navigation code were reviewed. The available cloud
+  browser did not expose viewport resizing; no mobile-device visual pass is claimed.
+- Production confirmation is recorded in the PR completion record after merge.
