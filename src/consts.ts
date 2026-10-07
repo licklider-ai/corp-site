@@ -1,14 +1,15 @@
+import { SCIGROUND } from './data/sciground';
+
 /**
  * Site-wide constants and navigation.
  */
 
 export const SITE_TITLE = 'Licklider';
 export const SITE_META_TITLE =
-  'Licklider — Determinize AI';
-export const SITE_DESCRIPTION =
-  'nomue gives AI-driven statistical analysis execution decisions, verifiable results, and evidence-based next actions. Current capabilities begin with Welch analyses.';
-export const SITE_VERSION = 'v0.4';
-export const SITE_UPDATED = '2026-09-09';
+  'SciGround by Licklider — From Design to Claim';
+export const SITE_DESCRIPTION = SCIGROUND.description;
+export const SITE_VERSION = 'v1.0';
+export const SITE_UPDATED = SCIGROUND.updated;
 
 export type NavItem = {
   label: string;
@@ -19,18 +20,17 @@ export type NavItem = {
 
 /** Global navigation */
 export const GLOBAL_NAV: NavItem[] = [
-  { label: 'Product', href: '/nomue/', ready: true },
-  { label: 'Evaluation', href: '/evaluation/', ready: true },
+  { label: 'How it works', href: '/#verification', ready: true },
+  { label: 'Get started', href: '/#start', ready: true },
+  { label: 'Research fit', href: '/#scope', ready: true },
+  { label: 'Our research', href: '/#evidence', ready: true },
   { label: 'Docs', href: '/docs/', ready: true },
-  { label: 'Research', href: '/research/', ready: true },
-  { label: 'Latest', href: '/latest/', ready: true },
-  { label: 'About', href: '/about/', ready: true },
+  { label: 'Connect', href: '/docs/sciground-connect/', ready: true },
 ];
 
 /** Left navigation used on long-form pages. */
 export const SIDE_NAV: NavItem[] = [
-  { label: 'nomue', href: '/nomue/', ready: true },
-  { label: 'Roadmap', href: '/roadmap/', ready: true },
+  { label: 'SciGround', href: '/#verification', ready: true },
   { label: 'Docs', href: '/docs/', ready: true },
   { label: 'Evaluation', href: '/evaluation/', ready: true },
   { label: 'Thesis', href: '/thesis/', ready: true },

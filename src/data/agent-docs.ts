@@ -1,3 +1,4 @@
+import { SCIGROUND_DOCS, SCIGROUND_DOCS_INDEX } from './sciground-docs';
 import {
   CORE_NON_CLAIMS,
   EVALUATION_BOUNDARY,
@@ -70,7 +71,7 @@ export type AgentDoc = {
   sections: DocSection[];
 };
 
-export const AGENT_DOCS: AgentDoc[] = [
+export const NOMUE_DOCS: AgentDoc[] = [
   {
     slug: 'verification-call',
     title: 'What a verification call is',
@@ -777,6 +778,8 @@ ${NOMUE_NPX_COMMAND}`,
   },
 ];
 
+export const AGENT_DOCS: AgentDoc[] = [...SCIGROUND_DOCS, ...NOMUE_DOCS];
+
 export const DOCS_BY_SLUG = Object.fromEntries(
   AGENT_DOCS.map((doc) => [doc.slug, doc]),
 ) as Record<string, AgentDoc>;
@@ -870,6 +873,8 @@ export function renderDocMarkdown(doc: AgentDoc): string {
     `Updated: ${doc.updated}`,
   ];
 
+  if (!doc.slug.startsWith('sciground-')) parts.push('', '> nomue reference: the named artifact, version, and scope apply. For SciGround, start at https://www.licklider.ai/docs/index.md.', '');
+
   for (const section of doc.sections) {
     parts.push('', `## ${section.title}`, '');
     for (const paragraph of section.paragraphs ?? []) parts.push(paragraph, '');
@@ -901,7 +906,7 @@ export function renderDocMarkdown(doc: AgentDoc): string {
   return `${parts.join('\n').trim()}\n`;
 }
 
-export const DOCS_INDEX_MARKDOWN = `# Licklider agent-readable documentation
+export const NOMUE_DOCS_INDEX_MARKDOWN = `# nomue documentation
 
 > Run the public verifier directly or through local MCP, decide when a verification call applies, and interpret the returned evidence from one versioned documentation set.
 
@@ -943,9 +948,11 @@ ${NOMUE_POSITION}
 
 ## Documentation
 
-${AGENT_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.slug}.md): ${doc.description}`).join('\n')}
+${NOMUE_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${doc.slug}.md): ${doc.description}`).join('\n')}
 
 ## Machine-readable examples
 
 - [Examples JSON](https://www.licklider.ai/docs/examples.json): normalized executable and call-selection examples
 `;
+
+export const DOCS_INDEX_MARKDOWN = SCIGROUND_DOCS_INDEX;

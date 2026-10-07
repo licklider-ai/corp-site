@@ -37,6 +37,7 @@ const { title, description, status, updated, slug, toc } = Astro.props;
       </dl>
     </header>
 
+    {!slug.startsWith('sciground-') && <p class="doc-reference">This is a <strong>nomue reference</strong> for the named artifact and version. <a href="/docs/">Go to SciGround documentation</a>.</p>}
     <div class="body">
       <slot />
     </div>

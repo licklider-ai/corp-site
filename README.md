@@ -94,7 +94,7 @@ pnpm install
 
 ## 公開情報の分類
 
-公開記事は **Research / Engineering / News / Blog** の4系統に分けます。`/latest/` とホームの **Latest** は4系統を時系列でまとめ、ヘッダーはLatestを共通入口とします。各項目には分類を表示します。
+公開記事は **Research / Engineering / News / Blog** の4系統に分けます。`/latest/` とホームの **Latest** は4系統を時系列でまとめ、公開記事の共通入口はLatestです。製品中心のヘッダーからは研究実績へ、フッターからはLatestへ移動できます。各項目には分類を表示します。
 
 配置、成熟度ラベル、公開文の書き方、公開前チェック、必須メタデータの正本は [`docs/publication-architecture.md`](./docs/publication-architecture.md) を参照してください。
 
@@ -140,3 +140,20 @@ Research papers use one card per `PUBLICATIONS` entry classified as Research /
 Publication, newest first. Each card retains the canonical title, summary, date,
 and publication status. Research notes stay discoverable through Research.
 The homepage Latest list shows the eight newest entries across all categories.
+
+## SciGround homepage — 2026-10-07
+
+The homepage follows the founder-approved sequence: fixed Hero → verification
+and connections → three entry points and research fit → public research/upstream
+work → FAQ → connection CTA. The presentation assumes the complete adopted ADY
+product; implementation progress is not the marketing narrative.
+
+`src/data/sciground.ts` owns product copy and scope. Structured guides in
+`src/data/sciground-docs.ts` generate both HTML and Markdown through the existing
+docs renderer. Historical nomue documentation, articles, names, releases, and
+examples remain reachable; `/docs/nomue/` groups the old artifact instructions.
+SciGround connection guides do not invent a public endpoint or npm installer.
+
+All publication cards keep their canonical registry status. The homepage's eight
+Latest items are available in the expandable updates list inside public work.
+See `docs/sciground-relaunch-20261007.md` for scope and validation records.
