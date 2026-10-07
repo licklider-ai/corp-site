@@ -1,4 +1,5 @@
 /* SciGround's product narrative. Scoped to the homepage; publications keep their reading layout. */
+@layer legacy, design;
 @layer design {
   .sg-home { --sg-accent: #826936; --sg-green: #315e52; }
   .sg-container { max-width: 90rem; padding-inline: var(--gutter); margin-inline: auto; }
