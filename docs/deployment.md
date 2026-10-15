@@ -72,8 +72,9 @@ vercel --prod        # 本番デプロイ
 
 デプロイ後に以下を確認:
 
-- [ ] トップページの Hero 見出しが "Make Your AI-Assisted Research Mathematically Verifiable."
+- [ ] トップページの Hero 見出しが “I finished your analysis,” says your AI. / Your doubts say otherwise.
 - [ ] `/docs/sciground-connect/` と `/docs/sciground-scope/` が表示される。`/roadmap/` は nomue の参照資料として区別される
+- [ ] `/examples/group-comparison/` と合成CSVが配信され、説明用例と明示されている
 - [ ] `/thesis/` が表示される
 - [ ] `favicon.svg` / `robots.txt` / `sitemap-index.xml` が配信される
 - [ ] OGP メタタグが出力されている
