@@ -12,6 +12,12 @@ ${SCIGROUND_DOCS.map((doc) => `- [${doc.title}](https://www.licklider.ai/docs/${
 
 SciGround works from available design and data toward supported claims, checking the meaning and conditions of each connection. It distinguishes established results, conditions that do not hold, and unresolved obligations. Changes require rechecking the affected guarantees against a new version. External assumptions and statistical uncertainty remain explicit.
 
+The AI calls SciGround analysis and verification tools and explains the findings. Defined checks determine the verification outcome; this does not certify arbitrary AI-generated code or prose. Originals are uploaded to SciGround through the supplied direct upload route. Review the data-handling terms for your access before sending files.
+
+## Illustrative example
+
+- [Group comparison sample report](https://www.licklider.ai/examples/group-comparison/): synthetic data illustrate a group-label mismatch, researcher-confirmed correction, and traceable results. This is not a product-issued verification record, live service response, or executable API request.
+
 Connection details: use the server address, authentication, and versioned API contract supplied for SciGround access. Do not infer an endpoint, credential, tool name, or request schema from the marketing page. Published nomue npm packages do not install the complete SciGround workflow.
 
 ## Documentation

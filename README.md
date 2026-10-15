@@ -121,39 +121,28 @@ LLM向けMarkdown、`llms.txt`、機械可読exampleは、同じ公開境界か�
 配置、正本境界、必須セクション、machine-readable surface、公開前チェックは
 [`docs/agent-readable-documentation.md`](./docs/agent-readable-documentation.md) を参照してください。
 
-## Homepage upstream panels
+## SciGround homepage — 2026-10-15
 
-The homepage shows all entries from `UPSTREAM_CONTRIBUTIONS` in a
-single automatically looping row spanning the full viewport width. Each panel
-keeps the project, title, concise `panelStatus`, numerical comparison with its
-meaning, and one full-report link. Summaries, upstream links, and attribution
-remain in the detailed reports and canonical data. Keep totals sourced from `site-facts.ts`; the displayed reports and cumulative counts use the same registry. A second, accessibility-hidden copy provides
-the seamless loop and does not represent additional reports.
+The founder-approved sequence is Hero → concrete mismatch and correction example
+→ shareable report → three starting points (analysis, data, design) → research fit
+→ verification and public evidence → FAQ and setup. This supersedes the October 7
+page order and the earlier automatic upstream carousel. The presentation assumes
+the complete adopted ADY product; implementation progress is not the narrative.
 
-The row has no pause/arrow controls, drag handling, or helper labels. Keyboard
-focus and the operating system's reduced-motion setting use a static horizontally
-scrollable row of the original panels. The animation pauses while a pointer hovers over the row. Styling lives in `src/styles/design.css`.
-
-## Homepage research and Latest
-
-Research papers use one card per `PUBLICATIONS` entry classified as Research /
-Publication, newest first. Each card retains the canonical title, summary, date,
-and publication status. Research notes stay discoverable through Research.
-The homepage Latest list shows the eight newest entries across all categories.
-
-## SciGround homepage — 2026-10-07
-
-The homepage follows the founder-approved sequence: fixed Hero → verification
-and connections → three entry points and research fit → public research/upstream
-work → FAQ → connection CTA. The presentation assumes the complete adopted ADY
-product; implementation progress is not the marketing narrative.
+The exact Hero is “I finished your analysis,” says your AI. Your doubts say otherwise.
+The visual system uses editorial display type, restrained color, actual data figures,
+and different section compositions. The synthetic group-comparison example and
+report share `src/data/sciground-example.ts`; they are not product-issued records.
 
 `src/data/sciground.ts` owns product copy and scope. Structured guides in
-`src/data/sciground-docs.ts` generate both HTML and Markdown through the existing
-docs renderer. Historical nomue documentation, articles, names, releases, and
-examples remain reachable; `/docs/nomue/` groups the old artifact instructions.
-SciGround connection guides do not invent a public endpoint or npm installer.
+`src/data/sciground-docs.ts` generate HTML and Markdown. Historical nomue documentation,
+articles, releases, and examples retain their URLs and scope. Connection guides
+use issued access details and do not invent an endpoint, installer, or signup flow.
 
-All publication cards keep their canonical registry status. The homepage's eight
-Latest items are available in the expandable updates list inside public work.
-See `docs/sciground-relaunch-20261007.md` for scope and validation records.
+The public-evidence section features the two newest Research / Publication entries
+with their canonical status, links to all Research, and derives upstream totals from
+`UPSTREAM_CONTRIBUTIONS`. Full reports remain in Engineering. The expandable Latest
+list shows the eight newest registry entries with date and category. No publication
+dates or registry statuses are changed for a design refresh.
+
+See `docs/sciground-redesign-20261015.md` for the review and validation record.

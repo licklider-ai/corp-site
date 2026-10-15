@@ -20,17 +20,16 @@ export type NavItem = {
 
 /** Global navigation */
 export const GLOBAL_NAV: NavItem[] = [
-  { label: 'How it works', href: '/#verification', ready: true },
-  { label: 'Get started', href: '/#start', ready: true },
+  { label: 'How it works', href: '/#example', ready: true },
   { label: 'Research fit', href: '/#scope', ready: true },
   { label: 'Our research', href: '/#evidence', ready: true },
   { label: 'Docs', href: '/docs/', ready: true },
-  { label: 'Connect', href: '/docs/sciground-connect/', ready: true },
+  { label: 'Get started ↗', href: '/docs/sciground-connect/', ready: true },
 ];
 
 /** Left navigation used on long-form pages. */
 export const SIDE_NAV: NavItem[] = [
-  { label: 'SciGround', href: '/#verification', ready: true },
+  { label: 'SciGround', href: '/#example', ready: true },
   { label: 'Docs', href: '/docs/', ready: true },
   { label: 'Evaluation', href: '/evaluation/', ready: true },
   { label: 'Thesis', href: '/thesis/', ready: true },

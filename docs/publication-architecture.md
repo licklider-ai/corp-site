@@ -662,3 +662,13 @@ older homepage maturity-first and header-link prescriptions for the relaunch.
 Research and upstream evidence retain their original names, scope, status, and
 dates. The product presentation does not turn nomue studies into end-to-end
 SciGround evidence or rename old packages. Existing article URLs are preserved.
+
+## SciGround homepage revision — 2026-10-15
+
+The founder approved a major minimal, visual redesign after accepting the revised
+copy and order: Hero → concrete example → report → starting points → research fit
+→ verification/public evidence → FAQ/setup. This supersedes the October 7 order.
+A synthetic example must be identifiable as illustrative, with a consistent dataset
+and visible assumptions; it is not a real issued verification record. Featured
+research can be condensed, with canonical status and discovery links preserved.
+No new publication or article date change is implied by this redesign.
